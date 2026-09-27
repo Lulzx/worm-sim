@@ -26,6 +26,13 @@ pub enum Event {
         times: Vec<f64>,
         amplitudes: Vec<f64>,
     },
+    /// Piecewise-linear nonnegative conductance with a fixed reversal potential.
+    ConductanceWaveform {
+        neuron: String,
+        times: Vec<f64>,
+        conductances: Vec<f64>,
+        reversal: f64,
+    },
     Silence {
         neuron: String,
         start: f64,
@@ -101,12 +108,32 @@ pub fn simulate_from_state<S: Scalar>(
     let mut events = Vec::new();
     let mut waveforms = Vec::new();
     for event in &cfg.events {
-        if let Event::CurrentWaveform {
-            neuron,
-            times,
-            amplitudes,
-        } = event
-        {
+        let waveform = match event {
+            Event::CurrentWaveform {
+                neuron,
+                times,
+                amplitudes,
+            } => Some((neuron, times, amplitudes, None)),
+            Event::ConductanceWaveform {
+                neuron,
+                times,
+                conductances,
+                reversal,
+            } => {
+                if !reversal.is_finite()
+                    || conductances
+                        .iter()
+                        .any(|g| *g < 0. || !(g * reversal).is_finite())
+                {
+                    return Err(
+                        "conductance must be nonnegative with finite reversal and drive".into(),
+                    );
+                }
+                Some((neuron, times, conductances, Some(*reversal)))
+            }
+            _ => None,
+        };
+        if let Some((neuron, times, amplitudes, reversal)) = waveform {
             if times.len() < 2
                 || times.len() != amplitudes.len()
                 || times.iter().chain(amplitudes).any(|v| !v.is_finite())
@@ -116,7 +143,7 @@ pub fn simulate_from_state<S: Scalar>(
             {
                 return Err("waveform needs matching finite values and strictly increasing times within the run".into());
             }
-            waveforms.push((model.graph.neuron(neuron)?, times, amplitudes));
+            waveforms.push((model.graph.neuron(neuron)?, times, amplitudes, reversal));
             boundaries.extend(times);
             continue;
         }
@@ -129,7 +156,7 @@ pub fn simulate_from_state<S: Scalar>(
             } => (neuron, *start, *end, *amplitude, 0),
             Event::Silence { neuron, start, end } => (neuron, *start, *end, 0.0, 1),
             Event::Ablate { neuron } => (neuron, 0.0, cfg.duration, 0.0, 2),
-            Event::CurrentWaveform { .. } => unreachable!(),
+            Event::CurrentWaveform { .. } | Event::ConductanceWaveform { .. } => unreachable!(),
         };
         if !start.is_finite()
             || !end.is_finite()
@@ -210,13 +237,20 @@ pub fn simulate_from_state<S: Scalar>(
         // the final stage therefore uses the left limit, as rectangular pulses do.
         let set_current = |stage_time: f64, input: &mut Inputs| {
             input.current.copy_from_slice(&constant_current);
-            for &(i, times, amplitudes) in &waveforms {
+            input.conductance.fill(0.);
+            input.conductance_drive.fill(0.);
+            for &(i, times, amplitudes, reversal) in &waveforms {
                 if t >= times[0] && t < times[times.len() - 1] {
                     let k = times.partition_point(|v| *v <= t) - 1;
                     let fraction =
                         ((stage_time - times[k]) / (times[k + 1] - times[k])).clamp(0., 1.);
-                    input.current[i] +=
-                        (1. - fraction) * amplitudes[k] + fraction * amplitudes[k + 1];
+                    let amplitude = (1. - fraction) * amplitudes[k] + fraction * amplitudes[k + 1];
+                    if let Some(reversal) = reversal {
+                        input.conductance[i] += amplitude;
+                        input.conductance_drive[i] += amplitude * reversal;
+                    } else {
+                        input.current[i] += amplitude;
+                    }
                 }
             }
         };

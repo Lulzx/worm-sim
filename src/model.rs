@@ -158,6 +158,10 @@ impl Model {
                 ((y[i] - p.threshold[i]) * p.slope[i]).sigmoid()
             };
             dy[i] = -(y[i] - p.rest[i]) + S::constant(input.current[i]);
+            if input.conductance[i] != 0.0 {
+                dy[i] = dy[i] + S::constant(input.conductance_drive[i])
+                    - S::constant(input.conductance[i]) * y[i];
+            }
             dy[n + i] = (release[i] - y[n + i]) * p.inv_calcium_tau[i];
             let s = y[2 * n + i];
             dy[2 * n + i] = (release[i] * (one - s) - s) * p.inv_synapse_tau;
@@ -209,6 +213,10 @@ impl Model {
 #[derive(Clone, Debug)]
 pub struct Inputs {
     pub current: Vec<f64>,
+    /// Sum of externally applied nonnegative conductances, in leak units.
+    pub conductance: Vec<f64>,
+    /// Sum of conductance times reversal potential for overlapping inputs.
+    pub conductance_drive: Vec<f64>,
     pub silenced: Vec<bool>,
     pub ablated: Vec<bool>,
 }
@@ -216,6 +224,8 @@ impl Inputs {
     pub fn new(n: usize) -> Self {
         Self {
             current: vec![0.0; n],
+            conductance: vec![0.0; n],
+            conductance_drive: vec![0.0; n],
             silenced: vec![false; n],
             ablated: vec![false; n],
         }

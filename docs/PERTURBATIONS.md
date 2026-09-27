@@ -32,8 +32,7 @@ Waveform knots/amplitudes are fixed `f64` protocol data; differentiating those
 controls or event times is not implemented. Gradients through neural parameters
 and initial state remain available through the generic scalar solver.
 
-This implements configurable current waveforms in specification §9. Conductance
-waveforms, voltage clamps, gene/drug mappings and the published phenotype
+This implements configurable current waveforms in specification §9. Voltage clamps, gene/drug mappings and the published phenotype
 registry remain separate requirements. It does not establish optogenetic pulse
 calibration or any biological phenotype match.
 
@@ -48,3 +47,31 @@ Neurons and event intervals are checked against the graph before integration.
 The existing JSON examples remain supported. Tests verify YAML/JSON trajectory
 identity; output metadata retains the normalized configuration, independently of
 its source format. New perturbation operations are still required to complete §9.
+
+## Conductance stimulation
+
+`conductance_waveform` supplies `neuron`, strictly increasing absolute `times`,
+nonnegative `conductances`, and a fixed finite `reversal`. The waveform is zero
+outside its support and linearly interpolated at each integration stage. Example:
+
+```sh
+cargo run --release -- simulate data/c302-herm.wsc examples/aval-conductance.yaml runs/aval-conductance.wst
+```
+
+The voltage equation adds `g(t) * (E - V) / tau`. Conductance is relative to the
+model's leak conductance and reversal uses normalized voltage units. Its effect
+can depolarize, hyperpolarize or shunt, depending on voltage and reversal; a
+conductance is never represented by a negative g. For overlapping inputs the
+solver stores `sum(g)` and `sum(g * E)` per cell. Current and conductance inputs
+combine; ablation overrides both, while silencing still only blocks output.
+Constant two-knot waveforms implement rectangular conductance pulses, including
+nonzero endpoint jumps. No receptor kinetics or experimentally calibrated
+optogenetic conductance is implied.
+
+The forward scalar-generic Rust dynamics preserve derivatives with respect to
+neural parameters and state. Tests check the exact passive-cell response to
+multiple overlapping conductances and the exact initial-voltage derivative under
+a ramp (integrated shunting). Waveform values and reversal are fixed f64 protocol
+inputs. The atlas-fitting adjoint and JAX atlas replay currently accept their
+existing current-kernel inputs; conductance protocol fitting is not wired into
+those interfaces.
