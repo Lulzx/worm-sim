@@ -61,3 +61,32 @@ unchanged.
 Primary API references: [Diffrax adjoints](https://docs.kidger.site/diffrax/api/adjoints/),
 [Equinox transformations](https://docs.kidger.site/equinox/api/transformations/),
 [JAX installation and device support](https://docs.jax.dev/en/latest/installation.html).
+
+## Training objective migration
+
+`examples/export_atlas_training.rs` validates the checkpoint, Rust split and pair
+evidence, then exports only training sufficient statistics, ordered pair labels
+and sign probabilities. It refuses to overwrite an existing export. The export
+is bound to the exact checkpoint SHA-256. `objective.py` composes MSE, optional
+pair BCE/correlation and priors in JAX. Target contributions retain the original
+confidence/sample weighting; pair losses normalize over all eligible training
+pairs; priors are added once per full batch. Frozen coordinates use stop-gradient.
+`check_training.py` streams reverse gradients across targets without retaining
+all trajectories, and can compare one Optax Adam update against frozen Rust
+checkpoint epoch one. This check does not select a new model or read test scores.
+
+```sh
+WORMSIM_COMMIT=$(git rev-parse HEAD) cargo run --release --example export_atlas_training -- \
+  data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json \
+  runs/level0-atlas-classification-fit/epoch-0.json runs/jax-training.json runs/randi-pairs.json
+.venv-jax/bin/python backends/jax/check_training.py \
+  --model runs/level0-atlas-classification-fit/epoch-0.json \
+  --graph runs/c302-audit.json --training runs/jax-training.json \
+  --reference-next runs/level0-atlas-classification-fit/epoch-1.json \
+  --output runs/jax-first-update.json
+```
+
+The epoch-one comparison starts from zero optimizer moments and checks the
+existing Adam settings (global gradient clip 10, beta1 .9, beta2 .999, epsilon
+1e-8). It is not an optimizer resume implementation. Preparation is currently
+repeated per target; sharing that work and a full population fit runner remain.

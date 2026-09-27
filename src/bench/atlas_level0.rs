@@ -218,7 +218,8 @@ impl AtlasModel {
         }
         Ok(rows)
     }
-    fn validate(&self, data: &Dataset, graph: &IndexedGraph, split: &Split) -> Result<Model> {
+    /// Validate a saved checkpoint against the authoritative data and split.
+    pub fn validate(&self, data: &Dataset, graph: &IndexedGraph, split: &Split) -> Result<Model> {
         split.validate(data, graph)?;
         self.config.validate()?;
         if let Some(priors) = &self.config.molecular_sign_priors {
