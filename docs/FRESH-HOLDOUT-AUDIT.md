@@ -326,3 +326,36 @@ recordings have been inspected: four have empty stimulus lists and three have
 localized events. The other 88 remain unclassified. Further candidate downloads
 are unnecessary until these positive candidates' target and animal metadata
 are assessed. No neural response arrays were constructed or outcomes scored.
+
+### Identity coverage of the three localized-event recordings
+
+The [identity receipt](dunn-localized-identity-metadata.json) checks all three
+positive candidates using the same downloaded files. The new
+`scripts/inspect_dunn_identity_metadata.py` reads only the `ID1` label strings
+from the inert object-array representation and an explicit allowlist of subject
+metadata fields. It does not reconstruct numerical arrays or import upstream
+classes. Unsupported label layouts fail instead of being guessed. Two label
+reader tests and the three existing inert-loader tests pass.
+
+| Recording | Segmented neurons | Canonical labels | Missing labels |
+| --- | ---: | ---: | ---: |
+| 20221106-21-00-09 | 84 | 22 | 62 |
+| 20221106-21-23-19 | 77 | 30 | 47 |
+| 20221106-21-47-31 | 71 | 33 | 38 |
+
+All nonmissing labels match the canonical graph names without alias conversion;
+none are duplicated within a recording. This verifies name compatibility, not
+identity confidence. All three metadata dictionaries report strain FC121. The
+paper's [key resources table](https://pmc.ncbi.nlm.nih.gov/articles/PMC12829590/)
+identifies FC121 with SMD/RIV Chrimson expression and NeuroPAL. That narrows the
+relevant expressing cell classes but does not identify which cells each light
+spot reached.
+
+No animal/worm/subject identifier appeared in the explicit checked field list
+in `md` or `md.gooey_args`. This is not an exhaustive proof that identity evidence
+is absent elsewhere. Per-event association still requires checking registered
+spatial coordinates, illumination geometry and missing labels; canonical name
+matches alone cannot establish single-neuron stimulation. Published study
+summaries and search excerpts have been seen during source verification, so
+blindness to published findings is not claimed. The candidate response arrays
+remain opaque and no model outcomes have been evaluated.

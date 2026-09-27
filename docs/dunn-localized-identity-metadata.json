@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "selection": "All three recordings with delivered localized events in the fixed first-seven metadata inspection; no response-outcome selection.",
+  "records": [
+    {
+      "recording": "20221106-21-00-09",
+      "identity_report": {
+        "schema_version": 1,
+        "pickle_sha256": "c2d2d3a96978e097429c8becd8a11091573a09d2bcc14122ec148f6accf735ad",
+        "download_receipt_sha256": "24a0be89c96157c639e7c6007b8f421dc7353d6bf84f5d21f9ac98534f0e6b73",
+        "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+        "script_sha256": "b85aa44aa439ae6923da52e2f5753f0fddef9069a1462c3fdac3dfb23e9aaa6c",
+        "inert_loader_sha256": "571992491e6db9c9304c0106bf54d765adb2a3b69de9f49067d017c53530f5ab",
+        "segmented_neurons": 84,
+        "missing_labels": 62,
+        "canonical_label_counts": {
+          "AIBL": 1,
+          "AIBR": 1,
+          "ALA": 1,
+          "AVAL": 1,
+          "AVAR": 1,
+          "M1": 1,
+          "OLQDL": 1,
+          "OLQDR": 1,
+          "OLQVL": 1,
+          "RIVL": 1,
+          "RMDL": 1,
+          "RMDR": 1,
+          "RMDVL": 1,
+          "RMED": 1,
+          "RMEL": 1,
+          "RMER": 1,
+          "RMEV": 1,
+          "SMBVL": 1,
+          "SMDDL": 1,
+          "SMDVL": 1,
+          "URADR": 1,
+          "URXR": 1
+        },
+        "unmatched_label_counts": {},
+        "explicit_subject_fields": {
+          "md.gooey_args.subject_strain": "FC121"
+        },
+        "checked_subject_field_names": [
+          "animal_id",
+          "worm_id",
+          "subject_id",
+          "animal_identifier",
+          "subject_identifier",
+          "subject_strain"
+        ],
+        "scope": "Only ID1 identity strings and the explicit subject-field allowlist inspected. NumPy arrays and upstream classes remain inert; neural response values not reported. Canonical name matches do not establish labeling confidence, target uniqueness, opsin expression or animal independence."
+      }
+    },
+    {
+      "recording": "20221106-21-23-19",
+      "identity_report": {
+        "schema_version": 1,
+        "pickle_sha256": "2e6993ac4b3212b6eb7126fcf95480e3b9a62835cdffd24576b90317b318ff04",
+        "download_receipt_sha256": "d7cda96826b8876d22d8715bcf8001253e95419acff12949e10d3e56b9783ecc",
+        "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+        "script_sha256": "b85aa44aa439ae6923da52e2f5753f0fddef9069a1462c3fdac3dfb23e9aaa6c",
+        "inert_loader_sha256": "571992491e6db9c9304c0106bf54d765adb2a3b69de9f49067d017c53530f5ab",
+        "segmented_neurons": 77,
+        "missing_labels": 47,
+        "canonical_label_counts": {
+          "ADER": 1,
+          "AFDR": 1,
+          "AIML": 1,
+          "AINR": 1,
+          "ALA": 1,
+          "AVAL": 1,
+          "AVAR": 1,
+          "AVER": 1,
+          "AVG": 1,
+          "CEPDR": 1,
+          "IL1DL": 1,
+          "OLLR": 1,
+          "OLQDL": 1,
+          "OLQDR": 1,
+          "OLQVR": 1,
+          "RID": 1,
+          "RIMR": 1,
+          "RIVR": 1,
+          "RMDDL": 1,
+          "RMDR": 1,
+          "RMDVR": 1,
+          "RMED": 1,
+          "RMEL": 1,
+          "RMER": 1,
+          "RMEV": 1,
+          "SMBDL": 1,
+          "SMDDR": 1,
+          "SMDVL": 1,
+          "SMDVR": 1,
+          "URXR": 1
+        },
+        "unmatched_label_counts": {},
+        "explicit_subject_fields": {
+          "md.gooey_args.subject_strain": "FC121"
+        },
+        "checked_subject_field_names": [
+          "animal_id",
+          "worm_id",
+          "subject_id",
+          "animal_identifier",
+          "subject_identifier",
+          "subject_strain"
+        ],
+        "scope": "Only ID1 identity strings and the explicit subject-field allowlist inspected. NumPy arrays and upstream classes remain inert; neural response values not reported. Canonical name matches do not establish labeling confidence, target uniqueness, opsin expression or animal independence."
+      }
+    },
+    {
+      "recording": "20221106-21-47-31",
+      "identity_report": {
+        "schema_version": 1,
+        "pickle_sha256": "8edd3db8305faef25c468f26e8877f764e84bfd3f132cdefecd9c37812890d72",
+        "download_receipt_sha256": "07ee96d6ebb5323b6a03f9b779e86e6e3537de464cbc375e43e8880f06280269",
+        "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+        "script_sha256": "b85aa44aa439ae6923da52e2f5753f0fddef9069a1462c3fdac3dfb23e9aaa6c",
+        "inert_loader_sha256": "571992491e6db9c9304c0106bf54d765adb2a3b69de9f49067d017c53530f5ab",
+        "segmented_neurons": 71,
+        "missing_labels": 38,
+        "canonical_label_counts": {
+          "ADER": 1,
+          "AFDR": 1,
+          "AIBR": 1,
+          "AIMR": 1,
+          "AINR": 1,
+          "ALA": 1,
+          "ASGR": 1,
+          "AVAL": 1,
+          "AVAR": 1,
+          "AVER": 1,
+          "FLPR": 1,
+          "OLQDL": 1,
+          "OLQDR": 1,
+          "OLQVL": 1,
+          "OLQVR": 1,
+          "RIVR": 1,
+          "RMDDL": 1,
+          "RMDDR": 1,
+          "RMDR": 1,
+          "RMDVR": 1,
+          "RMED": 1,
+          "RMEL": 1,
+          "RMER": 1,
+          "RMEV": 1,
+          "SMBDR": 1,
+          "SMBVR": 1,
+          "SMDDR": 1,
+          "SMDVR": 1,
+          "URXL": 1,
+          "URXR": 1,
+          "URYVR": 1,
+          "VB1": 1,
+          "VB2": 1
+        },
+        "unmatched_label_counts": {},
+        "explicit_subject_fields": {
+          "md.gooey_args.subject_strain": "FC121"
+        },
+        "checked_subject_field_names": [
+          "animal_id",
+          "worm_id",
+          "subject_id",
+          "animal_identifier",
+          "subject_identifier",
+          "subject_strain"
+        ],
+        "scope": "Only ID1 identity strings and the explicit subject-field allowlist inspected. NumPy arrays and upstream classes remain inert; neural response values not reported. Canonical name matches do not establish labeling confidence, target uniqueness, opsin expression or animal independence."
+      }
+    }
+  ],
+  "strain_reference": {
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12829590/",
+    "section": "Key resources table",
+    "finding": "FC121 is listed as the SMD/RIV Chrimson NeuroPAL strain. This does not establish per-event targeting."
+  },
+  "scope": "Identity strings and explicit subject metadata only. No neural response arrays constructed or values scored. Published study descriptions and search excerpts have been seen; no claim of blindness to published findings."
+}

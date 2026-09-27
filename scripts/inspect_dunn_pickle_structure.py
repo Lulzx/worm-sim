@@ -43,7 +43,7 @@ class StructureUnpickler(pickle.Unpickler):
         raise ValueError('persistent references are not supported')
 
 
-def inspect(raw):
+def load_structure(raw):
     # Extension opcodes can bypass find_class via the process-global cache.
     for opcode, _, _ in pickletools.genops(raw):
         if opcode.name in {'EXT1', 'EXT2', 'EXT4', 'PERSID', 'BINPERSID'}:
@@ -52,6 +52,11 @@ def inspect(raw):
     root = loader.load()
     if not isinstance(root, Opaque) or not isinstance(getattr(root, 'state', None), dict):
         raise ValueError('expected an object with dictionary state')
+    return root, loader
+
+
+def inspect(raw):
+    root, loader = load_structure(raw)
     state = root.state
     metadata = state.get('md')
     if not isinstance(metadata, dict):
