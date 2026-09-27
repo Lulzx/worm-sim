@@ -207,3 +207,20 @@ standalone JSON or CSV event manifest. The processed-recording metadata remains
 the next lead. Establish per-event eligibility and animal/session relationships
 before declaring any candidate subset confirmatory. This source inspection did
 not decode recording arrays or inspect held-out outcomes.
+
+### Acquisition traversal reached its request limit
+
+A second targeted inspection selected only `acquisition` in the same first
+asset. It terminated with exit 1 at the unchanged **500 range-request limit**,
+after receiving **1,748,712 bytes**. The [incomplete receipt](dunn-first-nwb-acquisition-schema.json)
+retains the exact ranges and hashes, partial object list, and exception. Its
+byte sum, per-range bounds, and input/source hashes were checked after termination.
+
+Only `acquisition` and `acquisition/CalciumImageSeries` were listed before the
+limit. This does not establish the full contents of the acquisition group or
+absence of events elsewhere. No dataset values were indexed or decoded; range
+responses may contain colocated raw bytes. The process was not retried with a
+larger limit. Together with the converter source audit, this favors using the
+processed metadata to establish stimulus eligibility instead of spending more
+requests traversing raw-image structures. Animal-level independence and a fresh
+confirmatory cohort remain unverified.
