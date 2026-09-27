@@ -9,6 +9,7 @@ from dark_edges import DarkEdges
 from plasticity import Plasticity
 from solvers import Adaptive
 from multirate import Multirate
+from optimization import rate_multipliers
 from level0 import Level0, parameters
 
 FORMAT = 'wormsim-jax-atlas'
@@ -18,7 +19,7 @@ def initialize(model, graph, times, configuration):
     if configuration is None:
         modules = {}
     else:
-        fields(configuration, ['schema_version', 'extensions', 'solver'], ['multirate'])
+        fields(configuration, ['schema_version', 'extensions', 'solver'], ['multirate', 'optimization'])
         if configuration['schema_version'] != 1:
             raise ValueError('unsupported JAX configuration version')
         specs = configuration['extensions']
@@ -50,6 +51,8 @@ def initialize(model, graph, times, configuration):
         modes = [by_type[t]['mode'] for t in modules['plasticity'].types]
         active['plasticity']['raw'] = jnp.asarray(
             [[True, m != 'facilitation', m != 'depression', True] for m in modes], dtype=bool).reshape((-1, 4))
+    rates=rate_multipliers(model,theta,configuration)
+    active=jax.tree.map(lambda mask,rate:mask & (rate>0),active,rates)
     return engine, theta, active
 
 

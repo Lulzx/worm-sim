@@ -22,7 +22,8 @@ A saved model is a separate `wormsim-jax-atlas` schema-version-1 envelope contai
 - `configuration`: versioned extension declarations and optional adaptive solver
   settings, including [adjoint options](ADJOINTS.md) (`solver: null` retains
   reference-grid Euler), plus optional
-  [multirate settings](MULTIRATE.md) for a held-concentration coarse grid.
+  [multirate settings](MULTIRATE.md) for a held-concentration coarse grid and
+  [optimization settings](GROUP-LEARNING-RATES.md) for group rates.
 - `extension_parameters`: the fitted arrays, each with explicit shape and flattened
   values. Declarations supply initial values; these arrays supply learned values.
 
@@ -35,7 +36,8 @@ All current modules are supported together: modulation, gap rectification, extra
 chemical connections, and plasticity. Type parameters unused in a plasticity mode
 are frozen, including under AdamW. Extra-edge L1 cost is added once to the complete
 training objective, independently of trial count. Other extension parameters are
-trainable; biological priors and group-specific learning rates remain future work.
+trainable by default. [Declared group learning-rate multipliers](GROUP-LEARNING-RATES.md)
+can slow or freeze coordinates; biological prior families remain future work.
 
 `fit_extensions.py` reuses the Optax fitting loop, saves every candidate, reloads
 its complete parameters to generate predictions, and invokes the Rust scorer.

@@ -12,9 +12,10 @@ import numpy as np
 import optax
 from objective import build, evaluate
 from extensions import pack
+from optimization import rate_multipliers
 
 
-def make_optimizer(config, active):
+def make_optimizer(config, active, multipliers=None):
     epochs=config['epochs']
     if not isinstance(epochs,int) or epochs<0:
         raise ValueError('epochs must be nonnegative')
@@ -30,12 +31,23 @@ def make_optimizer(config, active):
             rate=optax.cosine_decay_schedule(rate,epochs-1,alpha=minimum)
     elif schedule['kind']!='constant':
         raise ValueError('unsupported schedule')
+    maximum_multiplier=1.
+    if multipliers is not None:
+        if jax.tree.structure(multipliers)!=jax.tree.structure(active):
+            raise ValueError('learning-rate multiplier structure mismatch')
+        for scale,mask in zip(jax.tree.leaves(multipliers),jax.tree.leaves(active),strict=True):
+            values=np.asarray(scale);mask=np.asarray(mask)
+            if values.shape!=mask.shape or not np.isfinite(values).all() or np.any(values<0):
+                raise ValueError('invalid learning-rate multiplier array')
+        maximum_multiplier=max((float(np.max(np.asarray(s)[np.asarray(a)])) for s,a in zip(jax.tree.leaves(multipliers),jax.tree.leaves(active),strict=True) if np.asarray(a).any()),default=0.)
+    if not np.isfinite(config['learning_rate']*maximum_multiplier):
+        raise ValueError('effective learning rate is nonfinite')
     optimizer=config.get('optimizer',{'kind':'adam'})
     if optimizer['kind']=='adam':
         algorithm=optax.adam(rate,b1=.9,b2=.999,eps=1e-8)
     elif optimizer['kind']=='adamw':
         decay=optimizer['weight_decay']
-        if not np.isfinite(decay) or decay<0 or config['learning_rate']*decay>1:
+        if not np.isfinite(decay) or decay<0 or config['learning_rate']*decay*max(1.,maximum_multiplier)>1:
             raise ValueError('invalid decoupled decay')
         algorithm=optax.adamw(rate,b1=.9,b2=.999,eps=1e-8,weight_decay=decay)
     else:
@@ -65,7 +77,8 @@ def fit(model,graph,training,source,score_and_save,progress=None,configuration=N
     if model['epoch']!=0:
         raise ValueError('fit requires epoch zero; optimizer resume is not implemented')
     theta,active,groups,data,prior=build(model,graph,training,configuration)
-    optimizer=make_optimizer(model['config'],active)
+    multipliers=rate_multipliers(model,theta,configuration)
+    optimizer=make_optimizer(model['config'],active,multipliers)
     state=optimizer.init(theta)
     reports=[];selected=None;best=float('inf')
     for epoch in range(model['config']['epochs']+1):
@@ -76,6 +89,7 @@ def fit(model,graph,training,source,score_and_save,progress=None,configuration=N
                 raise ValueError('nonfinite objective or gradient')
             gradient=jax.tree.map(lambda g,a:jnp.where(a,g,0.),gradient,active)
             updates,state=optimizer.update(gradient,state,theta)
+            updates=jax.tree.map(lambda update,scale:update*scale,updates,multipliers)
             updated=optax.apply_updates(theta,updates)
             theta=jax.tree.map(lambda new,old,a:jnp.where(a,new,old),updated,theta,active)
         candidate=checkpoint(model,theta,epoch,source)

@@ -183,3 +183,10 @@ survive fitting/checkpoint reload; tests check convergence and gradients.
 Adaptive settings support an explicit recursive checkpoint budget or optional
 continuous adjoints with separate backward tolerances. See
 [configuration, numerical checks, and limits](../../docs/ADJOINTS.md).
+
+## Group learning rates
+
+The extended configuration supports [learning-rate multipliers](../../docs/GROUP-LEARNING-RATES.md)
+for native parameter types, exact tied groups, and module arrays. Zero freezes a
+coordinate through gradient clipping and AdamW decay; checkpoint reload preserves
+these settings.

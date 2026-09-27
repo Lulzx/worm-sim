@@ -78,6 +78,7 @@ def build(model, graph, training, configuration=None):
             loss+=correlation['weight']*shape
         return loss,jnp.stack([mse,bce,shape])
 
+    prior_active=jnp.asarray([g['trainable'] for g in model['parameters']['groups']])
     centers=jnp.asarray([g['prior_mean'] for g in model['parameters']['groups']])
     probabilities=jnp.asarray(training['sign_probabilities'])
     if len(probabilities)!=engine.m:
@@ -85,7 +86,7 @@ def build(model, graph, training, configuration=None):
     kernel_prior=jnp.asarray(model['kernel_prior'])
     def prior_loss(p):
         p=freeze(p)
-        penalty=config['prior_strength']*jnp.sum(jnp.where(active['groups'],(p['groups']-centers)**2,0.))/max(sum(g['trainable'] for g in model['parameters']['groups']),1)
+        penalty=config['prior_strength']*jnp.sum(jnp.where(prior_active,(p['groups']-centers)**2,0.))/max(sum(g['trainable'] for g in model['parameters']['groups']),1)
         if engine.m:
             raw=p['groups'][engine.mapping]
             signs=raw[6*n+engine.m:6*n+2*engine.m]

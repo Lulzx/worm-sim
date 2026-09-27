@@ -94,5 +94,16 @@
   "multirate": {
     "slow_dt": 0.03,
     "max_windows": 1000
+  },
+  "optimization": {
+    "learning_rate_multipliers": {
+      "base_types": {
+        "chemical_strength": 0.5,
+        "chemical_sign": 0.25
+      },
+      "parameters": {
+        "modulation.raw_tau": 0.0
+      }
+    }
   }
 }
