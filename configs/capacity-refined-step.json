@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "scope": "Separately declared refined-Euler training capacity experiment; no held-out selection or new dynamics.",
+  "parent_checkpoint": "runs/level0-capacity-adal-adar-1000-prep120/epoch-950.json",
+  "parent_sha256": "009d9496075b2675978052118e7347a00ece38be8d4cc1ecf44ddd1489994e08",
+  "parent_epoch": 950,
+  "targets": [
+    "ADAL",
+    "ADAR"
+  ],
+  "additional_updates_per_run": 200,
+  "optimizer": "Adam with freshly initialized moments in both runs; not exact resume",
+  "preparation_seconds": 120.0,
+  "rest_initialization": -0.2,
+  "primary_comparison": "Final training MSE at 200 additional updates and finite completion; unchanged 90% capacity gate.",
+  "secondary_comparison": "Best saved MSE; independent replay, half-step and preparation/drift controls. Compare with original dt=0.01 run only over finite iterates; it has no final-200 result.",
+  "capacity_gate": "unchanged: final capture of at least 90% of zero-start mean-response energy",
+  "runs": [
+    {
+      "learning_rate": 0.001,
+      "dt": 0.005,
+      "directory": "runs/capacity-warm-lr0001-dt0005"
+    }
+  ],
+  "dt": 0.005,
+  "learning_rate": 0.001
+}

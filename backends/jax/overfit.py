@@ -76,7 +76,7 @@ def bounds(groups):
 
 
 
-def warm_parameters(saved, model, graph, training, configuration, targets):
+def warm_parameters(saved, model, graph, training, configuration, targets, allow_step_change=False):
     """Reuse only fitted parameters; keep the new run's initialization and objective."""
     if saved.get('format') != 'wormsim-training-capacity-diagnostic' or saved.get('targets') != targets:
         raise ValueError('warm start requires the same diagnostic target subset')
@@ -92,6 +92,11 @@ def warm_parameters(saved, model, graph, training, configuration, targets):
     expected = copy.deepcopy(base)
     for key in ['epochs', 'learning_rate']:
         expected['config'][key] = model['config'][key]
+    if allow_step_change:
+        dt = model['config']['dt']
+        if not np.isfinite(dt) or dt <= 0 or dt > base['config']['dt']:
+            raise ValueError('warm-start step override must be positive and no larger than parent')
+        expected['config']['dt'] = dt
     if reconstructed != expected:
         raise ValueError('warm-start lineage, objective, initialization, or parameter layout differs')
     return theta
@@ -131,6 +136,7 @@ def main():
     p.add_argument('--learning-rate', type=float, default=.01)
     p.add_argument('--rest', type=float, default=-.2)
     p.add_argument('--preparation-seconds', type=float, default=None)
+    p.add_argument('--dt', type=float, help='Explicit Euler step refinement; distinct numerical configuration')
     p.add_argument('--warm-start', help='Diagnostic checkpoint; reuses parameters with fresh Adam state')
     a = p.parse_args()
     paths = {k:Path(getattr(a,k)) for k in ['model','graph','training']}
@@ -139,16 +145,23 @@ def main():
     if hashes['model'] != training['model_sha256']:
         raise ValueError('training export belongs to another checkpoint')
     model, training, config = prepare(model, training, a.targets, a.steps, a.learning_rate, a.rest, a.preparation_seconds)
+    if a.dt is not None:
+        if not np.isfinite(a.dt) or a.dt <= 0 or a.dt > model['config']['dt']:
+            raise ValueError('dt must be positive and no larger than the source step')
+        model['config']['dt'] = a.dt
     theta, active, groups, data, prior = build(model, graph, training, config)
     warm = None; warm_info = None
     if a.warm_start:
         raw = Path(a.warm_start).read_bytes()
         hashes['warm_start'] = hashlib.sha256(raw).hexdigest()
         warm = json.loads(raw)
-        theta = warm_parameters(warm, model, graph, training, config, a.targets)
+        theta = warm_parameters(warm, model, graph, training, config, a.targets, allow_step_change=a.dt is not None)
         warm_info = {'checkpoint_sha256':hashes['warm_start'],
             'source_epoch':warm['model']['base_model']['epoch'],
             'source_commit':warm['model']['base_model']['source_commit'],
+            'parent_dt':warm['model']['base_model']['config']['dt'],
+            'run_dt':model['config']['dt'],
+            'parent_training_mse':warm['metrics']['mse'],
             'optimizer_state':'reset', 'epoch_convention':'additional updates in this run'}
     reference = bounds(groups)
     source = subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
@@ -176,7 +189,7 @@ def main():
             if not np.isfinite(float(value)) or not all(np.isfinite(np.asarray(x)).all() for x in jax.tree.leaves(gradient)):
                 write('failure.json', failure_artifact(model,theta,config,epoch,source,value,gradient,metrics,a.targets,warm_info))
                 raise ValueError(f'nonfinite objective/gradient at epoch {epoch}; failure.json and prior progress retained')
-            if epoch == 0 and warm is not None:
+            if epoch == 0 and warm is not None and warm_info['parent_dt'] == warm_info['run_dt']:
                 parent_mse = warm['metrics']['mse']
                 if not np.isfinite(parent_mse) or abs(metrics['mse'] - parent_mse) > 1e-10:
                     raise ValueError('warm-start initial score differs from parent checkpoint')

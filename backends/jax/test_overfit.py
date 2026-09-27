@@ -52,6 +52,16 @@ class OverfitTests(unittest.TestCase):
         for left,right in zip(jax.tree.leaves(theta),jax.tree.leaves(q),strict=True):
             np.testing.assert_array_equal(left,right)
         np.testing.assert_allclose(engine.response(theta,jnp.asarray(0)),engine.response(q,jnp.asarray(0)),atol=0.)
+        refined=copy.deepcopy(new);refined['config']['dt']/=2
+        with self.assertRaises(ValueError):warm_parameters(saved,refined,g,t,c,['A'])
+        q=warm_parameters(saved,refined,g,t,c,['A'],allow_step_change=True)
+        for left,right in zip(jax.tree.leaves(theta),jax.tree.leaves(q),strict=True):
+            np.testing.assert_array_equal(left,right)
+        for invalid_step in [0.,float('nan'),new['config']['dt']*2]:
+            invalid=copy.deepcopy(refined);invalid['config']['dt']=invalid_step
+            with self.assertRaises(ValueError):warm_parameters(saved,invalid,g,t,c,['A'],allow_step_change=True)
+        invalid=copy.deepcopy(refined);invalid['initial'][0]=99.
+        with self.assertRaises(ValueError):warm_parameters(saved,invalid,g,t,c,['A'],allow_step_change=True)
         for mutate in [lambda x:x.update(targets=['B']),
                        lambda x:x['model']['base_model'].update(training_trials=['test']),
                        lambda x:x['model']['base_model']['initial'].__setitem__(0,99.),

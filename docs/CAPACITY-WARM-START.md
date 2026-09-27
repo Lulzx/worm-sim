@@ -127,3 +127,29 @@ it does not retroactively complete either failed run. The audit is reproducible
 with `backends/jax/audit_capacity_gradients.py` and records input/backend hashes.
 The original failure replay requires the original backend files identified by its
 manifest; use that source version when reproducing it after runner changes.
+
+
+## Declared refined-step fit
+
+The [new declaration](../configs/capacity-refined-step.json) fixes the same saved
+950 parent, 200 additional updates, fresh Adam at 0.001, and a 0.005-second Euler
+step. Targets, preparation, gains, objective and 90% capacity gate are unchanged.
+This is a new numerical configuration, not completion of either aborted run.
+
+`--dt` explicitly authorizes only step refinement. Warm-start validation still
+rejects unrelated initialization, data, objective, frozen-coordinate and layout
+changes. The manifest records parent and run steps and parent training MSE.
+When the step changes, epoch-zero MSE is re-evaluated at the new step rather than
+required to equal the old numerical score. Ordinary warm starts retain the exact
+parent-score check.
+
+Use the earlier 0.001 command with `--dt 0.005` and output
+`runs/capacity-warm-lr0001-dt0005`. The primary result is finite completion and
+final-at-200 MSE; the existing failed coarse-step run has no final score to compare.
+Repeat independent replay and numerical controls on retained results before
+interpreting any gain. No fresh confirmatory cohort has been secured.
+
+A separate one-update refined-step smoke completed with finite gradients. Its
+checkpoint independently replays in NumPy within 2.09e-17 MSE. All five focused
+capacity-runner tests pass, including explicit step-change rejection/acceptance
+and failure-snapshot round trips. The smoke is not the declared 200-update run.
