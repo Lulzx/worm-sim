@@ -153,3 +153,28 @@ A separate one-update refined-step smoke completed with finite gradients. Its
 checkpoint independently replays in NumPy within 2.09e-17 MSE. All five focused
 capacity-runner tests pass, including explicit step-change rejection/acceptance
 and failure-snapshot round trips. The smoke is not the declared 200-update run.
+
+
+### Preparation transient explains the coarse-step failure
+
+The [transient audit](capacity-reset-preparation-audit.json) examines the first
+0.5 seconds at the captured higher-rate failure. At the initialization seed,
+the fastest linearized mode is approximately -217.56 per second. Euler at 0.01
+seconds has local amplification radius **1.1756**, despite the stable spectrum
+at the much later prepared equilibrium. At 0.005 and 0.0025 seconds the seed's
+amplification radii are below one.
+
+There is also an independent nonlinear bound: during unforced preparation,
+positive conductances pull each voltage toward its resting potential, chemical
+reversal potentials and neighboring voltages. With gates in [0,1], the continuous
+flow stays within the interval spanning these potentials and the initial voltages:
+**[-4.25981, 3.72441]** for this parameter state. The 0.01-second Euler trajectory
+leaves that interval at **0.11 seconds** and reaches absolute voltage **765.04**
+by 0.5 seconds, while its gates remain within [0,1]. This departure is numerical,
+not an admissible unforced continuous-model response. Both refined trajectories
+remain inside the interval over the audited transient.
+
+Together with finite refined preparation, independent prediction replay and the
+gradient checks, this localizes the reproduced higher-rate failure to coarse
+Euler preparation. It does not prove stability for every later optimizer update,
+nor explain the lower-rate run's uncaptured failing parameters.

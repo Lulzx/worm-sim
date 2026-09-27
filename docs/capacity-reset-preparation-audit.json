@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "input_sha256": {
+    "failure": "e3a5d45d9ead1e353c6ab649477dba4a414cb79294b742dbe6e829feac512593",
+    "manifest": "0e889d561174eef7bd5f9a0558c2c64f42aa4d72cc52928ccac1a06d07564d2d",
+    "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629"
+  },
+  "source_sha256": {
+    "audit_capacity_preparation.py": "3034933a230cbc4c3e84f114b9d4329d76a0704ddbc1fa95fd3389988c33e1a7",
+    "audit_capacity_stability.py": "98e16c9fe64fd1827d087ff2cc292ec611e42f779e50c9f3ecb034f5e22f37d6",
+    "replay_level0_atlas.py": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9"
+  },
+  "unforced_continuous_voltage_interval": [
+    -4.259807560664652,
+    3.7244080479792916
+  ],
+  "transients": [
+    {
+      "dt": 0.01,
+      "initial_local_spectrum": {
+        "max_real_eigenvalue": -0.11519886563861553,
+        "min_real_eigenvalue": -217.56351210778743,
+        "euler_amplification_radius": 1.1756351210778742
+      },
+      "first_voltage_bound_exit": {
+        "time": 0.11,
+        "voltage_min": -4.713626958767113,
+        "voltage_max": 1.2023270429742756
+      },
+      "first_gate_bound_exit": null,
+      "end_time": 0.5,
+      "max_absolute_voltage": 765.0408423885009,
+      "final_voltage_min": -128.82171000611584,
+      "final_voltage_max": 765.0408423885009
+    },
+    {
+      "dt": 0.005,
+      "initial_local_spectrum": {
+        "max_real_eigenvalue": -0.11519886563861553,
+        "min_real_eigenvalue": -217.56351210778743,
+        "euler_amplification_radius": 0.9994240056718069
+      },
+      "first_voltage_bound_exit": null,
+      "first_gate_bound_exit": null,
+      "end_time": 0.5,
+      "max_absolute_voltage": 2.9326115149672667,
+      "final_voltage_min": -2.9326115149672667,
+      "final_voltage_max": 1.6056319881997214
+    },
+    {
+      "dt": 0.0025,
+      "initial_local_spectrum": {
+        "max_real_eigenvalue": -0.11519886563861553,
+        "min_real_eigenvalue": -217.56351210778743,
+        "euler_amplification_radius": 0.9997120028359034
+      },
+      "first_voltage_bound_exit": null,
+      "first_gate_bound_exit": null,
+      "end_time": 0.5,
+      "max_absolute_voltage": 2.932417572519059,
+      "final_voltage_min": -2.932417572519059,
+      "final_voltage_max": 1.60378411753527
+    }
+  ],
+  "scope": "Frozen failing parameters; first 0.5 seconds of unforced preparation. The positive-conductance continuous voltage interval assumes gates in [0,1]. Local eigenvalues diagnose the seed, not global stability. No refit or held-out outcomes."
+}
