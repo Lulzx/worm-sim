@@ -218,8 +218,8 @@
     "seed": 0,
     "missing_samples": 0,
     "zero_confidence_traces": 0,
-    "prediction_source_commit": "unversioned",
-    "scorer_source_commit": "unversioned"
+    "prediction_source_commit": "0708b543302f12f553f5865d4dfcd2f56ca11c2f",
+    "scorer_source_commit": "0708b543302f12f553f5865d4dfcd2f56ca11c2f"
   },
   "forecast_horizons": [
     {
