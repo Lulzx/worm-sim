@@ -1,0 +1,1046 @@
+{
+  "schema_version": 1,
+  "model_sha256": "f78eb0ac1bc23ae2a88df50871ecd7aa3a04615679d6b341da0c6a9f65b972d1",
+  "model_training_source_commit": "ad1b06d41911e50547b420804bf9d213a4536746",
+  "selection": {
+    "schema_version": 1,
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+    "source_commit": "ad1b06d41911e50547b420804bf9d213a4536746",
+    "config": {
+      "hidden": 6,
+      "epochs": 30,
+      "learning_rate": 0.003,
+      "weight_decay": 0.0001,
+      "gradient_clip": 1.0,
+      "seed": 42,
+      "behavior_channels": [
+        "angular_velocity",
+        "head_angle",
+        "pumping",
+        "velocity"
+      ]
+    },
+    "criterion": "Maximum mean validation macro-neuron R\u00b2 at 1/10/30 s including epoch zero; ties retain earlier epoch. Training-only normalization; exact full-window BPTT through autoregressive feedback; no future teacher forcing. Optional shared behavior AR covariates use history only, then extrapolate without actual future behavior.",
+    "candidates": [
+      {
+        "epoch": 0,
+        "updates": 0,
+        "training_standardized_mse": null,
+        "validation_horizon_r2": [
+          -0.0016188330001915105,
+          -0.02417114223192338,
+          -0.027574914374737167
+        ],
+        "validation_criterion": -0.01778829653561735,
+        "elapsed_seconds": 0.899907084
+      },
+      {
+        "epoch": 1,
+        "updates": 360,
+        "training_standardized_mse": 0.9922653075688508,
+        "validation_horizon_r2": [
+          0.013596143716464492,
+          -0.021421872028252294,
+          -0.025923428360417253
+        ],
+        "validation_criterion": -0.01124971889073502,
+        "elapsed_seconds": 1.143052916
+      },
+      {
+        "epoch": 2,
+        "updates": 360,
+        "training_standardized_mse": 0.9508984727751933,
+        "validation_horizon_r2": [
+          0.09807423960008269,
+          0.010554897229280722,
+          0.014814477249178774
+        ],
+        "validation_criterion": 0.04114787135951406,
+        "elapsed_seconds": 1.122841041
+      },
+      {
+        "epoch": 3,
+        "updates": 360,
+        "training_standardized_mse": 0.9103553484095811,
+        "validation_horizon_r2": [
+          0.11402111439311625,
+          0.01278972648455014,
+          0.017047100129874822
+        ],
+        "validation_criterion": 0.04795264700251373,
+        "elapsed_seconds": 1.113527417
+      },
+      {
+        "epoch": 4,
+        "updates": 360,
+        "training_standardized_mse": 0.8867409190980383,
+        "validation_horizon_r2": [
+          0.1202978220954755,
+          0.02595096683663014,
+          0.029234782477563087
+        ],
+        "validation_criterion": 0.058494523803222905,
+        "elapsed_seconds": 1.112087792
+      },
+      {
+        "epoch": 5,
+        "updates": 360,
+        "training_standardized_mse": 0.8796788695728491,
+        "validation_horizon_r2": [
+          0.1423732433327413,
+          0.03592057151930284,
+          0.04140410109609837
+        ],
+        "validation_criterion": 0.07323263864938083,
+        "elapsed_seconds": 1.11117
+      },
+      {
+        "epoch": 6,
+        "updates": 360,
+        "training_standardized_mse": 0.8646667413014053,
+        "validation_horizon_r2": [
+          0.15426928279561103,
+          0.04548997977676286,
+          0.02245474656273739
+        ],
+        "validation_criterion": 0.07407133637837042,
+        "elapsed_seconds": 1.111532375
+      },
+      {
+        "epoch": 7,
+        "updates": 360,
+        "training_standardized_mse": 0.855286576143601,
+        "validation_horizon_r2": [
+          0.15753591791792634,
+          0.02397185270996569,
+          0.029519518690289855
+        ],
+        "validation_criterion": 0.0703424297727273,
+        "elapsed_seconds": 1.114250333
+      },
+      {
+        "epoch": 8,
+        "updates": 360,
+        "training_standardized_mse": 0.8461685021300909,
+        "validation_horizon_r2": [
+          0.15753794212511563,
+          0.01704049705286149,
+          0.020253345381292226
+        ],
+        "validation_criterion": 0.06494392818642311,
+        "elapsed_seconds": 1.123149417
+      },
+      {
+        "epoch": 9,
+        "updates": 360,
+        "training_standardized_mse": 0.8440934053265937,
+        "validation_horizon_r2": [
+          0.14456893656870667,
+          0.017311783491683646,
+          0.027553903186704854
+        ],
+        "validation_criterion": 0.0631448744156984,
+        "elapsed_seconds": 1.134415208
+      },
+      {
+        "epoch": 10,
+        "updates": 360,
+        "training_standardized_mse": 0.8394237415305414,
+        "validation_horizon_r2": [
+          0.1686707610439877,
+          0.01677487102340367,
+          0.03298399519053804
+        ],
+        "validation_criterion": 0.07280987575264314,
+        "elapsed_seconds": 1.127844791
+      },
+      {
+        "epoch": 11,
+        "updates": 360,
+        "training_standardized_mse": 0.8340643353617527,
+        "validation_horizon_r2": [
+          0.16134615938822564,
+          0.04424399124936716,
+          0.05656651659631288
+        ],
+        "validation_criterion": 0.08738555574463523,
+        "elapsed_seconds": 1.129347708
+      },
+      {
+        "epoch": 12,
+        "updates": 360,
+        "training_standardized_mse": 0.828520709226853,
+        "validation_horizon_r2": [
+          0.14815532093035205,
+          0.03649219387261423,
+          0.04389694228725125
+        ],
+        "validation_criterion": 0.07618148569673917,
+        "elapsed_seconds": 1.127306833
+      },
+      {
+        "epoch": 13,
+        "updates": 360,
+        "training_standardized_mse": 0.8282325479228749,
+        "validation_horizon_r2": [
+          0.1728192923304028,
+          0.03838343092918201,
+          0.04160284181684795
+        ],
+        "validation_criterion": 0.08426852169214426,
+        "elapsed_seconds": 1.126100166
+      },
+      {
+        "epoch": 14,
+        "updates": 360,
+        "training_standardized_mse": 0.8210140391018841,
+        "validation_horizon_r2": [
+          0.16379575432018645,
+          0.038116944602012745,
+          0.023179525881735264
+        ],
+        "validation_criterion": 0.0750307416013115,
+        "elapsed_seconds": 1.118434708
+      },
+      {
+        "epoch": 15,
+        "updates": 360,
+        "training_standardized_mse": 0.8184907583415916,
+        "validation_horizon_r2": [
+          0.149781563972833,
+          0.03751682991351772,
+          0.035747594099507375
+        ],
+        "validation_criterion": 0.0743486626619527,
+        "elapsed_seconds": 1.117246958
+      },
+      {
+        "epoch": 16,
+        "updates": 360,
+        "training_standardized_mse": 0.8169688247084304,
+        "validation_horizon_r2": [
+          0.1556609184442928,
+          0.04320938801395881,
+          0.03730763711781241
+        ],
+        "validation_criterion": 0.07872598119202133,
+        "elapsed_seconds": 1.118029375
+      },
+      {
+        "epoch": 17,
+        "updates": 360,
+        "training_standardized_mse": 0.8166461712895565,
+        "validation_horizon_r2": [
+          0.12516690204524586,
+          0.01956253464784818,
+          0.01430263090036584
+        ],
+        "validation_criterion": 0.05301068919781996,
+        "elapsed_seconds": 1.117753833
+      },
+      {
+        "epoch": 18,
+        "updates": 360,
+        "training_standardized_mse": 0.8163962937409852,
+        "validation_horizon_r2": [
+          0.13608333893084604,
+          0.03566563586889231,
+          0.026524807871157595
+        ],
+        "validation_criterion": 0.06609126089029865,
+        "elapsed_seconds": 1.1183335
+      },
+      {
+        "epoch": 19,
+        "updates": 360,
+        "training_standardized_mse": 0.8164533030531184,
+        "validation_horizon_r2": [
+          0.14956064107015377,
+          0.030341935285447368,
+          0.04171258462785686
+        ],
+        "validation_criterion": 0.07387172032781934,
+        "elapsed_seconds": 1.126852541
+      },
+      {
+        "epoch": 20,
+        "updates": 360,
+        "training_standardized_mse": 0.8129484265128637,
+        "validation_horizon_r2": [
+          0.1599742940665353,
+          0.02736839548567974,
+          0.03185854227244045
+        ],
+        "validation_criterion": 0.07306707727488516,
+        "elapsed_seconds": 1.125373166
+      },
+      {
+        "epoch": 21,
+        "updates": 360,
+        "training_standardized_mse": 0.8109846392175134,
+        "validation_horizon_r2": [
+          0.15848321267283869,
+          0.04348093503058546,
+          0.038646641569988156
+        ],
+        "validation_criterion": 0.08020359642447077,
+        "elapsed_seconds": 1.127059459
+      },
+      {
+        "epoch": 22,
+        "updates": 360,
+        "training_standardized_mse": 0.8115083441242261,
+        "validation_horizon_r2": [
+          0.13781596011408245,
+          0.017372708993165335,
+          0.011669493419769366
+        ],
+        "validation_criterion": 0.05561938750900572,
+        "elapsed_seconds": 1.1280765
+      },
+      {
+        "epoch": 23,
+        "updates": 360,
+        "training_standardized_mse": 0.811629691759179,
+        "validation_horizon_r2": [
+          0.1442442539069972,
+          0.019786403845711873,
+          0.017083083236281663
+        ],
+        "validation_criterion": 0.06037124699633024,
+        "elapsed_seconds": 1.127063125
+      },
+      {
+        "epoch": 24,
+        "updates": 360,
+        "training_standardized_mse": 0.8062574375174475,
+        "validation_horizon_r2": [
+          0.15592461038090566,
+          0.03463562197035681,
+          0.03580660643471133
+        ],
+        "validation_criterion": 0.07545561292865793,
+        "elapsed_seconds": 1.133655084
+      },
+      {
+        "epoch": 25,
+        "updates": 360,
+        "training_standardized_mse": 0.8057881105230856,
+        "validation_horizon_r2": [
+          0.14599807052765376,
+          0.008907286044435208,
+          0.024964649509192333
+        ],
+        "validation_criterion": 0.059956668693760436,
+        "elapsed_seconds": 1.107064
+      },
+      {
+        "epoch": 26,
+        "updates": 360,
+        "training_standardized_mse": 0.8070391378575762,
+        "validation_horizon_r2": [
+          0.13589420497711993,
+          0.010860657450464014,
+          0.015899898174696128
+        ],
+        "validation_criterion": 0.054218253534093354,
+        "elapsed_seconds": 1.112643208
+      },
+      {
+        "epoch": 27,
+        "updates": 360,
+        "training_standardized_mse": 0.8153765170774347,
+        "validation_horizon_r2": [
+          0.13095713748856339,
+          0.019200148861196368,
+          0.020011744113031454
+        ],
+        "validation_criterion": 0.05672301015426373,
+        "elapsed_seconds": 1.114464375
+      },
+      {
+        "epoch": 28,
+        "updates": 360,
+        "training_standardized_mse": 0.8108764132647314,
+        "validation_horizon_r2": [
+          0.14702838682412847,
+          0.031698619251222804,
+          0.03435699918423885
+        ],
+        "validation_criterion": 0.0710280017531967,
+        "elapsed_seconds": 1.114860625
+      },
+      {
+        "epoch": 29,
+        "updates": 360,
+        "training_standardized_mse": 0.8087022613646039,
+        "validation_horizon_r2": [
+          0.15144167080291723,
+          0.013874910213366315,
+          0.00809986660359347
+        ],
+        "validation_criterion": 0.057805482539959006,
+        "elapsed_seconds": 1.1209988339999999
+      },
+      {
+        "epoch": 30,
+        "updates": 360,
+        "training_standardized_mse": 0.8070198797884942,
+        "validation_horizon_r2": [
+          0.15264659140279155,
+          0.03714409708654148,
+          0.04791585025886514
+        ],
+        "validation_criterion": 0.07923551291606605,
+        "elapsed_seconds": 1.116912917
+      }
+    ],
+    "selected_epoch": 11,
+    "trainable_parameters": 6677,
+    "calibration_statistics": 298,
+    "behavior_forecast_parameters": 16,
+    "free_parameters": 6991
+  },
+  "behavior_forecast": {
+    "schema_version": 1,
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+    "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+    "source_commit": "ad1b06d41911e50547b420804bf9d213a4536746",
+    "training_trials": [
+      "2022-06-14-01-window-0000",
+      "2022-06-14-01-window-0001",
+      "2022-06-14-01-window-0002",
+      "2022-06-14-01-window-0003",
+      "2022-06-14-01-window-0004",
+      "2022-06-14-01-window-0005",
+      "2022-06-14-01-window-0006",
+      "2022-06-14-01-window-0007",
+      "2022-06-14-01-window-0008",
+      "2022-06-14-01-window-0009",
+      "2022-06-14-01-window-0010",
+      "2022-06-14-01-window-0011",
+      "2022-06-14-01-window-0012",
+      "2022-06-14-01-window-0013",
+      "2022-06-14-01-window-0014",
+      "2022-06-14-01-window-0015",
+      "2022-06-14-01-window-0016",
+      "2022-06-14-01-window-0017",
+      "2022-06-14-01-window-0018",
+      "2022-06-14-01-window-0019",
+      "2022-06-14-01-window-0020",
+      "2022-06-14-01-window-0021",
+      "2022-06-14-01-window-0022",
+      "2022-06-14-01-window-0023",
+      "2022-06-14-13-window-0000",
+      "2022-06-14-13-window-0001",
+      "2022-06-14-13-window-0002",
+      "2022-06-14-13-window-0003",
+      "2022-06-14-13-window-0004",
+      "2022-06-14-13-window-0005",
+      "2022-06-14-13-window-0006",
+      "2022-06-14-13-window-0007",
+      "2022-06-14-13-window-0008",
+      "2022-06-14-13-window-0009",
+      "2022-06-14-13-window-0010",
+      "2022-06-14-13-window-0011",
+      "2022-06-14-13-window-0012",
+      "2022-06-14-13-window-0013",
+      "2022-06-14-13-window-0014",
+      "2022-06-14-13-window-0015",
+      "2022-06-14-13-window-0016",
+      "2022-06-14-13-window-0017",
+      "2022-06-14-13-window-0018",
+      "2022-06-14-13-window-0019",
+      "2022-06-14-13-window-0020",
+      "2022-06-14-13-window-0021",
+      "2022-06-14-13-window-0022",
+      "2022-06-14-13-window-0023",
+      "2022-06-28-01-window-0000",
+      "2022-06-28-01-window-0001",
+      "2022-06-28-01-window-0002",
+      "2022-06-28-01-window-0003",
+      "2022-06-28-01-window-0004",
+      "2022-06-28-01-window-0005",
+      "2022-06-28-01-window-0006",
+      "2022-06-28-01-window-0007",
+      "2022-06-28-01-window-0008",
+      "2022-06-28-01-window-0009",
+      "2022-06-28-01-window-0010",
+      "2022-06-28-01-window-0011",
+      "2022-06-28-01-window-0012",
+      "2022-06-28-01-window-0013",
+      "2022-06-28-01-window-0014",
+      "2022-06-28-01-window-0015",
+      "2022-06-28-01-window-0016",
+      "2022-06-28-01-window-0017",
+      "2022-06-28-01-window-0018",
+      "2022-06-28-01-window-0019",
+      "2022-06-28-01-window-0020",
+      "2022-06-28-01-window-0021",
+      "2022-06-28-01-window-0022",
+      "2022-06-28-01-window-0023",
+      "2022-06-28-07-window-0000",
+      "2022-06-28-07-window-0001",
+      "2022-06-28-07-window-0002",
+      "2022-06-28-07-window-0003",
+      "2022-06-28-07-window-0004",
+      "2022-06-28-07-window-0005",
+      "2022-06-28-07-window-0006",
+      "2022-06-28-07-window-0007",
+      "2022-06-28-07-window-0008",
+      "2022-06-28-07-window-0009",
+      "2022-06-28-07-window-0010",
+      "2022-06-28-07-window-0011",
+      "2022-06-28-07-window-0012",
+      "2022-06-28-07-window-0013",
+      "2022-06-28-07-window-0014",
+      "2022-06-28-07-window-0015",
+      "2022-06-28-07-window-0016",
+      "2022-06-28-07-window-0017",
+      "2022-06-28-07-window-0018",
+      "2022-06-28-07-window-0019",
+      "2022-06-28-07-window-0020",
+      "2022-06-28-07-window-0021",
+      "2022-06-28-07-window-0022",
+      "2022-06-28-07-window-0023",
+      "2022-07-15-06-window-0000",
+      "2022-07-15-06-window-0001",
+      "2022-07-15-06-window-0002",
+      "2022-07-15-06-window-0003",
+      "2022-07-15-06-window-0004",
+      "2022-07-15-06-window-0005",
+      "2022-07-15-06-window-0006",
+      "2022-07-15-06-window-0007",
+      "2022-07-15-06-window-0008",
+      "2022-07-15-06-window-0009",
+      "2022-07-15-06-window-0010",
+      "2022-07-15-06-window-0011",
+      "2022-07-15-06-window-0012",
+      "2022-07-15-06-window-0013",
+      "2022-07-15-06-window-0014",
+      "2022-07-15-06-window-0015",
+      "2022-07-15-06-window-0016",
+      "2022-07-15-06-window-0017",
+      "2022-07-15-06-window-0018",
+      "2022-07-15-06-window-0019",
+      "2022-07-15-06-window-0020",
+      "2022-07-15-06-window-0021",
+      "2022-07-15-06-window-0022",
+      "2022-07-15-06-window-0023",
+      "2022-07-20-01-window-0000",
+      "2022-07-20-01-window-0001",
+      "2022-07-20-01-window-0002",
+      "2022-07-20-01-window-0003",
+      "2022-07-20-01-window-0004",
+      "2022-07-20-01-window-0005",
+      "2022-07-20-01-window-0006",
+      "2022-07-20-01-window-0007",
+      "2022-07-20-01-window-0008",
+      "2022-07-20-01-window-0009",
+      "2022-07-20-01-window-0010",
+      "2022-07-20-01-window-0011",
+      "2022-07-20-01-window-0012",
+      "2022-07-20-01-window-0013",
+      "2022-07-20-01-window-0014",
+      "2022-07-20-01-window-0015",
+      "2022-07-20-01-window-0016",
+      "2022-07-20-01-window-0017",
+      "2022-07-20-01-window-0018",
+      "2022-07-20-01-window-0019",
+      "2022-07-20-01-window-0020",
+      "2022-07-20-01-window-0021",
+      "2022-07-20-01-window-0022",
+      "2022-07-20-01-window-0023",
+      "2022-07-26-01-window-0000",
+      "2022-07-26-01-window-0001",
+      "2022-07-26-01-window-0002",
+      "2022-07-26-01-window-0003",
+      "2022-07-26-01-window-0004",
+      "2022-07-26-01-window-0005",
+      "2022-07-26-01-window-0006",
+      "2022-07-26-01-window-0007",
+      "2022-07-26-01-window-0008",
+      "2022-07-26-01-window-0009",
+      "2022-07-26-01-window-0010",
+      "2022-07-26-01-window-0011",
+      "2022-07-26-01-window-0012",
+      "2022-07-26-01-window-0013",
+      "2022-07-26-01-window-0014",
+      "2022-07-26-01-window-0015",
+      "2022-07-26-01-window-0016",
+      "2022-07-26-01-window-0017",
+      "2022-07-26-01-window-0018",
+      "2022-07-26-01-window-0019",
+      "2022-07-26-01-window-0020",
+      "2022-07-26-01-window-0021",
+      "2022-07-26-01-window-0022",
+      "2022-07-26-01-window-0023",
+      "2022-08-02-01-window-0000",
+      "2022-08-02-01-window-0001",
+      "2022-08-02-01-window-0002",
+      "2022-08-02-01-window-0003",
+      "2022-08-02-01-window-0004",
+      "2022-08-02-01-window-0005",
+      "2022-08-02-01-window-0006",
+      "2022-08-02-01-window-0007",
+      "2022-08-02-01-window-0008",
+      "2022-08-02-01-window-0009",
+      "2022-08-02-01-window-0010",
+      "2022-08-02-01-window-0011",
+      "2022-08-02-01-window-0012",
+      "2022-08-02-01-window-0013",
+      "2022-08-02-01-window-0014",
+      "2022-08-02-01-window-0015",
+      "2022-08-02-01-window-0016",
+      "2022-08-02-01-window-0017",
+      "2022-08-02-01-window-0018",
+      "2022-08-02-01-window-0019",
+      "2022-08-02-01-window-0020",
+      "2022-08-02-01-window-0021",
+      "2022-08-02-01-window-0022",
+      "2022-08-02-01-window-0023",
+      "2023-01-09-28-window-0000",
+      "2023-01-09-28-window-0001",
+      "2023-01-09-28-window-0002",
+      "2023-01-09-28-window-0003",
+      "2023-01-09-28-window-0004",
+      "2023-01-09-28-window-0005",
+      "2023-01-09-28-window-0006",
+      "2023-01-09-28-window-0007",
+      "2023-01-09-28-window-0008",
+      "2023-01-09-28-window-0009",
+      "2023-01-09-28-window-0010",
+      "2023-01-09-28-window-0011",
+      "2023-01-09-28-window-0012",
+      "2023-01-09-28-window-0013",
+      "2023-01-09-28-window-0014",
+      "2023-01-09-28-window-0015",
+      "2023-01-09-28-window-0016",
+      "2023-01-09-28-window-0017",
+      "2023-01-09-28-window-0018",
+      "2023-01-09-28-window-0019",
+      "2023-01-09-28-window-0020",
+      "2023-01-09-28-window-0021",
+      "2023-01-09-28-window-0022",
+      "2023-01-09-28-window-0023",
+      "2023-01-17-01-window-0000",
+      "2023-01-17-01-window-0001",
+      "2023-01-17-01-window-0002",
+      "2023-01-17-01-window-0003",
+      "2023-01-17-01-window-0004",
+      "2023-01-17-01-window-0005",
+      "2023-01-17-01-window-0006",
+      "2023-01-17-01-window-0007",
+      "2023-01-17-01-window-0008",
+      "2023-01-17-01-window-0009",
+      "2023-01-17-01-window-0010",
+      "2023-01-17-01-window-0011",
+      "2023-01-17-01-window-0012",
+      "2023-01-17-01-window-0013",
+      "2023-01-17-01-window-0014",
+      "2023-01-17-01-window-0015",
+      "2023-01-17-01-window-0016",
+      "2023-01-17-01-window-0017",
+      "2023-01-17-01-window-0018",
+      "2023-01-17-01-window-0019",
+      "2023-01-17-01-window-0020",
+      "2023-01-17-01-window-0021",
+      "2023-01-17-01-window-0022",
+      "2023-01-17-01-window-0023",
+      "2023-01-19-01-window-0000",
+      "2023-01-19-01-window-0001",
+      "2023-01-19-01-window-0002",
+      "2023-01-19-01-window-0003",
+      "2023-01-19-01-window-0004",
+      "2023-01-19-01-window-0005",
+      "2023-01-19-01-window-0006",
+      "2023-01-19-01-window-0007",
+      "2023-01-19-01-window-0008",
+      "2023-01-19-01-window-0009",
+      "2023-01-19-01-window-0010",
+      "2023-01-19-01-window-0011",
+      "2023-01-19-01-window-0012",
+      "2023-01-19-01-window-0013",
+      "2023-01-19-01-window-0014",
+      "2023-01-19-01-window-0015",
+      "2023-01-19-01-window-0016",
+      "2023-01-19-01-window-0017",
+      "2023-01-19-01-window-0018",
+      "2023-01-19-01-window-0019",
+      "2023-01-19-01-window-0020",
+      "2023-01-19-01-window-0021",
+      "2023-01-19-01-window-0022",
+      "2023-01-19-01-window-0023",
+      "2023-01-19-22-window-0000",
+      "2023-01-19-22-window-0001",
+      "2023-01-19-22-window-0002",
+      "2023-01-19-22-window-0003",
+      "2023-01-19-22-window-0004",
+      "2023-01-19-22-window-0005",
+      "2023-01-19-22-window-0006",
+      "2023-01-19-22-window-0007",
+      "2023-01-19-22-window-0008",
+      "2023-01-19-22-window-0009",
+      "2023-01-19-22-window-0010",
+      "2023-01-19-22-window-0011",
+      "2023-01-19-22-window-0012",
+      "2023-01-19-22-window-0013",
+      "2023-01-19-22-window-0014",
+      "2023-01-19-22-window-0015",
+      "2023-01-19-22-window-0016",
+      "2023-01-19-22-window-0017",
+      "2023-01-19-22-window-0018",
+      "2023-01-19-22-window-0019",
+      "2023-01-19-22-window-0020",
+      "2023-01-19-22-window-0021",
+      "2023-01-19-22-window-0022",
+      "2023-01-19-22-window-0023",
+      "2023-01-23-01-window-0000",
+      "2023-01-23-01-window-0001",
+      "2023-01-23-01-window-0002",
+      "2023-01-23-01-window-0003",
+      "2023-01-23-01-window-0004",
+      "2023-01-23-01-window-0005",
+      "2023-01-23-01-window-0006",
+      "2023-01-23-01-window-0007",
+      "2023-01-23-01-window-0008",
+      "2023-01-23-01-window-0009",
+      "2023-01-23-01-window-0010",
+      "2023-01-23-01-window-0011",
+      "2023-01-23-01-window-0012",
+      "2023-01-23-01-window-0013",
+      "2023-01-23-01-window-0014",
+      "2023-01-23-01-window-0015",
+      "2023-01-23-01-window-0016",
+      "2023-01-23-01-window-0017",
+      "2023-01-23-01-window-0018",
+      "2023-01-23-01-window-0019",
+      "2023-01-23-01-window-0020",
+      "2023-01-23-01-window-0021",
+      "2023-01-23-01-window-0022",
+      "2023-01-23-01-window-0023",
+      "2023-01-23-08-window-0000",
+      "2023-01-23-08-window-0001",
+      "2023-01-23-08-window-0002",
+      "2023-01-23-08-window-0003",
+      "2023-01-23-08-window-0004",
+      "2023-01-23-08-window-0005",
+      "2023-01-23-08-window-0006",
+      "2023-01-23-08-window-0007",
+      "2023-01-23-08-window-0008",
+      "2023-01-23-08-window-0009",
+      "2023-01-23-08-window-0010",
+      "2023-01-23-08-window-0011",
+      "2023-01-23-08-window-0012",
+      "2023-01-23-08-window-0013",
+      "2023-01-23-08-window-0014",
+      "2023-01-23-08-window-0015",
+      "2023-01-23-08-window-0016",
+      "2023-01-23-08-window-0017",
+      "2023-01-23-08-window-0018",
+      "2023-01-23-08-window-0019",
+      "2023-01-23-08-window-0020",
+      "2023-01-23-08-window-0021",
+      "2023-01-23-08-window-0022",
+      "2023-01-23-08-window-0023",
+      "2023-03-07-01-window-0000",
+      "2023-03-07-01-window-0001",
+      "2023-03-07-01-window-0002",
+      "2023-03-07-01-window-0003",
+      "2023-03-07-01-window-0004",
+      "2023-03-07-01-window-0005",
+      "2023-03-07-01-window-0006",
+      "2023-03-07-01-window-0007",
+      "2023-03-07-01-window-0008",
+      "2023-03-07-01-window-0009",
+      "2023-03-07-01-window-0010",
+      "2023-03-07-01-window-0011",
+      "2023-03-07-01-window-0012",
+      "2023-03-07-01-window-0013",
+      "2023-03-07-01-window-0014",
+      "2023-03-07-01-window-0015",
+      "2023-03-07-01-window-0016",
+      "2023-03-07-01-window-0017",
+      "2023-03-07-01-window-0018",
+      "2023-03-07-01-window-0019",
+      "2023-03-07-01-window-0020",
+      "2023-03-07-01-window-0021",
+      "2023-03-07-01-window-0022",
+      "2023-03-07-01-window-0023"
+    ],
+    "sample_dt": 0.5,
+    "channels": [
+      {
+        "name": "angular_velocity",
+        "mean": 0.017757910949595487,
+        "scale": 0.18267044303114915,
+        "slope": 0.992312471741494,
+        "intercept": -0.0002603800528394834,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      },
+      {
+        "name": "head_angle",
+        "mean": 0.1425842653754989,
+        "scale": 0.5239418049540822,
+        "slope": 0.8943424130284194,
+        "intercept": 7.498990470735712e-05,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      },
+      {
+        "name": "pumping",
+        "mean": 0.40649844464134083,
+        "scale": 0.6821585704172426,
+        "slope": 0.995,
+        "intercept": -0.0003497716131240635,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      },
+      {
+        "name": "velocity",
+        "mean": 0.009318797116076296,
+        "scale": 0.063829588674733,
+        "slope": 0.9525314670598677,
+        "intercept": 2.070629891200005e-05,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      }
+    ]
+  },
+  "validation": {
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+    "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+    "partition": "validation",
+    "model": "connectome-free masked reset-before GRU; hidden=6; epoch=11; trainable=6677; calibration=298; history only; behavior AR artifact ba9b1a70200385d0154716e7d04a44bfe4cf67e066a6579ab8aea06d1db671e0; channels [\"angular_velocity\", \"head_angle\", \"pumping\", \"velocity\"]; no actual future behavior; unseen-neuron persistence fallback traces=120; neurons={\"ASJL\", \"AVBL\", \"AVHR\", \"URAVR\"}",
+    "free_parameters": 6991,
+    "prediction_source_commit": "7282bddbfacb931b2b938075a1feb4ad0110cef6",
+    "scorer_source_commit": "7282bddbfacb931b2b938075a1feb4ad0110cef6",
+    "preprocessing_assessment": {
+      "status": "retrospective",
+      "evidence_path": "docs/wormwideweb-preprocessing-audit.json",
+      "evidence_sha256": "56aab7c5ccde23df045d21d29ede3df5d25dc7daf862ba801294fea7919dcab6",
+      "description": "Whole-recording neural z-scoring is numerically confirmed for all 21 source animals. Reference neural and behavior processing includes noncausal operations; exact per-file settings are not fully attested. This benchmark supports retrospective processed-signal prediction, not end-to-end prospective forecasting."
+    },
+    "animal_bootstrap": {
+      "seed": 42,
+      "replicates": 2000,
+      "animals": 3,
+      "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+      "horizons": [
+        {
+          "seconds": 1.0,
+          "confidence_weighted": {
+            "point": 0.1613461593882256,
+            "lower_95": 0.10464526039076104,
+            "upper_95": 0.22916668597920495,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.1612538422520982,
+            "lower_95": 0.10464526039076101,
+            "upper_95": 0.22916668597920478,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.15953188355582895
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.22916668597920486
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": 0.10464526039076104
+            }
+          ]
+        },
+        {
+          "seconds": 10.0,
+          "confidence_weighted": {
+            "point": 0.044243991249367086,
+            "lower_95": -0.0344178438138645,
+            "upper_95": 0.07538670421083433,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.04496327643201775,
+            "lower_95": -0.034417843813864445,
+            "upper_95": 0.07538898824133647,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.059694526631993275
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.06279508310931932
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": -0.03441784381386448
+            }
+          ]
+        },
+        {
+          "seconds": 30.0,
+          "confidence_weighted": {
+            "point": 0.05656651659631288,
+            "lower_95": -0.00986724052500013,
+            "upper_95": 0.1405125923115255,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.05540182346832856,
+            "lower_95": -0.010589831773107647,
+            "upper_95": 0.1405125923115255,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.020359479271180217
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.14051259231152555
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": 5.431172316321681e-05
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "test": {
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+    "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+    "partition": "test",
+    "model": "connectome-free masked reset-before GRU; hidden=6; epoch=11; trainable=6677; calibration=298; history only; behavior AR artifact ba9b1a70200385d0154716e7d04a44bfe4cf67e066a6579ab8aea06d1db671e0; channels [\"angular_velocity\", \"head_angle\", \"pumping\", \"velocity\"]; no actual future behavior; unseen-neuron persistence fallback traces=48; neurons={\"AVBL\", \"URAVR\"}",
+    "free_parameters": 6991,
+    "prediction_source_commit": "7282bddbfacb931b2b938075a1feb4ad0110cef6",
+    "scorer_source_commit": "7282bddbfacb931b2b938075a1feb4ad0110cef6",
+    "preprocessing_assessment": {
+      "status": "retrospective",
+      "evidence_path": "docs/wormwideweb-preprocessing-audit.json",
+      "evidence_sha256": "56aab7c5ccde23df045d21d29ede3df5d25dc7daf862ba801294fea7919dcab6",
+      "description": "Whole-recording neural z-scoring is numerically confirmed for all 21 source animals. Reference neural and behavior processing includes noncausal operations; exact per-file settings are not fully attested. This benchmark supports retrospective processed-signal prediction, not end-to-end prospective forecasting."
+    },
+    "animal_bootstrap": {
+      "seed": 42,
+      "replicates": 2000,
+      "animals": 3,
+      "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+      "horizons": [
+        {
+          "seconds": 1.0,
+          "confidence_weighted": {
+            "point": 0.12278440971216953,
+            "lower_95": 0.06959110657225984,
+            "upper_95": 0.16190768319622909,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.12019747016788909,
+            "lower_95": 0.06959110657225978,
+            "upper_95": 0.1619076831962291,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": 0.16190768319622909
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": 0.09958079747396767
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": 0.06959110657225984
+            }
+          ]
+        },
+        {
+          "seconds": 10.0,
+          "confidence_weighted": {
+            "point": 0.031026133435609067,
+            "lower_95": -0.030457988440854986,
+            "upper_95": 0.14104919779823943,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.02789865541675963,
+            "lower_95": -0.030457988440854976,
+            "upper_95": 0.1410491977982394,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": 0.14104919779823938
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": -0.01815937376797718
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": -0.030457988440854986
+            }
+          ]
+        },
+        {
+          "seconds": 30.0,
+          "confidence_weighted": {
+            "point": -0.018686278320464874,
+            "lower_95": -0.09808452964663911,
+            "upper_95": 0.059901792856946516,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": -0.020641865479991393,
+            "lower_95": -0.0980845296466391,
+            "upper_95": 0.059901792856946516,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": 0.059901792856946516
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": -0.04658478180825131
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": -0.09808452964663911
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "timed_training_and_validation_seconds": 34.541355289,
+  "timing_exclusions": "File loading, training preparation/initialization, candidate artifact writing, and final held-out scoring are outside the summed timers.",
+  "limitations": [
+    "Only three test animals, already inspected during previous experiments; results are exploratory.",
+    "One fixed hidden size and random seed, not an exhaustive hyperparameter search.",
+    "Marginal animal-bootstrap intervals are not paired-difference significance tests.",
+    "Training-unseen identities use persistence, differing from Level 0 default readouts.",
+    "Standardized forecast MSE differs from the Level 0 raw fluorescence training objective; common selection/scoring uses unstandardized fluorescence.",
+    "Shared training-fitted behavior AR inputs; actual future behavior excluded. Consult preprocessing_assessment for source causality evidence.",
+    "Benchmark code and engineering tests do not establish biological validity."
+  ]
+}

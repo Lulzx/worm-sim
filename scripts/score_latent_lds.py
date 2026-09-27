@@ -64,7 +64,7 @@ receipt = {
     'timed_preparation_and_candidate_seconds': selection['training_preparation_seconds'] + sum(c['elapsed_seconds'] for c in selection['candidates']),
     'timing_exclusions': 'File loading, per-rank PCA initialization, candidate artifact writing, and final held-out scoring are outside the summed timers.',
     'limitations': [
-        'Three test animals only; marginal bootstrap intervals at both long horizons include zero.',
+        'Three test animals only; inspect the reported marginal animal-bootstrap intervals.',
         'No paired-bootstrap significance claim against AR(1).',
         'Training-unseen neuron outputs use persistence; this differs from Level 0 readout assumptions.',
         'Constrained EM-style updates with fixed process jitter, observation floor, ridge and operator-norm cap.',

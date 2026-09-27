@@ -66,6 +66,7 @@ receipt = {
     'schema_version': 1,
     'model_sha256': hashlib.sha256(model_bytes).hexdigest(),
     'fit': load(args.model + '.fit.json'),
+    'behavior_forecast': model.get('behavior'),
     'validation': validation,
     'test': test,
     'validation_history_diagnostic': history,

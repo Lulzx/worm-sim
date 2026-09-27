@@ -1,0 +1,1020 @@
+{
+  "schema_version": 1,
+  "scope": "Exploratory comparison on a fixed retrospective processed-signal benchmark. All artifacts selected on validation before this test scoring.",
+  "common_behavior_parameters_and_lineage_equal_excluding_source_commit": true,
+  "common_behavior_forecast": {
+    "schema_version": 1,
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+    "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+    "training_trials": [
+      "2022-06-14-01-window-0000",
+      "2022-06-14-01-window-0001",
+      "2022-06-14-01-window-0002",
+      "2022-06-14-01-window-0003",
+      "2022-06-14-01-window-0004",
+      "2022-06-14-01-window-0005",
+      "2022-06-14-01-window-0006",
+      "2022-06-14-01-window-0007",
+      "2022-06-14-01-window-0008",
+      "2022-06-14-01-window-0009",
+      "2022-06-14-01-window-0010",
+      "2022-06-14-01-window-0011",
+      "2022-06-14-01-window-0012",
+      "2022-06-14-01-window-0013",
+      "2022-06-14-01-window-0014",
+      "2022-06-14-01-window-0015",
+      "2022-06-14-01-window-0016",
+      "2022-06-14-01-window-0017",
+      "2022-06-14-01-window-0018",
+      "2022-06-14-01-window-0019",
+      "2022-06-14-01-window-0020",
+      "2022-06-14-01-window-0021",
+      "2022-06-14-01-window-0022",
+      "2022-06-14-01-window-0023",
+      "2022-06-14-13-window-0000",
+      "2022-06-14-13-window-0001",
+      "2022-06-14-13-window-0002",
+      "2022-06-14-13-window-0003",
+      "2022-06-14-13-window-0004",
+      "2022-06-14-13-window-0005",
+      "2022-06-14-13-window-0006",
+      "2022-06-14-13-window-0007",
+      "2022-06-14-13-window-0008",
+      "2022-06-14-13-window-0009",
+      "2022-06-14-13-window-0010",
+      "2022-06-14-13-window-0011",
+      "2022-06-14-13-window-0012",
+      "2022-06-14-13-window-0013",
+      "2022-06-14-13-window-0014",
+      "2022-06-14-13-window-0015",
+      "2022-06-14-13-window-0016",
+      "2022-06-14-13-window-0017",
+      "2022-06-14-13-window-0018",
+      "2022-06-14-13-window-0019",
+      "2022-06-14-13-window-0020",
+      "2022-06-14-13-window-0021",
+      "2022-06-14-13-window-0022",
+      "2022-06-14-13-window-0023",
+      "2022-06-28-01-window-0000",
+      "2022-06-28-01-window-0001",
+      "2022-06-28-01-window-0002",
+      "2022-06-28-01-window-0003",
+      "2022-06-28-01-window-0004",
+      "2022-06-28-01-window-0005",
+      "2022-06-28-01-window-0006",
+      "2022-06-28-01-window-0007",
+      "2022-06-28-01-window-0008",
+      "2022-06-28-01-window-0009",
+      "2022-06-28-01-window-0010",
+      "2022-06-28-01-window-0011",
+      "2022-06-28-01-window-0012",
+      "2022-06-28-01-window-0013",
+      "2022-06-28-01-window-0014",
+      "2022-06-28-01-window-0015",
+      "2022-06-28-01-window-0016",
+      "2022-06-28-01-window-0017",
+      "2022-06-28-01-window-0018",
+      "2022-06-28-01-window-0019",
+      "2022-06-28-01-window-0020",
+      "2022-06-28-01-window-0021",
+      "2022-06-28-01-window-0022",
+      "2022-06-28-01-window-0023",
+      "2022-06-28-07-window-0000",
+      "2022-06-28-07-window-0001",
+      "2022-06-28-07-window-0002",
+      "2022-06-28-07-window-0003",
+      "2022-06-28-07-window-0004",
+      "2022-06-28-07-window-0005",
+      "2022-06-28-07-window-0006",
+      "2022-06-28-07-window-0007",
+      "2022-06-28-07-window-0008",
+      "2022-06-28-07-window-0009",
+      "2022-06-28-07-window-0010",
+      "2022-06-28-07-window-0011",
+      "2022-06-28-07-window-0012",
+      "2022-06-28-07-window-0013",
+      "2022-06-28-07-window-0014",
+      "2022-06-28-07-window-0015",
+      "2022-06-28-07-window-0016",
+      "2022-06-28-07-window-0017",
+      "2022-06-28-07-window-0018",
+      "2022-06-28-07-window-0019",
+      "2022-06-28-07-window-0020",
+      "2022-06-28-07-window-0021",
+      "2022-06-28-07-window-0022",
+      "2022-06-28-07-window-0023",
+      "2022-07-15-06-window-0000",
+      "2022-07-15-06-window-0001",
+      "2022-07-15-06-window-0002",
+      "2022-07-15-06-window-0003",
+      "2022-07-15-06-window-0004",
+      "2022-07-15-06-window-0005",
+      "2022-07-15-06-window-0006",
+      "2022-07-15-06-window-0007",
+      "2022-07-15-06-window-0008",
+      "2022-07-15-06-window-0009",
+      "2022-07-15-06-window-0010",
+      "2022-07-15-06-window-0011",
+      "2022-07-15-06-window-0012",
+      "2022-07-15-06-window-0013",
+      "2022-07-15-06-window-0014",
+      "2022-07-15-06-window-0015",
+      "2022-07-15-06-window-0016",
+      "2022-07-15-06-window-0017",
+      "2022-07-15-06-window-0018",
+      "2022-07-15-06-window-0019",
+      "2022-07-15-06-window-0020",
+      "2022-07-15-06-window-0021",
+      "2022-07-15-06-window-0022",
+      "2022-07-15-06-window-0023",
+      "2022-07-20-01-window-0000",
+      "2022-07-20-01-window-0001",
+      "2022-07-20-01-window-0002",
+      "2022-07-20-01-window-0003",
+      "2022-07-20-01-window-0004",
+      "2022-07-20-01-window-0005",
+      "2022-07-20-01-window-0006",
+      "2022-07-20-01-window-0007",
+      "2022-07-20-01-window-0008",
+      "2022-07-20-01-window-0009",
+      "2022-07-20-01-window-0010",
+      "2022-07-20-01-window-0011",
+      "2022-07-20-01-window-0012",
+      "2022-07-20-01-window-0013",
+      "2022-07-20-01-window-0014",
+      "2022-07-20-01-window-0015",
+      "2022-07-20-01-window-0016",
+      "2022-07-20-01-window-0017",
+      "2022-07-20-01-window-0018",
+      "2022-07-20-01-window-0019",
+      "2022-07-20-01-window-0020",
+      "2022-07-20-01-window-0021",
+      "2022-07-20-01-window-0022",
+      "2022-07-20-01-window-0023",
+      "2022-07-26-01-window-0000",
+      "2022-07-26-01-window-0001",
+      "2022-07-26-01-window-0002",
+      "2022-07-26-01-window-0003",
+      "2022-07-26-01-window-0004",
+      "2022-07-26-01-window-0005",
+      "2022-07-26-01-window-0006",
+      "2022-07-26-01-window-0007",
+      "2022-07-26-01-window-0008",
+      "2022-07-26-01-window-0009",
+      "2022-07-26-01-window-0010",
+      "2022-07-26-01-window-0011",
+      "2022-07-26-01-window-0012",
+      "2022-07-26-01-window-0013",
+      "2022-07-26-01-window-0014",
+      "2022-07-26-01-window-0015",
+      "2022-07-26-01-window-0016",
+      "2022-07-26-01-window-0017",
+      "2022-07-26-01-window-0018",
+      "2022-07-26-01-window-0019",
+      "2022-07-26-01-window-0020",
+      "2022-07-26-01-window-0021",
+      "2022-07-26-01-window-0022",
+      "2022-07-26-01-window-0023",
+      "2022-08-02-01-window-0000",
+      "2022-08-02-01-window-0001",
+      "2022-08-02-01-window-0002",
+      "2022-08-02-01-window-0003",
+      "2022-08-02-01-window-0004",
+      "2022-08-02-01-window-0005",
+      "2022-08-02-01-window-0006",
+      "2022-08-02-01-window-0007",
+      "2022-08-02-01-window-0008",
+      "2022-08-02-01-window-0009",
+      "2022-08-02-01-window-0010",
+      "2022-08-02-01-window-0011",
+      "2022-08-02-01-window-0012",
+      "2022-08-02-01-window-0013",
+      "2022-08-02-01-window-0014",
+      "2022-08-02-01-window-0015",
+      "2022-08-02-01-window-0016",
+      "2022-08-02-01-window-0017",
+      "2022-08-02-01-window-0018",
+      "2022-08-02-01-window-0019",
+      "2022-08-02-01-window-0020",
+      "2022-08-02-01-window-0021",
+      "2022-08-02-01-window-0022",
+      "2022-08-02-01-window-0023",
+      "2023-01-09-28-window-0000",
+      "2023-01-09-28-window-0001",
+      "2023-01-09-28-window-0002",
+      "2023-01-09-28-window-0003",
+      "2023-01-09-28-window-0004",
+      "2023-01-09-28-window-0005",
+      "2023-01-09-28-window-0006",
+      "2023-01-09-28-window-0007",
+      "2023-01-09-28-window-0008",
+      "2023-01-09-28-window-0009",
+      "2023-01-09-28-window-0010",
+      "2023-01-09-28-window-0011",
+      "2023-01-09-28-window-0012",
+      "2023-01-09-28-window-0013",
+      "2023-01-09-28-window-0014",
+      "2023-01-09-28-window-0015",
+      "2023-01-09-28-window-0016",
+      "2023-01-09-28-window-0017",
+      "2023-01-09-28-window-0018",
+      "2023-01-09-28-window-0019",
+      "2023-01-09-28-window-0020",
+      "2023-01-09-28-window-0021",
+      "2023-01-09-28-window-0022",
+      "2023-01-09-28-window-0023",
+      "2023-01-17-01-window-0000",
+      "2023-01-17-01-window-0001",
+      "2023-01-17-01-window-0002",
+      "2023-01-17-01-window-0003",
+      "2023-01-17-01-window-0004",
+      "2023-01-17-01-window-0005",
+      "2023-01-17-01-window-0006",
+      "2023-01-17-01-window-0007",
+      "2023-01-17-01-window-0008",
+      "2023-01-17-01-window-0009",
+      "2023-01-17-01-window-0010",
+      "2023-01-17-01-window-0011",
+      "2023-01-17-01-window-0012",
+      "2023-01-17-01-window-0013",
+      "2023-01-17-01-window-0014",
+      "2023-01-17-01-window-0015",
+      "2023-01-17-01-window-0016",
+      "2023-01-17-01-window-0017",
+      "2023-01-17-01-window-0018",
+      "2023-01-17-01-window-0019",
+      "2023-01-17-01-window-0020",
+      "2023-01-17-01-window-0021",
+      "2023-01-17-01-window-0022",
+      "2023-01-17-01-window-0023",
+      "2023-01-19-01-window-0000",
+      "2023-01-19-01-window-0001",
+      "2023-01-19-01-window-0002",
+      "2023-01-19-01-window-0003",
+      "2023-01-19-01-window-0004",
+      "2023-01-19-01-window-0005",
+      "2023-01-19-01-window-0006",
+      "2023-01-19-01-window-0007",
+      "2023-01-19-01-window-0008",
+      "2023-01-19-01-window-0009",
+      "2023-01-19-01-window-0010",
+      "2023-01-19-01-window-0011",
+      "2023-01-19-01-window-0012",
+      "2023-01-19-01-window-0013",
+      "2023-01-19-01-window-0014",
+      "2023-01-19-01-window-0015",
+      "2023-01-19-01-window-0016",
+      "2023-01-19-01-window-0017",
+      "2023-01-19-01-window-0018",
+      "2023-01-19-01-window-0019",
+      "2023-01-19-01-window-0020",
+      "2023-01-19-01-window-0021",
+      "2023-01-19-01-window-0022",
+      "2023-01-19-01-window-0023",
+      "2023-01-19-22-window-0000",
+      "2023-01-19-22-window-0001",
+      "2023-01-19-22-window-0002",
+      "2023-01-19-22-window-0003",
+      "2023-01-19-22-window-0004",
+      "2023-01-19-22-window-0005",
+      "2023-01-19-22-window-0006",
+      "2023-01-19-22-window-0007",
+      "2023-01-19-22-window-0008",
+      "2023-01-19-22-window-0009",
+      "2023-01-19-22-window-0010",
+      "2023-01-19-22-window-0011",
+      "2023-01-19-22-window-0012",
+      "2023-01-19-22-window-0013",
+      "2023-01-19-22-window-0014",
+      "2023-01-19-22-window-0015",
+      "2023-01-19-22-window-0016",
+      "2023-01-19-22-window-0017",
+      "2023-01-19-22-window-0018",
+      "2023-01-19-22-window-0019",
+      "2023-01-19-22-window-0020",
+      "2023-01-19-22-window-0021",
+      "2023-01-19-22-window-0022",
+      "2023-01-19-22-window-0023",
+      "2023-01-23-01-window-0000",
+      "2023-01-23-01-window-0001",
+      "2023-01-23-01-window-0002",
+      "2023-01-23-01-window-0003",
+      "2023-01-23-01-window-0004",
+      "2023-01-23-01-window-0005",
+      "2023-01-23-01-window-0006",
+      "2023-01-23-01-window-0007",
+      "2023-01-23-01-window-0008",
+      "2023-01-23-01-window-0009",
+      "2023-01-23-01-window-0010",
+      "2023-01-23-01-window-0011",
+      "2023-01-23-01-window-0012",
+      "2023-01-23-01-window-0013",
+      "2023-01-23-01-window-0014",
+      "2023-01-23-01-window-0015",
+      "2023-01-23-01-window-0016",
+      "2023-01-23-01-window-0017",
+      "2023-01-23-01-window-0018",
+      "2023-01-23-01-window-0019",
+      "2023-01-23-01-window-0020",
+      "2023-01-23-01-window-0021",
+      "2023-01-23-01-window-0022",
+      "2023-01-23-01-window-0023",
+      "2023-01-23-08-window-0000",
+      "2023-01-23-08-window-0001",
+      "2023-01-23-08-window-0002",
+      "2023-01-23-08-window-0003",
+      "2023-01-23-08-window-0004",
+      "2023-01-23-08-window-0005",
+      "2023-01-23-08-window-0006",
+      "2023-01-23-08-window-0007",
+      "2023-01-23-08-window-0008",
+      "2023-01-23-08-window-0009",
+      "2023-01-23-08-window-0010",
+      "2023-01-23-08-window-0011",
+      "2023-01-23-08-window-0012",
+      "2023-01-23-08-window-0013",
+      "2023-01-23-08-window-0014",
+      "2023-01-23-08-window-0015",
+      "2023-01-23-08-window-0016",
+      "2023-01-23-08-window-0017",
+      "2023-01-23-08-window-0018",
+      "2023-01-23-08-window-0019",
+      "2023-01-23-08-window-0020",
+      "2023-01-23-08-window-0021",
+      "2023-01-23-08-window-0022",
+      "2023-01-23-08-window-0023",
+      "2023-03-07-01-window-0000",
+      "2023-03-07-01-window-0001",
+      "2023-03-07-01-window-0002",
+      "2023-03-07-01-window-0003",
+      "2023-03-07-01-window-0004",
+      "2023-03-07-01-window-0005",
+      "2023-03-07-01-window-0006",
+      "2023-03-07-01-window-0007",
+      "2023-03-07-01-window-0008",
+      "2023-03-07-01-window-0009",
+      "2023-03-07-01-window-0010",
+      "2023-03-07-01-window-0011",
+      "2023-03-07-01-window-0012",
+      "2023-03-07-01-window-0013",
+      "2023-03-07-01-window-0014",
+      "2023-03-07-01-window-0015",
+      "2023-03-07-01-window-0016",
+      "2023-03-07-01-window-0017",
+      "2023-03-07-01-window-0018",
+      "2023-03-07-01-window-0019",
+      "2023-03-07-01-window-0020",
+      "2023-03-07-01-window-0021",
+      "2023-03-07-01-window-0022",
+      "2023-03-07-01-window-0023"
+    ],
+    "sample_dt": 0.5,
+    "channels": [
+      {
+        "name": "angular_velocity",
+        "mean": 0.017757910949595487,
+        "scale": 0.18267044303114915,
+        "slope": 0.992312471741494,
+        "intercept": -0.0002603800528394834,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      },
+      {
+        "name": "head_angle",
+        "mean": 0.1425842653754989,
+        "scale": 0.5239418049540822,
+        "slope": 0.8943424130284194,
+        "intercept": 7.498990470735712e-05,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      },
+      {
+        "name": "pumping",
+        "mean": 0.40649844464134083,
+        "scale": 0.6821585704172426,
+        "slope": 0.995,
+        "intercept": -0.0003497716131240635,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      },
+      {
+        "name": "velocity",
+        "mean": 0.009318797116076296,
+        "scale": 0.063829588674733,
+        "slope": 0.9525314670598677,
+        "intercept": 2.070629891200005e-05,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      }
+    ]
+  },
+  "input_protocol": "All three families call the same Rust BehaviorModel::inputs implementation. Equal coefficients, channel order, calibration, sample interval and trial data determine identical eight-dimensional covariates. Actual future behavior is excluded. Source revision metadata differs and is retained separately.",
+  "behavior_implementation_sha256": "fbe84db4f988b97258566f5474bca070cdc08ca27341a4a331a49d50eb0ca5b3",
+  "models": {
+    "lds": {
+      "model_sha256": "3ed38adac1f093a989f547b25656c66d12a5759759c9b3c12258354426e761ae",
+      "training_source_commit": "ad1b06d41911e50547b420804bf9d213a4536746",
+      "behavior_source_commit": "ad1b06d41911e50547b420804bf9d213a4536746",
+      "receipt_path": "docs/lds-behavior-receipt.json",
+      "receipt_sha256": "c6d0d6d21782d86ced3e012e3f7a0266a2e31c3a5a5822f159e3103332cc4a4e",
+      "selected": {
+        "rank": 32,
+        "iteration": 2
+      },
+      "validation_horizons": [
+        {
+          "seconds": 1.0,
+          "confidence_weighted": {
+            "point": 0.4964181199835561,
+            "lower_95": 0.4778855703988337,
+            "upper_95": 0.5476304837486811,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.4948679590152405,
+            "lower_95": 0.4762202499345653,
+            "upper_95": 0.547630483748681,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.5476304837486811
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.5050226730955703
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": 0.4858586161553419
+            }
+          ]
+        },
+        {
+          "seconds": 10.0,
+          "confidence_weighted": {
+            "point": 0.09818819581256694,
+            "lower_95": -0.06212164638452058,
+            "upper_95": 0.20108782034029468,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.09836424806383103,
+            "lower_95": -0.06212164638452054,
+            "upper_95": 0.20108782034029463,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.20108782034029468
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.07998356326452614
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": -0.06212164638452057
+            }
+          ]
+        },
+        {
+          "seconds": 30.0,
+          "confidence_weighted": {
+            "point": 0.04877705323991303,
+            "lower_95": 0.026826116617961637,
+            "upper_95": 0.06315901464630803,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.04886448750263171,
+            "lower_95": 0.027480786614604718,
+            "upper_95": 0.06315901464630806,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.04126850865532338
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.06315901464630806
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": 0.04616176633180579
+            }
+          ]
+        }
+      ],
+      "test_horizons": [
+        {
+          "seconds": 1.0,
+          "confidence_weighted": {
+            "point": 0.5320317598081471,
+            "lower_95": 0.5031502235282003,
+            "upper_95": 0.5503782155689514,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.5299608030223895,
+            "lower_95": 0.5031502235282003,
+            "upper_95": 0.5503782155689514,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": 0.5503782155689514
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": 0.5031502235282002
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": 0.5141995158911074
+            }
+          ]
+        },
+        {
+          "seconds": 10.0,
+          "confidence_weighted": {
+            "point": 0.0572866433531948,
+            "lower_95": -0.20067749382163289,
+            "upper_95": 0.12420666689303732,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.05241695519932375,
+            "lower_95": -0.20067749382163289,
+            "upper_95": 0.12420666689303732,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": 0.12420666689303729
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": 0.06751630680086056
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": -0.20067749382163289
+            }
+          ]
+        },
+        {
+          "seconds": 30.0,
+          "confidence_weighted": {
+            "point": 0.014246595520442792,
+            "lower_95": -0.026337120768080754,
+            "upper_95": 0.04536134859789858,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.013068017616919711,
+            "lower_95": -0.026337120768080754,
+            "upper_95": 0.04536134859789856,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": 0.04536134859789862
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": -0.026337120768080754
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": -0.0038329307627187714
+            }
+          ]
+        }
+      ],
+      "reported_free_parameters": 7567,
+      "additional_calibration_statistics": 0,
+      "preprocessing_assessment": {
+        "status": "retrospective",
+        "evidence_path": "docs/wormwideweb-preprocessing-audit.json",
+        "evidence_sha256": "56aab7c5ccde23df045d21d29ede3df5d25dc7daf862ba801294fea7919dcab6",
+        "description": "Whole-recording neural z-scoring is numerically confirmed for all 21 source animals. Reference neural and behavior processing includes noncausal operations; exact per-file settings are not fully attested. This benchmark supports retrospective processed-signal prediction, not end-to-end prospective forecasting."
+      }
+    },
+    "gru": {
+      "model_sha256": "f78eb0ac1bc23ae2a88df50871ecd7aa3a04615679d6b341da0c6a9f65b972d1",
+      "training_source_commit": "ad1b06d41911e50547b420804bf9d213a4536746",
+      "behavior_source_commit": "ad1b06d41911e50547b420804bf9d213a4536746",
+      "receipt_path": "docs/gru-behavior-receipt.json",
+      "receipt_sha256": "2b968ddb82e293655dbc553eda80767a944135a697d43846024bed8ca8784c3e",
+      "selected": {
+        "epoch": 11
+      },
+      "validation_horizons": [
+        {
+          "seconds": 1.0,
+          "confidence_weighted": {
+            "point": 0.1613461593882256,
+            "lower_95": 0.10464526039076104,
+            "upper_95": 0.22916668597920495,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.1612538422520982,
+            "lower_95": 0.10464526039076101,
+            "upper_95": 0.22916668597920478,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.15953188355582895
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.22916668597920486
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": 0.10464526039076104
+            }
+          ]
+        },
+        {
+          "seconds": 10.0,
+          "confidence_weighted": {
+            "point": 0.044243991249367086,
+            "lower_95": -0.0344178438138645,
+            "upper_95": 0.07538670421083433,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.04496327643201775,
+            "lower_95": -0.034417843813864445,
+            "upper_95": 0.07538898824133647,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.059694526631993275
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.06279508310931932
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": -0.03441784381386448
+            }
+          ]
+        },
+        {
+          "seconds": 30.0,
+          "confidence_weighted": {
+            "point": 0.05656651659631288,
+            "lower_95": -0.00986724052500013,
+            "upper_95": 0.1405125923115255,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.05540182346832856,
+            "lower_95": -0.010589831773107647,
+            "upper_95": 0.1405125923115255,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.020359479271180217
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.14051259231152555
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": 5.431172316321681e-05
+            }
+          ]
+        }
+      ],
+      "test_horizons": [
+        {
+          "seconds": 1.0,
+          "confidence_weighted": {
+            "point": 0.12278440971216953,
+            "lower_95": 0.06959110657225984,
+            "upper_95": 0.16190768319622909,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.12019747016788909,
+            "lower_95": 0.06959110657225978,
+            "upper_95": 0.1619076831962291,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": 0.16190768319622909
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": 0.09958079747396767
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": 0.06959110657225984
+            }
+          ]
+        },
+        {
+          "seconds": 10.0,
+          "confidence_weighted": {
+            "point": 0.031026133435609067,
+            "lower_95": -0.030457988440854986,
+            "upper_95": 0.14104919779823943,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.02789865541675963,
+            "lower_95": -0.030457988440854976,
+            "upper_95": 0.1410491977982394,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": 0.14104919779823938
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": -0.01815937376797718
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": -0.030457988440854986
+            }
+          ]
+        },
+        {
+          "seconds": 30.0,
+          "confidence_weighted": {
+            "point": -0.018686278320464874,
+            "lower_95": -0.09808452964663911,
+            "upper_95": 0.059901792856946516,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": -0.020641865479991393,
+            "lower_95": -0.0980845296466391,
+            "upper_95": 0.059901792856946516,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": 0.059901792856946516
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": -0.04658478180825131
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": -0.09808452964663911
+            }
+          ]
+        }
+      ],
+      "reported_free_parameters": 6991,
+      "additional_calibration_statistics": 0,
+      "preprocessing_assessment": {
+        "status": "retrospective",
+        "evidence_path": "docs/wormwideweb-preprocessing-audit.json",
+        "evidence_sha256": "56aab7c5ccde23df045d21d29ede3df5d25dc7daf862ba801294fea7919dcab6",
+        "description": "Whole-recording neural z-scoring is numerically confirmed for all 21 source animals. Reference neural and behavior processing includes noncausal operations; exact per-file settings are not fully attested. This benchmark supports retrospective processed-signal prediction, not end-to-end prospective forecasting."
+      }
+    },
+    "level0": {
+      "model_sha256": "f56aa4ef260deb316085ca74065b15bb9e77d23ef24c36a648540bd60656a4e0",
+      "training_source_commit": "7282bddbfacb931b2b938075a1feb4ad0110cef6",
+      "behavior_source_commit": "7282bddbfacb931b2b938075a1feb4ad0110cef6",
+      "receipt_path": "docs/level0-behavior-receipt.json",
+      "receipt_sha256": "5bece7bbfdc3af8d356d47f802ec637b8ce8761a0d44474192de7a77622a9a2a",
+      "selected": {
+        "epoch": 2
+      },
+      "validation_horizons": [
+        {
+          "seconds": 1.0,
+          "confidence_weighted": {
+            "point": 0.6696260619592087,
+            "lower_95": 0.6618829662101072,
+            "upper_95": 0.6759923025285045,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.6693454697870858,
+            "lower_95": 0.6615084886517484,
+            "upper_95": 0.6759923025285045,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.6660731080176869
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.6646516746424449
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": 0.6759923025285045
+            }
+          ]
+        },
+        {
+          "seconds": 10.0,
+          "confidence_weighted": {
+            "point": 0.026144279480581054,
+            "lower_95": -0.000264230414427929,
+            "upper_95": 0.03775861515262058,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.02636658000444079,
+            "lower_95": 0.0007638428283362575,
+            "upper_95": 0.03778059276936001,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.03073983345729711
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.02610004404318325
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": 0.0012149893415647984
+            }
+          ]
+        },
+        {
+          "seconds": 30.0,
+          "confidence_weighted": {
+            "point": -0.04963942365825637,
+            "lower_95": -0.07189883655213279,
+            "upper_95": -0.02625858148489556,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": -0.05002656618375348,
+            "lower_95": -0.07189883655213276,
+            "upper_95": -0.02648404593053913,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": -0.07189883655213276
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": -0.03277120313007978
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": -0.036560618902010344
+            }
+          ]
+        }
+      ],
+      "test_horizons": [
+        {
+          "seconds": 1.0,
+          "confidence_weighted": {
+            "point": 0.7485610225787054,
+            "lower_95": 0.6948737132379981,
+            "upper_95": 0.7612124813165829,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.7482471297258113,
+            "lower_95": 0.6948737132379981,
+            "upper_95": 0.7612124813165829,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": 0.7334495474913917
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": 0.7612124813165829
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": 0.6948737132379981
+            }
+          ]
+        },
+        {
+          "seconds": 10.0,
+          "confidence_weighted": {
+            "point": -0.06796447071103189,
+            "lower_95": -0.1416078207482956,
+            "upper_95": -0.02028678250719998,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": -0.06721915441273625,
+            "lower_95": -0.14160782074829567,
+            "upper_95": -0.020286782507199966,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": -0.14160782074829562
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": -0.020286782507199983
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": -0.0750065589606883
+            }
+          ]
+        },
+        {
+          "seconds": 30.0,
+          "confidence_weighted": {
+            "point": -0.09730999502016938,
+            "lower_95": -0.14431199165581213,
+            "upper_95": -0.0798203874305075,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": -0.09795734164516308,
+            "lower_95": -0.14431199165581213,
+            "upper_95": -0.08074542489700388,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": -0.14431199165581213
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": -0.1082065563121579
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": -0.09427785640395565
+            }
+          ]
+        }
+      ],
+      "reported_free_parameters": 8680,
+      "additional_calibration_statistics": 298,
+      "preprocessing_assessment": {
+        "status": "retrospective",
+        "evidence_path": "docs/wormwideweb-preprocessing-audit.json",
+        "evidence_sha256": "56aab7c5ccde23df045d21d29ede3df5d25dc7daf862ba801294fea7919dcab6",
+        "description": "Whole-recording neural z-scoring is numerically confirmed for all 21 source animals. Reference neural and behavior processing includes noncausal operations; exact per-file settings are not fully attested. This benchmark supports retrospective processed-signal prediction, not end-to-end prospective forecasting."
+      }
+    }
+  },
+  "legacy_level0_compatibility": {
+    "equal_prediction_trials": 72,
+    "archived_predictions_sha256": "7f633446c027f2b597b4d998369bad71ff524c91ab4b332e2a8b122bb602b977",
+    "current_predictions_sha256": "3fcc469571ad152a546cd28f0519d7ab9b83ebc36fabfa7f36c38ed1de4e379a",
+    "scope": "Exact numerical fluorescence-array equality; metadata revisions differ."
+  },
+  "limitations": [
+    "Only three test animals, repeatedly inspected; animal-bootstrap intervals have limited resolution.",
+    "Marginal model intervals do not establish significance of differences; no paired-difference claim.",
+    "Additional capacity, different neural training objectives and inference methods prevent causal attribution to behavior inputs alone.",
+    "Level 0 reports calibration separately; LDS and GRU include it in reported scalar counts.",
+    "LDS and GRU use persistence for unseen identities; Level 0 uses default readouts.",
+    "Behavior trajectories are plug-in forecasts, with no propagated behavior uncertainty.",
+    "Upstream retrospective preprocessing prevents prospective forecasting claims."
+  ]
+}

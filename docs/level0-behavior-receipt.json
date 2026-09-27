@@ -1,0 +1,866 @@
+{
+  "schema_version": 1,
+  "model_sha256": "f56aa4ef260deb316085ca74065b15bb9e77d23ef24c36a648540bd60656a4e0",
+  "fit": {
+    "schema_version": 1,
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+    "source_commit": "7282bddbfacb931b2b938075a1feb4ad0110cef6",
+    "config": {
+      "epochs": 2,
+      "learning_rate": 0.005,
+      "prior_strength": 0.01,
+      "sign_prior_strength": 0.01,
+      "readout_prior_strength": 0.01,
+      "seed": 42,
+      "inference": {
+        "method": "block_ekf",
+        "filter": {
+          "initial_variance": [
+            0.25,
+            0.04,
+            0.04
+          ],
+          "process_variance_rate": [
+            0.05,
+            0.005,
+            0.005
+          ],
+          "observation_variance": 0.0025
+        },
+        "dt": 0.01,
+        "iterations": 0,
+        "learning_rate": 0.02,
+        "prior_weight": 0.001
+      },
+      "sharing": {
+        "classes": {},
+        "allow_suffix_pairs": true,
+        "provenance": "Explicit first-fit assumption: use graph class annotations if present, otherwise tie exact matching terminal L/R neuron names. Existing c302 classes are unannotated. No claim of a source-backed full neuron-class or transmitter annotation."
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "head_angle",
+        "pumping",
+        "velocity"
+      ],
+      "input_prior_strength": 0.01
+    },
+    "criterion": "Maximum mean validation macro-neuron R\u00b2 at 1/10/30 s, including epoch 0; ties retain earlier epoch. Conditional gradients hold history-inferred state fixed. No test targets used.",
+    "epochs": [
+      {
+        "epoch": 0,
+        "updates": 0,
+        "training_conditional_mse": null,
+        "validation_horizon_r2": [
+          0.6462830660049338,
+          -0.0013610710832015424,
+          -0.011423264528507155
+        ],
+        "validation_criterion": 0.21116624346440838,
+        "elapsed_seconds": 5.561501875
+      },
+      {
+        "epoch": 1,
+        "updates": 360,
+        "training_conditional_mse": 0.9016414644554448,
+        "validation_horizon_r2": [
+          0.662787715413549,
+          0.013259876319778721,
+          -0.045249980612380364
+        ],
+        "validation_criterion": 0.2102658703736491,
+        "elapsed_seconds": 85.223285042
+      },
+      {
+        "epoch": 2,
+        "updates": 360,
+        "training_conditional_mse": 0.8748314807630493,
+        "validation_horizon_r2": [
+          0.6696260619592087,
+          0.026144279480581064,
+          -0.049639423658256424
+        ],
+        "validation_criterion": 0.21537697259384445,
+        "elapsed_seconds": 85.793468666
+      }
+    ],
+    "selected_epoch": 2,
+    "free_parameters": 8680,
+    "calibration_statistics": 298,
+    "input_parameters": 1624,
+    "behavior_forecast_parameters": 16,
+    "inferred_state_variables_per_trial": 906
+  },
+  "behavior_forecast": {
+    "schema_version": 1,
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+    "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+    "source_commit": "7282bddbfacb931b2b938075a1feb4ad0110cef6",
+    "training_trials": [
+      "2022-06-14-01-window-0000",
+      "2022-06-14-01-window-0001",
+      "2022-06-14-01-window-0002",
+      "2022-06-14-01-window-0003",
+      "2022-06-14-01-window-0004",
+      "2022-06-14-01-window-0005",
+      "2022-06-14-01-window-0006",
+      "2022-06-14-01-window-0007",
+      "2022-06-14-01-window-0008",
+      "2022-06-14-01-window-0009",
+      "2022-06-14-01-window-0010",
+      "2022-06-14-01-window-0011",
+      "2022-06-14-01-window-0012",
+      "2022-06-14-01-window-0013",
+      "2022-06-14-01-window-0014",
+      "2022-06-14-01-window-0015",
+      "2022-06-14-01-window-0016",
+      "2022-06-14-01-window-0017",
+      "2022-06-14-01-window-0018",
+      "2022-06-14-01-window-0019",
+      "2022-06-14-01-window-0020",
+      "2022-06-14-01-window-0021",
+      "2022-06-14-01-window-0022",
+      "2022-06-14-01-window-0023",
+      "2022-06-14-13-window-0000",
+      "2022-06-14-13-window-0001",
+      "2022-06-14-13-window-0002",
+      "2022-06-14-13-window-0003",
+      "2022-06-14-13-window-0004",
+      "2022-06-14-13-window-0005",
+      "2022-06-14-13-window-0006",
+      "2022-06-14-13-window-0007",
+      "2022-06-14-13-window-0008",
+      "2022-06-14-13-window-0009",
+      "2022-06-14-13-window-0010",
+      "2022-06-14-13-window-0011",
+      "2022-06-14-13-window-0012",
+      "2022-06-14-13-window-0013",
+      "2022-06-14-13-window-0014",
+      "2022-06-14-13-window-0015",
+      "2022-06-14-13-window-0016",
+      "2022-06-14-13-window-0017",
+      "2022-06-14-13-window-0018",
+      "2022-06-14-13-window-0019",
+      "2022-06-14-13-window-0020",
+      "2022-06-14-13-window-0021",
+      "2022-06-14-13-window-0022",
+      "2022-06-14-13-window-0023",
+      "2022-06-28-01-window-0000",
+      "2022-06-28-01-window-0001",
+      "2022-06-28-01-window-0002",
+      "2022-06-28-01-window-0003",
+      "2022-06-28-01-window-0004",
+      "2022-06-28-01-window-0005",
+      "2022-06-28-01-window-0006",
+      "2022-06-28-01-window-0007",
+      "2022-06-28-01-window-0008",
+      "2022-06-28-01-window-0009",
+      "2022-06-28-01-window-0010",
+      "2022-06-28-01-window-0011",
+      "2022-06-28-01-window-0012",
+      "2022-06-28-01-window-0013",
+      "2022-06-28-01-window-0014",
+      "2022-06-28-01-window-0015",
+      "2022-06-28-01-window-0016",
+      "2022-06-28-01-window-0017",
+      "2022-06-28-01-window-0018",
+      "2022-06-28-01-window-0019",
+      "2022-06-28-01-window-0020",
+      "2022-06-28-01-window-0021",
+      "2022-06-28-01-window-0022",
+      "2022-06-28-01-window-0023",
+      "2022-06-28-07-window-0000",
+      "2022-06-28-07-window-0001",
+      "2022-06-28-07-window-0002",
+      "2022-06-28-07-window-0003",
+      "2022-06-28-07-window-0004",
+      "2022-06-28-07-window-0005",
+      "2022-06-28-07-window-0006",
+      "2022-06-28-07-window-0007",
+      "2022-06-28-07-window-0008",
+      "2022-06-28-07-window-0009",
+      "2022-06-28-07-window-0010",
+      "2022-06-28-07-window-0011",
+      "2022-06-28-07-window-0012",
+      "2022-06-28-07-window-0013",
+      "2022-06-28-07-window-0014",
+      "2022-06-28-07-window-0015",
+      "2022-06-28-07-window-0016",
+      "2022-06-28-07-window-0017",
+      "2022-06-28-07-window-0018",
+      "2022-06-28-07-window-0019",
+      "2022-06-28-07-window-0020",
+      "2022-06-28-07-window-0021",
+      "2022-06-28-07-window-0022",
+      "2022-06-28-07-window-0023",
+      "2022-07-15-06-window-0000",
+      "2022-07-15-06-window-0001",
+      "2022-07-15-06-window-0002",
+      "2022-07-15-06-window-0003",
+      "2022-07-15-06-window-0004",
+      "2022-07-15-06-window-0005",
+      "2022-07-15-06-window-0006",
+      "2022-07-15-06-window-0007",
+      "2022-07-15-06-window-0008",
+      "2022-07-15-06-window-0009",
+      "2022-07-15-06-window-0010",
+      "2022-07-15-06-window-0011",
+      "2022-07-15-06-window-0012",
+      "2022-07-15-06-window-0013",
+      "2022-07-15-06-window-0014",
+      "2022-07-15-06-window-0015",
+      "2022-07-15-06-window-0016",
+      "2022-07-15-06-window-0017",
+      "2022-07-15-06-window-0018",
+      "2022-07-15-06-window-0019",
+      "2022-07-15-06-window-0020",
+      "2022-07-15-06-window-0021",
+      "2022-07-15-06-window-0022",
+      "2022-07-15-06-window-0023",
+      "2022-07-20-01-window-0000",
+      "2022-07-20-01-window-0001",
+      "2022-07-20-01-window-0002",
+      "2022-07-20-01-window-0003",
+      "2022-07-20-01-window-0004",
+      "2022-07-20-01-window-0005",
+      "2022-07-20-01-window-0006",
+      "2022-07-20-01-window-0007",
+      "2022-07-20-01-window-0008",
+      "2022-07-20-01-window-0009",
+      "2022-07-20-01-window-0010",
+      "2022-07-20-01-window-0011",
+      "2022-07-20-01-window-0012",
+      "2022-07-20-01-window-0013",
+      "2022-07-20-01-window-0014",
+      "2022-07-20-01-window-0015",
+      "2022-07-20-01-window-0016",
+      "2022-07-20-01-window-0017",
+      "2022-07-20-01-window-0018",
+      "2022-07-20-01-window-0019",
+      "2022-07-20-01-window-0020",
+      "2022-07-20-01-window-0021",
+      "2022-07-20-01-window-0022",
+      "2022-07-20-01-window-0023",
+      "2022-07-26-01-window-0000",
+      "2022-07-26-01-window-0001",
+      "2022-07-26-01-window-0002",
+      "2022-07-26-01-window-0003",
+      "2022-07-26-01-window-0004",
+      "2022-07-26-01-window-0005",
+      "2022-07-26-01-window-0006",
+      "2022-07-26-01-window-0007",
+      "2022-07-26-01-window-0008",
+      "2022-07-26-01-window-0009",
+      "2022-07-26-01-window-0010",
+      "2022-07-26-01-window-0011",
+      "2022-07-26-01-window-0012",
+      "2022-07-26-01-window-0013",
+      "2022-07-26-01-window-0014",
+      "2022-07-26-01-window-0015",
+      "2022-07-26-01-window-0016",
+      "2022-07-26-01-window-0017",
+      "2022-07-26-01-window-0018",
+      "2022-07-26-01-window-0019",
+      "2022-07-26-01-window-0020",
+      "2022-07-26-01-window-0021",
+      "2022-07-26-01-window-0022",
+      "2022-07-26-01-window-0023",
+      "2022-08-02-01-window-0000",
+      "2022-08-02-01-window-0001",
+      "2022-08-02-01-window-0002",
+      "2022-08-02-01-window-0003",
+      "2022-08-02-01-window-0004",
+      "2022-08-02-01-window-0005",
+      "2022-08-02-01-window-0006",
+      "2022-08-02-01-window-0007",
+      "2022-08-02-01-window-0008",
+      "2022-08-02-01-window-0009",
+      "2022-08-02-01-window-0010",
+      "2022-08-02-01-window-0011",
+      "2022-08-02-01-window-0012",
+      "2022-08-02-01-window-0013",
+      "2022-08-02-01-window-0014",
+      "2022-08-02-01-window-0015",
+      "2022-08-02-01-window-0016",
+      "2022-08-02-01-window-0017",
+      "2022-08-02-01-window-0018",
+      "2022-08-02-01-window-0019",
+      "2022-08-02-01-window-0020",
+      "2022-08-02-01-window-0021",
+      "2022-08-02-01-window-0022",
+      "2022-08-02-01-window-0023",
+      "2023-01-09-28-window-0000",
+      "2023-01-09-28-window-0001",
+      "2023-01-09-28-window-0002",
+      "2023-01-09-28-window-0003",
+      "2023-01-09-28-window-0004",
+      "2023-01-09-28-window-0005",
+      "2023-01-09-28-window-0006",
+      "2023-01-09-28-window-0007",
+      "2023-01-09-28-window-0008",
+      "2023-01-09-28-window-0009",
+      "2023-01-09-28-window-0010",
+      "2023-01-09-28-window-0011",
+      "2023-01-09-28-window-0012",
+      "2023-01-09-28-window-0013",
+      "2023-01-09-28-window-0014",
+      "2023-01-09-28-window-0015",
+      "2023-01-09-28-window-0016",
+      "2023-01-09-28-window-0017",
+      "2023-01-09-28-window-0018",
+      "2023-01-09-28-window-0019",
+      "2023-01-09-28-window-0020",
+      "2023-01-09-28-window-0021",
+      "2023-01-09-28-window-0022",
+      "2023-01-09-28-window-0023",
+      "2023-01-17-01-window-0000",
+      "2023-01-17-01-window-0001",
+      "2023-01-17-01-window-0002",
+      "2023-01-17-01-window-0003",
+      "2023-01-17-01-window-0004",
+      "2023-01-17-01-window-0005",
+      "2023-01-17-01-window-0006",
+      "2023-01-17-01-window-0007",
+      "2023-01-17-01-window-0008",
+      "2023-01-17-01-window-0009",
+      "2023-01-17-01-window-0010",
+      "2023-01-17-01-window-0011",
+      "2023-01-17-01-window-0012",
+      "2023-01-17-01-window-0013",
+      "2023-01-17-01-window-0014",
+      "2023-01-17-01-window-0015",
+      "2023-01-17-01-window-0016",
+      "2023-01-17-01-window-0017",
+      "2023-01-17-01-window-0018",
+      "2023-01-17-01-window-0019",
+      "2023-01-17-01-window-0020",
+      "2023-01-17-01-window-0021",
+      "2023-01-17-01-window-0022",
+      "2023-01-17-01-window-0023",
+      "2023-01-19-01-window-0000",
+      "2023-01-19-01-window-0001",
+      "2023-01-19-01-window-0002",
+      "2023-01-19-01-window-0003",
+      "2023-01-19-01-window-0004",
+      "2023-01-19-01-window-0005",
+      "2023-01-19-01-window-0006",
+      "2023-01-19-01-window-0007",
+      "2023-01-19-01-window-0008",
+      "2023-01-19-01-window-0009",
+      "2023-01-19-01-window-0010",
+      "2023-01-19-01-window-0011",
+      "2023-01-19-01-window-0012",
+      "2023-01-19-01-window-0013",
+      "2023-01-19-01-window-0014",
+      "2023-01-19-01-window-0015",
+      "2023-01-19-01-window-0016",
+      "2023-01-19-01-window-0017",
+      "2023-01-19-01-window-0018",
+      "2023-01-19-01-window-0019",
+      "2023-01-19-01-window-0020",
+      "2023-01-19-01-window-0021",
+      "2023-01-19-01-window-0022",
+      "2023-01-19-01-window-0023",
+      "2023-01-19-22-window-0000",
+      "2023-01-19-22-window-0001",
+      "2023-01-19-22-window-0002",
+      "2023-01-19-22-window-0003",
+      "2023-01-19-22-window-0004",
+      "2023-01-19-22-window-0005",
+      "2023-01-19-22-window-0006",
+      "2023-01-19-22-window-0007",
+      "2023-01-19-22-window-0008",
+      "2023-01-19-22-window-0009",
+      "2023-01-19-22-window-0010",
+      "2023-01-19-22-window-0011",
+      "2023-01-19-22-window-0012",
+      "2023-01-19-22-window-0013",
+      "2023-01-19-22-window-0014",
+      "2023-01-19-22-window-0015",
+      "2023-01-19-22-window-0016",
+      "2023-01-19-22-window-0017",
+      "2023-01-19-22-window-0018",
+      "2023-01-19-22-window-0019",
+      "2023-01-19-22-window-0020",
+      "2023-01-19-22-window-0021",
+      "2023-01-19-22-window-0022",
+      "2023-01-19-22-window-0023",
+      "2023-01-23-01-window-0000",
+      "2023-01-23-01-window-0001",
+      "2023-01-23-01-window-0002",
+      "2023-01-23-01-window-0003",
+      "2023-01-23-01-window-0004",
+      "2023-01-23-01-window-0005",
+      "2023-01-23-01-window-0006",
+      "2023-01-23-01-window-0007",
+      "2023-01-23-01-window-0008",
+      "2023-01-23-01-window-0009",
+      "2023-01-23-01-window-0010",
+      "2023-01-23-01-window-0011",
+      "2023-01-23-01-window-0012",
+      "2023-01-23-01-window-0013",
+      "2023-01-23-01-window-0014",
+      "2023-01-23-01-window-0015",
+      "2023-01-23-01-window-0016",
+      "2023-01-23-01-window-0017",
+      "2023-01-23-01-window-0018",
+      "2023-01-23-01-window-0019",
+      "2023-01-23-01-window-0020",
+      "2023-01-23-01-window-0021",
+      "2023-01-23-01-window-0022",
+      "2023-01-23-01-window-0023",
+      "2023-01-23-08-window-0000",
+      "2023-01-23-08-window-0001",
+      "2023-01-23-08-window-0002",
+      "2023-01-23-08-window-0003",
+      "2023-01-23-08-window-0004",
+      "2023-01-23-08-window-0005",
+      "2023-01-23-08-window-0006",
+      "2023-01-23-08-window-0007",
+      "2023-01-23-08-window-0008",
+      "2023-01-23-08-window-0009",
+      "2023-01-23-08-window-0010",
+      "2023-01-23-08-window-0011",
+      "2023-01-23-08-window-0012",
+      "2023-01-23-08-window-0013",
+      "2023-01-23-08-window-0014",
+      "2023-01-23-08-window-0015",
+      "2023-01-23-08-window-0016",
+      "2023-01-23-08-window-0017",
+      "2023-01-23-08-window-0018",
+      "2023-01-23-08-window-0019",
+      "2023-01-23-08-window-0020",
+      "2023-01-23-08-window-0021",
+      "2023-01-23-08-window-0022",
+      "2023-01-23-08-window-0023",
+      "2023-03-07-01-window-0000",
+      "2023-03-07-01-window-0001",
+      "2023-03-07-01-window-0002",
+      "2023-03-07-01-window-0003",
+      "2023-03-07-01-window-0004",
+      "2023-03-07-01-window-0005",
+      "2023-03-07-01-window-0006",
+      "2023-03-07-01-window-0007",
+      "2023-03-07-01-window-0008",
+      "2023-03-07-01-window-0009",
+      "2023-03-07-01-window-0010",
+      "2023-03-07-01-window-0011",
+      "2023-03-07-01-window-0012",
+      "2023-03-07-01-window-0013",
+      "2023-03-07-01-window-0014",
+      "2023-03-07-01-window-0015",
+      "2023-03-07-01-window-0016",
+      "2023-03-07-01-window-0017",
+      "2023-03-07-01-window-0018",
+      "2023-03-07-01-window-0019",
+      "2023-03-07-01-window-0020",
+      "2023-03-07-01-window-0021",
+      "2023-03-07-01-window-0022",
+      "2023-03-07-01-window-0023"
+    ],
+    "sample_dt": 0.5,
+    "channels": [
+      {
+        "name": "angular_velocity",
+        "mean": 0.017757910949595487,
+        "scale": 0.18267044303114915,
+        "slope": 0.992312471741494,
+        "intercept": -0.0002603800528394834,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      },
+      {
+        "name": "head_angle",
+        "mean": 0.1425842653754989,
+        "scale": 0.5239418049540822,
+        "slope": 0.8943424130284194,
+        "intercept": 7.498990470735712e-05,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      },
+      {
+        "name": "pumping",
+        "mean": 0.40649844464134083,
+        "scale": 0.6821585704172426,
+        "slope": 0.995,
+        "intercept": -0.0003497716131240635,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      },
+      {
+        "name": "velocity",
+        "mean": 0.009318797116076296,
+        "scale": 0.063829588674733,
+        "slope": 0.9525314670598677,
+        "intercept": 2.070629891200005e-05,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      }
+    ]
+  },
+  "validation": {
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+    "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+    "partition": "validation",
+    "model": "Level 0 conditional-gradient population fit; selected epoch 2; full 3N history-only BlockEkf inference; neutral graph sign priors remain unannotated; behavior AR artifact 6bb8470f0b9f07dde56da59e642350c3bedf7260b528e3010885ac8b95e8c288; no actual future behavior",
+    "free_parameters": 8680,
+    "prediction_source_commit": "7282bddbfacb931b2b938075a1feb4ad0110cef6",
+    "scorer_source_commit": "7282bddbfacb931b2b938075a1feb4ad0110cef6",
+    "preprocessing_assessment": {
+      "status": "retrospective",
+      "evidence_path": "docs/wormwideweb-preprocessing-audit.json",
+      "evidence_sha256": "56aab7c5ccde23df045d21d29ede3df5d25dc7daf862ba801294fea7919dcab6",
+      "description": "Whole-recording neural z-scoring is numerically confirmed for all 21 source animals. Reference neural and behavior processing includes noncausal operations; exact per-file settings are not fully attested. This benchmark supports retrospective processed-signal prediction, not end-to-end prospective forecasting."
+    },
+    "animal_bootstrap": {
+      "seed": 42,
+      "replicates": 2000,
+      "animals": 3,
+      "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+      "horizons": [
+        {
+          "seconds": 1.0,
+          "confidence_weighted": {
+            "point": 0.6696260619592087,
+            "lower_95": 0.6618829662101072,
+            "upper_95": 0.6759923025285045,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.6693454697870858,
+            "lower_95": 0.6615084886517484,
+            "upper_95": 0.6759923025285045,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.6660731080176869
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.6646516746424449
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": 0.6759923025285045
+            }
+          ]
+        },
+        {
+          "seconds": 10.0,
+          "confidence_weighted": {
+            "point": 0.026144279480581054,
+            "lower_95": -0.000264230414427929,
+            "upper_95": 0.03775861515262058,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.02636658000444079,
+            "lower_95": 0.0007638428283362575,
+            "upper_95": 0.03778059276936001,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.03073983345729711
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.02610004404318325
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": 0.0012149893415647984
+            }
+          ]
+        },
+        {
+          "seconds": 30.0,
+          "confidence_weighted": {
+            "point": -0.04963942365825637,
+            "lower_95": -0.07189883655213279,
+            "upper_95": -0.02625858148489556,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": -0.05002656618375348,
+            "lower_95": -0.07189883655213276,
+            "upper_95": -0.02648404593053913,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": -0.07189883655213276
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": -0.03277120313007978
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": -0.036560618902010344
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "test": {
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+    "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+    "partition": "test",
+    "model": "Level 0 conditional-gradient population fit; selected epoch 2; full 3N history-only BlockEkf inference; neutral graph sign priors remain unannotated; behavior AR artifact 6bb8470f0b9f07dde56da59e642350c3bedf7260b528e3010885ac8b95e8c288; no actual future behavior",
+    "free_parameters": 8680,
+    "prediction_source_commit": "7282bddbfacb931b2b938075a1feb4ad0110cef6",
+    "scorer_source_commit": "7282bddbfacb931b2b938075a1feb4ad0110cef6",
+    "preprocessing_assessment": {
+      "status": "retrospective",
+      "evidence_path": "docs/wormwideweb-preprocessing-audit.json",
+      "evidence_sha256": "56aab7c5ccde23df045d21d29ede3df5d25dc7daf862ba801294fea7919dcab6",
+      "description": "Whole-recording neural z-scoring is numerically confirmed for all 21 source animals. Reference neural and behavior processing includes noncausal operations; exact per-file settings are not fully attested. This benchmark supports retrospective processed-signal prediction, not end-to-end prospective forecasting."
+    },
+    "animal_bootstrap": {
+      "seed": 42,
+      "replicates": 2000,
+      "animals": 3,
+      "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+      "horizons": [
+        {
+          "seconds": 1.0,
+          "confidence_weighted": {
+            "point": 0.7485610225787054,
+            "lower_95": 0.6948737132379981,
+            "upper_95": 0.7612124813165829,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.7482471297258113,
+            "lower_95": 0.6948737132379981,
+            "upper_95": 0.7612124813165829,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": 0.7334495474913917
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": 0.7612124813165829
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": 0.6948737132379981
+            }
+          ]
+        },
+        {
+          "seconds": 10.0,
+          "confidence_weighted": {
+            "point": -0.06796447071103189,
+            "lower_95": -0.1416078207482956,
+            "upper_95": -0.02028678250719998,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": -0.06721915441273625,
+            "lower_95": -0.14160782074829567,
+            "upper_95": -0.020286782507199966,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": -0.14160782074829562
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": -0.020286782507199983
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": -0.0750065589606883
+            }
+          ]
+        },
+        {
+          "seconds": 30.0,
+          "confidence_weighted": {
+            "point": -0.09730999502016938,
+            "lower_95": -0.14431199165581213,
+            "upper_95": -0.0798203874305075,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": -0.09795734164516308,
+            "lower_95": -0.14431199165581213,
+            "upper_95": -0.08074542489700388,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": -0.14431199165581213
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": -0.1082065563121579
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": -0.09427785640395565
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "validation_history_diagnostic": {
+    "description": "Independent Python weighted per-neuron R\u00b2, matching the scorer aggregation, at the first and final observed prefix frames. The ten-second history is used by state inference; these are reconstruction scores, not held-out forecasts.",
+    "history_start": {
+      "macro_neuron_r2": 0.9775812684540484,
+      "defined_neurons": 123
+    },
+    "forecast_origin": {
+      "macro_neuron_r2": 0.944969351511918,
+      "defined_neurons": 123
+    }
+  },
+  "numerical_audit": {
+    "partition": "validation",
+    "original_dt": 0.01,
+    "refined_dt": 0.005,
+    "macro_r2_delta_1_10_30": [
+      4.868100867583269e-05,
+      0.0001028033466296159,
+      7.384129520962568e-07
+    ],
+    "scope": "Complete inference-and-forecast pipeline with selected weights fixed. No refitting, timestep selection or test-set numerical tuning.",
+    "refined_validation": {
+      "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+      "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+      "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+      "partition": "validation",
+      "model": "Level 0 conditional-gradient population fit; selected epoch 2; full 3N history-only BlockEkf inference; neutral graph sign priors remain unannotated; behavior AR artifact 6bb8470f0b9f07dde56da59e642350c3bedf7260b528e3010885ac8b95e8c288; no actual future behavior",
+      "free_parameters": 8680,
+      "prediction_source_commit": "7282bddbfacb931b2b938075a1feb4ad0110cef6",
+      "scorer_source_commit": "7282bddbfacb931b2b938075a1feb4ad0110cef6",
+      "preprocessing_assessment": {
+        "status": "retrospective",
+        "evidence_path": "docs/wormwideweb-preprocessing-audit.json",
+        "evidence_sha256": "56aab7c5ccde23df045d21d29ede3df5d25dc7daf862ba801294fea7919dcab6",
+        "description": "Whole-recording neural z-scoring is numerically confirmed for all 21 source animals. Reference neural and behavior processing includes noncausal operations; exact per-file settings are not fully attested. This benchmark supports retrospective processed-signal prediction, not end-to-end prospective forecasting."
+      },
+      "animal_bootstrap": {
+        "seed": 42,
+        "replicates": 2000,
+        "animals": 3,
+        "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+        "horizons": [
+          {
+            "seconds": 1.0,
+            "confidence_weighted": {
+              "point": 0.6696747429678845,
+              "lower_95": 0.6619402284649512,
+              "upper_95": 0.6760331771071112,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": 0.6693943114250431,
+              "lower_95": 0.6615657792403058,
+              "upper_95": 0.676033177107111,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-07-15-12",
+                "macro_neuron_r2": 0.6661306038644514
+              },
+              {
+                "animal": "2023-01-23-15",
+                "macro_neuron_r2": 0.6646787868546175
+              },
+              {
+                "animal": "2023-01-23-21",
+                "macro_neuron_r2": 0.6760331771071112
+              }
+            ]
+          },
+          {
+            "seconds": 10.0,
+            "confidence_weighted": {
+              "point": 0.02624708282721067,
+              "lower_95": -0.0001760985564565054,
+              "upper_95": 0.03787838164749832,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": 0.02646948826011752,
+              "lower_95": 0.0008519339144519699,
+              "upper_95": 0.03790057220671933,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-07-15-12",
+                "macro_neuron_r2": 0.030869938028894196
+              },
+              {
+                "animal": "2023-01-23-15",
+                "macro_neuron_r2": 0.02621495232692291
+              },
+              {
+                "animal": "2023-01-23-21",
+                "macro_neuron_r2": 0.0012730758035139002
+              }
+            ]
+          },
+          {
+            "seconds": 30.0,
+            "confidence_weighted": {
+              "point": -0.04963868524530427,
+              "lower_95": -0.07189837281485575,
+              "upper_95": -0.02625760303543996,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": -0.05002585358081794,
+              "lower_95": -0.0718983728148557,
+              "upper_95": -0.02648307189729948,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-07-15-12",
+                "macro_neuron_r2": -0.07189837281485575
+              },
+              {
+                "animal": "2023-01-23-15",
+                "macro_neuron_r2": -0.03276976547709255
+              },
+              {
+                "animal": "2023-01-23-21",
+                "macro_neuron_r2": -0.0365601544261933
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "The selected trained epoch improved validation; this alone does not establish biological recovery or positive held-out forecasting.",
+    "Conditional parameter gradients hold history-inferred states fixed.",
+    "Suffix-based bilateral sharing is an assumption; graph class and transmitter annotations remain missing.",
+    "Graph sign priors are all neutral 0.5; these are not CeNGEN-informed sign priors.",
+    "Only three test animals, and baseline results on them were previously inspected.",
+    "LDS and GRU are scored separately; parameter-matched comparisons remain outstanding."
+  ]
+}

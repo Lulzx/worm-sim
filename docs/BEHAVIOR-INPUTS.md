@@ -53,8 +53,8 @@ cohort is deterministic. No model may fit behavior dynamics to held-out animals.
   Conditional reverse-mode gradients include input weights and the input-dependent
   membrane time-constant term. They hold the inferred origin state fixed.
 
-The equal-input comparison remains incomplete until the Level 0 fit and all three
-selected models have been scored.
+The first equal-input comparison is complete; see [held-out results](#held-out-comparison).
+It does not establish long-horizon forecasting skill for Level 0.
 
 With six hidden units and 149 training identities, the driven GRU has 6,677 neural
 weights/biases, 298 neural normalization statistics and 16 behavior scalars:
@@ -94,14 +94,15 @@ identifiers. This is evidence about information access, not forecast skill.
 
 The same committed executable loaded the archived no-behavior GRU artifact and
 reproduced all 72 saved test trial prediction arrays exactly. Source/model metadata
-changes as expected; neural numerical outputs are unchanged. The real-data Level 0 behavior fit and equal-input model comparison remain pending.
+changes as expected; neural numerical outputs are unchanged. The real-data Level 0 fit and comparison are recorded below.
 
 ## Baseline fits: validation only
 
 The [selection receipt](behavior-baseline-selection.json) binds both baseline fits
 to committed source `ad1b06d41911e50547b420804bf9d213a4536746`, records all candidates,
 and verifies that the embedded common behavior artifacts are **exactly equal**.
-No behavior-assisted test predictions were generated for this experiment.
+No behavior-assisted test predictions were generated during that selection-only
+experiment. Subsequent test scoring is recorded below.
 
 | Model selected on validation | 1 s R² | 10 s R² | 30 s R² | Total scalars |
 | --- | ---: | ---: | ---: | ---: |
@@ -122,7 +123,7 @@ preparation but excludes per-rank PCA initialization. These differing boundaries
 must not be treated as an apples-to-apples performance comparison.
 
 The receipt also verifies exact numerical compatibility on all 72 archived
-no-behavior LDS test predictions. The real-data Level 0 fit and three-model test comparison remain outstanding.
+no-behavior LDS test predictions. The subsequent Level 0 fit and three-model test comparison are recorded below.
 
 ```sh
 target/release/wormsim lds-fit data/c302-herm.wsc   runs/wormwideweb-benchmark.json data/wormwideweb-animal-split.json   configs/lds-behavior-fit.json runs/lds-behavior-fit.json
@@ -154,3 +155,78 @@ inference ignore post-origin currents. Tied-current reduction is separately chec
 against finite differences. A full synthetic refit with altered test neural and
 behavior futures preserves every candidate's weights, selection and predictions.
 Legacy artifacts without input fields remain readable and numerically compatible.
+
+## Held-out comparison
+
+The [comparison receipt](behavior-comparison.json) binds all three selected models,
+their [LDS](lds-behavior-receipt.json), [GRU](gru-behavior-receipt.json) and
+[Level 0](level0-behavior-receipt.json) scoring receipts, and the common behavior
+parameters. Their behavior coefficients, calibration, channel order, sample
+interval and dataset/training lineage are exactly equal. Training source revisions
+differ (`ad1b06d` for the baselines, `7282bdd` for Level 0); those metadata fields
+are preserved rather than claiming equal full-artifact hashes. All three call the
+same Rust input generator, whose source hash is recorded.
+
+**Retrospective benchmark only.** Scores are confidence-weighted macro-neuron R²
+on the same 72 windows from three test animals. Brackets contain percentile 95%
+intervals from 2,000 whole-animal bootstrap draws with seed 42. Every draw has a
+defined score; three animals nevertheless give little uncertainty resolution.
+
+| Selected behavior-assisted model | 1 s R² [95% interval] | 10 s R² [95% interval] | 30 s R² [95% interval] |
+| --- | --- | --- | --- |
+| LDS rank 32, update 2 | 0.532 [0.503, 0.550] | 0.057 [−0.201, 0.124] | 0.014 [−0.026, 0.045] |
+| GRU six hidden units, epoch 11 | 0.123 [0.070, 0.162] | 0.031 [−0.030, 0.141] | −0.019 [−0.098, 0.060] |
+| Level 0, epoch 2 | 0.749 [0.695, 0.761] | −0.068 [−0.142, −0.020] | −0.097 [−0.144, −0.080] |
+
+Level 0 **fails the positive long-horizon forecast hurdle**: both intervals are
+below zero. The LDS long-horizon point estimates are positive but both intervals
+include zero. These marginal intervals do not measure significance of pairwise
+model differences. Test animals have been inspected during earlier experiments,
+so this is an exploratory result, not a fresh confirmatory evaluation.
+
+For orientation, the previously scored no-behavior models gave 1/10/30-second R²:
+LDS 0.530/0.067/0.016, GRU 0.113/0.023/0.013, and filter-based Level 0
+0.722/−0.008/−0.022. The per-neuron AR control gave 0.764/0.071/−0.029.
+Behavior assistance therefore provides no consistent descriptive long-horizon
+improvement. This comparison does not isolate the effect of behavior from extra
+capacity, changed initialization, or a differently selected epoch.
+
+### Level 0 selection and numerical check
+
+Both epochs used all 360 training windows. Validation selected epoch 2 by the
+predeclared mean of the three horizons, including the epoch-zero candidate:
+
+| Epoch | 1 s validation R² | 10 s | 30 s | Mean criterion |
+| --- | ---: | ---: | ---: | ---: |
+| 0 | 0.646283 | −0.001361 | −0.011423 | 0.211166 |
+| 1 | 0.662788 | 0.013260 | −0.045250 | 0.210266 |
+| 2 | 0.669626 | 0.026144 | −0.049639 | 0.215377 |
+
+This is the first declared Level 0 experiment here to select trained weights,
+but the mean validation improvement is only 0.00421, and its 30-second validation
+score worsens. Origin reconstruction remains high (0.94497); good reconstruction
+does not imply useful free prediction. The M4 Pro CPU candidate timers sum to
+176.58 seconds, including validation and excluding loading, initialization,
+checkpoint writes and separate scoring. No backend change was needed.
+
+With the selected weights fixed, halving the timestep from 0.01 to 0.005 seconds
+changes validation R² by +0.000049/+0.000103/+0.0000007. This is a numerical
+sensitivity check, not another trained candidate or a test-based timestep choice.
+The current executable also reproduces all 72 archived no-behavior Level 0 test
+prediction arrays exactly.
+
+A useful fitted biological model remains outstanding. Source-backed class and
+transmitter priors, conditional-state training limitations, mismatch between
+fluorescence and latent dynamics, and the prospective-processing requirement
+remain unresolved. Additional GPU/backend optimization cannot address these
+scientific failures.
+
+```sh
+WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release --features hdf5 --bin wormsim
+target/release/wormsim level0-fit data/c302-herm.wsc runs/wormwideweb-benchmark.json data/wormwideweb-animal-split.json configs/level0-behavior-fit.json runs/level0-behavior-fit.json
+python3 scripts/score_level0_fit.py --model runs/level0-behavior-fit.json --prefix runs/level0-behavior --receipt runs/level0-behavior-receipt.json
+python3 scripts/score_latent_lds.py --model runs/lds-behavior-fit.json --prefix runs/lds-behavior --receipt runs/lds-behavior-receipt.json
+python3 scripts/score_gru.py --model runs/gru-behavior-fit.json --prefix runs/gru-behavior --receipt runs/gru-behavior-receipt.json
+target/release/wormsim level0-predict data/c302-herm.wsc runs/wormwideweb-benchmark.json data/wormwideweb-animal-split.json runs/level0-filter-fit.json test runs/level0-filter-compat-predictions.json
+python3 scripts/record_behavior_comparison.py
+```
