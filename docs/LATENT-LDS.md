@@ -129,5 +129,8 @@ python3 scripts/score_latent_lds.py --receipt runs/latent-lds-receipt.json
 ```
 
 Only selected-model test predictions are evaluated. Source preprocessing
-causality/units, biological class/sign annotations, GRU, and successful Level 0
+causality/units, biological class/sign annotations, equal behavior inputs, and successful Level 0
 forecasting remain open work.
+
+The matched-budget [GRU comparator](GRU.md) is now fitted and scored. Its long-horizon
+point estimates are also positive, with intervals spanning zero.

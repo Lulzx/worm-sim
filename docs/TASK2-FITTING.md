@@ -121,4 +121,10 @@ Filtering now repairs the lost prefix state: origin reconstruction R² rises to
 0.947, but the two trained candidates still lose to epoch zero. The selected
 filter model scores 0.722 / −0.008 / −0.022 on test, with negative long-horizon
 intervals. See [LEVEL0-FILTER.md](LEVEL0-FILTER.md) for the controlled comparison,
-selection receipts and timestep audit. GRU and equal behavior inputs are next.
+selection receipts and timestep audit.
+
+The [connectome-free GRU](GRU.md) is now fitted and scored with 6,831 total scalars,
+including normalization. Validation selects epoch 7 of 30; test R² is
+0.113 / 0.023 / 0.013. Both long-horizon animal-bootstrap intervals include zero.
+The stable LDS has higher point scores at all three horizons. All baseline
+receipts remain exploratory, and equal behavior inputs/preprocessing audit are next.
