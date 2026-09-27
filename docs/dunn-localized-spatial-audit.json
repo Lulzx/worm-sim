@@ -1,0 +1,978 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "recording": "20221106-21-00-09",
+      "audit": {
+        "segmented_neurons": 84,
+        "events": [
+          {
+            "event_index": 0,
+            "onset_volume_index": 121,
+            "inside_segmented_count": 2,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [
+              "SMDVL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL"
+            ]
+          },
+          {
+            "event_index": 1,
+            "onset_volume_index": 151,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [
+              "AVAR",
+              "SMDVL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL"
+            ]
+          },
+          {
+            "event_index": 2,
+            "onset_volume_index": 208,
+            "inside_segmented_count": 2,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AVAR",
+              "SMDVL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL"
+            ]
+          },
+          {
+            "event_index": 3,
+            "onset_volume_index": 264,
+            "inside_segmented_count": 2,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AVAR",
+              "SMDVL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL"
+            ]
+          },
+          {
+            "event_index": 4,
+            "onset_volume_index": 324,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [
+              "AVAR",
+              "SMDVL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL"
+            ]
+          },
+          {
+            "event_index": 5,
+            "onset_volume_index": 370,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 6,
+            "onset_volume_index": 398,
+            "inside_segmented_count": 2,
+            "inside_missing_identity_count": 2,
+            "inside_named_labels": [],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 7,
+            "onset_volume_index": 465,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [
+              "AVAR",
+              "SMDVL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL"
+            ]
+          },
+          {
+            "event_index": 8,
+            "onset_volume_index": 520,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [
+              "AVAR",
+              "SMDVL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL"
+            ]
+          },
+          {
+            "event_index": 9,
+            "onset_volume_index": 590,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 10,
+            "onset_volume_index": 633,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [
+              "AVAR",
+              "SMDVL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL"
+            ]
+          },
+          {
+            "event_index": 11,
+            "onset_volume_index": 719,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDDL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDDL"
+            ]
+          },
+          {
+            "event_index": 12,
+            "onset_volume_index": 727,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDDL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDDL"
+            ]
+          },
+          {
+            "event_index": 13,
+            "onset_volume_index": 745,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDDL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDDL"
+            ]
+          },
+          {
+            "event_index": 14,
+            "onset_volume_index": 814,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDDL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDDL"
+            ]
+          },
+          {
+            "event_index": 15,
+            "onset_volume_index": 827,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDDL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDDL"
+            ]
+          },
+          {
+            "event_index": 16,
+            "onset_volume_index": 858,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [
+              "AVAR",
+              "SMDVL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL"
+            ]
+          },
+          {
+            "event_index": 17,
+            "onset_volume_index": 916,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [
+              "AVAR",
+              "SMDVL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL"
+            ]
+          },
+          {
+            "event_index": 18,
+            "onset_volume_index": 929,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [
+              "AVAR",
+              "SMDVL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL"
+            ]
+          },
+          {
+            "event_index": 19,
+            "onset_volume_index": 977,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [
+              "AVAR",
+              "SMDVL"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL"
+            ]
+          }
+        ],
+        "registration_max_absolute_error_pixels": 0.0,
+        "events_by_named_expressing_count": {
+          "0": 3,
+          "1": 17
+        },
+        "events_with_unlabeled_somata_inside": 13,
+        "named_expressing_event_counts": {
+          "SMDDL": 5,
+          "SMDVL": 12
+        },
+        "schema_version": 1,
+        "pickle_sha256": "c2d2d3a96978e097429c8becd8a11091573a09d2bcc14122ec148f6accf735ad",
+        "download_receipt_sha256": "24a0be89c96157c639e7c6007b8f421dc7353d6bf84f5d21f9ac98534f0e6b73",
+        "source_sha256": {
+          "audit_dunn_spatial_metadata.py": "6ccc3c536bc9ae0d2449f9783abb4355547a61ce2878088b8ae300be5d0e192a",
+          "inspect_dunn_pickle_structure.py": "571992491e6db9c9304c0106bf54d765adb2a3b69de9f49067d017c53530f5ab",
+          "inspect_dunn_identity_metadata.py": "b85aa44aa439ae6923da52e2f5753f0fddef9069a1462c3fdac3dfb23e9aaa6c"
+        },
+        "rule": "gcamp-extractor x/y at stim_on // zsize; processed circle center equals delivered center minus saved XY offset; radius=diameter/2; inclusive Euclidean XY disk.",
+        "scope": "Identity and XY coordinate metadata only. Response arrays remain opaque. Nominal projected geometry and class-level opsin annotation do not establish effective illumination, single-neuron targeting, label confidence or animal independence."
+      }
+    },
+    {
+      "recording": "20221106-21-23-19",
+      "audit": {
+        "segmented_neurons": 77,
+        "events": [
+          {
+            "event_index": 0,
+            "onset_volume_index": 144,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 1,
+            "onset_volume_index": 157,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 2,
+            "onset_volume_index": 176,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AINR"
+            ],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 3,
+            "onset_volume_index": 189,
+            "inside_segmented_count": 0,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 4,
+            "onset_volume_index": 284,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 5,
+            "onset_volume_index": 297,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 6,
+            "onset_volume_index": 318,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AIML"
+            ],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 7,
+            "onset_volume_index": 331,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AIML"
+            ],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 8,
+            "onset_volume_index": 427,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AIML"
+            ],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 9,
+            "onset_volume_index": 440,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AIML"
+            ],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 10,
+            "onset_volume_index": 486,
+            "inside_segmented_count": 2,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [
+              "CEPDR"
+            ],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 11,
+            "onset_volume_index": 499,
+            "inside_segmented_count": 2,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [
+              "CEPDR"
+            ],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 12,
+            "onset_volume_index": 529,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AFDR",
+              "SMDVL",
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL",
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 13,
+            "onset_volume_index": 542,
+            "inside_segmented_count": 2,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AFDR",
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 14,
+            "onset_volume_index": 565,
+            "inside_segmented_count": 2,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AFDR",
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 15,
+            "onset_volume_index": 578,
+            "inside_segmented_count": 2,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AFDR",
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 16,
+            "onset_volume_index": 639,
+            "inside_segmented_count": 2,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AFDR",
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 17,
+            "onset_volume_index": 652,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AFDR",
+              "SMDVL",
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL",
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 18,
+            "onset_volume_index": 697,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AIML"
+            ],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 19,
+            "onset_volume_index": 710,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AIML"
+            ],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 20,
+            "onset_volume_index": 727,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AIML"
+            ],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 21,
+            "onset_volume_index": 740,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AIML"
+            ],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 22,
+            "onset_volume_index": 802,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AFDR",
+              "SMDVL",
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL",
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 23,
+            "onset_volume_index": 815,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AFDR",
+              "SMDVL",
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL",
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 24,
+            "onset_volume_index": 844,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AFDR",
+              "SMDVL",
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL",
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 25,
+            "onset_volume_index": 857,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AFDR",
+              "SMDVL",
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL",
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 26,
+            "onset_volume_index": 880,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AFDR",
+              "SMDVL",
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL",
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 27,
+            "onset_volume_index": 893,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AFDR",
+              "SMDVL",
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL",
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 28,
+            "onset_volume_index": 922,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "AFDR",
+              "SMDVL",
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL",
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 29,
+            "onset_volume_index": 954,
+            "inside_segmented_count": 2,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVL",
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVL",
+              "SMDVR"
+            ]
+          }
+        ],
+        "registration_max_absolute_error_pixels": 0.0,
+        "events_by_named_expressing_count": {
+          "0": 12,
+          "1": 8,
+          "2": 10
+        },
+        "events_with_unlabeled_somata_inside": 2,
+        "named_expressing_event_counts": {
+          "SMDVL": 10,
+          "SMDVR": 18
+        },
+        "schema_version": 1,
+        "pickle_sha256": "2e6993ac4b3212b6eb7126fcf95480e3b9a62835cdffd24576b90317b318ff04",
+        "download_receipt_sha256": "d7cda96826b8876d22d8715bcf8001253e95419acff12949e10d3e56b9783ecc",
+        "source_sha256": {
+          "audit_dunn_spatial_metadata.py": "6ccc3c536bc9ae0d2449f9783abb4355547a61ce2878088b8ae300be5d0e192a",
+          "inspect_dunn_pickle_structure.py": "571992491e6db9c9304c0106bf54d765adb2a3b69de9f49067d017c53530f5ab",
+          "inspect_dunn_identity_metadata.py": "b85aa44aa439ae6923da52e2f5753f0fddef9069a1462c3fdac3dfb23e9aaa6c"
+        },
+        "rule": "gcamp-extractor x/y at stim_on // zsize; processed circle center equals delivered center minus saved XY offset; radius=diameter/2; inclusive Euclidean XY disk.",
+        "scope": "Identity and XY coordinate metadata only. Response arrays remain opaque. Nominal projected geometry and class-level opsin annotation do not establish effective illumination, single-neuron targeting, label confidence or animal independence."
+      }
+    },
+    {
+      "recording": "20221106-21-47-31",
+      "audit": {
+        "segmented_neurons": 71,
+        "events": [
+          {
+            "event_index": 0,
+            "onset_volume_index": 97,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 1,
+            "onset_volume_index": 110,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 2,
+            "onset_volume_index": 145,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 3,
+            "onset_volume_index": 158,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 4,
+            "onset_volume_index": 208,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 5,
+            "onset_volume_index": 332,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 6,
+            "onset_volume_index": 345,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 7,
+            "onset_volume_index": 388,
+            "inside_segmented_count": 4,
+            "inside_missing_identity_count": 3,
+            "inside_named_labels": [
+              "SMDDR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDDR"
+            ]
+          },
+          {
+            "event_index": 8,
+            "onset_volume_index": 401,
+            "inside_segmented_count": 4,
+            "inside_missing_identity_count": 3,
+            "inside_named_labels": [
+              "SMDDR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDDR"
+            ]
+          },
+          {
+            "event_index": 9,
+            "onset_volume_index": 448,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 2,
+            "inside_named_labels": [
+              "SMDDR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDDR"
+            ]
+          },
+          {
+            "event_index": 10,
+            "onset_volume_index": 461,
+            "inside_segmented_count": 3,
+            "inside_missing_identity_count": 2,
+            "inside_named_labels": [
+              "SMDDR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDDR"
+            ]
+          },
+          {
+            "event_index": 11,
+            "onset_volume_index": 506,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 12,
+            "onset_volume_index": 619,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 13,
+            "onset_volume_index": 669,
+            "inside_segmented_count": 2,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [
+              "FLPR"
+            ],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 14,
+            "onset_volume_index": 680,
+            "inside_segmented_count": 2,
+            "inside_missing_identity_count": 1,
+            "inside_named_labels": [
+              "FLPR"
+            ],
+            "inside_named_expressing_labels": []
+          },
+          {
+            "event_index": 15,
+            "onset_volume_index": 714,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 16,
+            "onset_volume_index": 766,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 17,
+            "onset_volume_index": 777,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 18,
+            "onset_volume_index": 810,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 19,
+            "onset_volume_index": 821,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 20,
+            "onset_volume_index": 857,
+            "inside_segmented_count": 1,
+            "inside_missing_identity_count": 0,
+            "inside_named_labels": [
+              "SMDVR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDVR"
+            ]
+          },
+          {
+            "event_index": 21,
+            "onset_volume_index": 893,
+            "inside_segmented_count": 4,
+            "inside_missing_identity_count": 2,
+            "inside_named_labels": [
+              "SMBDR",
+              "SMDDR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDDR"
+            ]
+          },
+          {
+            "event_index": 22,
+            "onset_volume_index": 948,
+            "inside_segmented_count": 4,
+            "inside_missing_identity_count": 2,
+            "inside_named_labels": [
+              "SMBDR",
+              "SMDDR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDDR"
+            ]
+          },
+          {
+            "event_index": 23,
+            "onset_volume_index": 956,
+            "inside_segmented_count": 4,
+            "inside_missing_identity_count": 2,
+            "inside_named_labels": [
+              "SMBDR",
+              "SMDDR"
+            ],
+            "inside_named_expressing_labels": [
+              "SMDDR"
+            ]
+          }
+        ],
+        "registration_max_absolute_error_pixels": 0.0,
+        "events_by_named_expressing_count": {
+          "0": 4,
+          "1": 20
+        },
+        "events_with_unlabeled_somata_inside": 11,
+        "named_expressing_event_counts": {
+          "SMDDR": 7,
+          "SMDVR": 13
+        },
+        "schema_version": 1,
+        "pickle_sha256": "8edd3db8305faef25c468f26e8877f764e84bfd3f132cdefecd9c37812890d72",
+        "download_receipt_sha256": "07ee96d6ebb5323b6a03f9b779e86e6e3537de464cbc375e43e8880f06280269",
+        "source_sha256": {
+          "audit_dunn_spatial_metadata.py": "6ccc3c536bc9ae0d2449f9783abb4355547a61ce2878088b8ae300be5d0e192a",
+          "inspect_dunn_pickle_structure.py": "571992491e6db9c9304c0106bf54d765adb2a3b69de9f49067d017c53530f5ab",
+          "inspect_dunn_identity_metadata.py": "b85aa44aa439ae6923da52e2f5753f0fddef9069a1462c3fdac3dfb23e9aaa6c"
+        },
+        "rule": "gcamp-extractor x/y at stim_on // zsize; processed circle center equals delivered center minus saved XY offset; radius=diameter/2; inclusive Euclidean XY disk.",
+        "scope": "Identity and XY coordinate metadata only. Response arrays remain opaque. Nominal projected geometry and class-level opsin annotation do not establish effective illumination, single-neuron targeting, label confidence or animal independence."
+      }
+    }
+  ],
+  "upstream_source_sha256": "f83c58efa624da8f815e46df5a5d1e882dab296913231c51a2d4236a38aa22d1",
+  "upstream_source_url": "https://github.com/focolab/2025-dunn-et-al-curr-biol/blob/98016334b89ef087bdf39de938dad52a2cc8a47a/lib/wbliveDataClass.py",
+  "scope": "Nominal projected light-disk check only; coordinates and identity metadata inspected, responses opaque. Does not establish effective targeting or independent animals."
+}

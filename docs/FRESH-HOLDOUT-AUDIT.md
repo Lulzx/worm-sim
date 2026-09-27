@@ -359,3 +359,40 @@ matches alone cannot establish single-neuron stimulation. Published study
 summaries and search excerpts have been seen during source verification, so
 blindness to published findings is not claimed. The candidate response arrays
 remain opaque and no model outcomes have been evaluated.
+
+### Nominal illumination geometry: many events remain ambiguous
+
+The [spatial receipt](dunn-localized-spatial-audit.json) checks all 74 events
+against segmented soma centers. `scripts/audit_dunn_spatial_metadata.py` decodes
+only the allowlisted XY coordinate arrays; identity strings and stimulation/
+registration metadata are also inspected, while response arrays remain opaque.
+For these `gcamp-extractor` recordings it uses the saved coordinates at
+`stim_on // zsize` and a disk of radius `stim_diameter / 2`, inclusive of its
+boundary. The processed event center equals the delivered center minus the
+saved manual XY registration offset **exactly for every event**.
+
+The coordinate and registration conventions come from the pinned upstream
+methods. This is an explicit geometry calculation, not a claim that the upstream
+analysis pipeline has been reproduced. The upstream distance helper reads XY
+from the outer event dictionary, whereas these processed records store it under
+`event`; this audit uses the observed nested structure and verifies the saved
+correction rather than silently invoking or repairing that helper.
+
+| Recording | No named SMD/RIV soma in disk | One | Two | Events with unlabeled somata in disk |
+| --- | ---: | ---: | ---: | ---: |
+| 20221106-21-00-09 | 3 | 17 | 0 | 13 |
+| 20221106-21-23-19 | 12 | 8 | 10 | 2 |
+| 20221106-21-47-31 | 4 | 20 | 0 | 11 |
+
+Across recordings, 28 events have one named SMD/RIV soma and no unlabeled
+segmented soma inside the nominal disk. This is a metadata-screen count,
+**not an accepted single-neuron test set**. Segmentation omissions, label errors,
+neurites, axial illumination and effective optical calibration are not resolved
+by a projected center-in-disk test. The 19 events with no named expressing soma
+inside likewise cannot be treated as unstimulated controls from geometry alone.
+Animal independence remains unverified.
+
+Three focused tests cover coordinate endian/layout handling, refusal to decode
+response fields, circle boundaries, and an end-to-end registered synthetic event
+that preserves unlabeled-neuron ambiguity and rejects a mismatched correction.
+No candidate response values or model scores were inspected.
