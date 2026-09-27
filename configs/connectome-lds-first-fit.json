@@ -1,0 +1,6 @@
+{
+  "iterations": 3,
+  "kernel_lags": 39,
+  "ridge": 0.0001,
+  "cap": 0.995
+}

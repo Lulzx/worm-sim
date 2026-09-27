@@ -122,3 +122,36 @@ and lag covariance arrays. The one-window E/M step took 2.041 s. The
 [receipt](connectome-lds-reuse-workload.json) pins the training trial, graph,
 dataset, split and timing boundaries. Measurements use diagonal initialization;
 trained-model and distinct-window population timing remain unmeasured.
+
+## First population protocol
+
+`configs/connectome-lds-first-fit.json` fixes three full training EM updates,
+39 shared input lags, ridge 1e−4 and contraction cap 0.995. Initialization is also
+a candidate. Checkpoint selection minimizes pooled confidence-weighted validation
+MSE (earlier checkpoint on ties), not training likelihood or test performance.
+MSE includes constant predictions whose trace correlations are undefined. The
+common scorer separately reports correlation and its defined-trace count.
+
+The fitter accepts only a held-out stimulated-neuron split, constructs EM
+sequences exclusively from training trials, and predicts unconditioned impulses
+for validation/test targets. No fluorescence values, behavior values or published
+pair labels enter impulse prediction. Full-dataset hashes and structural validation
+are checked; those checks do not supply outcome values to the fit. A regression
+test changes every test fluorescence value and verifies identical fitted dynamics,
+validation selection and test predictions after rebinding the dataset identity.
+
+The model artifact records graph/data/split identities, config, source commit,
+training and selection IDs, and iteration. The nominal fitted parameter count
+includes supported A, the shared kernel, diagonal Q/P0 and training-observed R;
+unobserved R is fixed. Initialization is reported with the same model-family
+parameter count. Each candidate and score is persisted before the next update.
+The run directory must be new, preventing accidental checkpoint replacement.
+
+```sh
+WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release --example fit_connectome_lds
+target/release/examples/fit_connectome_lds data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json configs/connectome-lds-first-fit.json runs/connectome-lds-first-fit
+```
+
+This first protocol produces trace scores. Published pair classification and
+cluster uncertainty remain separate required evaluation steps; a point score
+alone is not evidence of improvement over the required baseline.

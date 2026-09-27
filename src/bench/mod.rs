@@ -2,6 +2,7 @@
 //! Prediction lineage is checked as declared metadata, not proof of how a model trained.
 pub mod atlas;
 pub mod behavior;
+pub mod connectome_fit;
 pub mod connectome_lds;
 pub mod controls;
 pub mod gru;
