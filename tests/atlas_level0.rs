@@ -50,6 +50,7 @@ fn fixture() -> (wormsim::data::IndexedGraph, Dataset, Split) {
 fn fit_and_impulses_exclude_held_out_fluorescence() {
     let (graph, mut data, split) = fixture();
     let config = FitConfig {
+        correlation: None,
         observation_gain: None,
         classification: None,
         molecular_sign_priors: None,
@@ -153,6 +154,10 @@ fn joint_fit_uses_training_labels_and_preserves_mse_selection() {
             .collect(),
     };
     let config = FitConfig {
+        correlation: Some(atlas_level0::CorrelationConfig {
+            weight: 0.02,
+            epsilon: 0.01,
+        }),
         observation_gain: Some(atlas_level0::ObservationGainConfig {
             initial_gain: 2.,
             prior_strength: 0.01,
@@ -224,6 +229,16 @@ fn joint_fit_uses_training_labels_and_preserves_mse_selection() {
                 .collect()
         })
         .collect();
+    let group = wormsim::bench::atlas_training::aggregate(&data, &graph, &split).unwrap();
+    let shape =
+        wormsim::bench::atlas_correlation::loss(&group[0].recording, &graph, &response, 0.01)
+            .unwrap();
+    assert!(
+        (shape.value / shape.pairs as f64
+            - reports[1].preceding_training_pair_correlation_loss.unwrap())
+        .abs()
+            < 1e-12
+    );
     let expected = initial
         .loss(
             &response,
@@ -316,6 +331,10 @@ fn molecular_prior_fit_preserves_graph_and_excludes_test_fluorescence() {
         inhibitory_edges: vec![1],
     };
     let config = FitConfig {
+        correlation: Some(atlas_level0::CorrelationConfig {
+            weight: 0.02,
+            epsilon: 0.01,
+        }),
         observation_gain: Some(atlas_level0::ObservationGainConfig {
             initial_gain: 3.,
             prior_strength: 0.01,

@@ -2,7 +2,7 @@
 use super::{
     Axis, Dataset, Partition, PredictedTrial, Predictions, Split, atlas,
     atlas_classification::{self, Classifier},
-    atlas_training,
+    atlas_correlation, atlas_training,
     population::Adam,
 };
 use crate::{
@@ -34,6 +34,15 @@ pub struct FitConfig {
     pub molecular_sign_priors: Option<crate::molecular::SignPriors>,
     #[serde(default)]
     pub observation_gain: Option<ObservationGainConfig>,
+    #[serde(default)]
+    pub correlation: Option<CorrelationConfig>,
+}
+/// Optional pair-mean shape loss; validation selection remains trace MSE.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct CorrelationConfig {
+    pub weight: f64,
+    pub epsilon: f64,
 }
 /// One global positive observation gain; calcium scales remain frozen.
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -53,6 +62,16 @@ pub struct ClassificationConfig {
 }
 impl FitConfig {
     fn validate(&self) -> Result<()> {
+        if let Some(c) = &self.correlation
+            && (!c.weight.is_finite()
+                || c.weight <= 0.
+                || !c.epsilon.is_finite()
+                || c.epsilon <= 0.
+                || !c.epsilon.powi(2).is_finite()
+                || c.epsilon.powi(2) <= 0.)
+        {
+            return Err("invalid correlation loss configuration".into());
+        }
         if let Some(g) = &self.observation_gain
             && (!g.initial_gain.is_finite()
                 || g.initial_gain <= 0.
@@ -131,6 +150,8 @@ pub struct EpochReport {
     pub preceding_training_mse: Option<f64>,
     pub preceding_penalty: Option<f64>,
     pub preceding_training_classification_bce: Option<f64>,
+    pub preceding_training_pair_correlation_loss: Option<f64>,
+    pub training_correlation_pairs: Option<usize>,
     pub validation_mse: f64,
     pub validation_correlation: Option<f64>,
     pub defined_trace_correlations: usize,
@@ -324,6 +345,10 @@ impl AtlasModel {
                 "-learned-global-gain"
             } else {
                 ""
+            } + if self.config.correlation.is_some() {
+                "-pair-mean-correlation"
+            } else {
+                ""
             },
             free_parameters: self.free_parameters(),
             training_trials: self.training_trials.clone(),
@@ -395,6 +420,13 @@ pub fn fit_select_with_evidence(
     if groups.is_empty() || split.validation.is_empty() {
         return Err("atlas fit needs training and validation groups".into());
     }
+    let correlation_pairs: usize = groups
+        .iter()
+        .map(|g| atlas_correlation::eligible_pairs(&g.recording))
+        .sum();
+    if config.correlation.is_some() && correlation_pairs == 0 {
+        return Err("no nonconstant training pair-mean traces for correlation loss".into());
+    }
     let times = &groups[0].recording.times;
     let sample_dt = times[1] - times[0];
     for g in &groups {
@@ -460,25 +492,21 @@ pub fn fit_select_with_evidence(
         let mut training = None;
         let mut penalty = None;
         let mut classification_bce = None;
+        let mut correlation_loss = None;
         if epoch > 0 {
             let readout = current.readout(model.n())?;
             let raw = current.parameters.expand(&model)?;
             let mut gradient = vec![0.; parameter_count];
             let mut bce = 0.;
+            let mut correlation_sum = 0.;
             let mut mse = 0.;
             for group in &groups {
                 let target = graph.neuron(&group.stimulated_neuron)?;
                 let currents = current.currents(target, group.recording.times.len(), model.n())?;
                 let w = group.sample_weight / total_weight;
-                let (g, gradient_weight) = if let (Some(classifier), Some(labels), Some(c)) =
-                    (&current.classifier, &labels, &config.classification)
+                let (g, gradient_weight) = if current.classifier.is_some()
+                    || config.correlation.is_some()
                 {
-                    let pair_labels = labels
-                        .by_target
-                        .get(&target)
-                        .map(Vec::as_slice)
-                        .unwrap_or(&[]);
-                    let pair_scale = c.weight / labels.pairs as f64;
                     let g = initial_state::prepared_response_objective_gradient(
                         &model,
                         &raw,
@@ -489,14 +517,49 @@ pub fn fit_select_with_evidence(
                         &currents,
                         config.preparation_seconds,
                         |response| {
-                            let mut classification =
-                                classifier.loss(response, pair_labels, sample_dt)?;
-                            bce += classification.value / labels.pairs as f64;
-                            gradient[classifier_index] += pair_scale * classification.bias_gradient;
-                            gradient[classifier_index + 1] +=
-                                pair_scale * classification.raw_slope_gradient;
-                            for v in classification.fluorescence.iter_mut().flatten() {
-                                *v *= pair_scale;
+                            let mut objective = 0.;
+                            let mut fluorescence = vec![vec![0.; model.n()]; response.len()];
+                            if let (Some(classifier), Some(labels), Some(c)) =
+                                (&current.classifier, &labels, &config.classification)
+                            {
+                                let pair_labels = labels
+                                    .by_target
+                                    .get(&target)
+                                    .map(Vec::as_slice)
+                                    .unwrap_or(&[]);
+                                let classification =
+                                    classifier.loss(response, pair_labels, sample_dt)?;
+                                let scale = c.weight / labels.pairs as f64;
+                                bce += classification.value / labels.pairs as f64;
+                                objective += scale * classification.value;
+                                gradient[classifier_index] += scale * classification.bias_gradient;
+                                gradient[classifier_index + 1] +=
+                                    scale * classification.raw_slope_gradient;
+                                for (a, b) in fluorescence
+                                    .iter_mut()
+                                    .flatten()
+                                    .zip(classification.fluorescence.iter().flatten())
+                                {
+                                    *a += scale * b;
+                                }
+                            }
+                            if let Some(c) = &config.correlation {
+                                let shape = atlas_correlation::loss(
+                                    &group.recording,
+                                    graph,
+                                    response,
+                                    c.epsilon,
+                                )?;
+                                let scale = c.weight / correlation_pairs as f64;
+                                correlation_sum += shape.value / correlation_pairs as f64;
+                                objective += scale * shape.value;
+                                for (a, b) in fluorescence
+                                    .iter_mut()
+                                    .flatten()
+                                    .zip(shape.fluorescence.iter().flatten())
+                                {
+                                    *a += scale * b;
+                                }
                             }
                             let weight = group
                                 .recording
@@ -518,15 +581,12 @@ pub fn fit_select_with_evidence(
                                     if let Some(value) = value {
                                         let delta = response[t][i] - value;
                                         error += scale * delta * delta;
-                                        classification.fluorescence[t][i] += w * 2. * scale * delta;
+                                        fluorescence[t][i] += w * 2. * scale * delta;
                                     }
                                 }
                             }
                             mse += w * (error + group.irreducible_mse);
-                            Ok((
-                                w * error + pair_scale * classification.value,
-                                classification.fluorescence,
-                            ))
+                            Ok((w * error + objective, fluorescence))
                         },
                     )?;
                     (g, 1.)
@@ -561,6 +621,9 @@ pub fn fit_select_with_evidence(
             }
             if labels.is_some() {
                 classification_bce = Some(bce);
+            }
+            if config.correlation.is_some() {
+                correlation_loss = Some(correlation_sum);
             }
 
             let (mut loss, prior) = current.parameters.prior_with_sign_probabilities(
@@ -627,6 +690,8 @@ pub fn fit_select_with_evidence(
             preceding_training_mse: training,
             preceding_penalty: penalty,
             preceding_training_classification_bce: classification_bce,
+            preceding_training_pair_correlation_loss: correlation_loss,
+            training_correlation_pairs: config.correlation.as_ref().map(|_| correlation_pairs),
             validation_mse: mse,
             validation_correlation: score.macro_trace_correlation,
             defined_trace_correlations: score.defined_trace_correlations,
