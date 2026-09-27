@@ -40,6 +40,10 @@ cargo clippy --all-targets -- -D warnings
 ./target/release/examples/fit_small
 ```
 
+For a step-by-step synthetic fit with loss and response plots, open the
+[small-circuit tutorial](tutorials/fit-small-circuit.ipynb) and its
+[execution instructions](tutorials/README.md).
+
 ## Model fitting
 
 Install the pinned Python 3.12 environment with [uv](https://docs.astral.sh/uv/):
