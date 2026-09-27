@@ -1,5 +1,6 @@
 //! Versioned benchmark trials, group-disjoint splits, and common held-out scoring.
 //! Prediction lineage is checked as declared metadata, not proof of how a model trained.
+pub mod behavior;
 pub mod controls;
 pub mod gru;
 mod gru_cell;

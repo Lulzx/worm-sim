@@ -35,6 +35,7 @@ receipt = {
     'model_sha256': hashlib.sha256(model_bytes).hexdigest(),
     'model_training_source_commit': model['source_commit'],
     'selection': selection,
+    'behavior_forecast': model.get('behavior'),
     **reports,
     'timed_training_and_validation_seconds': sum(c['elapsed_seconds'] for c in selection['candidates']),
     'timing_exclusions': 'File loading, training preparation/initialization, candidate artifact writing, and final held-out scoring are outside the summed timers.',
@@ -44,7 +45,7 @@ receipt = {
         'Marginal animal-bootstrap intervals are not paired-difference significance tests.',
         'Training-unseen identities use persistence, differing from Level 0 default readouts.',
         'Standardized forecast MSE differs from the Level 0 raw fluorescence training objective; common selection/scoring uses unstandardized fluorescence.',
-        'No behavior inputs; consult preprocessing_assessment for content-bound source causality evidence.',
+        ('Shared training-fitted behavior AR inputs; actual future behavior excluded.' if model.get('behavior') else 'No behavior inputs.') + ' Consult preprocessing_assessment for source causality evidence.',
         'Benchmark code and engineering tests do not establish biological validity.',
     ],
 }

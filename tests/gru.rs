@@ -123,6 +123,7 @@ fn scalar_gru_matches_explicit_reset_before_recurrence() {
     let net = Network {
         outputs: 1,
         hidden: 1,
+        covariates: 0,
         weights: vec![
             0.2, -0.1, 0.3, 0.05, -0.4, 0.2, 0.1, -0.2, 0.5, 0.3, -0.6, 0.1, 0.7, -0.1,
         ],
@@ -166,6 +167,24 @@ fn fitting_uses_training_animals_and_forecasts_ignore_test_futures() {
     let before = model
         .predict(&data, &graph, &split, Partition::Test)
         .unwrap();
+    let mut legacy = serde_json::to_value(&model).unwrap();
+    legacy.as_object_mut().unwrap().remove("behavior");
+    legacy["network"]
+        .as_object_mut()
+        .unwrap()
+        .remove("covariates");
+    legacy["config"]
+        .as_object_mut()
+        .unwrap()
+        .remove("behavior_channels");
+    let legacy: gru::GruModel = serde_json::from_value(legacy).unwrap();
+    let old = legacy
+        .predict(&data, &graph, &split, Partition::Test)
+        .unwrap();
+    for (a, b) in before.trials.iter().zip(old.trials) {
+        assert_eq!(a.fluorescence, b.fluorescence);
+    }
+
     bench::evaluate(&data, &graph, &split, &before, Partition::Test).unwrap();
     for t in &mut data.trials {
         if split.test.contains(&t.id) {
@@ -198,4 +217,167 @@ fn fitting_uses_training_animals_and_forecasts_ignore_test_futures() {
         bad.predict(&data, &graph, &updated, Partition::Test)
             .is_err()
     );
+}
+
+#[test]
+fn behavior_ar_matches_normal_equations_and_never_reads_future_covariates() {
+    use wormsim::bench::behavior;
+    let (graph, mut data) = data();
+    for (a, t) in data.trials.iter_mut().enumerate() {
+        t.recording.behavior.insert(
+            "velocity".into(),
+            (0..81)
+                .map(|i| {
+                    if i % 13 == 4 {
+                        None
+                    } else {
+                        Some((i as f64 * 0.31 + a as f64).sin() + 2.0)
+                    }
+                })
+                .collect(),
+        );
+    }
+    let split = Split::generate(&data, &graph, Axis::Animal, 42, 2, 2).unwrap();
+    let model = behavior::fit(&data, &graph, &split, &["velocity".into()]).unwrap();
+    let values: Vec<_> = data
+        .trials
+        .iter()
+        .filter(|t| split.train.contains(&t.id))
+        .flat_map(|t| t.recording.behavior["velocity"].iter().flatten().copied())
+        .collect();
+    let pairs: Vec<_> = data
+        .trials
+        .iter()
+        .filter(|t| split.train.contains(&t.id))
+        .flat_map(|t| {
+            t.recording.behavior["velocity"]
+                .windows(2)
+                .filter_map(|p| match (p[0], p[1]) {
+                    (Some(x), Some(y)) => Some((x, y)),
+                    _ => None,
+                })
+        })
+        .collect();
+    let mean = values.iter().sum::<f64>() / values.len() as f64;
+    let scale =
+        (values.iter().map(|x| (x - mean).powi(2)).sum::<f64>() / values.len() as f64).sqrt();
+    let mx = pairs.iter().map(|p| p.0).sum::<f64>() / pairs.len() as f64;
+    let my = pairs.iter().map(|p| p.1).sum::<f64>() / pairs.len() as f64;
+    let slope = (pairs.iter().map(|p| (p.0 - mx) * (p.1 - my)).sum::<f64>()
+        / pairs.iter().map(|p| (p.0 - mx).powi(2)).sum::<f64>())
+    .clamp(-0.995, 0.995);
+    let c = &model.channels[0];
+    assert!((c.mean - mean).abs() < 1e-12);
+    assert!((c.scale - scale).abs() < 1e-12);
+    assert!((c.slope - slope).abs() < 1e-12);
+    assert!((c.intercept - (my - mean - slope * (mx - mean)) / scale).abs() < 1e-12);
+    assert_eq!(c.adjacent_pairs, pairs.len());
+    assert_eq!(model.free_parameters(), 4);
+    let mut trial = data
+        .trials
+        .iter()
+        .find(|t| split.test.contains(&t.id))
+        .unwrap()
+        .clone();
+    let before = model.inputs(&trial).unwrap();
+    assert_eq!(before[20][1], 1.0);
+    assert!(before[21..].iter().all(|r| r[1] == 0.0));
+    assert!((before[21][0] - (c.intercept + c.slope * before[20][0])).abs() < 1e-14);
+    trial.recording.behavior.get_mut("velocity").unwrap()[21..].fill(Some(f64::NAN));
+    assert_eq!(before, model.inputs(&trial).unwrap());
+    trial.recording.behavior.clear();
+    assert!(model.inputs(&trial).unwrap().iter().all(|r| r[1] == 0.0));
+    assert!(behavior::fit(&data, &graph, &split, &["absent".into()]).is_err());
+    assert!(
+        behavior::fit(
+            &data,
+            &graph,
+            &split,
+            &["velocity".into(), "velocity".into()]
+        )
+        .is_err()
+    );
+}
+#[test]
+fn driven_gru_gradients_match_all_weight_finite_differences() {
+    let mut net = Network::initialize_with_inputs(2, 2, 2, 13).unwrap();
+    let seq = vec![
+        vec![(0, 0.2, 0.8)],
+        vec![(1, -0.3, 1.0)],
+        vec![(0, 0.5, 1.0)],
+        vec![(1, 0.4, 0.6)],
+    ];
+    let inputs = vec![
+        vec![0.2, 1.0],
+        vec![0.8, 1.0],
+        vec![0.7, 0.0],
+        vec![0.5, 0.0],
+    ];
+    let (_, gradient) = net.loss_gradient_with_inputs(&seq, 1, &inputs).unwrap();
+    let loss = |m: &Network| {
+        let p = m.predict_with_inputs(&seq, 1, &inputs).unwrap();
+        ((p[2][0] - 0.5).powi(2) + 0.6 * (p[3][1] - 0.4).powi(2)) / 1.6
+    };
+    for (i, &g) in gradient.iter().enumerate() {
+        let x = net.weights[i];
+        net.weights[i] = x + 1e-6;
+        let plus = loss(&net);
+        net.weights[i] = x - 1e-6;
+        let minus = loss(&net);
+        net.weights[i] = x;
+        assert!(((plus - minus) / 2e-6 - g).abs() < 1e-7, "{i}");
+    }
+    assert!(net.predict(&seq, 1).is_err());
+}
+#[test]
+fn behavior_driven_refit_is_invariant_to_test_neural_and_behavior_futures() {
+    let (graph, mut data) = data();
+    for (a, t) in data.trials.iter_mut().enumerate() {
+        t.recording.behavior.insert(
+            "velocity".into(),
+            (0..81)
+                .map(|i| Some((i as f64 * 0.12 + a as f64).sin()))
+                .collect(),
+        );
+    }
+    let split = Split::generate(&data, &graph, Axis::Animal, 42, 2, 2).unwrap();
+    let cfg = FitConfig {
+        hidden: 3,
+        epochs: 2,
+        behavior_channels: vec!["velocity".into()],
+        ..Default::default()
+    };
+    let (model, report) =
+        gru::fit_select(&data, &graph, &split, cfg.clone(), |_, _| Ok(())).unwrap();
+    let before = model
+        .predict(&data, &graph, &split, Partition::Test)
+        .unwrap();
+    assert_eq!(report.behavior_forecast_parameters, 4);
+    assert_eq!(
+        report.free_parameters,
+        report.trainable_parameters + report.calibration_statistics + 4
+    );
+    for t in &mut data.trials {
+        if split.test.contains(&t.id) {
+            for tr in &mut t.recording.traces {
+                tr.values[21..].fill(Some(999.0));
+            }
+            t.recording.behavior.get_mut("velocity").unwrap()[21..].fill(Some(-999.0));
+        }
+    }
+    let updated = Split::generate(&data, &graph, Axis::Animal, 42, 2, 2).unwrap();
+    let (other, other_report) =
+        gru::fit_select(&data, &graph, &updated, cfg, |_, _| Ok(())).unwrap();
+    assert_eq!(model.network.weights, other.network.weights);
+    assert_eq!(
+        model.behavior.as_ref().unwrap().channels,
+        other.behavior.as_ref().unwrap().channels
+    );
+    assert_eq!(report.selected_epoch, other_report.selected_epoch);
+    let after = other
+        .predict(&data, &graph, &updated, Partition::Test)
+        .unwrap();
+    for (a, b) in before.trials.iter().zip(after.trials) {
+        assert_eq!(a.fluorescence, b.fluorescence);
+    }
 }

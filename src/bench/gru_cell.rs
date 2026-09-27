@@ -5,6 +5,8 @@ use serde::{Deserialize, Serialize};
 pub struct Network {
     pub outputs: usize,
     pub hidden: usize,
+    #[serde(default)]
+    pub covariates: usize,
     /// Three rows per hidden unit (reset, retain, candidate), then affine readout.
     pub weights: Vec<f64>,
 }
@@ -21,13 +23,21 @@ struct Step {
 pub type Observation = (usize, f64, f64);
 impl Network {
     fn row(&self) -> usize {
-        2 * self.outputs + self.hidden + 1
+        2 * self.outputs + self.covariates + self.hidden + 1
     }
     fn readout(&self) -> usize {
         3 * self.hidden * self.row()
     }
     pub fn initialize(outputs: usize, hidden: usize, seed: u64) -> Result<Self> {
-        if outputs == 0 || outputs > 1024 || hidden == 0 || hidden > 128 {
+        Self::initialize_with_inputs(outputs, hidden, 0, seed)
+    }
+    pub fn initialize_with_inputs(
+        outputs: usize,
+        hidden: usize,
+        covariates: usize,
+        seed: u64,
+    ) -> Result<Self> {
+        if covariates > 64 || outputs == 0 || outputs > 1024 || hidden == 0 || hidden > 128 {
             return Err("invalid GRU dimensions".into());
         }
         let mut s = seed;
@@ -38,9 +48,9 @@ impl Network {
             z = (z ^ (z >> 27)).wrapping_mul(0x94d049bb133111eb);
             ((z ^ (z >> 31)) >> 11) as f64 / ((1u64 << 53) as f64) * 2.0 - 1.0
         };
-        let row = 2 * outputs + hidden + 1;
+        let row = 2 * outputs + covariates + hidden + 1;
         let mut weights = vec![0.0; 3 * hidden * row + outputs * (hidden + 1)];
-        let scale = (6.0 / (2 * outputs + 2 * hidden) as f64).sqrt();
+        let scale = (6.0 / (2 * outputs + covariates + 2 * hidden) as f64).sqrt();
         for r in 0..3 * hidden {
             for j in 0..row - 1 {
                 weights[r * row + j] = uniform() * scale;
@@ -56,11 +66,13 @@ impl Network {
         Ok(Self {
             outputs,
             hidden,
+            covariates,
             weights,
         })
     }
     pub fn validate(&self) -> Result<()> {
-        if self.outputs == 0
+        if self.covariates > 64
+            || self.outputs == 0
             || self.outputs > 1024
             || self.hidden == 0
             || self.hidden > 128
@@ -72,7 +84,7 @@ impl Network {
         Ok(())
     }
     fn step(&self, x: Vec<f64>, previous: Vec<f64>) -> Step {
-        let d = 2 * self.outputs;
+        let d = 2 * self.outputs + self.covariates;
         let h = self.hidden;
         let mut gates = vec![vec![0.0; h]; 3];
         for g in 0..3 {
@@ -139,13 +151,19 @@ impl Network {
         }
         Ok(())
     }
-    fn forward(&self, sequence: &[Vec<Observation>], origin: usize) -> (Vec<Vec<f64>>, Vec<Step>) {
+    fn forward(
+        &self,
+        sequence: &[Vec<Observation>],
+        origin: usize,
+        inputs: &[Vec<f64>],
+    ) -> (Vec<Vec<f64>>, Vec<Step>) {
         let n = self.outputs;
         let mut hidden = vec![0.0; self.hidden];
         let mut output = vec![self.decode(&hidden)];
         let mut tape = vec![];
         for t in 0..sequence.len() - 1 {
-            let mut x = vec![0.0; 2 * n];
+            let mut x = vec![0.0; 2 * n + self.covariates];
+            x[2 * n..].copy_from_slice(&inputs[t]);
             x[..n].copy_from_slice(&output[t]);
             if t <= origin {
                 for &(i, y, w) in &sequence[t] {
@@ -161,8 +179,27 @@ impl Network {
         (output, tape)
     }
     pub fn predict(&self, sequence: &[Vec<Observation>], origin: usize) -> Result<Vec<Vec<f64>>> {
+        self.predict_with_inputs(sequence, origin, &vec![vec![]; sequence.len()])
+    }
+    fn check_inputs(&self, frames: usize, inputs: &[Vec<f64>]) -> Result<()> {
+        if inputs.len() != frames
+            || inputs
+                .iter()
+                .any(|u| u.len() != self.covariates || u.iter().any(|v| !v.is_finite()))
+        {
+            return Err("invalid GRU covariate shape/values".into());
+        }
+        Ok(())
+    }
+    pub fn predict_with_inputs(
+        &self,
+        sequence: &[Vec<Observation>],
+        origin: usize,
+        inputs: &[Vec<f64>],
+    ) -> Result<Vec<Vec<f64>>> {
         self.check_sequence(sequence, origin)?;
-        let (out, _) = self.forward(sequence, origin);
+        self.check_inputs(sequence.len(), inputs)?;
+        let (out, _) = self.forward(sequence, origin, inputs);
         if out.iter().flatten().any(|v| !v.is_finite()) {
             return Err("nonfinite GRU prediction".into());
         }
@@ -173,11 +210,20 @@ impl Network {
         sequence: &[Vec<Observation>],
         origin: usize,
     ) -> Result<(f64, Vec<f64>)> {
+        self.loss_gradient_with_inputs(sequence, origin, &vec![vec![]; sequence.len()])
+    }
+    pub fn loss_gradient_with_inputs(
+        &self,
+        sequence: &[Vec<Observation>],
+        origin: usize,
+        inputs: &[Vec<f64>],
+    ) -> Result<(f64, Vec<f64>)> {
         self.check_sequence(sequence, origin)?;
-        let (output, tape) = self.forward(sequence, origin);
+        self.check_inputs(sequence.len(), inputs)?;
+        let (output, tape) = self.forward(sequence, origin, inputs);
         let n = self.outputs;
         let h = self.hidden;
-        let d = 2 * n;
+        let d = 2 * n + self.covariates;
         let denom: f64 = sequence[origin + 1..].iter().flatten().map(|x| x.2).sum();
         if denom <= 0.0 {
             return Err("no GRU forecast training targets".into());

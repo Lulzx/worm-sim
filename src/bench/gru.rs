@@ -14,6 +14,8 @@ pub struct FitConfig {
     pub weight_decay: f64,
     pub gradient_clip: f64,
     pub seed: u64,
+    #[serde(default)]
+    pub behavior_channels: Vec<String>,
 }
 impl Default for FitConfig {
     fn default() -> Self {
@@ -24,6 +26,7 @@ impl Default for FitConfig {
             weight_decay: 1e-4,
             gradient_clip: 1.0,
             seed: 42,
+            behavior_channels: vec![],
         }
     }
 }
@@ -57,6 +60,8 @@ pub struct GruModel {
     pub mean: Vec<f64>,
     pub scale: Vec<f64>,
     pub network: Network,
+    #[serde(default)]
+    pub behavior: Option<super::behavior::BehaviorModel>,
     pub config: FitConfig,
     pub epoch: usize,
     pub training_trials: Vec<String>,
@@ -83,11 +88,15 @@ pub struct SelectionReport {
     pub selected_epoch: usize,
     pub trainable_parameters: usize,
     pub calibration_statistics: usize,
+    #[serde(default)]
+    pub behavior_forecast_parameters: usize,
     pub free_parameters: usize,
 }
 impl GruModel {
     pub fn free_parameters(&self) -> usize {
-        self.network.weights.len() + 2 * self.neurons.len()
+        self.network.weights.len()
+            + 2 * self.neurons.len()
+            + self.behavior.as_ref().map_or(0, |b| b.free_parameters())
     }
     fn validate(&self, data: &Dataset, graph: &IndexedGraph, split: &Split) -> Result<()> {
         split.validate(data, graph)?;
@@ -117,6 +126,23 @@ impl GruModel {
         }
         for name in &self.neurons {
             graph.neuron(name)?;
+        }
+        if let Some(b) = &self.behavior {
+            b.validate_lineage(data, graph, split)?;
+            let mut names = self.config.behavior_channels.clone();
+            names.sort();
+            if names
+                != b.channels
+                    .iter()
+                    .map(|c| c.name.clone())
+                    .collect::<Vec<_>>()
+                || self.network.covariates != b.input_dim()
+                || self.sample_dt != b.sample_dt
+            {
+                return Err("GRU behavior configuration mismatch".into());
+            }
+        } else if self.network.covariates != 0 || !self.config.behavior_channels.is_empty() {
+            return Err("missing GRU behavior artifact".into());
         }
         Ok(())
     }
@@ -158,6 +184,12 @@ impl GruModel {
         }
         Ok((sequence, at))
     }
+    fn behavior_inputs(&self, trial: &Trial) -> Result<Vec<Vec<f64>>> {
+        self.behavior.as_ref().map_or_else(
+            || Ok(vec![vec![]; trial.recording.times.len()]),
+            |b| b.inputs(trial),
+        )
+    }
     pub fn predict(
         &self,
         data: &Dataset,
@@ -175,7 +207,10 @@ impl GruModel {
             .filter(|t| split.ids(partition).contains(&t.id))
         {
             let (sequence, origin) = self.sequence(trial, false)?;
-            let output = self.network.predict(&sequence, origin)?;
+            let inputs = self.behavior_inputs(trial)?;
+            let output = self
+                .network
+                .predict_with_inputs(&sequence, origin, &inputs)?;
             let mut fluorescence = BTreeMap::new();
             for trace in &trial.recording.traces {
                 let values = if let Ok(i) = self.neurons.binary_search(&trace.neuron) {
@@ -206,12 +241,20 @@ impl GruModel {
             });
         }
         trials.sort_by(|a, b| a.id.cmp(&b.id));
+        let behavior_description = match &self.behavior {
+            Some(b) => format!(
+                "behavior AR artifact {}; channels {:?}; no actual future behavior",
+                b.content_hash()?,
+                b.channels.iter().map(|c| &c.name).collect::<Vec<_>>()
+            ),
+            None => "no behavior inputs".into(),
+        };
         Ok(Predictions {
             schema_version: 1,
             dataset_hash: self.dataset_hash.clone(),
             split_hash: self.split_hash.clone(),
             model: format!(
-                "connectome-free masked reset-before GRU; hidden={}; epoch={}; trainable={}; calibration={}; history only; unseen-neuron persistence fallback traces={fallback_traces}; neurons={fallbacks:?}",
+                "connectome-free masked reset-before GRU; hidden={}; epoch={}; trainable={}; calibration={}; history only; {behavior_description}; unseen-neuron persistence fallback traces={fallback_traces}; neurons={fallbacks:?}",
                 self.network.hidden,
                 self.epoch,
                 self.network.weights.len(),
@@ -271,7 +314,22 @@ pub fn fit_select(
         }
     }
     let n = statistics.len();
-    let network = Network::initialize(n, cfg.hidden, cfg.seed)?;
+    let behavior = if cfg.behavior_channels.is_empty() {
+        None
+    } else {
+        Some(super::behavior::fit(
+            data,
+            graph,
+            split,
+            &cfg.behavior_channels,
+        )?)
+    };
+    let network = Network::initialize_with_inputs(
+        n,
+        cfg.hidden,
+        behavior.as_ref().map_or(0, |b| b.input_dim()),
+        cfg.seed,
+    )?;
     let mut model = GruModel {
         schema_version: 1,
         dataset_hash: split.dataset_hash.clone(),
@@ -288,6 +346,7 @@ pub fn fit_select(
             .map(|s| (s.2 / s.0).max(0.0).sqrt().max(1e-8))
             .collect(),
         network,
+        behavior,
         config: cfg.clone(),
         epoch: 0,
         training_trials: split.train.clone(),
@@ -297,6 +356,10 @@ pub fn fit_select(
     let sequences = training
         .iter()
         .map(|t| model.sequence(t, true))
+        .collect::<Result<Vec<_>>>()?;
+    let inputs = training
+        .iter()
+        .map(|t| model.behavior_inputs(t))
         .collect::<Result<Vec<_>>>()?;
     let mut m = vec![0.0; model.network.weights.len()];
     let mut v = m.clone();
@@ -316,9 +379,11 @@ pub fn fit_select(
                 sha.finalize().to_vec()
             });
             for i in order {
-                let (value, mut grad) = model
-                    .network
-                    .loss_gradient(&sequences[i].0, sequences[i].1)?;
+                let (value, mut grad) = model.network.loss_gradient_with_inputs(
+                    &sequences[i].0,
+                    sequences[i].1,
+                    &inputs[i],
+                )?;
                 loss += value;
                 let norm = grad.iter().map(|g| g * g).sum::<f64>().sqrt();
                 if !norm.is_finite() {
@@ -371,6 +436,6 @@ pub fn fit_select(
         }
     }
     let (_, selected) = best.ok_or("no GRU candidate")?;
-    let report=SelectionReport{schema_version:1,dataset_hash:split.dataset_hash.clone(),split_hash:split.content_hash()?,source_commit:model.source_commit,config:cfg,criterion:"Maximum mean validation macro-neuron R² at 1/10/30 s including epoch zero; ties retain earlier epoch. Training-only normalization; exact full-window BPTT through autoregressive feedback; no future teacher forcing or behavior input.".into(),candidates,selected_epoch:selected.epoch,trainable_parameters:selected.network.weights.len(),calibration_statistics:2*n,free_parameters:selected.free_parameters()};
+    let report=SelectionReport{schema_version:1,dataset_hash:split.dataset_hash.clone(),split_hash:split.content_hash()?,source_commit:model.source_commit,config:cfg,criterion:"Maximum mean validation macro-neuron R² at 1/10/30 s including epoch zero; ties retain earlier epoch. Training-only normalization; exact full-window BPTT through autoregressive feedback; no future teacher forcing. Optional shared behavior AR covariates use history only, then extrapolate without actual future behavior.".into(),candidates,selected_epoch:selected.epoch,trainable_parameters:selected.network.weights.len(),calibration_statistics:2*n,behavior_forecast_parameters:selected.behavior.as_ref().map_or(0,|b|b.free_parameters()),free_parameters:selected.free_parameters()};
     Ok((selected, report))
 }

@@ -121,3 +121,7 @@ The next comparison should give all fitted models equal access to behavior, with
 an explicit distinction between behavior observed during history and future
 behavior unavailable at forecast time. The audit confirms retrospective source processing, so this comparison cannot be
 interpreted as a causal forecast.
+
+An optional [shared behavior-input protocol](BEHAVIOR-INPUTS.md) now augments GRU
+recurrent inputs. The original receipts above remain the no-behavior experiment;
+the equal-input LDS/Level 0 comparison is not yet complete.
