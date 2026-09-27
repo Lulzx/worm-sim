@@ -48,8 +48,8 @@ and attribution must be recorded separately from software provenance.
 
 ## Required import boundaries
 
-The expression matrices and supplementary tables have not yet been imported or
-validated in WormSim. A native implementation must retain threshold/version,
+The initial source audit preceded import. The subsequent native importer and
+independent source checks are documented in [MOLECULAR-PRIORS.md](MOLECULAR-PRIORS.md). A native implementation must retain threshold/version,
 source hashes, transmitter alternatives, receptor candidates, and unknown versus
 conflicting evidence. Missing expression cannot be silently turned into a known
 inhibitory or excitatory connection. Only existing anatomical edges receive
@@ -60,5 +60,6 @@ AWC ON/OFF identity must not be equated with fixed anatomical left/right. Numeri
 zero-padding aliases can be declared separately from biological class expansion.
 Any conversion of a qualitative polarity to P(excitatory), such as 0.9/0.1,
 would be a declared modeling assumption, not a probability supplied by the source.
-Metabotropic and peptide effects remain separate mechanisms. This audit identifies
-usable evidence; it does not claim the sign-prior requirement is implemented.
+Metabotropic and peptide effects remain separate mechanisms. The import preserves these boundaries. Integration into parameter initialization
+and fitted penalties remains required before claiming implemented molecular
+priors in a benchmark run.

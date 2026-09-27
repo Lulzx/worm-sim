@@ -1,0 +1,2499 @@
+{
+  "schema_version": 1,
+  "source": {
+    "url": "https://raw.githubusercontent.com/francescorandi/wormneuroatlas/b2e13d88b670efcb3438aeacba2ad4bd6c383933/wormneuroatlas/data/journal.pcbi.1007974.s003.xlsx",
+    "sha256": "85959066fd7cbdbc2024d0ebb323b71c4365f4083bc85e555ee973f470697c47",
+    "version": "Fenyves et al. 2020; doi:10.1371/journal.pcbi.1007974.s003",
+    "license": "CC BY 4.0; https://creativecommons.org/licenses/by/4.0/"
+  },
+  "transmitters": [
+    {
+      "neuron": "ADAL",
+      "source_neuron": "ADAL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 2
+    },
+    {
+      "neuron": "ADAR",
+      "source_neuron": "ADAR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 3
+    },
+    {
+      "neuron": "ADEL",
+      "source_neuron": "ADEL",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 4
+    },
+    {
+      "neuron": "ADER",
+      "source_neuron": "ADER",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 5
+    },
+    {
+      "neuron": "ADFL",
+      "source_neuron": "ADFL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 6
+    },
+    {
+      "neuron": "ADFR",
+      "source_neuron": "ADFR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 7
+    },
+    {
+      "neuron": "ADLL",
+      "source_neuron": "ADLL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 8
+    },
+    {
+      "neuron": "ADLR",
+      "source_neuron": "ADLR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 9
+    },
+    {
+      "neuron": "AFDL",
+      "source_neuron": "AFDL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 10
+    },
+    {
+      "neuron": "AFDR",
+      "source_neuron": "AFDR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 11
+    },
+    {
+      "neuron": "AIAL",
+      "source_neuron": "AIAL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 12
+    },
+    {
+      "neuron": "AIAR",
+      "source_neuron": "AIAR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 13
+    },
+    {
+      "neuron": "AIBL",
+      "source_neuron": "AIBL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 14
+    },
+    {
+      "neuron": "AIBR",
+      "source_neuron": "AIBR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 15
+    },
+    {
+      "neuron": "AIML",
+      "source_neuron": "AIML",
+      "dominant": "Glu",
+      "alternative": "ACh",
+      "source_row": 16
+    },
+    {
+      "neuron": "AIMR",
+      "source_neuron": "AIMR",
+      "dominant": "Glu",
+      "alternative": "ACh",
+      "source_row": 17
+    },
+    {
+      "neuron": "AINL",
+      "source_neuron": "AINL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 18
+    },
+    {
+      "neuron": "AINR",
+      "source_neuron": "AINR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 19
+    },
+    {
+      "neuron": "AIYL",
+      "source_neuron": "AIYL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 20
+    },
+    {
+      "neuron": "AIYR",
+      "source_neuron": "AIYR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 21
+    },
+    {
+      "neuron": "AIZL",
+      "source_neuron": "AIZL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 22
+    },
+    {
+      "neuron": "AIZR",
+      "source_neuron": "AIZR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 23
+    },
+    {
+      "neuron": "ALA",
+      "source_neuron": "ALA",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 24
+    },
+    {
+      "neuron": "ALML",
+      "source_neuron": "ALML",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 25
+    },
+    {
+      "neuron": "ALMR",
+      "source_neuron": "ALMR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 26
+    },
+    {
+      "neuron": "ALNL",
+      "source_neuron": "ALNL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 27
+    },
+    {
+      "neuron": "ALNR",
+      "source_neuron": "ALNR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 28
+    },
+    {
+      "neuron": "AQR",
+      "source_neuron": "AQR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 29
+    },
+    {
+      "neuron": "AS1",
+      "source_neuron": "AS01",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 30
+    },
+    {
+      "neuron": "AS2",
+      "source_neuron": "AS02",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 31
+    },
+    {
+      "neuron": "AS3",
+      "source_neuron": "AS03",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 32
+    },
+    {
+      "neuron": "AS4",
+      "source_neuron": "AS04",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 33
+    },
+    {
+      "neuron": "AS5",
+      "source_neuron": "AS05",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 34
+    },
+    {
+      "neuron": "AS6",
+      "source_neuron": "AS06",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 35
+    },
+    {
+      "neuron": "AS7",
+      "source_neuron": "AS07",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 36
+    },
+    {
+      "neuron": "AS8",
+      "source_neuron": "AS08",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 37
+    },
+    {
+      "neuron": "AS9",
+      "source_neuron": "AS09",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 38
+    },
+    {
+      "neuron": "AS10",
+      "source_neuron": "AS10",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 39
+    },
+    {
+      "neuron": "AS11",
+      "source_neuron": "AS11",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 40
+    },
+    {
+      "neuron": "ASEL",
+      "source_neuron": "ASEL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 41
+    },
+    {
+      "neuron": "ASER",
+      "source_neuron": "ASER",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 42
+    },
+    {
+      "neuron": "ASGL",
+      "source_neuron": "ASGL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 43
+    },
+    {
+      "neuron": "ASGR",
+      "source_neuron": "ASGR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 44
+    },
+    {
+      "neuron": "ASHL",
+      "source_neuron": "ASHL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 45
+    },
+    {
+      "neuron": "ASHR",
+      "source_neuron": "ASHR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 46
+    },
+    {
+      "neuron": "ASIL",
+      "source_neuron": "ASIL",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 47
+    },
+    {
+      "neuron": "ASIR",
+      "source_neuron": "ASIR",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 48
+    },
+    {
+      "neuron": "ASJL",
+      "source_neuron": "ASJL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 49
+    },
+    {
+      "neuron": "ASJR",
+      "source_neuron": "ASJR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 50
+    },
+    {
+      "neuron": "ASKL",
+      "source_neuron": "ASKL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 51
+    },
+    {
+      "neuron": "ASKR",
+      "source_neuron": "ASKR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 52
+    },
+    {
+      "neuron": "AUAL",
+      "source_neuron": "AUAL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 53
+    },
+    {
+      "neuron": "AUAR",
+      "source_neuron": "AUAR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 54
+    },
+    {
+      "neuron": "AVAL",
+      "source_neuron": "AVAL",
+      "dominant": "ACh",
+      "alternative": "GABA",
+      "source_row": 55
+    },
+    {
+      "neuron": "AVAR",
+      "source_neuron": "AVAR",
+      "dominant": "ACh",
+      "alternative": "GABA",
+      "source_row": 56
+    },
+    {
+      "neuron": "AVBL",
+      "source_neuron": "AVBL",
+      "dominant": "ACh",
+      "alternative": "GABA",
+      "source_row": 57
+    },
+    {
+      "neuron": "AVBR",
+      "source_neuron": "AVBR",
+      "dominant": "ACh",
+      "alternative": "GABA",
+      "source_row": 58
+    },
+    {
+      "neuron": "AVDL",
+      "source_neuron": "AVDL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 59
+    },
+    {
+      "neuron": "AVDR",
+      "source_neuron": "AVDR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 60
+    },
+    {
+      "neuron": "AVEL",
+      "source_neuron": "AVEL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 61
+    },
+    {
+      "neuron": "AVER",
+      "source_neuron": "AVER",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 62
+    },
+    {
+      "neuron": "AVFL",
+      "source_neuron": "AVFL",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 63
+    },
+    {
+      "neuron": "AVFR",
+      "source_neuron": "AVFR",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 64
+    },
+    {
+      "neuron": "AVG",
+      "source_neuron": "AVG",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 65
+    },
+    {
+      "neuron": "AVHL",
+      "source_neuron": "AVHL",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 66
+    },
+    {
+      "neuron": "AVHR",
+      "source_neuron": "AVHR",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 67
+    },
+    {
+      "neuron": "AVJL",
+      "source_neuron": "AVJL",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 68
+    },
+    {
+      "neuron": "AVJR",
+      "source_neuron": "AVJR",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 69
+    },
+    {
+      "neuron": "AVKL",
+      "source_neuron": "AVKL",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 70
+    },
+    {
+      "neuron": "AVKR",
+      "source_neuron": "AVKR",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 71
+    },
+    {
+      "neuron": "AVL",
+      "source_neuron": "AVL",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 72
+    },
+    {
+      "neuron": "AVM",
+      "source_neuron": "AVM",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 73
+    },
+    {
+      "neuron": "AWAL",
+      "source_neuron": "AWAL",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 74
+    },
+    {
+      "neuron": "AWAR",
+      "source_neuron": "AWAR",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 75
+    },
+    {
+      "neuron": "AWBL",
+      "source_neuron": "AWBL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 76
+    },
+    {
+      "neuron": "AWBR",
+      "source_neuron": "AWBR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 77
+    },
+    {
+      "neuron": "AWCL",
+      "source_neuron": "AWCL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 78
+    },
+    {
+      "neuron": "AWCR",
+      "source_neuron": "AWCR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 79
+    },
+    {
+      "neuron": "BAGL",
+      "source_neuron": "BAGL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 80
+    },
+    {
+      "neuron": "BAGR",
+      "source_neuron": "BAGR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 81
+    },
+    {
+      "neuron": "BDUL",
+      "source_neuron": "BDUL",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 82
+    },
+    {
+      "neuron": "BDUR",
+      "source_neuron": "BDUR",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 83
+    },
+    {
+      "neuron": "CANL",
+      "source_neuron": "CANL",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 84
+    },
+    {
+      "neuron": "CANR",
+      "source_neuron": "CANR",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 85
+    },
+    {
+      "neuron": "CEPDL",
+      "source_neuron": "CEPDL",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 86
+    },
+    {
+      "neuron": "CEPDR",
+      "source_neuron": "CEPDR",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 87
+    },
+    {
+      "neuron": "CEPVL",
+      "source_neuron": "CEPVL",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 88
+    },
+    {
+      "neuron": "CEPVR",
+      "source_neuron": "CEPVR",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 89
+    },
+    {
+      "neuron": "DA1",
+      "source_neuron": "DA01",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 90
+    },
+    {
+      "neuron": "DA2",
+      "source_neuron": "DA02",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 91
+    },
+    {
+      "neuron": "DA3",
+      "source_neuron": "DA03",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 92
+    },
+    {
+      "neuron": "DA4",
+      "source_neuron": "DA04",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 93
+    },
+    {
+      "neuron": "DA5",
+      "source_neuron": "DA05",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 94
+    },
+    {
+      "neuron": "DA6",
+      "source_neuron": "DA06",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 95
+    },
+    {
+      "neuron": "DA7",
+      "source_neuron": "DA07",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 96
+    },
+    {
+      "neuron": "DA8",
+      "source_neuron": "DA08",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 97
+    },
+    {
+      "neuron": "DA9",
+      "source_neuron": "DA09",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 98
+    },
+    {
+      "neuron": "DB1",
+      "source_neuron": "DB01",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 99
+    },
+    {
+      "neuron": "DB2",
+      "source_neuron": "DB02",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 100
+    },
+    {
+      "neuron": "DB3",
+      "source_neuron": "DB03",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 101
+    },
+    {
+      "neuron": "DB4",
+      "source_neuron": "DB04",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 102
+    },
+    {
+      "neuron": "DB5",
+      "source_neuron": "DB05",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 103
+    },
+    {
+      "neuron": "DB6",
+      "source_neuron": "DB06",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 104
+    },
+    {
+      "neuron": "DB7",
+      "source_neuron": "DB07",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 105
+    },
+    {
+      "neuron": "DD1",
+      "source_neuron": "DD01",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 106
+    },
+    {
+      "neuron": "DD2",
+      "source_neuron": "DD02",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 107
+    },
+    {
+      "neuron": "DD3",
+      "source_neuron": "DD03",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 108
+    },
+    {
+      "neuron": "DD4",
+      "source_neuron": "DD04",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 109
+    },
+    {
+      "neuron": "DD5",
+      "source_neuron": "DD05",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 110
+    },
+    {
+      "neuron": "DD6",
+      "source_neuron": "DD06",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 111
+    },
+    {
+      "neuron": "DVA",
+      "source_neuron": "DVA",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 112
+    },
+    {
+      "neuron": "DVB",
+      "source_neuron": "DVB",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 113
+    },
+    {
+      "neuron": "DVC",
+      "source_neuron": "DVC",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 114
+    },
+    {
+      "neuron": "FLPL",
+      "source_neuron": "FLPL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 115
+    },
+    {
+      "neuron": "FLPR",
+      "source_neuron": "FLPR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 116
+    },
+    {
+      "neuron": "HSNL",
+      "source_neuron": "HSNL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 117
+    },
+    {
+      "neuron": "HSNR",
+      "source_neuron": "HSNR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 118
+    },
+    {
+      "neuron": "I1L",
+      "source_neuron": "I1L",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 119
+    },
+    {
+      "neuron": "I1R",
+      "source_neuron": "I1R",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 120
+    },
+    {
+      "neuron": "I2L",
+      "source_neuron": "I2L",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 121
+    },
+    {
+      "neuron": "I2R",
+      "source_neuron": "I2R",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 122
+    },
+    {
+      "neuron": "I3",
+      "source_neuron": "I3",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 123
+    },
+    {
+      "neuron": "I4",
+      "source_neuron": "I4",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 124
+    },
+    {
+      "neuron": "I5",
+      "source_neuron": "I5",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 125
+    },
+    {
+      "neuron": "I6",
+      "source_neuron": "I6",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 126
+    },
+    {
+      "neuron": "IL1DL",
+      "source_neuron": "IL1DL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 127
+    },
+    {
+      "neuron": "IL1DR",
+      "source_neuron": "IL1DR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 128
+    },
+    {
+      "neuron": "IL1L",
+      "source_neuron": "IL1L",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 129
+    },
+    {
+      "neuron": "IL1R",
+      "source_neuron": "IL1R",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 130
+    },
+    {
+      "neuron": "IL1VL",
+      "source_neuron": "IL1VL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 131
+    },
+    {
+      "neuron": "IL1VR",
+      "source_neuron": "IL1VR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 132
+    },
+    {
+      "neuron": "IL2DL",
+      "source_neuron": "IL2DL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 133
+    },
+    {
+      "neuron": "IL2DR",
+      "source_neuron": "IL2DR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 134
+    },
+    {
+      "neuron": "IL2L",
+      "source_neuron": "IL2L",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 135
+    },
+    {
+      "neuron": "IL2R",
+      "source_neuron": "IL2R",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 136
+    },
+    {
+      "neuron": "IL2VL",
+      "source_neuron": "IL2VL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 137
+    },
+    {
+      "neuron": "IL2VR",
+      "source_neuron": "IL2VR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 138
+    },
+    {
+      "neuron": "LUAL",
+      "source_neuron": "LUAL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 139
+    },
+    {
+      "neuron": "LUAR",
+      "source_neuron": "LUAR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 140
+    },
+    {
+      "neuron": "M1",
+      "source_neuron": "M1",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 141
+    },
+    {
+      "neuron": "M2L",
+      "source_neuron": "M2L",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 142
+    },
+    {
+      "neuron": "M2R",
+      "source_neuron": "M2R",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 143
+    },
+    {
+      "neuron": "M3L",
+      "source_neuron": "M3L",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 144
+    },
+    {
+      "neuron": "M3R",
+      "source_neuron": "M3R",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 145
+    },
+    {
+      "neuron": "M4",
+      "source_neuron": "M4",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 146
+    },
+    {
+      "neuron": "M5",
+      "source_neuron": "M5",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 147
+    },
+    {
+      "neuron": "MCL",
+      "source_neuron": "MCL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 148
+    },
+    {
+      "neuron": "MCR",
+      "source_neuron": "MCR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 149
+    },
+    {
+      "neuron": "MI",
+      "source_neuron": "MI",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 150
+    },
+    {
+      "neuron": "NSML",
+      "source_neuron": "NSML",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 151
+    },
+    {
+      "neuron": "NSMR",
+      "source_neuron": "NSMR",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 152
+    },
+    {
+      "neuron": "OLLL",
+      "source_neuron": "OLLL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 153
+    },
+    {
+      "neuron": "OLLR",
+      "source_neuron": "OLLR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 154
+    },
+    {
+      "neuron": "OLQDL",
+      "source_neuron": "OLQDL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 155
+    },
+    {
+      "neuron": "OLQDR",
+      "source_neuron": "OLQDR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 156
+    },
+    {
+      "neuron": "OLQVL",
+      "source_neuron": "OLQVL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 157
+    },
+    {
+      "neuron": "OLQVR",
+      "source_neuron": "OLQVR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 158
+    },
+    {
+      "neuron": "PDA",
+      "source_neuron": "PDA",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 159
+    },
+    {
+      "neuron": "PDB",
+      "source_neuron": "PDB",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 160
+    },
+    {
+      "neuron": "PDEL",
+      "source_neuron": "PDEL",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 161
+    },
+    {
+      "neuron": "PDER",
+      "source_neuron": "PDER",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 162
+    },
+    {
+      "neuron": "PHAL",
+      "source_neuron": "PHAL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 163
+    },
+    {
+      "neuron": "PHAR",
+      "source_neuron": "PHAR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 164
+    },
+    {
+      "neuron": "PHBL",
+      "source_neuron": "PHBL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 165
+    },
+    {
+      "neuron": "PHBR",
+      "source_neuron": "PHBR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 166
+    },
+    {
+      "neuron": "PHCL",
+      "source_neuron": "PHCL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 167
+    },
+    {
+      "neuron": "PHCR",
+      "source_neuron": "PHCR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 168
+    },
+    {
+      "neuron": "PLML",
+      "source_neuron": "PLML",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 169
+    },
+    {
+      "neuron": "PLMR",
+      "source_neuron": "PLMR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 170
+    },
+    {
+      "neuron": "PLNL",
+      "source_neuron": "PLNL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 171
+    },
+    {
+      "neuron": "PLNR",
+      "source_neuron": "PLNR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 172
+    },
+    {
+      "neuron": "PQR",
+      "source_neuron": "PQR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 173
+    },
+    {
+      "neuron": "PVCL",
+      "source_neuron": "PVCL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 174
+    },
+    {
+      "neuron": "PVCR",
+      "source_neuron": "PVCR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 175
+    },
+    {
+      "neuron": "PVDL",
+      "source_neuron": "PVDL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 176
+    },
+    {
+      "neuron": "PVDR",
+      "source_neuron": "PVDR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 177
+    },
+    {
+      "neuron": "PVM",
+      "source_neuron": "PVM",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 178
+    },
+    {
+      "neuron": "PVNL",
+      "source_neuron": "PVNL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 179
+    },
+    {
+      "neuron": "PVNR",
+      "source_neuron": "PVNR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 180
+    },
+    {
+      "neuron": "PVPL",
+      "source_neuron": "PVPL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 181
+    },
+    {
+      "neuron": "PVPR",
+      "source_neuron": "PVPR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 182
+    },
+    {
+      "neuron": "PVQL",
+      "source_neuron": "PVQL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 183
+    },
+    {
+      "neuron": "PVQR",
+      "source_neuron": "PVQR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 184
+    },
+    {
+      "neuron": "PVR",
+      "source_neuron": "PVR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 185
+    },
+    {
+      "neuron": "PVT",
+      "source_neuron": "PVT",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 186
+    },
+    {
+      "neuron": "PVWL",
+      "source_neuron": "PVWL",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 187
+    },
+    {
+      "neuron": "PVWR",
+      "source_neuron": "PVWR",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 188
+    },
+    {
+      "neuron": "RIAL",
+      "source_neuron": "RIAL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 189
+    },
+    {
+      "neuron": "RIAR",
+      "source_neuron": "RIAR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 190
+    },
+    {
+      "neuron": "RIBL",
+      "source_neuron": "RIBL",
+      "dominant": "GABA",
+      "alternative": "ACh",
+      "source_row": 191
+    },
+    {
+      "neuron": "RIBR",
+      "source_neuron": "RIBR",
+      "dominant": "GABA",
+      "alternative": "ACh",
+      "source_row": 192
+    },
+    {
+      "neuron": "RICL",
+      "source_neuron": "RICL",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 193
+    },
+    {
+      "neuron": "RICR",
+      "source_neuron": "RICR",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 194
+    },
+    {
+      "neuron": "RID",
+      "source_neuron": "RID",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 195
+    },
+    {
+      "neuron": "RIFL",
+      "source_neuron": "RIFL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 196
+    },
+    {
+      "neuron": "RIFR",
+      "source_neuron": "RIFR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 197
+    },
+    {
+      "neuron": "RIGL",
+      "source_neuron": "RIGL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 198
+    },
+    {
+      "neuron": "RIGR",
+      "source_neuron": "RIGR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 199
+    },
+    {
+      "neuron": "RIH",
+      "source_neuron": "RIH",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 200
+    },
+    {
+      "neuron": "RIML",
+      "source_neuron": "RIML",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 201
+    },
+    {
+      "neuron": "RIMR",
+      "source_neuron": "RIMR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 202
+    },
+    {
+      "neuron": "RIPL",
+      "source_neuron": "RIPL",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 203
+    },
+    {
+      "neuron": "RIPR",
+      "source_neuron": "RIPR",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 204
+    },
+    {
+      "neuron": "RIR",
+      "source_neuron": "RIR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 205
+    },
+    {
+      "neuron": "RIS",
+      "source_neuron": "RIS",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 206
+    },
+    {
+      "neuron": "RIVL",
+      "source_neuron": "RIVL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 207
+    },
+    {
+      "neuron": "RIVR",
+      "source_neuron": "RIVR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 208
+    },
+    {
+      "neuron": "RMDDL",
+      "source_neuron": "RMDDL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 209
+    },
+    {
+      "neuron": "RMDDR",
+      "source_neuron": "RMDDR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 210
+    },
+    {
+      "neuron": "RMDL",
+      "source_neuron": "RMDL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 211
+    },
+    {
+      "neuron": "RMDR",
+      "source_neuron": "RMDR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 212
+    },
+    {
+      "neuron": "RMDVL",
+      "source_neuron": "RMDVL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 213
+    },
+    {
+      "neuron": "RMDVR",
+      "source_neuron": "RMDVR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 214
+    },
+    {
+      "neuron": "RMED",
+      "source_neuron": "RMED",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 215
+    },
+    {
+      "neuron": "RMEL",
+      "source_neuron": "RMEL",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 216
+    },
+    {
+      "neuron": "RMER",
+      "source_neuron": "RMER",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 217
+    },
+    {
+      "neuron": "RMEV",
+      "source_neuron": "RMEV",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 218
+    },
+    {
+      "neuron": "RMFL",
+      "source_neuron": "RMFL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 219
+    },
+    {
+      "neuron": "RMFR",
+      "source_neuron": "RMFR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 220
+    },
+    {
+      "neuron": "RMGL",
+      "source_neuron": "RMGL",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 221
+    },
+    {
+      "neuron": "RMGR",
+      "source_neuron": "RMGR",
+      "dominant": null,
+      "alternative": null,
+      "source_row": 222
+    },
+    {
+      "neuron": "RMHL",
+      "source_neuron": "RMHL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 223
+    },
+    {
+      "neuron": "RMHR",
+      "source_neuron": "RMHR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 224
+    },
+    {
+      "neuron": "SAADL",
+      "source_neuron": "SAADL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 225
+    },
+    {
+      "neuron": "SAADR",
+      "source_neuron": "SAADR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 226
+    },
+    {
+      "neuron": "SAAVL",
+      "source_neuron": "SAAVL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 227
+    },
+    {
+      "neuron": "SAAVR",
+      "source_neuron": "SAAVR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 228
+    },
+    {
+      "neuron": "SABD",
+      "source_neuron": "SABD",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 229
+    },
+    {
+      "neuron": "SABVL",
+      "source_neuron": "SABVL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 230
+    },
+    {
+      "neuron": "SABVR",
+      "source_neuron": "SABVR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 231
+    },
+    {
+      "neuron": "SDQL",
+      "source_neuron": "SDQL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 232
+    },
+    {
+      "neuron": "SDQR",
+      "source_neuron": "SDQR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 233
+    },
+    {
+      "neuron": "SIADL",
+      "source_neuron": "SIADL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 234
+    },
+    {
+      "neuron": "SIADR",
+      "source_neuron": "SIADR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 235
+    },
+    {
+      "neuron": "SIAVL",
+      "source_neuron": "SIAVL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 236
+    },
+    {
+      "neuron": "SIAVR",
+      "source_neuron": "SIAVR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 237
+    },
+    {
+      "neuron": "SIBDL",
+      "source_neuron": "SIBDL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 238
+    },
+    {
+      "neuron": "SIBDR",
+      "source_neuron": "SIBDR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 239
+    },
+    {
+      "neuron": "SIBVL",
+      "source_neuron": "SIBVL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 240
+    },
+    {
+      "neuron": "SIBVR",
+      "source_neuron": "SIBVR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 241
+    },
+    {
+      "neuron": "SMBDL",
+      "source_neuron": "SMBDL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 242
+    },
+    {
+      "neuron": "SMBDR",
+      "source_neuron": "SMBDR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 243
+    },
+    {
+      "neuron": "SMBVL",
+      "source_neuron": "SMBVL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 244
+    },
+    {
+      "neuron": "SMBVR",
+      "source_neuron": "SMBVR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 245
+    },
+    {
+      "neuron": "SMDDL",
+      "source_neuron": "SMDDL",
+      "dominant": "ACh",
+      "alternative": "GABA",
+      "source_row": 246
+    },
+    {
+      "neuron": "SMDDR",
+      "source_neuron": "SMDDR",
+      "dominant": "ACh",
+      "alternative": "GABA",
+      "source_row": 247
+    },
+    {
+      "neuron": "SMDVL",
+      "source_neuron": "SMDVL",
+      "dominant": "ACh",
+      "alternative": "GABA",
+      "source_row": 248
+    },
+    {
+      "neuron": "SMDVR",
+      "source_neuron": "SMDVR",
+      "dominant": "ACh",
+      "alternative": "GABA",
+      "source_row": 249
+    },
+    {
+      "neuron": "URADL",
+      "source_neuron": "URADL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 250
+    },
+    {
+      "neuron": "URADR",
+      "source_neuron": "URADR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 251
+    },
+    {
+      "neuron": "URAVL",
+      "source_neuron": "URAVL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 252
+    },
+    {
+      "neuron": "URAVR",
+      "source_neuron": "URAVR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 253
+    },
+    {
+      "neuron": "URBL",
+      "source_neuron": "URBL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 254
+    },
+    {
+      "neuron": "URBR",
+      "source_neuron": "URBR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 255
+    },
+    {
+      "neuron": "URXL",
+      "source_neuron": "URXL",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 256
+    },
+    {
+      "neuron": "URXR",
+      "source_neuron": "URXR",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 257
+    },
+    {
+      "neuron": "URYDL",
+      "source_neuron": "URYDL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 258
+    },
+    {
+      "neuron": "URYDR",
+      "source_neuron": "URYDR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 259
+    },
+    {
+      "neuron": "URYVL",
+      "source_neuron": "URYVL",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 260
+    },
+    {
+      "neuron": "URYVR",
+      "source_neuron": "URYVR",
+      "dominant": "Glu",
+      "alternative": null,
+      "source_row": 261
+    },
+    {
+      "neuron": "VA1",
+      "source_neuron": "VA01",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 262
+    },
+    {
+      "neuron": "VA2",
+      "source_neuron": "VA02",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 263
+    },
+    {
+      "neuron": "VA3",
+      "source_neuron": "VA03",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 264
+    },
+    {
+      "neuron": "VA4",
+      "source_neuron": "VA04",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 265
+    },
+    {
+      "neuron": "VA5",
+      "source_neuron": "VA05",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 266
+    },
+    {
+      "neuron": "VA6",
+      "source_neuron": "VA06",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 267
+    },
+    {
+      "neuron": "VA7",
+      "source_neuron": "VA07",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 268
+    },
+    {
+      "neuron": "VA8",
+      "source_neuron": "VA08",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 269
+    },
+    {
+      "neuron": "VA9",
+      "source_neuron": "VA09",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 270
+    },
+    {
+      "neuron": "VA10",
+      "source_neuron": "VA10",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 271
+    },
+    {
+      "neuron": "VA11",
+      "source_neuron": "VA11",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 272
+    },
+    {
+      "neuron": "VA12",
+      "source_neuron": "VA12",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 273
+    },
+    {
+      "neuron": "VB1",
+      "source_neuron": "VB01",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 274
+    },
+    {
+      "neuron": "VB2",
+      "source_neuron": "VB02",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 275
+    },
+    {
+      "neuron": "VB3",
+      "source_neuron": "VB03",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 276
+    },
+    {
+      "neuron": "VB4",
+      "source_neuron": "VB04",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 277
+    },
+    {
+      "neuron": "VB5",
+      "source_neuron": "VB05",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 278
+    },
+    {
+      "neuron": "VB6",
+      "source_neuron": "VB06",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 279
+    },
+    {
+      "neuron": "VB7",
+      "source_neuron": "VB07",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 280
+    },
+    {
+      "neuron": "VB8",
+      "source_neuron": "VB08",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 281
+    },
+    {
+      "neuron": "VB9",
+      "source_neuron": "VB09",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 282
+    },
+    {
+      "neuron": "VB10",
+      "source_neuron": "VB10",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 283
+    },
+    {
+      "neuron": "VB11",
+      "source_neuron": "VB11",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 284
+    },
+    {
+      "neuron": "VC1",
+      "source_neuron": "VC01",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 285
+    },
+    {
+      "neuron": "VC2",
+      "source_neuron": "VC02",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 286
+    },
+    {
+      "neuron": "VC3",
+      "source_neuron": "VC03",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 287
+    },
+    {
+      "neuron": "VC4",
+      "source_neuron": "VC04",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 288
+    },
+    {
+      "neuron": "VC5",
+      "source_neuron": "VC05",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 289
+    },
+    {
+      "neuron": "VC6",
+      "source_neuron": "VC06",
+      "dominant": "ACh",
+      "alternative": null,
+      "source_row": 290
+    },
+    {
+      "neuron": "VD1",
+      "source_neuron": "VD01",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 291
+    },
+    {
+      "neuron": "VD2",
+      "source_neuron": "VD02",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 292
+    },
+    {
+      "neuron": "VD3",
+      "source_neuron": "VD03",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 293
+    },
+    {
+      "neuron": "VD4",
+      "source_neuron": "VD04",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 294
+    },
+    {
+      "neuron": "VD5",
+      "source_neuron": "VD05",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 295
+    },
+    {
+      "neuron": "VD6",
+      "source_neuron": "VD06",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 296
+    },
+    {
+      "neuron": "VD7",
+      "source_neuron": "VD07",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 297
+    },
+    {
+      "neuron": "VD8",
+      "source_neuron": "VD08",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 298
+    },
+    {
+      "neuron": "VD9",
+      "source_neuron": "VD09",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 299
+    },
+    {
+      "neuron": "VD10",
+      "source_neuron": "VD10",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 300
+    },
+    {
+      "neuron": "VD11",
+      "source_neuron": "VD11",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 301
+    },
+    {
+      "neuron": "VD12",
+      "source_neuron": "VD12",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 302
+    },
+    {
+      "neuron": "VD13",
+      "source_neuron": "VD13",
+      "dominant": "GABA",
+      "alternative": null,
+      "source_row": 303
+    }
+  ],
+  "receptors": [
+    {
+      "gene": "glr-1",
+      "transmitter": "Glu",
+      "polarity": "excitatory",
+      "source_cell": "A2"
+    },
+    {
+      "gene": "glr-2",
+      "transmitter": "Glu",
+      "polarity": "excitatory",
+      "source_cell": "A3"
+    },
+    {
+      "gene": "glr-3",
+      "transmitter": "Glu",
+      "polarity": "excitatory",
+      "source_cell": "A4"
+    },
+    {
+      "gene": "glr-4",
+      "transmitter": "Glu",
+      "polarity": "excitatory",
+      "source_cell": "A5"
+    },
+    {
+      "gene": "glr-5",
+      "transmitter": "Glu",
+      "polarity": "excitatory",
+      "source_cell": "A6"
+    },
+    {
+      "gene": "glr-6",
+      "transmitter": "Glu",
+      "polarity": "excitatory",
+      "source_cell": "A7"
+    },
+    {
+      "gene": "glr-7",
+      "transmitter": "Glu",
+      "polarity": "excitatory",
+      "source_cell": "A8"
+    },
+    {
+      "gene": "glr-8",
+      "transmitter": "Glu",
+      "polarity": "excitatory",
+      "source_cell": "A9"
+    },
+    {
+      "gene": "nmr-1",
+      "transmitter": "Glu",
+      "polarity": "excitatory",
+      "source_cell": "A10"
+    },
+    {
+      "gene": "nmr-2",
+      "transmitter": "Glu",
+      "polarity": "excitatory",
+      "source_cell": "A11"
+    },
+    {
+      "gene": "glc-1",
+      "transmitter": "Glu",
+      "polarity": "inhibitory",
+      "source_cell": "B2"
+    },
+    {
+      "gene": "glc-2",
+      "transmitter": "Glu",
+      "polarity": "inhibitory",
+      "source_cell": "B3"
+    },
+    {
+      "gene": "glc-3",
+      "transmitter": "Glu",
+      "polarity": "inhibitory",
+      "source_cell": "B4"
+    },
+    {
+      "gene": "glc-4",
+      "transmitter": "Glu",
+      "polarity": "inhibitory",
+      "source_cell": "B5"
+    },
+    {
+      "gene": "avr-14",
+      "transmitter": "Glu",
+      "polarity": "inhibitory",
+      "source_cell": "B6"
+    },
+    {
+      "gene": "avr-15",
+      "transmitter": "Glu",
+      "polarity": "inhibitory",
+      "source_cell": "B7"
+    },
+    {
+      "gene": "acr-1",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C2"
+    },
+    {
+      "gene": "acr-2",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C3"
+    },
+    {
+      "gene": "acr-3",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C4"
+    },
+    {
+      "gene": "acr-4",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C5"
+    },
+    {
+      "gene": "acr-5",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C6"
+    },
+    {
+      "gene": "acr-6",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C7"
+    },
+    {
+      "gene": "acr-7",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C8"
+    },
+    {
+      "gene": "acr-8",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C9"
+    },
+    {
+      "gene": "acr-9",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C10"
+    },
+    {
+      "gene": "acr-10",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C11"
+    },
+    {
+      "gene": "acr-11",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C12"
+    },
+    {
+      "gene": "acr-12",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C13"
+    },
+    {
+      "gene": "acr-13",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C14"
+    },
+    {
+      "gene": "acr-14",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C15"
+    },
+    {
+      "gene": "acr-15",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C16"
+    },
+    {
+      "gene": "acr-16",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C17"
+    },
+    {
+      "gene": "acr-17",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C18"
+    },
+    {
+      "gene": "acr-18",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C19"
+    },
+    {
+      "gene": "acr-19",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C20"
+    },
+    {
+      "gene": "acr-20",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C21"
+    },
+    {
+      "gene": "acr-21",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C22"
+    },
+    {
+      "gene": "acr-23",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C23"
+    },
+    {
+      "gene": "acr-25",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C24"
+    },
+    {
+      "gene": "deg-3",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C25"
+    },
+    {
+      "gene": "des-2",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C26"
+    },
+    {
+      "gene": "lev-8",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C27"
+    },
+    {
+      "gene": "unc-29",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C28"
+    },
+    {
+      "gene": "unc-38",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C29"
+    },
+    {
+      "gene": "unc-63",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C30"
+    },
+    {
+      "gene": "eat-2",
+      "transmitter": "ACh",
+      "polarity": "excitatory",
+      "source_cell": "C31"
+    },
+    {
+      "gene": "acc-1",
+      "transmitter": "ACh",
+      "polarity": "inhibitory",
+      "source_cell": "D2"
+    },
+    {
+      "gene": "acc-2",
+      "transmitter": "ACh",
+      "polarity": "inhibitory",
+      "source_cell": "D3"
+    },
+    {
+      "gene": "acc-3",
+      "transmitter": "ACh",
+      "polarity": "inhibitory",
+      "source_cell": "D4"
+    },
+    {
+      "gene": "lgc-47",
+      "transmitter": "ACh",
+      "polarity": "inhibitory",
+      "source_cell": "D5"
+    },
+    {
+      "gene": "lgc-48",
+      "transmitter": "ACh",
+      "polarity": "inhibitory",
+      "source_cell": "D6"
+    },
+    {
+      "gene": "lgc-49",
+      "transmitter": "ACh",
+      "polarity": "inhibitory",
+      "source_cell": "D7"
+    },
+    {
+      "gene": "exp-1",
+      "transmitter": "GABA",
+      "polarity": "excitatory",
+      "source_cell": "E2"
+    },
+    {
+      "gene": "lgc-35",
+      "transmitter": "GABA",
+      "polarity": "excitatory",
+      "source_cell": "E3"
+    },
+    {
+      "gene": "gab-1",
+      "transmitter": "GABA",
+      "polarity": "inhibitory",
+      "source_cell": "F2"
+    },
+    {
+      "gene": "ggr-1",
+      "transmitter": "GABA",
+      "polarity": "inhibitory",
+      "source_cell": "F3"
+    },
+    {
+      "gene": "ggr-2",
+      "transmitter": "GABA",
+      "polarity": "inhibitory",
+      "source_cell": "F4"
+    },
+    {
+      "gene": "ggr-3",
+      "transmitter": "GABA",
+      "polarity": "inhibitory",
+      "source_cell": "F5"
+    },
+    {
+      "gene": "lgc-36",
+      "transmitter": "GABA",
+      "polarity": "inhibitory",
+      "source_cell": "F6"
+    },
+    {
+      "gene": "lgc-37",
+      "transmitter": "GABA",
+      "polarity": "inhibitory",
+      "source_cell": "F7"
+    },
+    {
+      "gene": "lgc-38",
+      "transmitter": "GABA",
+      "polarity": "inhibitory",
+      "source_cell": "F8"
+    },
+    {
+      "gene": "unc-49",
+      "transmitter": "GABA",
+      "polarity": "inhibitory",
+      "source_cell": "F9"
+    }
+  ]
+}
