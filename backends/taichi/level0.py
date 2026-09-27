@@ -8,6 +8,7 @@ import taichi as ti
 @ti.data_oriented
 class Level0:
     def __init__(self,fixture,batch=1,dtype=ti.f32):
+        self.static_neighbors=ti.lang.impl.current_cfg().arch==ti.metal
         if fixture.get('schema_version')!=1 or fixture.get('method')!='euler':
             raise ValueError('Expected schema 1 Euler reference')
         self.n=int(fixture['neurons']);self.steps=int(fixture['steps'])
@@ -91,27 +92,39 @@ class Level0:
             self.calcium[0,b,i]=r
             self.gate[0,b,i]=r/(1.0+r)
 
+    @ti.func
+    def chemical_current(self,t,b,i,edge):
+        a=self.pre[edge];p=self.edge_parameter[edge]
+        strength=self.prepared[6*self.n+p]*self.count[edge]
+        reversal=self.prepared[6*self.n+self.m+p]
+        return strength*self.gate[t,b,a]*(reversal-self.voltage[t,b,i])
+
+    @ti.func
+    def electrical_current(self,t,b,i,edge):
+        a=self.gap_peer[edge];p=self.gap_parameter[edge]
+        conductance=self.prepared[6*self.n+2*self.m+p]*self.gap_size[edge]
+        return conductance*(self.voltage[t,b,a]-self.voltage[t,b,i])
+
     @ti.kernel
     def advance(self,t:ti.i32):
         for b,i in ti.ndrange(self.batch,self.n):
             v=self.voltage[t,b,i]
             r=self.sigmoid((v-self.prepared[2*self.n+i])*self.prepared[3*self.n+i])
             current=-(v-self.prepared[self.n+i])+self.current[i]
-            # Static slots avoid incorrect Metal reverse gradients observed with
-            # dynamic nested CSR loops in Taichi 1.7.4. Keep the regression audit.
-            for slot in ti.static(range(self.max_chemical_degree)):
-                if self.offset[i]+slot<self.offset[i+1]:
-                    edge=self.offset[i]+slot
-                    a=self.pre[edge];p=self.edge_parameter[edge]
-                    strength=self.prepared[6*self.n+p]*self.count[edge]
-                    reversal=self.prepared[6*self.n+self.m+p]
-                    current+=strength*self.gate[t,b,a]*(reversal-v)
-            for slot in ti.static(range(self.max_gap_degree)):
-                if self.gap_offset[i]+slot<self.gap_offset[i+1]:
-                    edge=self.gap_offset[i]+slot
-                    a=self.gap_peer[edge];p=self.gap_parameter[edge]
-                    conductance=self.prepared[6*self.n+2*self.m+p]*self.gap_size[edge]
-                    current+=conductance*(self.voltage[t,b,a]-v)
+            # Metal needs static slots for correct reverse gradients in 1.7.4.
+            # CPU uses dynamic CSR loops to keep compilation bounded.
+            if ti.static(self.static_neighbors):
+                for slot in ti.static(range(self.max_chemical_degree)):
+                    if self.offset[i]+slot<self.offset[i+1]:
+                        current+=self.chemical_current(t,b,i,self.offset[i]+slot)
+                for slot in ti.static(range(self.max_gap_degree)):
+                    if self.gap_offset[i]+slot<self.gap_offset[i+1]:
+                        current+=self.electrical_current(t,b,i,self.gap_offset[i]+slot)
+            else:
+                for edge in range(self.offset[i],self.offset[i+1]):
+                    current+=self.chemical_current(t,b,i,edge)
+                for edge in range(self.gap_offset[i],self.gap_offset[i+1]):
+                    current+=self.electrical_current(t,b,i,edge)
             self.voltage[t+1,b,i]=v+self.dt*current/self.prepared[i]
             c=self.calcium[t,b,i]
             self.calcium[t+1,b,i]=c+self.dt*(r-c)/self.prepared[4*self.n+i]

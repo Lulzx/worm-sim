@@ -48,7 +48,8 @@ It demonstrates plumbing, not biological validation or parameter identifiability
 - Pinned [Creamer linear baseline](docs/BASELINE.md): complete inference operators,
   compact export, Rust evaluation, and independent NumPy parity.
 - Experimental [DiffTaichi-style reverse gradients](docs/TAICHI.md) on CPU and
-  Apple Metal, audited against Rust on a small circuit.
+  Apple Metal, audited against Rust for all 10,169 parameters of the 302-neuron
+  anatomy, using short synthetic-target trials.
 
 ## Scientific and numerical conventions
 

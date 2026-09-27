@@ -24,3 +24,5 @@ jobs:
       - run: mkdir -p runs
       - run: cargo run --locked --release --example export_taichi_reference -- runs/taichi-reference.json
       - run: python backends/taichi/audit.py runs/taichi-reference.json --arch cpu --validate --output runs/taichi-cpu-audit.json
+      - run: cargo run --locked --release --example export_taichi_reference -- runs/taichi-c302-reference.json data/c302-herm.wsc
+      - run: python backends/taichi/audit.py runs/taichi-c302-reference.json --arch cpu --validate --output runs/taichi-c302-cpu-audit.json

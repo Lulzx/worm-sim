@@ -44,8 +44,8 @@ interaction, not a fully isolated compiler bug report.
 
 Static neighbor slots guarded by each target's actual degree fix this fixture
 without changing tolerances. Storage remains CSR; static unrolling increases
-compiled code with maximum degree. Validate compile size/time and gradients
-before extending it to the complete anatomy. A per-edge kernel with explicit
+compiled code with maximum degree. Measure compile size/time and gradients
+when changing anatomy or scaling the horizon. A per-edge kernel with explicit
 current reductions is an alternative if unrolling becomes expensive.
 
 Time-indexed voltage, calcium, and shared presynaptic gate fields respect
@@ -58,7 +58,72 @@ floating point; the lossless Rust trajectory codecs serve archival output.
 [Metal supports f32, not f64](https://docs.taichi-lang.org/docs/type). CPU f64
 therefore remains the numerical reference. Metal timings on this tiny fixture
 are dominated by overhead and do not demonstrate acceleration. Long-horizon
-stability, mixed precision, distinct batched stimuli, real graph gradients,
+stability, mixed precision, distinct batched stimuli,
 checkpoint/recompute, and end-to-end fitting still need measurement. Metal
 AOT/C API integration is not established here; the documented stable/master
 support differs, so this backend uses the verified Python runtime.
+
+## Complete anatomy audit (2026-09-27)
+
+```sh
+cargo run --locked --release --example export_taichi_reference -- runs/taichi-c302-reference.json data/c302-herm.wsc
+.venv-taichi/bin/python backends/taichi/audit.py runs/taichi-c302-reference.json --arch cpu --validate --output runs/c302-cpu-validation.json
+.venv-taichi/bin/python backends/taichi/audit.py runs/taichi-c302-reference.json --arch cpu --output runs/c302-cpu-timing.json
+.venv-taichi/bin/python backends/taichi/audit.py runs/taichi-c302-reference.json --arch metal --output runs/c302-metal.json
+```
+
+The exporter now accepts a WSC1 graph. The pinned c302 anatomy has 302 neurons,
+3,638 chemical edges, 1,080 undirected gaps, and 10,169 raw parameters. This audit
+checks **every derivative**, all voltage/fluorescence samples, and the masked loss
+against independent Rust forward AD. It uses 64 Euler steps (64 ms), periodic
+nonuniform resting voltages/confidence/target offsets, and current injected into
+the first canonical neuron. Targets are synthetic, not experimental recordings.
+All parameters are compared, including derivatives that are zero or smaller than
+the absolute tolerance; passing does not establish identifiability.
+
+Measured on the M4 Pro, five timed repetitions after the first reverse pass:
+
+| Backend | Median forward + reverse | First reverse including compilation | Maximum gradient error | State + adjoints |
+| --- | ---: | ---: | ---: | ---: |
+| CPU f64, one thread | 8.45 ms | 0.46 s | 3.01e-17 | 942,240 bytes |
+| CPU f64, access validator enabled | 30.34 ms | 0.80 s | 3.01e-17 | 942,240 bytes |
+| Metal f32 | 38.24 ms | 15.83 s | 4.37e-10 | 471,120 bytes |
+
+Receipts: `taichi-c302-cpu-timing.json`, `taichi-c302-cpu-audit.json`, and
+`taichi-c302-metal-audit.json`. Large receipts retain vector hashes and the 16
+largest errors rather than duplicate entire gradient arrays. Offline compilation
+cache is disabled for these runs. Timings include Python dispatch, synchronization,
+and gradient readback; the state-byte estimate excludes AD stacks and runtime
+allocations. The Rust full forward-AD reference took 6.99 s for 10,169 separate
+parameter directions. That difference measures differentiation algorithms as well
+as runtimes and is not a GPU-versus-Rust solver speedup.
+
+CPU is about 4.5 times faster than Metal for this short single-trial reverse pass.
+The audit CLI now defaults to CPU for this workload; larger batches and longer horizons require separate
+measurements. Metal's scalar loss differs from Rust by about 6.4e-7, while state
+and gradient errors remain much smaller. The f32 loss accumulation needs further
+accuracy work before using tightly converged loss values as a stopping criterion.
+
+### CPU stack failure and backend-specific loops
+
+The first full-anatomy CPU attempts exited with native signals 11/10 under
+Taichi's automatic AD stack sizing (`ad_stack_size=0`), with both static and
+dynamic neighbor loops. A dynamic-loop attempt also failed without the access
+validator and with the offline cache disabled. Explicit capacity 128 completed;
+capacity 256 passed the complete gradient audit with the validator. This narrows
+the failure to a stack-sizing-sensitive configuration, without claiming an
+isolated upstream compiler defect.
+
+The audit runner now defaults to `--ad-stack-size 256`; this is a tested capacity
+for these fixtures, not a universal bound for arbitrary graphs. CPU uses dynamic
+CSR traversal; Metal keeps static slots to avoid the earlier dynamic-loop
+reverse-gradient regression. Maximum c302 chemical/gap degrees are 63/47.
+Both the original four-neuron regression and the full-anatomy CPU validator run
+are included in CI. Metal is audited locally because hosted CI has no Metal GPU.
+
+This establishes short-horizon gradient parity on the imported anatomy. It does
+not establish stable long-horizon training, heterogeneous trial batching,
+checkpointing, measured total peak memory, biological fitting, or body feedback.
+The next performance experiments are reducing Metal dispatch/reduction costs and
+checkpointing the time-indexed states, with the complete derivative audit retained
+as the correctness gate.
