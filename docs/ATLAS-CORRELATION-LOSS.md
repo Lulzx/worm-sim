@@ -55,3 +55,25 @@ tests independently calculate the recorded training shape loss. These establish
 implementation correctness, not a biological improvement. No real-data
 correlation-loss fit has been run yet; choose its weight and stabilization only
 under an explicitly recorded training/validation protocol.
+
+## Independent training audit
+
+`diagnose_atlas_training` reports the training shape loss and eligible pair count
+when the model config enables it. An optional final epsilon argument evaluates
+the same diagnostic on an existing MSE fit without changing that model. The
+receipt identifies whether the epsilon was configured for fitting. Predictions
+are merged across trials to cover all neurons in each target's aggregate, with
+duplicate-column equality checked.
+
+```sh
+target/release/examples/diagnose_atlas_training data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json runs/level0-atlas-classification-fit/selected.json runs/neutral-shape-diagnostic.json 0.01
+python3 scripts/audit_atlas_training.py --model runs/level0-atlas-classification-fit/selected.json --native runs/neutral-shape-diagnostic.json --output runs/neutral-shape-audit.json
+```
+
+The independent auditor reconstructs confidence-weighted means directly from
+original training trials, replays the neural model in NumPy, calculates centered
+covariance independently and checks the native count and loss within 1e-10.
+It does not call the Rust correlation implementation or refit the model. Analytic
+Python checks cover matching, reversed, shifted and constant signals and confirm
+the effect of the variance floor. These diagnostic values are distinct from
+held-out performance and do not justify selecting epsilon using test outcomes.

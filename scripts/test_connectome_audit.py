@@ -6,6 +6,23 @@ from audit_connectome_fit import impulse, trace_scores
 
 
 class AuditTests(unittest.TestCase):
+    def test_training_pair_mean_correlation_uses_declared_variance_floor(self):
+        from audit_atlas_training import pair_mean_correlation_loss
+        y = np.array([-1., 0., 1.])
+        epsilon = .2
+        variance = 2/3
+        expected = 1-variance/(variance+epsilon**2)
+        self.assertAlmostEqual(pair_mean_correlation_loss(y,y,epsilon),expected)
+        self.assertAlmostEqual(pair_mean_correlation_loss(y,y+4,epsilon),expected)
+        self.assertAlmostEqual(pair_mean_correlation_loss(y,-y,epsilon),2-expected)
+        self.assertEqual(pair_mean_correlation_loss(y,np.zeros(3),epsilon),1.)
+        self.assertIsNone(pair_mean_correlation_loss(np.ones(3),y,epsilon))
+        self.assertIsNone(pair_mean_correlation_loss([],[],epsilon))
+        with self.assertRaises(AssertionError):
+            pair_mean_correlation_loss(y,y,0.)
+        with self.assertRaises(AssertionError):
+            pair_mean_correlation_loss(y,[1.,2.],epsilon)
+
     def test_dense_impulse_routes_shared_input_after_initial_frame(self):
         model = {'dynamics': {'gaussian': {'dim': 2, 'transition': [0.5, 0.2, -0.1, 0.8]}, 'kernel': [1.0, 0.4]}}
         np.testing.assert_allclose(impulse(model, 0, 4), [[0., 0.], [1., 0.], [0.9, -0.1], [0.43, -0.17]], atol=1e-15)
