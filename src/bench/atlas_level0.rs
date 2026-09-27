@@ -1,6 +1,9 @@
 //! Deterministic Level 0 atlas response fitting with a shared positive input kernel.
 use super::{
-    Axis, Dataset, Partition, PredictedTrial, Predictions, Split, atlas_training, population::Adam,
+    Axis, Dataset, Partition, PredictedTrial, Predictions, Split, atlas,
+    atlas_classification::{self, Classifier},
+    atlas_training,
+    population::Adam,
 };
 use crate::{
     Result,
@@ -25,9 +28,31 @@ pub struct FitConfig {
     pub sign_prior_strength: f64,
     pub kernel_prior_strength: f64,
     pub sharing: Sharing,
+    #[serde(default)]
+    pub classification: Option<ClassificationConfig>,
+}
+/// Fixed before fitting; validation selection continues to use trace MSE only.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ClassificationConfig {
+    pub weight: f64,
+    pub area_scale: f64,
+    pub epsilon: f64,
 }
 impl FitConfig {
     fn validate(&self) -> Result<()> {
+        if let Some(c) = &self.classification {
+            if !c.weight.is_finite() || c.weight <= 0. {
+                return Err("invalid classification weight".into());
+            }
+            Classifier {
+                bias: 0.,
+                raw_slope: 0.,
+                area_scale: c.area_scale,
+                epsilon: c.epsilon,
+            }
+            .validate()?;
+        }
         if !self.preparation_seconds.is_finite()
             || self.preparation_seconds < 0.0
             || self.preparation_seconds > 300.0
@@ -72,12 +97,18 @@ pub struct AtlasModel {
     pub kernel_prior: Vec<f64>,
     pub training_trials: Vec<String>,
     pub selection_trials: Vec<String>,
+    #[serde(default)]
+    pub classifier: Option<Classifier>,
+    /// Identity of all supplied evidence; only train-target labels enter gradients.
+    #[serde(default)]
+    pub classification_evidence_hash: Option<String>,
 }
 #[derive(Debug, Serialize)]
 pub struct EpochReport {
     pub epoch: usize,
     pub preceding_training_mse: Option<f64>,
     pub preceding_penalty: Option<f64>,
+    pub preceding_training_classification_bce: Option<f64>,
     pub validation_mse: f64,
     pub validation_correlation: Option<f64>,
     pub defined_trace_correlations: usize,
@@ -85,7 +116,9 @@ pub struct EpochReport {
 }
 impl AtlasModel {
     pub fn free_parameters(&self) -> usize {
-        self.parameters.free_parameters() + self.kernel_raw.len()
+        self.parameters.free_parameters()
+            + self.kernel_raw.len()
+            + if self.classifier.is_some() { 2 } else { 0 }
     }
     fn currents(&self, target: usize, frames: usize, n: usize) -> Result<Vec<Vec<f64>>> {
         if target >= n || frames < 2 {
@@ -102,6 +135,22 @@ impl AtlasModel {
     fn validate(&self, data: &Dataset, graph: &IndexedGraph, split: &Split) -> Result<Model> {
         split.validate(data, graph)?;
         self.config.validate()?;
+        match (
+            &self.config.classification,
+            &self.classifier,
+            &self.classification_evidence_hash,
+        ) {
+            (None, None, None) => {}
+            (Some(c), Some(classifier), Some(hash))
+                if hash.len() == 64 && hash.bytes().all(|v| v.is_ascii_hexdigit()) =>
+            {
+                classifier.validate()?;
+                if classifier.area_scale != c.area_scale || classifier.epsilon != c.epsilon {
+                    return Err("classifier scales differ from fit configuration".into());
+                }
+            }
+            _ => return Err("invalid classification fit lineage".into()),
+        }
         let model = Model::new(graph.clone())?;
         if split.axis != Axis::StimulatedNeuron
             || self.schema_version != 1
@@ -209,11 +258,23 @@ impl AtlasModel {
             dataset_hash: self.dataset_hash.clone(),
             split_hash: self.split_hash.clone(),
             model: if self.config.preparation_seconds == 0.0 {
-                "level0-atlas-shared-positive-current-fixed-initial-state".into()
+                format!(
+                    "level0-atlas-shared-positive-current-fixed-initial-state{}",
+                    if self.classifier.is_some() {
+                        "-joint-pair-bce"
+                    } else {
+                        ""
+                    }
+                )
             } else {
                 format!(
-                    "level0-atlas-shared-positive-current-preparation-{}s",
-                    self.config.preparation_seconds
+                    "level0-atlas-shared-positive-current-preparation-{}s{}",
+                    self.config.preparation_seconds,
+                    if self.classifier.is_some() {
+                        "-joint-pair-bce"
+                    } else {
+                        ""
+                    }
                 )
             },
             free_parameters: self.free_parameters(),
@@ -241,9 +302,42 @@ pub fn fit_select(
     graph: &IndexedGraph,
     split: &Split,
     config: FitConfig,
+    checkpoint: impl FnMut(&AtlasModel, &EpochReport) -> Result<()>,
+) -> Result<(AtlasModel, Vec<EpochReport>)> {
+    fit_select_with_evidence(data, graph, split, config, None, checkpoint)
+}
+pub fn fit_select_with_evidence(
+    data: &Dataset,
+    graph: &IndexedGraph,
+    split: &Split,
+    config: FitConfig,
+    evidence: Option<&atlas::Evidence>,
     mut checkpoint: impl FnMut(&AtlasModel, &EpochReport) -> Result<()>,
 ) -> Result<(AtlasModel, Vec<EpochReport>)> {
     config.validate()?;
+    let labels = match (&config.classification, evidence) {
+        (Some(_), Some(evidence)) => Some(atlas_classification::training_labels(
+            evidence, data, graph, split,
+        )?),
+        (None, None) => None,
+        _ => {
+            return Err(
+                "classification configuration and evidence must be supplied together".into(),
+            );
+        }
+    };
+    let classifier = if let (Some(c), Some(labels)) = (&config.classification, &labels) {
+        // Jeffreys smoothing uses train counts only, keeping one-class fits finite.
+        let probability = (labels.detected as f64 + 0.5) / (labels.pairs as f64 + 1.);
+        Some(Classifier {
+            bias: (probability / (1. - probability)).ln(),
+            raw_slope: inverse_softplus(1.),
+            area_scale: c.area_scale,
+            epsilon: c.epsilon,
+        })
+    } else {
+        None
+    };
     let groups = atlas_training::aggregate(data, graph, split)?;
     if groups.is_empty() || split.validation.is_empty() {
         return Err("atlas fit needs training and validation groups".into());
@@ -252,6 +346,9 @@ pub fn fit_select(
     let sample_dt = times[1] - times[0];
     for g in &groups {
         check_grid(&g.recording.times, sample_dt)?;
+        if labels.is_some() && g.recording.times != *times {
+            return Err("joint atlas classification requires a common response grid".into());
+        }
     }
     if config.kernel_lags
         >= groups
@@ -286,9 +383,13 @@ pub fn fit_select(
         kernel_raw,
         training_trials: split.train.clone(),
         selection_trials: split.validation.clone(),
+        classifier,
+        classification_evidence_hash: labels.as_ref().map(|l| l.evidence_hash.clone()),
     };
     let pcount = current.parameters.groups.len();
-    let mut optimizer = Adam::new(pcount + config.kernel_lags);
+    let classifier_index = pcount + config.kernel_lags;
+    let parameter_count = classifier_index + if labels.is_some() { 2 } else { 0 };
+    let mut optimizer = Adam::new(parameter_count);
     let total_weight = groups.iter().map(|g| g.sample_weight).sum::<f64>();
     let readout = Readout::identity(model.n());
     let mut best = f64::INFINITY;
@@ -298,36 +399,105 @@ pub fn fit_select(
         let start = std::time::Instant::now();
         let mut training = None;
         let mut penalty = None;
+        let mut classification_bce = None;
         if epoch > 0 {
             let raw = current.parameters.expand(&model)?;
-            let mut gradient = vec![0.; pcount + config.kernel_lags];
+            let mut gradient = vec![0.; parameter_count];
+            let mut bce = 0.;
             let mut mse = 0.;
             for group in &groups {
                 let target = graph.neuron(&group.stimulated_neuron)?;
                 let currents = current.currents(target, group.recording.times.len(), model.n())?;
-                let g = initial_state::prepared_response_gradient_with_currents(
-                    &model,
-                    &raw,
-                    &group.recording,
-                    &readout,
-                    &current.initial,
-                    config.dt,
-                    &currents,
-                    config.preparation_seconds,
-                )?;
                 let w = group.sample_weight / total_weight;
-                mse += w * (g.value + group.irreducible_mse);
+                let (g, gradient_weight) = if let (Some(classifier), Some(labels), Some(c)) =
+                    (&current.classifier, &labels, &config.classification)
+                {
+                    let pair_labels = labels
+                        .by_target
+                        .get(&target)
+                        .map(Vec::as_slice)
+                        .unwrap_or(&[]);
+                    let pair_scale = c.weight / labels.pairs as f64;
+                    let g = initial_state::prepared_response_objective_gradient(
+                        &model,
+                        &raw,
+                        &readout,
+                        &current.initial,
+                        &group.recording.times,
+                        config.dt,
+                        &currents,
+                        config.preparation_seconds,
+                        |response| {
+                            let mut classification =
+                                classifier.loss(response, pair_labels, sample_dt)?;
+                            bce += classification.value / labels.pairs as f64;
+                            gradient[classifier_index] += pair_scale * classification.bias_gradient;
+                            gradient[classifier_index + 1] +=
+                                pair_scale * classification.raw_slope_gradient;
+                            for v in classification.fluorescence.iter_mut().flatten() {
+                                *v *= pair_scale;
+                            }
+                            let weight = group
+                                .recording
+                                .traces
+                                .iter()
+                                .map(|trace| {
+                                    trace.provenance.id_confidence
+                                        * trace.values.iter().filter(|v| v.is_some()).count() as f64
+                                })
+                                .sum::<f64>();
+                            if weight <= 0. {
+                                return Err("empty aggregate trace objective".into());
+                            }
+                            let mut error = 0.;
+                            for trace in &group.recording.traces {
+                                let i = graph.neuron(&trace.neuron)?;
+                                let scale = trace.provenance.id_confidence / weight;
+                                for (t, value) in trace.values.iter().enumerate() {
+                                    if let Some(value) = value {
+                                        let delta = response[t][i] - value;
+                                        error += scale * delta * delta;
+                                        classification.fluorescence[t][i] += w * 2. * scale * delta;
+                                    }
+                                }
+                            }
+                            mse += w * (error + group.irreducible_mse);
+                            Ok((
+                                w * error + pair_scale * classification.value,
+                                classification.fluorescence,
+                            ))
+                        },
+                    )?;
+                    (g, 1.)
+                } else {
+                    let g = initial_state::prepared_response_gradient_with_currents(
+                        &model,
+                        &raw,
+                        &group.recording,
+                        &readout,
+                        &current.initial,
+                        config.dt,
+                        &currents,
+                        config.preparation_seconds,
+                    )?;
+                    mse += w * (g.value + group.irreducible_mse);
+                    (g, w)
+                };
                 for (a, b) in gradient
                     .iter_mut()
                     .zip(current.parameters.reduce_gradient(&g.parameters)?)
                 {
-                    *a += w * b;
+                    *a += gradient_weight * b;
                 }
                 for t in 0..config.kernel_lags.min(g.currents.len() - 1) {
                     gradient[pcount + t] +=
-                        w * g.currents[t][target] * current.kernel_raw[t].sigmoid();
+                        gradient_weight * g.currents[t][target] * current.kernel_raw[t].sigmoid();
                 }
             }
+            if labels.is_some() {
+                classification_bce = Some(bce);
+            }
+
             let (mut loss, prior) = current.parameters.prior(
                 &model,
                 config.prior_strength,
@@ -349,13 +519,22 @@ pub fn fit_select(
                 .map(|g| g.value)
                 .chain(current.kernel_raw.iter().copied())
                 .collect();
+            if let Some(classifier) = &current.classifier {
+                values.extend([classifier.bias, classifier.raw_slope]);
+            }
             optimizer.update(&mut values, &gradient, config.learning_rate)?;
             for (i, g) in current.parameters.groups.iter_mut().enumerate() {
                 if g.trainable {
                     g.value = values[i];
                 }
             }
-            current.kernel_raw.copy_from_slice(&values[pcount..]);
+            current
+                .kernel_raw
+                .copy_from_slice(&values[pcount..classifier_index]);
+            if let Some(classifier) = &mut current.classifier {
+                classifier.bias = values[classifier_index];
+                classifier.raw_slope = values[classifier_index + 1];
+            }
             training = Some(mse);
             penalty = Some(loss);
         }
@@ -370,6 +549,7 @@ pub fn fit_select(
             epoch,
             preceding_training_mse: training,
             preceding_penalty: penalty,
+            preceding_training_classification_bce: classification_bce,
             validation_mse: mse,
             validation_correlation: score.macro_trace_correlation,
             defined_trace_correlations: score.defined_trace_correlations,

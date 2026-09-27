@@ -467,3 +467,109 @@ fn generic_response_ranking_is_label_independent_and_rejects_inconsistent_trials
         .is_err()
     );
 }
+
+#[test]
+fn classification_training_labels_exclude_held_out_targets_and_trial_multiplicity() {
+    use wormsim::bench::atlas_classification::training_labels;
+    let (graph, data, split, mut evidence) = fixture();
+    let before = training_labels(&evidence, &data, &graph, &split).unwrap();
+    assert_eq!(before.pairs, 2);
+    assert_eq!(before.detected, 1);
+    assert_eq!(before.by_target.len(), 1);
+    for pair in &mut evidence.pairs {
+        if !before
+            .by_target
+            .contains_key(&graph.neuron(&pair.stimulated).unwrap())
+        {
+            pair.q = if pair.q < 0.05 { 1. } else { 0. };
+        }
+    }
+    let after = training_labels(&evidence, &data, &graph, &split).unwrap();
+    assert_ne!(before.evidence_hash, after.evidence_hash);
+    assert_eq!(before.by_target, after.by_target);
+    assert_eq!(before.pairs, after.pairs);
+    assert_eq!(before.detected, after.detected);
+}
+
+#[test]
+fn classification_loss_gradients_match_finite_differences_and_reject_invalid_inputs() {
+    use wormsim::bench::atlas_classification::Classifier;
+    let classifier = Classifier {
+        bias: -2.,
+        raw_slope: 0.3,
+        area_scale: 0.01,
+        epsilon: 0.001,
+    };
+    let response = vec![vec![0., 0., 0.], vec![0.2, -0.3, 0.], vec![-0.1, 0.05, 0.]];
+    let labels = [(0, true), (1, false), (2, true)];
+    let gradient = classifier.loss(&response, &labels, 0.5).unwrap();
+    let eps = 1e-6;
+    let compare = |a: f64, b: f64| assert!((a - b).abs() < 1e-7, "{a} != {b}");
+    for t in 0..response.len() {
+        for i in 0..3 {
+            let mut plus = response.clone();
+            let mut minus = response.clone();
+            plus[t][i] += eps;
+            minus[t][i] -= eps;
+            compare(
+                (classifier.loss(&plus, &labels, 0.5).unwrap().value
+                    - classifier.loss(&minus, &labels, 0.5).unwrap().value)
+                    / (2. * eps),
+                gradient.fluorescence[t][i],
+            );
+        }
+    }
+    for slope in [false, true] {
+        let mut plus = classifier.clone();
+        let mut minus = classifier.clone();
+        if slope {
+            plus.raw_slope += eps;
+            minus.raw_slope -= eps;
+        } else {
+            plus.bias += eps;
+            minus.bias -= eps;
+        }
+        compare(
+            (plus.loss(&response, &labels, 0.5).unwrap().value
+                - minus.loss(&response, &labels, 0.5).unwrap().value)
+                / (2. * eps),
+            if slope {
+                gradient.raw_slope_gradient
+            } else {
+                gradient.bias_gradient
+            },
+        );
+    }
+    let empty = classifier.loss(&response, &[], 0.5).unwrap();
+    assert_eq!(empty.value, 0.);
+    assert!(empty.fluorescence.iter().flatten().all(|v| *v == 0.));
+    assert!(
+        classifier
+            .loss(&response, &[(0, true), (0, false)], 0.5)
+            .is_err()
+    );
+    assert!(classifier.loss(&response, &[(3, true)], 0.5).is_err());
+    assert!(classifier.loss(&response, &labels, 0.).is_err());
+    assert!(
+        classifier
+            .loss(&vec![vec![f64::NAN; 3]; 2], &labels, 0.5)
+            .is_err()
+    );
+    let mut extreme = classifier.clone();
+    extreme.bias = 1000.;
+    assert!(
+        extreme
+            .loss(&response, &labels, 0.5)
+            .unwrap()
+            .value
+            .is_finite()
+    );
+    extreme.bias = -1000.;
+    assert!(
+        extreme
+            .loss(&response, &labels, 0.5)
+            .unwrap()
+            .value
+            .is_finite()
+    );
+}

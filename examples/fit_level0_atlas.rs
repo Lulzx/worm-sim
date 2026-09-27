@@ -20,22 +20,29 @@ fn write(path: impl AsRef<Path>, value: &impl serde::Serialize) -> Result<()> {
 }
 fn main() -> Result<()> {
     let args: Vec<_> = std::env::args().collect();
-    if args.len() != 6 {
-        return Err("usage: fit_level0_atlas GRAPH DATA SPLIT CONFIG NEW_OUTPUT_DIR".into());
+    if args.len() != 6 && args.len() != 7 {
+        return Err(
+            "usage: fit_level0_atlas GRAPH DATA SPLIT CONFIG NEW_OUTPUT_DIR [PAIR_EVIDENCE]".into(),
+        );
     }
     let graph = codec::decode(&fs::read(&args[1]).map_err(|e| e.to_string())?)?;
     let data: Dataset = read(&args[2])?;
     let split: Split = read(&args[3])?;
     let config: FitConfig = read(&args[4])?;
+    let evidence = args
+        .get(6)
+        .map(|path| read::<bench::atlas::Evidence>(path))
+        .transpose()?;
     split.validate(&data, &graph)?;
     let output = Path::new(&args[5]);
     fs::create_dir(output).map_err(|e| e.to_string())?;
     write(output.join("config.json"), &config)?;
-    let (model, candidates) = atlas_level0::fit_select(
+    let (model, candidates) = atlas_level0::fit_select_with_evidence(
         &data,
         &graph,
         &split,
         config,
+        evidence.as_ref(),
         |model, candidate| {
             write(
                 output.join(format!("epoch-{}.json", candidate.epoch)),

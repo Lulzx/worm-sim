@@ -438,6 +438,62 @@ fn check_response_gradient(preparation: f64) {
         preparation,
     )
     .unwrap();
+    let generic = initial_state::prepared_response_objective_gradient(
+        &model,
+        &params,
+        &readout,
+        &initial,
+        &recording.times,
+        config.dt,
+        &currents,
+        preparation,
+        |prediction| {
+            let mut error = 0.;
+            let mut weight = 0.;
+            let mut derivative = vec![vec![0.; n]; prediction.len()];
+            for trace in &recording.traces {
+                let i = model.graph.neuron(&trace.neuron)?;
+                for (t, value) in trace.values.iter().enumerate() {
+                    if let Some(v) = value {
+                        let w = trace.provenance.id_confidence;
+                        error += w * (prediction[t][i] - v).powi(2);
+                        derivative[t][i] += 2. * w * (prediction[t][i] - v);
+                        weight += w;
+                    }
+                }
+            }
+            for v in derivative.iter_mut().flatten() {
+                *v /= weight;
+            }
+            Ok((error / weight, derivative))
+        },
+    )
+    .unwrap();
+    assert!((generic.value - gradient.value).abs() < 1e-12);
+    for (a, b) in generic
+        .parameters
+        .iter()
+        .chain(&generic.initial)
+        .chain(&generic.readout_offset)
+        .chain(&generic.readout_log_gain)
+        .chain(generic.currents.iter().flatten())
+        .chain(&generic.terminal)
+        .zip(
+            gradient
+                .parameters
+                .iter()
+                .chain(&gradient.initial)
+                .chain(&gradient.readout_offset)
+                .chain(&gradient.readout_log_gain)
+                .chain(gradient.currents.iter().flatten())
+                .chain(&gradient.terminal),
+        )
+    {
+        assert!(
+            (a - b).abs() < 1e-12,
+            "generic MSE adjoint differs: {a} != {b}"
+        );
+    }
     let objective =
         |p: &wormsim::model::Parameters<f64>, y: &[f64], r: &Readout, u: &[Vec<f64>]| {
             let prediction = initial_state::prepared_response_with_currents(
@@ -617,6 +673,133 @@ fn prepared_state_matches_event_solver_and_zero_duration_preserves_old_responses
             config.dt,
             &currents,
             -1.
+        )
+        .is_err()
+    );
+}
+
+#[test]
+fn prepared_classification_adjoint_matches_network_seed_readout_and_drive_differences() {
+    use wormsim::bench::atlas_classification::Classifier;
+    let (model, params, recording, initial, readout, config) = fixture();
+    let classifier = Classifier {
+        bias: -2.,
+        raw_slope: 0.3,
+        area_scale: 0.01,
+        epsilon: 1e-4,
+    };
+    let labels = [(0, true), (1, false), (2, true)];
+    let mut currents = vec![vec![0.; model.n()]; recording.times.len()];
+    currents[0][1] = 0.7;
+    currents[2][2] = -0.3;
+    let gradient = initial_state::prepared_response_objective_gradient(
+        &model,
+        &params,
+        &readout,
+        &initial,
+        &recording.times,
+        config.dt,
+        &currents,
+        0.4,
+        |response| {
+            let loss = classifier.loss(response, &labels, config.save_dt)?;
+            Ok((loss.value, loss.fluorescence))
+        },
+    )
+    .unwrap();
+    let objective =
+        |p: &wormsim::model::Parameters<f64>, seed: &[f64], r: &Readout, u: &[Vec<f64>]| {
+            let response = initial_state::prepared_response_with_currents(
+                &model,
+                p,
+                seed,
+                &recording.times,
+                r,
+                config.dt,
+                u,
+                0.4,
+            )
+            .unwrap();
+            classifier
+                .loss(&response, &labels, config.save_dt)
+                .unwrap()
+                .value
+        };
+    let eps = 1e-5;
+    let compare = |a: f64, b: f64| assert!((a - b).abs() < 2e-7, "{a} != {b}");
+    compare(
+        objective(&params, &initial, &readout, &currents),
+        gradient.value,
+    );
+    for i in 0..params.raw.len() {
+        let mut plus = params.clone();
+        let mut minus = params.clone();
+        plus.raw[i] += eps;
+        minus.raw[i] -= eps;
+        compare(
+            (objective(&plus, &initial, &readout, &currents)
+                - objective(&minus, &initial, &readout, &currents))
+                / (2. * eps),
+            gradient.parameters[i],
+        );
+    }
+    for i in 0..initial.len() {
+        let mut plus = initial.clone();
+        let mut minus = initial.clone();
+        plus[i] += eps;
+        minus[i] -= eps;
+        compare(
+            (objective(&params, &plus, &readout, &currents)
+                - objective(&params, &minus, &readout, &currents))
+                / (2. * eps),
+            gradient.initial[i],
+        );
+    }
+    for i in 0..model.n() {
+        let mut plus = readout.clone();
+        let mut minus = readout.clone();
+        plus.offset[i] += eps;
+        minus.offset[i] -= eps;
+        compare(
+            (objective(&params, &initial, &plus, &currents)
+                - objective(&params, &initial, &minus, &currents))
+                / (2. * eps),
+            gradient.readout_offset[i],
+        );
+        plus = readout.clone();
+        minus = readout.clone();
+        plus.gain[i] *= eps.exp();
+        minus.gain[i] *= (-eps).exp();
+        compare(
+            (objective(&params, &initial, &plus, &currents)
+                - objective(&params, &initial, &minus, &currents))
+                / (2. * eps),
+            gradient.readout_log_gain[i],
+        );
+        for t in 0..currents.len() {
+            let mut plus = currents.clone();
+            let mut minus = currents.clone();
+            plus[t][i] += eps;
+            minus[t][i] -= eps;
+            compare(
+                (objective(&params, &initial, &readout, &plus)
+                    - objective(&params, &initial, &readout, &minus))
+                    / (2. * eps),
+                gradient.currents[t][i],
+            );
+        }
+    }
+    assert!(
+        initial_state::prepared_response_objective_gradient(
+            &model,
+            &params,
+            &readout,
+            &initial,
+            &recording.times,
+            config.dt,
+            &currents,
+            0.4,
+            |_| Ok((0., vec![]))
         )
         .is_err()
     );

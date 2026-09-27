@@ -877,3 +877,127 @@ pub fn prepared_state(
     }
     Ok((state, derivative))
 }
+
+/// Apply an arbitrary differentiable loss to prepared baseline-relative outputs.
+/// The callback returns its scalar value and derivatives with respect to every
+/// [response frame][neuron] fluorescence value. This is a single forward/adjoint
+/// pass, including preparation and baseline derivatives; no detached pseudo-targets.
+#[allow(clippy::too_many_arguments)]
+pub fn prepared_response_objective_gradient(
+    model: &Model,
+    params: &Parameters<f64>,
+    readout: &Readout,
+    seed: &[f64],
+    times: &[f64],
+    dt: f64,
+    currents: &[Vec<f64>],
+    preparation_seconds: f64,
+    objective: impl FnOnce(&[Vec<f64>]) -> Result<(f64, Vec<Vec<f64>>)>,
+) -> Result<ObjectiveGradient> {
+    let n = model.n();
+    readout.validate(n)?;
+    let (extended, drive, baseline) = if preparation_seconds == 0. {
+        validate_currents(Some(currents), times.len(), n)?;
+        (times.to_vec(), currents.to_vec(), 0)
+    } else {
+        let (t, u) = preparation_grid(times, currents, n, preparation_seconds)?;
+        (t, u, 1)
+    };
+    let p = model.prepare(params)?;
+    let tape = rollout(model, &p, seed, &extended, dt, Some(&drive))?;
+    let base = &tape.states[tape.samples[baseline]];
+    let outputs: Vec<Vec<_>> = tape.samples[baseline..]
+        .iter()
+        .map(|&s| {
+            (0..n)
+                .map(|i| {
+                    readout.offset[i]
+                        + readout.gain[i]
+                            * p.calcium_scale[i]
+                            * (tape.states[s][n + i] - base[n + i])
+                })
+                .collect()
+        })
+        .collect();
+    let (value, cotangent) = objective(&outputs)?;
+    if !value.is_finite()
+        || cotangent.len() != times.len()
+        || cotangent
+            .iter()
+            .any(|r| r.len() != n || r.iter().any(|v| !v.is_finite()))
+    {
+        return Err("invalid response loss or fluorescence derivatives".into());
+    }
+    let mut injections = vec![vec![0.; n]; tape.samples.len()];
+    let mut param_gradient = vec![0.; model.parameter_count()];
+    let mut offset_gradient = vec![0.; n];
+    let mut gain_gradient = vec![0.; n];
+    for (t, row) in cotangent.iter().enumerate() {
+        let sample = t + baseline;
+        for i in 0..n {
+            let calcium = tape.states[tape.samples[sample]][n + i] - base[n + i];
+            let gain = readout.gain[i] * p.calcium_scale[i];
+            injections[sample][i] += row[i] * gain;
+            injections[baseline][i] -= row[i] * gain;
+            param_gradient[5 * n + i] +=
+                row[i] * readout.gain[i] * calcium * params.raw[5 * n + i].sigmoid();
+            offset_gradient[i] += row[i];
+            gain_gradient[i] += row[i] * gain * calcium;
+        }
+    }
+    let mut current_gradient = vec![vec![0.; n]; extended.len()];
+    let mut adj = vec![0.; model.state_len()];
+    let mut vjp = adj.clone();
+    let mut sample = tape.samples.len();
+    for step in (0..tape.states.len()).rev() {
+        if sample > 0 && tape.samples[sample - 1] == step {
+            sample -= 1;
+            for i in 0..n {
+                adj[n + i] += injections[sample][i];
+            }
+        }
+        if step > 0 {
+            let interval = tape.intervals[step - 1];
+            let h = tape.steps[step - 1];
+            for i in 0..n {
+                current_gradient[interval][i] += h * adj[i] * p.inv_tau[i];
+            }
+            parameter_vjp(
+                model,
+                params,
+                &p,
+                &tape.states[step - 1],
+                &adj,
+                h,
+                &mut param_gradient,
+                Some(&drive[interval]),
+            );
+            state_vjp(model, &p, &tape.states[step - 1], &adj, &mut vjp);
+            for i in 0..adj.len() {
+                adj[i] += h * vjp[i];
+            }
+        }
+    }
+    if baseline == 1 {
+        current_gradient.remove(0);
+    }
+    if adj
+        .iter()
+        .chain(&param_gradient)
+        .chain(&offset_gradient)
+        .chain(&gain_gradient)
+        .chain(current_gradient.iter().flatten())
+        .any(|v| !v.is_finite())
+    {
+        return Err("nonfinite response objective gradient".into());
+    }
+    Ok(ObjectiveGradient {
+        value,
+        initial: adj,
+        parameters: param_gradient,
+        readout_offset: offset_gradient,
+        readout_log_gain: gain_gradient,
+        terminal: tape.states.last().unwrap().clone(),
+        currents: current_gradient,
+    })
+}

@@ -1,6 +1,7 @@
 //! Versioned benchmark trials, group-disjoint splits, and common held-out scoring.
 //! Prediction lineage is checked as declared metadata, not proof of how a model trained.
 pub mod atlas;
+pub mod atlas_classification;
 pub mod atlas_level0;
 pub mod atlas_training;
 pub mod atlas_uncertainty;
