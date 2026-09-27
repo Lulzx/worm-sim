@@ -45,7 +45,7 @@ fn main() -> Result<()> {
         Some(p) => p.probabilities(&graph)?,
         None => graph.chemical.iter().map(|e| e.3).collect(),
     };
-    let report = serde_json::json!({"schema_version":1,"source_commit":option_env!("WORMSIM_COMMIT").unwrap_or("unversioned"),"model_sha256":format!("{:x}",Sha256::digest(fs::read(&a[4]).map_err(|e|e.to_string())?)),"graph_hash":graph.hash,"dataset_hash":split.dataset_hash,"split_hash":split.content_hash()?,"names":graph.names,"training_trials":split.train,"sign_probabilities":probabilities,"classification_pairs":labels.as_ref().map_or(0,|l|l.pairs),"groups":groups});
+    let report = serde_json::json!({"schema_version":2,"source_commit":option_env!("WORMSIM_COMMIT").unwrap_or("unversioned"),"model_sha256":format!("{:x}",Sha256::digest(fs::read(&a[4]).map_err(|e|e.to_string())?)),"graph_hash":graph.hash,"dataset_hash":split.dataset_hash,"split_hash":split.content_hash()?,"names":graph.names,"chemical_topology":graph.chemical.iter().map(|e|(e.0,e.1,e.2)).collect::<Vec<_>>(),"gap_topology":graph.gaps,"training_trials":split.train,"sign_probabilities":probabilities,"classification_pairs":labels.as_ref().map_or(0,|l|l.pairs),"groups":groups});
     fs::OpenOptions::new()
         .write(true)
         .create_new(true)

@@ -7,6 +7,8 @@ from level0 import Level0, parameters
 
 
 def build(model, graph, training):
+    if training.get('schema_version')!=2:
+        raise ValueError('training export requires schema version 2')
     for key in ['graph_hash','dataset_hash','split_hash','training_trials']:
         if model[key]!=training[key]:
             raise ValueError(f'training export lineage mismatch: {key}')
@@ -15,6 +17,11 @@ def build(model, graph, training):
         raise ValueError('training neuron order mismatch')
     n=len(names)
     index={name:i for i,name in enumerate(names)}
+    chemical=sorted(graph['chemical'],key=lambda e:(e['pre'],e['post']))
+    gaps=sorted(graph['gaps'],key=lambda e:(e['a'],e['b']))
+    if ([[index[e['pre']],index[e['post']],e['synapse_count']] for e in chemical]!=training['chemical_topology']
+            or [[index[e['a']],index[e['b']],e['size']] for e in gaps]!=training['gap_topology']):
+        raise ValueError('JAX graph differs from authoritative Rust topology')
     times=training['groups'][0]['recording']['times']
     engine=Level0(model,graph,times)
     theta=parameters(model)

@@ -79,10 +79,10 @@ checkpoint epoch one. This check does not select a new model or read test scores
 ```sh
 WORMSIM_COMMIT=$(git rev-parse HEAD) cargo run --release --example export_atlas_training -- \
   data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json \
-  runs/level0-atlas-classification-fit/epoch-0.json runs/jax-training.json runs/randi-pairs.json
+  runs/level0-atlas-classification-fit/epoch-0.json runs/jax-training-v2.json runs/randi-pairs.json
 .venv-jax/bin/python backends/jax/check_training.py \
   --model runs/level0-atlas-classification-fit/epoch-0.json \
-  --graph runs/c302-audit.json --training runs/jax-training.json \
+  --graph runs/c302-audit.json --training runs/jax-training-v2.json \
   --reference-next runs/level0-atlas-classification-fit/epoch-1.json \
   --output runs/jax-first-update.json
 ```
@@ -91,3 +91,36 @@ The epoch-one comparison starts from zero optimizer moments and checks the
 existing Adam settings (global gradient clip 10, beta1 .9, beta2 .999, epsilon
 1e-8). It is not an optimizer resume implementation. Preparation is currently
 repeated per target; sharing that work and a full population fit runner remain.
+
+## Population fit runner
+
+`fit.py` starts from an exported epoch-zero checkpoint, retains Optax moments
+across updates, writes every candidate in the Rust `AtlasModel` schema, and calls
+`score_atlas_checkpoint` for validation-only scoring. Selection minimizes Rust
+validation MSE with earliest-epoch tie breaking. The Python runner never reads
+held-out fluorescence or test scores. Source and input hashes (including the
+Rust scorer binary) are stored in a manifest. Output directories must be new;
+nonzero-epoch starts are rejected because optimizer resume is not yet supported.
+Adam/AdamW and constant/cosine schedules use Optax. Frozen coordinates receive no
+updates or decoupled decay. The original initialization, priors and split lineage
+remain in each checkpoint.
+
+```sh
+WORMSIM_COMMIT=$(git rev-parse HEAD) cargo build --release --example score_atlas_checkpoint
+.venv-jax/bin/python backends/jax/fit.py \
+  --model runs/level0-atlas-classification-fit/epoch-0.json \
+  --graph-json runs/c302-audit.json --graph data/c302-herm.wsc \
+  --data runs/randi-data.json --split data/randi-neuron-split.json \
+  --training runs/jax-training-v2.json \
+  --scorer target/release/examples/score_atlas_checkpoint \
+  --output runs/jax-level0-classification-fit
+```
+
+This runner tests migration under the frozen configuration; it does not tune on
+the repeatedly inspected test cohort. Tests cover multiple optimizer updates,
+frozen coordinates under AdamW, earliest-epoch selection ties and cosine rates.
+A full fit and final scored prediction comparison are required before declaring
+the training migration reproduced.
+
+Training export schema 2 also carries native chemical/gap topology; the JAX
+loader rejects a graph with different endpoints or weights, even if names match.

@@ -1,0 +1,27 @@
+{
+  "objective": 0.10186837005763177,
+  "components": {
+    "mse": 0.07536645831538034,
+    "bce": 0.19570439936652007,
+    "correlation": 0.0,
+    "prior": 0.006931471805599447
+  },
+  "gradient_l2": 0.0001630856259255606,
+  "seconds_including_compilation": 139.54000491695479,
+  "groups": 161,
+  "scope": "Training-only frozen objective and reverse gradient with one in-memory Optax Adam update compared against saved Rust epoch one. No validation/test selection and no full training trajectory reproduction.",
+  "source_commit": "dc8ef3de3be0a655aba2e84f6a80d9bc9510a705",
+  "source_worktree_dirty": false,
+  "inputs_sha256": {
+    "model": "f7f061464f4685f059f0a7d0a22b43af1011267277bc2d5fa239008b1f0c0f0e",
+    "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "training": "68da0851bf0370fd6b9bc7badf78bb78dac84ee28d225083d350e010ce2e1b13"
+  },
+  "first_adam_update_maximum_absolute_errors": {
+    "classifier": 0.0,
+    "groups": 1.9077863420979835e-11,
+    "kernel": 8.881784197001252e-16,
+    "log_gain": 0.0
+  },
+  "reference_next_sha256": "31e2bce78bbe08d96c9ef964040fb2b2d4862046a7f7ae89106cbf07b096b144"
+}

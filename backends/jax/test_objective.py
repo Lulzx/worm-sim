@@ -22,7 +22,7 @@ def example():
                           classification={'weight':.1},correlation={'weight':.2,'epsilon':.03},
                           observation_gain={'initial_gain':1.5,'prior_strength':.1})
     training={k:model[k] for k in ['graph_hash','dataset_hash','split_hash','training_trials']}
-    training.update(names=['A','B'],sign_probabilities=[.7],classification_pairs=1,groups=[{
+    training.update(schema_version=2,chemical_topology=[[0,1,2.]],gap_topology=[[0,1,1.]],names=['A','B'],sign_probabilities=[.7],classification_pairs=1,groups=[{
         'target':0,'sample_weight':6.,'irreducible_mse':.02,'labels':[[1,True]],
         'recording':{'times':times,'traces':[
             {'neuron':'A','values':[0.,.01,.03],'provenance':{'id_confidence':1.}},
@@ -63,6 +63,10 @@ class ObjectiveTests(unittest.TestCase):
     def test_lineage_mismatch_fails(self):
         model,graph,training=example()
         changed=copy.deepcopy(training)
+        bad_graph=copy.deepcopy(graph)
+        bad_graph['chemical'][0]['synapse_count']=99.
+        with self.assertRaises(ValueError):
+            build(model,bad_graph,training)
         changed['training_trials']=['test']
         with self.assertRaises(ValueError):
             build(model,graph,changed)
