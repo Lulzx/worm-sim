@@ -20,6 +20,12 @@ pub enum Event {
         end: f64,
         amplitude: f64,
     },
+    /// Piecewise-linear current at absolute simulation times, zero outside support.
+    CurrentWaveform {
+        neuron: String,
+        times: Vec<f64>,
+        amplitudes: Vec<f64>,
+    },
     Silence {
         neuron: String,
         start: f64,
@@ -93,7 +99,27 @@ pub fn simulate_from_state<S: Scalar>(
     let len = model.state_len();
     let mut boundaries = vec![0.0, cfg.duration];
     let mut events = Vec::new();
+    let mut waveforms = Vec::new();
     for event in &cfg.events {
+        if let Event::CurrentWaveform {
+            neuron,
+            times,
+            amplitudes,
+        } = event
+        {
+            if times.len() < 2
+                || times.len() != amplitudes.len()
+                || times.iter().chain(amplitudes).any(|v| !v.is_finite())
+                || times[0] < 0.
+                || times[times.len() - 1] > cfg.duration
+                || times.windows(2).any(|w| w[1] <= w[0])
+            {
+                return Err("waveform needs matching finite values and strictly increasing times within the run".into());
+            }
+            waveforms.push((model.graph.neuron(neuron)?, times, amplitudes));
+            boundaries.extend(times);
+            continue;
+        }
         let (name, start, end, amplitude, kind) = match event {
             Event::Stimulate {
                 neuron,
@@ -103,6 +129,7 @@ pub fn simulate_from_state<S: Scalar>(
             } => (neuron, *start, *end, *amplitude, 0),
             Event::Silence { neuron, start, end } => (neuron, *start, *end, 0.0, 1),
             Event::Ablate { neuron } => (neuron, 0.0, cfg.duration, 0.0, 2),
+            Event::CurrentWaveform { .. } => unreachable!(),
         };
         if !start.is_finite()
             || !end.is_finite()
@@ -134,6 +161,7 @@ pub fn simulate_from_state<S: Scalar>(
     let mut k4 = k1.clone();
     let mut release = vec![S::constant(0.0); n];
     let mut input = Inputs::new(n);
+    let mut constant_current = vec![0.; n];
     let mut result = Trajectory {
         times: vec![],
         voltage: vec![],
@@ -177,6 +205,22 @@ pub fn simulate_from_state<S: Scalar>(
                 }
             }
         }
+        constant_current.copy_from_slice(&input.current);
+        // Select segments using the step's left endpoint. At support boundaries
+        // the final stage therefore uses the left limit, as rectangular pulses do.
+        let set_current = |stage_time: f64, input: &mut Inputs| {
+            input.current.copy_from_slice(&constant_current);
+            for &(i, times, amplitudes) in &waveforms {
+                if t >= times[0] && t < times[times.len() - 1] {
+                    let k = times.partition_point(|v| *v <= t) - 1;
+                    let fraction =
+                        ((stage_time - times[k]) / (times[k + 1] - times[k])).clamp(0., 1.);
+                    input.current[i] +=
+                        (1. - fraction) * amplitudes[k] + fraction * amplitudes[k + 1];
+                }
+            }
+        };
+        set_current(t, &mut input);
         model.rhs(&p, &y, &input, &mut release, &mut k1);
         match cfg.method {
             Method::Euler => {
@@ -188,6 +232,7 @@ pub fn simulate_from_state<S: Scalar>(
                 for i in 0..len {
                     temp[i] = y[i] + S::constant(h * 0.5) * k1[i];
                 }
+                set_current(t + h * 0.5, &mut input);
                 model.rhs(&p, &temp, &input, &mut release, &mut k2);
                 for i in 0..len {
                     temp[i] = y[i] + S::constant(h * 0.5) * k2[i];
@@ -196,6 +241,7 @@ pub fn simulate_from_state<S: Scalar>(
                 for i in 0..len {
                     temp[i] = y[i] + S::constant(h) * k3[i];
                 }
+                set_current(target, &mut input);
                 model.rhs(&p, &temp, &input, &mut release, &mut k4);
                 for i in 0..len {
                     y[i] = y[i]

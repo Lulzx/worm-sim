@@ -36,7 +36,8 @@ It demonstrates plumbing, not biological validation or parameter identifiability
 - Level 0 graded neurons; anatomical chemical conductances and relaxed reversal
   signs; symmetric gap junctions; learned calcium time constants and scales.
 - Euler and RK4 with exact event boundaries; stimulation/inhibition through
-  signed current, silencing, and ablation. Declarative protocols are JSON.
+  signed current, piecewise-linear current waveforms, silencing, and ablation.
+  Declarative protocols are JSON; see [perturbations](docs/PERTURBATIONS.md).
 - Softplus constraints and forward-mode AD for every implemented parameter;
   confidence-weighted fluorescence loss and a small-circuit Adam example.
 - Compact incoming sparse rows, u16 indices, shared presynaptic gates, contiguous
