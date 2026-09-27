@@ -29,25 +29,44 @@ comparisons are exploratory; a fresh confirmatory cohort is not yet secured.
 
 ## Build sequence and completion gates
 
-The user has reprioritized implementation before further fitting experiments.
-Existing scientific results remain acceptance evidence; new fit sweeps and model
-selection diagnostics are deferred while missing software requirements are built.
-The subsequent hybrid-stack decision adds a first migration gate: reproduce the
-frozen Level 0 forward result through the Rust scorer, then reproduce the fitting
-loop before new model experiments. The frozen-forward gate passes with identical Rust-scored AUROC 0.6810058793;
-the complete five-update training trajectory and test AUROC are now reproduced
-([migration receipt](JAX-MIGRATION.md)).
-See [JAX backend](../backends/jax/README.md).
+The latest priority supersedes the earlier implementation-first sequence:
+**train and diagnose Level 0 before adding dynamical features**. The hybrid
+migration gate is complete: the frozen forward result and full five-update
+trajectory reproduce through the Rust scorer ([migration receipt](JAX-MIGRATION.md)).
+This verifies the fitting implementation, not biological adequacy.
 
-1. Complete perturbation protocols: current/conductance waveforms, voltage clamps and YAML
-   (implemented), gene/drug mappings and the phenotype registry.
-2. Extend coupling with slow modulation, plasticity and optional dark edges.
-3. Add mixed-fidelity neuron models and stiff/multirate numerical support.
-4. Add reduced-body/replay/high-fidelity interfaces and Task 3–5 evaluation code.
-5. Complete remaining data, inference, uncertainty, API and tutorial requirements.
-6. Resume biological validation, optimize measured bottlenecks, execute the full
-   uncertainty/performance batteries, and close each specification requirement
-   individually. Software completeness does not establish benchmark success.
+1. **Training capacity, in progress.** Non-neutral signs/rest and positive
+   per-neuron gains are implemented. The two-target 1,000-update fit missed the
+   unchanged 90% capacity gate. Both subsequent 200-update warm starts failed
+   before completion. Their complete finite histories and terminal failures are
+   retained in [the warm-start report](CAPACITY-WARM-START.md).
+2. **Numerical robustness, in progress.** The higher-rate failure is reproduced
+   at its failing parameters. Independent replay localizes it to coarse Euler
+   preparation leaving the continuous model's voltage bounds. Refined steps
+   give finite trajectories and gradients, with directional finite-difference
+   checks. A separately declared refined-step fit is underway; launch is not
+   completion. The lower-rate failure's parameters remain unaudited. New runs
+   retain finite failing parameters automatically on nonfinite evaluations.
+3. **Broader fitting, pending.** Interpret the refined fit only after its terminal
+   outcome, independent replay, and step/preparation/drift controls. Continue
+   optimization/capacity diagnosis until the small-target gate passes; then
+   replicate across unrelated training targets and fit the training population.
+   A failed small-target gate alone does not identify model capacity as the cause.
+4. **Scientific comparison, pending.** Preserve the LDS comparison and report
+   uncertainty at the independent target/animal level. Existing validation/test
+   observations have been inspected; treat subsequent comparisons as exploratory.
+   The [fresh-cohort audit](FRESH-HOLDOUT-AUDIT.md) has not secured an independent
+   confirmatory cohort. Do not relabel old recordings as a fresh test set.
+5. **Deferred specification work.** After the fitting priority is resolved,
+   finish the missing data/biological assignments, mixed-fidelity neurons,
+   gene/drug protocols, body/sensory interfaces, Tasks 3–5, inference/uncertainty,
+   API/tutorial and performance requirements listed above. Neuromodulation is
+   the first scientific extension to evaluate; existing synthetic extension
+   checks are not biological acceptance.
+6. **Full acceptance.** Close each original specification requirement with
+   source-backed implementation and scope-matched validation, including the
+   complete uncertainty/performance batteries. Neither the capacity gate nor a
+   successful Level 0 benchmark would complete the whole specification.
 
 Performance claims must specify workload, hardware, precision, timing boundaries,
 and excluded storage. Benchmark success requires actual held-out data and named
