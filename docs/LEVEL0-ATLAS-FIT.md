@@ -159,3 +159,19 @@ fixed common initial state and stimulus-independent drift, before expanding comp
 or tuning against test outcomes. Source-backed signs/classes, calibrated drive,
 and a declared training-pair classification objective are still missing. Task 1
 biological acceptance and the complete specification remain open.
+
+## Validation drift diagnostic
+
+`diagnose_atlas_drift` keeps a checkpoint frozen and evaluates three validation-only
+signals: its original driven response, the same initial state and parameters with
+zero input current, and their difference. The three use identical observations,
+trace scoring and pair ranking. It reports the initial unforced state derivative
+and weighted mean squares, including the cross term; these components are not
+orthogonal variance fractions. Subtracting drift here is a diagnostic, not a
+newly fitted model or evidence of held-out improvement.
+
+```sh
+WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release --example diagnose_atlas_drift
+target/release/examples/diagnose_atlas_drift data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json runs/randi-pairs.json runs/level0-atlas-first-fit/selected.json runs/level0-atlas-selected-drift
+target/release/examples/diagnose_atlas_drift data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json runs/randi-pairs.json runs/level0-atlas-first-fit/epoch-0.json runs/level0-atlas-initial-drift
+```
