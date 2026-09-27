@@ -174,3 +174,104 @@ fn native_hdf5_pair_import_preserves_direction_missing_q_and_source_hash() {
     assert!(atlas::import_hdf5(&path, &data, &graph, &"0".repeat(64)).is_err());
     std::fs::remove_file(path).unwrap();
 }
+
+#[test]
+fn atlas_bootstrap_retains_target_clusters_and_reports_undefined_draws() {
+    use bench::atlas_uncertainty;
+    let (_, _, _, mut evidence) = fixture();
+    evidence.pairs = vec![
+        atlas::Pair {
+            stimulated: "A".into(),
+            responding: "X".into(),
+            q: 0.01,
+            equivalence_q: None,
+            observations: 1,
+        },
+        atlas::Pair {
+            stimulated: "B".into(),
+            responding: "X".into(),
+            q: 0.5,
+            equivalence_q: None,
+            observations: 1,
+        },
+    ];
+    let mut predictions = atlas::Predictions {
+        evidence_hash: evidence.content_hash().unwrap(),
+        split_hash: "test".into(),
+        model: "synthetic".into(),
+        free_parameters: 0,
+        source_commit: "test".into(),
+        training_trials: vec![],
+        selection_trials: vec![],
+        pairs: vec![
+            atlas::Prediction {
+                stimulated: "A".into(),
+                responding: "X".into(),
+                score: 1.,
+            },
+            atlas::Prediction {
+                stimulated: "B".into(),
+                responding: "X".into(),
+                score: 0.,
+            },
+        ],
+    };
+    let report = atlas_uncertainty::pairs(&evidence, &predictions, 42, 2000).unwrap();
+    assert_eq!(report.clusters, 2);
+    assert_eq!(report.auroc.point, Some(1.));
+    assert_eq!(report.auroc.lower_95, Some(1.));
+    assert_eq!(report.auroc.upper_95, Some(1.));
+    assert!(report.auroc.defined_replicates > 800 && report.auroc.defined_replicates < 1200);
+    predictions.pairs[0].score = 0.;
+    let tied = atlas_uncertainty::pairs(&evidence, &predictions, 42, 2000).unwrap();
+    assert_eq!(tied.auroc.point, Some(0.5));
+    assert_eq!(tied.auroc.lower_95, Some(0.5));
+    assert_eq!(
+        tied.auroc.defined_replicates,
+        report.auroc.defined_replicates
+    );
+    predictions.pairs.push(predictions.pairs[0].clone());
+    assert!(atlas_uncertainty::pairs(&evidence, &predictions, 42, 2000).is_err());
+}
+
+#[test]
+fn atlas_trace_intervals_keep_recordings_and_targets_distinct() {
+    let (graph, data, split, _) = fixture();
+    let prediction = bench::Predictions {
+        schema_version: 1,
+        dataset_hash: split.dataset_hash.clone(),
+        split_hash: split.content_hash().unwrap(),
+        model: "synthetic oracle".into(),
+        free_parameters: 0,
+        training_trials: vec![],
+        selection_trials: vec![],
+        source_commit: "test".into(),
+        seed: 42,
+        trials: data
+            .trials
+            .iter()
+            .filter(|t| split.test.contains(&t.id))
+            .map(|t| bench::PredictedTrial {
+                id: t.id.clone(),
+                times: t.recording.times.clone(),
+                fluorescence: t
+                    .recording
+                    .traces
+                    .iter()
+                    .map(|r| (r.neuron.clone(), vec![0., 1.]))
+                    .collect(),
+                response_scores: BTreeMap::new(),
+            })
+            .collect(),
+    };
+    let report = bench::evaluate(&data, &graph, &split, &prediction, Partition::Test).unwrap();
+    let intervals = bench::atlas_uncertainty::traces(&data, &report, 42, 100).unwrap();
+    assert_eq!(intervals[0].clusters, 1);
+    assert_eq!(intervals[1].clusters, 2);
+    for group in intervals {
+        assert_eq!(group.pooled_mse.point, Some(0.));
+        assert_eq!(group.pooled_mse.upper_95, Some(0.));
+        assert!((group.macro_trace_correlation.lower_95.unwrap() - 1.0).abs() < 1e-12);
+        assert_eq!(group.macro_trace_correlation.defined_replicates, 100);
+    }
+}

@@ -155,3 +155,33 @@ target/release/examples/fit_connectome_lds data/c302-herm.wsc runs/randi-data.js
 This first protocol produces trace scores. Published pair classification and
 cluster uncertainty remain separate required evaluation steps; a point score
 alone is not evidence of improvement over the required baseline.
+
+## Frozen-fit pair ranking and uncertainty
+
+The separate `evaluate_connectome_atlas` example scores published pair detection
+using `dt × sum(abs(predicted fluorescence))` over the common response grid.
+This score is fixed without fitting a classifier or selecting against published
+q-values. All trial impulse predictions for a given pair must agree exactly;
+there is one score per ordered non-self pair. Mixed response grids are rejected.
+The model remains the checkpoint chosen using validation trace MSE.
+
+Uncertainty uses 2,000 percentile bootstrap replicates with seed 42. Trace MSE
+and confidence-weighted mean defined trace correlation are computed separately
+under stimulated-neuron cluster resampling and recording cluster resampling.
+All traces/windows within a sampled cluster stay together. Pair AUROC resamples
+stimulated identities, retaining all responding pairs and multiplying their
+weights when a target is drawn repeatedly. A replicate containing only one
+class has undefined AUROC and is excluded; the report gives defined counts.
+
+These are **separate marginal intervals**, conditional on the frozen fitted
+model. Targets and recordings form crossed dependencies; neither marginal
+analysis accounts for both simultaneously. Source recording IDs are not verified
+animal identities. Published aggregate pair labels lack an event-level recording
+decomposition, so recording bootstrap is not claimed for pair classification.
+Constant predictions have undefined trace correlation; report coverage alongside
+correlation and MSE. These intervals alone do not prove a model comparison.
+
+```sh
+WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release --example evaluate_connectome_atlas
+target/release/examples/evaluate_connectome_atlas data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json runs/randi-pairs.json runs/connectome-lds-first-fit/selected.json test runs/connectome-lds-first-fit-evaluation
+```
