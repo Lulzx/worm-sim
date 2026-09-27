@@ -94,6 +94,13 @@ edge; unequal mirrors require `--mean-mirrors` (recorded in the import report).
 Use `--strict` to reject those conflicts. Repeated rows in the same direction sum.
 Chemical signs/types are not inferred from anatomy or names.
 
+## Specification progress
+
+[Implementation ledger](docs/IMPLEMENTATION-STATUS.md) tracks the complete
+specification and its acceptance gates. [Benchmark contracts](docs/BENCHMARKS.md)
+provide Rust neuron/animal splits, leakage checks, trace/response metrics, and
+1/10/30-second forecast scoring. Real-data benchmark success remains unproven.
+
 ## Remaining work
 
 The GPU performance targets and Tasks 1–5 in the spec are **not met**. Forward AD

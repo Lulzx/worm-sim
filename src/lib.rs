@@ -17,3 +17,5 @@ pub mod import;
 pub mod trace_codec;
 
 pub mod baseline;
+
+pub mod bench;

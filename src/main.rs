@@ -121,6 +121,24 @@ fn benchmark(path: Option<&str>) -> Result<()> {
 fn run() -> Result<()> {
     let args: Vec<_> = std::env::args().collect();
     match args.get(1).map(String::as_str) {
+        Some("bench-split") if args.len()==9 => {
+            let graph=load(&args[2])?;
+            let data:wormsim::bench::Dataset=serde_json::from_slice(&fs::read(&args[3]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let axis=match args[4].as_str() {"neuron"=>wormsim::bench::Axis::StimulatedNeuron,"animal"=>wormsim::bench::Axis::Animal,_=>return Err("axis must be neuron or animal".into())};
+            let split=wormsim::bench::Split::generate(&data,&graph,axis,args[5].parse().map_err(|_|"invalid seed")?,args[6].parse().map_err(|_|"invalid validation group count")?,args[7].parse().map_err(|_|"invalid test group count")?)?;
+            write_json(&args[8],&split)?;
+            println!("split {}: {} train, {} validation, {} test trials",split.content_hash()?,split.train.len(),split.validation.len(),split.test.len());
+        }
+        Some("bench-score") if args.len()==8 => {
+            let graph=load(&args[2])?;
+            let data:wormsim::bench::Dataset=serde_json::from_slice(&fs::read(&args[3]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let split:wormsim::bench::Split=serde_json::from_slice(&fs::read(&args[4]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let predictions:wormsim::bench::Predictions=serde_json::from_slice(&fs::read(&args[5]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let partition=match args[6].as_str() {"train"=>wormsim::bench::Partition::Train,"validation"=>wormsim::bench::Partition::Validation,"test"=>wormsim::bench::Partition::Test,_=>return Err("partition must be train, validation or test".into())};
+            let report=wormsim::bench::evaluate(&data,&graph,&split,&predictions,partition)?;
+            write_json(&args[7],&report)?;
+            println!("scored {} trials; correlation={:?}; AUROC={:?}",report.trials,report.macro_trace_correlation,report.response_auroc.value);
+        }
         Some("baseline-pack") if args.len()==4 => {
             let bundle:wormsim::baseline::Bundle=serde_json::from_slice(&fs::read(&args[2]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
             let bytes=wormsim::baseline::pack(&bundle)?;
@@ -167,7 +185,7 @@ fn run() -> Result<()> {
             println!("saved {} samples to {}",result.times.len(),args[4]);
         }
         Some("bench") if args.len()<=3 => {benchmark(args.get(2).map(String::as_str))?;}
-        _ => return Err("usage: wormsim baseline-pack BUNDLE.json BUNDLE.wsb | baseline-eval BUNDLE.wsb REPORT.json | import-c302 CSV IDS.json VERSION OUTPUT.wsc --strict|--mean-mirrors | pack GRAPH.json GRAPH.wsc | unpack GRAPH.wsc GRAPH.json | simulate GRAPH CONFIG.json OUTPUT.json|OUTPUT.wst | bench [GRAPH]".into()),
+        _ => return Err("usage: wormsim bench-split GRAPH DATA.json neuron|animal SEED VALIDATION_GROUPS TEST_GROUPS SPLIT.json | bench-score GRAPH DATA.json SPLIT.json PREDICTIONS.json train|validation|test REPORT.json | baseline-pack BUNDLE.json BUNDLE.wsb | baseline-eval BUNDLE.wsb REPORT.json | import-c302 CSV IDS.json VERSION OUTPUT.wsc --strict|--mean-mirrors | pack GRAPH.json GRAPH.wsc | unpack GRAPH.wsc GRAPH.json | simulate GRAPH CONFIG.json OUTPUT.json|OUTPUT.wst | bench [GRAPH]".into()),
     }
     Ok(())
 }
