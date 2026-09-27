@@ -410,3 +410,109 @@ fn driven_forecast_matches_independent_event_solver_and_inference_ignores_future
         );
     }
 }
+
+#[test]
+fn relative_response_adjoint_matches_parameter_state_gain_and_current_differences() {
+    let (model, params, recording, initial, mut readout, config) = fixture();
+    readout.offset.fill(0.0);
+    let n = model.n();
+    let mut currents = vec![vec![0.; n]; recording.times.len()];
+    currents[0][1] = 0.7;
+    currents[2][2] = -0.3;
+    let gradient = initial_state::response_gradient_with_currents(
+        &model, &params, &recording, &readout, &initial, config.dt, &currents,
+    )
+    .unwrap();
+    let objective = |p: &wormsim::model::Parameters<f64>,
+                     y: &[f64],
+                     r: &Readout,
+                     u: &[Vec<f64>]| {
+        let prediction =
+            initial_state::response_with_currents(&model, p, y, &recording.times, r, config.dt, u)
+                .unwrap();
+        let mut error = 0.;
+        let mut weight = 0.;
+        for trace in &recording.traces {
+            let i = model.graph.neuron(&trace.neuron).unwrap();
+            for (t, value) in trace.values.iter().enumerate() {
+                if let Some(v) = value {
+                    error += trace.provenance.id_confidence * (prediction[t][i] - v).powi(2);
+                    weight += trace.provenance.id_confidence;
+                }
+            }
+        }
+        error / weight
+    };
+    assert!((objective(&params, &initial, &readout, &currents) - gradient.value).abs() < 1e-12);
+    let eps = 1e-5;
+    let compare = |a: f64, b: f64| assert!((a - b).abs() < 2e-7, "{a} != {b}");
+    for i in 0..params.raw.len() {
+        let mut plus = params.clone();
+        let mut minus = params.clone();
+        plus.raw[i] += eps;
+        minus.raw[i] -= eps;
+        compare(
+            (objective(&plus, &initial, &readout, &currents)
+                - objective(&minus, &initial, &readout, &currents))
+                / (2. * eps),
+            gradient.parameters[i],
+        );
+    }
+    for i in 0..initial.len() {
+        let mut plus = initial.clone();
+        let mut minus = initial.clone();
+        plus[i] += eps;
+        minus[i] -= eps;
+        compare(
+            (objective(&params, &plus, &readout, &currents)
+                - objective(&params, &minus, &readout, &currents))
+                / (2. * eps),
+            gradient.initial[i],
+        );
+    }
+    for i in 0..n {
+        let mut plus = readout.clone();
+        let mut minus = readout.clone();
+        plus.gain[i] *= eps.exp();
+        minus.gain[i] *= (-eps).exp();
+        compare(
+            (objective(&params, &initial, &plus, &currents)
+                - objective(&params, &initial, &minus, &currents))
+                / (2. * eps),
+            gradient.readout_log_gain[i],
+        );
+        plus = readout.clone();
+        minus = readout.clone();
+        plus.offset[i] += eps;
+        minus.offset[i] -= eps;
+        compare(
+            (objective(&params, &initial, &plus, &currents)
+                - objective(&params, &initial, &minus, &currents))
+                / (2. * eps),
+            gradient.readout_offset[i],
+        );
+    }
+    for t in 0..currents.len() {
+        let mut plus = currents.clone();
+        let mut minus = currents.clone();
+        plus[t][1] += eps;
+        minus[t][1] -= eps;
+        compare(
+            (objective(&params, &initial, &readout, &plus)
+                - objective(&params, &initial, &readout, &minus))
+                / (2. * eps),
+            gradient.currents[t][1],
+        );
+    }
+    let response = initial_state::response_with_currents(
+        &model,
+        &params,
+        &initial,
+        &recording.times,
+        &readout,
+        config.dt,
+        &currents,
+    )
+    .unwrap();
+    assert!(response[0].iter().all(|v| v.abs() < 1e-12));
+}

@@ -275,3 +275,66 @@ fn atlas_trace_intervals_keep_recordings_and_targets_distinct() {
         assert_eq!(group.macro_trace_correlation.defined_replicates, 100);
     }
 }
+
+#[test]
+fn response_aggregation_preserves_original_weighted_loss_and_gradient() {
+    let (graph, mut data, mut split, _) = fixture();
+    for (k, trial) in data.trials.iter_mut().enumerate() {
+        for (i, trace) in trial.recording.traces.iter_mut().enumerate() {
+            trace.provenance.id_confidence = 0.2 + 0.1 * i as f64;
+            trace.values = vec![Some(k as f64 * 0.3 + i as f64), Some(0.2 - k as f64 * 0.1)];
+        }
+    }
+    split.dataset_hash = data.content_hash().unwrap();
+    let groups = bench::atlas_training::aggregate(&data, &graph, &split).unwrap();
+    assert_eq!(groups.len(), 1);
+    let group = &groups[0];
+    let mut raw_loss = 0.;
+    let mut raw_gradient = 0.;
+    let mut raw_weight = 0.;
+    for t in data.trials.iter().filter(|t| split.train.contains(&t.id)) {
+        for trace in &t.recording.traces {
+            for y in &trace.values {
+                let w = trace.provenance.id_confidence;
+                let error = 0.7 - y.unwrap();
+                raw_loss += w * error * error;
+                raw_gradient += 2. * w * error;
+                raw_weight += w;
+            }
+        }
+    }
+    let mut loss = 0.;
+    let mut gradient = 0.;
+    let mut weight = 0.;
+    for trace in &group.recording.traces {
+        for y in &trace.values {
+            let w = trace.provenance.id_confidence;
+            let error = 0.7 - y.unwrap();
+            loss += w * error * error;
+            gradient += 2. * w * error;
+            weight += w;
+        }
+    }
+    assert!((raw_weight - group.sample_weight).abs() < 1e-12);
+    assert!((raw_loss / raw_weight - loss / weight - group.irreducible_mse).abs() < 1e-12);
+    assert!((raw_gradient / raw_weight - gradient / weight).abs() < 1e-12);
+    assert_eq!(
+        group
+            .training_trials
+            .iter()
+            .collect::<std::collections::BTreeSet<_>>(),
+        split.train.iter().collect()
+    );
+    let training = data
+        .trials
+        .iter_mut()
+        .find(|t| split.train.contains(&t.id))
+        .unwrap();
+    training.recording.traces[0].values[0] = None;
+    split.dataset_hash = data.content_hash().unwrap();
+    assert!(
+        bench::atlas_training::aggregate(&data, &graph, &split)
+            .unwrap_err()
+            .contains("complete")
+    );
+}

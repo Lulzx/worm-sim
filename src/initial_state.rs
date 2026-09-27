@@ -285,7 +285,7 @@ pub fn objective_gradient(
     cfg: &InferenceConfig,
 ) -> Result<(f64, Vec<f64>, Vec<f64>)> {
     let g = objective_impl(
-        model, params, recording, readout, initial, prior, cfg, false, None,
+        model, params, recording, readout, initial, prior, cfg, false, None, false,
     )?;
     Ok((g.value, g.initial, g.terminal))
 }
@@ -303,7 +303,7 @@ pub fn parameter_gradient(
         ..Default::default()
     };
     objective_impl(
-        model, params, recording, readout, initial, initial, &cfg, true, None,
+        model, params, recording, readout, initial, initial, &cfg, true, None, false,
     )
 }
 pub fn parameter_gradient_with_currents(
@@ -330,6 +330,7 @@ pub fn parameter_gradient_with_currents(
         &cfg,
         true,
         Some(currents),
+        false,
     )
 }
 /// Affine readout at sample boundaries; each current row drives its following interval.
@@ -358,6 +359,57 @@ pub fn forecast_with_currents(
         })
         .collect())
 }
+/// Training loss for an atlas response expressed relative to initial calcium.
+/// The affine offset is retained; use zero offsets for a zero initial response.
+/// Differentiates the subtracted initial calcium as well as the trajectory.
+pub fn response_gradient_with_currents(
+    model: &Model,
+    params: &Parameters<f64>,
+    recording: &Recording,
+    readout: &Readout,
+    initial: &[f64],
+    dt: f64,
+    currents: &[Vec<f64>],
+) -> Result<ObjectiveGradient> {
+    let cfg = InferenceConfig {
+        dt,
+        prior_weight: 0.0,
+        ..Default::default()
+    };
+    objective_impl(
+        model,
+        params,
+        recording,
+        readout,
+        initial,
+        initial,
+        &cfg,
+        true,
+        Some(currents),
+        true,
+    )
+}
+/// Relative fluorescence response, not a calibrated conversion of optical power
+/// to membrane current. No observed response is used to construct predictions.
+pub fn response_with_currents(
+    model: &Model,
+    params: &Parameters<f64>,
+    initial: &[f64],
+    times: &[f64],
+    readout: &Readout,
+    dt: f64,
+    currents: &[Vec<f64>],
+) -> Result<Vec<Vec<f64>>> {
+    let mut values = forecast_with_currents(model, params, initial, times, readout, dt, currents)?;
+    let p = model.prepare(params)?;
+    for row in &mut values {
+        for i in 0..model.n() {
+            row[i] -= readout.gain[i] * p.calcium_scale[i] * initial[model.n() + i];
+        }
+    }
+    Ok(values)
+}
+
 #[allow(clippy::too_many_arguments)]
 fn objective_impl(
     model: &Model,
@@ -369,6 +421,7 @@ fn objective_impl(
     cfg: &InferenceConfig,
     parameter_derivatives: bool,
     currents: Option<&[Vec<f64>]>,
+    relative_to_initial: bool,
 ) -> Result<ObjectiveGradient> {
     recording.validate(&model.graph)?;
     readout.validate(model.n())?;
@@ -408,11 +461,19 @@ fn objective_impl(
         let w = trace.provenance.id_confidence / weight;
         for (t, value) in trace.values.iter().enumerate() {
             if let Some(value) = value {
-                let error = readout.offset[i] + gain * tape.states[tape.samples[t]][n + i] - value;
+                let calcium = tape.states[tape.samples[t]][n + i]
+                    - if relative_to_initial {
+                        initial[n + i]
+                    } else {
+                        0.0
+                    };
+                let error = readout.offset[i] + gain * calcium - value;
                 loss += w * error * error;
                 injections[t][i] += 2.0 * w * gain * error;
+                if relative_to_initial {
+                    injections[0][i] -= 2.0 * w * gain * error;
+                }
                 if parameter_derivatives {
-                    let calcium = tape.states[tape.samples[t]][n + i];
                     param_gradient[5 * n + i] += 2.0
                         * w
                         * error
@@ -597,6 +658,7 @@ fn infer_impl(
             cfg,
             false,
             history_currents,
+            false,
         )?;
         Ok((g.value, g.initial, g.terminal))
     };
