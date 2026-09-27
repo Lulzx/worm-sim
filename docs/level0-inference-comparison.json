@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "partition": "validation",
+  "identical_fields": [
+    "dataset_hash",
+    "split_hash",
+    "graph_hash",
+    "parameters",
+    "readout",
+    "calibration",
+    "readout_fitted",
+    "training_trials",
+    "selection_trials",
+    "selected_epoch"
+  ],
+  "methods": {
+    "shooting": {
+      "model_sha256": "41cff2e668d7963f0b9510862c0990ca44bedc2c5c88686c9a1bdb831e6386fc",
+      "inference_config": {
+        "dt": 0.01,
+        "iterations": 8,
+        "learning_rate": 0.02,
+        "prior_weight": 0.001
+      },
+      "history_reconstruction": {
+        "history_start": {
+          "macro_neuron_r2": 0.645445185318867,
+          "defined_neurons": 123
+        },
+        "forecast_origin": {
+          "macro_neuron_r2": 0.0005143545505047719,
+          "defined_neurons": 123
+        }
+      },
+      "score": {
+        "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+        "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+        "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+        "model": "Level 0 conditional-gradient population fit; selected epoch 0; full 3N history-only Shooting inference; neutral graph sign priors remain unannotated",
+        "free_parameters": 7040,
+        "prediction_source_commit": "c706e62219f756e092c7b1fa9d421a03bec673ca",
+        "scorer_source_commit": "c706e62219f756e092c7b1fa9d421a03bec673ca",
+        "animal_bootstrap": {
+          "seed": 42,
+          "replicates": 2000,
+          "animals": 3,
+          "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+          "horizons": [
+            {
+              "seconds": 1.0,
+              "confidence_weighted": {
+                "point": -0.003795339201664176,
+                "lower_95": -0.012825310649511836,
+                "upper_95": -0.003310150623425925,
+                "defined_replicates": 2000
+              },
+              "unit_weighted": {
+                "point": -0.003825176052374049,
+                "lower_95": -0.012825310649511775,
+                "upper_95": -0.0034064441677415843,
+                "defined_replicates": 2000
+              },
+              "per_animal": [
+                {
+                  "animal": "2022-07-15-12",
+                  "macro_neuron_r2": -0.011198573301566836
+                },
+                {
+                  "animal": "2023-01-23-15",
+                  "macro_neuron_r2": -0.012825310649511836
+                },
+                {
+                  "animal": "2023-01-23-21",
+                  "macro_neuron_r2": -0.011562923198031918
+                }
+              ]
+            },
+            {
+              "seconds": 10.0,
+              "confidence_weighted": {
+                "point": -0.011072619748016384,
+                "lower_95": -0.03554596097960915,
+                "upper_95": -0.01107261974801637,
+                "defined_replicates": 2000
+              },
+              "unit_weighted": {
+                "point": -0.010962234623514401,
+                "lower_95": -0.03554596097960911,
+                "upper_95": -0.010962234623514385,
+                "defined_replicates": 2000
+              },
+              "per_animal": [
+                {
+                  "animal": "2022-07-15-12",
+                  "macro_neuron_r2": -0.02300630014898502
+                },
+                {
+                  "animal": "2023-01-23-15",
+                  "macro_neuron_r2": -0.035545960979609124
+                },
+                {
+                  "animal": "2023-01-23-21",
+                  "macro_neuron_r2": -0.016844588673701644
+                }
+              ]
+            },
+            {
+              "seconds": 30.0,
+              "confidence_weighted": {
+                "point": -0.011423624999221001,
+                "lower_95": -0.02811188125647023,
+                "upper_95": -0.010154685182332633,
+                "defined_replicates": 2000
+              },
+              "unit_weighted": {
+                "point": -0.011285278104169858,
+                "lower_95": -0.028111881256470236,
+                "upper_95": -0.010133030289209541,
+                "defined_replicates": 2000
+              },
+              "per_animal": [
+                {
+                  "animal": "2022-07-15-12",
+                  "macro_neuron_r2": -0.019780821458756363
+                },
+                {
+                  "animal": "2023-01-23-15",
+                  "macro_neuron_r2": -0.010823817518884806
+                },
+                {
+                  "animal": "2023-01-23-21",
+                  "macro_neuron_r2": -0.02811188125647023
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "filter": {
+      "model_sha256": "9b15595e9b706b7d3ed88e5f2ebde819fa387268c3e559c4bb11181e583af229",
+      "inference_config": {
+        "method": "block_ekf",
+        "filter": {
+          "initial_variance": [
+            0.25,
+            0.04,
+            0.04
+          ],
+          "process_variance_rate": [
+            0.05,
+            0.005,
+            0.005
+          ],
+          "observation_variance": 0.0025
+        },
+        "dt": 0.01,
+        "iterations": 0,
+        "learning_rate": 0.02,
+        "prior_weight": 0.001
+      },
+      "history_reconstruction": {
+        "history_start": {
+          "macro_neuron_r2": 0.9778615015419556,
+          "defined_neurons": 123
+        },
+        "forecast_origin": {
+          "macro_neuron_r2": 0.9468408451167981,
+          "defined_neurons": 123
+        }
+      },
+      "score": {
+        "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+        "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+        "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+        "model": "Level 0 conditional-gradient population fit; selected epoch 0; full 3N history-only BlockEkf inference; neutral graph sign priors remain unannotated",
+        "free_parameters": 7040,
+        "prediction_source_commit": "c706e62219f756e092c7b1fa9d421a03bec673ca",
+        "scorer_source_commit": "c706e62219f756e092c7b1fa9d421a03bec673ca",
+        "animal_bootstrap": {
+          "seed": 42,
+          "replicates": 2000,
+          "animals": 3,
+          "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+          "horizons": [
+            {
+              "seconds": 1.0,
+              "confidence_weighted": {
+                "point": 0.6462830660049338,
+                "lower_95": 0.6337487815211359,
+                "upper_95": 0.6510895326295579,
+                "defined_replicates": 2000
+              },
+              "unit_weighted": {
+                "point": 0.6458755664880718,
+                "lower_95": 0.6337487815211359,
+                "upper_95": 0.6510895326295579,
+                "defined_replicates": 2000
+              },
+              "per_animal": [
+                {
+                  "animal": "2022-07-15-12",
+                  "macro_neuron_r2": 0.6337487815211359
+                },
+                {
+                  "animal": "2023-01-23-15",
+                  "macro_neuron_r2": 0.6360927239797767
+                },
+                {
+                  "animal": "2023-01-23-21",
+                  "macro_neuron_r2": 0.6510895326295579
+                }
+              ]
+            },
+            {
+              "seconds": 10.0,
+              "confidence_weighted": {
+                "point": -0.0013610710832015866,
+                "lower_95": -0.024708956284845315,
+                "upper_95": -0.0013610710832015812,
+                "defined_replicates": 2000
+              },
+              "unit_weighted": {
+                "point": -0.0012518921105602856,
+                "lower_95": -0.02470895628484526,
+                "upper_95": -0.0012518921105602856,
+                "defined_replicates": 2000
+              },
+              "per_animal": [
+                {
+                  "animal": "2022-07-15-12",
+                  "macro_neuron_r2": -0.010901959081119867
+                },
+                {
+                  "animal": "2023-01-23-15",
+                  "macro_neuron_r2": -0.024708956284845315
+                },
+                {
+                  "animal": "2023-01-23-21",
+                  "macro_neuron_r2": -0.01053258622538054
+                }
+              ]
+            },
+            {
+              "seconds": 30.0,
+              "confidence_weighted": {
+                "point": -0.011423264528507174,
+                "lower_95": -0.02811172919041921,
+                "upper_95": -0.010154189571673009,
+                "defined_replicates": 2000
+              },
+              "unit_weighted": {
+                "point": -0.011284918439847249,
+                "lower_95": -0.028111729190419196,
+                "upper_95": -0.010132533875392074,
+                "defined_replicates": 2000
+              },
+              "per_animal": [
+                {
+                  "animal": "2022-07-15-12",
+                  "macro_neuron_r2": -0.01978048271983346
+                },
+                {
+                  "animal": "2023-01-23-15",
+                  "macro_neuron_r2": -0.010823185286222175
+                },
+                {
+                  "animal": "2023-01-23-21",
+                  "macro_neuron_r2": -0.028111729190419224
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "limitations": [
+    "History reconstruction uses assimilated observations; it is not forecast accuracy.",
+    "Comparison changes only inference configuration and uses no test targets.",
+    "Block filter omits cross-neuron covariance and covariance effects of mean projection.",
+    "Fixed variance assumptions were not estimated from biological noise."
+  ]
+}

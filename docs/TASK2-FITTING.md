@@ -75,9 +75,10 @@ normal equations with missing data, held-out-future invariance, merged moments
 versus explicit duplicated observations, and exact two-animal bootstrap support.
 
 History-only full-network initial-state inference is now implemented and audited
-in [INITIAL-STATE.md](INITIAL-STATE.md). Next: introduce left/right and class
-sharing with explicit sign priors, and run the first Level 0 training/validation
-experiment. The test results already inspected are exploratory evidence; further
+in [INITIAL-STATE.md](INITIAL-STATE.md). Explicit sharing and population fitting
+are implemented in [LEVEL0-FIT.md](LEVEL0-FIT.md), followed by the
+[filtering comparison](LEVEL0-FILTER.md). Biological class/sign annotations remain
+missing. The test results already inspected are exploratory evidence; further
 model development must not be described as fresh confirmation on these animals.
 
 ## Exploratory held-out results
@@ -115,3 +116,9 @@ forecast origin; inference quality, not backend throughput, is the next issue.
 A rank-32 stable latent LDS now scores 0.530 / 0.067 / 0.016 on test animals. Both
 long-horizon animal-bootstrap intervals include zero. See [LATENT-LDS.md](LATENT-LDS.md)
 for all candidate receipts, parameter counts and coverage assumptions.
+
+Filtering now repairs the lost prefix state: origin reconstruction R² rises to
+0.947, but the two trained candidates still lose to epoch zero. The selected
+filter model scores 0.722 / −0.008 / −0.022 on test, with negative long-horizon
+intervals. See [LEVEL0-FILTER.md](LEVEL0-FILTER.md) for the controlled comparison,
+selection receipts and timestep audit. GRU and equal behavior inputs are next.

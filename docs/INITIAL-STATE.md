@@ -7,7 +7,10 @@ unobserved neurons evolve through the same chemical/gap network. The resulting
 state at the origin can initialize a free forecast with `solve::simulate_from_state`.
 
 This is a regularized point estimate, **not a claim of hidden-state identifiability**.
-It is not yet the fitted population model or a successful Task 2 forecast.
+Population fitting is described separately in [LEVEL0-FIT.md](LEVEL0-FIT.md).
+The algorithm below is the default shooting method; an alternative history filter
+is described in [LEVEL0-FILTER.md](LEVEL0-FILTER.md). Neither constitutes a claim
+of successful Task 2 forecasting.
 
 ## Objective and algorithm
 
@@ -68,8 +71,9 @@ solver when initialized with its default state.
 The current c302 graph has `class="unannotated"`, unknown side metadata, and
 sign prior 0.5 for every chemical edge. That is missing biological annotation,
 not a class-sharing instruction or evidence for excitatory/inhibitory identity.
-Explicit sharing maps and source-backed sign priors remain to be added, followed
-by a population parameter fit and common held-out scoring. A stable latent LDS
+Explicit sharing maps, suffix-pair tying, neutral sign-prior penalties and a
+population fitting/scoring path now exist. Source-backed biological class and sign
+annotations remain missing. A stable latent LDS
 baseline is now fitted and scored in [LATENT-LDS.md](LATENT-LDS.md); the failed
 dense linear experiment is retained.
 

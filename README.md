@@ -54,7 +54,11 @@ It demonstrates plumbing, not biological validation or parameter identifiability
   1,024 steps on CPU/Metal; trades recomputation for smaller state storage.
 
 - Native [WormWideWeb HDF5 import](docs/WORMWIDEWEB.md): 21 labeled baseline
-  animals, fixed animal splits, behavior channels, and a persistence control.
+  animals, fixed animal splits, behavior channels, [trivial and AR controls](docs/TASK2-FITTING.md),
+  animal-bootstrap uncertainty and a fitted [stable latent LDS](docs/LATENT-LDS.md).
+- Full-network [history state inference](docs/INITIAL-STATE.md), tied-parameter
+  [Level 0 population fitting](docs/LEVEL0-FIT.md), and an approximate
+  [history filter](docs/LEVEL0-FILTER.md). Scientific acceptance remains open.
 
 ## Scientific and numerical conventions
 
