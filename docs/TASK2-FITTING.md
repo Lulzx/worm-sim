@@ -58,7 +58,7 @@ breaking. Ridge penalizes the intercept too. The initial experiment has no spect
 stability constraint. All five candidates failed at long validation horizons;
 selected ridge 0.001 also failed badly on test. This failure is retained as a
 negative experiment, not a useful competitive LDS baseline or a statement that
-nonlinear models cannot work. A stable latent LDS remains outstanding.
+nonlinear models cannot work. A stable latent LDS is now fitted and scored separately in [LATENT-LDS.md](LATENT-LDS.md).
 
 ## Reproduction
 
@@ -111,3 +111,7 @@ The first two-epoch Level 0 population fit is recorded in [LEVEL0-FIT.md](LEVEL0
 Both trained epochs failed to improve validation, and selection retained the initial
 candidate. Validation history reconstruction decays almost completely by the
 forecast origin; inference quality, not backend throughput, is the next issue.
+
+A rank-32 stable latent LDS now scores 0.530 / 0.067 / 0.016 on test animals. Both
+long-horizon animal-bootstrap intervals include zero. See [LATENT-LDS.md](LATENT-LDS.md)
+for all candidate receipts, parameter counts and coverage assumptions.

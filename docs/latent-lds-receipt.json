@@ -1,0 +1,728 @@
+{
+  "schema_version": 1,
+  "model_sha256": "f8931ca6fc9c99014c3e9183efa6525f1080e3b6ae1468c6ad7c533c59d6b6ae",
+  "model_training_source_commit": "6dceb3f4f144fb64a1ff08c3097e8d555398ee83",
+  "selection": {
+    "schema_version": 1,
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+    "source_commit": "6dceb3f4f144fb64a1ff08c3097e8d555398ee83",
+    "config": {
+      "ranks": [
+        4,
+        8,
+        16,
+        32
+      ],
+      "iterations": 8,
+      "ridge": 0.0001,
+      "transition_cap": 0.995
+    },
+    "criterion": "Maximum mean validation macro-neuron R\u00b2 at 1/10/30 s; ties retain earlier declared rank/iteration. All normalization, latent initialization and EM moments use training animals only.",
+    "candidates": [
+      {
+        "rank": 4,
+        "iteration": 0,
+        "preceding_training_nll_per_observation": null,
+        "validation_horizon_r2": [
+          0.26144788080809156,
+          0.026853394114842603,
+          -0.01923706659515845
+        ],
+        "validation_criterion": 0.0896880694425919,
+        "transition_norm_bound": 0.9500000000004756,
+        "elapsed_seconds": 1.04400525
+      },
+      {
+        "rank": 4,
+        "iteration": 1,
+        "preceding_training_nll_per_observation": 1.2421992880016233,
+        "validation_horizon_r2": [
+          0.2978573097469508,
+          0.039501061376428274,
+          0.015762669338579918
+        ],
+        "validation_criterion": 0.11770701348731966,
+        "transition_norm_bound": 0.9794612637208779,
+        "elapsed_seconds": 1.243502833
+      },
+      {
+        "rank": 4,
+        "iteration": 2,
+        "preceding_training_nll_per_observation": 1.160014463917091,
+        "validation_horizon_r2": [
+          0.29926870762361907,
+          0.026233296202565808,
+          0.026244060701033373
+        ],
+        "validation_criterion": 0.11724868817573941,
+        "transition_norm_bound": 0.9880209907841291,
+        "elapsed_seconds": 1.23917025
+      },
+      {
+        "rank": 4,
+        "iteration": 3,
+        "preceding_training_nll_per_observation": 1.153661251748667,
+        "validation_horizon_r2": [
+          0.3000897543556875,
+          0.018284144583000275,
+          0.028565423520496912
+        ],
+        "validation_criterion": 0.11564644081972823,
+        "transition_norm_bound": 0.9914888400162314,
+        "elapsed_seconds": 1.158797417
+      },
+      {
+        "rank": 4,
+        "iteration": 4,
+        "preceding_training_nll_per_observation": 1.151773350532714,
+        "validation_horizon_r2": [
+          0.3006503141688012,
+          0.01430519161242865,
+          0.030631949152164877
+        ],
+        "validation_criterion": 0.11519581831113158,
+        "transition_norm_bound": 0.9933276084611006,
+        "elapsed_seconds": 1.0968651249999999
+      },
+      {
+        "rank": 4,
+        "iteration": 5,
+        "preceding_training_nll_per_observation": 1.1509910688796856,
+        "validation_horizon_r2": [
+          0.30106306570567565,
+          0.0123096910156319,
+          0.03285600814854633
+        ],
+        "validation_criterion": 0.11540958828995129,
+        "transition_norm_bound": 0.9944861804943717,
+        "elapsed_seconds": 1.095141292
+      },
+      {
+        "rank": 4,
+        "iteration": 6,
+        "preceding_training_nll_per_observation": 1.1505791066046978,
+        "validation_horizon_r2": [
+          0.3013957740618563,
+          0.01232822167436312,
+          0.03544176947335885
+        ],
+        "validation_criterion": 0.11638858840319276,
+        "transition_norm_bound": 0.995,
+        "elapsed_seconds": 1.098105625
+      },
+      {
+        "rank": 4,
+        "iteration": 7,
+        "preceding_training_nll_per_observation": 1.1503249331530785,
+        "validation_horizon_r2": [
+          0.30166900003300956,
+          0.013901723520256797,
+          0.03820951721467636
+        ],
+        "validation_criterion": 0.11792674692264758,
+        "transition_norm_bound": 0.9949999999999999,
+        "elapsed_seconds": 1.111999167
+      },
+      {
+        "rank": 4,
+        "iteration": 8,
+        "preceding_training_nll_per_observation": 1.1501526937210984,
+        "validation_horizon_r2": [
+          0.30184421128192696,
+          0.015171167814768386,
+          0.04035642955447599
+        ],
+        "validation_criterion": 0.11912393621705712,
+        "transition_norm_bound": 0.9950000000000001,
+        "elapsed_seconds": 1.116175875
+      },
+      {
+        "rank": 8,
+        "iteration": 0,
+        "preceding_training_nll_per_observation": null,
+        "validation_horizon_r2": [
+          0.324077965779722,
+          0.03632558856167916,
+          -0.017595557581472656
+        ],
+        "validation_criterion": 0.1142693322533095,
+        "transition_norm_bound": 0.9500000000004756,
+        "elapsed_seconds": 0.95170925
+      },
+      {
+        "rank": 8,
+        "iteration": 1,
+        "preceding_training_nll_per_observation": 1.1772265147595964,
+        "validation_horizon_r2": [
+          0.3705881257153309,
+          0.06292594542902478,
+          0.03154189926992349
+        ],
+        "validation_criterion": 0.15501865680475974,
+        "transition_norm_bound": 0.9812704437373838,
+        "elapsed_seconds": 1.3220329579999999
+      },
+      {
+        "rank": 8,
+        "iteration": 2,
+        "preceding_training_nll_per_observation": 1.068237253002075,
+        "validation_horizon_r2": [
+          0.3701947620746524,
+          0.049227147092555185,
+          0.050106804114577644
+        ],
+        "validation_criterion": 0.1565095710939284,
+        "transition_norm_bound": 0.9904675619880347,
+        "elapsed_seconds": 1.2533453749999999
+      },
+      {
+        "rank": 8,
+        "iteration": 3,
+        "preceding_training_nll_per_observation": 1.0577336357296778,
+        "validation_horizon_r2": [
+          0.36879161919527903,
+          0.040381009573888856,
+          0.05748998365429994
+        ],
+        "validation_criterion": 0.15555420414115595,
+        "transition_norm_bound": 0.9937428122857018,
+        "elapsed_seconds": 1.298687584
+      },
+      {
+        "rank": 8,
+        "iteration": 4,
+        "preceding_training_nll_per_observation": 1.0531909352571154,
+        "validation_horizon_r2": [
+          0.3675143945402443,
+          0.03697944814960633,
+          0.061451698113501534
+        ],
+        "validation_criterion": 0.15531518026778407,
+        "transition_norm_bound": 0.995,
+        "elapsed_seconds": 1.280389792
+      },
+      {
+        "rank": 8,
+        "iteration": 5,
+        "preceding_training_nll_per_observation": 1.0504272664781011,
+        "validation_horizon_r2": [
+          0.3667855013274391,
+          0.03848419430013972,
+          0.0635572417098008
+        ],
+        "validation_criterion": 0.15627564577912653,
+        "transition_norm_bound": 0.9950000000000003,
+        "elapsed_seconds": 1.274648584
+      },
+      {
+        "rank": 8,
+        "iteration": 6,
+        "preceding_training_nll_per_observation": 1.0487028105876361,
+        "validation_horizon_r2": [
+          0.3664518966400317,
+          0.040491996265562186,
+          0.06535511039492026
+        ],
+        "validation_criterion": 0.15743300110017136,
+        "transition_norm_bound": 0.995,
+        "elapsed_seconds": 1.275468917
+      },
+      {
+        "rank": 8,
+        "iteration": 7,
+        "preceding_training_nll_per_observation": 1.04768588401234,
+        "validation_horizon_r2": [
+          0.36636845589499406,
+          0.04264293815822619,
+          0.06688146501299158
+        ],
+        "validation_criterion": 0.15863095302207061,
+        "transition_norm_bound": 0.9949999999999999,
+        "elapsed_seconds": 1.309712167
+      },
+      {
+        "rank": 8,
+        "iteration": 8,
+        "preceding_training_nll_per_observation": 1.0470589394642047,
+        "validation_horizon_r2": [
+          0.36638918200274745,
+          0.04468239854647612,
+          0.06825364570531078
+        ],
+        "validation_criterion": 0.15977507541817812,
+        "transition_norm_bound": 0.9949999999999998,
+        "elapsed_seconds": 1.28778125
+      },
+      {
+        "rank": 16,
+        "iteration": 0,
+        "preceding_training_nll_per_observation": null,
+        "validation_horizon_r2": [
+          0.3703142602435478,
+          0.04724740491344131,
+          -0.01631814383724603
+        ],
+        "validation_criterion": 0.13374784043991436,
+        "transition_norm_bound": 0.9500000000004756,
+        "elapsed_seconds": 0.884151625
+      },
+      {
+        "rank": 16,
+        "iteration": 1,
+        "preceding_training_nll_per_observation": 1.1111524376744102,
+        "validation_horizon_r2": [
+          0.4170140060513543,
+          0.08849225550333278,
+          0.031680563585749506
+        ],
+        "validation_criterion": 0.17906227504681219,
+        "transition_norm_bound": 0.9811467569771466,
+        "elapsed_seconds": 2.1568965
+      },
+      {
+        "rank": 16,
+        "iteration": 2,
+        "preceding_training_nll_per_observation": 0.9729039052150243,
+        "validation_horizon_r2": [
+          0.4128626851400663,
+          0.082452435369457,
+          0.046368012711992555
+        ],
+        "validation_criterion": 0.18056104440717194,
+        "transition_norm_bound": 0.990425852102915,
+        "elapsed_seconds": 1.893847292
+      },
+      {
+        "rank": 16,
+        "iteration": 3,
+        "preceding_training_nll_per_observation": 0.9541864084514625,
+        "validation_horizon_r2": [
+          0.4078820745599918,
+          0.07638549268262794,
+          0.05099475202090912
+        ],
+        "validation_criterion": 0.17842077308784296,
+        "transition_norm_bound": 0.9940778062253476,
+        "elapsed_seconds": 1.907948625
+      },
+      {
+        "rank": 16,
+        "iteration": 4,
+        "preceding_training_nll_per_observation": 0.9451291861830072,
+        "validation_horizon_r2": [
+          0.4043059025014559,
+          0.07440455247763493,
+          0.050896797675563835
+        ],
+        "validation_criterion": 0.1765357508848849,
+        "transition_norm_bound": 0.9949999999999999,
+        "elapsed_seconds": 1.9054704999999998
+      },
+      {
+        "rank": 16,
+        "iteration": 5,
+        "preceding_training_nll_per_observation": 0.9394564042806116,
+        "validation_horizon_r2": [
+          0.40120828988480833,
+          0.07373612139569491,
+          0.04950406231531494
+        ],
+        "validation_criterion": 0.17481615786527271,
+        "transition_norm_bound": 0.9950000000000001,
+        "elapsed_seconds": 1.920783334
+      },
+      {
+        "rank": 16,
+        "iteration": 6,
+        "preceding_training_nll_per_observation": 0.9355697573727405,
+        "validation_horizon_r2": [
+          0.3979299534532927,
+          0.07223446077275311,
+          0.04808330377024848
+        ],
+        "validation_criterion": 0.1727492393320981,
+        "transition_norm_bound": 0.9949999999999998,
+        "elapsed_seconds": 1.9182992909999999
+      },
+      {
+        "rank": 16,
+        "iteration": 7,
+        "preceding_training_nll_per_observation": 0.9326538724990041,
+        "validation_horizon_r2": [
+          0.39438497084900526,
+          0.07015445748771333,
+          0.04668704016666929
+        ],
+        "validation_criterion": 0.1704088228344626,
+        "transition_norm_bound": 0.995,
+        "elapsed_seconds": 1.930147958
+      },
+      {
+        "rank": 16,
+        "iteration": 8,
+        "preceding_training_nll_per_observation": 0.930208714886235,
+        "validation_horizon_r2": [
+          0.39068540964274856,
+          0.06775240855131962,
+          0.045395272015393326
+        ],
+        "validation_criterion": 0.1679443634031538,
+        "transition_norm_bound": 0.995,
+        "elapsed_seconds": 1.924752
+      },
+      {
+        "rank": 32,
+        "iteration": 0,
+        "preceding_training_nll_per_observation": null,
+        "validation_horizon_r2": [
+          0.4229685394242494,
+          0.05740957973059846,
+          -0.015295689227332194
+        ],
+        "validation_criterion": 0.1550274766425052,
+        "transition_norm_bound": 0.9500000000004756,
+        "elapsed_seconds": 0.859027125
+      },
+      {
+        "rank": 32,
+        "iteration": 1,
+        "preceding_training_nll_per_observation": 1.0200959436938506,
+        "validation_horizon_r2": [
+          0.4866966941213781,
+          0.10329166557539121,
+          0.027881491750511227
+        ],
+        "validation_criterion": 0.20595661714909352,
+        "transition_norm_bound": 0.9832348602775003,
+        "elapsed_seconds": 5.238555708
+      },
+      {
+        "rank": 32,
+        "iteration": 2,
+        "preceding_training_nll_per_observation": 0.830691959708389,
+        "validation_horizon_r2": [
+          0.493377612956825,
+          0.10384210232777316,
+          0.04349187023073729
+        ],
+        "validation_criterion": 0.21357052850511182,
+        "transition_norm_bound": 0.9935829147040632,
+        "elapsed_seconds": 5.233125041
+      },
+      {
+        "rank": 32,
+        "iteration": 3,
+        "preceding_training_nll_per_observation": 0.7972467345375106,
+        "validation_horizon_r2": [
+          0.49594072052996274,
+          0.10598254811081552,
+          0.043218653509548746
+        ],
+        "validation_criterion": 0.21504730738344235,
+        "transition_norm_bound": 0.9950000000000001,
+        "elapsed_seconds": 5.29245675
+      },
+      {
+        "rank": 32,
+        "iteration": 4,
+        "preceding_training_nll_per_observation": 0.7803572752840539,
+        "validation_horizon_r2": [
+          0.4935883450427051,
+          0.10443273366576614,
+          0.03984649754837154
+        ],
+        "validation_criterion": 0.21262252541894758,
+        "transition_norm_bound": 0.9949999999999997,
+        "elapsed_seconds": 6.021525792
+      },
+      {
+        "rank": 32,
+        "iteration": 5,
+        "preceding_training_nll_per_observation": 0.7686290044322843,
+        "validation_horizon_r2": [
+          0.48598798596298454,
+          0.09946283880496222,
+          0.03583152514926865
+        ],
+        "validation_criterion": 0.20709411663907182,
+        "transition_norm_bound": 0.9950000000000002,
+        "elapsed_seconds": 9.682701
+      },
+      {
+        "rank": 32,
+        "iteration": 6,
+        "preceding_training_nll_per_observation": 0.7593031199884643,
+        "validation_horizon_r2": [
+          0.47448493215806403,
+          0.0930525168319329,
+          0.031385915896763435
+        ],
+        "validation_criterion": 0.19964112162892012,
+        "transition_norm_bound": 0.9950000000000002,
+        "elapsed_seconds": 8.532763292
+      },
+      {
+        "rank": 32,
+        "iteration": 7,
+        "preceding_training_nll_per_observation": 0.7513712636432801,
+        "validation_horizon_r2": [
+          0.4608712129112463,
+          0.08665677819154273,
+          0.02659718284040843
+        ],
+        "validation_criterion": 0.19137505798106583,
+        "transition_norm_bound": 0.9949999999999996,
+        "elapsed_seconds": 9.897585375
+      },
+      {
+        "rank": 32,
+        "iteration": 8,
+        "preceding_training_nll_per_observation": 0.7444001237996947,
+        "validation_horizon_r2": [
+          0.447007856545548,
+          0.08110013310836386,
+          0.02165347727341249
+        ],
+        "validation_criterion": 0.1832538223091081,
+        "transition_norm_bound": 0.9949999999999996,
+        "elapsed_seconds": 8.417287167
+      }
+    ],
+    "selected_rank": 32,
+    "selected_iteration": 3,
+    "free_parameters": 7295,
+    "training_preparation_seconds": 0.579715375
+  },
+  "validation": {
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+    "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+    "partition": "validation",
+    "model": "stable latent Gaussian LDS; rank=32; iteration=3; history-only Kalman filtering; unseen-neuron persistence fallback traces=120; neurons={\"ASJL\", \"AVBL\", \"AVHR\", \"URAVR\"}",
+    "free_parameters": 7295,
+    "prediction_source_commit": "6dceb3f4f144fb64a1ff08c3097e8d555398ee83",
+    "scorer_source_commit": "6dceb3f4f144fb64a1ff08c3097e8d555398ee83",
+    "animal_bootstrap": {
+      "seed": 42,
+      "replicates": 2000,
+      "animals": 3,
+      "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+      "horizons": [
+        {
+          "seconds": 1.0,
+          "confidence_weighted": {
+            "point": 0.4959407205299627,
+            "lower_95": 0.47620747201660973,
+            "upper_95": 0.5414581379586848,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.4940500237781865,
+            "lower_95": 0.47434371072609605,
+            "upper_95": 0.5414581379586847,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.5414581379586848
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.4897628714016139
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": 0.4890125074594481
+            }
+          ]
+        },
+        {
+          "seconds": 10.0,
+          "confidence_weighted": {
+            "point": 0.10598254811081546,
+            "lower_95": -0.03435774144432412,
+            "upper_95": 0.21406315275994917,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.10624431807208656,
+            "lower_95": -0.034357741444324096,
+            "upper_95": 0.21406315275994914,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.21406315275994917
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.08444375740554025
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": -0.03435774144432412
+            }
+          ]
+        },
+        {
+          "seconds": 30.0,
+          "confidence_weighted": {
+            "point": 0.043218653509548795,
+            "lower_95": 0.025220064755115713,
+            "upper_95": 0.05039380163795575,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.043237057139619985,
+            "lower_95": 0.025664385542723947,
+            "upper_95": 0.049544883534797066,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-07-15-12",
+              "macro_neuron_r2": 0.03591494171649652
+            },
+            {
+              "animal": "2023-01-23-15",
+              "macro_neuron_r2": 0.04954488353479702
+            },
+            {
+              "animal": "2023-01-23-21",
+              "macro_neuron_r2": 0.04539348606756628
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "test": {
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+    "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+    "partition": "test",
+    "model": "stable latent Gaussian LDS; rank=32; iteration=3; history-only Kalman filtering; unseen-neuron persistence fallback traces=48; neurons={\"AVBL\", \"URAVR\"}",
+    "free_parameters": 7295,
+    "prediction_source_commit": "6dceb3f4f144fb64a1ff08c3097e8d555398ee83",
+    "scorer_source_commit": "6dceb3f4f144fb64a1ff08c3097e8d555398ee83",
+    "animal_bootstrap": {
+      "seed": 42,
+      "replicates": 2000,
+      "animals": 3,
+      "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+      "horizons": [
+        {
+          "seconds": 1.0,
+          "confidence_weighted": {
+            "point": 0.5303837102867002,
+            "lower_95": 0.48879991180406585,
+            "upper_95": 0.5478215153904602,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.5281445838080904,
+            "lower_95": 0.48879991180406585,
+            "upper_95": 0.5478215153904602,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": 0.5478215153904601
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": 0.4958687656432062
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": 0.48879991180406585
+            }
+          ]
+        },
+        {
+          "seconds": 10.0,
+          "confidence_weighted": {
+            "point": 0.06661436686714438,
+            "lower_95": -0.20503629787194272,
+            "upper_95": 0.150202610401828,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.06173069457230941,
+            "lower_95": -0.20503629787194272,
+            "upper_95": 0.150202610401828,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": 0.150202610401828
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": 0.05303012668214694
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": -0.20503629787194272
+            }
+          ]
+        },
+        {
+          "seconds": 30.0,
+          "confidence_weighted": {
+            "point": 0.016298515040925558,
+            "lower_95": -0.028352240049900296,
+            "upper_95": 0.06593875217915378,
+            "defined_replicates": 2000
+          },
+          "unit_weighted": {
+            "point": 0.014989208895471288,
+            "lower_95": -0.028352240049900265,
+            "upper_95": 0.06593875217915379,
+            "defined_replicates": 2000
+          },
+          "per_animal": [
+            {
+              "animal": "2022-06-14-07",
+              "macro_neuron_r2": 0.06593875217915382
+            },
+            {
+              "animal": "2023-01-19-08",
+              "macro_neuron_r2": -0.028352240049900286
+            },
+            {
+              "animal": "2023-01-19-15",
+              "macro_neuron_r2": -0.011605047572915785
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "validation_history_diagnostic": {
+    "description": "Independent weighted per-neuron reconstruction R\u00b2 at the first and final prefix frames; validation only. Unknown training identities retain the disclosed persistence fallback.",
+    "history_start": {
+      "macro_neuron_r2": 0.6031446250194792,
+      "defined_neurons": 123
+    },
+    "forecast_origin": {
+      "macro_neuron_r2": 0.5957143424864408,
+      "defined_neurons": 123
+    }
+  },
+  "timed_preparation_and_candidate_seconds": 97.654578461,
+  "timing_exclusions": "File loading, per-rank PCA initialization, candidate artifact writing, and final held-out scoring are outside the summed timers.",
+  "limitations": [
+    "Three test animals only; marginal bootstrap intervals at both long horizons include zero.",
+    "No paired-bootstrap significance claim against AR(1).",
+    "Training-unseen neuron outputs use persistence; this differs from Level 0 readout assumptions.",
+    "Constrained EM-style updates with fixed process jitter, observation floor, ridge and operator-norm cap.",
+    "Source preprocessing causality/units remain to be audited.",
+    "GRU and a successful fitted biological model remain outstanding."
+  ]
+}

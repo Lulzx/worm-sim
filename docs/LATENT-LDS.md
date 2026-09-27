@@ -91,3 +91,43 @@ stability checks, and a complete refit after replacing test futures. The last
 check requires identical fitted matrices, selected rank/iteration and predictions.
 A stable fitted baseline is not evidence that the biological model beats it, or
 that the long-horizon success criterion is achieved.
+
+## First real-data result
+
+The [committed-source receipt](latent-lds-receipt.json) records all 36 candidates.
+Validation selects rank **32**, update **3**, with **7,295** parameter scalars.
+Its transition norm bound is 0.9950000000000001 (floating-point rounding at the
+configured cap). Training likelihood continues improving at later updates while
+validation forecast scores decline; the selected candidate is retained unchanged.
+
+| Partition | 1 s R² | 10 s R² | 30 s R² |
+| --- | ---: | ---: | ---: |
+| Validation | 0.496 | 0.106 | 0.043 |
+| Test | 0.530 | 0.067 | 0.016 |
+| Test animal-bootstrap 95% interval | [0.489, 0.548] | [−0.205, 0.150] | [−0.028, 0.066] |
+
+Both long-horizon intervals include zero. The positive test point estimates do
+not establish population-level long-horizon forecasting. AR(1)'s test point
+scores are 0.764 / 0.071 / −0.029: it remains stronger at one second. The apparent
+30-second difference is not a paired-bootstrap significance result. Neither this
+baseline nor the failed biological fit completes Task 2's success criterion.
+
+Validation prefix reconstruction is 0.603 at the first frame and **0.596 at the
+forecast origin**. The previous Level 0 shooting-inference experiment fell from
+0.645 to 0.0005. This supports testing a filtering-based Level 0 state estimate,
+but does not isolate the inference algorithm as the cause: the two models and
+fitted parameter sets differ.
+
+The summed timed preparation/candidate phases took 97.65 seconds on this M4 Pro
+CPU. That excludes file loading, per-rank PCA initialization, artifact writing and
+final held-out scoring; it is not an end-to-end throughput claim.
+
+Reproduce the compact scored receipt and prefix diagnostic after fitting with:
+
+```sh
+python3 scripts/score_latent_lds.py --receipt runs/latent-lds-receipt.json
+```
+
+Only selected-model test predictions are evaluated. Source preprocessing
+causality/units, biological class/sign annotations, GRU, and successful Level 0
+forecasting remain open work.

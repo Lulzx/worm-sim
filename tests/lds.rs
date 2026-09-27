@@ -185,7 +185,7 @@ fn latent_fitting_and_history_filtering_never_read_test_futures() {
     for (a, b) in before.trials.iter().zip(after.trials) {
         assert_eq!(a.fluorescence, b.fluorescence);
     }
-    let mut invalid = model;
+    let mut invalid = other;
     invalid.gaussian.transition[0] = 10.0;
     assert!(
         invalid
@@ -224,4 +224,42 @@ fn multivariate_rts_matches_independent_numpy_joint_gaussian_fixture() {
             .abs()
             < 1e-12
     );
+}
+
+#[test]
+fn weighted_observation_noise_update_uses_observation_count() {
+    let mut g = GaussianLds {
+        dim: 1,
+        outputs: 1,
+        transition: vec![0.8],
+        observation: vec![1.0],
+        process_cov: vec![0.36],
+        noise: vec![0.25],
+        initial_cov: vec![1.0],
+    };
+    let means = [152.0 / 247.0, 19.0 / 247.0];
+    let variances = [43.0 / 247.0, 61.0 / 247.0];
+    let y = [1.0, -0.5];
+    let weight = [1.0, 0.5];
+    let moment: f64 = (0..2)
+        .map(|i| weight[i] * (variances[i] + means[i] * means[i]))
+        .sum();
+    let cross: f64 = (0..2).map(|i| weight[i] * y[i] * means[i]).sum();
+    let c = cross / moment;
+    let r = (0..2)
+        .map(|i| {
+            weight[i]
+                * (y[i] * y[i] - 2.0 * y[i] * c * means[i]
+                    + c * c * (variances[i] + means[i] * means[i]))
+        })
+        .sum::<f64>()
+        / 2.0;
+    g.em_step(
+        &[vec![vec![(0, 1.0, 1.0)], vec![(0, -0.5, 0.5)]]],
+        0.995,
+        0.0,
+    )
+    .unwrap();
+    assert!((g.observation[0] - c).abs() < 1e-12);
+    assert!((g.noise[0] - r).abs() < 1e-12);
 }

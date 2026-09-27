@@ -70,7 +70,8 @@ sign prior 0.5 for every chemical edge. That is missing biological annotation,
 not a class-sharing instruction or evidence for excitatory/inhibitory identity.
 Explicit sharing maps and source-backed sign priors remain to be added, followed
 by a population parameter fit and common held-out scoring. A stable latent LDS
-baseline is also still required; the failed dense linear experiment is retained.
+baseline is now fitted and scored in [LATENT-LDS.md](LATENT-LDS.md); the failed
+dense linear experiment is retained.
 
 The [committed-source training audit](initial-state-receipt.json) ran all 15
 preselected windows using 67–110 observed neurons each. Every run retained all
