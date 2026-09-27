@@ -5,6 +5,7 @@ All pickle globals become inert placeholders. No upstream classes or NumPy
 constructors are imported. This is a metadata locator, not a recording loader.
 """
 import argparse
+from collections import Counter
 import hashlib
 import io
 import json
@@ -63,12 +64,46 @@ def inspect(raw):
                       if isinstance(value, Opaque) else type(value).__name__)
                 for key, value in sorted(mapping.items())}
 
-    # Only keys and type names leave the loader. Values are deliberately omitted.
+    events = metadata.get('stim_metadata', {}).get('stim_param_list')
+    event_schema = None
+    if isinstance(events, list):
+        fields = {}
+        event_types = Counter()
+        for item in events:
+            if not isinstance(item, dict):
+                raise ValueError('expected delivered event dictionaries')
+            for key, kind in structure(item).items():
+                fields.setdefault(key, set()).add(kind)
+            event = item.get('event')
+            if isinstance(event, dict):
+                for key, kind in structure(event).items():
+                    fields.setdefault('event.' + key, set()).add(kind)
+                event_type = event.get('event_type')
+                if isinstance(event_type, str):
+                    event_types[event_type] += 1
+        event_schema = {
+            'count': len(events),
+            'field_types': {k: sorted(v) for k, v in sorted(fields.items())},
+            'event_type_counts': dict(sorted(event_types.items())),
+        }
+
+    stimulus_lengths = {}
+    for prefix, container in [('object', state),
+                              ('md.stim_metadata', metadata.get('stim_metadata', {})),
+                              ('md.alg_metadata', metadata.get('alg_metadata', {}))]:
+        if isinstance(container, dict):
+            for key, value in container.items():
+                if key.startswith('stim_') and isinstance(value, list):
+                    stimulus_lengths[prefix + '.' + key] = len(value)
+
+    # Only structure, event counts and event-type labels leave the loader.
     return {
         'object_global': list(root.pickle_global),
         'object_fields': structure(state),
         'metadata_fields': structure(metadata),
         'nested_metadata_fields': {k: structure(v) for k, v in sorted(metadata.items()) if isinstance(v, dict)},
+        'delivered_event_schema': event_schema,
+        'stimulus_list_lengths': dict(sorted(stimulus_lengths.items())),
         'replaced_globals': [list(k) for k in sorted(loader.globals)],
     }
 
@@ -92,7 +127,7 @@ def main():
         'schema_version': 1, 'pickle_sha256': sha,
         'download_receipt_sha256': hashlib.sha256(receipt_raw).hexdigest(),
         'script_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
-        'scope': 'One candidate processed recording, field names and types only. All pickle globals replaced by inert placeholders; numerical arrays not constructed, values not reported. Does not establish stimulus eligibility or animal independence.',
+        'scope': 'One candidate processed recording: field names/types and delivered-event count/type categories only. All pickle globals replaced by inert placeholders; numerical arrays not constructed, response values not reported. Does not establish stimulus eligibility or animal independence.',
     })
     with Path(a.output).open('x') as f:
         json.dump(result, f, indent=2)

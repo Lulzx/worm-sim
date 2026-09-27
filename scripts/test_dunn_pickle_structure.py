@@ -33,6 +33,10 @@ class StructureTests(unittest.TestCase):
     def test_globals_are_inert_and_values_not_exported(self):
         record = Recording()
         record.md = {'subject': 'private-value', 'alg_metadata': {'stim_param_list': []}}
+        record.md['stim_metadata'] = {'stim_param_list': [
+            {'stim_on': 1234, 'event': {'event_type': 'pulse', 'amplitude': 6789}},
+            {'stim_on': 1235, 'event': {'event_type': 'pulse', 'amplitude': 6789}},
+        ]}
         record.array = SideEffect()
         with tempfile.TemporaryDirectory() as tmp:
             previous = os.getcwd()
@@ -45,6 +49,12 @@ class StructureTests(unittest.TestCase):
         self.assertEqual(result['metadata_fields']['subject'], 'str')
         self.assertEqual(result['nested_metadata_fields']['alg_metadata'], {'stim_param_list': 'list'})
         self.assertNotIn('private-value', str(result))
+        self.assertEqual(result['delivered_event_schema']['count'], 2)
+        self.assertEqual(result['stimulus_list_lengths']['md.stim_metadata.stim_param_list'], 2)
+        self.assertEqual(result['stimulus_list_lengths']['md.alg_metadata.stim_param_list'], 0)
+        self.assertEqual(result['delivered_event_schema']['event_type_counts'], {'pulse': 2})
+        self.assertEqual(result['delivered_event_schema']['field_types']['event.amplitude'], ['int'])
+        self.assertNotIn('6789', str(result))
         self.assertTrue(result['object_fields']['array'].startswith('opaque:'))
 
     def test_extension_and_wrong_root_rejected(self):

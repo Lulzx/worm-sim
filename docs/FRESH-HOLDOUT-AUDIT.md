@@ -230,9 +230,10 @@ confirmatory cohort remain unverified.
 `scripts/inspect_dunn_pickle_structure.py` locates metadata fields without
 loading upstream analysis classes or constructing NumPy arrays. All pickle
 globals are replaced with inert placeholders; extension-cache and persistent
-reference opcodes are rejected. The report includes only field names and types
-from the object's state, its `md` dictionary and nested metadata dictionaries.
-It deliberately omits values and does not establish delivered events or animal
+reference opcodes are rejected. The report includes field names and types
+from the object's state, its `md` dictionary and nested metadata dictionaries,
+plus stimulus-list lengths and delivered-event type categories.
+It deliberately omits response values and does not establish delivered events or animal
 identity. Pickle primitive values and opaque byte payloads are parsed in memory;
 this is not a claim that only metadata bytes are downloaded.
 
@@ -256,3 +257,26 @@ python3 scripts/inspect_dunn_pickle_structure.py \
 The download and real-file structure inspection must complete before reporting
 candidate field availability. No processed-file eligibility result is claimed
 by the reader tests.
+
+### First processed recording: stimulus lists are empty
+
+The lexicographically first candidate, `20220302-11-45-51.pkl`, downloaded
+successfully (**209,932,669 bytes**); its published MD5 matches. The
+[download receipt](dunn-first-processed-download.json) also records SHA-256.
+The [metadata inspection receipt](dunn-first-processed-metadata.json) pins that
+file, download receipt and reader source.
+
+The object has `md.stim_metadata` and processed stimulus fields, but all **11**
+inspected stimulus lists are empty: the algorithm event list, six delivered-event
+and timing lists, and four processed event/intensity/onset/offset lists. Thus this
+recording supplies no Task 1 stimulation trials through the inspected metadata.
+Do not interpret the mere presence of stimulus field names as usable events.
+This does not classify the remaining 94 recordings or establish an independent
+animal identity. A later candidate must be selected by a fixed metadata-only
+rule, without inspecting response outcomes.
+
+`dff`, neuron-identity arrays, positions and time arrays remained inert NumPy
+placeholders, and the stored DataFrame remained an inert pandas placeholder.
+The report contains only field types, stimulus counts and event-type categories
+(empty here), not neural response values. These are eligibility observations,
+not held-out model scores or a claim that a confirmatory cohort is secured.

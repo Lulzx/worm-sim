@@ -1,0 +1,162 @@
+{
+  "object_global": [
+    "wbliveDataClass",
+    "wbliveDataClass"
+  ],
+  "object_fields": {
+    "DERIV_PRECALCULATED_FLAG": "bool",
+    "ID1": "opaque:numpy.core.multiarray._reconstruct",
+    "baseline_window": "int",
+    "datadir": "str",
+    "derivs": "NoneType",
+    "dff": "opaque:numpy.core.multiarray._reconstruct",
+    "dff_nobacksub": "NoneType",
+    "fname_root": "str",
+    "md": "dict",
+    "metadata_fname": "str",
+    "metadatadir": "str",
+    "nn": "int",
+    "pre_post_frames": "int",
+    "quant_method": "str",
+    "raw_datadir": "str",
+    "stim_intensity_list": "list",
+    "stim_off_list": "list",
+    "stim_on_list": "list",
+    "stim_param_list": "list",
+    "timeseries_fname": "str",
+    "timevec": "opaque:numpy.core.multiarray._reconstruct",
+    "tracestate_colors": "list",
+    "tracestate_names": "list",
+    "tracestatedir": "str",
+    "tracestates": "opaque:numpy.core.multiarray._reconstruct",
+    "wbstruct": "opaque:pandas.core.frame.DataFrame",
+    "x": "opaque:numpy.core.multiarray._reconstruct",
+    "y": "opaque:numpy.core.multiarray._reconstruct",
+    "z": "opaque:numpy.core.multiarray._reconstruct"
+  },
+  "metadata_fields": {
+    "alg_metadata": "dict",
+    "frame_time_list": "list",
+    "gooey_args": "dict",
+    "id": "str",
+    "mmc_metadata": "dict",
+    "postprocessing": "dict",
+    "roi": "list",
+    "stim_metadata": "dict",
+    "xsize": "int",
+    "ysize": "int"
+  },
+  "nested_metadata_fields": {
+    "alg_metadata": {
+      "model_time_list": "list",
+      "process_time_list": "list",
+      "stim_param_list": "list"
+    },
+    "gooey_args": {
+      "acquisition_backend": "str",
+      "atr_concentration": "int",
+      "microscope_name": "str",
+      "nose_orientation": "str",
+      "num_eggs": "int",
+      "save_structural_scan": "str",
+      "stim_interface": "str",
+      "subject_strain": "str",
+      "total_frames": "int",
+      "trigger_algorithm": "str",
+      "vnc_orientation": "str",
+      "z_step_size": "float",
+      "zsize": "int"
+    },
+    "mmc_metadata": {
+      "GB_info": "dict",
+      "binning": "str",
+      "camera_mode": "str",
+      "exposure": "float",
+      "intensity_405": "float",
+      "intensity_488": "float",
+      "intensity_561": "float",
+      "intensity_639": "float",
+      "objective": "str"
+    },
+    "postprocessing": {
+      "timeseries_extraction": "dict"
+    },
+    "stim_metadata": {
+      "stim_off_list": "list",
+      "stim_off_time_list": "list",
+      "stim_on_list": "list",
+      "stim_on_time_list": "list",
+      "stim_onset_times_simple": "list",
+      "stim_param_list": "list"
+    }
+  },
+  "delivered_event_schema": {
+    "count": 0,
+    "field_types": {},
+    "event_type_counts": {}
+  },
+  "stimulus_list_lengths": {
+    "md.alg_metadata.stim_param_list": 0,
+    "md.stim_metadata.stim_off_list": 0,
+    "md.stim_metadata.stim_off_time_list": 0,
+    "md.stim_metadata.stim_on_list": 0,
+    "md.stim_metadata.stim_on_time_list": 0,
+    "md.stim_metadata.stim_onset_times_simple": 0,
+    "md.stim_metadata.stim_param_list": 0,
+    "object.stim_intensity_list": 0,
+    "object.stim_off_list": 0,
+    "object.stim_on_list": 0,
+    "object.stim_param_list": 0
+  },
+  "replaced_globals": [
+    [
+      "builtins",
+      "slice"
+    ],
+    [
+      "numpy",
+      "dtype"
+    ],
+    [
+      "numpy",
+      "ndarray"
+    ],
+    [
+      "numpy.core.multiarray",
+      "_reconstruct"
+    ],
+    [
+      "pandas._libs.internals",
+      "_unpickle_block"
+    ],
+    [
+      "pandas.core.frame",
+      "DataFrame"
+    ],
+    [
+      "pandas.core.indexes.base",
+      "Index"
+    ],
+    [
+      "pandas.core.indexes.base",
+      "_new_Index"
+    ],
+    [
+      "pandas.core.indexes.range",
+      "RangeIndex"
+    ],
+    [
+      "pandas.core.internals.managers",
+      "BlockManager"
+    ],
+    [
+      "wbliveDataClass",
+      "wbliveDataClass"
+    ]
+  ],
+  "schema_version": 1,
+  "pickle_sha256": "5e1ff7311230f25250cf846c8bfabf08173cc5240354a2e49e6589549e502acb",
+  "download_receipt_sha256": "ce17ecbbc56f5044fe26dffae3e8a394a8a9fd283c85dd7966096a1d8c0ec471",
+  "script_sha256": "5cde8b54eb81d7847be667e8895f359973931ed3eaf392305bcdf52e0fc1e817",
+  "scope": "One candidate processed recording: field names/types and delivered-event count/type categories only. All pickle globals replaced by inert placeholders; numerical arrays not constructed, response values not reported. Does not establish stimulus eligibility or animal independence."
+}

@@ -1,0 +1,17 @@
+{
+  "file": "runs/dunn-first-processed.pkl",
+  "source": {
+    "id": "7ff6bea0-81d6-4fee-a84f-f2267bc39c86",
+    "key": "20220302-11-45-51.pkl",
+    "size": 209932669,
+    "checksum": "md5:84177373647c75edd97edf179374d956",
+    "links": {
+      "self": "https://zenodo.org/api/records/17353307/files/20220302-11-45-51.pkl/content"
+    }
+  },
+  "bytes": 209932669,
+  "sha256": "5e1ff7311230f25250cf846c8bfabf08173cc5240354a2e49e6589549e502acb",
+  "md5_verified": true,
+  "selection": "lexicographically first recording in pinned candidate inventory",
+  "scope": "Downloaded bytes only; no pickle decoding performed."
+}
