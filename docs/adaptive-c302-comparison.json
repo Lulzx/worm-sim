@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "loose": {
+    "schema_version": 1,
+    "source_commit": "3c7052674baf4cf7a06ea56722306853a0bb8911",
+    "source_worktree_dirty": false,
+    "input_sha256": {
+      "model": "0d5c943e2e03feef048184b9703ea69d9d5a3418feb4563046c845c68a1eea0f",
+      "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629"
+    },
+    "target": "AVAL",
+    "neurons": 302,
+    "frames": 40,
+    "preparation_seconds": 60.0,
+    "sample_dt": 0.5,
+    "devices": [
+      "cpu:0"
+    ],
+    "methods": {
+      "tsit5": {
+        "settings": {
+          "method": "tsit5",
+          "rtol": 1e-07,
+          "atol": 1e-09,
+          "dt0": 0.01,
+          "dtmax": null,
+          "max_steps": 100000
+        },
+        "seconds_including_compile": 1.2502963750157505,
+        "stats": {
+          "num_accepted_steps": 319,
+          "num_rejected_steps": 33,
+          "num_steps": 352
+        }
+      },
+      "kvaerno5": {
+        "settings": {
+          "method": "kvaerno5",
+          "rtol": 1e-07,
+          "atol": 1e-09,
+          "dt0": 0.01,
+          "dtmax": null,
+          "max_steps": 100000
+        },
+        "seconds_including_compile": 5.940244707977399,
+        "stats": {
+          "num_accepted_steps": 195,
+          "num_rejected_steps": 0,
+          "num_steps": 195
+        }
+      }
+    },
+    "maximum_state_difference": 3.260053982323541e-07,
+    "scope": "Frozen parameter numerical comparison, not a fit or biological benchmark. Full states include prepared voltage/calcium/gates. Timings include compilation and no gradient."
+  },
+  "tight": {
+    "schema_version": 1,
+    "source_commit": "3c7052674baf4cf7a06ea56722306853a0bb8911",
+    "source_worktree_dirty": false,
+    "input_sha256": {
+      "model": "0d5c943e2e03feef048184b9703ea69d9d5a3418feb4563046c845c68a1eea0f",
+      "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629"
+    },
+    "target": "AVAL",
+    "neurons": 302,
+    "frames": 40,
+    "preparation_seconds": 60.0,
+    "sample_dt": 0.5,
+    "devices": [
+      "cpu:0"
+    ],
+    "methods": {
+      "tsit5": {
+        "settings": {
+          "method": "tsit5",
+          "rtol": 1e-09,
+          "atol": 1e-11,
+          "dt0": 0.01,
+          "dtmax": null,
+          "max_steps": 100000
+        },
+        "seconds_including_compile": 0.6128492089919746,
+        "stats": {
+          "num_accepted_steps": 466,
+          "num_rejected_steps": 28,
+          "num_steps": 494
+        }
+      },
+      "kvaerno5": {
+        "settings": {
+          "method": "kvaerno5",
+          "rtol": 1e-09,
+          "atol": 1e-11,
+          "dt0": 0.01,
+          "dtmax": null,
+          "max_steps": 100000
+        },
+        "seconds_including_compile": 8.923460500082001,
+        "stats": {
+          "num_accepted_steps": 382,
+          "num_rejected_steps": 52,
+          "num_steps": 434
+        }
+      }
+    },
+    "maximum_state_difference": 1.126396309558686e-09,
+    "scope": "Frozen parameter numerical comparison, not a fit or biological benchmark. Full states include prepared voltage/calcium/gates. Timings include compilation and no gradient."
+  },
+  "tolerance_change_maximum_state_difference": {
+    "tsit5": 3.3250279529717375e-07,
+    "kvaerno5": 5.38242101444375e-08
+  },
+  "state_file_sha256": {
+    "runs/adaptive-c302-comparison/tsit5-states.npy": "1decac5e4d6af7ca73425bb08974f8f3e09361abc456af4de5f3f972322a8ed2",
+    "runs/adaptive-c302-tight-comparison/tsit5-states.npy": "0aac6f4b49a0046cb29431075f3b6f1ef997bdb1cc9145f7265e35c048c9e796",
+    "runs/adaptive-c302-comparison/kvaerno5-states.npy": "2ad83abbfd8ab422b19c4e64b1224cd29b0af320897ef80f75b3f5d15a7bc07e",
+    "runs/adaptive-c302-tight-comparison/kvaerno5-states.npy": "2391226404c89bea7a0f557a24bc6e1e0ea76c8b56051f57f59a8e2fda5d97c0"
+  }
+}

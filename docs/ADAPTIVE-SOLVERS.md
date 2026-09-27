@@ -65,3 +65,25 @@ truncated training and distributed execution remain separate §6 requirements.
 Primary documentation: [Diffrax ODE solvers](https://docs.kidger.site/diffrax/api/solvers/ode_solvers/),
 [step controllers](https://docs.kidger.site/diffrax/api/stepsize_controller/),
 [adjoints](https://docs.kidger.site/diffrax/api/adjoints/).
+
+## Full-network numerical receipt
+
+At clean source `3c70526`, both adaptive solvers completed the frozen selected
+neutral joint-fit model on the 302-neuron graph, with AVAL stimulated, 60 seconds
+of preparation and 40 observations through 19.5 seconds. The
+[receipt](adaptive-c302-comparison.json) records model/graph/state-array hashes,
+settings, device, source and step counts. No parameters were updated.
+
+| Relative / absolute tolerance | Maximum Tsit5–Kvaerno5 state difference | Tsit5 seconds | Kvaerno5 seconds |
+| --- | --- | --- | --- |
+| 1e-7 / 1e-9 | 3.26e-7 | 1.250 | 5.940 |
+| 1e-9 / 1e-11 | 1.13e-9 | 0.613 | 8.923 |
+
+Tightening tolerances changed Tsit5 states by at most 3.33e-7 and Kvaerno5 states
+by at most 5.38e-8. The explicit/implicit discrepancy decreased by roughly two
+orders of magnitude. This is convergence evidence for one frozen full-network
+trajectory, not a global error bound or a test of all stimulation targets.
+Timings are CPU wall time including compilation/cache effects; the faster second
+Tsit5 invocation is not evidence that stricter tolerances improve performance.
+The implicit solver was slower here despite fewer steps at the looser tolerance.
+No claim is made that this fitted Level 0 configuration requires stiff integration.
