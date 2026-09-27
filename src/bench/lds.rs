@@ -34,10 +34,10 @@ impl GaussianLds {
         let k = self.dim;
         let n = self.outputs;
         if k == 0
-            || k > 64
+            || k > 512
             || n == 0
             || n > 1024
-            || self.input_dim > 64
+            || self.input_dim > 512
             || self.input_weights.len() != k * self.input_dim
             || self.transition.len() != k * k
             || self.observation.len() != n * k
