@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "source_commit": "1082401c2722f925cde7350dbb86cb2b8b9ea899",
+  "dataset_hash": "3f3a537ff8424d89da72699e9b342185959afbd9380f7ecc6aa0fed06fafe843",
+  "split_hash": "2d291f63668345396d9b08e984581841db7b8912897405993ba258bf9f013f47",
+  "selected_epoch": 5,
+  "config": {
+    "epochs": 5,
+    "dt": 0.01,
+    "preparation_seconds": 30.0,
+    "learning_rate": 0.01,
+    "kernel_lags": 39,
+    "prior_strength": 0.01,
+    "sign_prior_strength": 0.01,
+    "kernel_prior_strength": 0.01,
+    "sharing": {
+      "classes": {},
+      "allow_suffix_pairs": true,
+      "provenance": "Graph annotations when available; matching terminal L/R names otherwise. Suffix pairing is an explicit modeling assumption, not a biological annotation."
+    }
+  },
+  "selection": [
+    {
+      "epoch": 0,
+      "preceding_training_mse": null,
+      "preceding_penalty": null,
+      "validation_mse": 0.04232877326057794,
+      "validation_correlation": -0.0006802823236675523,
+      "defined_trace_correlations": 10659,
+      "elapsed_seconds": 1.932349459
+    },
+    {
+      "epoch": 1,
+      "preceding_training_mse": 0.07536645831538034,
+      "preceding_penalty": 0.006931471805598933,
+      "validation_mse": 0.04232672484970199,
+      "validation_correlation": 0.014495410802174489,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 46.187928125
+    },
+    {
+      "epoch": 2,
+      "preceding_training_mse": 0.07536408403027563,
+      "preceding_penalty": 0.0069323482725576185,
+      "validation_mse": 0.04232535446494848,
+      "validation_correlation": 0.015247264008918054,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 46.736800417
+    },
+    {
+      "epoch": 3,
+      "preceding_training_mse": 0.07536225683490841,
+      "preceding_penalty": 0.006932872542146207,
+      "validation_mse": 0.0423245479762023,
+      "validation_correlation": 0.015639935518867196,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 51.138750458
+    },
+    {
+      "epoch": 4,
+      "preceding_training_mse": 0.07536085698875758,
+      "preceding_penalty": 0.0069337035438543845,
+      "validation_mse": 0.0423242059663678,
+      "validation_correlation": 0.01589740485386116,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 48.364688292
+    },
+    {
+      "epoch": 5,
+      "preceding_training_mse": 0.07535977411948844,
+      "preceding_penalty": 0.006934447236789052,
+      "validation_mse": 0.042324205283926324,
+      "validation_correlation": 0.01611856034587323,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 49.59221425
+    }
+  ],
+  "free_parameters": 6781,
+  "independent_saved_trace_scores": {
+    "validation": {
+      "pooled_mse": 0.0423242052839269,
+      "zero_response_mse": 0.042458845587192255,
+      "macro_trace_correlation": 0.016118560345873206,
+      "defined_trace_correlations": 11746
+    },
+    "test": {
+      "pooled_mse": 0.0498993152451586,
+      "zero_response_mse": 0.05003565246791083,
+      "macro_trace_correlation": 0.014800262324508505,
+      "defined_trace_correlations": 12588
+    }
+  },
+  "independent_pair_auroc": 0.653959776471273,
+  "max_pair_area_error": 2.0816681711721685e-17,
+  "validation_half_step": {
+    "coarse_mse": 0.042324205283926324,
+    "dt": 0.01,
+    "epoch": 5,
+    "fine_dt": 0.005,
+    "fine_mse": 0.04232418264243576,
+    "max_prediction_change": 5.2100080486144895e-05,
+    "scope": "Validation-only numerical sensitivity at the selected checkpoint; not a convergence proof.",
+    "source_commit": "1082401c2722f925cde7350dbb86cb2b8b9ea899"
+  },
+  "selected_model_sha256": "d8474ffb227691cfb5c7e2661dfc9f762456823c4a963faf131764bd87275a19",
+  "dataset_file_sha256": "2063f69753f9ab0dce9ee489214fc3eb641c451651a09cc4b2ee81f261df4b2b",
+  "split_file_sha256": "c3002a03460f7685f71bcddf2be58c78e8ec35a410abe4a5eb3c2b9f11375438",
+  "evidence_file_sha256": "28633bafc09afac3c53eb24d76e038774f9d1470182233a4f8d4b50e07d47152",
+  "audit_script_sha256": "2cd5d6b8a900d4ddee77ee6c11275aeb41b8ca8e1b99af51329d866761ca8af0",
+  "shared_score_script_sha256": "ddcc0c95f9a3f872c61b180176f8043682bc6fbc3c70f9441cafb1d1d3806e53",
+  "artifacts": {
+    "epoch-0.json": "c9ffe4a84134c0228cc5a266e38d61d96bef5f037e40027c415b085777ec9e26",
+    "epoch-1.json": "7988a40d3db17b8003e5442cf4aa1f8c91200d37c872f2b6ad760bd737df80ba",
+    "epoch-2.json": "4044c226d2d077d3f24a927bde3d0d07213e10a62741a01a965361706a34c069",
+    "epoch-3.json": "759a867eaff5569b0e936bf30c421c3c071a8d791a94d0c879a36d490ed634a2",
+    "epoch-4.json": "100e8984eefff991384be625a11aa7894ea5f5894e896ae680a862265f2f5468",
+    "epoch-5.json": "d8474ffb227691cfb5c7e2661dfc9f762456823c4a963faf131764bd87275a19",
+    "validation-report.json": "a0c1781c31c42b72d9ac317c83ccb18ac2e6c262018b2adcd341de46294bf0ef",
+    "validation-predictions.json": "699aa47dc5e0aa020050b2afcd7b35703de39c8ff202c0362c350ac9349ae914",
+    "test-report.json": "dc3c01602426a7fa2d709750f648e40c19f6b8558c8b53a784c5a11a4c7edb80",
+    "test-predictions.json": "90f6729877de894479489b9a2b5a853aa459817faf3a4fba7b571041042d3e34",
+    "validation-preparation-check.json": "fe8c468bafc67356b0214171e399ba07953945249be362481e5eebf4b66bc5e8"
+  },
+  "limitations": "Independent recomputation of saved-output MSE, correlation, response area and direct pairwise AUROC. Selection and declared lineage checked. Nonlinear ODE replay is audited separately below; optimization and bootstrap draws are not independently replayed. See gradient tests and selected-checkpoint half-step check for separate numerical evidence. Shared fixed preparation seed, assumed positive shared input, neutral unannotated signs and previously inspected test cohort remain limitations.",
+  "validation_preparation_check": {
+    "derivative_l2": 4.724268677487512e-07,
+    "epoch": 5,
+    "longer_derivative_l2": 1.9636849738575618e-13,
+    "longer_duration_mse": 0.0423242027191623,
+    "longer_seconds": 60.0,
+    "max_prediction_change": 2.210392452951454e-07,
+    "max_state_change": 2.210590819839986e-07,
+    "preparation_seconds": 30.0,
+    "scope": "Validation-only preparation duration sensitivity and residual unforced derivative; not a proof of equilibrium uniqueness or a biological resting state.",
+    "selected_duration_mse": 0.042324205283926324,
+    "source_commit": "1082401c2722f925cde7350dbb86cb2b8b9ea899"
+  },
+  "independent_ode_replay": {
+    "script_sha256": "3ed4cc5807676e467968619765b28b2a464a5ed3fe96ffc09442adbd8f08220d",
+    "graph_json_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "target_grids_replayed": 30,
+    "max_fluorescence_error": 1.6653345410736379e-16,
+    "prepared_unforced_derivative_l2": 4.7242686773806265e-07,
+    "scope": "Independent NumPy Euler dynamics including unforced preparation, positive parameter transforms, chemical and gap currents, calcium/synapse dynamics and baseline-relative readout. All saved selected validation/test predictions checked. Does not refit parameters, replay optimization or independently bootstrap."
+  }
+}

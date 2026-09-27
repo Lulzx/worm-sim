@@ -281,3 +281,72 @@ score audit. The audit also checks preparation-report lineage and duration. It
 does not independently replay optimization, select all candidates by independent
 ODE evaluation, or recompute bootstrap draws. A single-cell equilibrium/input
 check runs in CI alongside the existing independent-score arithmetic tests.
+
+## First prepared-state fit: state correction, no baseline win
+
+Source `1082401` completed the predeclared five updates with 30 s preparation.
+Validation MSE selected epoch 5. The summed epoch timers were 243.95 s on the local
+Apple M4 Pro, including training gradients and validation, excluding preparation
+of the dataset, artifact writing and final scoring. Parameter count remains 6,781.
+
+| Test metric | Prepared Level 0 | Fixed-state Level 0 | LDS |
+|---|---:|---:|---:|
+| Pooled MSE | 0.0498993 | 0.0489985 | 0.0473448 |
+| Mean trace correlation | 0.0148003 | 0.0239803 | 0.0452857 |
+| Pair AUROC | 0.6539598 | 0.4177484 | 0.6861866 |
+
+The [paired prepared-model comparison](atlas-prepared-comparison.json) gives:
+MSE difference versus LDS +0.0025545, target-cluster interval
+[+0.0011340, +0.0037140]; AUROC difference −0.03223, target interval
+[−0.06448, +0.00868]. Thus MSE still favors LDS and AUROC superiority is not
+established. The standalone prepared-model AUROC interval is [0.58041, 0.72900].
+All 12,588 test trace correlations are defined. The same previously inspected
+cohort and separate-marginal-bootstrap limitations apply.
+
+The [independent audit](level0-atlas-prepared-fit-audit.json) checks all 30 distinct
+selected validation/test target grids against independent NumPy dynamics. Maximum
+fluorescence error is 1.67e−16. Prepared-state derivative L2 is 4.7243e−7 after 30 s;
+it is 1.9637e−13 after 60 s in the native duration check. Doubling duration changes
+validation predictions by at most 2.21e−7 and MSE by 2.56e−9. The half-dt change is
+5.21e−5 in predictions and 2.26e−8 in validation MSE. Epoch 5's MSE advantage over
+epoch 4 is only 6.82e−10, smaller than those numerical changes; selection of that
+specific final epoch must not be treated as robust evidence of improvement.
+
+The [prepared drift diagnostic](level0-atlas-prepared-drift.json) shows zero-current
+mean square 4.39e−15 versus stimulus-difference mean square 5.90e−6. The gross drift
+confound has been removed. However, validation AUROC changes from 0.73086 to
+0.76313 when even this tiny residual drift is subtracted. Correlation likewise
+changes because it normalizes very weak traces. Absolute output/MSE stability is
+therefore insufficient to certify ranking/correlation convergence. Further
+validation-only duration and dt checks are required before interpreting those
+metrics as numerically stable. No diagnostic override replaces the frozen test
+results above.
+
+This correction does not meet Task 1 acceptance. The training-only pair
+classification objective, calibrated response scale/drive, and source-backed
+cell/sign priors remain necessary model/fitting work. Backend expansion is not
+indicated by these results.
+
+### Ranking/correlation duration sensitivity
+
+The [frozen validation sensitivity check](level0-atlas-preparation-sensitivity.json)
+(source `9196ac3`) confirms that stable MSE concealed ranking changes:
+
+| Preparation | dt | Validation MSE | Correlation | Defined traces | Pair AUROC |
+|---|---:|---:|---:|---:|---:|
+| 30 s | 0.01 | 0.0423242053 | 0.0161186 | 11,746 | 0.7308562 |
+| 60 s | 0.01 | 0.0423242027 | 0.0024711 | 11,697 | 0.7631311 |
+| 120 s | 0.01 | 0.0423242027 | 0.0025727 | 11,564 | 0.7631311 |
+| 120 s | 0.005 | 0.0423241800 | 0.0029074 | 11,445 | 0.7631311 |
+
+Pair ranking agrees at 60/120 s and at half dt in this check. Correlation and its
+coverage remain sensitive to effectively constant traces; no blanket numerical
+convergence claim is made. The prepared 30 s test scores above stay frozen and
+carry this numerical limitation. Future fitting should use at least the validated
+preparation duration and check all reported metrics, not just MSE/state norms.
+These validation diagnostics do not establish test improvements or a new fit.
+
+```sh
+WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release --example check_atlas_preparation
+target/release/examples/check_atlas_preparation data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json runs/randi-pairs.json runs/level0-atlas-prepared-fit/selected.json runs/level0-atlas-preparation-sensitivity.json
+```
