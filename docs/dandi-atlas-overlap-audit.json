@@ -1,0 +1,702 @@
+{
+  "schema_version": 1,
+  "dandiset": "001075",
+  "published_version": "0.240930.1859",
+  "checked_version": "draft",
+  "script_sha256": "22ec504bbe0ba9e831cd2ca4a76a7d5f487f8370d828291c3060ec7a96b0d06d",
+  "source_manifest_sha256": "e8e31bee31091aca24a671a255fb227e520105b6934a1dd8dcc68522382b1ee2",
+  "published_inventory_sha256": "9440782f628bac5e5ba5822fc5a5bd3b0d70d544f0438e1c4590fb82a790bde0",
+  "draft_inventory_sha256": "9440782f628bac5e5ba5822fc5a5bd3b0d70d544f0438e1c4590fb82a790bde0",
+  "published_assets_url": "https://api.dandiarchive.org/api/dandisets/001075/versions/0.240930.1859/assets/?page_size=1000",
+  "draft_assets_url": "https://api.dandiarchive.org/api/dandisets/001075/versions/draft/assets/?page_size=1000",
+  "published_asset_count": 223,
+  "draft_asset_count": 223,
+  "identical_asset_paths_ids_blobs_and_sizes": true,
+  "pinned_source_recordings": 113,
+  "draft_subject_count": 113,
+  "matched_subject_sessions": 113,
+  "matches": [
+    {
+      "subject": "0",
+      "session": "20210824-104000",
+      "source_name_sha256": "1dab277274c37ab1672a448f433d56487a18214091a38f1742b469f3196f77d8",
+      "asset_count": 2
+    },
+    {
+      "subject": "1",
+      "session": "20210824-114940",
+      "source_name_sha256": "b8b98f5e51bbf6d742fda0b7c3b73c1924f1ca7fd2eb38bd5be3f0b4119e556b",
+      "asset_count": 2
+    },
+    {
+      "subject": "2",
+      "session": "20210824-144628",
+      "source_name_sha256": "e5a3ef4ae697e6a55247febc4008d57779d2aabe5e4d1c61551ac979180795bc",
+      "asset_count": 2
+    },
+    {
+      "subject": "3",
+      "session": "20210824-161919",
+      "source_name_sha256": "55d4e79e7ae44d17ced77e5362e8b852d81c9c9d696687dd7fe55d8920760618",
+      "asset_count": 2
+    },
+    {
+      "subject": "4",
+      "session": "20210825-123600",
+      "source_name_sha256": "3d638d28c571ad0a05e3ae0ba83bbcb63edcee5ca28bad0c95abdb92629b4485",
+      "asset_count": 2
+    },
+    {
+      "subject": "5",
+      "session": "20210825-150349",
+      "source_name_sha256": "b3b42f4d8a5b156a5eacda427432aaf7c914520181d11b997ac835b74f93d252",
+      "asset_count": 2
+    },
+    {
+      "subject": "6",
+      "session": "20210827-104408",
+      "source_name_sha256": "4eb6d1d6d7839a9adeeb518359fd847fd3526649b974b78d1a2a26c6480e5b26",
+      "asset_count": 2
+    },
+    {
+      "subject": "7",
+      "session": "20210827-115857",
+      "source_name_sha256": "5bb5af62e4058545836da575f5ebec15d03a2f26ffe6a6987d3c1b8fbaf627b1",
+      "asset_count": 2
+    },
+    {
+      "subject": "8",
+      "session": "20210827-142226",
+      "source_name_sha256": "791808f9e3df331a0130454b2d038112af6757a73f08c7e14acd82addb3e8b49",
+      "asset_count": 2
+    },
+    {
+      "subject": "9",
+      "session": "20210830-111646",
+      "source_name_sha256": "bdca5339581b91822804bbc03a3103f5f0199be867bbbedf5f64fea2cc245b21",
+      "asset_count": 2
+    },
+    {
+      "subject": "10",
+      "session": "20210830-144155",
+      "source_name_sha256": "0ae12567f7b07776695a382fd5f414c260a864ca59d681c51305b5584f443b38",
+      "asset_count": 2
+    },
+    {
+      "subject": "11",
+      "session": "20210830-161543",
+      "source_name_sha256": "90457db2f89c1cf90a4e64588fc357ab39270b1c6524be91798a95481bb60920",
+      "asset_count": 2
+    },
+    {
+      "subject": "12",
+      "session": "20210902-115146",
+      "source_name_sha256": "ac82388c2c7afc859f3385598a77ed72cc0072797711a9d07a3ef73233549ed9",
+      "asset_count": 2
+    },
+    {
+      "subject": "13",
+      "session": "20210903-153005",
+      "source_name_sha256": "7f34ebbc6bb8da7d70d79b4277020b37889a8557dd28e06dd257fa0ea2d7ca05",
+      "asset_count": 2
+    },
+    {
+      "subject": "14",
+      "session": "20210907-110334",
+      "source_name_sha256": "a52331983e74fcbc26f24343c30dc275e311a7c89f15cf1c747095412b1b5f12",
+      "asset_count": 2
+    },
+    {
+      "subject": "15",
+      "session": "20210907-141336",
+      "source_name_sha256": "d4f3374c99ee7c1778af630abc6ae5ce402cf49f154bfedc8bf7ebf143bad471",
+      "asset_count": 2
+    },
+    {
+      "subject": "16",
+      "session": "20210909-102637",
+      "source_name_sha256": "2b9f0b8d76347fb0c6114fd23d8774e2058822e4f56e0c150baec69520653b5f",
+      "asset_count": 2
+    },
+    {
+      "subject": "17",
+      "session": "20210913-105324",
+      "source_name_sha256": "984bf160ae9bdf581663e8a8c480ec6b3f0e1d39c641c629dcc4cfa0588989a5",
+      "asset_count": 2
+    },
+    {
+      "subject": "18",
+      "session": "20210913-161934",
+      "source_name_sha256": "c7f54fa06d595b167b85f3c6a57a976b2ebf31a9b1719c5e865b5359ac08d55f",
+      "asset_count": 2
+    },
+    {
+      "subject": "19",
+      "session": "20210917-104948",
+      "source_name_sha256": "f8e15510f23f0d64443b6ab325a21241d9812f0f2975ca81bb2ae02543e57e49",
+      "asset_count": 2
+    },
+    {
+      "subject": "20",
+      "session": "20210917-132736",
+      "source_name_sha256": "4974100f00c1cc37b7e95fde0b9da2926828e8dd14f1089101717877e0cdee3a",
+      "asset_count": 1
+    },
+    {
+      "subject": "21",
+      "session": "20210928-105933",
+      "source_name_sha256": "a6cbdf66d0f8675a1dcbc9aeaf884c48f5bdb062a27b5e3db4862cd4b125fb35",
+      "asset_count": 2
+    },
+    {
+      "subject": "22",
+      "session": "20210928-134411",
+      "source_name_sha256": "3238b0bbcaa7d4b28ab1f238c09e74b6ab8e3b457bf34fa10c1c600ea0e13251",
+      "asset_count": 2
+    },
+    {
+      "subject": "23",
+      "session": "20211008-115929",
+      "source_name_sha256": "420792b2b31c8303f3a7c866780ddb694fefb952c528c9ef5ff6a68975977bcc",
+      "asset_count": 1
+    },
+    {
+      "subject": "24",
+      "session": "20211102-101248",
+      "source_name_sha256": "a6fc76f374977941c043dd1e554ee1a40d79dc79cb31701a12a1c384448ec7f5",
+      "asset_count": 2
+    },
+    {
+      "subject": "25",
+      "session": "20211102-152524",
+      "source_name_sha256": "17bb6bfd3e3c87b3b3c20adcd333c31f6e0a751c8e8fe7ba94492b3885a61335",
+      "asset_count": 2
+    },
+    {
+      "subject": "26",
+      "session": "20211104-163944",
+      "source_name_sha256": "24ec20ade65ee15e39ab04c3d7e5ffb953342c076dfbd63274ef2b6c6757e414",
+      "asset_count": 2
+    },
+    {
+      "subject": "27",
+      "session": "20220113-153037",
+      "source_name_sha256": "a2d8d9775f62179cd4f85eb4d85fdd36af31b1b3a45f68c4561655ce4c07a4ec",
+      "asset_count": 2
+    },
+    {
+      "subject": "28",
+      "session": "20220120-135951",
+      "source_name_sha256": "03eff4fc7dc986fc5ef1fa66e1d48288001bafa989b6b20e5fa93881aeae5278",
+      "asset_count": 2
+    },
+    {
+      "subject": "29",
+      "session": "20220120-150453",
+      "source_name_sha256": "10e2a3c534bcee18439980ce7b8ae18620229938656e8215bdad61a24077911f",
+      "asset_count": 2
+    },
+    {
+      "subject": "30",
+      "session": "20220120-151357",
+      "source_name_sha256": "f59574fe5062dfcd0f0485a251e21782286bcc28d9f8450f49088c8def8af5d5",
+      "asset_count": 2
+    },
+    {
+      "subject": "31",
+      "session": "20211022-140822",
+      "source_name_sha256": "0230c80e81c580b145ae0b2f2cc985d6b9fecac190a7cca1023a055e3acb3c0e",
+      "asset_count": 2
+    },
+    {
+      "subject": "32",
+      "session": "20220126-153426",
+      "source_name_sha256": "c724e116807228e5ca3173b60ad300903e20bef304a9994c10d1fc2865e02317",
+      "asset_count": 2
+    },
+    {
+      "subject": "33",
+      "session": "20220330-110253",
+      "source_name_sha256": "1e54a6b101fcf891080bea06a4b2fcc56ca84951a110ad75dacede5646d6e745",
+      "asset_count": 1
+    },
+    {
+      "subject": "34",
+      "session": "20220330-123606",
+      "source_name_sha256": "d296bc1bba0a943945b75868732a13e4548aa79a0ab8cfdd988d03e344320e7f",
+      "asset_count": 2
+    },
+    {
+      "subject": "35",
+      "session": "20220330-164449",
+      "source_name_sha256": "8716d412b340485fa11f2ccc0ad1d97174cacac7b6b3cedcca0a585f5f9f75d0",
+      "asset_count": 2
+    },
+    {
+      "subject": "36",
+      "session": "20220331-114306",
+      "source_name_sha256": "d0e52a75df879ab8d1d63bc82828dc5ec509e7af8b3d02b84aaa5d35966c8511",
+      "asset_count": 2
+    },
+    {
+      "subject": "37",
+      "session": "20220331-142924",
+      "source_name_sha256": "530eb5f50834d9739ec4b6ac2a03bec5ae92bfc52a561b4c9a283ca4a94e0c6d",
+      "asset_count": 2
+    },
+    {
+      "subject": "38",
+      "session": "20220331-153103",
+      "source_name_sha256": "761b0efb2907b39e1017dc7a4c894a87734db14e298d5c83d699021295d52084",
+      "asset_count": 2
+    },
+    {
+      "subject": "39",
+      "session": "20220405-100245",
+      "source_name_sha256": "7fdbfb3259660fdc33c963a18c14f039ddf9454dfd036a4dc68f9bc397bb56c2",
+      "asset_count": 2
+    },
+    {
+      "subject": "40",
+      "session": "20220405-110704",
+      "source_name_sha256": "d8396f2e7d1bed7cc60e4b90192e3997ea48d3b42759f78de11d1a867678d7a5",
+      "asset_count": 2
+    },
+    {
+      "subject": "41",
+      "session": "20220405-125435",
+      "source_name_sha256": "12f07965c3d7eabfafb8bf43c7ee2aeea945aa7d7f1214aeaf924a493db42b51",
+      "asset_count": 2
+    },
+    {
+      "subject": "42",
+      "session": "20220405-143326",
+      "source_name_sha256": "50816c66f36652c05dc4b2f9baef898b6f6208e63332aa06a3bdb5592b1838ce",
+      "asset_count": 2
+    },
+    {
+      "subject": "43",
+      "session": "20211128-101826",
+      "source_name_sha256": "4e9f2729f8189815d2b8bcf13004f446ebee9b8ed919e59f6e68ae7753a6ea2f",
+      "asset_count": 2
+    },
+    {
+      "subject": "44",
+      "session": "20211128-133449",
+      "source_name_sha256": "3b91b16019769d70054d9c73dffe1bad705562c99110a78c6be90fe1a3e2526a",
+      "asset_count": 2
+    },
+    {
+      "subject": "45",
+      "session": "20211128-154756",
+      "source_name_sha256": "ba6dd02b4d5b12ef1699d5972c5d13feab30e13bf06cf05536a13ea69aed2291",
+      "asset_count": 2
+    },
+    {
+      "subject": "46",
+      "session": "20211128-165637",
+      "source_name_sha256": "f7d51bc3a3668e00c9ac510bfb6dfc9ae3911f6b69827289259441ce4ecba6fb",
+      "asset_count": 2
+    },
+    {
+      "subject": "47",
+      "session": "20211130-151402",
+      "source_name_sha256": "5a12f40e84d6f541aa84156e6ffe9f02b9d4b0f1971c0d7030df87563c2b2c30",
+      "asset_count": 2
+    },
+    {
+      "subject": "48",
+      "session": "20211203-164020",
+      "source_name_sha256": "c12436185aa3aef40a5400984a2c89c03b750ef1ffd5f5a330138b399426995a",
+      "asset_count": 2
+    },
+    {
+      "subject": "49",
+      "session": "20211206-110909",
+      "source_name_sha256": "9d5db9864115d05410089dc9ed38c9f8781af1cfa4908f729b783e5662a6b928",
+      "asset_count": 2
+    },
+    {
+      "subject": "50",
+      "session": "20220120-104715",
+      "source_name_sha256": "7fc0a51373f33616498a1af4f402900e9bff5bc949b243fcf2ef62c8af7d33e9",
+      "asset_count": 2
+    },
+    {
+      "subject": "51",
+      "session": "20220208-171724",
+      "source_name_sha256": "0b74053133af8560eed5cadf196723bc75945d688af3d602dfc466b3217af27b",
+      "asset_count": 2
+    },
+    {
+      "subject": "52",
+      "session": "20220929-143243",
+      "source_name_sha256": "0e6d3ccdf3edd6a9aacd270a600250bff6b9effadc95fdf1c0df3349f0218342",
+      "asset_count": 2
+    },
+    {
+      "subject": "53",
+      "session": "20220929-151408",
+      "source_name_sha256": "c0f581aa26034f1f0e98816bb89c46c8a6611569450f7581fae2214a3644a5e1",
+      "asset_count": 2
+    },
+    {
+      "subject": "54",
+      "session": "20221011-151353",
+      "source_name_sha256": "6b8651d193fe8aec96bc1ddc504525a04ea8f9378eeaf2916e33734a76f5c1b0",
+      "asset_count": 2
+    },
+    {
+      "subject": "55",
+      "session": "20221011-163802",
+      "source_name_sha256": "9d65a3d2c46577281335b95db82cce9b0caf1abb1e61cebaddb228ee69fc1fb1",
+      "asset_count": 2
+    },
+    {
+      "subject": "56",
+      "session": "20221010-165439",
+      "source_name_sha256": "8ed0246bd08ee1e0dffd14bb80a351ee3e94237a294a4abd9190f276de9ac547",
+      "asset_count": 2
+    },
+    {
+      "subject": "57",
+      "session": "20221010-173036",
+      "source_name_sha256": "3c2f050e52691b8a61337f50b9a40ec21c35949d8f1e3a540d7588edaf58e7d6",
+      "asset_count": 2
+    },
+    {
+      "subject": "58",
+      "session": "20230117-152438",
+      "source_name_sha256": "a85ff843790e8651dc5a6810387b241c4284ff528b17252747184a62f79d60b9",
+      "asset_count": 2
+    },
+    {
+      "subject": "59",
+      "session": "20221219-150841",
+      "source_name_sha256": "9b309e578713dc34dfeaa72487c60ca3e1e8b019d37a7f8684d8d75892090ec6",
+      "asset_count": 2
+    },
+    {
+      "subject": "60",
+      "session": "20230125-114648",
+      "source_name_sha256": "6a07d5b42965b97b55d68636dbcdcf3b56eae0187e28195f265c36be8c0fa642",
+      "asset_count": 2
+    },
+    {
+      "subject": "61",
+      "session": "20230215-150553",
+      "source_name_sha256": "a6bd9ede64d0428b63ba7851cacb25973aed4fdf68642ab2ef66b7e7e4967bdb",
+      "asset_count": 2
+    },
+    {
+      "subject": "62",
+      "session": "20230222-165630",
+      "source_name_sha256": "778a581240fb87f711a0afe05fa547d5c2c401323a1206bbe938760b1a44eadf",
+      "asset_count": 2
+    },
+    {
+      "subject": "63",
+      "session": "20211206-165435",
+      "source_name_sha256": "f86725a4f7f55e904db6a66a07daa701ba3b479bf75f1868d7625cae3ef0044e",
+      "asset_count": 2
+    },
+    {
+      "subject": "64",
+      "session": "20220124-163157",
+      "source_name_sha256": "388d1c765d457c873908e80f97de38452552e9e48c02ee3638431c4b076abe16",
+      "asset_count": 2
+    },
+    {
+      "subject": "65",
+      "session": "20220322-101222",
+      "source_name_sha256": "61719f62bec2bedd5e66da27276124a8435d285f9a88ab17db7a7c19fcd6356e",
+      "asset_count": 2
+    },
+    {
+      "subject": "66",
+      "session": "20230304-102932",
+      "source_name_sha256": "e8989e4782f9efca4e65886349925c780f19f214c01dda82361d75e9757d1194",
+      "asset_count": 2
+    },
+    {
+      "subject": "67",
+      "session": "20230304-112842",
+      "source_name_sha256": "80b8baf146a2c3316ade46c7b3349231c1c3d195f78345c6479efb9de3826365",
+      "asset_count": 2
+    },
+    {
+      "subject": "68",
+      "session": "20230304-133215",
+      "source_name_sha256": "1a455f97ecdd104b2fd15e35ffbf6f0df567b5f9bd0343374f3c8d8413f42288",
+      "asset_count": 2
+    },
+    {
+      "subject": "69",
+      "session": "20230304-144313",
+      "source_name_sha256": "73bcf117652b4aeb3b1c49b6f39c839d61e57c7e5e50c6e43734d7e8d3cdc005",
+      "asset_count": 2
+    },
+    {
+      "subject": "70",
+      "session": "20230309-112206",
+      "source_name_sha256": "1dea9469516f68f599589d0d45062f6ff46c5737e7a01c08e7318b04614fefab",
+      "asset_count": 2
+    },
+    {
+      "subject": "71",
+      "session": "20230309-122120",
+      "source_name_sha256": "b2d094943538b0c99a68b75c08df67b81407004d7b9af29d6a0fa763b45b4c13",
+      "asset_count": 2
+    },
+    {
+      "subject": "72",
+      "session": "20230309-143050",
+      "source_name_sha256": "c11668cc92f45b94d07c1e37f8f8801fc091ae465a0a4f4c9ba03173ea3a5f23",
+      "asset_count": 2
+    },
+    {
+      "subject": "73",
+      "session": "20230309-153504",
+      "source_name_sha256": "68cf185a7fcb21879fe13ee468d86a5b5683d15b6de0b4c1dd258636dba591df",
+      "asset_count": 2
+    },
+    {
+      "subject": "74",
+      "session": "20230309-180300",
+      "source_name_sha256": "7aec2a952b8e73ffb04c362e6ec3f17dca23d87001389e4015acc6cbc67f04b4",
+      "asset_count": 2
+    },
+    {
+      "subject": "75",
+      "session": "20230314-104728",
+      "source_name_sha256": "f8050f68a9aa0e27d72d34b65d08501660266be2d1aa367768f57654c571e1ce",
+      "asset_count": 2
+    },
+    {
+      "subject": "76",
+      "session": "20230314-115358",
+      "source_name_sha256": "74412959ec6527c3677f132685062542c6c2456a9074582ab78acb765056f5b5",
+      "asset_count": 2
+    },
+    {
+      "subject": "77",
+      "session": "20230314-132310",
+      "source_name_sha256": "ac25b5fc8f58c30f4bf0475bac235dbf1bdcdb64ec40dc3558f8e53ed35cbbc3",
+      "asset_count": 2
+    },
+    {
+      "subject": "78",
+      "session": "20230314-142850",
+      "source_name_sha256": "0feb37e0ce3e018056849d8c2a50d2a9518505e1ee28a74be2bde8a325167345",
+      "asset_count": 2
+    },
+    {
+      "subject": "79",
+      "session": "20230314-154307",
+      "source_name_sha256": "bc51e7f4ed6cca4b2bca61c53d267de67b9d844494d6430519f1507abe53dfc9",
+      "asset_count": 2
+    },
+    {
+      "subject": "80",
+      "session": "20230314-164209",
+      "source_name_sha256": "3b84606493467c030a97e92cdd0d0b0ebf6b7a920c1d0a44d3bd8161ea2d6a7b",
+      "asset_count": 2
+    },
+    {
+      "subject": "81",
+      "session": "20230315-105655",
+      "source_name_sha256": "9099accb9d3c70f217a4792cb1bbf56944af87188bf1f6e1bb7f289d3a898eb0",
+      "asset_count": 2
+    },
+    {
+      "subject": "82",
+      "session": "20230315-122224",
+      "source_name_sha256": "975af91b840696d331ee655c60294185dbbd30c863809e5ae1b96575dbb3f3e5",
+      "asset_count": 2
+    },
+    {
+      "subject": "83",
+      "session": "20230315-132059",
+      "source_name_sha256": "99e991721d2e72d3317315e8c09068eb5025b40528e7161f8eb0ef0294b06a64",
+      "asset_count": 2
+    },
+    {
+      "subject": "84",
+      "session": "20230315-141835",
+      "source_name_sha256": "0323f0530de7afbe33a3e4c77e2ca242b49a464282d43351c5cc6296de98d1a6",
+      "asset_count": 2
+    },
+    {
+      "subject": "85",
+      "session": "20230318-115913",
+      "source_name_sha256": "ba95572c220c48003fc491f3eedd2f2cad33eaa863e9b5bc1e04ad71059735f5",
+      "asset_count": 2
+    },
+    {
+      "subject": "86",
+      "session": "20230318-132720",
+      "source_name_sha256": "4dc65379cbcfe90f89b6656d9d8bf8a68ed995dd7de218c243802b1c306e7aa2",
+      "asset_count": 2
+    },
+    {
+      "subject": "87",
+      "session": "20230318-144657",
+      "source_name_sha256": "a18270fe4e1db7bed3574154c1ffdd34913564e3c257996f09b659e95e69622c",
+      "asset_count": 2
+    },
+    {
+      "subject": "88",
+      "session": "20230318-155217",
+      "source_name_sha256": "9aefc4410c58beb8e28a85defb3bd1ade42721054e661b5e72f8c6fde44a2716",
+      "asset_count": 2
+    },
+    {
+      "subject": "89",
+      "session": "20230318-165159",
+      "source_name_sha256": "d99e40a096a904c0337c02ff539bd411822b9b16c577f3b08c2bfbeeef3c18d3",
+      "asset_count": 2
+    },
+    {
+      "subject": "90",
+      "session": "20230319-091815",
+      "source_name_sha256": "490a668790e0ad0fe6be71c4ee66ab5080063d5c1217bd638082ba4fc6de8835",
+      "asset_count": 2
+    },
+    {
+      "subject": "91",
+      "session": "20230319-102409",
+      "source_name_sha256": "386f2ffdbe809d16ea2fc98e320cd1f9c1f0bb526c27c51970fd5fb219b2ebf8",
+      "asset_count": 2
+    },
+    {
+      "subject": "92",
+      "session": "20230319-114117",
+      "source_name_sha256": "6b5a6a697c38bf5a3c59ddae553de3ba1c1bb9467b23bc67adc169df5e4498e4",
+      "asset_count": 2
+    },
+    {
+      "subject": "93",
+      "session": "20230319-131328",
+      "source_name_sha256": "2f7da4a3b376e4c129cb82326d32b8075362745c8100c50ada11118272365c7c",
+      "asset_count": 2
+    },
+    {
+      "subject": "94",
+      "session": "20230319-141756",
+      "source_name_sha256": "d25aeac58451cf98d147c3b03a00f5a0fe2146fa130d8f73d930e8f14c4af2c7",
+      "asset_count": 2
+    },
+    {
+      "subject": "95",
+      "session": "20230228-110846",
+      "source_name_sha256": "c91b92d4ebae587c3db16d6f34aa4f8aad84bba9f94776063b076fa2bc039d3d",
+      "asset_count": 2
+    },
+    {
+      "subject": "96",
+      "session": "20230228-151210",
+      "source_name_sha256": "e7fe4feae49499b9291be8bae4cec13a5d4400c51eee82e6644b96ddb1ec53e7",
+      "asset_count": 2
+    },
+    {
+      "subject": "97",
+      "session": "20230302-112654",
+      "source_name_sha256": "a86f37cb13c9c1ead8cf5e230a65b30d577e5ed46f5646b62918f9684fa4b2b9",
+      "asset_count": 2
+    },
+    {
+      "subject": "98",
+      "session": "20230302-151318",
+      "source_name_sha256": "7c1f1abd5bf8a0ff38857b52ce50a7a9f234a1c110bcc9fdb5951c2e0911e3c8",
+      "asset_count": 2
+    },
+    {
+      "subject": "99",
+      "session": "20230302-172145",
+      "source_name_sha256": "1e4ebc56b6c2e4d61fb2d8de98e1e52ef328cd645851d00572599c310161c07a",
+      "asset_count": 2
+    },
+    {
+      "subject": "100",
+      "session": "20230317-124858",
+      "source_name_sha256": "d27ead6230d406f016bafec4de5723c5b733a85f0558ea12c0bd0130abfc1bf9",
+      "asset_count": 2
+    },
+    {
+      "subject": "101",
+      "session": "20230317-174524",
+      "source_name_sha256": "b3947f71b187654a32ddb73c049fbb280056f6b7a6ccbc66e43fd7f50cddc9a0",
+      "asset_count": 2
+    },
+    {
+      "subject": "102",
+      "session": "20230321-112506",
+      "source_name_sha256": "c6794f797ae67c5829c8b5d1484e7d8ac2d26483e0487f3cd3f53df39e76806e",
+      "asset_count": 2
+    },
+    {
+      "subject": "103",
+      "session": "20230321-140421",
+      "source_name_sha256": "4e1b1b6ed37e6c78f155ea460c495cc5ca468acbfabbefb2dac1fd731b1395e1",
+      "asset_count": 2
+    },
+    {
+      "subject": "104",
+      "session": "20230321-154619",
+      "source_name_sha256": "59495bb4ca4356c56c78c53a8c7e44c8a63ca565fd67aec52105ff8112500ec2",
+      "asset_count": 2
+    },
+    {
+      "subject": "105",
+      "session": "20230323-112405",
+      "source_name_sha256": "5c0b85bd07162ccd75ecd7ab995c182f3923082c42254c5a2b90d56d23ac7677",
+      "asset_count": 2
+    },
+    {
+      "subject": "106",
+      "session": "20230323-123647",
+      "source_name_sha256": "435df7b584567eb66d2981d09bca447e744645b16c7b6df4680df6fc0c4b5968",
+      "asset_count": 2
+    },
+    {
+      "subject": "107",
+      "session": "20230324-153349",
+      "source_name_sha256": "77418289ce46518fe6e0efd484c5ab7892598ca2846b48bd1c7874323bc8498b",
+      "asset_count": 2
+    },
+    {
+      "subject": "108",
+      "session": "20230401-190627",
+      "source_name_sha256": "19c586d28dea4b81b42e94eaf25e88acbdd6e4bd93bdc4ecf12906de491ea395",
+      "asset_count": 2
+    },
+    {
+      "subject": "109",
+      "session": "20211128-112504",
+      "source_name_sha256": "2034df4405c71679b8436f02f50b626fc956ed759068111d82dd4963b51f3398",
+      "asset_count": 2
+    },
+    {
+      "subject": "110",
+      "session": "20220128-140323",
+      "source_name_sha256": "0e35978508ff8daefdfb2d7a8abb2d5fc5c2f78ecbb41a421591157de3dbf7e5",
+      "asset_count": 2
+    },
+    {
+      "subject": "111",
+      "session": "20220203-165151",
+      "source_name_sha256": "8bd1b0028dc0096b558f6822ba3c21398ed240e7803cdc80d5afed9a8ba6406c",
+      "asset_count": 2
+    },
+    {
+      "subject": "112",
+      "session": "20220208-150446",
+      "source_name_sha256": "19b783ba1befbbbcc218ee6e54bffa240ae0dd2c6f59785e2e151e388d7672ba",
+      "asset_count": 2
+    }
+  ],
+  "unknown_subject_assets": [],
+  "conflicting_session_assets": [],
+  "unrepresented_source_recordings": [],
+  "scope": "Metadata only: complete DANDI asset inventories and content-hash-verified OSF recording-name files. No NWB objects, imaging, fluorescence, or held-out outcome values downloaded or read. Matching names are provenance evidence, not a biological animal-identity verification."
+}

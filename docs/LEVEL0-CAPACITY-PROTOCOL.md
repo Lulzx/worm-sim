@@ -129,7 +129,8 @@ training gate does not establish superiority over LDS.
 
 The existing validation and test targets have been inspected. They remain useful
 for exploratory comparisons but cannot become fresh by reshuffling. No fresh
-confirmatory holdout has yet been secured. Before new model selection, identify
+confirmatory holdout has yet been secured. The [metadata-only DANDI overlap audit](FRESH-HOLDOUT-AUDIT.md)
+rejects the atlas NWB release as an independent recording cohort. Before new model selection, identify
 additional uninspected recordings and freeze their identities and hashes using
 metadata only, including recording/animal overlap checks against this atlas.
 Predeclare preprocessing, eligibility, endpoints, and the final comparison before
