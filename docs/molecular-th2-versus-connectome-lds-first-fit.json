@@ -1,0 +1,80 @@
+{
+  "a": {
+    "correlation": -0.003116422985652122,
+    "defined_trace_correlations": 12588,
+    "free_parameters": 6783,
+    "model": "level0-atlas-shared-positive-current-preparation-60s-joint-pair-bce-molecular-sign-priors",
+    "mse": 0.04989662475011916,
+    "pair_auroc": 0.6796233773793585,
+    "prediction_sha256": "88d8cef00b0758d0541644b5af5f8a1ae81b766ce59193697635e505add4751e",
+    "source_commit": "2e1210880e4ea6db77717f40f9de37cbebb292b6"
+  },
+  "b": {
+    "correlation": 0.04528572273010101,
+    "defined_trace_correlations": 12588,
+    "free_parameters": 6194,
+    "model": "connectome-lds-shared-kernel",
+    "mse": 0.04734483559552093,
+    "pair_auroc": 0.6861866232027476,
+    "prediction_sha256": "80453688e3582f4c936a02454797c29fd1444576c463d08ad02a142b8f4e7df1",
+    "source_commit": "11330bc2a459fdf3ac6f3fe1275190ba16bccebd"
+  },
+  "common_defined_trace_correlations": 12588,
+  "dataset_hash": "3f3a537ff8424d89da72699e9b342185959afbd9380f7ecc6aa0fed06fafe843",
+  "evidence_hash": "28633bafc09afac3c53eb24d76e038774f9d1470182233a4f8d4b50e07d47152",
+  "interpretation": "Paired percentile 95% cluster bootstrap with 2000 common draws and seed 42. Negative MSE difference favors A; positive correlation/AUROC difference favors A. Correlation differences use only traces defined for both models. Target and recording resampling are separate marginal analyses, not a crossed-cluster correction. Recording IDs are not verified animals. Conditional on frozen fits; no refitting in bootstrap. Previously inspected test cohort; exploratory comparison.",
+  "pair_difference_a_minus_b": {
+    "auroc": {
+      "defined_replicates": 2000,
+      "lower_95": -0.041703454496730824,
+      "point": -0.0065632458233890745,
+      "upper_95": 0.03570683905348669
+    },
+    "clusters": 13,
+    "grouping": "stimulated_neuron",
+    "replicates": 2000,
+    "seed": 42
+  },
+  "partition": "test",
+  "schema_version": 1,
+  "source_commit": "2e1210880e4ea6db77717f40f9de37cbebb292b6",
+  "split_hash": "2d291f63668345396d9b08e984581841db7b8912897405993ba258bf9f013f47",
+  "trace_difference_a_minus_b": [
+    {
+      "clusters": 15,
+      "grouping": "stimulated_neuron",
+      "macro_trace_correlation": {
+        "defined_replicates": 2000,
+        "lower_95": -0.07950168918832728,
+        "point": -0.04840214571575307,
+        "upper_95": -0.009275704139232113
+      },
+      "pooled_mse": {
+        "defined_replicates": 2000,
+        "lower_95": 0.0011342563968103174,
+        "point": 0.00255178915459685,
+        "upper_95": 0.003711295181762095
+      },
+      "replicates": 2000,
+      "seed": 42
+    },
+    {
+      "clusters": 67,
+      "grouping": "recording_id_not_verified_animal",
+      "macro_trace_correlation": {
+        "defined_replicates": 2000,
+        "lower_95": -0.07195990733815288,
+        "point": -0.04840214571575309,
+        "upper_95": -0.027854079440546176
+      },
+      "pooled_mse": {
+        "defined_replicates": 2000,
+        "lower_95": 0.0019737149945562005,
+        "point": 0.0025517891545968506,
+        "upper_95": 0.003205051592780526
+      },
+      "replicates": 2000,
+      "seed": 42
+    }
+  ]
+}

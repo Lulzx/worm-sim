@@ -1,0 +1,1150 @@
+{
+  "dataset_hash": "3f3a537ff8424d89da72699e9b342185959afbd9380f7ecc6aa0fed06fafe843",
+  "decomposition_absolute_error": 1.1102230246251565e-14,
+  "direct_zero_response_mse": 0.0754700224030831,
+  "fraction_mean_trace_energy_captured": 0.008967721401432597,
+  "groups": [
+    {
+      "sample_weight": 71640.0,
+      "stimulated_neuron": "ADAL",
+      "training_trials": 24,
+      "weighted_mean_trace_energy": 0.010877259064200959,
+      "within_target_trial_mse": 0.040934671770783596
+    },
+    {
+      "sample_weight": 79720.0,
+      "stimulated_neuron": "ADAR",
+      "training_trials": 26,
+      "weighted_mean_trace_energy": 0.009154349772113667,
+      "within_target_trial_mse": 0.041980008234825505
+    },
+    {
+      "sample_weight": 29280.0,
+      "stimulated_neuron": "ADEL",
+      "training_trials": 12,
+      "weighted_mean_trace_energy": 0.010773659383779907,
+      "within_target_trial_mse": 0.02597017980533888
+    },
+    {
+      "sample_weight": 52480.0,
+      "stimulated_neuron": "ADER",
+      "training_trials": 21,
+      "weighted_mean_trace_energy": 0.004479129844154568,
+      "within_target_trial_mse": 0.018484208245631906
+    },
+    {
+      "sample_weight": 9840.0,
+      "stimulated_neuron": "ADFL",
+      "training_trials": 3,
+      "weighted_mean_trace_energy": 0.0780368659646521,
+      "within_target_trial_mse": 0.023229196890933054
+    },
+    {
+      "sample_weight": 3640.0,
+      "stimulated_neuron": "ADFR",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.017020152300932286,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 29960.0,
+      "stimulated_neuron": "ADLR",
+      "training_trials": 9,
+      "weighted_mean_trace_energy": 0.01628191596222407,
+      "within_target_trial_mse": 0.026754665492009843
+    },
+    {
+      "sample_weight": 12000.0,
+      "stimulated_neuron": "AFDR",
+      "training_trials": 4,
+      "weighted_mean_trace_energy": 0.015290495791293074,
+      "within_target_trial_mse": 0.017424393540240057
+    },
+    {
+      "sample_weight": 6160.0,
+      "stimulated_neuron": "AIBR",
+      "training_trials": 3,
+      "weighted_mean_trace_energy": 0.02677373326923403,
+      "within_target_trial_mse": 0.026105665983516334
+    },
+    {
+      "sample_weight": 55360.0,
+      "stimulated_neuron": "AIML",
+      "training_trials": 20,
+      "weighted_mean_trace_energy": 0.025449380996144116,
+      "within_target_trial_mse": 0.08454330120261047
+    },
+    {
+      "sample_weight": 46200.0,
+      "stimulated_neuron": "AINL",
+      "training_trials": 15,
+      "weighted_mean_trace_energy": 0.005890297915041429,
+      "within_target_trial_mse": 0.020555853682258637
+    },
+    {
+      "sample_weight": 34080.0,
+      "stimulated_neuron": "AIYL",
+      "training_trials": 10,
+      "weighted_mean_trace_energy": 0.011031997191264464,
+      "within_target_trial_mse": 0.029541180412874762
+    },
+    {
+      "sample_weight": 21520.0,
+      "stimulated_neuron": "AIYR",
+      "training_trials": 7,
+      "weighted_mean_trace_energy": 0.02049945729358844,
+      "within_target_trial_mse": 0.037087181622513635
+    },
+    {
+      "sample_weight": 44440.0,
+      "stimulated_neuron": "AIZL",
+      "training_trials": 14,
+      "weighted_mean_trace_energy": 0.01947431442816931,
+      "within_target_trial_mse": 0.04646865865355839
+    },
+    {
+      "sample_weight": 48520.0,
+      "stimulated_neuron": "AIZR",
+      "training_trials": 17,
+      "weighted_mean_trace_energy": 0.01196911969378228,
+      "within_target_trial_mse": 0.029044444429770666
+    },
+    {
+      "sample_weight": 13040.0,
+      "stimulated_neuron": "ALA",
+      "training_trials": 4,
+      "weighted_mean_trace_energy": 0.010638578753464932,
+      "within_target_trial_mse": 0.012000774961951097
+    },
+    {
+      "sample_weight": 109680.0,
+      "stimulated_neuron": "AQR",
+      "training_trials": 42,
+      "weighted_mean_trace_energy": 0.011604684024072115,
+      "within_target_trial_mse": 0.07197957818293489
+    },
+    {
+      "sample_weight": 2960.0,
+      "stimulated_neuron": "AS1",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.036977062452760355,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 51000.0,
+      "stimulated_neuron": "ASEL",
+      "training_trials": 16,
+      "weighted_mean_trace_energy": 0.007762033758639413,
+      "within_target_trial_mse": 0.03089324323471397
+    },
+    {
+      "sample_weight": 35480.0,
+      "stimulated_neuron": "ASER",
+      "training_trials": 12,
+      "weighted_mean_trace_energy": 0.012621611386233682,
+      "within_target_trial_mse": 0.038737905141308863
+    },
+    {
+      "sample_weight": 57760.0,
+      "stimulated_neuron": "ASGL",
+      "training_trials": 19,
+      "weighted_mean_trace_energy": 0.010810130292996491,
+      "within_target_trial_mse": 0.02449107809808424
+    },
+    {
+      "sample_weight": 16360.0,
+      "stimulated_neuron": "ASGR",
+      "training_trials": 6,
+      "weighted_mean_trace_energy": 0.014192039464741893,
+      "within_target_trial_mse": 0.016709419329001895
+    },
+    {
+      "sample_weight": 106400.0,
+      "stimulated_neuron": "ASHL",
+      "training_trials": 38,
+      "weighted_mean_trace_energy": 0.007525054970078344,
+      "within_target_trial_mse": 0.033102742380820276
+    },
+    {
+      "sample_weight": 46880.0,
+      "stimulated_neuron": "ASHR",
+      "training_trials": 16,
+      "weighted_mean_trace_energy": 0.009587152845680983,
+      "within_target_trial_mse": 0.0291769062749271
+    },
+    {
+      "sample_weight": 28240.0,
+      "stimulated_neuron": "ASIL",
+      "training_trials": 10,
+      "weighted_mean_trace_energy": 0.012925409255522895,
+      "within_target_trial_mse": 0.020452520536962695
+    },
+    {
+      "sample_weight": 42840.0,
+      "stimulated_neuron": "ASIR",
+      "training_trials": 16,
+      "weighted_mean_trace_energy": 0.01582296521954396,
+      "within_target_trial_mse": 0.03319510772166507
+    },
+    {
+      "sample_weight": 48760.0,
+      "stimulated_neuron": "ASJL",
+      "training_trials": 14,
+      "weighted_mean_trace_energy": 0.007349950965905058,
+      "within_target_trial_mse": 0.024043894760906875
+    },
+    {
+      "sample_weight": 12320.0,
+      "stimulated_neuron": "ASKR",
+      "training_trials": 6,
+      "weighted_mean_trace_energy": 0.019905977946399273,
+      "within_target_trial_mse": 0.020804611956947078
+    },
+    {
+      "sample_weight": 35240.0,
+      "stimulated_neuron": "AUAR",
+      "training_trials": 11,
+      "weighted_mean_trace_energy": 0.010315260983581993,
+      "within_target_trial_mse": 0.029353851200078898
+    },
+    {
+      "sample_weight": 48120.0,
+      "stimulated_neuron": "AVAL",
+      "training_trials": 17,
+      "weighted_mean_trace_energy": 0.008279506414473089,
+      "within_target_trial_mse": 0.03553941545137751
+    },
+    {
+      "sample_weight": 52480.0,
+      "stimulated_neuron": "AVAR",
+      "training_trials": 23,
+      "weighted_mean_trace_energy": 0.006563029874252406,
+      "within_target_trial_mse": 0.02044457092042158
+    },
+    {
+      "sample_weight": 20280.0,
+      "stimulated_neuron": "AVBL",
+      "training_trials": 6,
+      "weighted_mean_trace_energy": 0.13695902464635842,
+      "within_target_trial_mse": 0.39384479771616393
+    },
+    {
+      "sample_weight": 18440.0,
+      "stimulated_neuron": "AVBR",
+      "training_trials": 5,
+      "weighted_mean_trace_energy": 0.019722189564048427,
+      "within_target_trial_mse": 0.033085653108902394
+    },
+    {
+      "sample_weight": 87040.0,
+      "stimulated_neuron": "AVDL",
+      "training_trials": 34,
+      "weighted_mean_trace_energy": 0.01330225508275632,
+      "within_target_trial_mse": 0.05909792706068167
+    },
+    {
+      "sample_weight": 108760.0,
+      "stimulated_neuron": "AVDR",
+      "training_trials": 42,
+      "weighted_mean_trace_energy": 0.006355056077715158,
+      "within_target_trial_mse": 0.03815764847936519
+    },
+    {
+      "sample_weight": 140200.0,
+      "stimulated_neuron": "AVEL",
+      "training_trials": 66,
+      "weighted_mean_trace_energy": 0.009040097132070242,
+      "within_target_trial_mse": 0.05199915137969881
+    },
+    {
+      "sample_weight": 134400.0,
+      "stimulated_neuron": "AVER",
+      "training_trials": 62,
+      "weighted_mean_trace_energy": 0.0066879401554574055,
+      "within_target_trial_mse": 0.04015754168402854
+    },
+    {
+      "sample_weight": 3560.0,
+      "stimulated_neuron": "AVFL",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.06816950856108318,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 45400.0,
+      "stimulated_neuron": "AVG",
+      "training_trials": 15,
+      "weighted_mean_trace_energy": 0.022070333244757125,
+      "within_target_trial_mse": 0.15578798474569314
+    },
+    {
+      "sample_weight": 52480.0,
+      "stimulated_neuron": "AVHL",
+      "training_trials": 16,
+      "weighted_mean_trace_energy": 0.0076976690774988935,
+      "within_target_trial_mse": 0.02495130496879323
+    },
+    {
+      "sample_weight": 30080.0,
+      "stimulated_neuron": "AVHR",
+      "training_trials": 11,
+      "weighted_mean_trace_energy": 0.014197347202068573,
+      "within_target_trial_mse": 0.02716642099029168
+    },
+    {
+      "sample_weight": 163720.0,
+      "stimulated_neuron": "AVJL",
+      "training_trials": 67,
+      "weighted_mean_trace_energy": 0.007833212178021973,
+      "within_target_trial_mse": 0.05407602611962244
+    },
+    {
+      "sample_weight": 115520.0,
+      "stimulated_neuron": "AVJR",
+      "training_trials": 49,
+      "weighted_mean_trace_energy": 0.010334716455434068,
+      "within_target_trial_mse": 0.05581714007225343
+    },
+    {
+      "sample_weight": 16760.0,
+      "stimulated_neuron": "AVKL",
+      "training_trials": 5,
+      "weighted_mean_trace_energy": 0.02075919699818376,
+      "within_target_trial_mse": 0.022269523411695826
+    },
+    {
+      "sample_weight": 33480.0,
+      "stimulated_neuron": "AVKR",
+      "training_trials": 10,
+      "weighted_mean_trace_energy": 0.009666014572427363,
+      "within_target_trial_mse": 0.020726197301606245
+    },
+    {
+      "sample_weight": 5720.0,
+      "stimulated_neuron": "AVL",
+      "training_trials": 2,
+      "weighted_mean_trace_energy": 0.028293781659723388,
+      "within_target_trial_mse": 0.010707941396278743
+    },
+    {
+      "sample_weight": 57120.0,
+      "stimulated_neuron": "AWAL",
+      "training_trials": 21,
+      "weighted_mean_trace_energy": 0.005836736094727129,
+      "within_target_trial_mse": 0.02313862184529179
+    },
+    {
+      "sample_weight": 41200.0,
+      "stimulated_neuron": "AWAR",
+      "training_trials": 15,
+      "weighted_mean_trace_energy": 0.012817776828361752,
+      "within_target_trial_mse": 0.028386044408555224
+    },
+    {
+      "sample_weight": 165040.0,
+      "stimulated_neuron": "AWBL",
+      "training_trials": 65,
+      "weighted_mean_trace_energy": 0.009667148658088074,
+      "within_target_trial_mse": 0.04137694977056117
+    },
+    {
+      "sample_weight": 109480.0,
+      "stimulated_neuron": "AWBR",
+      "training_trials": 42,
+      "weighted_mean_trace_energy": 0.008122986073844863,
+      "within_target_trial_mse": 0.036721671079066084
+    },
+    {
+      "sample_weight": 45920.0,
+      "stimulated_neuron": "BAGL",
+      "training_trials": 16,
+      "weighted_mean_trace_energy": 0.008518500834226707,
+      "within_target_trial_mse": 0.027880623216787616
+    },
+    {
+      "sample_weight": 26400.0,
+      "stimulated_neuron": "BAGR",
+      "training_trials": 11,
+      "weighted_mean_trace_energy": 0.009006240428395105,
+      "within_target_trial_mse": 0.03418329119367749
+    },
+    {
+      "sample_weight": 30200.0,
+      "stimulated_neuron": "CEPDL",
+      "training_trials": 14,
+      "weighted_mean_trace_energy": 0.01568730933802901,
+      "within_target_trial_mse": 0.025814730350233343
+    },
+    {
+      "sample_weight": 59440.0,
+      "stimulated_neuron": "CEPDR",
+      "training_trials": 22,
+      "weighted_mean_trace_energy": 0.010760612344825476,
+      "within_target_trial_mse": 0.029660601299311657
+    },
+    {
+      "sample_weight": 53880.0,
+      "stimulated_neuron": "CEPVL",
+      "training_trials": 21,
+      "weighted_mean_trace_energy": 0.046376438533377244,
+      "within_target_trial_mse": 0.10167614337158967
+    },
+    {
+      "sample_weight": 44360.0,
+      "stimulated_neuron": "CEPVR",
+      "training_trials": 17,
+      "weighted_mean_trace_energy": 0.007088303626018499,
+      "within_target_trial_mse": 0.020992394076111334
+    },
+    {
+      "sample_weight": 4640.0,
+      "stimulated_neuron": "DA1",
+      "training_trials": 2,
+      "weighted_mean_trace_energy": 0.012290614443304223,
+      "within_target_trial_mse": 0.0033959425278911417
+    },
+    {
+      "sample_weight": 4360.0,
+      "stimulated_neuron": "DB1",
+      "training_trials": 2,
+      "weighted_mean_trace_energy": 0.10872339227138025,
+      "within_target_trial_mse": 0.008193253637203786
+    },
+    {
+      "sample_weight": 45160.0,
+      "stimulated_neuron": "DB2",
+      "training_trials": 16,
+      "weighted_mean_trace_energy": 0.015041374326034673,
+      "within_target_trial_mse": 0.02978487456687424
+    },
+    {
+      "sample_weight": 3960.0,
+      "stimulated_neuron": "DVB",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.008773314228589766,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 95640.0,
+      "stimulated_neuron": "FLPL",
+      "training_trials": 34,
+      "weighted_mean_trace_energy": 0.03823424270422516,
+      "within_target_trial_mse": 0.7534354877490247
+    },
+    {
+      "sample_weight": 126400.0,
+      "stimulated_neuron": "FLPR",
+      "training_trials": 45,
+      "weighted_mean_trace_energy": 0.005942884716805378,
+      "within_target_trial_mse": 0.057088198622555694
+    },
+    {
+      "sample_weight": 61320.0,
+      "stimulated_neuron": "I1L",
+      "training_trials": 24,
+      "weighted_mean_trace_energy": 0.005144821905575114,
+      "within_target_trial_mse": 0.03000794681428565
+    },
+    {
+      "sample_weight": 42320.0,
+      "stimulated_neuron": "I1R",
+      "training_trials": 18,
+      "weighted_mean_trace_energy": 0.0088560213033793,
+      "within_target_trial_mse": 0.07878492654330554
+    },
+    {
+      "sample_weight": 57320.0,
+      "stimulated_neuron": "I2L",
+      "training_trials": 24,
+      "weighted_mean_trace_energy": 0.011849751061168241,
+      "within_target_trial_mse": 0.03608953497591919
+    },
+    {
+      "sample_weight": 56160.0,
+      "stimulated_neuron": "I2R",
+      "training_trials": 24,
+      "weighted_mean_trace_energy": 0.016669898079324938,
+      "within_target_trial_mse": 0.034952580317572986
+    },
+    {
+      "sample_weight": 76440.0,
+      "stimulated_neuron": "I3",
+      "training_trials": 30,
+      "weighted_mean_trace_energy": 0.03124414516044154,
+      "within_target_trial_mse": 0.30634208751962894
+    },
+    {
+      "sample_weight": 45760.0,
+      "stimulated_neuron": "I4",
+      "training_trials": 15,
+      "weighted_mean_trace_energy": 0.01478953713103338,
+      "within_target_trial_mse": 0.044344338245991495
+    },
+    {
+      "sample_weight": 52600.0,
+      "stimulated_neuron": "I6",
+      "training_trials": 20,
+      "weighted_mean_trace_energy": 0.008247760251802757,
+      "within_target_trial_mse": 0.028578748299994787
+    },
+    {
+      "sample_weight": 100720.0,
+      "stimulated_neuron": "IL1DL",
+      "training_trials": 37,
+      "weighted_mean_trace_energy": 0.006613836210744509,
+      "within_target_trial_mse": 0.058166439063900115
+    },
+    {
+      "sample_weight": 55200.0,
+      "stimulated_neuron": "IL1DR",
+      "training_trials": 24,
+      "weighted_mean_trace_energy": 0.011433531341727303,
+      "within_target_trial_mse": 0.07897803039020038
+    },
+    {
+      "sample_weight": 1760.0,
+      "stimulated_neuron": "IL1L",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.010135549443128375,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 86320.0,
+      "stimulated_neuron": "IL1VL",
+      "training_trials": 32,
+      "weighted_mean_trace_energy": 0.008515816242499637,
+      "within_target_trial_mse": 0.03966120048667257
+    },
+    {
+      "sample_weight": 82040.0,
+      "stimulated_neuron": "IL1VR",
+      "training_trials": 30,
+      "weighted_mean_trace_energy": 0.007708730128458084,
+      "within_target_trial_mse": 0.03629606814636921
+    },
+    {
+      "sample_weight": 26320.0,
+      "stimulated_neuron": "IL2DL",
+      "training_trials": 11,
+      "weighted_mean_trace_energy": 0.009034566213010518,
+      "within_target_trial_mse": 0.02691147971910608
+    },
+    {
+      "sample_weight": 27520.0,
+      "stimulated_neuron": "IL2DR",
+      "training_trials": 11,
+      "weighted_mean_trace_energy": 0.015301876627907137,
+      "within_target_trial_mse": 0.024953062665236662
+    },
+    {
+      "sample_weight": 14160.0,
+      "stimulated_neuron": "IL2R",
+      "training_trials": 5,
+      "weighted_mean_trace_energy": 0.019640577044899667,
+      "within_target_trial_mse": 0.035673829683478146
+    },
+    {
+      "sample_weight": 10800.0,
+      "stimulated_neuron": "IL2VL",
+      "training_trials": 4,
+      "weighted_mean_trace_energy": 0.013996233787050722,
+      "within_target_trial_mse": 0.011406567538561667
+    },
+    {
+      "sample_weight": 13840.0,
+      "stimulated_neuron": "IL2VR",
+      "training_trials": 5,
+      "weighted_mean_trace_energy": 0.0104370796704219,
+      "within_target_trial_mse": 0.01663010937865609
+    },
+    {
+      "sample_weight": 10920.0,
+      "stimulated_neuron": "LUAL",
+      "training_trials": 3,
+      "weighted_mean_trace_energy": 0.015867635529578036,
+      "within_target_trial_mse": 0.00935206099850953
+    },
+    {
+      "sample_weight": 3960.0,
+      "stimulated_neuron": "LUAR",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.014365880996954393,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 71680.0,
+      "stimulated_neuron": "M1",
+      "training_trials": 26,
+      "weighted_mean_trace_energy": 0.016421198280399483,
+      "within_target_trial_mse": 0.038349578738457436
+    },
+    {
+      "sample_weight": 33720.0,
+      "stimulated_neuron": "M2R",
+      "training_trials": 11,
+      "weighted_mean_trace_energy": 0.0105855833538542,
+      "within_target_trial_mse": 0.027540972190091426
+    },
+    {
+      "sample_weight": 110880.0,
+      "stimulated_neuron": "M3L",
+      "training_trials": 47,
+      "weighted_mean_trace_energy": 0.023330613960442722,
+      "within_target_trial_mse": 0.11824533491977442
+    },
+    {
+      "sample_weight": 115920.0,
+      "stimulated_neuron": "M3R",
+      "training_trials": 49,
+      "weighted_mean_trace_energy": 0.013536029300833257,
+      "within_target_trial_mse": 0.0364599478267829
+    },
+    {
+      "sample_weight": 5440.0,
+      "stimulated_neuron": "M4",
+      "training_trials": 2,
+      "weighted_mean_trace_energy": 0.03840834983044778,
+      "within_target_trial_mse": 0.020573114623321957
+    },
+    {
+      "sample_weight": 16360.0,
+      "stimulated_neuron": "MCL",
+      "training_trials": 5,
+      "weighted_mean_trace_energy": 0.07877627254725199,
+      "within_target_trial_mse": 0.07897568953858808
+    },
+    {
+      "sample_weight": 12160.0,
+      "stimulated_neuron": "MCR",
+      "training_trials": 4,
+      "weighted_mean_trace_energy": 0.03298583391086344,
+      "within_target_trial_mse": 0.022693819567628042
+    },
+    {
+      "sample_weight": 10800.0,
+      "stimulated_neuron": "NSML",
+      "training_trials": 5,
+      "weighted_mean_trace_energy": 0.04494982249183317,
+      "within_target_trial_mse": 0.029502223568056887
+    },
+    {
+      "sample_weight": 10880.0,
+      "stimulated_neuron": "NSMR",
+      "training_trials": 5,
+      "weighted_mean_trace_energy": 0.014562420002739905,
+      "within_target_trial_mse": 0.018179874421152063
+    },
+    {
+      "sample_weight": 106320.0,
+      "stimulated_neuron": "OLLL",
+      "training_trials": 40,
+      "weighted_mean_trace_energy": 0.005166500544033206,
+      "within_target_trial_mse": 0.027345517631015413
+    },
+    {
+      "sample_weight": 86720.0,
+      "stimulated_neuron": "OLLR",
+      "training_trials": 34,
+      "weighted_mean_trace_energy": 0.006348443594434508,
+      "within_target_trial_mse": 0.03782110470953273
+    },
+    {
+      "sample_weight": 76480.0,
+      "stimulated_neuron": "OLQDL",
+      "training_trials": 31,
+      "weighted_mean_trace_energy": 0.0033147829181083156,
+      "within_target_trial_mse": 0.027690863917299118
+    },
+    {
+      "sample_weight": 79520.0,
+      "stimulated_neuron": "OLQDR",
+      "training_trials": 32,
+      "weighted_mean_trace_energy": 0.003707761843060769,
+      "within_target_trial_mse": 0.030098195404637387
+    },
+    {
+      "sample_weight": 59840.0,
+      "stimulated_neuron": "OLQVL",
+      "training_trials": 23,
+      "weighted_mean_trace_energy": 0.006882948127854246,
+      "within_target_trial_mse": 0.032928545826153316
+    },
+    {
+      "sample_weight": 61760.0,
+      "stimulated_neuron": "OLQVR",
+      "training_trials": 27,
+      "weighted_mean_trace_energy": 0.014315452217058475,
+      "within_target_trial_mse": 0.047826681609504186
+    },
+    {
+      "sample_weight": 3960.0,
+      "stimulated_neuron": "PHAR",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.01146324352601234,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 3960.0,
+      "stimulated_neuron": "PHBR",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.011522815967104439,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 14320.0,
+      "stimulated_neuron": "PHCL",
+      "training_trials": 4,
+      "weighted_mean_trace_energy": 0.0064962022760964595,
+      "within_target_trial_mse": 0.009838637993755596
+    },
+    {
+      "sample_weight": 7320.0,
+      "stimulated_neuron": "PHCR",
+      "training_trials": 2,
+      "weighted_mean_trace_energy": 0.01813773040772161,
+      "within_target_trial_mse": 0.006956767572865231
+    },
+    {
+      "sample_weight": 7360.0,
+      "stimulated_neuron": "PLMR",
+      "training_trials": 2,
+      "weighted_mean_trace_energy": 0.009775788176396205,
+      "within_target_trial_mse": 0.006446762681913349
+    },
+    {
+      "sample_weight": 3400.0,
+      "stimulated_neuron": "PLNR",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.024977418001367265,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 10920.0,
+      "stimulated_neuron": "PQR",
+      "training_trials": 3,
+      "weighted_mean_trace_energy": 0.01989310406327231,
+      "within_target_trial_mse": 0.01579472238040056
+    },
+    {
+      "sample_weight": 6960.0,
+      "stimulated_neuron": "PVCL",
+      "training_trials": 2,
+      "weighted_mean_trace_energy": 0.015222807531943338,
+      "within_target_trial_mse": 0.004618166104014454
+    },
+    {
+      "sample_weight": 7360.0,
+      "stimulated_neuron": "PVCR",
+      "training_trials": 2,
+      "weighted_mean_trace_energy": 0.008658445511590628,
+      "within_target_trial_mse": 0.0037008842052467334
+    },
+    {
+      "sample_weight": 3400.0,
+      "stimulated_neuron": "PVNR",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.010769382176161553,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 3400.0,
+      "stimulated_neuron": "PVQR",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.012458364390238763,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 3560.0,
+      "stimulated_neuron": "PVWL",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.0076628255419391505,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 3400.0,
+      "stimulated_neuron": "PVWR",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.011327637520330332,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 43960.0,
+      "stimulated_neuron": "RIAL",
+      "training_trials": 14,
+      "weighted_mean_trace_energy": 0.015995452026978794,
+      "within_target_trial_mse": 0.05396696992247113
+    },
+    {
+      "sample_weight": 64880.0,
+      "stimulated_neuron": "RIAR",
+      "training_trials": 22,
+      "weighted_mean_trace_energy": 0.009910649670390612,
+      "within_target_trial_mse": 0.040151840838368875
+    },
+    {
+      "sample_weight": 15240.0,
+      "stimulated_neuron": "RIBL",
+      "training_trials": 5,
+      "weighted_mean_trace_energy": 0.03507339145904252,
+      "within_target_trial_mse": 0.0508113283829293
+    },
+    {
+      "sample_weight": 16160.0,
+      "stimulated_neuron": "RIBR",
+      "training_trials": 5,
+      "weighted_mean_trace_energy": 0.017835854602692026,
+      "within_target_trial_mse": 0.03088107459764801
+    },
+    {
+      "sample_weight": 31760.0,
+      "stimulated_neuron": "RICL",
+      "training_trials": 9,
+      "weighted_mean_trace_energy": 0.011002618130260964,
+      "within_target_trial_mse": 0.034980616809486706
+    },
+    {
+      "sample_weight": 48720.0,
+      "stimulated_neuron": "RICR",
+      "training_trials": 15,
+      "weighted_mean_trace_energy": 0.009510677264260192,
+      "within_target_trial_mse": 0.025691590669184864
+    },
+    {
+      "sample_weight": 30680.0,
+      "stimulated_neuron": "RID",
+      "training_trials": 12,
+      "weighted_mean_trace_energy": 0.007338828064357249,
+      "within_target_trial_mse": 0.016706975926115246
+    },
+    {
+      "sample_weight": 4000.0,
+      "stimulated_neuron": "RIFR",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.03636029328366216,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 51160.0,
+      "stimulated_neuron": "RIGL",
+      "training_trials": 17,
+      "weighted_mean_trace_energy": 0.02167289914959242,
+      "within_target_trial_mse": 0.0963317442853367
+    },
+    {
+      "sample_weight": 77480.0,
+      "stimulated_neuron": "RIGR",
+      "training_trials": 25,
+      "weighted_mean_trace_energy": 0.005338585519277255,
+      "within_target_trial_mse": 0.020310033081976767
+    },
+    {
+      "sample_weight": 28400.0,
+      "stimulated_neuron": "RIH",
+      "training_trials": 10,
+      "weighted_mean_trace_energy": 0.01747312031786169,
+      "within_target_trial_mse": 0.04666453309133463
+    },
+    {
+      "sample_weight": 116080.0,
+      "stimulated_neuron": "RIMR",
+      "training_trials": 38,
+      "weighted_mean_trace_energy": 0.0055754360306377836,
+      "within_target_trial_mse": 0.03633631081699458
+    },
+    {
+      "sample_weight": 7160.0,
+      "stimulated_neuron": "RIPL",
+      "training_trials": 2,
+      "weighted_mean_trace_energy": 0.028517803894810526,
+      "within_target_trial_mse": 0.007648987319721072
+    },
+    {
+      "sample_weight": 23920.0,
+      "stimulated_neuron": "RIR",
+      "training_trials": 8,
+      "weighted_mean_trace_energy": 0.02285661392082373,
+      "within_target_trial_mse": 0.04686265407880205
+    },
+    {
+      "sample_weight": 124520.0,
+      "stimulated_neuron": "RMDDL",
+      "training_trials": 48,
+      "weighted_mean_trace_energy": 0.012876684337512831,
+      "within_target_trial_mse": 0.07498419876869895
+    },
+    {
+      "sample_weight": 118480.0,
+      "stimulated_neuron": "RMDDR",
+      "training_trials": 43,
+      "weighted_mean_trace_energy": 0.01496400892348903,
+      "within_target_trial_mse": 0.08170121283676612
+    },
+    {
+      "sample_weight": 85080.0,
+      "stimulated_neuron": "RMDR",
+      "training_trials": 31,
+      "weighted_mean_trace_energy": 0.010908803479228199,
+      "within_target_trial_mse": 0.04304824626901758
+    },
+    {
+      "sample_weight": 220760.0,
+      "stimulated_neuron": "RMDVL",
+      "training_trials": 88,
+      "weighted_mean_trace_energy": 0.005007157467733511,
+      "within_target_trial_mse": 0.033943597603784695
+    },
+    {
+      "sample_weight": 220120.0,
+      "stimulated_neuron": "RMDVR",
+      "training_trials": 95,
+      "weighted_mean_trace_energy": 0.009227589988794013,
+      "within_target_trial_mse": 0.09470154858571632
+    },
+    {
+      "sample_weight": 10160.0,
+      "stimulated_neuron": "RMED",
+      "training_trials": 4,
+      "weighted_mean_trace_energy": 0.00820461836611077,
+      "within_target_trial_mse": 0.005651198629422004
+    },
+    {
+      "sample_weight": 103000.0,
+      "stimulated_neuron": "RMEL",
+      "training_trials": 46,
+      "weighted_mean_trace_energy": 0.004153916140106396,
+      "within_target_trial_mse": 0.05042223985881363
+    },
+    {
+      "sample_weight": 129640.0,
+      "stimulated_neuron": "RMER",
+      "training_trials": 51,
+      "weighted_mean_trace_energy": 0.004189603678213672,
+      "within_target_trial_mse": 0.03744188337875027
+    },
+    {
+      "sample_weight": 24840.0,
+      "stimulated_neuron": "RMEV",
+      "training_trials": 9,
+      "weighted_mean_trace_energy": 0.011590363218448594,
+      "within_target_trial_mse": 0.026365910834684612
+    },
+    {
+      "sample_weight": 9720.0,
+      "stimulated_neuron": "RMFL",
+      "training_trials": 3,
+      "weighted_mean_trace_energy": 0.015550145984007996,
+      "within_target_trial_mse": 0.007431284099850187
+    },
+    {
+      "sample_weight": 21640.0,
+      "stimulated_neuron": "RMGL",
+      "training_trials": 6,
+      "weighted_mean_trace_energy": 0.009251722551110736,
+      "within_target_trial_mse": 0.0185356337608972
+    },
+    {
+      "sample_weight": 2960.0,
+      "stimulated_neuron": "RMGR",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.025745252179431074,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 15480.0,
+      "stimulated_neuron": "SAADR",
+      "training_trials": 6,
+      "weighted_mean_trace_energy": 0.03255645161589711,
+      "within_target_trial_mse": 0.044935455651221326
+    },
+    {
+      "sample_weight": 50680.0,
+      "stimulated_neuron": "SAAVL",
+      "training_trials": 20,
+      "weighted_mean_trace_energy": 0.014405646400173016,
+      "within_target_trial_mse": 0.04297372852802573
+    },
+    {
+      "sample_weight": 72480.0,
+      "stimulated_neuron": "SAAVR",
+      "training_trials": 26,
+      "weighted_mean_trace_energy": 0.013508128602768885,
+      "within_target_trial_mse": 0.048725571790120485
+    },
+    {
+      "sample_weight": 32040.0,
+      "stimulated_neuron": "SABD",
+      "training_trials": 11,
+      "weighted_mean_trace_energy": 0.014644941612236494,
+      "within_target_trial_mse": 0.020509602973334217
+    },
+    {
+      "sample_weight": 10160.0,
+      "stimulated_neuron": "SABVL",
+      "training_trials": 3,
+      "weighted_mean_trace_energy": 0.02164068706874747,
+      "within_target_trial_mse": 0.016342314107721242
+    },
+    {
+      "sample_weight": 10560.0,
+      "stimulated_neuron": "SABVR",
+      "training_trials": 4,
+      "weighted_mean_trace_energy": 0.03138916961291245,
+      "within_target_trial_mse": 0.03850089029064203
+    },
+    {
+      "sample_weight": 3120.0,
+      "stimulated_neuron": "SIBDR",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.04234111070978101,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 3120.0,
+      "stimulated_neuron": "SIBVR",
+      "training_trials": 1,
+      "weighted_mean_trace_energy": 0.08244331237646561,
+      "within_target_trial_mse": 0.0
+    },
+    {
+      "sample_weight": 9240.0,
+      "stimulated_neuron": "SMBDR",
+      "training_trials": 3,
+      "weighted_mean_trace_energy": 0.02022230058475347,
+      "within_target_trial_mse": 0.011030493167749353
+    },
+    {
+      "sample_weight": 28520.0,
+      "stimulated_neuron": "SMBVL",
+      "training_trials": 9,
+      "weighted_mean_trace_energy": 0.0071678650274140145,
+      "within_target_trial_mse": 0.020544374249147037
+    },
+    {
+      "sample_weight": 4560.0,
+      "stimulated_neuron": "SMBVR",
+      "training_trials": 2,
+      "weighted_mean_trace_energy": 0.04899938946528748,
+      "within_target_trial_mse": 0.006244125714309356
+    },
+    {
+      "sample_weight": 51320.0,
+      "stimulated_neuron": "SMDDR",
+      "training_trials": 16,
+      "weighted_mean_trace_energy": 0.011674286287972816,
+      "within_target_trial_mse": 0.04748129573703263
+    },
+    {
+      "sample_weight": 46760.0,
+      "stimulated_neuron": "SMDVL",
+      "training_trials": 16,
+      "weighted_mean_trace_energy": 0.013048032010573257,
+      "within_target_trial_mse": 0.0262771370213671
+    },
+    {
+      "sample_weight": 33040.0,
+      "stimulated_neuron": "SMDVR",
+      "training_trials": 13,
+      "weighted_mean_trace_energy": 0.022939333957735,
+      "within_target_trial_mse": 0.07217755715156325
+    },
+    {
+      "sample_weight": 41840.0,
+      "stimulated_neuron": "URADL",
+      "training_trials": 13,
+      "weighted_mean_trace_energy": 0.003585652812898986,
+      "within_target_trial_mse": 0.017109864906872867
+    },
+    {
+      "sample_weight": 39880.0,
+      "stimulated_neuron": "URBL",
+      "training_trials": 17,
+      "weighted_mean_trace_energy": 0.004556383899083042,
+      "within_target_trial_mse": 0.017052588249358645
+    },
+    {
+      "sample_weight": 37600.0,
+      "stimulated_neuron": "URBR",
+      "training_trials": 13,
+      "weighted_mean_trace_energy": 0.004609210596116521,
+      "within_target_trial_mse": 0.021035540569419385
+    },
+    {
+      "sample_weight": 113960.0,
+      "stimulated_neuron": "URXL",
+      "training_trials": 44,
+      "weighted_mean_trace_energy": 0.009548600422116768,
+      "within_target_trial_mse": 0.04377422003725236
+    },
+    {
+      "sample_weight": 92000.0,
+      "stimulated_neuron": "URXR",
+      "training_trials": 30,
+      "weighted_mean_trace_energy": 0.008474063597390339,
+      "within_target_trial_mse": 0.032988981655160954
+    },
+    {
+      "sample_weight": 41280.0,
+      "stimulated_neuron": "URYDL",
+      "training_trials": 14,
+      "weighted_mean_trace_energy": 0.016016318040973036,
+      "within_target_trial_mse": 0.08261355193000298
+    },
+    {
+      "sample_weight": 26440.0,
+      "stimulated_neuron": "URYDR",
+      "training_trials": 10,
+      "weighted_mean_trace_energy": 0.010083178193647404,
+      "within_target_trial_mse": 0.02699588560579674
+    },
+    {
+      "sample_weight": 45000.0,
+      "stimulated_neuron": "URYVL",
+      "training_trials": 15,
+      "weighted_mean_trace_energy": 0.007617592072341486,
+      "within_target_trial_mse": 0.02747793586895705
+    },
+    {
+      "sample_weight": 57640.0,
+      "stimulated_neuron": "URYVR",
+      "training_trials": 23,
+      "weighted_mean_trace_energy": 0.0589829223726607,
+      "within_target_trial_mse": 0.9748700477045967
+    },
+    {
+      "sample_weight": 8240.0,
+      "stimulated_neuron": "VA1",
+      "training_trials": 3,
+      "weighted_mean_trace_energy": 0.028140395855745945,
+      "within_target_trial_mse": 0.018195898047454185
+    },
+    {
+      "sample_weight": 96560.0,
+      "stimulated_neuron": "VB1",
+      "training_trials": 40,
+      "weighted_mean_trace_energy": 0.010032448015137179,
+      "within_target_trial_mse": 0.03548264506920025
+    },
+    {
+      "sample_weight": 82280.0,
+      "stimulated_neuron": "VB2",
+      "training_trials": 27,
+      "weighted_mean_trace_energy": 0.013127017472680812,
+      "within_target_trial_mse": 0.0345340936081953
+    }
+  ],
+  "model_epoch": 5,
+  "model_excess_above_lower_bound": 0.012357694135858535,
+  "model_mse": 0.07535819924598947,
+  "model_sha256": "0d5c943e2e03feef048184b9703ea69d9d5a3418feb4563046c845c68a1eea0f",
+  "model_source_commit": "fe2972f1a7bbb105534b6a0eb9b7671e1f81ee26",
+  "partition": "train",
+  "sample_weight": 7589040.0,
+  "schema_version": 1,
+  "scope": "Training-only confidence-weighted variance decomposition. The empirical per-target mean trace minimizes MSE among shared deterministic responses; within-target variation is not an irreducible biological noise claim and may be predictable from omitted trial/animal/state/input information. No held-out labels, calibration or model selection. This is not a deployable held-out-target baseline or a generalization score.",
+  "shared_target_response_lower_bound_mse": 0.06300050511013093,
+  "source_commit": "e36e101f2529d49cb82d4d8fbf4cd8c0d4b38541",
+  "split_hash": "2d291f63668345396d9b08e984581841db7b8912897405993ba258bf9f013f47",
+  "stimulated_targets": 161,
+  "training_trials": 2842,
+  "weighted_mean_trace_energy": 0.012469517292963278
+}

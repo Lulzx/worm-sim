@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "native_source_commit": "e36e101f2529d49cb82d4d8fbf4cd8c0d4b38541",
+  "model_source_commit": "fe2972f1a7bbb105534b6a0eb9b7671e1f81ee26",
+  "native_receipt_sha256": "3d69449c1d9496298a2835845a81ce754e5a86010e910ea76d3a71dfe4983f1c",
+  "model_sha256": "0d5c943e2e03feef048184b9703ea69d9d5a3418feb4563046c845c68a1eea0f",
+  "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+  "dataset_file_sha256": "2063f69753f9ab0dce9ee489214fc3eb641c451651a09cc4b2ee81f261df4b2b",
+  "split_file_sha256": "c3002a03460f7685f71bcddf2be58c78e8ec35a410abe4a5eb3c2b9f11375438",
+  "audit_script_sha256": "15265305a62796ad8f23830fd20178a23165158275db6b9db2d34db73afe154c",
+  "replay_script_sha256": "3ed4cc5807676e467968619765b28b2a464a5ed3fe96ffc09442adbd8f08220d",
+  "training_trials": 2842,
+  "target_grids_replayed": 161,
+  "sample_weight": 7589040.0,
+  "independent_scores": {
+    "direct_zero_response_mse": 0.07547002240309315,
+    "shared_target_response_lower_bound_mse": 0.06300050511013146,
+    "weighted_mean_trace_energy": 0.012469517292963231,
+    "model_mse": 0.07535819924599924
+  },
+  "zero_origin_extra_mse": 0.00015256502660459669,
+  "zero_origin_shared_target_lower_bound_mse": 0.06315307013673604,
+  "fraction_mean_trace_energy_captured": 0.008967721401454479,
+  "scope": "Training-only two-pass weighted means/residuals and independent NumPy neural replay. Per-target empirical means are a lower bound for the shared-response model, not a held-out baseline or irreducible biological noise estimate. The tighter bound additionally requires the initial predicted fluorescence to be zero, as in the current relative readout. Trial-specific context could explain within-target variation; no held-out labels or model selection here.",
+  "training_fitted_global_gain_probe": {
+    "gain": 9.839100227086265,
+    "added_parameters": 1,
+    "training_scaled_mse": 0.07489045028185713,
+    "training_original_mse": 0.07535819924599924,
+    "validation_original_mse": 0.042322505308209704,
+    "validation_scaled_mse": 0.04164451069691618,
+    "scope": "One nonnegative least-squares observation gain, estimated from training data only; frozen neural dynamics and kernel. Validation-only diagnostic with no test scoring or q-label use. Does not retrain the joint classifier or improve waveform shape; not a replacement for the original fit artifact."
+  }
+}
