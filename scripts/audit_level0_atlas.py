@@ -87,6 +87,11 @@ def main():
     config = load(run/'config.json')
     data, split, evidence = load(args.data), load(args.split), load(args.evidence)
     assert model['config'] == config
+    optimizer=config.get('optimizer',{'kind':'adam'})
+    assert optimizer['kind'] in ('adam','adamw')
+    if optimizer['kind']=='adamw':
+        decay=optimizer['weight_decay']
+        assert np.isfinite(decay) and decay >= 0 and config['learning_rate']*decay <= 1
     assert [c['epoch'] for c in selection] == list(range(config['epochs']+1))
     best = min(selection, key=lambda c: (c['validation_mse'], c['epoch']))
     assert model['epoch'] == best['epoch']

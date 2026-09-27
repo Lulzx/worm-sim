@@ -25,6 +25,8 @@ pub struct FitConfig {
     pub learning_rate: f64,
     #[serde(default)]
     pub learning_rate_schedule: super::optimization::LearningRateSchedule,
+    #[serde(default)]
+    pub optimizer: super::optimization::Optimizer,
     pub kernel_lags: usize,
     pub prior_strength: f64,
     pub sign_prior_strength: f64,
@@ -65,6 +67,13 @@ pub struct ClassificationConfig {
 impl FitConfig {
     fn validate(&self) -> Result<()> {
         self.learning_rate_schedule.validate()?;
+        self.optimizer.validate()?;
+        if let super::optimization::Optimizer::AdamW { weight_decay } = self.optimizer
+            && (!(self.learning_rate * weight_decay).is_finite()
+                || self.learning_rate * weight_decay > 1.)
+        {
+            return Err("AdamW base rate times decay must be at most one".into());
+        }
         if let Some(c) = &self.correlation
             && (!c.weight.is_finite()
                 || c.weight <= 0.
@@ -353,6 +362,13 @@ impl AtlasModel {
                 "-pair-mean-correlation"
             } else {
                 ""
+            } + if matches!(
+                self.config.optimizer,
+                super::optimization::Optimizer::AdamW { .. }
+            ) {
+                "-adamw"
+            } else {
+                ""
             },
             free_parameters: self.free_parameters(),
             training_trials: self.training_trials.clone(),
@@ -487,6 +503,13 @@ pub fn fit_select_with_evidence(
     let gain_index = classifier_index + if labels.is_some() { 2 } else { 0 };
     let parameter_count = gain_index + usize::from(current.observation_log_gain.is_some());
     let mut optimizer = Adam::new(parameter_count);
+    let mut trainable: Vec<_> = current
+        .parameters
+        .groups
+        .iter()
+        .map(|g| g.trainable)
+        .collect();
+    trainable.resize(parameter_count, true);
     let total_weight = groups.iter().map(|g| g.sample_weight).sum::<f64>();
     let mut best = f64::INFINITY;
     let mut selected = None;
@@ -672,9 +695,11 @@ pub fn fit_select_with_evidence(
                 gradient[gain_index] += 2. * g.prior_strength * delta;
                 values.push(log_gain);
             }
-            optimizer.update(
+            config.optimizer.update(
+                &mut optimizer,
                 &mut values,
                 &gradient,
+                &trainable,
                 rate.ok_or("missing update learning rate")?,
             )?;
             if current.observation_log_gain.is_some() {

@@ -50,6 +50,7 @@ fn fixture() -> (wormsim::data::IndexedGraph, Dataset, Split) {
 fn fit_and_impulses_exclude_held_out_fluorescence() {
     let (graph, mut data, split) = fixture();
     let config = FitConfig {
+        optimizer: Default::default(),
         learning_rate_schedule: Default::default(),
         correlation: None,
         observation_gain: None,
@@ -155,6 +156,7 @@ fn joint_fit_uses_training_labels_and_preserves_mse_selection() {
             .collect(),
     };
     let config = FitConfig {
+        optimizer: Default::default(),
         learning_rate_schedule: Default::default(),
         correlation: Some(atlas_level0::CorrelationConfig {
             weight: 0.02,
@@ -333,6 +335,7 @@ fn molecular_prior_fit_preserves_graph_and_excludes_test_fluorescence() {
         inhibitory_edges: vec![1],
     };
     let config = FitConfig {
+        optimizer: Default::default(),
         learning_rate_schedule: Default::default(),
         correlation: Some(atlas_level0::CorrelationConfig {
             weight: 0.02,
@@ -525,4 +528,58 @@ fn cosine_schedule_is_applied_and_zero_final_rate_preserves_parameters() {
     .unwrap();
     assert_eq!(checkpoints[1].kernel_raw, constant[1].kernel_raw);
     assert_ne!(checkpoints[2].kernel_raw, constant[2].kernel_raw);
+}
+
+#[test]
+fn adamw_fit_decays_only_trainable_raw_coordinates() {
+    use wormsim::bench::optimization::Optimizer;
+    let (graph, data, split) = fixture();
+    let mut config: FitConfig = serde_json::from_value(serde_json::json!({
+        "epochs":1,"dt":0.02,"preparation_seconds":0.4,"learning_rate":0.01,
+        "kernel_lags":1,"prior_strength":0.01,"sign_prior_strength":0.01,
+        "kernel_prior_strength":0.01,"sharing":wormsim::parameters::Sharing::default(),
+        "observation_gain":{"initial_gain":3.,"prior_strength":0.1}
+    }))
+    .unwrap();
+    let mut baseline = vec![];
+    atlas_level0::fit_select(&data, &graph, &split, config.clone(), |m, _| {
+        baseline.push(m.clone());
+        Ok(())
+    })
+    .unwrap();
+    config.optimizer = Optimizer::AdamW { weight_decay: 0.2 };
+    let mut decayed = vec![];
+    atlas_level0::fit_select(&data, &graph, &split, config, |m, _| {
+        decayed.push(m.clone());
+        Ok(())
+    })
+    .unwrap();
+    for ((start, adam), adamw) in baseline[0]
+        .parameters
+        .groups
+        .iter()
+        .zip(&baseline[1].parameters.groups)
+        .zip(&decayed[1].parameters.groups)
+    {
+        let expected = if start.trainable {
+            adam.value - 0.002 * start.value
+        } else {
+            start.value
+        };
+        assert!((adamw.value - expected).abs() < 1e-12);
+    }
+    assert!(
+        (decayed[1].kernel_raw[0]
+            - (baseline[1].kernel_raw[0] - 0.002 * baseline[0].kernel_raw[0]))
+            .abs()
+            < 1e-12
+    );
+    assert!(
+        (decayed[1].observation_log_gain.unwrap()
+            - (baseline[1].observation_log_gain.unwrap()
+                - 0.002 * baseline[0].observation_log_gain.unwrap()))
+        .abs()
+            < 1e-12
+    );
+    assert_eq!(decayed[1].free_parameters(), baseline[1].free_parameters());
 }
