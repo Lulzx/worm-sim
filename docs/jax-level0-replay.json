@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "source_commit": "06633467f3e40044c5ba46363932a2964461e699",
+  "source_worktree_dirty": false,
+  "inputs": {
+    "model": "0d5c943e2e03feef048184b9703ea69d9d5a3418feb4563046c845c68a1eea0f",
+    "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "data": "2063f69753f9ab0dce9ee489214fc3eb641c451651a09cc4b2ee81f261df4b2b",
+    "reference": "e88b37d7939905255560a02ac62a5656bef8666e9da02037eafabe6cbb7ab4a0"
+  },
+  "prediction_sha256": "7b67cfc0b02a304fa48d8bbe1bafa62d4e989d265f298e83ee0d60ae37b8c2aa",
+  "jax": "0.11.2",
+  "diffrax": "0.7.2",
+  "equinox": "0.13.8",
+  "devices": [
+    "cpu:0"
+  ],
+  "precision": "float64",
+  "targets": 15,
+  "trials": 166,
+  "maximum_absolute_prediction_error": 1.6653346031121838e-16,
+  "target_seconds_including_first_compile": [
+    0.5446685829665512,
+    0.08159504202194512,
+    0.08071287488564849,
+    0.08118662494234741,
+    0.08159733295906335,
+    0.08130208298098296,
+    0.08077029208652675,
+    0.08083650004118681,
+    0.08163566596340388,
+    0.08019074995536357,
+    0.0818621669895947,
+    0.08168275002390146,
+    0.08118816604837775,
+    0.08115058299154043,
+    0.08074812509585172
+  ],
+  "scope": "Frozen parameter forward replay, same Euler grid; no refit, no new biological result, no optimizer parity claim. Reference predictions used only for output schema and post-hoc numerical comparison.",
+  "rust_scoring": {
+    "evaluation_source_commit": "dcdd0fffc559f393c8c5e6838f88ba2b755d1d06",
+    "pooled_trace_scores": {
+      "samples": 503600,
+      "weight": 503600.0,
+      "mse": 0.04989684961428055,
+      "correlation": 0.12329083497980861,
+      "r2": -0.021586945852074324
+    },
+    "macro_trace_correlation": 0.0021261078038790847,
+    "pair_auroc": {
+      "value": 0.6810058792712033,
+      "positive_pairs": 82,
+      "negative_pairs": 1676,
+      "positive_weight": 82.0,
+      "negative_weight": 1676.0
+    },
+    "artifacts_sha256": {
+      "trace-report.json": "4eb22097f99763198c4bd1ba1178f7f481c72280856d1aec0cd8ee92cfa36508",
+      "pair-report.json": "2053558e9c91b28cea43eec9339b6348ba2e42b2d413494b69d6839eec81a21d",
+      "uncertainty.json": "6290823d921638aa8cf34c8ccfe76db7f28e6bf7641dd354762a86c5d19760e9"
+    }
+  }
+}

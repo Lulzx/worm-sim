@@ -29,7 +29,9 @@ Existing scientific results remain acceptance evidence; new fit sweeps and model
 selection diagnostics are deferred while missing software requirements are built.
 The subsequent hybrid-stack decision adds a first migration gate: reproduce the
 frozen Level 0 forward result through the Rust scorer, then reproduce the fitting
-loop before new model experiments. See [JAX backend](../backends/jax/README.md).
+loop before new model experiments. The frozen-forward gate passes with identical Rust-scored AUROC 0.6810058793;
+full training reproduction is pending ([migration receipt](JAX-MIGRATION.md)).
+See [JAX backend](../backends/jax/README.md).
 
 1. Complete perturbation protocols: current waveforms (implemented), conductance
    inputs, clamps, YAML, gene/drug mappings and the phenotype registry.
