@@ -11,6 +11,7 @@ import diffrax
 import numpy as np
 from solvers import Adaptive, integrate
 from typing import NamedTuple
+from modulation import Modulation
 
 
 class AdaptiveSolution(NamedTuple):
@@ -34,14 +35,18 @@ class Level0(eqx.Module):
     max_steps: int = eqx.field(static=True)
     adaptive: Adaptive | None = eqx.field(static=True)
     preparation: float = eqx.field(static=True)
+    modulation: Modulation | None
 
-    def __init__(self, model, graph, times, adaptive=None):
+    def __init__(self, model, graph, times, adaptive=None, modulation=None):
         if adaptive is not None and not isinstance(adaptive,Adaptive):
             raise TypeError('adaptive settings must be an Adaptive instance')
         self.adaptive=adaptive
+        self.modulation=modulation
         names = sorted(n['id'] for n in graph['neurons'])
         index = {name:i for i,name in enumerate(names)}
         self.n = len(names)
+        if modulation is not None and (not isinstance(modulation,Modulation) or modulation.names!=tuple(names)):
+            raise ValueError('modulation neuron order differs from the model')
         chemical = sorted(graph['chemical'], key=lambda e:(e['pre'],e['post']))
         gaps = sorted(graph['gaps'], key=lambda e:(e['a'],e['b']))
         self.m = len(chemical)
@@ -57,6 +62,8 @@ class Level0(eqx.Module):
         self.initial = jnp.asarray(model['initial'])
         if self.initial.shape != (3*self.n,):
             raise ValueError('initial state size mismatch')
+        if modulation is not None:
+            self.initial=jnp.concatenate((self.initial,modulation.initial))
         times = np.asarray(times, dtype=float)
         dt = model['config']['dt']
         prep = model['config'].get('preparation_seconds', 0.)
@@ -95,16 +102,26 @@ class Level0(eqx.Module):
         raw = theta['groups'][self.mapping]
         positive = jax.nn.softplus(raw)+1e-9
         n,m = self.n,self.m
-        v,c,s = state[:n],state[n:2*n],state[2*n:]
-        release = jax.nn.sigmoid((v-raw[2*n:3*n])*positive[3*n:4*n])
-        dv = (-(v-raw[n:2*n])).at[target].add(current)
+        v,c,s = state[:n],state[n:2*n],state[2*n:3*n]
+        if self.modulation is None:
+            release = jax.nn.sigmoid((v-raw[2*n:3*n])*positive[3*n:4*n])
+            dv = (-(v-raw[n:2*n])).at[target].add(current)
+        else:
+            gain,leak,synapse=self.modulation.multipliers(state[3*n:],theta['modulation'])
+            release=jax.nn.sigmoid((v-raw[2*n:3*n])*positive[3*n:4*n]*gain)
+            dv=(-(v-raw[n:2*n])*leak).at[target].add(current)
         weight = positive[6*n:6*n+m]*self.counts
+        if self.modulation is not None:
+            weight=weight*synapse[self.post]
         reversal = 2*jax.nn.sigmoid(raw[6*n+m:6*n+2*m])-1
         dv = dv.at[self.post].add(weight*s[self.pre]*(reversal-v[self.post]))
         gap = positive[6*n+2*m:-1]*self.sizes*(v[self.gb]-v[self.ga])
         dv = dv.at[self.ga].add(gap).at[self.gb].add(-gap)
-        return jnp.concatenate((dv/positive[:n], (release-c)/positive[4*n:5*n],
+        fast=jnp.concatenate((dv/positive[:n], (release-c)/positive[4*n:5*n],
                                 (release*(1-s)-s)/positive[-1]))
+        if self.modulation is None:
+            return fast
+        return jnp.concatenate((fast,self.modulation.derivative(state[3*n:],release,theta['modulation'])))
 
     def solve(self, theta, target):
         if self.adaptive is not None:
@@ -148,10 +165,13 @@ class Level0(eqx.Module):
         return jnp.exp(theta['log_gain'])*scale*(calcium-calcium[0])
 
 
-def parameters(model):
-    return {'groups':jnp.asarray([g['value'] for g in model['parameters']['groups']]),
+def parameters(model, modulation=None):
+    out = {'groups':jnp.asarray([g['value'] for g in model['parameters']['groups']]),
             'kernel':jnp.asarray(model['kernel_raw']),
             'log_gain':jnp.asarray(model.get('observation_log_gain') or 0.)}
+    if modulation is not None:
+        out['modulation']=modulation.parameters()
+    return out
 
 
 response = eqx.filter_jit(lambda engine,theta,target: engine.response(theta,target))

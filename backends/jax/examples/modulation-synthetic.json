@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "source": "Synthetic two-cell mechanism example. No measured biological release/receptor map.",
+  "max_log_effect": 3.0,
+  "channels": [
+    {"id": "example/head", "species": "example", "compartment": "head", "tau_seconds": 10.0, "initial": 0.0, "bath": 0.0}
+  ],
+  "release": [
+    {"neuron": "A", "channel": "example/head", "group": "example-release", "alpha": 1.0}
+  ],
+  "receptors": [
+    {"neuron": "B", "channel": "example/head", "effect": "gain", "group": "example-receptor", "kd": 0.5, "beta": 0.2}
+  ]
+}

@@ -134,3 +134,11 @@ PID control and reverse differentiation through preparation and all response
 intervals. The default Euler reproduction path and population runner remain
 unchanged. See [adaptive solver semantics and checks](../../docs/ADAPTIVE-SOLVERS.md),
 including why implicit stages require interval-local input values.
+
+## Slow modulation API
+
+`Modulation` supplies sparse release/receptor maps and extra concentration states
+for the Level 0 engine. It supports named parameter tying, independent
+species/compartment channels, and gain/leak/chemical-weight effects with automatic
+gradients. Maps require explicit provenance; the included example is synthetic.
+See [equations, API and acceptance limits](../../docs/NEUROMODULATION.md).
