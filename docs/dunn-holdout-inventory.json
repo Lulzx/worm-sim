@@ -1,0 +1,1092 @@
+{
+  "schema_version": 1,
+  "dandiset": "001623",
+  "version": "0.251015.0312",
+  "zenodo_record": 17353307,
+  "upstream_commit": "98016334b89ef087bdf39de938dad52a2cc8a47a",
+  "source_manifest_sha256": "e8e31bee31091aca24a671a255fb227e520105b6934a1dd8dcc68522382b1ee2",
+  "script_sha256": "5e78fb00bbd64a9efbc2c5b9d252526e27227b740cd175936ca8febc86cebe1b",
+  "sources": {
+    "dandi-metadata.json": {
+      "url": "https://api.dandiarchive.org/api/dandisets/001623/versions/0.251015.0312/",
+      "sha256": "104d204c8d1209cb70441f1785a464fd2997940e07d336cd1824fa7bcbbb75b5",
+      "bytes": 2683
+    },
+    "dandi-assets.json": {
+      "url": "https://api.dandiarchive.org/api/dandisets/001623/versions/0.251015.0312/assets/?page_size=1000",
+      "sha256": "3cf01d309e48fecc3c153999f726f81c66ddf637fd0227e1559d6fc320c6dea1",
+      "bytes": 27268
+    },
+    "zenodo-metadata.json": {
+      "url": "https://zenodo.org/api/records/17353307",
+      "sha256": "b870bdc3d064cf8b3d3c4f10fb14474ce4e482c9c614b8a672574afbdfa562ed",
+      "bytes": 27515
+    },
+    "upstream-readme.md": {
+      "url": "https://raw.githubusercontent.com/focolab/2025-dunn-et-al-curr-biol/98016334b89ef087bdf39de938dad52a2cc8a47a/README.md",
+      "sha256": "183af6be0e3b72dab65f3f16e50f70c1edce5026ea48741ded5639d8f8483173",
+      "bytes": 2373
+    },
+    "upstream-data-schema.py": {
+      "url": "https://raw.githubusercontent.com/focolab/2025-dunn-et-al-curr-biol/98016334b89ef087bdf39de938dad52a2cc8a47a/lib/wbliveDataClass.py",
+      "sha256": "f83c58efa624da8f815e46df5a5d1e882dab296913231c51a2d4236a38aa22d1",
+      "bytes": 106207
+    }
+  },
+  "candidate_assets": 95,
+  "randi_recording_names_checked": 113,
+  "matching_randi_timestamps": 0,
+  "matching_processed_pickle_names": 95,
+  "zenodo_file_count": 96,
+  "other_zenodo_files": [
+    "intermediate_datafiles.zip"
+  ],
+  "records": [
+    {
+      "recording": "20220302-11-45-51",
+      "path": "sub-20220302-11-45-51/sub-20220302-11-45-51_ses-20220302T114551.nwb",
+      "asset_id": "c87f3d60-0a13-4f0d-9c16-e7f73d56f650",
+      "bytes": 8163874989,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 209932669,
+        "checksum": "md5:84177373647c75edd97edf179374d956"
+      }
+    },
+    {
+      "recording": "20220316-15-34-20",
+      "path": "sub-20220316-15-34-20/sub-20220316-15-34-20_ses-20220316T153420.nwb",
+      "asset_id": "fbffdc4a-470f-434c-8986-6d2a24db02a9",
+      "bytes": 8076745436,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 130885444,
+        "checksum": "md5:41375cb364bdfa4834a3ecdb480b273e"
+      }
+    },
+    {
+      "recording": "20220426-11-26-14",
+      "path": "sub-20220426-11-26-14/sub-20220426-11-26-14_ses-20220426T112614.nwb",
+      "asset_id": "7036e1e7-9663-4bb8-af28-ce402f6017d1",
+      "bytes": 8078567443,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 143894235,
+        "checksum": "md5:53104bd05d608e3f2d59f912a5e281fd"
+      }
+    },
+    {
+      "recording": "20220426-11-32-18",
+      "path": "sub-20220426-11-32-18/sub-20220426-11-32-18_ses-20220426T113218.nwb",
+      "asset_id": "68b50334-52eb-4305-af3a-b2368ecee5e7",
+      "bytes": 8083534008,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 164740433,
+        "checksum": "md5:7ed57fabd644d97df600ae97455f143b"
+      }
+    },
+    {
+      "recording": "20221106-21-00-09",
+      "path": "sub-20221106-21-00-09/sub-20221106-21-00-09_ses-20221106T210009.nwb",
+      "asset_id": "1e318b58-c5cf-477a-a1bc-83e9ee13f04b",
+      "bytes": 2650829215,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 42905729,
+        "checksum": "md5:617abb4f67e97377e61f422d6ba2967a"
+      }
+    },
+    {
+      "recording": "20221106-21-23-19",
+      "path": "sub-20221106-21-23-19/sub-20221106-21-23-19_ses-20221106T212319.nwb",
+      "asset_id": "b28f2a9c-b414-4b89-b4f8-6356a6c567d1",
+      "bytes": 2651628202,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 54812982,
+        "checksum": "md5:702ec04e73597257f328b1f7d34bab58"
+      }
+    },
+    {
+      "recording": "20221106-21-47-31",
+      "path": "sub-20221106-21-47-31/sub-20221106-21-47-31_ses-20221106T214731.nwb",
+      "asset_id": "cb2b5d60-4c26-457a-a37c-a0d0f0aec2e6",
+      "bytes": 2648601000,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 43451647,
+        "checksum": "md5:9581242a2bce65186343017262efadb8"
+      }
+    },
+    {
+      "recording": "20221215-22-02-55",
+      "path": "sub-20221215-22-02-55/sub-20221215-22-02-55_ses-20221215T220255.nwb",
+      "asset_id": "70a533fd-2e08-48eb-9e96-49670e741f5a",
+      "bytes": 2655051522,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 31500701,
+        "checksum": "md5:8f052e284fdf846c68284128c1791a4f"
+      }
+    },
+    {
+      "recording": "20230317-12-27-51",
+      "path": "sub-20230317-12-27-51/sub-20230317-12-27-51_ses-20230317T122751.nwb",
+      "asset_id": "ba3efcb2-e847-465e-b0b5-10cf27ebc3e0",
+      "bytes": 2704993279,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 34978097,
+        "checksum": "md5:5205661b06c594f739279c0346674c85"
+      }
+    },
+    {
+      "recording": "20230317-12-51-42",
+      "path": "sub-20230317-12-51-42/sub-20230317-12-51-42_ses-20230317T125142.nwb",
+      "asset_id": "af14e6d0-ff57-4854-8f83-ef4d40d9e376",
+      "bytes": 2707514166,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 29946162,
+        "checksum": "md5:77949868b92af2c5f59e2c598a46fa69"
+      }
+    },
+    {
+      "recording": "20230322-18-57-04",
+      "path": "sub-20230322-18-57-04/sub-20230322-18-57-04_ses-20230322T185704.nwb",
+      "asset_id": "abd67ccc-f2ef-4bd2-97f8-c54dfafbeb1c",
+      "bytes": 4031697527,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 32021602,
+        "checksum": "md5:0311664837d5c950a24a1d29b37c10f0"
+      }
+    },
+    {
+      "recording": "20230322-20-16-50",
+      "path": "sub-20230322-20-16-50/sub-20230322-20-16-50_ses-20230322T201650.nwb",
+      "asset_id": "ef66e044-b84d-45ad-81f5-61d432bb1e4f",
+      "bytes": 4037173793,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 37111335,
+        "checksum": "md5:690f555629f705863af78b6926e48ede"
+      }
+    },
+    {
+      "recording": "20230322-21-09-13",
+      "path": "sub-20230322-21-09-13/sub-20230322-21-09-13_ses-20230322T210913.nwb",
+      "asset_id": "a91f4d69-4a73-40a9-8b16-487d9ea0a59b",
+      "bytes": 4030918730,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 72172848,
+        "checksum": "md5:1a1de9ff3d51152fbace1901b3b17fea"
+      }
+    },
+    {
+      "recording": "20230322-21-41-10",
+      "path": "sub-20230322-21-41-10/sub-20230322-21-41-10_ses-20230322T214110.nwb",
+      "asset_id": "cf16f8da-cfd5-4edb-ac43-e9788e572677",
+      "bytes": 4028907692,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 73621236,
+        "checksum": "md5:3f468d9d7b868ced8539dc1b4c52918a"
+      }
+    },
+    {
+      "recording": "20230322-22-12-12",
+      "path": "sub-20230322-22-12-12/sub-20230322-22-12-12_ses-20230322T221212.nwb",
+      "asset_id": "ed8cc6e3-8bd5-4013-a727-4cb101b9f8b2",
+      "bytes": 4030749856,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 76696703,
+        "checksum": "md5:76d5a2e43ed226172d1d4a3904970631"
+      }
+    },
+    {
+      "recording": "20230322-22-43-03",
+      "path": "sub-20230322-22-43-03/sub-20230322-22-43-03_ses-20230322T224303.nwb",
+      "asset_id": "6f89f14e-7b8f-4670-8c42-f29179d93dc5",
+      "bytes": 4027363860,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 86587070,
+        "checksum": "md5:bf5ad464c76db3c97dac330cad2e3be3"
+      }
+    },
+    {
+      "recording": "20230412-20-15-17",
+      "path": "sub-20230412-20-15-17/sub-20230412-20-15-17_ses-20230412T201517.nwb",
+      "asset_id": "69797a4d-c196-4bc6-a6c7-8a1908029ae8",
+      "bytes": 4052319369,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 85326558,
+        "checksum": "md5:b49274ff0f75bfc468c49de9fa256feb"
+      }
+    },
+    {
+      "recording": "20230502-20-05-02",
+      "path": "sub-20230502-20-05-02/sub-20230502-20-05-02_ses-20230502T200502.nwb",
+      "asset_id": "ef816ae6-2ddd-4f3f-9cdc-f3813646d11d",
+      "bytes": 12968523477,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 45217212,
+        "checksum": "md5:d6806cb0469f6120da14e7fbadcfcbac"
+      }
+    },
+    {
+      "recording": "20230502-20-41-23",
+      "path": "sub-20230502-20-41-23/sub-20230502-20-41-23_ses-20230502T204123.nwb",
+      "asset_id": "ef89750c-d194-4e3d-881f-66a5b901548f",
+      "bytes": 12989443637,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 41408515,
+        "checksum": "md5:f2916a4100e2f66644054a5dce02c29a"
+      }
+    },
+    {
+      "recording": "20230506-12-56-00",
+      "path": "sub-20230506-12-56-00/sub-20230506-12-56-00_ses-20230506T125600.nwb",
+      "asset_id": "e4ba51b7-c313-4058-b33b-e526d89df9b8",
+      "bytes": 12979639663,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 47661653,
+        "checksum": "md5:6253e5ee0478f6244275d1661a9ad71b"
+      }
+    },
+    {
+      "recording": "20230506-13-32-08",
+      "path": "sub-20230506-13-32-08/sub-20230506-13-32-08_ses-20230506T133208.nwb",
+      "asset_id": "416babe0-e1f4-47e7-ab64-a63373728501",
+      "bytes": 12966848481,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 43008330,
+        "checksum": "md5:653abd283be3d1cf39a923715f48d34b"
+      }
+    },
+    {
+      "recording": "20230506-14-24-57",
+      "path": "sub-20230506-14-24-57/sub-20230506-14-24-57_ses-20230506T142457.nwb",
+      "asset_id": "b2cae471-145a-42bb-9871-8eb42b94aa08",
+      "bytes": 12977449066,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 45597621,
+        "checksum": "md5:1685e9d41be984ac750ee3fcd8950bd7"
+      }
+    },
+    {
+      "recording": "20230506-15-01-45",
+      "path": "sub-20230506-15-01-45/sub-20230506-15-01-45_ses-20230506T150145.nwb",
+      "asset_id": "5524ed14-7b67-4498-9a5f-3b0dc5e86e92",
+      "bytes": 12967247188,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 25019219,
+        "checksum": "md5:ac1d9324cfe761e974ec57330893a4ea"
+      }
+    },
+    {
+      "recording": "20230506-15-33-51",
+      "path": "sub-20230506-15-33-51/sub-20230506-15-33-51_ses-20230506T153351.nwb",
+      "asset_id": "e5cf16a8-1af2-4b9d-9f49-348f68c2f377",
+      "bytes": 12970991953,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 27710241,
+        "checksum": "md5:5652030f9919a4fc02086820080c3d4c"
+      }
+    },
+    {
+      "recording": "20230510-12-53-34",
+      "path": "sub-20230510-12-53-34/sub-20230510-12-53-34_ses-20230510T125334.nwb",
+      "asset_id": "dd285dcb-c35e-441c-8333-e650bf52f2ee",
+      "bytes": 12971793713,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 45658765,
+        "checksum": "md5:34480614794dd4a73843e045e8337595"
+      }
+    },
+    {
+      "recording": "20230510-13-25-46",
+      "path": "sub-20230510-13-25-46/sub-20230510-13-25-46_ses-20230510T132546.nwb",
+      "asset_id": "1978fe3a-17c4-4e07-9165-8026deefbc51",
+      "bytes": 12972843377,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 45919402,
+        "checksum": "md5:de3a07b3450b631c9f9932de65cddffd"
+      }
+    },
+    {
+      "recording": "20230510-15-49-47",
+      "path": "sub-20230510-15-49-47/sub-20230510-15-49-47_ses-20230510T154947.nwb",
+      "asset_id": "1df7c886-35cb-4542-a6e5-ba618acd6be4",
+      "bytes": 12967189276,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 42003438,
+        "checksum": "md5:4bcbed5bcd45c2c4cbdd4d49bbe4e2c6"
+      }
+    },
+    {
+      "recording": "20230510-16-36-46",
+      "path": "sub-20230510-16-36-46/sub-20230510-16-36-46_ses-20230510T163646.nwb",
+      "asset_id": "e50aaef4-1cbd-493f-a2ed-be434365e427",
+      "bytes": 12962621993,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 31554681,
+        "checksum": "md5:38941b99c3404eb781a632710ea50277"
+      }
+    },
+    {
+      "recording": "20230604-15-10-44",
+      "path": "sub-20230604-15-10-44/sub-20230604-15-10-44_ses-20230604T151044.nwb",
+      "asset_id": "1023cc35-c200-40b6-a45a-de34e416f05e",
+      "bytes": 12955619340,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 59361297,
+        "checksum": "md5:215f0d1af913e4a47cf2418593ea1a56"
+      }
+    },
+    {
+      "recording": "20230604-15-50-12",
+      "path": "sub-20230604-15-50-12/sub-20230604-15-50-12_ses-20230604T155012.nwb",
+      "asset_id": "e4829f2d-cc9c-48da-b103-0ca32ed9b7fa",
+      "bytes": 12965402919,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 57298485,
+        "checksum": "md5:9a90a3596c7d6da72e287be047a96525"
+      }
+    },
+    {
+      "recording": "20230604-16-22-56",
+      "path": "sub-20230604-16-22-56/sub-20230604-16-22-56_ses-20230604T162256.nwb",
+      "asset_id": "8ca1aacb-20f4-4719-9b73-3b2b9ede79de",
+      "bytes": 12962479174,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 53656777,
+        "checksum": "md5:dcbe9ebffebf441a772a996e7c79586a"
+      }
+    },
+    {
+      "recording": "20230604-17-09-01",
+      "path": "sub-20230604-17-09-01/sub-20230604-17-09-01_ses-20230604T170901.nwb",
+      "asset_id": "3f64f641-4f3f-47c9-9ee7-f86e0dd5e0ab",
+      "bytes": 12961576441,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 55632464,
+        "checksum": "md5:2c0b04e59568c93f363566863a8f8ba7"
+      }
+    },
+    {
+      "recording": "20230903-15-10-21",
+      "path": "sub-20230903-15-10-21/sub-20230903-15-10-21_ses-20230903T151021.nwb",
+      "asset_id": "d16d36bd-2aa0-4a6d-a713-2357b121f5fd",
+      "bytes": 4049442036,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 52659386,
+        "checksum": "md5:73b5d402153dd9725e30b039de15ba7d"
+      }
+    },
+    {
+      "recording": "20230903-16-32-28",
+      "path": "sub-20230903-16-32-28/sub-20230903-16-32-28_ses-20230903T163228.nwb",
+      "asset_id": "0b758baf-51d6-40b0-b8c8-e8f7b6943c89",
+      "bytes": 4039354634,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 41362087,
+        "checksum": "md5:33cb1528a7f002016ae0ece036c16243"
+      }
+    },
+    {
+      "recording": "20230903-17-18-45",
+      "path": "sub-20230903-17-18-45/sub-20230903-17-18-45_ses-20230903T171845.nwb",
+      "asset_id": "fb9ea83c-2ef5-492d-87a9-92e6719b9031",
+      "bytes": 4043376234,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 50724248,
+        "checksum": "md5:22bdc31d668728317dec571ceda00203"
+      }
+    },
+    {
+      "recording": "20230903-18-20-19",
+      "path": "sub-20230903-18-20-19/sub-20230903-18-20-19_ses-20230903T182019.nwb",
+      "asset_id": "3f33f6ae-d7c8-41ec-af8e-4a07f636ad74",
+      "bytes": 4039170305,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 60643396,
+        "checksum": "md5:26e9dfe7e64ff2eb2a09d634d2e02b2a"
+      }
+    },
+    {
+      "recording": "20230903-19-07-30",
+      "path": "sub-20230903-19-07-30/sub-20230903-19-07-30_ses-20230903T190730.nwb",
+      "asset_id": "efdc2e32-f24d-4a3a-be63-ca72f6f0ad2e",
+      "bytes": 4035860052,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 61953814,
+        "checksum": "md5:2076880784371d227aaee8f6c93f0cbf"
+      }
+    },
+    {
+      "recording": "20230904-14-30-52",
+      "path": "sub-20230904-14-30-52/sub-20230904-14-30-52_ses-20230904T143052.nwb",
+      "asset_id": "521f1562-e399-4f3d-8ecb-5ec697dbf4ea",
+      "bytes": 13002397412,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 35698418,
+        "checksum": "md5:b2f607d6609848b92c5928b01bbf8e2e"
+      }
+    },
+    {
+      "recording": "20230904-15-09-05",
+      "path": "sub-20230904-15-09-05/sub-20230904-15-09-05_ses-20230904T150905.nwb",
+      "asset_id": "274c8b1d-10d3-4abe-96d2-450cc2120580",
+      "bytes": 13017534496,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 37291352,
+        "checksum": "md5:fb0d6de33411e94f2187de397fd56d6a"
+      }
+    },
+    {
+      "recording": "20230904-15-59-40",
+      "path": "sub-20230904-15-59-40/sub-20230904-15-59-40_ses-20230904T155940.nwb",
+      "asset_id": "b1221959-fc8a-48ea-b282-9cb8e31ebc0c",
+      "bytes": 12988909042,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 55653193,
+        "checksum": "md5:f7f9969294dc7420f37631bf338ca775"
+      }
+    },
+    {
+      "recording": "20230909-14-26-56",
+      "path": "sub-20230909-14-26-56/sub-20230909-14-26-56_ses-20230909T142656.nwb",
+      "asset_id": "771c8482-8dfd-4740-98be-fbdba1a189f4",
+      "bytes": 13017789079,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 66469134,
+        "checksum": "md5:cceb29f2a23bf18365541da4612b6a97"
+      }
+    },
+    {
+      "recording": "20230909-15-40-07",
+      "path": "sub-20230909-15-40-07/sub-20230909-15-40-07_ses-20230909T154007.nwb",
+      "asset_id": "5abab929-0936-45ed-8c99-412e117e26bd",
+      "bytes": 13010480896,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 49770231,
+        "checksum": "md5:3b9b39bba23e7562e9a5c84be93af873"
+      }
+    },
+    {
+      "recording": "20230909-16-14-25",
+      "path": "sub-20230909-16-14-25/sub-20230909-16-14-25_ses-20230909T161425.nwb",
+      "asset_id": "e986a86b-5da6-4ef2-bf59-3fa4c5800728",
+      "bytes": 12999828443,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 58359121,
+        "checksum": "md5:df983b63b2a791d4516fe94d708994c4"
+      }
+    },
+    {
+      "recording": "20230909-16-48-09",
+      "path": "sub-20230909-16-48-09/sub-20230909-16-48-09_ses-20230909T164809.nwb",
+      "asset_id": "f71f55f4-4294-4fe2-a41b-996c52e03dc6",
+      "bytes": 12994201763,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 57096155,
+        "checksum": "md5:ac7cc8c61f706d71223bb56a60677149"
+      }
+    },
+    {
+      "recording": "20230921-17-15-33",
+      "path": "sub-20230921-17-15-33/sub-20230921-17-15-33_ses-20230921T171533.nwb",
+      "asset_id": "3d614e69-8c65-4a4b-81b5-39917cff4f2a",
+      "bytes": 12987946119,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 35620511,
+        "checksum": "md5:82c57e226bd2519bd54b4176ed932e5e"
+      }
+    },
+    {
+      "recording": "20240426-22-49-55",
+      "path": "sub-20240426-22-49-55/sub-20240426-22-49-55_ses-20240426T224955.nwb",
+      "asset_id": "5819ac44-bad0-429f-97bd-ae963e533b98",
+      "bytes": 2126066776,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 21793265,
+        "checksum": "md5:abb709960668bf0b2350983eb2ed96a1"
+      }
+    },
+    {
+      "recording": "20240426-23-12-40",
+      "path": "sub-20240426-23-12-40/sub-20240426-23-12-40_ses-20240426T231240.nwb",
+      "asset_id": "c2ccf7e9-3146-4b3c-9fb4-4517247ac9e6",
+      "bytes": 2118164791,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 18865580,
+        "checksum": "md5:8b94734b6144d4afbd2d136c3ca577df"
+      }
+    },
+    {
+      "recording": "20240427-12-43-44",
+      "path": "sub-20240427-12-43-44/sub-20240427-12-43-44_ses-20240427T124344.nwb",
+      "asset_id": "ab18d91e-b618-4a1c-a21a-8d311999e520",
+      "bytes": 2128100453,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 23850108,
+        "checksum": "md5:41d4c9082df5fb363182f02998ae3425"
+      }
+    },
+    {
+      "recording": "20240430-20-31-05",
+      "path": "sub-20240430-20-31-05/sub-20240430-20-31-05_ses-20240430T203105.nwb",
+      "asset_id": "87a753eb-bec0-46a5-8b8d-825546b166ed",
+      "bytes": 2136478463,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 30556314,
+        "checksum": "md5:ebec072229bd95cba3d9105f96d09f90"
+      }
+    },
+    {
+      "recording": "20240430-21-04-44",
+      "path": "sub-20240430-21-04-44/sub-20240430-21-04-44_ses-20240430T210444.nwb",
+      "asset_id": "444ae01d-5e04-4a05-a182-a0610433555e",
+      "bytes": 2122809948,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 23922476,
+        "checksum": "md5:72dc56e4aaa9126f156599e6641ed978"
+      }
+    },
+    {
+      "recording": "20240526-17-36-55",
+      "path": "sub-20240526-17-36-55/sub-20240526-17-36-55_ses-20240526T173655.nwb",
+      "asset_id": "03a471c3-c755-4445-b4bd-a1133a44f1ed",
+      "bytes": 3131494124,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 34437156,
+        "checksum": "md5:aa66ec3c81f51ce7b6aa2b120a13ab01"
+      }
+    },
+    {
+      "recording": "20240526-18-19-39",
+      "path": "sub-20240526-18-19-39/sub-20240526-18-19-39_ses-20240526T181939.nwb",
+      "asset_id": "f9b2561a-a6be-466d-9bb9-6e3084392463",
+      "bytes": 3121470974,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 31551711,
+        "checksum": "md5:253a4abaeaf5808f90738511ac08dc7b"
+      }
+    },
+    {
+      "recording": "20240526-19-18-14",
+      "path": "sub-20240526-19-18-14/sub-20240526-19-18-14_ses-20240526T191814.nwb",
+      "asset_id": "3bc7a789-b500-4c03-af3e-809458c662da",
+      "bytes": 3133626102,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 43403031,
+        "checksum": "md5:ebb5ac494072e054764fbe4fb1a4e34c"
+      }
+    },
+    {
+      "recording": "20240526-19-51-22",
+      "path": "sub-20240526-19-51-22/sub-20240526-19-51-22_ses-20240526T195122.nwb",
+      "asset_id": "47b5e6e7-6455-48a2-b832-37f8735860b4",
+      "bytes": 3133672935,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 46279436,
+        "checksum": "md5:bb35f53c5f905de3647ccafdc9c8e249"
+      }
+    },
+    {
+      "recording": "20240626-12-35-05",
+      "path": "sub-20240626-12-35-05/sub-20240626-12-35-05_ses-20240626T123505.nwb",
+      "asset_id": "66a87643-07e5-4059-92ee-e3307b2e964f",
+      "bytes": 3122877762,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 31641891,
+        "checksum": "md5:c812102ddcd2ee60633f0513d88813ae"
+      }
+    },
+    {
+      "recording": "20240626-13-22-25",
+      "path": "sub-20240626-13-22-25/sub-20240626-13-22-25_ses-20240626T132225.nwb",
+      "asset_id": "b86b78d2-f429-49f4-9c72-b9eaf776d426",
+      "bytes": 3146849028,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 48193896,
+        "checksum": "md5:bdde43cdb8bdfda983cbf6fc2426b8cc"
+      }
+    },
+    {
+      "recording": "20240626-13-55-40",
+      "path": "sub-20240626-13-55-40/sub-20240626-13-55-40_ses-20240626T135540.nwb",
+      "asset_id": "512275f0-80a2-40ec-8d0b-11918656d843",
+      "bytes": 3138488337,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 53189233,
+        "checksum": "md5:a9bb4d55325d385f02b2980ad24d4f26"
+      }
+    },
+    {
+      "recording": "20240626-14-30-55",
+      "path": "sub-20240626-14-30-55/sub-20240626-14-30-55_ses-20240626T143055.nwb",
+      "asset_id": "2ecd170c-6a55-4418-9a41-e12b9b6d3b01",
+      "bytes": 3132661167,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 37121969,
+        "checksum": "md5:669b4f38fc4f334c27cefb274332c98e"
+      }
+    },
+    {
+      "recording": "20240626-15-08-33",
+      "path": "sub-20240626-15-08-33/sub-20240626-15-08-33_ses-20240626T150833.nwb",
+      "asset_id": "828b7907-dd5e-4c02-82be-6d14f578908b",
+      "bytes": 3150369256,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 40376148,
+        "checksum": "md5:bb3afdc3d9ba107a2b3e0c9ca51799bb"
+      }
+    },
+    {
+      "recording": "20240629-14-14-08",
+      "path": "sub-20240629-14-14-08/sub-20240629-14-14-08_ses-20240629T141408.nwb",
+      "asset_id": "19734d6a-e23f-45b9-bc06-32e6f094002f",
+      "bytes": 3147954799,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 52272969,
+        "checksum": "md5:645cf27de75a67b4e6d5f506596c1c7e"
+      }
+    },
+    {
+      "recording": "20240629-14-48-32",
+      "path": "sub-20240629-14-48-32/sub-20240629-14-48-32_ses-20240629T144832.nwb",
+      "asset_id": "5780aa0b-353c-480d-85b6-dc3c91b40bd1",
+      "bytes": 3149648018,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 38919234,
+        "checksum": "md5:fe2ce8d64b38f9596ca59a3cb4c65b33"
+      }
+    },
+    {
+      "recording": "20240629-17-55-55",
+      "path": "sub-20240629-17-55-55/sub-20240629-17-55-55_ses-20240629T175555.nwb",
+      "asset_id": "fda010c0-22e4-4520-8320-17f290fb7f15",
+      "bytes": 3137127475,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 41539012,
+        "checksum": "md5:73426aa1493468dd0baa13f5345ad3db"
+      }
+    },
+    {
+      "recording": "20240629-20-22-10",
+      "path": "sub-20240629-20-22-10/sub-20240629-20-22-10_ses-20240629T202210.nwb",
+      "asset_id": "42988e06-62a5-48f3-bfb7-6eb0ae4361ea",
+      "bytes": 3140725822,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 48248172,
+        "checksum": "md5:69fc5b30c06cc29b7bc3d92f0096ca85"
+      }
+    },
+    {
+      "recording": "20240629-20-59-45",
+      "path": "sub-20240629-20-59-45/sub-20240629-20-59-45_ses-20240629T205945.nwb",
+      "asset_id": "d61704d1-27fd-454d-bcd9-984bc1c177f7",
+      "bytes": 3143179264,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 44238252,
+        "checksum": "md5:f52190e78232186076e3be3517c20239"
+      }
+    },
+    {
+      "recording": "20240714-15-24-26",
+      "path": "sub-20240714-15-24-26/sub-20240714-15-24-26_ses-20240714T152426.nwb",
+      "asset_id": "a9d3b27f-0dd7-47fd-9b73-611886044e08",
+      "bytes": 3131755042,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 38579516,
+        "checksum": "md5:2a607f0696fd094d91aacd0cb3c5121e"
+      }
+    },
+    {
+      "recording": "20240714-16-04-26",
+      "path": "sub-20240714-16-04-26/sub-20240714-16-04-26_ses-20240714T160426.nwb",
+      "asset_id": "2dcef1ec-962a-4fb0-a82d-3022930e299b",
+      "bytes": 3148763838,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 40603506,
+        "checksum": "md5:f58f1e7c451208096e014d1788a41846"
+      }
+    },
+    {
+      "recording": "20240714-17-28-58",
+      "path": "sub-20240714-17-28-58/sub-20240714-17-28-58_ses-20240714T172858.nwb",
+      "asset_id": "99688a76-4646-437b-9e14-77a82b2f1c14",
+      "bytes": 3147253312,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 49584415,
+        "checksum": "md5:7e8fa3c5aa4ada3f542e3ea4bd1af659"
+      }
+    },
+    {
+      "recording": "20240724-14-26-00",
+      "path": "sub-20240724-14-26-00/sub-20240724-14-26-00_ses-20240724T142600.nwb",
+      "asset_id": "8f8a9447-5bef-4ffc-b8fd-ece5cbef1b9d",
+      "bytes": 3132057689,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 36393588,
+        "checksum": "md5:c0fe0760b26daba3dc6899dcee456291"
+      }
+    },
+    {
+      "recording": "20240724-15-07-00",
+      "path": "sub-20240724-15-07-00/sub-20240724-15-07-00_ses-20240724T150700.nwb",
+      "asset_id": "348a12cd-dd2a-4790-9330-8b103f045aaf",
+      "bytes": 3141319891,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 38512792,
+        "checksum": "md5:4cd22993ec409771787c1f84f555bef2"
+      }
+    },
+    {
+      "recording": "20240724-15-48-55",
+      "path": "sub-20240724-15-48-55/sub-20240724-15-48-55_ses-20240724T154855.nwb",
+      "asset_id": "c64dccd8-b283-4d77-b013-4c7d903427ce",
+      "bytes": 3155953384,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 38944193,
+        "checksum": "md5:88b111b4fbfb8b051cdcf394d3c218fe"
+      }
+    },
+    {
+      "recording": "20240724-16-28-26",
+      "path": "sub-20240724-16-28-26/sub-20240724-16-28-26_ses-20240724T162826.nwb",
+      "asset_id": "83de3ab1-ae0a-4386-94cc-4067ec572fc2",
+      "bytes": 3140140712,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 38474373,
+        "checksum": "md5:babc985c9fcfa741f81d9ab8637c2719"
+      }
+    },
+    {
+      "recording": "20240724-17-40-58",
+      "path": "sub-20240724-17-40-58/sub-20240724-17-40-58_ses-20240724T174058.nwb",
+      "asset_id": "08acd2cf-89a9-45bd-aa9d-7c2b2fcfc2e8",
+      "bytes": 3126779662,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 38971513,
+        "checksum": "md5:e93bdf90ad190d8e38f6814aff13ad45"
+      }
+    },
+    {
+      "recording": "20240828-14-16-29",
+      "path": "sub-20240828-14-16-29/sub-20240828-14-16-29_ses-20240828T141629.nwb",
+      "asset_id": "d1f32ecc-f891-4747-be4d-7e225186dcb7",
+      "bytes": 13004972838,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 36551935,
+        "checksum": "md5:542e53c4a966066552685d62d2ca7ecb"
+      }
+    },
+    {
+      "recording": "20240828-14-57-38",
+      "path": "sub-20240828-14-57-38/sub-20240828-14-57-38_ses-20240828T145738.nwb",
+      "asset_id": "f23f1d3a-106c-49e7-b481-0bd4104fd9d9",
+      "bytes": 12993389112,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 30191943,
+        "checksum": "md5:be3d18a2b7bc2bbe5b3a2044d078d01f"
+      }
+    },
+    {
+      "recording": "20240828-15-51-58",
+      "path": "sub-20240828-15-51-58/sub-20240828-15-51-58_ses-20240828T155158.nwb",
+      "asset_id": "4495233c-ee7e-4b59-a14c-cfffc53d1c33",
+      "bytes": 13009442073,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 32477220,
+        "checksum": "md5:300eb0e8c43404041f23b474862fcc83"
+      }
+    },
+    {
+      "recording": "20240828-16-23-54",
+      "path": "sub-20240828-16-23-54/sub-20240828-16-23-54_ses-20240828T162354.nwb",
+      "asset_id": "275fda1c-b517-425d-910a-680e81ab5b07",
+      "bytes": 13003232589,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 34028302,
+        "checksum": "md5:0e0ad796f3641c3eb101566ed2c77afd"
+      }
+    },
+    {
+      "recording": "20240828-17-07-39",
+      "path": "sub-20240828-17-07-39/sub-20240828-17-07-39_ses-20240828T170739.nwb",
+      "asset_id": "270f3e3d-f6e8-4ae7-8d4e-4439aabec397",
+      "bytes": 13015097310,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 39051198,
+        "checksum": "md5:6076e063018b913f521707ef7d5c8d0d"
+      }
+    },
+    {
+      "recording": "20240829-13-00-31",
+      "path": "sub-20240829-13-00-31/sub-20240829-13-00-31_ses-20240829T130031.nwb",
+      "asset_id": "f3c6b8fd-1b35-4953-844c-f47504308d9a",
+      "bytes": 13012157182,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 39219254,
+        "checksum": "md5:21ef00b6de923174c0dbc64f4728ed36"
+      }
+    },
+    {
+      "recording": "20240829-13-39-15",
+      "path": "sub-20240829-13-39-15/sub-20240829-13-39-15_ses-20240829T133915.nwb",
+      "asset_id": "16e78c4b-d1a7-4884-bc3e-88806991c4c9",
+      "bytes": 13000772857,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 35634428,
+        "checksum": "md5:e5826497a226f73f9640b8aef750ccf9"
+      }
+    },
+    {
+      "recording": "20240902-15-36-41",
+      "path": "sub-20240902-15-36-41/sub-20240902-15-36-41_ses-20240902T153641.nwb",
+      "asset_id": "8557af79-64a1-493c-9538-9bab333dc0f4",
+      "bytes": 13010209344,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 32365586,
+        "checksum": "md5:85d5e075e88aabfae8b732cb9de0a8db"
+      }
+    },
+    {
+      "recording": "20240902-16-12-10",
+      "path": "sub-20240902-16-12-10/sub-20240902-16-12-10_ses-20240902T161210.nwb",
+      "asset_id": "6b8a2d3f-148d-4b27-96ce-7cd9cf91b08e",
+      "bytes": 13018422114,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 35941266,
+        "checksum": "md5:a03f2a69c981b3e60d1b4d56f98d7adb"
+      }
+    },
+    {
+      "recording": "20240902-16-53-12",
+      "path": "sub-20240902-16-53-12/sub-20240902-16-53-12_ses-20240902T165312.nwb",
+      "asset_id": "95eb4e25-0e95-4bac-a731-218b0029bad4",
+      "bytes": 12996732549,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 29802755,
+        "checksum": "md5:c66808f4b38991b748caa16832e5f203"
+      }
+    },
+    {
+      "recording": "20240902-17-33-24",
+      "path": "sub-20240902-17-33-24/sub-20240902-17-33-24_ses-20240902T173324.nwb",
+      "asset_id": "25559194-04e8-4c02-89a0-cca298face0e",
+      "bytes": 13005975580,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 33973922,
+        "checksum": "md5:353c1a5ef6d19abb06ac42a9a5ef5ca3"
+      }
+    },
+    {
+      "recording": "20240902-18-09-07",
+      "path": "sub-20240902-18-09-07/sub-20240902-18-09-07_ses-20240902T180907.nwb",
+      "asset_id": "6d9460a9-512c-42e4-8a74-cdf18cc9c15e",
+      "bytes": 13022006716,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 39297468,
+        "checksum": "md5:6f4115105d92fbe9de45d00a200b7c9d"
+      }
+    },
+    {
+      "recording": "20240902-18-51-10",
+      "path": "sub-20240902-18-51-10/sub-20240902-18-51-10_ses-20240902T185110.nwb",
+      "asset_id": "fec16053-c769-445d-9c10-ef5fecb6dc32",
+      "bytes": 12995323088,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 33009687,
+        "checksum": "md5:cec2f6b199113ab7baedda2e5a5a6048"
+      }
+    },
+    {
+      "recording": "20240902-20-11-40",
+      "path": "sub-20240902-20-11-40/sub-20240902-20-11-40_ses-20240902T201140.nwb",
+      "asset_id": "693b6d41-cebe-4dbd-8c53-4e1c9067d69a",
+      "bytes": 13001803885,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 38812068,
+        "checksum": "md5:fb23c49d1eb64018dfee995213039521"
+      }
+    },
+    {
+      "recording": "20240904-14-55-14",
+      "path": "sub-20240904-14-55-14/sub-20240904-14-55-14_ses-20240904T145514.nwb",
+      "asset_id": "5d058c8a-3473-4120-8f91-4435a037b2f9",
+      "bytes": 13011639835,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 38849179,
+        "checksum": "md5:dc73d3449500e408c0f773beedb79236"
+      }
+    },
+    {
+      "recording": "20240904-15-32-57",
+      "path": "sub-20240904-15-32-57/sub-20240904-15-32-57_ses-20240904T153257.nwb",
+      "asset_id": "be148ba5-99f1-42fe-96e5-9dc1afd4fe84",
+      "bytes": 12994336113,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 35520371,
+        "checksum": "md5:d6ee58bf212b35da0a9c893a4df8315f"
+      }
+    },
+    {
+      "recording": "20240904-16-13-38",
+      "path": "sub-20240904-16-13-38/sub-20240904-16-13-38_ses-20240904T161338.nwb",
+      "asset_id": "01287bc2-430f-42a5-8ba5-cf580ceaf98a",
+      "bytes": 13014138300,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 37725613,
+        "checksum": "md5:8055052d37696ea4adc6d5be6f6627f5"
+      }
+    },
+    {
+      "recording": "20240904-16-51-21",
+      "path": "sub-20240904-16-51-21/sub-20240904-16-51-21_ses-20240904T165121.nwb",
+      "asset_id": "b044568c-09dd-42dc-8dac-94a20a761564",
+      "bytes": 13008902493,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 32241294,
+        "checksum": "md5:723d75e12e40e3f71d7d80b442f684eb"
+      }
+    },
+    {
+      "recording": "20240904-17-29-27",
+      "path": "sub-20240904-17-29-27/sub-20240904-17-29-27_ses-20240904T172927.nwb",
+      "asset_id": "3a55872f-9106-40ef-8925-1d0e9edb5a2a",
+      "bytes": 12999865445,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 33657863,
+        "checksum": "md5:e1fa9cfc9328b7fd79c26533a3c14d68"
+      }
+    },
+    {
+      "recording": "20240917-20-18-26",
+      "path": "sub-20240917-20-18-26/sub-20240917-20-18-26_ses-20240917T201826.nwb",
+      "asset_id": "cf38462d-f61c-4696-9a1a-88120dba4594",
+      "bytes": 12997341719,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 35986633,
+        "checksum": "md5:1865a84a66df3b3e8d7e95865c157525"
+      }
+    },
+    {
+      "recording": "20240917-20-52-20",
+      "path": "sub-20240917-20-52-20/sub-20240917-20-52-20_ses-20240917T205220.nwb",
+      "asset_id": "c5d00564-714d-473c-af8a-4e7e0992a1e8",
+      "bytes": 12992078552,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 67140464,
+        "checksum": "md5:e7bde743a396a5938607e73a3231e889"
+      }
+    },
+    {
+      "recording": "20240917-21-32-57",
+      "path": "sub-20240917-21-32-57/sub-20240917-21-32-57_ses-20240917T213257.nwb",
+      "asset_id": "e5905cf8-d68e-4c8e-9e46-d1f76d152cfb",
+      "bytes": 12985924878,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 27493141,
+        "checksum": "md5:e081853448e78930821071892ef9eeb2"
+      }
+    },
+    {
+      "recording": "20240917-22-37-14",
+      "path": "sub-20240917-22-37-14/sub-20240917-22-37-14_ses-20240917T223714.nwb",
+      "asset_id": "f15004bf-202b-4434-8cc3-c732dd1fc64a",
+      "bytes": 13018157745,
+      "timestamp_matches_randi": false,
+      "processed_pickle_metadata": {
+        "size": 35005432,
+        "checksum": "md5:4a4ed5fd1c1ea47cf436bdf017c23133"
+      }
+    }
+  ],
+  "scope": "Only repository source text and JSON metadata inventories read. No NWB, pickle, CSV, archive, calcium or image payload read. Recording-name nonoverlap does not prove animal independence or compatible per-neuron stimuli. No confirmatory holdout secured."
+}
