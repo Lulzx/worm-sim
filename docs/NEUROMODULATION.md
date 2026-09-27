@@ -73,5 +73,5 @@ differences, and invalid map/tie handling. Test maps and parameter values are
 synthetic. No biological fit, phenotype, or improved forecasting is claimed.
 
 Remaining acceptance work includes source-backed peptide/monoamine maps,
-receptor-specific priors, timed drug/gene perturbations, multirate integration, spatial transport
+receptor-specific priors, timed drug/gene perturbations, full-network [multirate validation](MULTIRATE.md), spatial transport
 if needed, and held-out comparisons against the model without modulation.

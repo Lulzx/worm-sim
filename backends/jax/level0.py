@@ -15,6 +15,7 @@ from modulation import Modulation
 from rectification import GapRectification
 from dark_edges import DarkEdges
 from plasticity import Plasticity
+from multirate import Multirate, solve as solve_multirate
 
 
 class AdaptiveSolution(NamedTuple):
@@ -43,8 +44,11 @@ class Level0(eqx.Module):
     dark_edges: DarkEdges | None
     plasticity: Plasticity | None
     plasticity_start: int = eqx.field(static=True)
+    multirate: Multirate | None = eqx.field(static=True)
+    slow_boundaries: jax.Array
+    slow_output_indices: jax.Array
 
-    def __init__(self, model, graph, times, adaptive=None, modulation=None, rectification=None, dark_edges=None, plasticity=None):
+    def __init__(self, model, graph, times, adaptive=None, modulation=None, rectification=None, dark_edges=None, plasticity=None, multirate=None):
         if adaptive is not None and not isinstance(adaptive,Adaptive):
             raise TypeError('adaptive settings must be an Adaptive instance')
         self.adaptive=adaptive
@@ -52,6 +56,9 @@ class Level0(eqx.Module):
         self.rectification=rectification
         self.dark_edges=dark_edges
         self.plasticity=plasticity
+        if multirate is not None and (not isinstance(multirate,Multirate) or modulation is None or adaptive is None):
+            raise ValueError('multirate requires explicit settings, modulation and an adaptive fast solver')
+        self.multirate=multirate
         names = sorted(n['id'] for n in graph['neurons'])
         index = {name:i for i,name in enumerate(names)}
         self.n = len(names)
@@ -93,6 +100,13 @@ class Level0(eqx.Module):
             raise ValueError('invalid time grid')
         self.preparation=prep
         self.save_times = jnp.asarray(prep+times)
+        boundaries,indices=([],[]) if multirate is None else multirate.grid(prep+times)
+        self.slow_boundaries=jnp.asarray(boundaries,dtype=float)
+        output_indices=np.full(max(0,len(boundaries)-1),-1,dtype=np.int32)
+        for output_index,boundary_index in enumerate(indices):
+            if boundary_index>0:
+                output_indices[boundary_index-1]=output_index
+        self.slow_output_indices=jnp.asarray(output_indices)
         if adaptive is not None:
             self.steps=jnp.asarray([0.,float(prep+times[-1])])
             self.max_steps=adaptive.max_steps
@@ -118,7 +132,7 @@ class Level0(eqx.Module):
         current=jnp.where((interval>=0)&(interval<len(kernel)),kernel[jnp.clip(interval,0,len(kernel)-1)],0.)
         return self.rhs_current(state,theta,target,current)
 
-    def rhs_current(self, state, theta, target, current):
+    def rhs_current(self, state, theta, target, current, return_release=False):
         raw = theta['groups'][self.mapping]
         positive = jax.nn.softplus(raw)+1e-9
         n,m = self.n,self.m
@@ -152,7 +166,8 @@ class Level0(eqx.Module):
             parts.append(self.modulation.derivative(state[3*n:self.plasticity_start],release,theta['modulation']))
         if self.plasticity is not None:
             parts.append(self.plasticity.derivative(state[self.plasticity_start:],release,theta['plasticity']))
-        return jnp.concatenate(parts)
+        derivative=jnp.concatenate(parts)
+        return (derivative,release) if return_release else derivative
 
     def extension_penalty(self, theta):
         """Add once to a training objective, independently of batch/trace count."""
@@ -165,6 +180,9 @@ class Level0(eqx.Module):
 
     def solve(self, theta, target):
         initial=self.initial_state(theta)
+        if self.multirate is not None:
+            states,stats=solve_multirate(self,theta,target,initial)
+            return AdaptiveSolution(states,stats)
         if self.adaptive is not None:
             # Implicit RK stages may evaluate beyond an interval's end.
             # Keep the input constant within each solve so those stages cannot

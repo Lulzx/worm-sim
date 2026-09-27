@@ -171,3 +171,9 @@ distinguish this rate-adapted mechanism from calibrated worm biology.
 checkpoint envelopes. `predict_extensions.py` reloads them against observation-free
 Rust plans; Rust scores each validation candidate. See the
 [reproduction guide and boundaries](../../docs/EXTENDED-FITTING.md).
+
+## Multirate modulation
+
+Optional [held-concentration splitting](../../docs/MULTIRATE.md) updates modulation
+on a declared coarse grid while Diffrax integrates fast states. Its settings
+survive fitting/checkpoint reload; tests check convergence and gradients.

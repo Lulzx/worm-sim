@@ -8,6 +8,7 @@ from rectification import GapRectification
 from dark_edges import DarkEdges
 from plasticity import Plasticity
 from solvers import Adaptive
+from multirate import Multirate
 from level0 import Level0, parameters
 
 FORMAT = 'wormsim-jax-atlas'
@@ -17,7 +18,7 @@ def initialize(model, graph, times, configuration):
     if configuration is None:
         modules = {}
     else:
-        fields(configuration, ['schema_version', 'extensions', 'solver'])
+        fields(configuration, ['schema_version', 'extensions', 'solver'], ['multirate'])
         if configuration['schema_version'] != 1:
             raise ValueError('unsupported JAX configuration version')
         specs = configuration['extensions']
@@ -34,8 +35,11 @@ def initialize(model, graph, times, configuration):
         if configuration['solver'] is not None:
             fields(configuration['solver'], [], ['method', 'rtol', 'atol', 'dt0', 'dtmax', 'max_steps'])
             modules['adaptive'] = Adaptive(**configuration['solver'])
+        if configuration.get('multirate') is not None:
+            fields(configuration['multirate'], ['slow_dt'], ['max_windows'])
+            modules['multirate'] = Multirate(**configuration['multirate'])
     engine = Level0(model, graph, times, **modules)
-    theta = parameters(model, **{k: v for k, v in modules.items() if k != 'adaptive'})
+    theta = parameters(model, **{k: v for k, v in modules.items() if k not in ('adaptive', 'multirate')})
     if model.get('classifier'):
         theta['classifier'] = jnp.asarray([model['classifier']['bias'], model['classifier']['raw_slope']])
     active = jax.tree.map(lambda v: jnp.ones_like(v, dtype=bool), theta)

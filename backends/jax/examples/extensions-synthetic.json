@@ -90,5 +90,9 @@
         }
       ]
     }
+  },
+  "multirate": {
+    "slow_dt": 0.03,
+    "max_windows": 1000
   }
 }

@@ -60,8 +60,9 @@ full graph; no speedup or memory-efficiency claim is implied by library support.
 The compatibility fit runner retains Euler. The separate
 [extended fitter](EXTENDED-FITTING.md) serializes adaptive settings and evaluates
 training and validation dynamics with the same solver; Rust scores the generated
-predictions instead of rerunning them with a different integrator. Continuous adjoints, multirate modulation,
-truncated training and distributed execution remain separate §6 requirements.
+predictions instead of rerunning them with a different integrator. [Multirate modulation](MULTIRATE.md) is also available with explicit coarse-step
+settings and convergence checks. Continuous adjoints, truncated training and
+distributed execution remain separate §6 requirements.
 
 Primary documentation: [Diffrax ODE solvers](https://docs.kidger.site/diffrax/api/solvers/ode_solvers/),
 [step controllers](https://docs.kidger.site/diffrax/api/stepsize_controller/),

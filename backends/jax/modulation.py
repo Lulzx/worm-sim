@@ -113,10 +113,16 @@ class Modulation(eqx.Module):
         return {'raw_tau':self.initial_tau,'raw_release':self.initial_release,
                 'raw_kd':self.initial_kd,'sensitivity':self.initial_beta}
 
-    def derivative(self, concentration, release, params):
+    def drive(self, release, params):
         alpha=(jax.nn.softplus(params['raw_release'])+1e-9)[self.release_group]
-        drive=jnp.zeros(len(self.channels)).at[self.release_channel].add(alpha*release[self.sender])
-        return (drive+self.bath-concentration)/(jax.nn.softplus(params['raw_tau'])+1e-9)
+        return jnp.zeros(len(self.channels)).at[self.release_channel].add(alpha*release[self.sender])
+
+    def derivative(self, concentration, release, params):
+        return (self.drive(release,params)+self.bath-concentration)/(jax.nn.softplus(params['raw_tau'])+1e-9)
+
+    def advance_mean_drive(self, concentration, mean_drive, duration, params):
+        exponent=-duration/(jax.nn.softplus(params['raw_tau'])+1e-9)
+        return jnp.exp(exponent)*concentration-jnp.expm1(exponent)*(mean_drive+self.bath)
 
     def multipliers(self, concentration, params):
         # Solvers can undershoot zero slightly; receptor activation has no

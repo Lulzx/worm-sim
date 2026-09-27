@@ -20,7 +20,8 @@ A saved model is a separate `wormsim-jax-atlas` schema-version-1 envelope contai
 - `base_model`: the native Level 0 parameters, initialization, fit configuration,
   epoch, and data/split lineage.
 - `configuration`: versioned extension declarations and optional adaptive solver
-  settings (`solver: null` retains reference-grid Euler).
+  settings (`solver: null` retains reference-grid Euler), plus optional
+  [multirate settings](MULTIRATE.md) for a held-concentration coarse grid.
 - `extension_parameters`: the fitted arrays, each with explicit shape and flattened
   values. Declarations supply initial values; these arrays supply learned values.
 
@@ -56,7 +57,8 @@ WORMSIM_COMMIT=$(git rev-parse HEAD) cargo build --release \
 ```
 
 The test exports a three-neuron synthetic dataset with held-out stimulus groups,
-trains two Optax updates with all four extension modules and Tsit5 enabled,
+trains two Optax updates with all four extension modules, Tsit5, and multirate
+concentration updates enabled,
 selects using Rust scores, reloads the selected model in a separate Python
 process, and verifies identical predictions. It checks Rust MSE against direct
 NumPy arithmetic, rejects a changed checkpoint paired with old predictions, and
