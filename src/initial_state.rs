@@ -144,8 +144,85 @@ fn state_vjp(model: &Model, p: &Prepared<f64>, y: &[f64], adj: &[f64], out: &mut
         out[b] += z;
     }
 }
-/// Return history MSE plus a state prior, its exact initial-state gradient, and
-/// terminal state. The supplied recording must contain only permitted history.
+/// Accumulate h * (d RHS / d raw parameters)^T * adjoint.
+fn parameter_vjp(
+    model: &Model,
+    raw: &Parameters<f64>,
+    p: &Prepared<f64>,
+    y: &[f64],
+    adj: &[f64],
+    h: f64,
+    g: &mut [f64],
+) {
+    let n = model.n();
+    let m = model.pre.len();
+    // Reconstruct the current before division by voltage tau. This avoids
+    // dividing by a parameter derivative and matches the forward arithmetic.
+    let mut current: Vec<f64> = (0..n).map(|i| -(y[i] - p.rest[i])).collect();
+    for e in 0..m {
+        let a = model.pre[e] as usize;
+        let b = model.post[e] as usize;
+        let canonical = model.parameter_edge[e];
+        let gate = y[2 * n + a];
+        let delta = p.reversal[e] - y[b];
+        current[b] += p.weight[e] * gate * delta;
+        let z = h * adj[b] * p.inv_tau[b] * gate;
+        g[6 * n + canonical] += z * delta * model.counts[e] * raw.raw[6 * n + canonical].sigmoid();
+        let q = raw.raw[6 * n + m + canonical].sigmoid();
+        g[6 * n + m + canonical] += z * p.weight[e] * 2.0 * q * (1.0 - q);
+    }
+    for e in 0..model.gap_a.len() {
+        let a = model.gap_a[e] as usize;
+        let b = model.gap_b[e] as usize;
+        let delta = y[b] - y[a];
+        current[a] += p.gap[e] * delta;
+        current[b] -= p.gap[e] * delta;
+        let index = 6 * n + 2 * m + e;
+        g[index] += h
+            * delta
+            * (adj[a] * p.inv_tau[a] - adj[b] * p.inv_tau[b])
+            * model.gap_sizes[e]
+            * raw.raw[index].sigmoid();
+    }
+    let synapse = model.parameter_count() - 1;
+    for i in 0..n {
+        let r = ((y[i] - p.threshold[i]) * p.slope[i]).sigmoid();
+        let gate = y[2 * n + i];
+        g[i] -= h * adj[i] * current[i] * p.inv_tau[i] * p.inv_tau[i] * raw.raw[i].sigmoid();
+        g[n + i] += h * adj[i] * p.inv_tau[i];
+        let release = h
+            * r
+            * (1.0 - r)
+            * (adj[n + i] * p.inv_calcium_tau[i]
+                + adj[2 * n + i] * (1.0 - gate) * p.inv_synapse_tau);
+        g[2 * n + i] -= release * p.slope[i];
+        g[3 * n + i] += release * (y[i] - p.threshold[i]) * raw.raw[3 * n + i].sigmoid();
+        g[4 * n + i] -= h
+            * adj[n + i]
+            * (r - y[n + i])
+            * p.inv_calcium_tau[i]
+            * p.inv_calcium_tau[i]
+            * raw.raw[4 * n + i].sigmoid();
+        g[synapse] -= h
+            * adj[2 * n + i]
+            * (r * (1.0 - gate) - gate)
+            * p.inv_synapse_tau
+            * p.inv_synapse_tau
+            * raw.raw[synapse].sigmoid();
+    }
+}
+/// Objective derivatives with initial state and prior held fixed for parameter
+/// differentiation. This is the conditional parameter gradient, not an implicit
+/// derivative through the initial-state optimizer.
+#[derive(Debug)]
+pub struct ObjectiveGradient {
+    pub value: f64,
+    pub initial: Vec<f64>,
+    pub parameters: Vec<f64>,
+    pub readout_offset: Vec<f64>,
+    pub readout_log_gain: Vec<f64>,
+    pub terminal: Vec<f64>,
+}
 pub fn objective_gradient(
     model: &Model,
     params: &Parameters<f64>,
@@ -155,6 +232,39 @@ pub fn objective_gradient(
     prior: &[f64],
     cfg: &InferenceConfig,
 ) -> Result<(f64, Vec<f64>, Vec<f64>)> {
+    let g = objective_impl(
+        model, params, recording, readout, initial, prior, cfg, false,
+    )?;
+    Ok((g.value, g.initial, g.terminal))
+}
+pub fn parameter_gradient(
+    model: &Model,
+    params: &Parameters<f64>,
+    recording: &Recording,
+    readout: &Readout,
+    initial: &[f64],
+    dt: f64,
+) -> Result<ObjectiveGradient> {
+    let cfg = InferenceConfig {
+        dt,
+        prior_weight: 0.0,
+        ..Default::default()
+    };
+    objective_impl(
+        model, params, recording, readout, initial, initial, &cfg, true,
+    )
+}
+#[allow(clippy::too_many_arguments)]
+fn objective_impl(
+    model: &Model,
+    params: &Parameters<f64>,
+    recording: &Recording,
+    readout: &Readout,
+    initial: &[f64],
+    prior: &[f64],
+    cfg: &InferenceConfig,
+    parameter_derivatives: bool,
+) -> Result<ObjectiveGradient> {
     recording.validate(&model.graph)?;
     readout.validate(model.n())?;
     if prior.len() != model.state_len()
@@ -180,6 +290,13 @@ pub fn objective_gradient(
     // Observation gradients occupy only sample times, not every integration step.
     let mut injections = vec![vec![0.0; n]; tape.samples.len()];
     let mut loss = 0.0;
+    let mut param_gradient = if parameter_derivatives {
+        vec![0.0; model.parameter_count()]
+    } else {
+        vec![]
+    };
+    let mut offset_gradient = vec![0.0; n];
+    let mut gain_gradient = vec![0.0; n];
     for trace in &recording.traces {
         let i = model.graph.neuron(&trace.neuron)?;
         let gain = readout.gain[i] * p.calcium_scale[i];
@@ -189,6 +306,17 @@ pub fn objective_gradient(
                 let error = readout.offset[i] + gain * tape.states[tape.samples[t]][n + i] - value;
                 loss += w * error * error;
                 injections[t][i] += 2.0 * w * gain * error;
+                if parameter_derivatives {
+                    let calcium = tape.states[tape.samples[t]][n + i];
+                    param_gradient[5 * n + i] += 2.0
+                        * w
+                        * error
+                        * readout.gain[i]
+                        * calcium
+                        * params.raw[5 * n + i].sigmoid();
+                    offset_gradient[i] += 2.0 * w * error;
+                    gain_gradient[i] += 2.0 * w * error * gain * calcium;
+                }
             }
         }
     }
@@ -203,6 +331,17 @@ pub fn objective_gradient(
             }
         }
         if step > 0 {
+            if parameter_derivatives {
+                parameter_vjp(
+                    model,
+                    params,
+                    &p,
+                    &tape.states[step - 1],
+                    &adj,
+                    tape.steps[step - 1],
+                    &mut param_gradient,
+                );
+            }
             state_vjp(model, &p, &tape.states[step - 1], &adj, &mut vjp);
             for i in 0..adj.len() {
                 adj[i] += tape.steps[step - 1] * vjp[i];
@@ -217,7 +356,22 @@ pub fn objective_gradient(
     if !loss.is_finite() || adj.iter().any(|g| !g.is_finite()) {
         return Err("nonfinite inference objective/gradient".into());
     }
-    Ok((loss, adj, tape.states.last().unwrap().clone()))
+    if param_gradient
+        .iter()
+        .chain(&offset_gradient)
+        .chain(&gain_gradient)
+        .any(|g| !g.is_finite())
+    {
+        return Err("nonfinite parameter/readout gradient".into());
+    }
+    Ok(ObjectiveGradient {
+        value: loss,
+        initial: adj,
+        parameters: param_gradient,
+        readout_offset: offset_gradient,
+        readout_log_gain: gain_gradient,
+        terminal: tape.states.last().unwrap().clone(),
+    })
 }
 /// Optimize a full-network initial condition using only samples <= origin.
 /// This is a point estimate with a prior, not proof of hidden-state identifiability.

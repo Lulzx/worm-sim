@@ -4,6 +4,7 @@ pub mod controls;
 pub mod level0;
 pub mod linear;
 pub mod metrics;
+pub mod population;
 pub mod uncertainty;
 use crate::{
     Result,

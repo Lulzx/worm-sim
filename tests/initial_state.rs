@@ -163,3 +163,85 @@ fn explicit_default_state_matches_original_solver_and_invalid_states_fail() {
     invalid[0] = f64::NAN;
     assert!(solve::simulate_from_state(&model, &p, &cfg, Some(&invalid)).is_err());
 }
+
+#[test]
+fn conditional_parameter_and_readout_gradients_match_finite_differences() {
+    let (model, p, recording, initial, readout, _) = fixture();
+    let cfg = InferenceConfig {
+        dt: 0.02,
+        prior_weight: 0.0,
+        ..Default::default()
+    };
+    let g = initial_state::parameter_gradient(&model, &p, &recording, &readout, &initial, 0.02)
+        .unwrap();
+    let value = |p: &wormsim::model::Parameters<f64>, r: &Readout| {
+        initial_state::objective_gradient(&model, p, &recording, r, &initial, &initial, &cfg)
+            .unwrap()
+            .0
+    };
+    // Move the targets away from the exact generating model before checking;
+    // otherwise every first derivative would be zero at the synthetic truth.
+    let mut observed = recording.clone();
+    for trace in &mut observed.traces {
+        for x in trace.values.iter_mut().flatten() {
+            *x += 0.15;
+        }
+    }
+    let g2 =
+        initial_state::parameter_gradient(&model, &p, &observed, &readout, &initial, 0.02).unwrap();
+    assert!(g.parameters.iter().all(|v| v.abs() < 1e-12));
+    for i in 0..p.raw.len() {
+        let eps = 1e-5;
+        let mut a = p.clone();
+        let mut b = p.clone();
+        a.raw[i] += eps;
+        b.raw[i] -= eps;
+        let va = initial_state::objective_gradient(
+            &model, &a, &observed, &readout, &initial, &initial, &cfg,
+        )
+        .unwrap()
+        .0;
+        let vb = initial_state::objective_gradient(
+            &model, &b, &observed, &readout, &initial, &initial, &cfg,
+        )
+        .unwrap()
+        .0;
+        assert!(
+            (g2.parameters[i] - (va - vb) / (2.0 * eps)).abs() < 1e-8,
+            "parameter {i}: {} vs {}",
+            g2.parameters[i],
+            (va - vb) / (2.0 * eps)
+        );
+    }
+    assert!(value(&p, &readout) < 1e-20);
+    for i in 0..model.n() {
+        for log_gain in [false, true] {
+            let eps: f64 = 1e-5;
+            let mut a = readout.clone();
+            let mut b = readout.clone();
+            if log_gain {
+                a.gain[i] *= eps.exp();
+                b.gain[i] *= (-eps).exp();
+            } else {
+                a.offset[i] += eps;
+                b.offset[i] -= eps;
+            }
+            let va = initial_state::objective_gradient(
+                &model, &p, &observed, &a, &initial, &initial, &cfg,
+            )
+            .unwrap()
+            .0;
+            let vb = initial_state::objective_gradient(
+                &model, &p, &observed, &b, &initial, &initial, &cfg,
+            )
+            .unwrap()
+            .0;
+            let derivative = if log_gain {
+                g2.readout_log_gain[i]
+            } else {
+                g2.readout_offset[i]
+            };
+            assert!((derivative - (va - vb) / (2.0 * eps)).abs() < 1e-8);
+        }
+    }
+}

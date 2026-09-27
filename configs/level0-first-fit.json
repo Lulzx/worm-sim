@@ -1,0 +1,14 @@
+{
+  "epochs": 2,
+  "learning_rate": 0.005,
+  "prior_strength": 0.01,
+  "sign_prior_strength": 0.01,
+  "readout_prior_strength": 0.01,
+  "seed": 42,
+  "inference": {"dt": 0.01, "iterations": 8, "learning_rate": 0.02, "prior_weight": 0.001},
+  "sharing": {
+    "classes": {},
+    "allow_suffix_pairs": true,
+    "provenance": "Explicit first-fit assumption: use graph class annotations if present, otherwise tie exact matching terminal L/R neuron names. Existing c302 classes are unannotated. No claim of a source-backed full neuron-class or transmitter annotation."
+  }
+}
