@@ -113,3 +113,72 @@ fn population_fit_uses_all_training_windows_and_excludes_test_targets() {
         assert_eq!(a.fluorescence, b.fluorescence);
     }
 }
+
+#[test]
+fn population_filter_forecast_carries_assimilated_origin_not_unforced_replay() {
+    use wormsim::{
+        initial_state::{self, InferenceMethod},
+        model::Model,
+    };
+    let (graph, mut data) = fixture();
+    let split = Split::generate(&data, &graph, Axis::Animal, 42, 2, 2).unwrap();
+    let config = FitConfig {
+        epochs: 1,
+        inference: InferenceConfig {
+            method: InferenceMethod::BlockEkf,
+            dt: 0.05,
+            ..Default::default()
+        },
+        ..Default::default()
+    };
+    let (model, _) = population::fit(&data, &graph, &split, config.clone(), |_, _| Ok(())).unwrap();
+    let prediction = model
+        .predict(&data, &graph, &split, Partition::Test)
+        .unwrap();
+    let neural = Model::new(graph.clone()).unwrap();
+    let parameters = model.parameters.expand(&neural).unwrap();
+    let prepared = neural.prepare(&parameters).unwrap();
+    for trial in data.trials.iter().filter(|t| split.test.contains(&t.id)) {
+        let inferred = initial_state::infer(
+            &neural,
+            &parameters,
+            &trial.recording,
+            10.0,
+            &model.readout,
+            &model.config.inference,
+        )
+        .unwrap();
+        let pred = prediction.trials.iter().find(|p| p.id == trial.id).unwrap();
+        for trace in &trial.recording.traces {
+            let i = graph.neuron(&trace.neuron).unwrap();
+            let expected = model.readout.offset[i]
+                + model.readout.gain[i]
+                    * prepared.calcium_scale[i]
+                    * inferred.forecast_state[neural.n() + i];
+            assert!((pred.fluorescence[&trace.neuron][20] - expected).abs() < 1e-12);
+        }
+    }
+    for trial in &mut data.trials {
+        if split.test.contains(&trial.id) {
+            for trace in &mut trial.recording.traces {
+                for value in &mut trace.values[21..] {
+                    *value = Some(9999.0);
+                }
+            }
+        }
+    }
+    let updated = Split::generate(&data, &graph, Axis::Animal, 42, 2, 2).unwrap();
+    let (same, _) = population::fit(&data, &graph, &updated, config, |_, _| Ok(())).unwrap();
+    assert_eq!(same.selected_epoch, model.selected_epoch);
+    assert_eq!(same.readout.offset, model.readout.offset);
+    assert_eq!(same.readout.gain, model.readout.gain);
+    for (a, b) in same.parameters.groups.iter().zip(&model.parameters.groups) {
+        assert_eq!(a.value, b.value);
+    }
+    let after = same
+        .predict(&data, &graph, &updated, Partition::Test)
+        .unwrap();
+    for (a, b) in prediction.trials.iter().zip(after.trials) {
+        assert_eq!(a.fluorescence, b.fluorescence);
+    }
+}

@@ -119,6 +119,7 @@ fn inference_reduces_prefix_loss_is_causal_and_carries_full_state() {
         iterations: 80,
         learning_rate: 0.04,
         prior_weight: 1e-5,
+        ..Default::default()
     };
     let inferred = initial_state::infer(&model, &p, &recording, 1.0, &readout, &cfg).unwrap();
     assert_eq!(inferred.observed_neurons, 2);

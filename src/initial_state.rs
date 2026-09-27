@@ -20,7 +20,7 @@ impl Readout {
             gain: vec![1.0; n],
         }
     }
-    fn validate(&self, n: usize) -> Result<()> {
+    pub(crate) fn validate(&self, n: usize) -> Result<()> {
         if self.offset.len() != n
             || self.gain.len() != n
             || self.offset.iter().any(|x| !x.is_finite())
@@ -31,9 +31,20 @@ impl Readout {
         Ok(())
     }
 }
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum InferenceMethod {
+    #[default]
+    Shooting,
+    BlockEkf,
+}
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct InferenceConfig {
+    #[serde(default)]
+    pub method: InferenceMethod,
+    #[serde(default)]
+    pub filter: crate::state_filter::FilterConfig,
     pub dt: f64,
     pub iterations: usize,
     pub learning_rate: f64,
@@ -42,6 +53,8 @@ pub struct InferenceConfig {
 impl Default for InferenceConfig {
     fn default() -> Self {
         Self {
+            method: InferenceMethod::Shooting,
+            filter: Default::default(),
             dt: 0.005,
             iterations: 30,
             learning_rate: 0.02,
@@ -59,6 +72,12 @@ pub struct InferredState {
     pub observed_neurons: usize,
     pub latent_neurons: usize,
     pub history_samples: usize,
+    /// Affine-readout predictions at observed history frames. For filtering these
+    /// are posterior reconstructions, not an unforced replay of initial_state.
+    #[serde(default)]
+    pub history_predictions: Vec<Vec<f64>>,
+    #[serde(default)]
+    pub filter_diagnostics: Option<crate::state_filter::FilterDiagnostics>,
 }
 struct Tape {
     states: Vec<Vec<f64>>,
@@ -384,12 +403,9 @@ pub fn infer(
     cfg: &InferenceConfig,
 ) -> Result<InferredState> {
     recording.validate(&model.graph)?;
-    if !origin.is_finite()
-        || !cfg.learning_rate.is_finite()
-        || cfg.learning_rate <= 0.0
-        || cfg.iterations > 10000
-    {
-        return Err("invalid inference configuration".into());
+    readout.validate(model.n())?;
+    if !origin.is_finite() || !cfg.dt.is_finite() || cfg.dt <= 0.0 {
+        return Err("invalid inference origin/step".into());
     }
     let end = recording
         .times
@@ -410,6 +426,12 @@ pub fn infer(
     }
     for values in history.behavior.values_mut() {
         values.truncate(end + 1);
+    }
+    if cfg.method == InferenceMethod::BlockEkf {
+        return crate::state_filter::infer(model, params, &history, readout, cfg.dt, &cfg.filter);
+    }
+    if !cfg.learning_rate.is_finite() || cfg.learning_rate <= 0.0 || cfg.iterations > 10000 {
+        return Err("invalid shooting-inference configuration".into());
     }
     let observed = history
         .traces
@@ -465,6 +487,21 @@ pub fn infer(
         terminal = next_terminal;
         objectives.push(value);
     }
+    let prepared = model.prepare(params)?;
+    let tape = rollout(model, &prepared, &state, &history.times, cfg.dt)?;
+    let history_predictions = tape
+        .samples
+        .iter()
+        .map(|&t| {
+            (0..model.n())
+                .map(|i| {
+                    readout.offset[i]
+                        + readout.gain[i]
+                            * (prepared.calcium_scale[i] * tape.states[t][model.n() + i])
+                })
+                .collect()
+        })
+        .collect();
     Ok(InferredState {
         initial_state: state,
         forecast_state: terminal,
@@ -472,5 +509,7 @@ pub fn infer(
         observed_neurons: observed,
         latent_neurons: model.n() - observed,
         history_samples: end + 1,
+        history_predictions,
+        filter_diagnostics: None,
     })
 }

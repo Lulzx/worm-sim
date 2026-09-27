@@ -135,31 +135,37 @@ impl PopulationModel {
             if times.windows(2).any(|p| (p[1] - p[0] - dt).abs() > 1e-8) {
                 return Err("population forecasts require a uniform save grid".into());
             }
+            let origin_index = inferred.history_samples - 1;
             let cfg = Config {
-                duration: times[times.len() - 1] - times[0],
+                duration: times[times.len() - 1] - origin,
                 dt: self.config.inference.dt,
                 save_dt: dt,
                 method: Method::Euler,
                 events: vec![],
             };
             let trajectory =
-                solve::simulate_from_state(&model, &params, &cfg, Some(&inferred.initial_state))?;
-            if trajectory.times.len() != times.len()
+                solve::simulate_from_state(&model, &params, &cfg, Some(&inferred.forecast_state))?;
+            if trajectory.times.len() != times.len() - origin_index
                 || trajectory
                     .times
                     .iter()
-                    .zip(times)
-                    .any(|(a, b)| (*a + times[0] - b).abs() > 1e-8)
+                    .zip(&times[origin_index..])
+                    .any(|(a, b)| (*a + origin - b).abs() > 1e-8)
             {
                 return Err("forecast output grid differs from recording".into());
             }
             let mut fluorescence = BTreeMap::new();
             for trace in &trial.recording.traces {
                 let i = graph.neuron(&trace.neuron)?;
-                let values: Vec<_> = trajectory
-                    .fluorescence
+                let values: Vec<_> = inferred.history_predictions[..origin_index]
                     .iter()
-                    .map(|y| self.readout.offset[i] + self.readout.gain[i] * y[i])
+                    .map(|row| row[i])
+                    .chain(
+                        trajectory
+                            .fluorescence
+                            .iter()
+                            .map(|y| self.readout.offset[i] + self.readout.gain[i] * y[i]),
+                    )
                     .collect();
                 if values.iter().any(|v| !v.is_finite()) {
                     return Err("nonfinite population prediction".into());
@@ -179,13 +185,15 @@ impl PopulationModel {
             dataset_hash: self.dataset_hash.clone(),
             split_hash: self.split_hash.clone(),
             model: format!(
-                "Level 0 conditional-gradient population fit; selected epoch {}; full 3N history-only state inference; neutral graph sign priors remain unannotated",
-                self.selected_epoch
+                "Level 0 conditional-gradient population fit; selected epoch {}; full 3N history-only {:?} inference; neutral graph sign priors remain unannotated",
+                self.selected_epoch, self.config.inference.method
             ),
             free_parameters: self.free_parameters(),
             training_trials: self.training_trials.clone(),
             selection_trials: self.selection_trials.clone(),
-            source_commit: self.source_commit.clone(),
+            source_commit: option_env!("WORMSIM_COMMIT")
+                .unwrap_or("unversioned")
+                .into(),
             seed: self.config.seed,
             trials,
         })

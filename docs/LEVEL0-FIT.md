@@ -142,7 +142,6 @@ python3 scripts/score_level0_fit.py --receipt runs/level0-first-fit-receipt.json
 ```
 
 The stable latent LDS comparison is now available in [LATENT-LDS.md](LATENT-LDS.md).
-A Level 0 filtering experiment must begin its free forecast from the assimilated
-state at the origin. It cannot replay the entire prefix from an unforced initial
-state, as the current shooting-based prediction path does. History reconstruction
-and forecast continuation need to preserve this distinction.
+The history-filter comparison is described in [LEVEL0-FILTER.md](LEVEL0-FILTER.md).
+Prediction now continues directly from the inferred state at the forecast origin;
+the reconstructed prefix is retained separately.

@@ -78,12 +78,12 @@ receipt = {
         'refined_validation': refined,
     },
     'limitations': [
-        'Selected epoch zero means population training failed to improve the declared validation criterion.',
+        ('Selected epoch zero means population training failed to improve the declared validation criterion.' if model['selected_epoch'] == 0 else 'The selected trained epoch improved validation; this alone does not establish biological recovery or positive held-out forecasting.'),
         'Conditional parameter gradients hold history-inferred states fixed.',
         'Suffix-based bilateral sharing is an assumption; graph class and transmitter annotations remain missing.',
         'Graph sign priors are all neutral 0.5; these are not CeNGEN-informed sign priors.',
         'Only three test animals, and baseline results on them were previously inspected.',
-        'Stable latent LDS, GRU and parameter-matched comparisons remain outstanding.',
+        'A stable latent LDS is scored separately; GRU and parameter-matched comparisons remain outstanding.',
     ],
 }
 Path(args.receipt).write_text(json.dumps(receipt, indent=2) + '\n')
