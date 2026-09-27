@@ -155,6 +155,23 @@ fn run() -> Result<()> {
             println!("inferred {} state values from {} observed neurons; history objective {:?} -> {:?}; {} seconds",audit.inferred.forecast_state.len(),audit.inferred.observed_neurons,audit.inferred.history_objective.first(),audit.inferred.history_objective.last(),audit.elapsed_seconds);
             write_json(&args[6],&audit)?;
         }
+        Some("gru-fit") if args.len()==7 => {
+            let graph=load(&args[2])?;
+            let data:wormsim::bench::Dataset=serde_json::from_slice(&fs::read(&args[3]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let split:wormsim::bench::Split=serde_json::from_slice(&fs::read(&args[4]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let config:wormsim::bench::gru::FitConfig=serde_json::from_slice(&fs::read(&args[5]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let(model,report)=wormsim::bench::gru::fit_select(&data,&graph,&split,config,|m,c|{write_json(&format!("{}.epoch-{}.json",args[6],c.epoch),m)?;write_json(&format!("{}.epoch-{}.report.json",args[6],c.epoch),c)?;println!("epoch {} validation {:?}; training MSE {:?}",c.epoch,c.validation_horizon_r2,c.training_standardized_mse);Ok(())})?;
+            write_json(&args[6],&model)?;write_json(&format!("{}.selection.json",args[6]),&report)?;
+            println!("selected epoch {}; {} total scalars",model.epoch,model.free_parameters());
+        }
+        Some("gru-predict") if args.len()==8 => {
+            let graph=load(&args[2])?;
+            let data:wormsim::bench::Dataset=serde_json::from_slice(&fs::read(&args[3]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let split:wormsim::bench::Split=serde_json::from_slice(&fs::read(&args[4]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let model:wormsim::bench::gru::GruModel=serde_json::from_slice(&fs::read(&args[5]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let partition=match args[6].as_str(){"train"=>wormsim::bench::Partition::Train,"validation"=>wormsim::bench::Partition::Validation,"test"=>wormsim::bench::Partition::Test,_=>return Err("invalid partition".into())};
+            write_json(&args[7],&model.predict(&data,&graph,&split,partition)?)?;
+        }
         Some("lds-fit") if args.len()==7 => {
             let graph=load(&args[2])?;
             let data:wormsim::bench::Dataset=serde_json::from_slice(&fs::read(&args[3]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
@@ -268,7 +285,7 @@ fn run() -> Result<()> {
             println!("saved {} samples to {}",result.times.len(),args[4]);
         }
         Some("bench") if args.len()<=3 => {benchmark(args.get(2).map(String::as_str))?;}
-        _ => return Err("usage: wormsim lds-fit GRAPH DATA.json SPLIT.json CONFIG.json MODEL.json | lds-predict GRAPH DATA.json SPLIT.json MODEL.json PARTITION OUTPUT.json | level0-fit GRAPH DATA.json SPLIT.json CONFIG.json MODEL.json | level0-predict GRAPH DATA.json SPLIT.json MODEL.json PARTITION OUTPUT.json | level0-infer GRAPH DATA.json SPLIT.json TRIAL OUTPUT.json | bench-control GRAPH DATA.json SPLIT.json PARTITION history-mean|half-blend|training-mean|ar PREDICTIONS.json | linear-fit GRAPH DATA.json SPLIT.json MODEL.json | linear-predict GRAPH DATA.json SPLIT.json MODEL.json PARTITION PREDICTIONS.json | bench-persist GRAPH DATA.json SPLIT.json PARTITION PREDICTIONS.json | import-wormwideweb GRAPH H5_DIR LABELS.json RECEIPT.json CONFIG.json OUTPUT.json (hdf5 feature) | bench-split GRAPH DATA.json neuron|animal SEED VALIDATION_GROUPS TEST_GROUPS SPLIT.json | bench-score GRAPH DATA.json SPLIT.json PREDICTIONS.json train|validation|test REPORT.json | baseline-pack BUNDLE.json BUNDLE.wsb | baseline-eval BUNDLE.wsb REPORT.json | import-c302 CSV IDS.json VERSION OUTPUT.wsc --strict|--mean-mirrors | pack GRAPH.json GRAPH.wsc | unpack GRAPH.wsc GRAPH.json | simulate GRAPH CONFIG.json OUTPUT.json|OUTPUT.wst | bench [GRAPH]".into()),
+        _ => return Err("usage: wormsim gru-fit GRAPH DATA.json SPLIT.json CONFIG.json MODEL.json | gru-predict GRAPH DATA.json SPLIT.json MODEL.json PARTITION OUTPUT.json | lds-fit GRAPH DATA.json SPLIT.json CONFIG.json MODEL.json | lds-predict GRAPH DATA.json SPLIT.json MODEL.json PARTITION OUTPUT.json | level0-fit GRAPH DATA.json SPLIT.json CONFIG.json MODEL.json | level0-predict GRAPH DATA.json SPLIT.json MODEL.json PARTITION OUTPUT.json | level0-infer GRAPH DATA.json SPLIT.json TRIAL OUTPUT.json | bench-control GRAPH DATA.json SPLIT.json PARTITION history-mean|half-blend|training-mean|ar PREDICTIONS.json | linear-fit GRAPH DATA.json SPLIT.json MODEL.json | linear-predict GRAPH DATA.json SPLIT.json MODEL.json PARTITION PREDICTIONS.json | bench-persist GRAPH DATA.json SPLIT.json PARTITION PREDICTIONS.json | import-wormwideweb GRAPH H5_DIR LABELS.json RECEIPT.json CONFIG.json OUTPUT.json (hdf5 feature) | bench-split GRAPH DATA.json neuron|animal SEED VALIDATION_GROUPS TEST_GROUPS SPLIT.json | bench-score GRAPH DATA.json SPLIT.json PREDICTIONS.json train|validation|test REPORT.json | baseline-pack BUNDLE.json BUNDLE.wsb | baseline-eval BUNDLE.wsb REPORT.json | import-c302 CSV IDS.json VERSION OUTPUT.wsc --strict|--mean-mirrors | pack GRAPH.json GRAPH.wsc | unpack GRAPH.wsc GRAPH.json | simulate GRAPH CONFIG.json OUTPUT.json|OUTPUT.wst | bench [GRAPH]".into()),
     }
     Ok(())
 }
