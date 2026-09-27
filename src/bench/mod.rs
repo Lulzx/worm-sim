@@ -1,6 +1,8 @@
 //! Versioned benchmark trials, group-disjoint splits, and common held-out scoring.
 //! Prediction lineage is checked as declared metadata, not proof of how a model trained.
 pub mod controls;
+pub mod lds;
+mod lds_math;
 pub mod level0;
 pub mod linear;
 pub mod metrics;
