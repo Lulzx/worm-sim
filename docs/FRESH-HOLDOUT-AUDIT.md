@@ -131,3 +131,30 @@ payload was requested or decompressed, so per-event eligibility remains unresolv
 ```sh
 python3 scripts/inspect_dunn_archive.py --output runs/dunn-archive-inventory-new.json
 ```
+
+## Bounded NWB schema inspection
+
+`scripts/inspect_dunn_nwb_schema.py` selects the lexicographically first asset
+path from the pinned inventory and inspects HDF5 object names, dataset shapes
+and dtypes. It does not index datasets or read attribute values. It uses exact
+HTTP ranges, rejects servers that ignore ranges, and caps individual reads at
+64 KiB, total received bytes at 2 MB, and requests at 500. The output records
+range offsets/hashes, asset metadata, software versions and the schema inventory.
+
+This is a separate phase from the JSON/directory-only inventory above: it reads
+NWB structure bytes. Those ranges may include bytes colocated with metadata;
+the claim is that no neural response values are decoded or displayed, not that
+no raw data byte can enter a range response. A single asset's schema cannot
+establish cohort-wide stimulus eligibility, calibration or animal independence.
+
+```sh
+uv run --no-project --with h5py==3.16.0 --python 3.12 \
+  scripts/inspect_dunn_nwb_schema.py \
+  --inventory docs/dunn-holdout-inventory.json \
+  --output runs/dunn-first-nwb-schema-new.json
+```
+
+The optional h5py environment is separate from the pinned JAX fitter. The two
+range-reader tests cover seeking, exact reads, limits, and rejection of a full
+body response before reading it. The first live schema inspection is pending;
+tool availability and unit tests do not establish dataset compatibility.
