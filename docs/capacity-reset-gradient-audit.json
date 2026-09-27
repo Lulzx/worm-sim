@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "input_sha256": {
+    "failure": "e3a5d45d9ead1e353c6ab649477dba4a414cb79294b742dbe6e829feac512593",
+    "manifest": "0e889d561174eef7bd5f9a0558c2c64f42aa4d72cc52928ccac1a06d07564d2d",
+    "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "training": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc"
+  },
+  "backend_source_sha256": {
+    "audit_capacity_gradients.py": "67ab4bc0db3898bc232ea39fef431b03fa3ca41299a9c1bb8b45c99d7a24cd2f",
+    "audit_fit.py": "666c26f4bbff8b8a3f49e936a0ecfe83f998a7d1f96760c1df432a6efea411cb",
+    "check_training.py": "3bdf12fe5da687262d188500b6760810c26bfe4659515000d8be38a3d80488b6",
+    "compare_solvers.py": "f36c4813d4c208d1661affe5b0d2ec97e644772901f85766e612bf3c6b508aa9",
+    "dark_edges.py": "51e520b5dc7ad7be736be97bb63be43e7439bc87a9cf969835a19e3ba168a2d0",
+    "extensions.py": "a3d8d61bd5f05d76c0c01b5d0419d313db2d794a9311811aafc59542b30eb2db",
+    "fit.py": "82767fd354ea2e9dc368bd9f1cd85bfe3f517faa4e5c201347d2baa75f2dedbb",
+    "fit_extensions.py": "c2572a3235ec21bd2c32edfbf656911f49d749276da2c326b17751a3ff1c0a40",
+    "level0.py": "5594af39c7acbcad1e6d554a32a93ddd60f8ef6d36c4e1863a3c59cb2414232d",
+    "modulation.py": "883fc33701a1f9bd4edd3ad3b2021efde6e7c54020c89c6a5dffac071df1ec47",
+    "multirate.py": "3c9abb8052bb36462a497bf00988a9aebc0478ce60ff3cdce5a77b0fe87256b7",
+    "objective.py": "28ae005464e2391695b7a9b8391a8c1f0000dacbc2e1bcfb43ed00d897cad5c6",
+    "observation.py": "b577b780ceb852c784a9aeeebeec65ec8583625a39f52756abf8ce161e6667d6",
+    "optimization.py": "f78d1f46ab30befc342171aee9c21caef918f8429d80f25222d7c9425b8521f1",
+    "overfit.py": "357b38a83359064a0aac85916921e71dd32270ab0b590e8493760ae463dd56a5",
+    "plasticity.py": "e7193355906d53d53703e3f2294f3da3326d72d76e2a7846f306223f4c1eac7d",
+    "predict_extensions.py": "4d796f6edf8b17e78941a7effe5d1b94f2d18d5a91f2ff9ad4991803864b9e0f",
+    "rectification.py": "2c68b8a09832f1e6adb59b1353b06ddccc0e024f1b82b78bfe869694ddd8a1ad",
+    "replay.py": "8bbd2b5b1537decfc58df7cedc9ce86d45631241248c2e0258c71feef736cf28",
+    "replay_capacity_failure.py": "ecef1134575afceeba904e322d404a2defe800af635d864658fb9005e0c0b3de",
+    "solvers.py": "d6278c352e37d7887ccb2b239472a4babbacc1fe5b05c878336b06b261ab474a",
+    "test_adjoints.py": "52ff185c8af2dc56387b8edbae78454fdb248c6ad5296e635b8773a9e86ab085",
+    "test_audit_fit.py": "957c8aa89add4a211d089f69e13fa2303edfc50316182db94ee62096070ff2e1",
+    "test_dark_edges.py": "257ecfc4024de51be66603da0ecd2550444f09b8b76d2e420eadf0dd837ad3c3",
+    "test_extensions.py": "89e3331c40b2e59460795b634c5f8dae2d2caec120befbb14a8fd83fe12b69c0",
+    "test_external_smoke.py": "1506e15451b7ef662dd60ad5b75427b2d4a7fd8f1994df4b7f903f6dd5c36172",
+    "test_fit.py": "dc1dfef8697868d5db43886b479937bc845d5d4436c318ab185a01e6450936f5",
+    "test_level0.py": "bdbab2d43b594352da82b01a5946bc349f393be187005437e0e958020299614c",
+    "test_modulation.py": "cb59f00c09c0530c5e52b835d943ade77929238ed9cd613853a5b236d0ff4c6a",
+    "test_multirate.py": "da5527c66db4ba8808acb76d9b6f562a80f387e4488404e15b6f6eb5c303ec7a",
+    "test_objective.py": "ad7aa7e97f702aef6e9acd7242124fc795f29247fef380872ce5aa34280776bc",
+    "test_optimization.py": "7161c6b9c6a256d9ed555d665d9e8cc0df6af7ae92bb13ccbd11e25efc149d57",
+    "test_overfit.py": "81f6537311297ed9a9d01c37ca7aae29d1e26b143a24f01db38769688612a6d5",
+    "test_plasticity.py": "b99adf1872b5ccc3bc04e5972baea03f5c856a60fee00f3aa2e3048157d3ed6c",
+    "test_rectification.py": "4808c0ceb528e7c3ac8f049471c063f2d7f32f7ca36c2f30cd34bd3fd5363fd8",
+    "test_solvers.py": "e28e8b11882637698567b2fc4a31b90707cb8612800e85d3e04767f12fd6a512"
+  },
+  "epoch": 20,
+  "refinements": [
+    {
+      "dt": 0.005,
+      "metrics": {
+        "mse": 0.04478080648655994,
+        "bce": 0.0,
+        "correlation": 0.0,
+        "prior": 0.0
+      },
+      "gradient_norm": 0.011591588635360195,
+      "finite_gradient_coordinates": 7287,
+      "directional_checks": [
+        {
+          "step": 0.0001,
+          "analytic": 0.011591588635360198,
+          "central_difference": 0.011591562628608665,
+          "absolute_error": 2.6006751533552697e-08,
+          "relative_error": 2.2435882044863964e-06
+        },
+        {
+          "step": 1e-05,
+          "analytic": 0.011591588635360198,
+          "central_difference": 0.011591588373188742,
+          "absolute_error": 2.6217145641938e-10,
+          "relative_error": 2.261738788932043e-08
+        }
+      ]
+    },
+    {
+      "dt": 0.0025,
+      "metrics": {
+        "mse": 0.04478096729793503,
+        "bce": 0.0,
+        "correlation": 0.0,
+        "prior": 0.0
+      },
+      "gradient_norm": 0.011594823291990863,
+      "finite_gradient_coordinates": 7287,
+      "directional_checks": [
+        {
+          "step": 0.0001,
+          "analytic": 0.011594823291990864,
+          "central_difference": 0.011594797283999425,
+          "absolute_error": 2.6007991439300215e-08,
+          "relative_error": 2.2430692373953872e-06
+        },
+        {
+          "step": 1e-05,
+          "analytic": 0.011594823291990864,
+          "central_difference": 0.011594823037114342,
+          "absolute_error": 2.5487652266509286e-10,
+          "relative_error": 2.1981923850547088e-08
+        }
+      ]
+    }
+  ],
+  "gradient_cosine": 0.9999999639073336,
+  "gradient_relative_step_difference": 0.00038728775269292193,
+  "scope": "Frozen failing parameters; training subset only. Directional checks cover the gradient direction at two step sizes, not every coordinate or optimization trajectory. No refitting or held-out comparison."
+}

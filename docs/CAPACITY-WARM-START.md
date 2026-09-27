@@ -103,7 +103,27 @@ The lower-rate failure has not been reproduced at its failing parameters.
 
 Keep dynamical features frozen. Before another longer fit, check the preparation
 trajectory and differentiated objective at refined steps or with the existing
-adaptive solver. Retain a failing parameter snapshot automatically in future
-runs. Declare any changed-solver fit separately; do not treat it as completion
+adaptive solver. The runner now automatically writes `failure.json` on a returned nonfinite
+objective or gradient, retaining finite parameters and nulling nonfinite metrics.
+If parameters themselves are nonfinite, it records their count and omits the
+model. Exceptions raised inside the solver are not yet captured by this path. Declare any changed-solver fit separately; do not treat it as completion
 of these failed runs. The capacity gate and fresh-holdout requirement remain
 unchanged.
+
+
+### Refined-step gradient check
+
+The [gradient receipt](capacity-reset-gradient-audit.json) evaluates the captured
+higher-rate failing parameters with the original trace objective at steps 0.005
+and 0.0025 seconds. All 7,287 gradient coordinates are finite. Central differences
+along the normalized gradient at perturbation 1e-5 agree with autodiff to relative
+errors 2.26e-8 and 2.20e-8; the larger 1e-4 perturbation gives about 2.24e-6.
+The two gradients have cosine 0.999999964 and relative norm difference 0.0003873.
+MSE agrees with the independent NumPy refinement to floating-point precision.
+
+This verifies one direction at one failing parameter state, not every coordinate
+or a full fitting trajectory. It supports a separately declared refined-step fit;
+it does not retroactively complete either failed run. The audit is reproducible
+with `backends/jax/audit_capacity_gradients.py` and records input/backend hashes.
+The original failure replay requires the original backend files identified by its
+manifest; use that source version when reproducing it after runner changes.

@@ -10,7 +10,7 @@ from test_objective import example
 from objective import build, evaluate
 from extensions import initialize, pack, restore
 from fit import checkpoint
-from overfit import prepare, bounds, warm_parameters, atomic_best
+from overfit import prepare, bounds, warm_parameters, atomic_best, failure_artifact
 
 
 class OverfitTests(unittest.TestCase):
@@ -71,6 +71,24 @@ class OverfitTests(unittest.TestCase):
             with self.assertRaises(ValueError):atomic_best(path,{'epoch':2,'mse':float('nan')})
             self.assertEqual(json.loads(path.read_text())['epoch'],1)
             self.assertFalse(path.with_name('best.json.tmp').exists())
+
+    def test_failure_artifact_retains_finite_parameters_and_nulls_nonfinite_metrics(self):
+        m,g,t=self.fixture();m,t,c=prepare(m,t,['A'],10,.01,-.2)
+        theta,_,_,_,_=build(m,g,t,c)
+        gradient=jax.tree.map(jnp.zeros_like,theta)
+        gradient['groups']=gradient['groups'].at[0].set(jnp.nan)
+        artifact=failure_artifact(m,theta,c,3,'test',jnp.nan,gradient,{'mse':float('nan')},['A'],None)
+        encoded=json.loads(json.dumps(artifact,allow_nan=False))
+        self.assertEqual(encoded['nonfinite_gradient_coordinates'],1)
+        self.assertIsNone(encoded['metrics']['mse'])
+        _,restored,_=restore(encoded['model'],g,t['groups'][0]['recording']['times'])
+        for a,b in zip(jax.tree.leaves(theta),jax.tree.leaves(restored),strict=True):
+            np.testing.assert_array_equal(a,b)
+        theta['groups']=theta['groups'].at[0].set(jnp.inf)
+        artifact=failure_artifact(m,theta,c,4,'test',jnp.nan,gradient,{'mse':float('inf')},['A'],None)
+        self.assertIsNone(artifact['model'])
+        self.assertEqual(artifact['nonfinite_parameter_coordinates'],1)
+        json.dumps(artifact,allow_nan=False)
 
     def test_per_neuron_gains_gradient_roundtrip_and_bounds(self):
         m,g,t=self.fixture();m,t,c=prepare(m,t,['A'],10,.01,-.2)

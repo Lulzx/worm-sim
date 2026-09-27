@@ -108,6 +108,20 @@ def atomic_best(path, value):
     temporary.replace(path)
 
 
+
+def failure_artifact(model, theta, config, epoch, source, value, gradient, metrics, targets, warm_info):
+    """Keep finite failing parameters without serializing NaNs as valid checkpoints."""
+    invalid_parameters = sum(int(np.count_nonzero(~np.isfinite(np.asarray(x)))) for x in jax.tree.leaves(theta))
+    invalid_gradients = sum(int(np.count_nonzero(~np.isfinite(np.asarray(x)))) for x in jax.tree.leaves(gradient))
+    return {'format':'wormsim-capacity-failure', 'epoch':epoch, 'targets':targets,
+        'model':None if invalid_parameters else pack(checkpoint(model,theta,epoch,source),theta,config),
+        'warm_start':warm_info, 'objective_finite':bool(np.isfinite(float(value))),
+        'nonfinite_parameter_coordinates':invalid_parameters,
+        'nonfinite_gradient_coordinates':invalid_gradients,
+        'metrics':{key:float(v) if np.isfinite(float(v)) else None for key,v in metrics.items()},
+        'scope':'Failed evaluation, not a completed fit or eligible best checkpoint. Parameters omitted if nonfinite.'}
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     for key in ['model', 'graph', 'training', 'output']:
@@ -160,7 +174,8 @@ def main():
         for epoch in range(a.steps+1):
             value, gradient, metrics = evaluate(theta,groups,data,prior)
             if not np.isfinite(float(value)) or not all(np.isfinite(np.asarray(x)).all() for x in jax.tree.leaves(gradient)):
-                raise ValueError(f'nonfinite objective/gradient at epoch {epoch}; prior progress retained')
+                write('failure.json', failure_artifact(model,theta,config,epoch,source,value,gradient,metrics,a.targets,warm_info))
+                raise ValueError(f'nonfinite objective/gradient at epoch {epoch}; failure.json and prior progress retained')
             if epoch == 0 and warm is not None:
                 parent_mse = warm['metrics']['mse']
                 if not np.isfinite(parent_mse) or abs(metrics['mse'] - parent_mse) > 1e-10:
