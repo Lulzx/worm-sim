@@ -25,5 +25,20 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(score['defined_trace_correlations'], 1)
 
 
+    def test_independent_level0_replay_single_cell_equilibrium(self):
+        from replay_level0_atlas import Replay
+        # At zero voltage, release/calcium=.5 and gate=1/3 are at equilibrium.
+        graph = {'neurons':[{'id':'X'}], 'chemical':[], 'gaps':[]}
+        values = [1.,0.,0.,1.,1.,1.,1.]
+        model = {'parameters':{'raw_to_group':list(range(7)), 'groups':[{'value':x} for x in values]}, 'kernel_raw':[-2.], 'initial':[0.,.5,1/3], 'config':{'dt':.01,'preparation_seconds':.2}}
+        replay = Replay(model,graph)
+        np.testing.assert_allclose(replay.state,model['initial'],atol=1e-15)
+        np.testing.assert_allclose(replay.rhs(replay.state,None,0.),0.,atol=1e-15)
+        response = replay.response('X',[0.,.1,.2])
+        self.assertEqual(response[0,0],0.)
+        self.assertGreater(response[1,0],0.)
+        self.assertGreater(response[2,0],response[1,0])
+
+
 if __name__ == '__main__':
     unittest.main()

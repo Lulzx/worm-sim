@@ -258,3 +258,26 @@ The frozen first-fit results and their failure remain recorded above. Preparatio
 addresses the identified state inconsistency; it does not by itself establish a
 better model, identify the worm's actual pre-stimulation state, or implement the
 still-missing training-pair classification objective.
+
+## Independent nonlinear replay
+
+The audit can now reconstruct selected validation/test responses with a separate
+NumPy Euler implementation. `scripts/replay_level0_atlas.py` expands tied raw
+parameters and independently implements positive transforms, chemical/gap currents,
+voltage/calcium/synapse dynamics, unforced preparation and relative readout. It
+reuses a prepared state across target rollouts but keeps the same absolute time
+clock and sample boundaries as the native implementation. No native or Taichi
+solver is called by the replay. The decoded graph JSON and replay source are hashed.
+
+```sh
+target/release/wormsim unpack data/c302-herm.wsc runs/c302-audit.json
+python3 scripts/audit_level0_atlas.py --run runs/level0-atlas-prepared-fit --evaluation runs/level0-atlas-prepared-fit-evaluation --graph-json runs/c302-audit.json --output runs/level0-atlas-prepared-fit-audit.json
+```
+
+With `--graph-json`, every saved selected validation/test fluorescence sample is
+checked within 1e−10 and the prepared-state derivative norm is checked against the
+native stationarity report. Without that option, the audit remains a saved-output
+score audit. The audit also checks preparation-report lineage and duration. It
+does not independently replay optimization, select all candidates by independent
+ODE evaluation, or recompute bootstrap draws. A single-cell equilibrium/input
+check runs in CI alongside the existing independent-score arithmetic tests.
