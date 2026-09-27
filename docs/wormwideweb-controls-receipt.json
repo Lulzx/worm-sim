@@ -1,0 +1,706 @@
+{
+  "schema_version": 1,
+  "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+  "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+  "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+  "partition": "test",
+  "linear_selection": {
+    "schema_version": 1,
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+    "criterion": "Maximum arithmetic mean of macro per-neuron R\u00b2 at 1, 10, 30 seconds on validation animals; ties retain earlier declared candidate",
+    "training_statistics_seconds": 0.490003292,
+    "candidates": [
+      {
+        "ridge": 0.0001,
+        "validation_mean_horizon_r2": -79.26433229464716,
+        "horizon_r2": [
+          0.5740667842860849,
+          -2.775842645054182,
+          -235.59122102317338
+        ],
+        "elapsed_seconds": 0.764663083,
+        "error": null
+      },
+      {
+        "ridge": 0.001,
+        "validation_mean_horizon_r2": -77.73696207563292,
+        "horizon_r2": [
+          0.5806972842677631,
+          -2.5527133855169084,
+          -231.23887012564958
+        ],
+        "elapsed_seconds": 0.76818925,
+        "error": null
+      },
+      {
+        "ridge": 0.01,
+        "validation_mean_horizon_r2": -118.0349498042137,
+        "horizon_r2": [
+          0.6106175025320502,
+          -2.145191383451252,
+          -352.5702755317219
+        ],
+        "elapsed_seconds": 0.770716334,
+        "error": null
+      },
+      {
+        "ridge": 0.1,
+        "validation_mean_horizon_r2": -1489.6615554335076,
+        "horizon_r2": [
+          0.6325599106899708,
+          -3.970648783483055,
+          -4465.646577427729
+        ],
+        "elapsed_seconds": 0.769789334,
+        "error": null
+      },
+      {
+        "ridge": 1.0,
+        "validation_mean_horizon_r2": -371.39074512052457,
+        "horizon_r2": [
+          0.48286011343107327,
+          -2.175405135907257,
+          -1112.4796903390975
+        ],
+        "elapsed_seconds": 0.768223166,
+        "error": null
+      }
+    ],
+    "selected_ridge": 0.001,
+    "free_parameters": 22648
+  },
+  "models": [
+    {
+      "name": "persistence",
+      "model": "last-observation persistence; no fitted parameters",
+      "free_parameters": 0,
+      "prediction_source_commit": "1cb95904a6ff90b998ef8179b4e591601522441a",
+      "scorer_source_commit": "1cb95904a6ff90b998ef8179b4e591601522441a",
+      "trials": 72,
+      "animal_bootstrap": {
+        "seed": 42,
+        "replicates": 2000,
+        "animals": 3,
+        "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+        "horizons": [
+          {
+            "seconds": 1.0,
+            "confidence_weighted": {
+              "point": 0.7064140298411056,
+              "lower_95": 0.5405463374784457,
+              "upper_95": 0.7772645980198039,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": 0.7025157664703918,
+              "lower_95": 0.5405463374784459,
+              "upper_95": 0.7772645980198039,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": 0.5405463374784457
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": 0.7772645980198039
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": 0.675237368015503
+              }
+            ]
+          },
+          {
+            "seconds": 10.0,
+            "confidence_weighted": {
+              "point": -0.4660244619731428,
+              "lower_95": -3.1144073027814487,
+              "upper_95": -0.35529755695852583,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": -0.48638652274843996,
+              "lower_95": -3.1144073027814474,
+              "upper_95": -0.3552975569585257,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": -0.947365784249442
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": -0.35529755695852583
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": -3.1144073027814487
+              }
+            ]
+          },
+          {
+            "seconds": 30.0,
+            "confidence_weighted": {
+              "point": -0.6506216115014981,
+              "lower_95": -2.265741526479408,
+              "upper_95": -0.6506216115014981,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": -0.6711311897799122,
+              "lower_95": -2.2657415264794087,
+              "upper_95": -0.6711311897799122,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": -0.751769838113719
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": -0.8837410003505484
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": -2.265741526479408
+              }
+            ]
+          }
+        ]
+      },
+      "report": "runs/wormwideweb-controls-persistence.json.report.json"
+    },
+    {
+      "name": "history-mean",
+      "model": "HistoryMean; unseen training neurons use last observed value; fallback traces=0; neurons={}",
+      "free_parameters": 0,
+      "prediction_source_commit": "1cb95904a6ff90b998ef8179b4e591601522441a",
+      "scorer_source_commit": "1cb95904a6ff90b998ef8179b4e591601522441a",
+      "trials": 72,
+      "animal_bootstrap": {
+        "seed": 42,
+        "replicates": 2000,
+        "animals": 3,
+        "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+        "horizons": [
+          {
+            "seconds": 1.0,
+            "confidence_weighted": {
+              "point": 0.4740812419613107,
+              "lower_95": 0.4477968480394551,
+              "upper_95": 0.5001270715812122,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": 0.4731952439723473,
+              "lower_95": 0.4477968480394551,
+              "upper_95": 0.5001270715812122,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": 0.4477968480394551
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": 0.45924365988198923
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": 0.5001270715812122
+              }
+            ]
+          },
+          {
+            "seconds": 10.0,
+            "confidence_weighted": {
+              "point": -0.12016671421593711,
+              "lower_95": -0.3471299804020638,
+              "upper_95": 0.14647627278052336,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": -0.11698322554663915,
+              "lower_95": -0.3471299804020637,
+              "upper_95": 0.1464762727805234,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": -0.3471299804020638
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": -0.10299177369329036
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": 0.14647627278052336
+              }
+            ]
+          },
+          {
+            "seconds": 30.0,
+            "confidence_weighted": {
+              "point": -0.2889060207983375,
+              "lower_95": -0.4179307692880619,
+              "upper_95": -0.22885684908490453,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": -0.2918068297779277,
+              "lower_95": -0.41793076928806205,
+              "upper_95": -0.22885684908490453,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": -0.34772786885559664
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": -0.41793076928806205
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": -0.22885684908490447
+              }
+            ]
+          }
+        ]
+      },
+      "report": "runs/wormwideweb-controls-history-mean.json.report.json"
+    },
+    {
+      "name": "half-blend",
+      "model": "HalfBlend; unseen training neurons use last observed value; fallback traces=0; neurons={}",
+      "free_parameters": 0,
+      "prediction_source_commit": "1cb95904a6ff90b998ef8179b4e591601522441a",
+      "scorer_source_commit": "1cb95904a6ff90b998ef8179b4e591601522441a",
+      "trials": 72,
+      "animal_bootstrap": {
+        "seed": 42,
+        "replicates": 2000,
+        "animals": 3,
+        "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+        "horizons": [
+          {
+            "seconds": 1.0,
+            "confidence_weighted": {
+              "point": 0.7232471256465343,
+              "lower_95": 0.6732692368641701,
+              "upper_95": 0.7356116376503753,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": 0.7219984530431085,
+              "lower_95": 0.6732692368641702,
+              "upper_95": 0.7354184461725968,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": 0.6732692368641701
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": 0.7334341846738391
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": 0.7110120413272879
+              }
+            ]
+          },
+          {
+            "seconds": 10.0,
+            "confidence_weighted": {
+              "point": -0.1280658806145308,
+              "lower_95": -0.7971762373056879,
+              "upper_95": -0.07119975366292636,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": -0.1336677877329275,
+              "lower_95": -0.7971762373056874,
+              "upper_95": -0.07787534005039518,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": -0.37750761808508054
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": -0.1047857708214698
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": -0.7971762373056878
+              }
+            ]
+          },
+          {
+            "seconds": 30.0,
+            "confidence_weighted": {
+              "point": -0.33091099107485455,
+              "lower_95": -0.784669563018008,
+              "upper_95": -0.33091099107485455,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": -0.33915880996020437,
+              "lower_95": -0.7846695630180082,
+              "upper_95": -0.33634800532079456,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": -0.40072752951226676
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": -0.5023675175721585
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": -0.784669563018008
+              }
+            ]
+          }
+        ]
+      },
+      "report": "runs/wormwideweb-controls-half-blend.json.report.json"
+    },
+    {
+      "name": "training-mean",
+      "model": "TrainingMean; unseen training neurons use last observed value; fallback traces=48; neurons={\"AVBL\", \"URAVR\"}",
+      "free_parameters": 149,
+      "prediction_source_commit": "1cb95904a6ff90b998ef8179b4e591601522441a",
+      "scorer_source_commit": "1cb95904a6ff90b998ef8179b4e591601522441a",
+      "trials": 72,
+      "animal_bootstrap": {
+        "seed": 42,
+        "replicates": 2000,
+        "animals": 3,
+        "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+        "horizons": [
+          {
+            "seconds": 1.0,
+            "confidence_weighted": {
+              "point": 0.0006616099846009268,
+              "lower_95": -0.01670756834465746,
+              "upper_95": 0.0006616099846009285,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": 0.0005647362589132555,
+              "lower_95": -0.016707568344657416,
+              "upper_95": 0.000564736258913259,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": -0.01600760787531994
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": -0.010742643091862552
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": -0.01670756834465748
+              }
+            ]
+          },
+          {
+            "seconds": 10.0,
+            "confidence_weighted": {
+              "point": -0.03415006431514389,
+              "lower_95": -0.04092042929242534,
+              "upper_95": -0.014670626456978083,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": -0.03387853993623823,
+              "lower_95": -0.040577615646721105,
+              "upper_95": -0.014670626456978057,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": -0.03762246097575048
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": -0.037392307199700506
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": -0.014670626456978102
+              }
+            ]
+          },
+          {
+            "seconds": 30.0,
+            "confidence_weighted": {
+              "point": -0.03946492469911226,
+              "lower_95": -0.06340986450105637,
+              "upper_95": -0.011331578767201712,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": -0.03929293108765093,
+              "lower_95": -0.06340986450105636,
+              "upper_95": -0.01133157876720168,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": -0.03924284478325937
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": -0.06340986450105632
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": -0.0113315787672017
+              }
+            ]
+          }
+        ]
+      },
+      "report": "runs/wormwideweb-controls-training-mean.json.report.json"
+    },
+    {
+      "name": "ar",
+      "model": "Autoregressive; unseen training neurons use last observed value; fallback traces=48; neurons={\"AVBL\", \"URAVR\"}",
+      "free_parameters": 447,
+      "prediction_source_commit": "1cb95904a6ff90b998ef8179b4e591601522441a",
+      "scorer_source_commit": "1cb95904a6ff90b998ef8179b4e591601522441a",
+      "trials": 72,
+      "animal_bootstrap": {
+        "seed": 42,
+        "replicates": 2000,
+        "animals": 3,
+        "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+        "horizons": [
+          {
+            "seconds": 1.0,
+            "confidence_weighted": {
+              "point": 0.7642238009582354,
+              "lower_95": 0.6925707373626535,
+              "upper_95": 0.7947710868730239,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": 0.7629983049359955,
+              "lower_95": 0.6925707373626536,
+              "upper_95": 0.7947710868730239,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": 0.6925707373626535
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": 0.7947710868730239
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": 0.7204222626342275
+              }
+            ]
+          },
+          {
+            "seconds": 10.0,
+            "confidence_weighted": {
+              "point": 0.07103896284220403,
+              "lower_95": -0.026563316080177358,
+              "upper_95": 0.11277543758158745,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": 0.06912329956178777,
+              "lower_95": -0.026563316080177344,
+              "upper_95": 0.11277543758158745,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": 0.11277543758158744
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": 0.029285738820954765
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": -0.026563316080177337
+              }
+            ]
+          },
+          {
+            "seconds": 30.0,
+            "confidence_weighted": {
+              "point": -0.029137749350312634,
+              "lower_95": -0.054626047895967964,
+              "upper_95": 0.0012285628406678987,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": -0.02905215188397043,
+              "lower_95": -0.05534345766315973,
+              "upper_95": 0.0012285628406679702,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": -0.04554537915068278
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": -0.050670038512632
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": 0.0012285628406679175
+              }
+            ]
+          }
+        ]
+      },
+      "report": "runs/wormwideweb-controls-ar.json.report.json"
+    },
+    {
+      "name": "linear",
+      "model": "dense linear fluorescence dynamics; ridge=0.001",
+      "free_parameters": 22648,
+      "prediction_source_commit": "1cb95904a6ff90b998ef8179b4e591601522441a",
+      "scorer_source_commit": "1cb95904a6ff90b998ef8179b4e591601522441a",
+      "trials": 72,
+      "animal_bootstrap": {
+        "seed": 42,
+        "replicates": 2000,
+        "animals": 3,
+        "method": "Percentile 95% cluster bootstrap; draw N whole animals with replacement, retain all windows, re-center targets per neuron in every replicate, average defined neuron R\u00b2. Same fixed draws for every model. Very few animals give weak population uncertainty estimates.",
+        "horizons": [
+          {
+            "seconds": 1.0,
+            "confidence_weighted": {
+              "point": 0.6957003341659923,
+              "lower_95": 0.6361559371333284,
+              "upper_95": 0.7048121932283042,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": 0.6949292841351269,
+              "lower_95": 0.6361559371333283,
+              "upper_95": 0.7048121932283044,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": 0.6561268459935762
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": 0.7048121932283045
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": 0.6361559371333284
+              }
+            ]
+          },
+          {
+            "seconds": 10.0,
+            "confidence_weighted": {
+              "point": -4.190747380167999,
+              "lower_95": -4.929507095430145,
+              "upper_95": -4.001108977527183,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": -4.17651862129787,
+              "lower_95": -4.929507095430145,
+              "upper_95": -3.9868589106309043,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": -4.929507095430145
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": -4.216452856009909
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": -4.102423602856191
+              }
+            ]
+          },
+          {
+            "seconds": 30.0,
+            "confidence_weighted": {
+              "point": -341.92113367413754,
+              "lower_95": -399.9341731446946,
+              "upper_95": -281.62398836200737,
+              "defined_replicates": 2000
+            },
+            "unit_weighted": {
+              "point": -340.30622336859284,
+              "lower_95": -400.1436720171263,
+              "upper_95": -281.62398836200737,
+              "defined_replicates": 2000
+            },
+            "per_animal": [
+              {
+                "animal": "2022-06-14-07",
+                "macro_neuron_r2": -389.94459514326536
+              },
+              {
+                "animal": "2023-01-19-08",
+                "macro_neuron_r2": -347.4092952712592
+              },
+              {
+                "animal": "2023-01-19-15",
+                "macro_neuron_r2": -281.6239883620073
+              }
+            ]
+          }
+        ]
+      },
+      "report": "runs/wormwideweb-controls-linear.json.report.json"
+    }
+  ],
+  "limitations": [
+    "Three held-out animals: bootstrap intervals have very limited population coverage.",
+    "Linear model is fluorescence-state VAR(1), not a latent Kalman-EM LDS.",
+    "Model fitting uses training animals only; fixed ridge grid selected using validation animals only.",
+    "Two test neuron identities (AVBL, URAVR) are absent from training; fitted controls and linear model use persistence for these.",
+    "Initial unconstrained linear experiment failed at long horizons. No positive biological conclusion."
+  ]
+}

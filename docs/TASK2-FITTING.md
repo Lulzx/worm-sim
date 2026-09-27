@@ -78,3 +78,30 @@ Next: fit initial states from observed history, introduce left/right and class
 sharing with explicit sign priors, and run the first Level 0 training/validation
 experiment. The test results already inspected are exploratory evidence; further
 model development must not be described as fresh confirmation on these animals.
+
+## Exploratory held-out results
+
+Committed-source [receipt](wormwideweb-controls-receipt.json), same fixed test
+animals and exact horizons:
+
+| Model | 1 s R² | 10 s R² | 30 s R² |
+| --- | ---: | ---: | ---: |
+| Persistence | 0.706 | −0.466 | −0.651 |
+| History mean | 0.474 | −0.120 | −0.289 |
+| Half blend | 0.723 | −0.128 | −0.331 |
+| Training mean, with disclosed fallbacks | 0.001 | −0.034 | −0.039 |
+| Per-neuron AR(1) | 0.764 | 0.071 | −0.029 |
+| Unconstrained dense linear experiment | 0.696 | −4.191 | −341.921 |
+
+AR(1) marginal 95% animal-bootstrap intervals are [0.693, 0.795] at 1 s,
+[−0.027, 0.113] at 10 s, and [−0.055, 0.001] at 30 s. This is not evidence of
+reliable positive long-horizon R² across animals. No model here establishes the
+project's biological claim. The full receipt includes intervals for every control.
+
+An independent Python calculation using `math.fsum`, unit weights, and the same
+126 per-neuron groups reproduces Rust persistence R² as
+0.7025157664703914 / −0.4863865227484400 / −0.6711311897799123. Thus the user's
+approximate 0.70 / −0.35 / −0.63 table is not reproduced by removing confidence
+weights alone. A different preprocessing revision or aggregation convention may
+explain it; its exact cause remains unverified. The scorer convention and the
+content hashes are retained rather than changed to match the supplied table.

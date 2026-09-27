@@ -118,3 +118,10 @@ Primary source discovery for the next import stage:
 [their data tooling](https://github.com/flavell-lab/WormWideWebData.jl).
 Read manifests and data formats directly; do not execute upstream code as part of
 a downloader or equate a downloaded recording with a validated benchmark.
+
+## Task 2 controls and fitting
+
+See [TASK2-FITTING.md](TASK2-FITTING.md) for training-only controls, animal-cluster
+bootstrap intervals, and the failed first dense linear experiment. Scorer reports
+now include `animal_bootstrap` for animal splits; existing primary scores are
+unchanged.
