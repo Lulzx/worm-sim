@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "native_source_commit": "fbaa0cfe905867bbde222534acd02a5ebddca953",
+  "model_source_commit": "dcdd0fffc559f393c8c5e6838f88ba2b755d1d06",
+  "model_sha256": "385f9d881d585d475af99acd2d80f5b92317fabdea39e955c11b1bced856e3d0",
+  "graph_file_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+  "native_sha256": "dd351b86bb47b512630ab063cf004ffcf279fb1449a4a12abb8012bdaf859b64",
+  "audit_script_sha256": "de9d3a7868ca14f4f5ae72645a8920b28702229392120cc745932cbbc43eed0a",
+  "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+  "epoch": 8,
+  "preparation_seconds": 60.0,
+  "dt": 0.01,
+  "chemical_edges": 3638,
+  "exact_zero_gate_sensitivity_edges": 0,
+  "positive_gate_sensitivity_edges": 2181,
+  "negative_gate_sensitivity_edges": 1457,
+  "gate_sensitivity_l2": 0.20328227652950395,
+  "max_gate_sensitivity_error": 1.734723475976807e-16,
+  "scope": "Independent prepared-state dynamics and local chemical gate Jacobian. No optimization replay, biological sign inference or held-out prediction score."
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "native_source_commit": "fdcd6eb90635d34c8b591006ff8d690d25006b6b",
+  "model_source_commit": "dcdd0fffc559f393c8c5e6838f88ba2b755d1d06",
+  "native_receipt_sha256": "2cdbb7bb77f296b9ab470ea94ecb5021f0e2191c1face7e2d02148fb7e515c02",
+  "model_sha256": "a68acbdcd9c8ef826c167e90940bead25a356310de3c4b3ee866a9b230af0af9",
+  "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+  "dataset_file_sha256": "2063f69753f9ab0dce9ee489214fc3eb641c451651a09cc4b2ee81f261df4b2b",
+  "split_file_sha256": "c3002a03460f7685f71bcddf2be58c78e8ec35a410abe4a5eb3c2b9f11375438",
+  "audit_script_sha256": "1ac1a0d29fcc3009d5466ed78e6cd1c322a33428a64f9c05fc394c8dc69246f3",
+  "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+  "training_trials": 2842,
+  "target_grids_replayed": 161,
+  "sample_weight": 7589040.0,
+  "independent_scores": {
+    "direct_zero_response_mse": 0.07547002240309315,
+    "shared_target_response_lower_bound_mse": 0.06300050511013146,
+    "weighted_mean_trace_energy": 0.012469517292963231,
+    "model_mse": 0.07535556366784349
+  },
+  "zero_origin_extra_mse": 0.00015256502660459669,
+  "zero_origin_shared_target_lower_bound_mse": 0.06315307013673604,
+  "fraction_mean_trace_energy_captured": 0.009179083084014264,
+  "scope": "Training-only two-pass weighted means/residuals and independent NumPy neural replay. Per-target empirical means are a lower bound for the shared-response model, not a held-out baseline or irreducible biological noise estimate. The tighter bound additionally requires the initial predicted fluorescence to be zero, as in the current relative readout. Trial-specific context could explain within-target variation; no held-out labels or model selection here.",
+  "independent_pair_mean_correlation": {
+    "epsilon": 0.01,
+    "eligible_pairs": 24635,
+    "mean_loss": 1.002196781580793,
+    "scope": "Independent weighted training means and centered NumPy covariance; same declared variance floor, no optimizer replay or held-out responses."
+  }
+}

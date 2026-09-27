@@ -47,3 +47,7 @@ Next fitting work should address observation amplitude and optimization duration
 under training/validation controls. Five Adam updates are not evidence of
 convergence. Neither this diagnostic nor a failed linear baseline establishes a
 ceiling on what a nonlinear model can predict.
+
+See the [initialization diagnostic](ATLAS-INITIALIZATION-DIAGNOSTIC.md) for
+independently checked epoch-8 amplitude/shape scores and the zero chemical
+driving-force mechanism at the original neutral initialization.
