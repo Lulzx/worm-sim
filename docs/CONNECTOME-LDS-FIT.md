@@ -113,3 +113,12 @@ repeated observations, varying confidence, changed data and changed inputs.
 The workload report additionally times preparation and 16 repeated inferences on
 one real training window, checking mean and covariance parity. This isolates
 reuse cost; it is explicitly not a population throughput measurement.
+
+Measured on the local Apple M4 Pro with release Rust, f64 arithmetic and source
+`0e4bd682b3a5a161d67903d5a58b555df13a70e5`: preparation took 1.971 s;
+16 subsequent mean/likelihood inferences including parity checks took 0.09663 s
+(6.04 ms each). Means matched the reference exactly on this window, as did full
+and lag covariance arrays. The one-window E/M step took 2.041 s. The
+[receipt](connectome-lds-reuse-workload.json) pins the training trial, graph,
+dataset, split and timing boundaries. Measurements use diagonal initialization;
+trained-model and distinct-window population timing remain unmeasured.

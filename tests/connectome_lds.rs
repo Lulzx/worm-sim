@@ -50,6 +50,48 @@ fn shared_input_em_matches_independent_full_normal_system() {
             assert!((x - y).abs() < 1e-10, "{x} != {y}");
         }
     }
+    // Duplicating every sequence preserves the normalized moment update and
+    // forces reuse within each pattern group, including different targets.
+    let repeated: Vec<_> = sequences
+        .iter()
+        .cycle()
+        .take(sequences.len() * 3)
+        .cloned()
+        .collect();
+    let (repeated_model, repeated_report) = model
+        .em_step(
+            &repeated,
+            fixture["ridge"].as_f64().unwrap(),
+            fixture["cap"].as_f64().unwrap(),
+        )
+        .unwrap();
+    assert_eq!(repeated_report.observations, 3 * report.observations);
+    assert!(
+        (repeated_report.preceding_negative_log_likelihood
+            - 3.0 * report.preceding_negative_log_likelihood)
+            .abs()
+            < 1e-10
+    );
+    for (a, b) in [
+        (&actual.kernel, &repeated_model.kernel),
+        (
+            &actual.gaussian.transition,
+            &repeated_model.gaussian.transition,
+        ),
+        (
+            &actual.gaussian.process_cov,
+            &repeated_model.gaussian.process_cov,
+        ),
+        (
+            &actual.gaussian.initial_cov,
+            &repeated_model.gaussian.initial_cov,
+        ),
+        (&actual.gaussian.noise, &repeated_model.gaussian.noise),
+    ] {
+        for (x, y) in a.iter().zip(b) {
+            assert!((x - y).abs() < 1e-10);
+        }
+    }
     actual.validate_for_graph(&graph).unwrap();
     let (uncapped, _) = model
         .em_step(&sequences, fixture["ridge"].as_f64().unwrap(), 0.99)
