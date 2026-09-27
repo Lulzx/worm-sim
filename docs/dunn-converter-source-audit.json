@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "upstream_commit": "98016334b89ef087bdf39de938dad52a2cc8a47a",
+  "source_url": "https://raw.githubusercontent.com/focolab/2025-dunn-et-al-curr-biol/98016334b89ef087bdf39de938dad52a2cc8a47a/lib/clefNWB.py",
+  "source_sha256": "904d63379ea164d29a2b96145a9eee518d25e588317d0a5cc96c4fe508368043",
+  "source_bytes": 24584,
+  "tree_sha256": "4f3943ab42fab4c7c24b85aae7f6ed3f8a3a66d1e554fe1adb3e6b70c1dd6ee6",
+  "tree_truncated": false,
+  "functions": {
+    "create_nwbfile": {
+      "start_line": 25,
+      "end_line": 60
+    },
+    "create_subject": {
+      "start_line": 63,
+      "end_line": 92
+    },
+    "clef_to_nwb": {
+      "start_line": 524,
+      "end_line": 576
+    }
+  },
+  "metadata_attribute_uses": [
+    {
+      "line": 75,
+      "expression": "dc.md"
+    }
+  ],
+  "findings": [
+    "create_nwbfile derives identifier and session_start_time from the recording name, with US/Pacific timezone.",
+    "create_subject sets subject_id to nwbfile.identifier, not a separately supplied animal identity.",
+    "create_subject reads dc.md for subject_strain; birth date, growth stage, temperature and sex are assigned defaults.",
+    "The inspected conversion entry point invokes subject, imaging, segmentation and file-writing functions. This source contains no explicit stimulus-event export."
+  ],
+  "scope": "Pinned public converter source, not proof that every published NWB was generated with this exact code. No NWB dataset or pickle values read. Recording-level identifiers do not establish animal-level independence. Stimulus eligibility remains unverified.",
+  "tree_url": "https://api.github.com/repos/focolab/2025-dunn-et-al-curr-biol/git/trees/98016334b89ef087bdf39de938dad52a2cc8a47a?recursive=1",
+  "tree_entries": 70,
+  "standalone_json_csv_paths": []
+}

@@ -182,3 +182,28 @@ the NWB, in the processed pickle, or in the other 94 recordings. The published
 repository describes the NWBs as raw data, so processed-recording metadata
 remains a separate lead. No neural response values were indexed, decoded or
 displayed; no confirmatory cohort has been secured.
+
+### Converter source: recording identity is not animal identity
+
+The pinned repository's [NWB converter](https://github.com/focolab/2025-dunn-et-al-curr-biol/blob/98016334b89ef087bdf39de938dad52a2cc8a47a/lib/clefNWB.py)
+provides a more specific reason not to equate different NWB subjects with
+independent animals. `create_nwbfile` (lines 25–60) derives the identifier and
+session time from the recording name, using US/Pacific time. `create_subject`
+(lines 63–92) assigns that identifier directly to `subject_id`. A separate
+animal identifier is not supplied there. Several subject fields, including
+birth date and growth stage, are defaults in this converter; they cannot be
+used as measured evidence of biological independence.
+
+The [source receipt](dunn-converter-source-audit.json) pins the source hash and
+function locations. The sole `dc.md` access in this file supplies subject strain.
+The conversion entry point creates subject, imaging and segmentation structures
+and writes the file; there is no explicit stimulation-event export in this source.
+This supports prioritizing the processed metadata's `stim_param_list` over
+further broad NWB traversal when determining delivered events. It does not prove
+that every published NWB was produced by this exact converter version.
+
+The repository tree at that commit is complete (not truncated) and lists no
+standalone JSON or CSV event manifest. The processed-recording metadata remains
+the next lead. Establish per-event eligibility and animal/session relationships
+before declaring any candidate subset confirmatory. This source inspection did
+not decode recording arrays or inspect held-out outcomes.
