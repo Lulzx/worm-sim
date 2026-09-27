@@ -44,12 +44,13 @@ cohort is deterministic. No model may fit behavior dynamics to held-out animals.
   cell. Their weights are learned by full-window BPTT. Behavior AR coefficients
   stay fixed; gradients do not pass into observed behavior or the shared AR fit.
   Legacy zero-covariate artifacts retain their numerical predictions.
-- **LDS pending:** the same vectors must enter a learned transition input matrix,
-  including controlled Kalman inference and EM sufficient statistics.
+- **LDS implemented:** the same vectors enter a learned transition input matrix,
+  including controlled Kalman inference and EM sufficient statistics. See
+  [LDS details](LATENT-LDS.md#behavior-input-extension).
 - **Level 0 pending:** the same vectors must enter tied current-input weights
   during history inference and free prediction, with matching parameter gradients.
 
-The equal-input comparison is incomplete until all three integrations are fitted
+The equal-input comparison is incomplete until Level 0 is integrated and all three models are fitted
 and scored. A GRU-only result must not be presented as that comparison.
 
 With six hidden units and 149 training identities, the driven GRU has 6,677 neural
@@ -90,5 +91,5 @@ identifiers. This is evidence about information access, not forecast skill.
 
 The same committed executable loaded the archived no-behavior GRU artifact and
 reproduced all 72 saved test trial prediction arrays exactly. Source/model metadata
-changes as expected; neural numerical outputs are unchanged. LDS and Level 0
+changes as expected; neural numerical outputs are unchanged. Level 0
 behavior integration and the equal-input model comparison remain pending.

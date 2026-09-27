@@ -10,6 +10,10 @@ pub struct GaussianLds {
     pub dim: usize,
     pub outputs: usize,
     pub transition: Vec<f64>,
+    #[serde(default)]
+    pub input_dim: usize,
+    #[serde(default)]
+    pub input_weights: Vec<f64>,
     pub observation: Vec<f64>,
     pub process_cov: Vec<f64>,
     pub noise: Vec<f64>,
@@ -33,6 +37,8 @@ impl GaussianLds {
             || k > 64
             || n == 0
             || n > 1024
+            || self.input_dim > 64
+            || self.input_weights.len() != k * self.input_dim
             || self.transition.len() != k * k
             || self.observation.len() != n * k
             || self.process_cov.len() != k * k
@@ -41,6 +47,7 @@ impl GaussianLds {
             || self
                 .transition
                 .iter()
+                .chain(&self.input_weights)
                 .chain(&self.observation)
                 .chain(&self.process_cov)
                 .chain(&self.initial_cov)
@@ -62,9 +69,29 @@ impl GaussianLds {
         self.validate()?;
         norm_bound(&self.transition, self.dim)
     }
-    fn advance(&self, mean: &[f64], cov: &[f64]) -> (Vec<f64>, Vec<f64>) {
+    fn advance_mean(&self, mean: &[f64], input: &[f64]) -> Vec<f64> {
+        let mut next = mv(&self.transition, mean, self.dim, self.dim);
+        if self.input_dim > 0 {
+            let drive = mv(&self.input_weights, input, self.dim, self.input_dim);
+            for (v, u) in next.iter_mut().zip(drive) {
+                *v += u;
+            }
+        }
+        next
+    }
+    fn check_inputs(&self, frames: usize, inputs: &[Vec<f64>]) -> Result<()> {
+        if inputs.len() != frames
+            || inputs
+                .iter()
+                .any(|u| u.len() != self.input_dim || u.iter().any(|v| !v.is_finite()))
+        {
+            return Err("invalid LDS covariate shape/values".into());
+        }
+        Ok(())
+    }
+    fn advance(&self, mean: &[f64], cov: &[f64], input: &[f64]) -> (Vec<f64>, Vec<f64>) {
         let k = self.dim;
-        let next = mv(&self.transition, mean, k, k);
+        let next = self.advance_mean(mean, input);
         let mut p = mm(
             &mm(&self.transition, cov, k, k, k),
             &transpose(&self.transition, k, k),
@@ -115,7 +142,15 @@ impl GaussianLds {
     }
     /// Smoothing is for training only; prediction never invokes this method.
     pub fn smooth(&self, sequence: &[Vec<Observation>]) -> Result<Posterior> {
+        self.smooth_with_inputs(sequence, &vec![vec![]; sequence.len()])
+    }
+    pub fn smooth_with_inputs(
+        &self,
+        sequence: &[Vec<Observation>],
+        inputs: &[Vec<f64>],
+    ) -> Result<Posterior> {
         self.validate()?;
+        self.check_inputs(sequence.len(), inputs)?;
         if sequence.is_empty() {
             return Err("empty LDS sequence".into());
         }
@@ -130,7 +165,7 @@ impl GaussianLds {
         let mut count = 0;
         for (t, values) in sequence.iter().enumerate() {
             if t > 0 {
-                (mean, cov) = self.advance(&mean, &cov);
+                (mean, cov) = self.advance(&mean, &cov, &inputs[t - 1]);
             }
             predicted_means.push(mean.clone());
             predicted_covs.push(cov.clone());
@@ -187,7 +222,23 @@ impl GaussianLds {
         cap: f64,
         ridge: f64,
     ) -> Result<f64> {
+        let inputs = sequences
+            .iter()
+            .map(|seq| vec![vec![]; seq.len()])
+            .collect::<Vec<_>>();
+        self.em_step_with_inputs(sequences, &inputs, cap, ridge)
+    }
+    pub fn em_step_with_inputs(
+        &mut self,
+        sequences: &[Vec<Vec<Observation>>],
+        inputs: &[Vec<Vec<f64>>],
+        cap: f64,
+        ridge: f64,
+    ) -> Result<f64> {
         self.validate()?;
+        if inputs.len() != sequences.len() {
+            return Err("LDS input/sequence count mismatch".into());
+        }
         if sequences.is_empty()
             || !cap.is_finite()
             || cap <= 0.0
@@ -199,10 +250,12 @@ impl GaussianLds {
         }
         let k = self.dim;
         let n = self.outputs;
-        let mut s00 = vec![0.0; k * k];
-        let mut s11 = s00.clone();
-        let mut s10 = s00.clone();
-        let mut initial = s00.clone();
+        let d = self.input_dim;
+        let augmented = k + d;
+        let mut s00 = vec![0.0; augmented * augmented];
+        let mut s11 = vec![0.0; k * k];
+        let mut s10 = vec![0.0; k * augmented];
+        let mut initial = vec![0.0; k * k];
         let mut emission = vec![0.0; n * k * k];
         let mut cross = vec![0.0; n * k];
         let mut square = vec![0.0; n];
@@ -210,8 +263,8 @@ impl GaussianLds {
         let mut transitions = 0;
         let mut nll = 0.0;
         let mut observed = 0;
-        for sequence in sequences {
-            let p = self.smooth(sequence)?;
+        for (sequence, control) in sequences.iter().zip(inputs) {
+            let p = self.smooth_with_inputs(sequence, control)?;
             nll += p.negative_log_likelihood;
             observed += p.observations;
             for (t, values) in sequence.iter().enumerate() {
@@ -228,8 +281,22 @@ impl GaussianLds {
                 }
                 if t + 1 < sequence.len() {
                     transitions += 1;
-                    for (v, m) in s00.iter_mut().zip(&moment) {
-                        *v += m;
+                    for a in 0..k {
+                        for b in 0..k {
+                            s00[a * augmented + b] += moment[a * k + b];
+                        }
+                    }
+                    for a in 0..k {
+                        for b in 0..d {
+                            let cross = p.means[t][a] * control[t][b];
+                            s00[a * augmented + k + b] += cross;
+                            s00[(k + b) * augmented + a] += cross;
+                        }
+                    }
+                    for a in 0..d {
+                        for b in 0..d {
+                            s00[(k + a) * augmented + k + b] += control[t][a] * control[t][b];
+                        }
                     }
                 }
                 if t > 0 {
@@ -238,8 +305,11 @@ impl GaussianLds {
                     }
                     for a in 0..k {
                         for b in 0..k {
-                            s10[a * k + b] += p.lag_covariances[t - 1][a * k + b]
+                            s10[a * augmented + b] += p.lag_covariances[t - 1][a * k + b]
                                 + p.means[t][a] * p.means[t - 1][b];
+                        }
+                        for b in 0..d {
+                            s10[a * augmented + k + b] += p.means[t][a] * control[t - 1][b];
                         }
                     }
                 }
@@ -259,13 +329,59 @@ impl GaussianLds {
             return Err("LDS EM has no transitions or an unobserved training output".into());
         }
         let mut regularized = s00.clone();
-        for i in 0..k {
-            regularized[i * k + i] += ridge * transitions as f64;
+        let penalty = ridge * transitions as f64;
+        for i in 0..augmented {
+            regularized[i * augmented + i] += penalty;
         }
-        let mut a = mm(&s10, &inverse(&regularized, k)?, k, k, k);
+        let mut ab = mm(
+            &s10,
+            &inverse(&regularized, augmented)?,
+            k,
+            augmented,
+            augmented,
+        );
+        let mut a = vec![0.0; k * k];
+        for i in 0..k {
+            a[i * k..(i + 1) * k].copy_from_slice(&ab[i * augmented..i * augmented + k]);
+        }
         stabilize(&mut a, k, cap)?;
-        let as10t = mm(&a, &transpose(&s10, k, k), k, k, k);
-        let as00at = mm(&mm(&a, &s00, k, k, k), &transpose(&a, k, k), k, k, k);
+        for i in 0..k {
+            ab[i * augmented..i * augmented + k].copy_from_slice(&a[i * k..(i + 1) * k]);
+        }
+        // With projected A fixed, refit B conditionally before computing the
+        // process residual covariance. Projection is still not exact constrained EM.
+        let mut input_weights = vec![0.0; k * d];
+        if d > 0 {
+            let mut uu = vec![0.0; d * d];
+            let mut residual = vec![0.0; k * d];
+            for i in 0..d {
+                for j in 0..d {
+                    uu[i * d + j] = s00[(k + i) * augmented + k + j];
+                }
+                uu[i * d + i] += penalty;
+            }
+            for i in 0..k {
+                for j in 0..d {
+                    residual[i * d + j] = s10[i * augmented + k + j];
+                    for l in 0..k {
+                        residual[i * d + j] -= a[i * k + l] * s00[l * augmented + k + j];
+                    }
+                }
+            }
+            input_weights = mm(&residual, &inverse(&uu, d)?, k, d, d);
+            for i in 0..k {
+                ab[i * augmented + k..(i + 1) * augmented]
+                    .copy_from_slice(&input_weights[i * d..(i + 1) * d]);
+            }
+        }
+        let as10t = mm(&ab, &transpose(&s10, k, augmented), k, augmented, k);
+        let as00at = mm(
+            &mm(&ab, &s00, k, augmented, augmented),
+            &transpose(&ab, k, augmented),
+            k,
+            augmented,
+            k,
+        );
         let mut q = vec![0.0; k * k];
         for i in 0..k {
             for j in 0..k {
@@ -307,6 +423,7 @@ impl GaussianLds {
         }
         symmetrize(&mut initial, k);
         self.transition = a;
+        self.input_weights = input_weights;
         self.observation = c;
         self.process_cov = q;
         self.noise = noise;
@@ -323,6 +440,8 @@ pub struct FitConfig {
     pub iterations: usize,
     pub ridge: f64,
     pub transition_cap: f64,
+    #[serde(default)]
+    pub behavior_channels: Vec<String>,
 }
 impl Default for FitConfig {
     fn default() -> Self {
@@ -331,6 +450,7 @@ impl Default for FitConfig {
             iterations: 8,
             ridge: 1e-4,
             transition_cap: 0.995,
+            behavior_channels: vec![],
         }
     }
 }
@@ -346,6 +466,8 @@ pub struct LatentModel {
     pub mean: Vec<f64>,
     pub scale: Vec<f64>,
     pub gaussian: GaussianLds,
+    #[serde(default)]
+    pub behavior: Option<super::behavior::BehaviorModel>,
     pub transition_cap: f64,
     pub ridge: f64,
     pub iteration: usize,
@@ -374,6 +496,10 @@ pub struct SelectionReport {
     pub selected_rank: usize,
     pub selected_iteration: usize,
     pub free_parameters: usize,
+    #[serde(default)]
+    pub input_parameters: usize,
+    #[serde(default)]
+    pub behavior_forecast_parameters: usize,
     pub training_preparation_seconds: f64,
 }
 struct Training {
@@ -512,6 +638,8 @@ fn initialize(training: &Training, rank: usize, cap: f64) -> Result<GaussianLds>
         dim: rank,
         outputs: n,
         transition: eye(rank, 0.95f64.min(cap)),
+        input_dim: 0,
+        input_weights: vec![],
         observation: c,
         process_cov: eye(rank, 0.1),
         noise,
@@ -524,7 +652,12 @@ impl LatentModel {
     pub fn free_parameters(&self) -> usize {
         let k = self.gaussian.dim;
         let n = self.neurons.len();
-        k * k + n * k + k * (k + 1) + 3 * n
+        k * k
+            + n * k
+            + k * (k + 1)
+            + 3 * n
+            + self.gaussian.input_weights.len()
+            + self.behavior.as_ref().map_or(0, |b| b.free_parameters())
     }
     fn validate(&self, data: &Dataset, graph: &IndexedGraph, split: &Split) -> Result<()> {
         split.validate(data, graph)?;
@@ -555,6 +688,14 @@ impl LatentModel {
         }
         for name in &self.neurons {
             graph.neuron(name)?;
+        }
+        if let Some(b) = &self.behavior {
+            b.validate_lineage(data, graph, split)?;
+            if self.gaussian.input_dim != b.input_dim() || self.sample_dt != b.sample_dt {
+                return Err("LDS behavior dimension/grid mismatch".into());
+            }
+        } else if self.gaussian.input_dim != 0 {
+            return Err("missing LDS behavior forecast artifact".into());
         }
         Ok(())
     }
@@ -620,14 +761,18 @@ impl LatentModel {
                     fallback_traces += 1;
                 }
             }
+            let inputs = self
+                .behavior
+                .as_ref()
+                .map_or_else(|| Ok(vec![vec![]; times.len()]), |b| b.inputs(trial))?;
             let mut mean = vec![0.0; k];
             let mut cov = self.gaussian.initial_cov.clone();
             for (t, &time) in times.iter().enumerate() {
                 if t > 0 {
                     if time <= origin {
-                        (mean, cov) = self.gaussian.advance(&mean, &cov);
+                        (mean, cov) = self.gaussian.advance(&mean, &cov, &inputs[t - 1]);
                     } else {
-                        mean = mv(&self.gaussian.transition, &mean, k, k);
+                        mean = self.gaussian.advance_mean(&mean, &inputs[t - 1]);
                     }
                 }
                 if time <= origin {
@@ -654,12 +799,20 @@ impl LatentModel {
             });
         }
         trials.sort_by(|a, b| a.id.cmp(&b.id));
+        let behavior_description = match &self.behavior {
+            Some(b) => format!(
+                "behavior AR artifact {}; channels {:?}; no actual future behavior",
+                b.content_hash()?,
+                b.channels.iter().map(|c| &c.name).collect::<Vec<_>>()
+            ),
+            None => "no behavior inputs".into(),
+        };
         Ok(Predictions {
             schema_version: 1,
             dataset_hash: self.dataset_hash.clone(),
             split_hash: self.split_hash.clone(),
             model: format!(
-                "stable latent Gaussian LDS; rank={k}; iteration={}; history-only Kalman filtering; unseen-neuron persistence fallback traces={fallback_traces}; neurons={fallbacks:?}",
+                "stable latent Gaussian LDS; rank={k}; iteration={}; history-only Kalman filtering; {behavior_description}; unseen-neuron persistence fallback traces={fallback_traces}; neurons={fallbacks:?}",
                 self.iteration
             ),
             free_parameters: self.free_parameters(),
@@ -693,10 +846,38 @@ pub fn fit_select(
     }
     let start = std::time::Instant::now();
     let training = prepare(data, graph, split)?;
+    let behavior = if cfg.behavior_channels.is_empty() {
+        None
+    } else {
+        Some(super::behavior::fit(
+            data,
+            graph,
+            split,
+            &cfg.behavior_channels,
+        )?)
+    };
+    let mut training_trials: Vec<_> = data
+        .trials
+        .iter()
+        .filter(|t| split.train.contains(&t.id))
+        .collect();
+    training_trials.sort_by(|a, b| a.id.cmp(&b.id));
+    let inputs = training_trials
+        .iter()
+        .map(|t| {
+            behavior.as_ref().map_or_else(
+                || Ok(vec![vec![]; t.recording.times.len()]),
+                |b| b.inputs(t),
+            )
+        })
+        .collect::<Result<Vec<_>>>()?;
     let preparation = start.elapsed().as_secs_f64();
     let mut candidates = vec![];
     let mut best: Option<(f64, LatentModel)> = None;
     for &rank in &cfg.ranks {
+        let mut gaussian = initialize(&training, rank, cfg.transition_cap)?;
+        gaussian.input_dim = behavior.as_ref().map_or(0, |b| b.input_dim());
+        gaussian.input_weights = vec![0.0; rank * gaussian.input_dim];
         let mut candidate = LatentModel {
             schema_version: 1,
             dataset_hash: split.dataset_hash.clone(),
@@ -709,7 +890,8 @@ pub fn fit_select(
             neurons: training.neurons.clone(),
             mean: training.mean.clone(),
             scale: training.scale.clone(),
-            gaussian: initialize(&training, rank, cfg.transition_cap)?,
+            gaussian,
+            behavior: behavior.clone(),
             transition_cap: cfg.transition_cap,
             ridge: cfg.ridge,
             iteration: 0,
@@ -719,8 +901,9 @@ pub fn fit_select(
         for iteration in 0..=cfg.iterations {
             let start = std::time::Instant::now();
             let preceding = if iteration > 0 {
-                Some(candidate.gaussian.em_step(
+                Some(candidate.gaussian.em_step_with_inputs(
                     &training.sequences,
+                    &inputs,
                     cfg.transition_cap,
                     cfg.ridge,
                 )?)
@@ -760,6 +943,6 @@ pub fn fit_select(
         }
     }
     let (_, model) = best.ok_or("no latent LDS candidate")?;
-    let report=SelectionReport{schema_version:1,dataset_hash:split.dataset_hash.clone(),split_hash:split.content_hash()?,source_commit:model.source_commit.clone(),config:cfg,criterion:"Maximum mean validation macro-neuron R² at 1/10/30 s; ties retain earlier declared rank/iteration. All normalization, latent initialization and EM moments use training animals only.".into(),candidates,selected_rank:model.gaussian.dim,selected_iteration:model.iteration,free_parameters:model.free_parameters(),training_preparation_seconds:preparation};
+    let report=SelectionReport{schema_version:1,dataset_hash:split.dataset_hash.clone(),split_hash:split.content_hash()?,source_commit:model.source_commit.clone(),config:cfg,criterion:"Maximum mean validation macro-neuron R² at 1/10/30 s; ties retain earlier declared rank/iteration. All normalization, latent initialization and EM moments use training animals only. Optional shared behavior AR inputs exclude actual future behavior.".into(),candidates,selected_rank:model.gaussian.dim,selected_iteration:model.iteration,free_parameters:model.free_parameters(),input_parameters:model.gaussian.input_weights.len(),behavior_forecast_parameters:model.behavior.as_ref().map_or(0,|b|b.free_parameters()),training_preparation_seconds:preparation};
     Ok((model, report))
 }

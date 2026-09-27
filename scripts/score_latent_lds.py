@@ -58,6 +58,7 @@ receipt = {
     'model_sha256': hashlib.sha256(model_bytes).hexdigest(),
     'model_training_source_commit': model['source_commit'],
     'selection': selection,
+    'behavior_forecast': model.get('behavior'),
     **reports,
     'validation_history_diagnostic': history,
     'timed_preparation_and_candidate_seconds': selection['training_preparation_seconds'] + sum(c['elapsed_seconds'] for c in selection['candidates']),

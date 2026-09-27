@@ -138,3 +138,38 @@ forecasting remain open work.
 
 The matched-budget [GRU comparator](GRU.md) is now fitted and scored. Its long-horizon
 point estimates are also positive, with intervals spanning zero.
+
+## Behavior input extension
+
+The optional [shared behavior protocol](BEHAVIOR-INPUTS.md) drives
+`x[t+1] = A x[t] + B u[t] + noise`, retaining `y[t] = C x[t] + noise`.
+The same input vectors enter both Kalman filtering and free forecast transitions.
+The smoother includes their effect in the predicted means; covariance propagation
+and RTS gains remain conditional on the fixed input trajectory. Actual future
+behavior is never supplied, including during training. Input-forecast uncertainty
+is not marginalized.
+
+The M-step forms moments of `[x[t], u[t]]`, solves the ridge-regularized joint
+regression, and projects A to the same operator-norm bound. With projected A fixed,
+it refits B conditionally from the input and state–input moments. The process
+covariance is the full expected transition residual covariance using that final
+A and B. Observation/noise and initial-covariance updates retain their original
+rules. This is an EM-style constrained update, not a guarantee of monotonic
+likelihood under projection/ridge/floors.
+
+An independent [NumPy joint-Gaussian oracle](../scripts/generate_lds_control_fixture.py)
+conditions the entire trajectory directly, without a Kalman recursion. Tests
+match its smoothed means, marginal/lag covariances, likelihood and every parameter
+of one M-step. The fixture activates the stability projection, testing the
+conditional B refit and final process covariance. A full refit with altered test
+neural/behavior futures preserves parameters, selection and predictions. Legacy
+artifacts default to zero input dimensions and preserve predictions.
+
+The [fixed driven configuration](../configs/lds-behavior-fit.json) retains ranks
+4/8/16/32, eight updates, ridge 1e-4 and transition cap 0.995. B starts at zero;
+only training-animal EM updates estimate it. Four behavior channels supply eight
+values/masks, adding `8 * rank` learned B entries plus 16 shared behavior scalars.
+A rank-32 driven candidate therefore contains 7,567 total scalars. The report
+states these extra counts separately; the unconditioned receipts above remain
+unchanged. The behavior-assisted comparison will be scored after Level 0 consumes
+the same protocol.
