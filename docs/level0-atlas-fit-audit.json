@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "source_commit": "2a510efbc972e0b60732f6291ced59bed69d5d16",
+  "dataset_hash": "3f3a537ff8424d89da72699e9b342185959afbd9380f7ecc6aa0fed06fafe843",
+  "split_hash": "2d291f63668345396d9b08e984581841db7b8912897405993ba258bf9f013f47",
+  "selected_epoch": 1,
+  "config": {
+    "epochs": 5,
+    "dt": 0.01,
+    "learning_rate": 0.01,
+    "kernel_lags": 39,
+    "prior_strength": 0.01,
+    "sign_prior_strength": 0.01,
+    "kernel_prior_strength": 0.01,
+    "sharing": {
+      "classes": {},
+      "allow_suffix_pairs": true,
+      "provenance": "Graph annotations when available; matching terminal L/R names otherwise. Suffix pairing is an explicit modeling assumption, not a biological annotation."
+    }
+  },
+  "selection": [
+    {
+      "epoch": 0,
+      "preceding_training_mse": null,
+      "preceding_penalty": null,
+      "validation_mse": 0.04232877326057794,
+      "validation_correlation": -0.0006802823238431266,
+      "defined_trace_correlations": 10659,
+      "elapsed_seconds": 1.7438503330000001
+    },
+    {
+      "epoch": 1,
+      "preceding_training_mse": 0.07536645831538034,
+      "preceding_penalty": 0.006931471805598933,
+      "validation_mse": 0.04192679367559813,
+      "validation_correlation": -0.011936962388379385,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 19.441701208
+    },
+    {
+      "epoch": 2,
+      "preceding_training_mse": 0.07461315543053937,
+      "preceding_penalty": 0.00693277096793281,
+      "validation_mse": 0.041978311078740234,
+      "validation_correlation": -0.009963384953712313,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 19.968518334
+    },
+    {
+      "epoch": 3,
+      "preceding_training_mse": 0.0743702801827413,
+      "preceding_penalty": 0.006934321118111438,
+      "validation_mse": 0.042181414534307814,
+      "validation_correlation": -0.00890656231152302,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 21.7339005
+    },
+    {
+      "epoch": 4,
+      "preceding_training_mse": 0.0744087485665296,
+      "preceding_penalty": 0.006935998468924549,
+      "validation_mse": 0.042305668206980694,
+      "validation_correlation": -0.008460193857837552,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 23.782359834
+    },
+    {
+      "epoch": 5,
+      "preceding_training_mse": 0.07449740980336339,
+      "preceding_penalty": 0.006936922785799641,
+      "validation_mse": 0.0422844753657844,
+      "validation_correlation": -0.008522135247673892,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 22.469921958
+    }
+  ],
+  "free_parameters": 6781,
+  "independent_saved_trace_scores": {
+    "validation": {
+      "pooled_mse": 0.04192679367559743,
+      "zero_response_mse": 0.042458845587192255,
+      "macro_trace_correlation": -0.01193696238837944,
+      "defined_trace_correlations": 11746
+    },
+    "test": {
+      "pooled_mse": 0.048998503617930574,
+      "zero_response_mse": 0.05003565246791083,
+      "macro_trace_correlation": 0.023980329919480875,
+      "defined_trace_correlations": 12588
+    }
+  },
+  "independent_pair_auroc": 0.41774841376098726,
+  "max_pair_area_error": 0.0,
+  "validation_half_step": {
+    "coarse_mse": 0.04192679367559813,
+    "dt": 0.01,
+    "epoch": 1,
+    "fine_dt": 0.005,
+    "fine_mse": 0.04192679247321883,
+    "max_prediction_change": 5.682695328779186e-05,
+    "scope": "Validation-only numerical sensitivity at the selected checkpoint; not a convergence proof.",
+    "source_commit": "2a510efbc972e0b60732f6291ced59bed69d5d16"
+  },
+  "selected_model_sha256": "ec9c7b2a53c9237cad33134cecf51f00cac1a2915df017622a91b5de0c3fb199",
+  "dataset_file_sha256": "2063f69753f9ab0dce9ee489214fc3eb641c451651a09cc4b2ee81f261df4b2b",
+  "split_file_sha256": "c3002a03460f7685f71bcddf2be58c78e8ec35a410abe4a5eb3c2b9f11375438",
+  "evidence_file_sha256": "28633bafc09afac3c53eb24d76e038774f9d1470182233a4f8d4b50e07d47152",
+  "audit_script_sha256": "1acdaef7c316a75456844a88aa0854aa5f2b02f03468973c12c58252b5892b8a",
+  "shared_score_script_sha256": "ddcc0c95f9a3f872c61b180176f8043682bc6fbc3c70f9441cafb1d1d3806e53",
+  "artifacts": {
+    "epoch-0.json": "53b8e7cf2bcd684f0e3e7f1f0bfa60c77678194b4c5240795c06e4084418a55b",
+    "epoch-1.json": "ec9c7b2a53c9237cad33134cecf51f00cac1a2915df017622a91b5de0c3fb199",
+    "epoch-2.json": "738a8d2fefe4cb31237456823764829c2d307a902b4221373efaab82a6f23a37",
+    "epoch-3.json": "8f71e08dd2d3472539db3509912d8d532bb6ebd9e7c3ab8269eaa140f098cb71",
+    "epoch-4.json": "83ef53d1928aaa5121f1ea132cbc5c69884d5a43e794230ab5c4aea910a0ce7c",
+    "epoch-5.json": "1ec491684cd314b646e328d037eee139b9869a3d81b3f8d17d6960cd1d2b0f52",
+    "validation-report.json": "a0b5edf216694835c92f250927f7a063dc13cf5ab07d7e03c46e3ab4ee3e3d01",
+    "validation-predictions.json": "39c546cba6944580d4c2700c0115a5d40e7b8782813483f743a66b2b6fc23f54",
+    "test-report.json": "8396de47cf3516f17638b11682b2001c271b901294e9921f9dd15e99bcc93989",
+    "test-predictions.json": "ec6dd974d06072dd9ff73104e255524b7f82093039e265d4ae7fb9e962d0c93b"
+  },
+  "limitations": "Independent recomputation of saved-output MSE, correlation, response area and direct pairwise AUROC. Selection and declared lineage checked. Nonlinear ODE, optimization and bootstrap draws are not independently replayed here. See gradient tests and selected-checkpoint half-step check for separate numerical evidence. Fixed common initial state, assumed positive shared input, neutral unannotated signs and previously inspected test cohort remain limitations."
+}

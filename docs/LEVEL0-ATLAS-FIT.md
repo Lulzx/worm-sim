@@ -42,7 +42,7 @@ It is never an evaluation recording or an animal-level observation.
 Analytical tests verify original-versus-aggregated MSE and its derivative with
 unequal confidence and variable trial responses. Missing-data rejection and exact
 training membership are checked. The population runner below uses these
-components; its measured comparison against the linear baseline remains pending.
+components; its first measured comparison is reported below.
 
 ## Native workload measurement
 
@@ -101,7 +101,61 @@ WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release --example 
 target/release/examples/fit_level0_atlas data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json configs/level0-atlas-first-fit.json runs/level0-atlas-first-fit
 ```
 
-This implements the first nonlinear fit runner; measured population results and
-comparison against the linear atlas baseline remain pending. The test partition
+The first measured population result and linear-baseline comparison are below.
+The test partition
 has already been inspected for the linear baseline, so subsequent results are
 exploratory comparisons on that fixed benchmark, not a fresh confirmatory cohort.
+
+## First completed fit: negative comparison
+
+Source `2a510efbc972e0b60732f6291ced59bed69d5d16` completed the five-update
+protocol. Validation MSE selected **epoch 1**, with 6,781 nominal fitted parameters.
+Epochs 2–5 did not improve validation MSE. The selected model uses the same fixed
+initial state as initialization. Summed epoch timers include gradients and
+validation, but exclude data loading, aggregation and checkpoint writing.
+
+| Test metric | Level 0 | Shared-kernel LDS |
+|---|---:|---:|
+| Pooled MSE | 0.0489985 | 0.0473448 |
+| Mean trace correlation | 0.0239803 | 0.0452857 |
+| Published pair-detection AUROC | 0.4177484 | 0.6861866 |
+
+Both models have all 12,588 test trace correlations defined. The zero-response
+MSE is 0.0500357; modest improvement over that control does not meet the required
+linear-baseline comparison. Pair classification uses the same fixed absolute-area
+score, eligibility and 1,758 pairs for both models.
+
+The [paired comparison](atlas-first-comparison.json) reports Level 0 minus LDS:
+
+- MSE difference +0.001654, target-cluster interval [+0.000413, +0.002655];
+  recording-cluster interval [+0.001161, +0.002227]. Both favor the LDS.
+- Correlation difference −0.02131, target interval [−0.03875, +0.00300];
+  recording interval [−0.03495, −0.00985]. The target interval includes zero.
+- AUROC difference −0.26844, target interval [−0.32737, −0.20375], favoring LDS.
+
+These are paired, conditional, separate marginal cluster analyses with the
+previously stated crossed-dependence and previously inspected-cohort limitations.
+Level 0's standalone AUROC interval is [0.34658, 0.48453]. We do not invert the
+ranking using this test outcome or call below-chance ranking a success.
+
+Halving the selected model's integration dt changed validation MSE by about
+1.2e−9 and predictions by at most 5.68e−5. This check does not establish full
+convergence, but the observed baseline gap is not explained by this dt comparison.
+
+The [saved-output audit](level0-atlas-fit-audit.json) independently recomputes trace
+MSE/correlation, response-area scores and direct pairwise AUROC, checks selected
+checkpoint identity/declared lineage, and hashes artifacts. It does not independently
+replay nonlinear dynamics or optimization. The [uncertainty receipt](level0-atlas-fit-uncertainty.json)
+preserves model/evaluator sources and coverage. The shared evaluator reproduces
+the earlier LDS pair predictions, pair report and both bootstrap results exactly.
+
+```sh
+python3 scripts/audit_level0_atlas.py --output runs/level0-atlas-fit-audit.json
+```
+
+The first Level 0 atlas fit therefore fails the required baseline comparison.
+Further work should diagnose validation-only response dynamics, particularly the
+fixed common initial state and stimulus-independent drift, before expanding compute
+or tuning against test outcomes. Source-backed signs/classes, calibrated drive,
+and a declared training-pair classification objective are still missing. Task 1
+biological acceptance and the complete specification remain open.
