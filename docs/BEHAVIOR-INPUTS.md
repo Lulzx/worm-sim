@@ -78,3 +78,17 @@ The [declared GRU configuration](../configs/gru-behavior-fit.json) retains the
 same hidden size, 30 epochs, optimizer settings and seed as its unconditioned
 experiment. Candidate selection remains mean validation R² at 1/10/30 seconds.
 The protocol audit does not evaluate neural forecasting quality.
+
+## Real-data protocol audit
+
+The [receipt](behavior-input-audit.json), from source
+`22da047`, covers all **504 windows** (360 train, 72 validation, 72 test).
+Every generated input vector is finite, every post-origin observation mask is zero,
+and replacing all exported future behavior leaves all eight covariates exactly
+unchanged. The receipt includes the 16 fitted behavior scalars and all source/split
+identifiers. This is evidence about information access, not forecast skill.
+
+The same committed executable loaded the archived no-behavior GRU artifact and
+reproduced all 72 saved test trial prediction arrays exactly. Source/model metadata
+changes as expected; neural numerical outputs are unchanged. LDS and Level 0
+behavior integration and the equal-input model comparison remain pending.
