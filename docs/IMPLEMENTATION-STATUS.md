@@ -16,17 +16,18 @@ This ledger does not declare scientific targets achieved merely because code exi
 | Training (§8) | Masked confidence-weighted MSE, small synthetic Adam fit | Real-data staged fitting, correlation/classification/behavior losses, AdamW schedules/group rates, ensembles/Laplace/SBI, held-out evidence |
 | Perturbations (§9) | Current pulses, silence, ablation; JSON protocols | Waveforms/conductance input, gene mappings, drug/modulator input, voltage clamps, YAML, source-backed phenotype registry |
 | Body (§10) | Not implemented | Motor/muscle map, differentiable reduced body, sensor/environment interface, replay and Sibernetic adapter |
-| Tasks 1–2 (§11) | Pinned pretrained Creamer inference reproduced; Rust group-disjoint splits and common Task 1/2 scorers implemented; upstream Creamer split differs from requested held-out neurons | Animal split published and persistence control scored; publish atlas neuron split; fit/evaluate LDS and GRU baselines, parameter-matched nonlinear fits |
+| Tasks 1–2 (§11) | Pinned pretrained Creamer inference reproduced; Rust group-disjoint splits and common Task 1/2 scorers implemented; upstream Creamer split differs from requested held-out neurons | Controls, AR(1), animal bootstrap and first failed dense linear experiment implemented (see TASK2-FITTING.md); stable latent LDS, 302-neuron initial-state inference, Level 0 real fit, GRU and atlas neuron split remain |
 | Tasks 3–5 (§11) | Not demonstrated | Behavior decoder comparison, mutant/ablation direction scoring, untrained closed-loop gait statistics |
 | Performance (§12) | Native CPU/Metal and storage receipts; checkpoint tradeoff measured | Spec workload targets: GPU 100 s <1 s, batch 64 gradient <2 s, atlas fit <12 h, ensemble runs |
 | Engineering (§12) | Public MIT repository, local/CI regression tests, manifests and receipts | Complete tutorial notebook, experiment tracking adapter, package/API documentation and reproducible full benchmark runs |
 
 ## Build sequence and completion gates
 
-1. Establish real-data contracts and immutable, leakage-checked Task 1/2 splits.
-   Score baseline and nonlinear predictions using the same observations/metrics.
-2. Add named/tied/hierarchical parameter groups, priors and scalable training;
-   ingest recordings and run the staged atlas/free-moving comparisons.
+1. Prioritize Task 2 fitting: controls and animal-level intervals, stable LDS,
+   302-neuron initial-state inference, tied parameters/sign priors, then a real
+   Level 0 fit through the same scorer. Defer backend/performance expansion.
+2. Add GRU and equal behavior inputs, then ingest the Task 1 atlas and publish
+   its held-out stimulated-neuron split; complete staged comparisons.
 3. Extend coupling with slow modulation; compare against the same held-out tasks.
 4. Add mixed-fidelity neuron models and stiff/multirate numerical support.
 5. Complete perturbation protocols and the measured-phenotype registry.

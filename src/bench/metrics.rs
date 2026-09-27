@@ -55,6 +55,28 @@ impl Moments {
         }
         Ok(())
     }
+    /// Merge independent blocks, including repeated blocks in a cluster bootstrap.
+    pub fn merge(&mut self, other: &Self) {
+        if other.weight == 0.0 {
+            return;
+        }
+        if self.weight == 0.0 {
+            *self = other.clone();
+            return;
+        }
+        let total = self.weight + other.weight;
+        let dt = other.mean_target - self.mean_target;
+        let dp = other.mean_prediction - self.mean_prediction;
+        let bridge = self.weight * (other.weight / total);
+        self.target_ss += other.target_ss + dt * dt * bridge;
+        self.prediction_ss += other.prediction_ss + dp * dp * bridge;
+        self.cross += other.cross + dt * dp * bridge;
+        self.error_ss += other.error_ss;
+        self.mean_target += dt * (other.weight / total);
+        self.mean_prediction += dp * (other.weight / total);
+        self.weight = total;
+        self.count += other.count;
+    }
     pub fn scores(&self) -> Scores {
         Scores {
             samples: self.count,

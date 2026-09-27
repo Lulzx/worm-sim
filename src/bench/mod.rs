@@ -1,6 +1,9 @@
 //! Versioned benchmark trials, group-disjoint splits, and common held-out scoring.
 //! Prediction lineage is checked as declared metadata, not proof of how a model trained.
+pub mod controls;
+pub mod linear;
 pub mod metrics;
+pub mod uncertainty;
 use crate::{
     Result,
     data::{IndexedGraph, Recording},
@@ -345,6 +348,8 @@ pub struct Report {
     pub traces: Vec<TraceScore>,
     pub response_auroc: Auroc,
     pub forecast_horizons: Vec<HorizonScore>,
+    #[serde(default)]
+    pub animal_bootstrap: Option<uncertainty::AnimalBootstrap>,
 }
 fn declared_subset(ids: &[String], allowed: &[String]) -> bool {
     ids.iter().collect::<BTreeSet<_>>().len() == ids.len()
@@ -537,6 +542,11 @@ pub fn evaluate(
         traces,
         response_auroc: metrics::auroc(&pairs)?,
         forecast_horizons,
+        animal_bootstrap: if split.axis == Axis::Animal {
+            Some(uncertainty::calculate(data, predictions, 42, 2000)?)
+        } else {
+            None
+        },
     })
 }
 
