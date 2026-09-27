@@ -77,7 +77,8 @@ longer optimization, non-neutral initialization, and per-neuron observation gain
 A [1,000-update capacity test](docs/LEVEL0-LONG-RUN.md) improved training fit but
 missed its 90% gate and showed late instability. Subsequent
 [warm-start diagnostics](docs/CAPACITY-WARM-START.md) reproduced a coarse-step
-Euler failure during preparation; refined-step fitting is being evaluated.
+Euler failure during preparation. A refined-step run completed, but captured
+only 76.69% of the available training-response energy and still missed the gate.
 New dynamical features are paused. Existing validation/test results are
 exploratory; a fresh confirmatory cohort remains outstanding.
 

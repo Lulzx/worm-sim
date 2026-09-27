@@ -44,11 +44,11 @@ This verifies the fitting implementation, not biological adequacy.
    at its failing parameters. Independent replay localizes it to coarse Euler
    preparation leaving the continuous model's voltage bounds. Refined steps
    give finite trajectories and gradients, with directional finite-difference
-   checks. A separately declared refined-step fit is underway; launch is not
-   completion. The lower-rate failure's parameters remain unaudited. New runs
+   checks. The separately declared refined-step fit completed 200 updates with
+   independent replay and numerical controls; final capture is 76.69%, still
+   below the 90% capacity gate. The lower-rate failure's parameters remain unaudited. New runs
    retain finite failing parameters automatically on nonfinite evaluations.
-3. **Broader fitting, pending.** Interpret the refined fit only after its terminal
-   outcome, independent replay, and step/preparation/drift controls. Continue
+3. **Broader fitting, pending.** The refined fit is audited and remains underfit. Continue
    optimization/capacity diagnosis until the small-target gate passes; then
    replicate across unrelated training targets and fit the training population.
    A failed small-target gate alone does not identify model capacity as the cause.

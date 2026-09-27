@@ -178,3 +178,45 @@ Together with finite refined preparation, independent prediction replay and the
 gradient checks, this localizes the reproduced higher-rate failure to coarse
 Euler preparation. It does not prove stability for every later optimizer update,
 nor explain the lower-rate run's uncaptured failing parameters.
+
+
+## Refined-step outcome: completed, capacity gate still failed
+
+The separately declared run completed all 200 updates at clean source `65245a4`.
+The [receipt](capacity-refined-results.json) retains the declaration, manifest,
+all 201 finite iterates, final/best hash, and independent endpoint audits.
+The final iterate is also the best retained checkpoint.
+
+| Quantity | Training MSE | Captured zero-start response energy |
+| --- | ---: | ---: |
+| Parent parameters, re-evaluated at dt 0.005 | 0.04386941 | 76.4813% |
+| Final/best, 200 additional updates | 0.04384851 | 76.6920% |
+| Unchanged 90% gate | 0.04252858 | 90% |
+
+The improvement is only **0.211 percentage points** of available response energy.
+The run passes the finite-completion check, including update 181 where the
+coarse-step lower-rate run stopped, but fails the fitting gate. The coarse run
+has no final-at-200 score; its missing endpoint is not imputed. Elapsed time was
+1,147.64 seconds on CPU, including compilation; this is a run receipt, not a
+controlled performance benchmark.
+
+Independent NumPy replay reproduces final MSE exactly. Halving the step changes
+MSE by 8.91e-8 and predictions by at most 0.000815. Doubling preparation changes
+MSE by 5.29e-11; quadrupling it adds a negligible change. Without stimulation,
+prediction energy is 3.64e-13 versus 0.007612 with stimulation. All 3,638 prepared
+chemical coupling coefficients remain nonzero.
+
+Final learned gains span 0.0268–1,005.55 and remain calibration parameters without
+physiological interpretation. With dynamics frozen, optimal positive per-neuron
+recalibration gives MSE 0.04379858, closing only 2.16% of the remaining gap to the
+zero-start mean-response bound. Even the inadmissible signed-scale diagnostic
+only reaches 0.04364143. These projections are training diagnostics, not new
+benchmark models.
+
+**Decision:** numerical stabilization alone does not solve the underfit. Keep the
+model and target subset fixed for the next optimization diagnostic. A bounded,
+library-backed quasi-Newton comparison is the next candidate before adding
+capacity or scaling to the population; validate its gradients, active-coordinate
+handling and numerical failure behavior before launching it. Do not infer a
+capacity limit from this Adam plateau or weaken the 90% gate. New dynamical
+features and further held-out selection remain paused.
