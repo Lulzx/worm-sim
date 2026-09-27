@@ -21,6 +21,7 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install -r backends/taichi/requirements.txt
+      - run: python scripts/test_connectome_audit.py
       - run: mkdir -p runs
       - run: cargo run --locked --release --example export_taichi_reference -- runs/taichi-reference.json
       - run: python backends/taichi/audit.py runs/taichi-reference.json --arch cpu --validate --output runs/taichi-cpu-audit.json

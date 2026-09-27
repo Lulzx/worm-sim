@@ -185,3 +185,24 @@ correlation and MSE. These intervals alone do not prove a model comparison.
 WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release --example evaluate_connectome_atlas
 target/release/examples/evaluate_connectome_atlas data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json runs/randi-pairs.json runs/connectome-lds-first-fit/selected.json test runs/connectome-lds-first-fit-evaluation
 ```
+
+## Independent completed-run audit
+
+`scripts/audit_connectome_fit.py` reconstructs every candidate's validation MSE
+using dense NumPy matrix-vector propagation and rechecks minimum-MSE selection.
+It checks all selected validation/test impulse samples against native sparse
+predictions, recomputes trace MSE/correlation, and reports the zero-response MSE
+control. A zero response has undefined trace correlation; constant pair scores
+have AUROC 0.5 when both classes are present. The audit verifies declared split
+membership, disjoint target identities, training observation/transition counts,
+checkpoint identity and source lineage, then hashes all result artifacts.
+It does not independently rerun EM or prove absence of upstream leakage.
+
+```sh
+python3 scripts/test_connectome_audit.py
+python3 scripts/audit_connectome_fit.py --output runs/connectome-lds-fit-audit.json
+```
+
+The audit requires a completed run and NumPy. Small analytical tests check dense
+impulse timing/input routing, confidence weighting, missing samples and undefined
+correlations. They run in CI using the existing pinned NumPy environment.
