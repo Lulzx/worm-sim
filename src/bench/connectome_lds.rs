@@ -1,12 +1,13 @@
 //! Anatomically constrained Gaussian LDS with a shared stimulation kernel.
 //! The shared kernel is necessary when whole stimulated identities are held out.
+use super::lds::prepared::observation_pattern;
 use super::{
     lds::{GaussianLds, Observation},
     lds_math::*,
 };
 use crate::{Result, data::IndexedGraph};
 use serde::{Deserialize, Serialize};
-use std::collections::BTreeSet;
+use std::collections::{BTreeMap, BTreeSet};
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct StimulusSequence {
@@ -195,43 +196,51 @@ impl ConnectomeLds {
         let mut transitions = 0;
         let mut observations = 0;
         let mut nll = 0.0;
+        let mut groups = BTreeMap::new();
         for sequence in sequences {
-            let inputs = self.inputs(sequence.target, sequence.observations.len())?;
-            let posterior = self
-                .gaussian
-                .smooth_with_inputs(&sequence.observations, &inputs)?;
-            nll += posterior.negative_log_likelihood;
-            observations += posterior.observations;
-            for (i, value) in initial.iter_mut().enumerate() {
-                *value += posterior.covariances[0][i * n + i] + posterior.means[0][i].powi(2);
-            }
-            for (t, frame) in sequence.observations.iter().enumerate() {
-                for &(i, y, w) in frame {
-                    noise[i] += w
-                        * ((y - posterior.means[t][i]).powi(2)
-                            + posterior.covariances[t][i * n + i]);
-                    counts[i] += 1;
+            groups
+                .entry(observation_pattern(&sequence.observations))
+                .or_insert_with(Vec::new)
+                .push(sequence);
+        }
+        for group in groups.values() {
+            let plan = self.gaussian.prepare_smoother(&group[0].observations)?;
+            for sequence in group {
+                let inputs = self.inputs(sequence.target, sequence.observations.len())?;
+                let posterior = plan.smooth(&sequence.observations, &inputs)?;
+                nll += posterior.negative_log_likelihood;
+                observations += posterior.observations;
+                for (i, value) in initial.iter_mut().enumerate() {
+                    *value += posterior.covariances[0][i * n + i] + posterior.means[0][i].powi(2);
                 }
-                if t + 1 == sequence.observations.len() {
-                    continue;
-                }
-                transitions += 1;
-                for i in 0..n {
-                    s11[i] +=
-                        posterior.covariances[t + 1][i * n + i] + posterior.means[t + 1][i].powi(2);
-                    for j in 0..n {
-                        s00[i * n + j] += posterior.covariances[t][i * n + j]
-                            + posterior.means[t][i] * posterior.means[t][j];
-                        s10[i * n + j] += posterior.lag_covariances[t][i * n + j]
-                            + posterior.means[t + 1][i] * posterior.means[t][j];
+                for (t, frame) in sequence.observations.iter().enumerate() {
+                    for &(i, y, w) in frame {
+                        noise[i] += w
+                            * ((y - posterior.means[t][i]).powi(2)
+                                + posterior.covariances[t][i * n + i]);
+                        counts[i] += 1;
                     }
-                }
-                if t < l {
-                    let i = sequence.target;
-                    input_count[i * l + t] += 1.0;
-                    y_input[i * l + t] += posterior.means[t + 1][i];
-                    for j in 0..n {
-                        x_input[(i * n + j) * l + t] += posterior.means[t][j];
+                    if t + 1 == sequence.observations.len() {
+                        continue;
+                    }
+                    transitions += 1;
+                    for i in 0..n {
+                        s11[i] += posterior.covariances[t + 1][i * n + i]
+                            + posterior.means[t + 1][i].powi(2);
+                        for j in 0..n {
+                            s00[i * n + j] += posterior.covariances[t][i * n + j]
+                                + posterior.means[t][i] * posterior.means[t][j];
+                            s10[i * n + j] += posterior.lag_covariances[t][i * n + j]
+                                + posterior.means[t + 1][i] * posterior.means[t][j];
+                        }
+                    }
+                    if t < l {
+                        let i = sequence.target;
+                        input_count[i * l + t] += 1.0;
+                        y_input[i * l + t] += posterior.means[t + 1][i];
+                        for j in 0..n {
+                            x_input[(i * n + j) * l + t] += posterior.means[t][j];
+                        }
                     }
                 }
             }

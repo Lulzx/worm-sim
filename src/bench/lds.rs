@@ -1,5 +1,7 @@
 //! Stable latent Gaussian LDS: masked Kalman filtering, RTS smoothing and
 //! constrained EM moment updates. Forecasts condition on observed history only.
+pub mod prepared;
+
 use super::{Axis, Dataset, Partition, PredictedTrial, Predictions, Split, lds_math::*};
 use crate::{Result, data::IndexedGraph};
 use serde::{Deserialize, Serialize};

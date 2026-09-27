@@ -91,3 +91,25 @@ full-state E/M step with 39 kernel lags for its 40-frame window. It does not fit
 population or evaluate validation/test data. The initial window timing must not
 be presented as whole-fit throughput or biological acceptance. Population fitting,
 validation selection, held-out trace/pair scoring and uncertainty remain pending.
+
+### Exact covariance reuse
+
+The constrained E-step groups sequences by their complete ordered, per-frame
+output identities and confidence-weight bit patterns. For each group it prepares
+Kalman scalar-update covariances/variances, RTS gains and smoothed/lag covariances
+once. Observed values and stimulation inputs affect the conditional means and
+likelihood but not these covariances. Each sequence still gets its own mean and
+likelihood calculation. The model is borrowed immutably by the plan, preventing
+stale reuse after parameter updates. Changed masks or weights are rejected.
+
+Only one group's covariance plan is held at a time. Posterior covariances are
+borrowed rather than copied for every trial. This preserves full covariance;
+it introduces no diagonal/block approximation. Moment summation order changes
+with grouping, so floating-point roundoff may differ from original trial order.
+The original general Gaussian smoothing path remains available as a reference.
+Tests compare both paths with dense readouts, correlated noise, missing frames,
+repeated observations, varying confidence, changed data and changed inputs.
+
+The workload report additionally times preparation and 16 repeated inferences on
+one real training window, checking mean and covariance parity. This isolates
+reuse cost; it is explicitly not a population throughput measurement.
