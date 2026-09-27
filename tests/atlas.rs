@@ -1,0 +1,176 @@
+use std::collections::BTreeMap;
+use wormsim::{
+    bench::{self, Axis, Dataset, Partition, Split, Trial, atlas},
+    data::{Provenance, Recording, Trace},
+    fixtures,
+};
+fn fixture() -> (wormsim::data::IndexedGraph, Dataset, Split, atlas::Evidence) {
+    let graph = fixtures::synthetic(3, 1, 0).compile().unwrap();
+    let data = Dataset {
+        schema_version: 1,
+        name: "synthetic pair classification".into(),
+        graph_hash: graph.hash.clone(),
+        source: "synthetic".into(),
+        trials: (0..6)
+            .map(|k| Trial {
+                id: format!("trial{k}"),
+                stimulated_neuron: Some(graph.names[k % 3].clone()),
+                forecast_origin: None,
+                response_labels: BTreeMap::new(),
+                recording: Recording {
+                    dataset: "synthetic".into(),
+                    animal_id: format!("animal{k}"),
+                    condition: "stim".into(),
+                    times: vec![0., 1.],
+                    behavior: BTreeMap::new(),
+                    traces: graph
+                        .names
+                        .iter()
+                        .map(|n| Trace {
+                            neuron: n.clone(),
+                            values: vec![Some(0.), Some(1.)],
+                            provenance: Provenance {
+                                dataset: "synthetic".into(),
+                                version: "1".into(),
+                                id_confidence: 1.,
+                            },
+                        })
+                        .collect(),
+                },
+            })
+            .collect(),
+    };
+    let split = Split::generate(&data, &graph, Axis::StimulatedNeuron, 42, 1, 1).unwrap();
+    let mut pairs = vec![];
+    for (i, s) in graph.names.iter().enumerate() {
+        for (j, r) in graph.names.iter().enumerate() {
+            if i != j {
+                pairs.push(atlas::Pair {
+                    stimulated: s.clone(),
+                    responding: r.clone(),
+                    q: if j == (i + 1) % 3 { 0.01 } else { 0.2 },
+                    equivalence_q: Some(0.01),
+                    observations: 2,
+                });
+            }
+        }
+    }
+    let evidence = atlas::Evidence {
+        schema_version: 1,
+        dataset_hash: data.content_hash().unwrap(),
+        graph_hash: graph.hash.clone(),
+        source_sha256: "0".repeat(64),
+        source_version: "synthetic".into(),
+        equivalence_threshold: 1.2,
+        detection_q_threshold: 0.05,
+        pairs,
+    };
+    (graph, data, split, evidence)
+}
+#[test]
+fn pair_scoring_is_once_per_pair_and_checks_coverage_and_training_lineage() {
+    let (graph, data, split, evidence) = fixture();
+    let pairs = evidence
+        .partition_pairs(&data, &split, Partition::Test)
+        .unwrap();
+    let mut pred = atlas::Predictions {
+        evidence_hash: evidence.content_hash().unwrap(),
+        split_hash: split.content_hash().unwrap(),
+        model: "synthetic oracle".into(),
+        free_parameters: 0,
+        source_commit: "test".into(),
+        training_trials: split.train.clone(),
+        selection_trials: split.validation.clone(),
+        pairs: pairs
+            .iter()
+            .map(|p| atlas::Prediction {
+                stimulated: p.stimulated.clone(),
+                responding: p.responding.clone(),
+                score: if p.q < 0.05 { 2. } else { 0. },
+            })
+            .collect(),
+    };
+    let r = atlas::evaluate(&evidence, &data, &graph, &split, &pred, Partition::Test).unwrap();
+    assert_eq!(r.pairs, 2);
+    assert_eq!(r.detected, 1);
+    assert_eq!(r.not_detected, 1);
+    assert_eq!(r.detected_and_equivalent, 1);
+    assert_eq!(
+        serde_json::to_value(r.auroc).unwrap(),
+        serde_json::to_value(bench::metrics::auroc(&[(true, 2., 1.), (false, 0., 1.)]).unwrap())
+            .unwrap()
+    );
+    pred.training_trials.push(split.test[0].clone());
+    assert!(atlas::evaluate(&evidence, &data, &graph, &split, &pred, Partition::Test).is_err());
+    pred.training_trials = split.train.clone();
+    pred.pairs.push(pred.pairs[0].clone());
+    assert!(atlas::evaluate(&evidence, &data, &graph, &split, &pred, Partition::Test).is_err());
+    pred.pairs.pop();
+    pred.pairs.pop();
+    assert!(atlas::evaluate(&evidence, &data, &graph, &split, &pred, Partition::Test).is_err());
+    let mut bad = evidence.clone();
+    bad.pairs[0].q = f64::NAN;
+    assert!(bad.validate(&data, &graph).is_err());
+    let mut bad = evidence.clone();
+    bad.pairs[0].responding = bad.pairs[0].stimulated.clone();
+    assert!(bad.validate(&data, &graph).is_err());
+}
+#[cfg(feature = "hdf5")]
+#[test]
+fn native_hdf5_pair_import_preserves_direction_missing_q_and_source_hash() {
+    use hdf5::types::FixedAscii;
+    use sha2::{Digest, Sha256};
+    let (graph, data, _, _) = fixture();
+    let path = std::env::temp_dir().join(format!("wormsim-atlas-{}.h5", std::process::id()));
+    {
+        let f = hdf5::File::create(&path).unwrap();
+        let ids: Vec<_> = graph
+            .names
+            .iter()
+            .map(|n| FixedAscii::<5>::from_ascii(n).unwrap())
+            .collect();
+        f.new_dataset_builder()
+            .with_data(&ids)
+            .create("neuron_ids")
+            .unwrap();
+        f.new_attr::<FixedAscii<19>>()
+            .create("time_compiled")
+            .unwrap()
+            .write_scalar(&FixedAscii::<19>::from_ascii("2023-06-28_19-52-14").unwrap())
+            .unwrap();
+        f.create_group("wt").unwrap();
+        for (name, values) in [
+            (
+                "wt/q",
+                vec![0.1, 0.01, f64::NAN, 0.2, 0.1, 0.3, 0.4, 0.5, 0.1],
+            ),
+            ("wt/q_eq", vec![f64::NAN; 9]),
+            ("wt/occ1", vec![3.; 9]),
+        ] {
+            f.new_dataset::<f64>()
+                .shape([3, 3])
+                .create(name)
+                .unwrap()
+                .write_raw(&values)
+                .unwrap();
+        }
+        f.new_dataset::<f64>()
+            .create("wt/q_eq_th")
+            .unwrap()
+            .write_scalar(&1.2)
+            .unwrap();
+    }
+    let digest = format!("{:x}", Sha256::digest(std::fs::read(&path).unwrap()));
+    let evidence = atlas::import_hdf5(&path, &data, &graph, &digest).unwrap();
+    assert_eq!(evidence.pairs.len(), 5);
+    let p = evidence
+        .pairs
+        .iter()
+        .find(|p| p.stimulated == "N001" && p.responding == "N000")
+        .unwrap();
+    assert_eq!(p.q, 0.01);
+    assert_eq!(p.equivalence_q, None);
+    assert_eq!(p.observations, 3);
+    assert!(atlas::import_hdf5(&path, &data, &graph, &"0".repeat(64)).is_err());
+    std::fs::remove_file(path).unwrap();
+}

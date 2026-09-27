@@ -1,0 +1,1154 @@
+{
+  "schema_version": 1,
+  "export_script_sha256": "e0f73b003811e8a9d90fae736da766be13d81aff6df3ba2b5c07df3cb59c8cd1",
+  "full_archive_url": "https://osf.io/download/34m5v/?version=1",
+  "full_archive_sha256": "f59e8f1f74cc468559a230a3b44832ebe394680be0b73ee871633510a4df9165",
+  "full_archive_bytes": 1143920663,
+  "pair_statistics_url": "https://raw.githubusercontent.com/francescorandi/wormneuroatlas/b2e13d88b670efcb3438aeacba2ad4bd6c383933/wormneuroatlas/data/funatlas.h5",
+  "pair_statistics_sha256": "53a99055667b853e1d3d6be573ec2613d38c9f6989f302ec38ecd38dd50c7975",
+  "text_manifest_sha256": "e8e31bee31091aca24a671a255fb227e520105b6934a1dd8dcc68522382b1ee2",
+  "annotation_export_sha256": "445144bb151164020fab43667cfbb38223eb535d4856daa75746b21b2cc9fb5c",
+  "verified_recordings": 113,
+  "stimulation_entries_matched_exactly": 5808,
+  "positive_detector_roi_entries": 69557,
+  "acquisition_detector_count_mismatches": [],
+  "metadata_files": [
+    {
+      "path": "exported_data_full/pumpprobe_20230321_154619/recording.pickle",
+      "bytes": 4581564,
+      "sha256": "899cb356015a3278aec608615b0208a0f56321554802d03851c9852d1451366b"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230321_154619/fconn.pickle",
+      "bytes": 847076,
+      "sha256": "d8d2746e0ae9e7e72eb324ac8ee10f15a7a153bb32f0174f3b308622db24dc12"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230222_165630/recording.pickle",
+      "bytes": 1136836,
+      "sha256": "c302b7d264a49f329e424d790c9f859c6108a0201d6001b397bf647674c59f74"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230222_165630/fconn.pickle",
+      "bytes": 241991,
+      "sha256": "dd1e33a7fe5b8c0a9f6ff6d46c1fbc5aa8f2a7ab4f0608656dd6564da98c9766"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220208_171724/recording.pickle",
+      "bytes": 5054559,
+      "sha256": "62c31f6ae819a49212c77b39b729be4c65c44b80a4ff26286f32f2dacd9189b1"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220208_171724/fconn.pickle",
+      "bytes": 870083,
+      "sha256": "647af51f69be783779dd0e212fb54995c0595cb60b861650d33ec0d288cfda54"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211206_165435/recording.pickle",
+      "bytes": 5717702,
+      "sha256": "49b5393b27643443de90a028404320474cf9271f398da085c041195c194d6a71"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211206_165435/fconn.pickle",
+      "bytes": 622579,
+      "sha256": "8f1833b48e62fb2f8fa8d5f86b04c360cd27a53d9cd3aabc7c001189479d1598"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211128_154756/recording.pickle",
+      "bytes": 6398296,
+      "sha256": "0067b9f9cb7385beac591ca5fed948c251ab024cdbc51cc440dff45a6917641b"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211128_154756/fconn.pickle",
+      "bytes": 1567241,
+      "sha256": "2fe94810838bf0139a528a8ae338ffb68928198ea43f9650781215225c65bdc1"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210903_153005/recording.pickle",
+      "bytes": 5132446,
+      "sha256": "ab37bd30f293046b8791ae90c3ae16529b5fc919b15ef1ec5becbb369b220ba0"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210903_153005/fconn.pickle",
+      "bytes": 536135,
+      "sha256": "b841d82777a9559f2861bdfb26c7aba49938107f1587bd337898cd992c9d6b6f"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230125_114648/recording.pickle",
+      "bytes": 1651224,
+      "sha256": "e45d63d24ba2622ebf56b12ace8276598bfad4cf8bfa2c4098427b6bf927940f"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230125_114648/fconn.pickle",
+      "bytes": 283725,
+      "sha256": "c858277ccd8d2ddd0a9dc781f0f432ce0fc73761bf57ae1f54d99dd479e20227"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230317_174524/recording.pickle",
+      "bytes": 3955099,
+      "sha256": "74a1e372cc03f5672cbad9cd22c6e290a8838a517982722a11281a266600befd"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230317_174524/fconn.pickle",
+      "bytes": 612080,
+      "sha256": "9b2b67b57e801c64c329fc67ddcaef5ffffa45358f69f24c6dc1d37796c1857e"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230304_112842/recording.pickle",
+      "bytes": 3795379,
+      "sha256": "577e41d7a66283ea199ec191c18b73e8e5145eb7eca82abc2317184f4b960f57"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230304_112842/fconn.pickle",
+      "bytes": 668326,
+      "sha256": "967186e5700cd737b1952473af491ab6b3bb695e6fb2f38986f72bbec6def823"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220126_153426/recording.pickle",
+      "bytes": 4790416,
+      "sha256": "19661dce171f0111d18ae5373f42913e4d0c7fdf5fddde8f698e8112f5050c9c"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220126_153426/fconn.pickle",
+      "bytes": 682721,
+      "sha256": "52fd5f66233a6f1231b2d17b449a31315b46e5f3fecff4425f83e430fc07c6af"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20221011_151353/recording.pickle",
+      "bytes": 1164804,
+      "sha256": "161ae214e21266d735edd90dee73461439023c655a849d1de0675aa5bafbf17a"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20221011_151353/fconn.pickle",
+      "bytes": 147906,
+      "sha256": "069cf410752af0afb816e4c9ac505090d20a9553ce62b143bc2020030e6be0b9"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230318_132720/recording.pickle",
+      "bytes": 4153735,
+      "sha256": "9119702765cd7fb776f4f1c51ce0ca5782568c6b32051b5b4462033fbb306a47"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230318_132720/fconn.pickle",
+      "bytes": 676651,
+      "sha256": "5c0d73b97ce16ab1311d201cf3243b7e5cb5e9d36d5bbbe083408702020ee669"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230318_115913/recording.pickle",
+      "bytes": 4106306,
+      "sha256": "55e61d768ac34837067ad463cf92a09a30810724b82d02ae51e45d79e6455caa"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230318_115913/fconn.pickle",
+      "bytes": 904628,
+      "sha256": "1afff4f65c6113e5fcab583763957467ab510a2054a5b37164b0283144bd8a4a"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210824_114940/recording.pickle",
+      "bytes": 6679160,
+      "sha256": "9769df2fe833067138ccc93248045771ac1c935c30ad2b772c6dc13227b33004"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210824_114940/fconn.pickle",
+      "bytes": 1264579,
+      "sha256": "6cd232e8e7b952e977bb413e0fd028429e429a42907647ffbeb8cb819e472a6c"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210830_161543/recording.pickle",
+      "bytes": 5002818,
+      "sha256": "9438bde510374caa790091b392d064617af2d176342d1e5f49f84fe5fc1bee66"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210830_161543/fconn.pickle",
+      "bytes": 1087929,
+      "sha256": "893fa344515fec55738da29bd4f465ab5e8021f128055d423dfb497e324f8bd3"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211102_101248/recording.pickle",
+      "bytes": 490704,
+      "sha256": "0594d856e7f8e4187999ec161aa808c72a394757191d5f9aadb71d8cb3bb7e73"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211102_101248/fconn.pickle",
+      "bytes": 192772,
+      "sha256": "26ed41da616de00836025f1ad1612a5c3ca3bb8dea0937bb64681600453658bc"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220929_143243/recording.pickle",
+      "bytes": 1106871,
+      "sha256": "210ccfbf2593420f8b9fd507dabd6a1cd80bcf59538a541185679732956e6ba3"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220929_143243/fconn.pickle",
+      "bytes": 164304,
+      "sha256": "391cbd0cbfea00af882c869a88ea9911caf969416487bca6c0bf8e89d860b623"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211203_164020/recording.pickle",
+      "bytes": 5456557,
+      "sha256": "a697b5c97607fd61b7dc71be3431de3d557225029206c8bc14c7239469ea327d"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211203_164020/fconn.pickle",
+      "bytes": 1153770,
+      "sha256": "81560ee765dc4a05bf08e60140d7b2700ecf31a7df1695df3eadc660721cd4d9"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220120_151357/recording.pickle",
+      "bytes": 5151810,
+      "sha256": "cbde6c311956dc7c485f544007a966db8bef36fa13f82062883a86530998c69e"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220120_151357/fconn.pickle",
+      "bytes": 677274,
+      "sha256": "709c8689cefb887ae9a79cee119c1c6883d90a28977e05f53ccd65e19f606365"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230315_105655/recording.pickle",
+      "bytes": 3932844,
+      "sha256": "bea7ca027f08b2263e1fcec37d08045b5135a1ff14caa904d3a3ad66963b131d"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230315_105655/fconn.pickle",
+      "bytes": 774837,
+      "sha256": "61c5e4d73ede7979535347e704705179adbd25afba90e19570c7d907bbd1ac14"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211128_165637/recording.pickle",
+      "bytes": 7239145,
+      "sha256": "1909d36c270fe89e18fffda547ab161921fd816b0f5b3b7bacf09faca7baa675"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211128_165637/fconn.pickle",
+      "bytes": 1255385,
+      "sha256": "3b633f6b009ff4f05279d9e288f59bbd422742fb5258b657f9258e43fbe87349"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211206_110909/recording.pickle",
+      "bytes": 5991447,
+      "sha256": "6321fe40d28176a1698e5d96848838d0fabed11c44e454beb9f451ffa5845f2a"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211206_110909/fconn.pickle",
+      "bytes": 1279165,
+      "sha256": "5b45b2c5c51881a85b4621365a084c5ab0ed5092c554d732d604e2e9526b1aba"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230321_140421/recording.pickle",
+      "bytes": 963027,
+      "sha256": "7007a3a10df7fe1de2836711c4357652da7de2ab928e6f13e4e80ecf8a387ec8"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230321_140421/fconn.pickle",
+      "bytes": 259385,
+      "sha256": "bd2d845b09e36bc3d5fed69bc903f6a00d71dde841205b6a12c84fc672a13572"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230228_151210/recording.pickle",
+      "bytes": 3782475,
+      "sha256": "3c5a5d0de3aec45881e5c0318b28d69fa2c05f8c139d71ccdda2188e64e0283f"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230228_151210/fconn.pickle",
+      "bytes": 580008,
+      "sha256": "47369b3ef4c45f6e01c636f7ecfdc872068000c39c52d2b9ac7fb05ed82a89a3"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230314_132310/recording.pickle",
+      "bytes": 1984511,
+      "sha256": "78bc64773276831f4fbda755ca0364a1ce7a83b4d0cbe5f876b133f4d2d27043"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230314_132310/fconn.pickle",
+      "bytes": 539783,
+      "sha256": "837cf32263b50fe3ec34b43084276a2914eee4c7a79868749d2a0687c91362a2"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220331_142924/recording.pickle",
+      "bytes": 5458476,
+      "sha256": "65578d757db1437512d1066e8fe1a7f13552ae48741bf380c7c9a2377041ce83"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220331_142924/fconn.pickle",
+      "bytes": 815754,
+      "sha256": "c29afbc8f6ea5ccf739c04596a9c3405857daff04fab74ba2ce241508f8239d8"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210909_102637/recording.pickle",
+      "bytes": 5593654,
+      "sha256": "f2a9e1cceb2acf205f55cad619aaaceee894ead0e387f717a494ad429b42731e"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210909_102637/fconn.pickle",
+      "bytes": 2641464,
+      "sha256": "d497dc7939709f773e385d0842c0974c16319ece1c347cb8737d2ecdc67e32de"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210928_134411/recording.pickle",
+      "bytes": 5850028,
+      "sha256": "2f75161a2a80bbab88dc48b49030fbbd1b2c11bf7beafddd799881640d4bdd73"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210928_134411/fconn.pickle",
+      "bytes": 1316757,
+      "sha256": "7f70461c7adf63a664ed3ecbe55cd7cc0f1770c005d1f5c406ad4ba9f6d6ca45"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20221219_150841/recording.pickle",
+      "bytes": 868347,
+      "sha256": "4a1434ecbb340dbf06bd5c625c5fb61821e1b477887cb98097f8511bd8fa79f8"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20221219_150841/fconn.pickle",
+      "bytes": 129052,
+      "sha256": "f446205688fe656c127784bb7828fb948c7b9f1d95bb923854932b8b0f5629c1"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230319_114117/recording.pickle",
+      "bytes": 4242565,
+      "sha256": "ffec2603df31a1c4d7e6e556ed66bcb616bef97597965fd4eacd296df5c51ab5"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230319_114117/fconn.pickle",
+      "bytes": 1470831,
+      "sha256": "f217343c9b2c42a8c8c75fbe511fcdfefaec60ff458513c6a63ee63dc4c90f5b"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220405_110704/recording.pickle",
+      "bytes": 5163301,
+      "sha256": "c817744e7ffbf0de14b879313ebcb41ea6361603db3cd1f81803a388ceba2349"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220405_110704/fconn.pickle",
+      "bytes": 997755,
+      "sha256": "7fb169745d0e2e42fb26111320a635cd9082b0e0e7eef74a0998e319b054c1f4"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230317_124858/recording.pickle",
+      "bytes": 4444069,
+      "sha256": "1628f266fb3a1ec213c004d40e856c24a81151156154d641382a817e8cc02325"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230317_124858/fconn.pickle",
+      "bytes": 662138,
+      "sha256": "b1258ee9bc7b00243244dc8989f6269de35605a3ae33af7f7ba2121524b837c6"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210902_115146/recording.pickle",
+      "bytes": 4762196,
+      "sha256": "b1e9efc4816e5cd37cf805a7d23af7acbd272464545daa0523915a9a41b8c4be"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210902_115146/fconn.pickle",
+      "bytes": 913686,
+      "sha256": "5254a42702cf2ad2d4416864723dd72dba6d84b05dd7b9481d69788210bfe10b"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211104_163944/recording.pickle",
+      "bytes": 5773152,
+      "sha256": "8dd8c3e073902f874eaeacfd88d65fc7c8228670eeb5d65e88c0883b1313b74a"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211104_163944/fconn.pickle",
+      "bytes": 905284,
+      "sha256": "c3436759f20c94e863c48acb5ce0c51b329167dcf88d2d014238d64e0862a8d8"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20221011_163802/recording.pickle",
+      "bytes": 1536155,
+      "sha256": "fd597ad6627ab122ddb0c99ab48258cb29e4a17bafc70812429007d0a2dd0420"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20221011_163802/fconn.pickle",
+      "bytes": 171056,
+      "sha256": "e94135f9ccec88fad2099b632b51a6484dc2a124a4df692006499dab3f6e9c41"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230318_155217/recording.pickle",
+      "bytes": 4015246,
+      "sha256": "caba41a58981c47284d27e57afe9daa118c413aa166cd29b514a104ff34964ee"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230318_155217/fconn.pickle",
+      "bytes": 1520305,
+      "sha256": "818dc0ae961eb750b9740de41c2f44a6ee96216f0b3bb236a0376de15075529b"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230314_154307/recording.pickle",
+      "bytes": 3918101,
+      "sha256": "55ef95dbf301459efd9dce2bdf3a9a3b9124df2c08edb4e3ae72e26552fe1f44"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230314_154307/fconn.pickle",
+      "bytes": 1003372,
+      "sha256": "8e21ded10665ace3a84b1e7b72db5866469f5e6be8809e051312e51b7f7549c0"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220330_164449/recording.pickle",
+      "bytes": 5460376,
+      "sha256": "4cc734f68754e25864e4d2dac06e922ac1ee48fbc1fcf284fb2b90531e194556"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220330_164449/fconn.pickle",
+      "bytes": 801841,
+      "sha256": "56da219ca16a32715344d92631bf98536ec80abbdfb27fbf2b7bcbbd6f3dd10b"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220120_104715/recording.pickle",
+      "bytes": 4733372,
+      "sha256": "f58dc2332edf66ac11cf99e1d92b525cae6a1a13115f9f232d6105cccc597441"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220120_104715/fconn.pickle",
+      "bytes": 900818,
+      "sha256": "81e98caa699f784bed5f220988aaed4b25d7504da8647f2c7bfbf3370a5dcb4f"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220113_153037/recording.pickle",
+      "bytes": 5210618,
+      "sha256": "dcbf09bdd254626b9a05a5c57f24c2e7d3ae368fa924a30267cf98a4df613600"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220113_153037/fconn.pickle",
+      "bytes": 619606,
+      "sha256": "c23497895ab06546ce23ee02825eded11694d419aaf961b2d2b671b2324ded7a"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230309_122120/recording.pickle",
+      "bytes": 3899619,
+      "sha256": "9b55b68a6e37fcb3d981490c287251dfbd1f53ad2c257b5a37cf6eaec7ad1fa9"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230309_122120/fconn.pickle",
+      "bytes": 762539,
+      "sha256": "fa077be20fa6b017e56242127b3ca3acf00819d95cb4a334f87c1032e99ebe1e"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210824_144628/recording.pickle",
+      "bytes": 4692397,
+      "sha256": "db792828122b169ac8cb01a1fd406d92f3ac2cef50edf8ea2b9e4f4f6babbebe"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210824_144628/fconn.pickle",
+      "bytes": 912232,
+      "sha256": "daad7ca70c8ed3a94db7a65648dac66c11487b782d16862bea71cc7cce7da393"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230228_110846/recording.pickle",
+      "bytes": 1742504,
+      "sha256": "5ed63fdf91854ee9d418248f1f29f10f048afec64849a1dd395e2a0bc1592c93"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230228_110846/fconn.pickle",
+      "bytes": 349793,
+      "sha256": "6ab1b05bb23d37be400f9084d58a0f3e81042c3a814a26205a288befd8b6d90a"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210827_142226/recording.pickle",
+      "bytes": 5563836,
+      "sha256": "8c1120ae1565144cf9cb2a14310cdcdfd016bcc5bff5492e8c1822ae1cafa220"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210827_142226/fconn.pickle",
+      "bytes": 697921,
+      "sha256": "1bd5ed9b972b186083b1da3f292c52eea375ca0c2658cb47624b098c419f6f2a"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211128_101826/recording.pickle",
+      "bytes": 5532774,
+      "sha256": "b762382c3466df61c31594b67526a979f2a90a4c68a2ca9fbb0211e60e1e4f01"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211128_101826/fconn.pickle",
+      "bytes": 975330,
+      "sha256": "e523ed39c6f5a90e2f3fc9b977dfe11ade1aed6361e4a5cf012486536591ad80"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230315_141835/recording.pickle",
+      "bytes": 3893157,
+      "sha256": "ebc896736e1e378d1ff8b2dc92c638621f3fc5a244a0e72a6714df357cfffd12"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230315_141835/fconn.pickle",
+      "bytes": 618586,
+      "sha256": "510f6fba558f8367bcd7287847d353e52d98bbadceacf10a89b9f7ae68c14b4f"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220330_110253/recording.pickle",
+      "bytes": 4846244,
+      "sha256": "c8e0bfb6a3ee31b5dd08e22a19603216b31b74334eae3481f76f350ae63e8b8d"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220330_110253/fconn.pickle",
+      "bytes": 698585,
+      "sha256": "6729396c0c16d2c0741ca4e7d2af34f8645d064e14d37d8fe18b23f95314c237"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230319_102409/recording.pickle",
+      "bytes": 4564370,
+      "sha256": "b2bc80383f5924f1ca9579473afeb7653df5762225684e4199237f4da2706105"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230319_102409/fconn.pickle",
+      "bytes": 995752,
+      "sha256": "7c9032335bb3ef1b13b72763a4b1d09550a8e731c1164af8b65925145392963f"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230318_144657/recording.pickle",
+      "bytes": 4111003,
+      "sha256": "6e8b24c0837d7e0b4f3a3350f4ac88e6dedaef2069083df69c95ad4ce987cc68"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230318_144657/fconn.pickle",
+      "bytes": 651646,
+      "sha256": "f2b3d9f70c804b27bc691d5e349a463d4bd3e630bd8ef65af0d25dbca54a7706"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230314_104728/recording.pickle",
+      "bytes": 3241148,
+      "sha256": "a326ae2cc6d48228633d0b2d1e34c987c3616e868d945628d8f503ac6ae857b7"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230314_104728/fconn.pickle",
+      "bytes": 932065,
+      "sha256": "735a64119377081f94cdbba834061a41d24111b6df720a83508c87306276cf6c"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230319_091815/recording.pickle",
+      "bytes": 4634367,
+      "sha256": "cebb90073172daff8f959eb96aac2919e49877e00163dfe3ca760aa42358ba73"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230319_091815/fconn.pickle",
+      "bytes": 995480,
+      "sha256": "fe148680f49809f4ff78e7f5b0e113e4777145111e1861ee3151d08731dccfb3"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230302_172145/recording.pickle",
+      "bytes": 4959875,
+      "sha256": "0bcc18ba53a70714d4b88dc2fe6aed7d1228e8ceb1240ed4251fee724d9464e1"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230302_172145/fconn.pickle",
+      "bytes": 1048703,
+      "sha256": "e53fbfec8858c541cdb6b8e4e81e3e65baa9fa6bca2f28be79e9c244cb129d89"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230304_102932/recording.pickle",
+      "bytes": 2463778,
+      "sha256": "77b0efacfd785cc61a15b9a5ba96df6f4d75d9127056fc4a71defa7d335c0f57"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230304_102932/fconn.pickle",
+      "bytes": 449256,
+      "sha256": "e3a2a3ca62ac775259a62a370914fb0dcaa6910963cf8c0de974cba1e45958b2"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211102_152524/recording.pickle",
+      "bytes": 518282,
+      "sha256": "12d10e86d9304f96f55b27e2d6cd17350300743bed076ff252eb6c94ef2e5485"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211102_152524/fconn.pickle",
+      "bytes": 209566,
+      "sha256": "7839dbb8b267b1780e32a312a394d69054dcec2729ba5e073d83ed3d9eb944c7"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220405_125435/recording.pickle",
+      "bytes": 5170793,
+      "sha256": "6bbc51b01aa558cc5d18496c4da1a799fd8c51a4a3fee2d6dbdafd3d31ee46d2"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220405_125435/fconn.pickle",
+      "bytes": 789748,
+      "sha256": "062690515707646c2505b77c9db2ead16fa79ab81f5becc9bd818a15878225aa"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230309_180300/recording.pickle",
+      "bytes": 3102702,
+      "sha256": "5fbb61ea4d0f7386d8498faf72e57e7a603393cdaf7ece8e47bc425eb45e22f1"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230309_180300/fconn.pickle",
+      "bytes": 806153,
+      "sha256": "bd5f2f9965cc9f109da9cfddc86d4539e1442a85d998139c35952c5feb48c78e"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211128_133449/recording.pickle",
+      "bytes": 6296318,
+      "sha256": "94e8dca605a4fc9381c38f1bb2b718db5de22a82d5bdf97767a01882ef583aec"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211128_133449/fconn.pickle",
+      "bytes": 1226985,
+      "sha256": "7103f675d3d162f985af290319b70f8300d91b53c7b1b6670d59d82a4ffccfa5"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220120_135951/recording.pickle",
+      "bytes": 3385870,
+      "sha256": "92f9ffbcf2d86455e2ab8da61b94d33467848b8e824d1a0ed4d4b0103496ee9c"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220120_135951/fconn.pickle",
+      "bytes": 511819,
+      "sha256": "96803f30d00458a24da9b0dd5bd08966a34883dbe1dd763bf89479fadf0a0df7"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210830_111646/recording.pickle",
+      "bytes": 4698771,
+      "sha256": "afa11dcf5c3dbd3ff88f9c073a7efab5b075796cfae4bd7b3e2f38de133208b1"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210830_111646/fconn.pickle",
+      "bytes": 897962,
+      "sha256": "d34e5e4704e8d2d68333b4d3e77f30aa0b330526d27cfbe052236471e331e019"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210913_161934/recording.pickle",
+      "bytes": 5450886,
+      "sha256": "c19b70eddf5f02d1d62d724055aadc6b6700287cf537d575593c7bec94d91050"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210913_161934/fconn.pickle",
+      "bytes": 1052350,
+      "sha256": "ac2ae8ed71fb3701e898d3c8b3e4da315a4d99e86f54fbd6a0ee9f74493e87c6"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230315_122224/recording.pickle",
+      "bytes": 3446505,
+      "sha256": "31c3edfd71668955da517e3581d8c54e2bc7612a71e36b81bc814edd11a9cc42"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230315_122224/fconn.pickle",
+      "bytes": 864231,
+      "sha256": "e45229bf95a3db16cb4208e89a0fc5f79d0f839f865ff5cb12a13f4f679ea378"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210928_105933/recording.pickle",
+      "bytes": 6247920,
+      "sha256": "cbc9eb16ec206e011c8b0e28f0c01b1abe516d8f6bc0fcfcf7026d72c25f461b"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210928_105933/fconn.pickle",
+      "bytes": 1277740,
+      "sha256": "ef2c0f7929e879ffd0ef8ef6eb9c7d87d3d277ad0cc215805a86de3a75e85b9a"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220208_150446/recording.pickle",
+      "bytes": 5011565,
+      "sha256": "96d92dfe7287e85d97be3855877f930341d3d37a406e5f69f6ee675fd5885d46"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220208_150446/fconn.pickle",
+      "bytes": 760887,
+      "sha256": "8c61a9837cc4e35a33bab301f3c259325aeac36ae5e9b8c64683c7b651229db6"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220331_114306/recording.pickle",
+      "bytes": 5614719,
+      "sha256": "74477e22ac9fb6e87176bf1ea110fe5fdd06615578d3f3bbdd2f53f61cc8bf34"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220331_114306/fconn.pickle",
+      "bytes": 760516,
+      "sha256": "9ffb6381a7b34d63eb257e9c1c1f9dfbd4241e7b44e7cf9998d46fb54d2c396c"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20221010_165439/recording.pickle",
+      "bytes": 842447,
+      "sha256": "943a7295e6fddf1819d374b41d40af3b70088125b9bcc9f3ccea66abdd046596"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20221010_165439/fconn.pickle",
+      "bytes": 155436,
+      "sha256": "6f6fbe78d0b6f6dfc4ba722dd32c7542893358318bcd1f4e6e06f40c89c2f701"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230323_112405/recording.pickle",
+      "bytes": 5547438,
+      "sha256": "a318a48ce6c28ac2d54ea19e90a256eafc8fb66a25eea9893982801aa7fa92f0"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230323_112405/fconn.pickle",
+      "bytes": 674020,
+      "sha256": "0f4696eb43b741fce2a98f6c45ec52791f76990a50fc3c677b62dab7cebf0815"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230314_164209/recording.pickle",
+      "bytes": 4078034,
+      "sha256": "12d4838f338edd41728362d244cd2508d475dba4e8339e222d0bd729503c5588"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230314_164209/fconn.pickle",
+      "bytes": 707421,
+      "sha256": "a5fca0f707c69a775f5f582806f7229dc707134d8e2154a471ec7e7994d367ac"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230302_151318/recording.pickle",
+      "bytes": 4987989,
+      "sha256": "5ec30abaa34a26550b11dbd362a1bd30224a6415d5c7204607fdec5964dea5f8"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230302_151318/fconn.pickle",
+      "bytes": 958549,
+      "sha256": "0e642480afa1928d6ce2a80364309cdcc770f4cd287b899d520a4470ffdb44a9"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230318_165159/recording.pickle",
+      "bytes": 3411003,
+      "sha256": "96fca21bd21f633f40402426bbb36dc594ac6154ca1d52a3c7b5c976b6293808"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230318_165159/fconn.pickle",
+      "bytes": 759950,
+      "sha256": "2fd08950570da045325149f4bcea96542c1016401cb352218f360bfeb5e18161"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220128_140323/recording.pickle",
+      "bytes": 4794290,
+      "sha256": "d11bf0efc54638a8224d6a059393b3ed92d7efc5411305fb63c09ebeb177d868"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220128_140323/fconn.pickle",
+      "bytes": 664598,
+      "sha256": "6b485ab178845914b0d5ffe7ad2083388c8f287b16bf1dcd0795d3c3de391c29"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210825_150349/recording.pickle",
+      "bytes": 4673721,
+      "sha256": "f4869c3155380cf843621944f4427aecdbc9f9e6df164a86c1ff5820f82d3531"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210825_150349/fconn.pickle",
+      "bytes": 1165308,
+      "sha256": "8e9de60a40bcbaba60fc18b501b5c284d3452ff2df3601c89d78155b8c9ace86"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210830_144155/recording.pickle",
+      "bytes": 4709521,
+      "sha256": "589010ffcf3bd75ec010645813749530acd310840f8e5d40cda8d0bb18fd3d8c"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210830_144155/fconn.pickle",
+      "bytes": 858092,
+      "sha256": "360998e198fb1312e52d2ee9b80747e59b87a3273f40f3c1ae2e99234cc6a02c"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220322_101222/recording.pickle",
+      "bytes": 4752919,
+      "sha256": "2bed8a52126cc6e51daa175b429359d390b170ec03fc7c9bd49b1599fbe3c824"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220322_101222/fconn.pickle",
+      "bytes": 560112,
+      "sha256": "131855e53785d664e8f90a224a1b5e6af870169a49c42c4a28baab0a5a0bccb5"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210907_141336/recording.pickle",
+      "bytes": 6315710,
+      "sha256": "e61dcde0dfc4f32fab1d36c1a2b6dc81badd8ad0a8243d3c213423b9bbc0f444"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210907_141336/fconn.pickle",
+      "bytes": 1503598,
+      "sha256": "5867bf8ab7f06150a6aafa78cc7464b20ae1f54423777daeedd18ca257d38dfa"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220330_123606/recording.pickle",
+      "bytes": 5124932,
+      "sha256": "fb0c549aa29421271e0953c5b4e314a308841b0b61a27797bd83dcda70a1c8f7"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220330_123606/fconn.pickle",
+      "bytes": 668632,
+      "sha256": "3bc9eecad44ad6c172bf80ebfc3dc64111c35de7d0bb6c546ede6348165f622f"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230304_144313/recording.pickle",
+      "bytes": 3882271,
+      "sha256": "50455bc193726a1bdd0f97677e632802a47c86bd328cfe20b0fdde7b93c2461d"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230304_144313/fconn.pickle",
+      "bytes": 762400,
+      "sha256": "73c7d6ce4f79fc1da7b37a0aacf2930bf22d7a16e3b5ac84888a6a5fe2b4fd09"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220120_150453/recording.pickle",
+      "bytes": 943289,
+      "sha256": "f1fd465d5fd580293b8c479f86615c7b5208f4e8bb35267f6b3dfc1f89884ddd"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220120_150453/fconn.pickle",
+      "bytes": 125339,
+      "sha256": "9dc369850214d69c68bda633a506c146d489ccd43df31565a62adb44f260388b"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230314_142850/recording.pickle",
+      "bytes": 4126808,
+      "sha256": "e638e34a108ea72d7b9d6abc59ad467562c5b67e91aa7a6ad1dae1cdcf4914fe"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230314_142850/fconn.pickle",
+      "bytes": 909429,
+      "sha256": "4bd1a1f963ed2384f65574dbafdbebfb30676f50a515d50d2c493e6a7ed3b8b3"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230324_153349/recording.pickle",
+      "bytes": 5090057,
+      "sha256": "62ccea09521d4b0fa4f8c98c010b336fdad5b8b2abd7162f4f960b6437fcf855"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230324_153349/fconn.pickle",
+      "bytes": 963424,
+      "sha256": "64ff39add3c8010e026898f4cb2bbcb5685cd94dbfb714a3f0b2833305bfbbb3"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220929_151408/recording.pickle",
+      "bytes": 1456720,
+      "sha256": "3a478b3536ad98fd0ede67fefcd411a492932cc8a379912df4523ad3bf5acfcd"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220929_151408/fconn.pickle",
+      "bytes": 269346,
+      "sha256": "04c81411149b472c2b69b39d81f16a71bc01b00718c5fca779bcd298dd10419a"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220124_163157/recording.pickle",
+      "bytes": 4711719,
+      "sha256": "dc5b04a752c173f4d26c3d6eac905c96fa25c707b07a82b7b6342bca50f998d3"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220124_163157/fconn.pickle",
+      "bytes": 651917,
+      "sha256": "2a5f29c6029f43dfd75a7fea8209bd17dfac1e7135041d48b0ad2bfca0511fae"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220203_165151/recording.pickle",
+      "bytes": 4884457,
+      "sha256": "3efaf089d259f7bebe7c99103f9fd9705df33bc9cb11bdd2e62e16590dc50c5e"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220203_165151/fconn.pickle",
+      "bytes": 803555,
+      "sha256": "ad11309d80f86c3ad6174862f695fb9074a4fa42c2a229c2309fec320cfa9ee8"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230304_133215/recording.pickle",
+      "bytes": 3532558,
+      "sha256": "d14c4996d783cd5a02c8e0ca34ae8943210be9a20443a29754e1f15d7ca5926e"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230304_133215/fconn.pickle",
+      "bytes": 567734,
+      "sha256": "eb8f457ed6a694df23b7484c74f910e674a8b4a2b5a34e61d0a4d4a078c65604"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230319_141756/recording.pickle",
+      "bytes": 4948950,
+      "sha256": "9ea0b7e76a83a4e875ad3d32c3c7b4d00631f6c196967fafde36fb45c7a0f96f"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230319_141756/fconn.pickle",
+      "bytes": 885469,
+      "sha256": "9f13080b31334cd7c8f980dd772e1c1c3ab30eea5002afb1fcd50b2df9c66ce9"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230401_190627/recording.pickle",
+      "bytes": 5042688,
+      "sha256": "81626aec8293dd255bcfdf85c9048fedcd30f853a3b4a18135065f5f28d1c3de"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230401_190627/fconn.pickle",
+      "bytes": 871619,
+      "sha256": "ef57f4b66885af1b7be453604cb5be750f26753345568355fd84f978df7b745b"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210824_104000/recording.pickle",
+      "bytes": 5514492,
+      "sha256": "1848c1098c6b52cdaf81e594586e3fd2e766774b90bfde76cfb433def09d6fa6"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210824_104000/fconn.pickle",
+      "bytes": 839565,
+      "sha256": "d757f71e9479d0b582ed64832f111a8cf6d2a61b317799c7551365b9c629078e"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220331_153103/recording.pickle",
+      "bytes": 4771385,
+      "sha256": "1303e16e1a533170a4c215c2eadbf6f4a683709f10d586f75ab0b9a0575180a7"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220331_153103/fconn.pickle",
+      "bytes": 952754,
+      "sha256": "d132c35eae3bae5facbab4656d08e5295a70ce36c562a0ad8c8dbf9ecaae4061"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210825_123600/recording.pickle",
+      "bytes": 4727813,
+      "sha256": "03c22f4f7bed838102b4d83f8fcba2486a5cc74bc83dba8111de7e409f620e50"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210825_123600/fconn.pickle",
+      "bytes": 1097857,
+      "sha256": "652568076ebddfaa8851be1004af39f771e9e724cb809d3c2510a90621a2336e"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211022_140822/recording.pickle",
+      "bytes": 6257918,
+      "sha256": "80b2ed2ed3c1f98bd8fc423ced2872be8cca13ac4ee5437465d6e3938b31724c"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211022_140822/fconn.pickle",
+      "bytes": 786681,
+      "sha256": "7df7053cd331f004b660603f44e321164a45368dc8ea6121e9328b11026521cc"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230314_115358/recording.pickle",
+      "bytes": 3580335,
+      "sha256": "d28d6dd0205bc382989c75dcaad17f703616af772bbda1f17f71f717b763b021"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230314_115358/fconn.pickle",
+      "bytes": 980382,
+      "sha256": "06db722623cccd1c50b07d260f289b06085117cfb0d1d33a4e559ac5981c2acf"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230309_153504/recording.pickle",
+      "bytes": 4225272,
+      "sha256": "b2f4521fdd52cd010f74f818097cb68bdc38801c66b2491dab6deff577f14dd5"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230309_153504/fconn.pickle",
+      "bytes": 1200564,
+      "sha256": "7c9eec57266122f844f9db1a7a5f5463ffabc2d924dda3b0857cfaf67a47e401"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211128_112504/recording.pickle",
+      "bytes": 5532254,
+      "sha256": "f78c051bf0a34a7c1d63cc3bd418b27a46909607f9ca78619640f18791a0a286"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211128_112504/fconn.pickle",
+      "bytes": 1222840,
+      "sha256": "71beab534fc233484623aa65bf6c1aef03a7e474154f1becbfff5e90c4bef5d7"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210917_104948/recording.pickle",
+      "bytes": 6313376,
+      "sha256": "0b2a6f3d250de3dced9ffac4b0d6731388149ed83435e7a411de91fc17811668"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210917_104948/fconn.pickle",
+      "bytes": 1623281,
+      "sha256": "e12c1ece1d647e2ef57e7b8add9b5c7a4d1bf47ab239296ec9c8b4cae8d40398"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230309_143050/recording.pickle",
+      "bytes": 4171512,
+      "sha256": "9ed27c7cb46c230684d4ce1597167376a7bdb9466777e44cb22a056094d39ade"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230309_143050/fconn.pickle",
+      "bytes": 914525,
+      "sha256": "b600c0ec63386dfc5a96df7a045b92ec23090c43f6505ab5e1f34e9e07fe592c"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230319_131328/recording.pickle",
+      "bytes": 4168221,
+      "sha256": "652734e3ca6f4583a77a7177b27642f49cf6dfe7361553b3b21254bfc9d40a3d"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230319_131328/fconn.pickle",
+      "bytes": 1056096,
+      "sha256": "4ed41544314f4cebf74f3a2232e7faf1668395608daf0f2dbd9e2dfd9c248185"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210827_104408/recording.pickle",
+      "bytes": 6718488,
+      "sha256": "d38c93552db6abc49a32fa18aabc4c7655d8b840a95478c5892fcdba8bcbeb85"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210827_104408/fconn.pickle",
+      "bytes": 743695,
+      "sha256": "7f4261ce22c45c3a16486666332b5fdd5fd9f333af28da5b725e19f969ae5409"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230309_112206/recording.pickle",
+      "bytes": 4147815,
+      "sha256": "3444bf1f06cd542438dc2054fadb83baad79892dbb8cb83fc905d273cff046cb"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230309_112206/fconn.pickle",
+      "bytes": 816551,
+      "sha256": "9bc734eabe963985b930d504b3aeb97bd2d1b2164b219519f26c1c8af91e8924"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210827_115857/recording.pickle",
+      "bytes": 6165896,
+      "sha256": "a363aea9723415db0b5c60119da479fe62dafa909a2840744ae331b175781d37"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210827_115857/fconn.pickle",
+      "bytes": 871011,
+      "sha256": "444d93c51d55baca8851b23bda3f5f69699b915f9f2311e6e2772e0bb2efa591"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230302_112654/recording.pickle",
+      "bytes": 3618630,
+      "sha256": "d9d017b8c0f70a876b17f7939251ab5382c9de8f56bd49085f6eeeee1921d5d9"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230302_112654/fconn.pickle",
+      "bytes": 491221,
+      "sha256": "7aaba5cb35a7561b8559e8a618a3429a23b1d45c8080c6a1f002f534098d395b"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220405_143326/recording.pickle",
+      "bytes": 4123105,
+      "sha256": "081a2c400ece6f6a022af8ae4502df94106d8f4bbe8142d90b10d4bfd87f5642"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220405_143326/fconn.pickle",
+      "bytes": 539427,
+      "sha256": "7ece111d51eed3e7720a4ee51c8f932e93c6b6aac8c096d020913f9837b8ca78"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220405_100245/recording.pickle",
+      "bytes": 5218587,
+      "sha256": "0e7e7ea3fb173bf795a8851f17808f09c4aec21cd9322ee0e2fa847007358bd1"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20220405_100245/fconn.pickle",
+      "bytes": 723977,
+      "sha256": "92b93d447b8554b0e315321cf31096e55b42e38a945228e0d8edbdbafe320815"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211130_151402/recording.pickle",
+      "bytes": 6286734,
+      "sha256": "5cddaaf0a275326ce12a0765f88c3eaf35cbb5dbe94a00820280f25a85bfc5a2"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211130_151402/fconn.pickle",
+      "bytes": 1067855,
+      "sha256": "f4b857cbb53e03f591b0d0161a34298142cf20843a84b8d04535abd542fe2f0d"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210913_105324/recording.pickle",
+      "bytes": 5510380,
+      "sha256": "339577a6795fd8411ffe64d05589ed3b75b3527f3981deccddf5de00f0d2a27c"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210913_105324/fconn.pickle",
+      "bytes": 810161,
+      "sha256": "c04529c4c7eb074069bacfcc80ff83c6868e9e20646f907fef64a28d33168b38"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230117_152438/recording.pickle",
+      "bytes": 2018305,
+      "sha256": "d966b63635c255cff32b577f7addc7c3c902d61f0e7f459d5ade9ad98141dac5"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230117_152438/fconn.pickle",
+      "bytes": 185555,
+      "sha256": "046bbab98e9b538f19a5edb7091dd1371b1017f5fcbae0529236ad4360ddacab"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20221010_173036/recording.pickle",
+      "bytes": 1030047,
+      "sha256": "139109e94b468245697b9d220040cde2a9df2f3f2843d829a84b994ac92e6920"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20221010_173036/fconn.pickle",
+      "bytes": 248830,
+      "sha256": "e4100b6dc68503b6a84ebf1d62713151ac734a8fe5dec022d98a766ecdf372ee"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210824_161919/recording.pickle",
+      "bytes": 5532454,
+      "sha256": "b3618fb43125d24ca0d479c1a5884e79a989271f3d1fb2661591b98221e34bb3"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210824_161919/fconn.pickle",
+      "bytes": 1221293,
+      "sha256": "6a85eafda6cfcd6c319dc9545459d50cdf5fc67cfba7e300e2e3b7f58e0b2b0a"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230321_112506/recording.pickle",
+      "bytes": 4964529,
+      "sha256": "db74e32863461afcd7cdab99982571d52c84fbb825f28625e909aa7dfceb4079"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230321_112506/fconn.pickle",
+      "bytes": 755151,
+      "sha256": "eba13b3f15501c01f19ee0cb4051d9f6a4a8e51e87d077df08a376e6c4d846ad"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230215_150553/recording.pickle",
+      "bytes": 2226991,
+      "sha256": "20d578bb1ae96311b3299b801eae538c7fc029ba59a0f00368a7617222df0624"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230215_150553/fconn.pickle",
+      "bytes": 489066,
+      "sha256": "5894bc47aff14a00dbd38f3802334fc7bd97384041a0b3b01feec7e539d4928b"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211008_115929/recording.pickle",
+      "bytes": 4705497,
+      "sha256": "cb88b43c0a7549250eb74711c939dfa9051c2d78895b95e47e662ed9bb5245a5"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20211008_115929/fconn.pickle",
+      "bytes": 626844,
+      "sha256": "18fdea68d7d48f9967ae33106c3eaeba5cd2bf5f4636c47a1cd76f0bf7f5fbb4"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230315_132059/recording.pickle",
+      "bytes": 3850779,
+      "sha256": "fc984f1a08fb6277e03f784fa0cab3bea75c191c73583f22e942ba7ba8592eab"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230315_132059/fconn.pickle",
+      "bytes": 938307,
+      "sha256": "334484b6f474ff4e1be79e6dff0442c7ac62c23c7d8eb49406d2d108c119b943"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210907_110334/recording.pickle",
+      "bytes": 6304256,
+      "sha256": "9ddde01cfb0d142fb5194e73052b0b44584c0f03118d06901823f4258aa18403"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210907_110334/fconn.pickle",
+      "bytes": 830440,
+      "sha256": "b4781ceab9a3c5916af7d9fe2e0c977c0b9e927287a1cbc2008cefd584a306eb"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230323_123647/recording.pickle",
+      "bytes": 3345211,
+      "sha256": "aeb26b643a04eac9921fff4b1581fcf506344aa33dfa56518ff19d5b2551e0c5"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20230323_123647/fconn.pickle",
+      "bytes": 432246,
+      "sha256": "2d8a85835f243fe597f915aec5aa5edf34a4e3118161ca6c8d9f9b14d6471ea1"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210917_132736/recording.pickle",
+      "bytes": 5526746,
+      "sha256": "ea1f6a5415fffe5fc5ba1ce232d87413824fb533a5a74cba5303c95c26df65c4"
+    },
+    {
+      "path": "exported_data_full/pumpprobe_20210917_132736/fconn.pickle",
+      "bytes": 1078199,
+      "sha256": "a92bb0d0b9a8e308150a1f97351c79cacc71998e4b36238661cd53123d4294b8"
+    }
+  ],
+  "limitations": [
+    "Per-event positive detector lists are preserved; absent list membership is not converted into a negative response label.",
+    "Per-ROI detector eligibility masks were not preserved in Fconn objects; reconstructed raw signal quality would require a separate audited pipeline.",
+    "Pulse counts/dividers/train counts are raw acquisition fields, not calibrated membrane currents or a verified duration/power conversion.",
+    "Acquisition metadata is not joined to individual detector events merely by position; count mismatches are retained.",
+    "Pair-level detection q and equivalence q are separate statistical tests and may both be significant."
+  ]
+}
