@@ -1,5 +1,8 @@
 # Level 0 training capacity protocol
 
+The declared 1,000-update run has completed and failed the 90% capacity gate.
+See the [full result and next decision](LEVEL0-LONG-RUN.md).
+
 Feature development is paused. The immediate question is whether the existing
 Level 0 dynamics can fit training responses, before another held-out comparison.
 The original five-update result is not a convergence result. The later 25-update
@@ -178,7 +181,7 @@ preparation/step checks, supports reporting the completed outcome.
 
 ### Interim zero-current control
 
-The longer run remains in progress. Its saved **150-update** checkpoint was
+At the time of this interim audit, the longer run was in progress. Its saved **150-update** checkpoint was
 checked with an additional control in `check_capacity_numerics.py`: set every
 stimulus-current sample to zero after the identical unforced preparation, leaving
 all fitted parameters and the readout fixed. This measures autonomous drift over
@@ -205,5 +208,5 @@ better or that optimization has converged.
 For the new checkpoint, doubling preparation changes MSE by 3.66e-8 and
 predictions by at most 8.10e-5; halving the integration step changes MSE by
 2.66e-8. Zero-current prediction energy is 6.61e-9 of stimulated energy.
-The 1,000-update run continues with its declared settings. These remain interim
+The run subsequently completed; see the result linked above. These remain interim
 checks, not a completed longer-run result or a passed capacity gate.

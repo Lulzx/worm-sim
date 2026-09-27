@@ -1,0 +1,572 @@
+{
+  "schema_version": 1,
+  "scope": "Completed 1000-update training-only capacity diagnostic, 2 targets and 50 trials; no generalization estimate.",
+  "manifest": {
+    "format": "wormsim-training-capacity-diagnostic",
+    "source_commit": "205c02a2e9b5c1d862911edd49c09592ee83a520",
+    "source_worktree_dirty": false,
+    "input_sha256": {
+      "model": "0b4d213bdbbff3853cfe61c49d3bdee16e1ca834ead72d5bc0f3956b745284ba",
+      "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+      "training": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc"
+    },
+    "targets": [
+      "ADAL",
+      "ADAR"
+    ],
+    "training_trials": [
+      "randi-004-event-027",
+      "randi-014-event-013",
+      "randi-014-event-042",
+      "randi-014-event-043",
+      "randi-014-event-066",
+      "randi-031-event-059",
+      "randi-031-event-067",
+      "randi-037-event-007",
+      "randi-040-event-064",
+      "randi-043-event-020",
+      "randi-043-event-045",
+      "randi-044-event-016",
+      "randi-046-event-040",
+      "randi-048-event-047",
+      "randi-049-event-035",
+      "randi-061-event-001",
+      "randi-063-event-002",
+      "randi-066-event-021",
+      "randi-070-event-014",
+      "randi-070-event-025",
+      "randi-070-event-029",
+      "randi-071-event-029",
+      "randi-072-event-002",
+      "randi-072-event-030",
+      "randi-072-event-038",
+      "randi-072-event-040",
+      "randi-073-event-001",
+      "randi-073-event-027",
+      "randi-075-event-008",
+      "randi-076-event-032",
+      "randi-079-event-025",
+      "randi-081-event-010",
+      "randi-082-event-020",
+      "randi-083-event-008",
+      "randi-084-event-038",
+      "randi-085-event-034",
+      "randi-085-event-046",
+      "randi-086-event-027",
+      "randi-087-event-037",
+      "randi-091-event-024",
+      "randi-095-event-006",
+      "randi-096-event-009",
+      "randi-096-event-035",
+      "randi-098-event-044",
+      "randi-101-event-032",
+      "randi-101-event-033",
+      "randi-102-event-034",
+      "randi-105-event-036",
+      "randi-106-event-003",
+      "randi-106-event-023"
+    ],
+    "process_id": 87809,
+    "backend_source_sha256": {
+      "audit_fit.py": "666c26f4bbff8b8a3f49e936a0ecfe83f998a7d1f96760c1df432a6efea411cb",
+      "check_training.py": "3bdf12fe5da687262d188500b6760810c26bfe4659515000d8be38a3d80488b6",
+      "compare_solvers.py": "f36c4813d4c208d1661affe5b0d2ec97e644772901f85766e612bf3c6b508aa9",
+      "dark_edges.py": "51e520b5dc7ad7be736be97bb63be43e7439bc87a9cf969835a19e3ba168a2d0",
+      "extensions.py": "a3d8d61bd5f05d76c0c01b5d0419d313db2d794a9311811aafc59542b30eb2db",
+      "fit.py": "82767fd354ea2e9dc368bd9f1cd85bfe3f517faa4e5c201347d2baa75f2dedbb",
+      "fit_extensions.py": "c2572a3235ec21bd2c32edfbf656911f49d749276da2c326b17751a3ff1c0a40",
+      "level0.py": "5594af39c7acbcad1e6d554a32a93ddd60f8ef6d36c4e1863a3c59cb2414232d",
+      "modulation.py": "883fc33701a1f9bd4edd3ad3b2021efde6e7c54020c89c6a5dffac071df1ec47",
+      "multirate.py": "3c9abb8052bb36462a497bf00988a9aebc0478ce60ff3cdce5a77b0fe87256b7",
+      "objective.py": "28ae005464e2391695b7a9b8391a8c1f0000dacbc2e1bcfb43ed00d897cad5c6",
+      "observation.py": "b577b780ceb852c784a9aeeebeec65ec8583625a39f52756abf8ce161e6667d6",
+      "optimization.py": "f78d1f46ab30befc342171aee9c21caef918f8429d80f25222d7c9425b8521f1",
+      "overfit.py": "0cd2452437960508770694964974e9f3ca1f45afd9d36362f5b7c510e88e80ad",
+      "plasticity.py": "e7193355906d53d53703e3f2294f3da3326d72d76e2a7846f306223f4c1eac7d",
+      "predict_extensions.py": "4d796f6edf8b17e78941a7effe5d1b94f2d18d5a91f2ff9ad4991803864b9e0f",
+      "rectification.py": "2c68b8a09832f1e6adb59b1353b06ddccc0e024f1b82b78bfe869694ddd8a1ad",
+      "replay.py": "8bbd2b5b1537decfc58df7cedc9ce86d45631241248c2e0258c71feef736cf28",
+      "solvers.py": "d6278c352e37d7887ccb2b239472a4babbacc1fe5b05c878336b06b261ab474a",
+      "test_adjoints.py": "52ff185c8af2dc56387b8edbae78454fdb248c6ad5296e635b8773a9e86ab085",
+      "test_audit_fit.py": "957c8aa89add4a211d089f69e13fa2303edfc50316182db94ee62096070ff2e1",
+      "test_dark_edges.py": "257ecfc4024de51be66603da0ecd2550444f09b8b76d2e420eadf0dd837ad3c3",
+      "test_extensions.py": "89e3331c40b2e59460795b634c5f8dae2d2caec120befbb14a8fd83fe12b69c0",
+      "test_external_smoke.py": "1506e15451b7ef662dd60ad5b75427b2d4a7fd8f1994df4b7f903f6dd5c36172",
+      "test_fit.py": "dc1dfef8697868d5db43886b479937bc845d5d4436c318ab185a01e6450936f5",
+      "test_level0.py": "bdbab2d43b594352da82b01a5946bc349f393be187005437e0e958020299614c",
+      "test_modulation.py": "cb59f00c09c0530c5e52b835d943ade77929238ed9cd613853a5b236d0ff4c6a",
+      "test_multirate.py": "da5527c66db4ba8808acb76d9b6f562a80f387e4488404e15b6f6eb5c303ec7a",
+      "test_objective.py": "ad7aa7e97f702aef6e9acd7242124fc795f29247fef380872ce5aa34280776bc",
+      "test_optimization.py": "7161c6b9c6a256d9ed555d665d9e8cc0df6af7ae92bb13ccbd11e25efc149d57",
+      "test_overfit.py": "378b02ffba4757869316e9cacebf948314aa68103fe42bf450221c00ae23826f",
+      "test_plasticity.py": "b99adf1872b5ccc3bc04e5972baea03f5c856a60fee00f3aa2e3048157d3ed6c",
+      "test_rectification.py": "4808c0ceb528e7c3ac8f049471c063f2d7f32f7ca36c2f30cd34bd3fd5363fd8",
+      "test_solvers.py": "e28e8b11882637698567b2fc4a31b90707cb8612800e85d3e04767f12fd6a512"
+    },
+    "configuration": {
+      "schema_version": 1,
+      "solver": null,
+      "extensions": {
+        "observation": {
+          "initial_gain": 10.0,
+          "prior_strength": 0.0
+        }
+      }
+    },
+    "fit_config": {
+      "epochs": 1000,
+      "dt": 0.01,
+      "preparation_seconds": 120.0,
+      "learning_rate": 0.01,
+      "learning_rate_schedule": {
+        "kind": "constant"
+      },
+      "optimizer": {
+        "kind": "adam"
+      },
+      "kernel_lags": 39,
+      "prior_strength": 0.0,
+      "sign_prior_strength": 0.0,
+      "kernel_prior_strength": 0.0,
+      "sharing": {
+        "classes": {},
+        "allow_suffix_pairs": true,
+        "provenance": "Graph annotations when available; matching terminal L/R names otherwise. Suffix pairing is an explicit modeling assumption, not a biological annotation."
+      },
+      "classification": null,
+      "molecular_sign_priors": null,
+      "sign_initialization": {
+        "seed": 1,
+        "reversal_magnitude": 0.5
+      },
+      "observation_gain": {
+        "initial_gain": 10.0,
+        "prior_strength": 0.0
+      },
+      "correlation": null
+    },
+    "rest_initialization": -0.2,
+    "bounds": {
+      "zero_response_mse": 0.05145505909970581,
+      "mean_response_bound": 0.04148524142533844,
+      "start_zero_mean_response_bound": 0.041536749763839996
+    },
+    "jax": "0.11.2",
+    "optax": "0.2.8",
+    "devices": [
+      "cpu:0"
+    ],
+    "selection": "minimum training MSE, earliest tie; no held-out scoring",
+    "scope": "Unregularized subset capacity diagnostic; checkpoints cannot be submitted as full-training benchmark fits."
+  },
+  "result": {
+    "completed_steps": 1000,
+    "best_training_mse": 0.04384650415922582,
+    "best_epoch": 985,
+    "final": {
+      "epoch": 1000,
+      "mse": 0.04404015988485664,
+      "bce": 0.0,
+      "correlation": 0.0,
+      "prior": 0.0,
+      "captured_start_zero_energy": 0.747597091778131,
+      "gradient_norm": 0.012769455232944368,
+      "gain_min": 0.02680721296459058,
+      "gain_max": 1270.9827802584114,
+      "elapsed_seconds": 2839.6872079169843
+    },
+    "bounds": {
+      "zero_response_mse": 0.05145505909970581,
+      "mean_response_bound": 0.04148524142533844,
+      "start_zero_mean_response_bound": 0.041536749763839996
+    },
+    "capacity_gate": false,
+    "capacity_gate_definition": "final iterate captures at least 90% of the zero-start mean-response energy; no generalization claim"
+  },
+  "best_observed_metrics": {
+    "epoch": 985,
+    "mse": 0.04384650415922582,
+    "bce": 0.0,
+    "correlation": 0.0,
+    "prior": 0.0,
+    "captured_start_zero_energy": 0.7671221659690052,
+    "gradient_norm": 0.0010944882920674896,
+    "gain_min": 0.02733806189816137,
+    "gain_max": 1156.0264803244136,
+    "elapsed_seconds": 2797.8948185420595
+  },
+  "best_observed_parameters_saved": false,
+  "best_saved_checkpoint_metrics": {
+    "epoch": 950,
+    "mse": 0.04386919577634917,
+    "bce": 0.0,
+    "correlation": 0.0,
+    "prior": 0.0,
+    "captured_start_zero_energy": 0.7648343146472789,
+    "gradient_norm": 0.0016734045663743353,
+    "gain_min": 0.02859154362398333,
+    "gain_max": 1073.4237848575674,
+    "elapsed_seconds": 2701.3913122920785
+  },
+  "full_progress_sha256": "ce4932ebb18d483cbceae93d37bb9c5a6c94617d0c6c8f016df76acd8638a364",
+  "training_curve_csv_sha256": "75dc9716fecbb37cdf0d7ea1322c4524e1c2aeb668586eea5541ebbe0d5f6bc9",
+  "final_audit": {
+    "checkpoint_sha256": "04130bea20e68e20ec2cdf1753be674853ce776763573938826f5599d880fc2c",
+    "manifest_sha256": "25c6531b9faca2f1fb1e6cc63477f21c78c09dfe1a3ae0a3f1e621cf3f6af0ac",
+    "training_sha256": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "audit_script_sha256": "74b89999635eeff5dd6f5f8558e59a0af659a335e9bfc5fc08a3f11bbe7e47f2",
+    "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+    "epoch": 1000,
+    "targets": [
+      "ADAL",
+      "ADAR"
+    ],
+    "training_trials": 50,
+    "numpy_mse": 0.04404015988485663,
+    "jax_mse": 0.04404015988485664,
+    "mse_absolute_difference": 1.3877787807814457e-17,
+    "bounds": {
+      "zero_response_mse": 0.05145505909970581,
+      "mean_response_bound": 0.04148524142533844,
+      "start_zero_mean_response_bound": 0.041536749763839996
+    },
+    "captured_start_zero_energy": 0.7475970917781329,
+    "nonzero_prepared_chemical_coefficients": 3638,
+    "chemical_edges": 3638,
+    "unforced_prepared_derivative_max": 5.075570988061499e-08,
+    "scope": "Independent NumPy dynamics and weighted scoring of Rust-exported training sufficient statistics; no held-out observations or generalization estimate."
+  },
+  "final_numerical_controls": {
+    "checkpoint_sha256": "04130bea20e68e20ec2cdf1753be674853ce776763573938826f5599d880fc2c",
+    "manifest_sha256": "25c6531b9faca2f1fb1e6cc63477f21c78c09dfe1a3ae0a3f1e621cf3f6af0ac",
+    "training_sha256": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "script_sha256": "0e7e69c00e2727c709c043cdda52ce624c1b58a2b7b16b2c9a86da0d0a947551",
+    "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+    "variants": [
+      {
+        "variant": "reference",
+        "dt": 0.01,
+        "preparation_seconds": 120.0,
+        "training_mse": 0.04404015988485663,
+        "weighted_prediction_energy": 0.0068902562406140105,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 0.0,
+        "max_absolute_difference_from_previous_variant": 0.0,
+        "unforced_prepared_derivative_max": 5.075570988061499e-08
+      },
+      {
+        "variant": "half_step",
+        "dt": 0.005,
+        "preparation_seconds": 120.0,
+        "training_mse": 0.04404053099204285,
+        "weighted_prediction_energy": 0.0068868165414043125,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 0.0008375100514832479,
+        "max_absolute_difference_from_previous_variant": 0.0008375100514832479,
+        "unforced_prepared_derivative_max": 5.0945889325180236e-08
+      },
+      {
+        "variant": "double_preparation",
+        "dt": 0.01,
+        "preparation_seconds": 240.0,
+        "training_mse": 0.04404015907770373,
+        "weighted_prediction_energy": 0.006890253531763932,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 1.3775576099356313e-05,
+        "max_absolute_difference_from_previous_variant": 0.0008375559097073548,
+        "unforced_prepared_derivative_max": 6.123389070316546e-14
+      },
+      {
+        "variant": "quadruple_preparation",
+        "dt": 0.01,
+        "preparation_seconds": 480.0,
+        "training_mse": 0.04404015907770361,
+        "weighted_prediction_energy": 0.006890253531760653,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 1.3775592676915083e-05,
+        "max_absolute_difference_from_previous_variant": 1.6577558770158873e-11,
+        "unforced_prepared_derivative_max": 2.8182459411413364e-14
+      },
+      {
+        "variant": "no_stimulus",
+        "dt": 0.01,
+        "preparation_seconds": 120.0,
+        "training_mse": 0.05145505720297063,
+        "weighted_prediction_energy": 4.959800167584631e-13,
+        "stimulus_enabled": false,
+        "max_absolute_prediction_difference": 1.035327100371753,
+        "max_absolute_difference_from_previous_variant": 1.0353271456322584,
+        "unforced_prepared_derivative_max": 5.075570988061499e-08
+      }
+    ],
+    "scope": "Frozen parameters, independent NumPy replay on training targets only. Step/preparation variants and a zero-current control are diagnostics, not refits or held-out scores. Prediction energy is measured on observed target-neuron traces using the same confidence weights."
+  },
+  "best_saved_audit": {
+    "checkpoint_sha256": "009d9496075b2675978052118e7347a00ece38be8d4cc1ecf44ddd1489994e08",
+    "manifest_sha256": "25c6531b9faca2f1fb1e6cc63477f21c78c09dfe1a3ae0a3f1e621cf3f6af0ac",
+    "training_sha256": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "audit_script_sha256": "74b89999635eeff5dd6f5f8558e59a0af659a335e9bfc5fc08a3f11bbe7e47f2",
+    "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+    "epoch": 950,
+    "targets": [
+      "ADAL",
+      "ADAR"
+    ],
+    "training_trials": 50,
+    "numpy_mse": 0.04386919577634918,
+    "jax_mse": 0.04386919577634917,
+    "mse_absolute_difference": 6.938893903907228e-18,
+    "bounds": {
+      "zero_response_mse": 0.05145505909970581,
+      "mean_response_bound": 0.04148524142533844,
+      "start_zero_mean_response_bound": 0.041536749763839996
+    },
+    "captured_start_zero_energy": 0.7648343146472788,
+    "nonzero_prepared_chemical_coefficients": 3638,
+    "chemical_edges": 3638,
+    "unforced_prepared_derivative_max": 3.547510358738202e-08,
+    "scope": "Independent NumPy dynamics and weighted scoring of Rust-exported training sufficient statistics; no held-out observations or generalization estimate."
+  },
+  "best_saved_numerical_controls": {
+    "checkpoint_sha256": "009d9496075b2675978052118e7347a00ece38be8d4cc1ecf44ddd1489994e08",
+    "manifest_sha256": "25c6531b9faca2f1fb1e6cc63477f21c78c09dfe1a3ae0a3f1e621cf3f6af0ac",
+    "training_sha256": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "script_sha256": "0e7e69c00e2727c709c043cdda52ce624c1b58a2b7b16b2c9a86da0d0a947551",
+    "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+    "variants": [
+      {
+        "variant": "reference",
+        "dt": 0.01,
+        "preparation_seconds": 120.0,
+        "training_mse": 0.04386919577634918,
+        "weighted_prediction_energy": 0.00752782516496945,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 0.0,
+        "max_absolute_difference_from_previous_variant": 0.0,
+        "unforced_prepared_derivative_max": 3.547510358738202e-08
+      },
+      {
+        "variant": "half_step",
+        "dt": 0.005,
+        "preparation_seconds": 120.0,
+        "training_mse": 0.04386940938522141,
+        "weighted_prediction_energy": 0.007523283289875533,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 0.0014565440079385983,
+        "max_absolute_difference_from_previous_variant": 0.0014565440079385983,
+        "unforced_prepared_derivative_max": 3.5614954157214096e-08
+      },
+      {
+        "variant": "double_preparation",
+        "dt": 0.01,
+        "preparation_seconds": 240.0,
+        "training_mse": 0.04386919579975193,
+        "weighted_prediction_energy": 0.007527823219423601,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 9.40504318881763e-06,
+        "max_absolute_difference_from_previous_variant": 0.0014564507397833992,
+        "unforced_prepared_derivative_max": 2.958444027980435e-14
+      },
+      {
+        "variant": "quadruple_preparation",
+        "dt": 0.01,
+        "preparation_seconds": 480.0,
+        "training_mse": 0.04386919579975215,
+        "weighted_prediction_energy": 0.007527823219422264,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 9.405050989390318e-06,
+        "max_absolute_difference_from_previous_variant": 7.800572687788332e-12,
+        "unforced_prepared_derivative_max": 2.2157652154969608e-14
+      },
+      {
+        "variant": "no_stimulus",
+        "dt": 0.01,
+        "preparation_seconds": 120.0,
+        "training_mse": 0.051455057131935704,
+        "weighted_prediction_energy": 1.903420294291256e-13,
+        "stimulus_enabled": false,
+        "max_absolute_prediction_difference": 1.2936667825393833,
+        "max_absolute_difference_from_previous_variant": 1.2936666910875185,
+        "unforced_prepared_derivative_max": 3.547510358738202e-08
+      }
+    ],
+    "scope": "Frozen parameters, independent NumPy replay on training targets only. Step/preparation variants and a zero-current control are diagnostics, not refits or held-out scores. Prediction energy is measured on observed target-neuron traces using the same confidence weights."
+  },
+  "final_residual_diagnostic": {
+    "checkpoint_sha256": "04130bea20e68e20ec2cdf1753be674853ce776763573938826f5599d880fc2c",
+    "manifest_sha256": "25c6531b9faca2f1fb1e6cc63477f21c78c09dfe1a3ae0a3f1e621cf3f6af0ac",
+    "training_sha256": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "script_sha256": "d29b20230357914921e9f1b0cd71e5799d44f962251fb70c4e338d2bc8e56fe2",
+    "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+    "targets": [
+      "ADAL",
+      "ADAR"
+    ],
+    "epoch": 1000,
+    "training_mse": 0.04404015988485663,
+    "frozen_dynamics_positive_recalibration_mse": 0.043916475677560116,
+    "frozen_dynamics_signed_recalibration_mse": 0.04376120903435099,
+    "positive_calibration_fraction_of_remaining_bound_gap": 0.04940629034697846,
+    "observed_neurons": 201,
+    "scope": "Training-only least squares shared across selected targets with frozen dynamics. Positive scale is an optimistic calibration diagnostic; a zero multiplier is a limiting value for log gains. Signed scale is an inadmissible readout diagnostic, not a proposed model. No held-out scoring or checkpoint selection.",
+    "top_residual_neurons": [
+      {
+        "neuron": "AVKL",
+        "observed_target_count": 2,
+        "gain": 155.02633525178254,
+        "positive_gain_multiplier": 1.1735362168211496,
+        "signed_gain_multiplier": 1.1735362168211496,
+        "weighted_mean_trace_squared_error": 0.00032206815510992513,
+        "positive_recalibrated_error": 0.0002984584457705322
+      },
+      {
+        "neuron": "RIGR",
+        "observed_target_count": 2,
+        "gain": 29.07616340586435,
+        "positive_gain_multiplier": 1.3749751455535326,
+        "signed_gain_multiplier": 1.3749751455535326,
+        "weighted_mean_trace_squared_error": 0.0001509566504671523,
+        "positive_recalibrated_error": 0.00014745845910686117
+      },
+      {
+        "neuron": "DD1",
+        "observed_target_count": 2,
+        "gain": 4.820877743135235,
+        "positive_gain_multiplier": 0.0,
+        "signed_gain_multiplier": -36972.38227033967,
+        "weighted_mean_trace_squared_error": 0.00012310235670538863,
+        "positive_recalibrated_error": 0.00012310213629413252
+      },
+      {
+        "neuron": "SABD",
+        "observed_target_count": 2,
+        "gain": 137.21011452447422,
+        "positive_gain_multiplier": 0.9775874633874838,
+        "signed_gain_multiplier": 0.9775874633874838,
+        "weighted_mean_trace_squared_error": 7.635123456402283e-05,
+        "positive_recalibrated_error": 7.630537926451887e-05
+      },
+      {
+        "neuron": "ASKR",
+        "observed_target_count": 2,
+        "gain": 40.32219168282273,
+        "positive_gain_multiplier": 0.8556821559963244,
+        "signed_gain_multiplier": 0.8556821559963244,
+        "weighted_mean_trace_squared_error": 6.163165754882051e-05,
+        "positive_recalibrated_error": 6.133712027484945e-05
+      },
+      {
+        "neuron": "VB2",
+        "observed_target_count": 2,
+        "gain": 3.873090134768908,
+        "positive_gain_multiplier": 0.0,
+        "signed_gain_multiplier": -273902.79514793225,
+        "weighted_mean_trace_squared_error": 4.90601650400427e-05,
+        "positive_recalibrated_error": 4.905984513425376e-05
+      },
+      {
+        "neuron": "ADAL",
+        "observed_target_count": 2,
+        "gain": 22.12827666695322,
+        "positive_gain_multiplier": 1.041378663789368,
+        "signed_gain_multiplier": 1.041378663789368,
+        "weighted_mean_trace_squared_error": 4.3723496011695544e-05,
+        "positive_recalibrated_error": 4.009081985927726e-05
+      },
+      {
+        "neuron": "ADLR",
+        "observed_target_count": 2,
+        "gain": 10.31989095711353,
+        "positive_gain_multiplier": 0.9491525572885625,
+        "signed_gain_multiplier": 0.9491525572885625,
+        "weighted_mean_trace_squared_error": 3.952401336922343e-05,
+        "positive_recalibrated_error": 3.940555483164215e-05
+      },
+      {
+        "neuron": "ALA",
+        "observed_target_count": 2,
+        "gain": 179.11203245682978,
+        "positive_gain_multiplier": 1.4489043640551111,
+        "signed_gain_multiplier": 1.4489043640551111,
+        "weighted_mean_trace_squared_error": 3.56601132965374e-05,
+        "positive_recalibrated_error": 3.441774619335303e-05
+      },
+      {
+        "neuron": "AUAR",
+        "observed_target_count": 2,
+        "gain": 12.018353995943832,
+        "positive_gain_multiplier": 67125.98941445512,
+        "signed_gain_multiplier": 67125.98941445512,
+        "weighted_mean_trace_squared_error": 3.417895120440678e-05,
+        "positive_recalibrated_error": 3.254612001815676e-05
+      }
+    ],
+    "top_residual_pairs": [
+      {
+        "target": "ADAL",
+        "neuron": "AVKL",
+        "weighted_mean_trace_squared_error": 0.00024933847573792805,
+        "mean_trace_correlation": 0.8248577248318588
+      },
+      {
+        "target": "ADAR",
+        "neuron": "DD1",
+        "weighted_mean_trace_squared_error": 0.00011389972036941485,
+        "mean_trace_correlation": -0.13262535380231236
+      },
+      {
+        "target": "ADAL",
+        "neuron": "RIGR",
+        "weighted_mean_trace_squared_error": 9.083439257400997e-05,
+        "mean_trace_correlation": 0.08853135813229027
+      },
+      {
+        "target": "ADAR",
+        "neuron": "AVKL",
+        "weighted_mean_trace_squared_error": 7.272967937199742e-05,
+        "mean_trace_correlation": 0.4915192391550361
+      },
+      {
+        "target": "ADAL",
+        "neuron": "SABD",
+        "weighted_mean_trace_squared_error": 6.122112193836586e-05,
+        "mean_trace_correlation": 0.5431955684488684
+      },
+      {
+        "target": "ADAR",
+        "neuron": "RIGR",
+        "weighted_mean_trace_squared_error": 6.0122257893142346e-05,
+        "mean_trace_correlation": 0.7968681982921425
+      },
+      {
+        "target": "ADAL",
+        "neuron": "ASKR",
+        "weighted_mean_trace_squared_error": 4.2581805158309204e-05,
+        "mean_trace_correlation": 0.051198355825167775
+      },
+      {
+        "target": "ADAR",
+        "neuron": "AUAR",
+        "weighted_mean_trace_squared_error": 3.2735564767911336e-05,
+        "mean_trace_correlation": -0.612164324035494
+      },
+      {
+        "target": "ADAR",
+        "neuron": "ADLR",
+        "weighted_mean_trace_squared_error": 3.118768915218272e-05,
+        "mean_trace_correlation": 0.22428744004420997
+      },
+      {
+        "target": "ADAR",
+        "neuron": "ALA",
+        "weighted_mean_trace_squared_error": 2.9526654000549888e-05,
+        "mean_trace_correlation": 0.4693831338493132
+      }
+    ]
+  }
+}

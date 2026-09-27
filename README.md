@@ -74,7 +74,9 @@ features, experimental components, and unmet acceptance gates.
 
 The immediate focus is [Level 0 training capacity](docs/LEVEL0-CAPACITY-PROTOCOL.md):
 longer optimization, non-neutral initialization, and per-neuron observation gains.
-New dynamical features are paused. Existing validation/test results are
+A [1,000-update capacity test](docs/LEVEL0-LONG-RUN.md) improved training fit but
+missed its 90% gate and showed late instability. New dynamical features are
+paused. Existing validation/test results are
 exploratory; a fresh confirmatory cohort remains outstanding.
 
 The JAX backend reproduced the original five-update Level 0 fit through the
