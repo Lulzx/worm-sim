@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "inventory_sha256": "44402befd01d0bc39a81d0407925c5d2a8b36989fcca84d0fd1a870d40649a59",
+  "selection": "lexicographically first asset path",
+  "status": "selected_groups_inspected",
+  "error": null,
+  "selected_groups": [
+    "stimulus",
+    "intervals"
+  ],
+  "root_names": [
+    "acquisition",
+    "analysis",
+    "file_create_date",
+    "general",
+    "identifier",
+    "processing",
+    "session_description",
+    "session_start_time",
+    "specifications",
+    "stimulus",
+    "timestamps_reference_time"
+  ],
+  "missing_selected_groups": [
+    "intervals"
+  ],
+  "recording": {
+    "recording": "20220302-11-45-51",
+    "path": "sub-20220302-11-45-51/sub-20220302-11-45-51_ses-20220302T114551.nwb",
+    "asset_id": "c87f3d60-0a13-4f0d-9c16-e7f73d56f650",
+    "bytes": 8163874989,
+    "timestamp_matches_randi": false,
+    "processed_pickle_metadata": {
+      "size": 209932669,
+      "checksum": "md5:84177373647c75edd97edf179374d956"
+    }
+  },
+  "asset_metadata_sha256": "e8e48909fd8d9de99a94bfc4a59f0f4d7af134911995dcb85deedbdf2bb7b127",
+  "published_asset_digest": {
+    "dandi:dandi-etag": "19331fd9f4329b2e435a7ef36a579b10-122",
+    "dandi:sha2-256": "816496507a8942b5518acd13ba871e7efdc0a1062626ede490e13857ec8b01bf"
+  },
+  "published_asset_digest_independently_verified": false,
+  "url": "https://dandiarchive.s3.amazonaws.com/blobs/e35/a68/e35a6865-f11d-4fd2-8d79-3988d2e63e6d",
+  "h5py": "3.16.0",
+  "hdf5": "2.0.0",
+  "script_sha256": "75ad33894657e504453a9bfcedb295edcc73562decf63469db57b82c54fa3603",
+  "bytes_received": 8160,
+  "ranges": [
+    {
+      "start": 0,
+      "bytes": 8,
+      "sha256": "4ca2915fde0a9d1d5dd59e6f6e535c04337c9b4f05dbb4b38af0a5db3c50f933"
+    },
+    {
+      "start": 0,
+      "bytes": 48,
+      "sha256": "59ef9d744e97ddb21a622febc974257c95a9f68842d8bdff16462d2526a0ef60"
+    },
+    {
+      "start": 48,
+      "bytes": 48,
+      "sha256": "2fa4002bc38edf2592a61bf913cdcb4a2f1d01d61f8b447509d158f61dd7e368"
+    },
+    {
+      "start": 96,
+      "bytes": 512,
+      "sha256": "01981607590b84db3037ce9bb5b9b93b7275a172c40ed6068cdf90f829c077b9"
+    },
+    {
+      "start": 8163647629,
+      "bytes": 104,
+      "sha256": "386343cf4326e20db4d8a81db1a20ce3352b3441e07301b35a0357f166548b54"
+    },
+    {
+      "start": 8163692933,
+      "bytes": 264,
+      "sha256": "60784a13423e490ef4cbb559840ef001a718d0d413b33a40288641741b4f7e0f"
+    },
+    {
+      "start": 8163669677,
+      "bytes": 80,
+      "sha256": "2e201e57597472e41a1b4b2b6eff1cf4dba0c5ee3213d9f9f60f09b519de21cd"
+    },
+    {
+      "start": 136,
+      "bytes": 544,
+      "sha256": "a1f4701b2da0cc73c1cbddbbb1f8f9bb8310f6d433492777342a4b9fd9da9f82"
+    },
+    {
+      "start": 1504,
+      "bytes": 328,
+      "sha256": "35d097c5d9acf536a4c505f256f0279952f0f2756e6566d279bae4850d9b26d8"
+    },
+    {
+      "start": 8163692333,
+      "bytes": 328,
+      "sha256": "836e0cf242c5308a36a3f4a724b97e4f65d6b76cb80f40df591ed384ec77e0c0"
+    },
+    {
+      "start": 680,
+      "bytes": 512,
+      "sha256": "f8803dcf4871e5128c97a70ee0d3402cd50ab4e346c4e00e39de9a9e10fc8307"
+    },
+    {
+      "start": 8163691981,
+      "bytes": 352,
+      "sha256": "fd9132e9aef48229021b73d76638862bd471753782e8998b05ccb01d271302cc"
+    },
+    {
+      "start": 8163639677,
+      "bytes": 512,
+      "sha256": "a3b2ba7128b68bf63e39f48dd1754b8a342bcadef2be9c9e713fc78ab96b31d1"
+    },
+    {
+      "start": 8163644565,
+      "bytes": 544,
+      "sha256": "ecaf19e66cd9cfd232bdfaf17d70413c25fa4ecf64af74bce5c4124c391a3490"
+    },
+    {
+      "start": 8163645109,
+      "bytes": 512,
+      "sha256": "28cb53d71aa877b7636b7279d18310f1dad9ca8f50d6778314c38b88a00c4ece"
+    },
+    {
+      "start": 8163645893,
+      "bytes": 328,
+      "sha256": "5eab26e18eb4b72c3877e944d2e336a129ec787112ccd8177735feeb49010577"
+    },
+    {
+      "start": 8163639717,
+      "bytes": 512,
+      "sha256": "1150a0c30c8a2e41cdcb42079e5b4c47b2059c3def382f2032875aebd44ab461"
+    },
+    {
+      "start": 8163645229,
+      "bytes": 544,
+      "sha256": "71801cd0e9f02c513e235a17aaebc7204ab55e4069a0e98166b28b274e962186"
+    },
+    {
+      "start": 8163645773,
+      "bytes": 512,
+      "sha256": "c621cde9b4b5afc9e96c4e78412e740f22ce48e9ab01456b3bc94f50c2624785"
+    },
+    {
+      "start": 8163646221,
+      "bytes": 512,
+      "sha256": "b17b9f7835712c82995a212d741e746be3f9669057022899c61bbff78f4cae9e"
+    },
+    {
+      "start": 8163646261,
+      "bytes": 544,
+      "sha256": "71801cd0e9f02c513e235a17aaebc7204ab55e4069a0e98166b28b274e962186"
+    },
+    {
+      "start": 8163646805,
+      "bytes": 512,
+      "sha256": "61c7b8a9ee46072dc618e130e686f5a520e15227b90c22e32862465ccaea202a"
+    }
+  ],
+  "objects": [
+    {
+      "path": "stimulus",
+      "kind": "group"
+    },
+    {
+      "path": "stimulus/presentation",
+      "kind": "group"
+    },
+    {
+      "path": "stimulus/templates",
+      "kind": "group"
+    }
+  ],
+  "scope": "One candidate asset, explicit root groups: HDF5 group/dataset names, shapes and dtype only; no dataset indexing or attribute values read. Range responses may contain bytes colocated with metadata; no neural response values decoded or displayed. No cohort-wide eligibility or independence claim."
+}

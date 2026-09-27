@@ -136,10 +136,12 @@ python3 scripts/inspect_dunn_archive.py --output runs/dunn-archive-inventory-new
 
 `scripts/inspect_dunn_nwb_schema.py` selects the lexicographically first asset
 path from the pinned inventory and inspects HDF5 object names, dataset shapes
-and dtypes. It does not index datasets or read attribute values. It uses exact
+and dtypes in selected root groups (by default `stimulus` and `intervals`). It does not index datasets or read attribute values. It uses exact
 HTTP ranges, rejects servers that ignore ranges, and caps individual reads at
-64 KiB, total received bytes at 2 MB, and requests at 500. The output records
-range offsets/hashes, asset metadata, software versions and the schema inventory.
+64 KiB, total received bytes at 2 MB, and requests at 500. Exact repeated byte ranges are cached. The output records
+range offsets/hashes, asset metadata, software versions and the selected schema
+inventory. Inspection errors retain an explicitly incomplete receipt and exit
+with an error.
 
 This is a separate phase from the JSON/directory-only inventory above: it reads
 NWB structure bytes. Those ranges may include bytes colocated with metadata;
@@ -154,7 +156,29 @@ uv run --no-project --with h5py==3.16.0 --python 3.12 \
   --output runs/dunn-first-nwb-schema-new.json
 ```
 
-The optional h5py environment is separate from the pinned JAX fitter. The two
-range-reader tests cover seeking, exact reads, limits, and rejection of a full
-body response before reading it. The first live schema inspection is pending;
-tool availability and unit tests do not establish dataset compatibility.
+The optional h5py environment is separate from the pinned JAX fitter. Four tests cover seeking, exact reads, caching, limits, rejection of a full body
+response before reading it, dataset-value access prevention during traversal,
+and incomplete receipt retention after an HDF5 error. These checks do not
+establish dataset compatibility.
+
+
+### First targeted schema result
+
+The original unrestricted object traversal stopped at the read-budget guard
+(exit 1) and did not produce a complete receipt. Its exact received-byte/request
+count was not retained; no schema-completeness conclusion is drawn from it.
+Rather than increase its budget, the follow-up restricted traversal to the
+standard `stimulus` and `intervals` root groups and retained partial receipts
+on inspection failures.
+
+The [targeted receipt](dunn-first-nwb-stimulus-schema.json) completes for
+`sub-20220302-11-45-51_ses-20220302T114551.nwb`, the lexicographically first
+inventory asset. It received **8,160 bytes** in exact ranges. The `stimulus`
+group contains empty `presentation` and `templates` groups; `intervals` is
+absent. No stimulus datasets exist in those selected locations for this file.
+This is evidence that those standard locations cannot supply its per-event
+stimulus manifest. It does not establish that metadata is absent elsewhere in
+the NWB, in the processed pickle, or in the other 94 recordings. The published
+repository describes the NWBs as raw data, so processed-recording metadata
+remains a separate lead. No neural response values were indexed, decoded or
+displayed; no confirmatory cohort has been secured.
