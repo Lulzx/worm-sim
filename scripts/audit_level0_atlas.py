@@ -10,6 +10,30 @@ import numpy as np
 from audit_connectome_fit import load, digest, trace_scores
 
 
+def classification_scores(model, prediction, indexed, pairs, threshold):
+    """Independent pair-uniform BCE/Brier from saved traces; no probability refit."""
+    classifier = model['classifier']
+    areas = {}
+    epsilon = classifier['epsilon']
+    for trial in prediction['trials']:
+        target = indexed[trial['id']]['stimulated_neuron']
+        for neuron, values in trial['fluorescence'].items():
+            values = np.asarray(values)
+            area = float(model['sample_dt'] * np.sum(values * (values / (np.hypot(values, epsilon) + epsilon))))
+            key = (target, neuron)
+            if key in areas:
+                assert areas[key] == area
+            areas[key] = area
+    y = np.array([p['q'] < threshold for p in pairs], dtype=float)
+    area = np.array([areas[(p['stimulated'], p['responding'])] for p in pairs])
+    logits = classifier['bias'] + np.logaddexp(0., classifier['raw_slope']) * np.log1p(area / classifier['area_scale'])
+    probability = np.exp(-np.logaddexp(0., -logits))
+    bce = np.logaddexp(0., np.where(y == 1., -logits, logits))
+    assert len(y) > 0 and np.isfinite(bce).all()
+    return {'pairs': len(y), 'detected': int(y.sum()), 'bce': float(bce.mean()),
+            'brier': float(np.mean((probability-y)**2)), 'mean_probability': float(probability.mean())}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run', default='runs/level0-atlas-first-fit')
@@ -50,6 +74,7 @@ def main():
         assert checkpoint['initial'] == model['initial'] and checkpoint['source_commit'] == model['source_commit']
         hashes[f'{name}.json'] = digest(run/f'{name}.json')
     scores = {}
+    classification = {}
     for partition in ['validation','test']:
         pred = load(run/f'{partition}-predictions.json')
         report = load(run/f'{partition}-report.json')
@@ -72,6 +97,10 @@ def main():
         assert abs(score['macro_trace_correlation']-report['macro_trace_correlation']) < 1e-10
         assert score['defined_trace_correlations'] == report['defined_trace_correlations']
         scores[partition] = score
+        if model.get('classifier') is not None:
+            pair_targets = targets[1 if partition == 'validation' else 2]
+            pairs = [p for p in evidence['pairs'] if p['stimulated'] in pair_targets]
+            classification[partition] = classification_scores(model, pred, indexed, pairs, evidence['detection_q_threshold'])
         for suffix in ['report','predictions']:
             hashes[f'{partition}-{suffix}.json'] = digest(run/f'{partition}-{suffix}.json')
     assert abs(scores['validation']['pooled_mse']-best['validation_mse']) < 1e-10
@@ -96,6 +125,25 @@ def main():
     auc = float(np.mean((positive[:,None]>negative).astype(float)+0.5*(positive[:,None]==negative)))
     assert abs(auc-load(evaluation/'pair-report.json')['auroc']['value']) < 1e-12
     receipt = {'schema_version':1,'source_commit':model['source_commit'],'dataset_hash':model['dataset_hash'],'split_hash':model['split_hash'],'selected_epoch':model['epoch'],'config':config,'selection':selection,'free_parameters':report['free_parameters'],'independent_saved_trace_scores':scores,'independent_pair_auroc':auc,'max_pair_area_error':area_error,'validation_half_step':load(run/'validation-half-step.json'),'selected_model_sha256':digest(run/'selected.json'),'dataset_file_sha256':digest(args.data),'split_file_sha256':digest(args.split),'evidence_file_sha256':digest(args.evidence),'audit_script_sha256':digest(__file__),'shared_score_script_sha256':digest(Path(__file__).with_name('audit_connectome_fit.py')),'artifacts':hashes,'limitations':'Independent recomputation of saved-output MSE, correlation, response area and direct pairwise AUROC. Selection and declared lineage checked. Nonlinear ODE, optimization and bootstrap draws are not independently replayed here. See gradient tests and selected-checkpoint half-step check for separate numerical evidence. Shared fixed preparation seed, assumed positive shared input, neutral unannotated signs and previously inspected test cohort remain limitations.'}
+    if model.get('classifier') is not None:
+        assert model['classification_evidence_hash'] == predicted_pairs['evidence_hash']
+        classifier = model['classifier']
+        for field in ['area_scale', 'epsilon']:
+            assert classifier[field] == config['classification'][field]
+        train_pairs = [p for p in evidence['pairs'] if p['stimulated'] in targets[0]]
+        detected = sum(p['q'] < evidence['detection_q_threshold'] for p in train_pairs)
+        prevalence = (detected + .5) / (len(train_pairs) + 1.)
+        initial_classifier = load(run/'epoch-0.json')['classifier']
+        assert abs(initial_classifier['bias'] - np.log(prevalence/(1-prevalence))) < 1e-12
+        assert abs(np.logaddexp(0.,initial_classifier['raw_slope'])-1.) < 1e-12
+        for stats in classification.values():
+            rate = stats['detected'] / stats['pairs']
+            stats['constant_train_prevalence_bce'] = float(-rate*np.log(prevalence)-(1-rate)*np.log1p(-prevalence))
+            stats['constant_train_prevalence_brier'] = float(rate*(1-prevalence)**2+(1-rate)*prevalence**2)
+        receipt['independent_classifier_scores'] = classification
+        receipt['classifier'] = classifier
+        receipt['training_pair_labels'] = {'pairs':len(train_pairs),'detected':detected,'initial_smoothed_prevalence':prevalence}
+        receipt['classification_scope'] = 'Saved-trace pair-uniform BCE and Brier; training-count initialization checked. No refitting, probability threshold selection or replacement of common absolute-area AUROC. Gradients and optimizer are not independently replayed.'
     if config.get('preparation_seconds',0.) > 0:
         preparation_check = load(run/'validation-preparation-check.json')
         assert preparation_check['epoch'] == model['epoch']

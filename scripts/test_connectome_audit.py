@@ -39,6 +39,24 @@ class AuditTests(unittest.TestCase):
         self.assertGreater(response[1,0],0.)
         self.assertGreater(response[2,0],response[1,0])
 
+    def test_classifier_audit_counts_pairs_once_and_handles_extreme_logits(self):
+        from audit_level0_atlas import classification_scores
+        model = {'classifier': {'bias': 0., 'raw_slope': 0., 'area_scale': .01, 'epsilon': 1e-8}, 'sample_dt': .5}
+        indexed = {'a': {'stimulated_neuron': 'X'}, 'b': {'stimulated_neuron': 'X'}}
+        prediction = {'trials': [{'id': i, 'fluorescence': {'Y': [0.,0.], 'Z': [0.,0.]}} for i in indexed]}
+        pairs = [{'stimulated':'X','responding':'Y','q':.01}, {'stimulated':'X','responding':'Z','q':.9}]
+        score = classification_scores(model, prediction, indexed, pairs, .05)
+        self.assertEqual(score['pairs'], 2)
+        self.assertAlmostEqual(score['bce'], np.log(2.))
+        self.assertAlmostEqual(score['brier'], .25)
+        model['classifier']['bias'] = 1000.
+        score = classification_scores(model, prediction, indexed, pairs, .05)
+        self.assertEqual(score['bce'], 500.)
+        self.assertEqual(score['brier'], .5)
+        prediction['trials'][1]['fluorescence']['Y'][1] = 1.
+        with self.assertRaises(AssertionError):
+            classification_scores(model, prediction, indexed, pairs, .05)
+
 
 if __name__ == '__main__':
     unittest.main()
