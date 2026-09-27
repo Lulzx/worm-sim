@@ -29,11 +29,13 @@ def main():
     total=sum(g['sample_weight'] for g in groups)
     variants={'reference':{},'half_step':{'dt':base['config']['dt']/2},
               'double_preparation':{'preparation_seconds':base['config']['preparation_seconds']*2},
-              'quadruple_preparation':{'preparation_seconds':base['config']['preparation_seconds']*4}}
+              'quadruple_preparation':{'preparation_seconds':base['config']['preparation_seconds']*4},
+              'no_stimulus':{}}
     reference={};previous={};rows=[]
     for name,changes in variants.items():
         model=copy.deepcopy(base);model['config'].update(changes)
-        replay=Replay(model,graph);mse=0.;maxdiff=0.;previous_diff=0.
+        replay=Replay(model,graph);mse=0.;maxdiff=0.;previous_diff=0.;prediction_energy=0.
+        if name=='no_stimulus':replay.kernel=np.zeros_like(replay.kernel)
         for group in groups:
             target=training['names'][group['target']]
             pred=replay.response(target,group['recording']['times'])*gains/replay.gain
@@ -44,16 +46,18 @@ def main():
             traces=group['recording']['traces'];weights=np.array([t['provenance']['id_confidence'] for t in traces])
             mean=np.array([t['values'] for t in traces]).T
             observed=pred[:,[replay.index[t['neuron']] for t in traces]]
+            prediction_energy+=group['sample_weight']/total*float(np.sum(observed**2*weights)/(weights.sum()*len(pred)))
             mse+=group['sample_weight']/total*(float(np.sum((observed-mean)**2*weights)/(weights.sum()*len(pred)))+group['irreducible_mse'])
         rows.append({'variant':name,'dt':replay.dt,'preparation_seconds':replay.preparation,
-                     'training_mse':mse,'max_absolute_prediction_difference':maxdiff,
+                     'training_mse':mse,'weighted_prediction_energy':prediction_energy,
+                     'stimulus_enabled':name!='no_stimulus','max_absolute_prediction_difference':maxdiff,
                      'max_absolute_difference_from_previous_variant':previous_diff,
                      'unforced_prepared_derivative_max':float(np.max(np.abs(replay.rhs(replay.state,None,0.))))})
     assert abs(rows[0]['training_mse']-saved['metrics']['mse'])<1e-10
     receipt={'checkpoint_sha256':digest(a.checkpoint),'manifest_sha256':digest(a.manifest),
         'training_sha256':digest(a.training),'graph_sha256':digest(a.graph),
         'script_sha256':digest(__file__),'replay_script_sha256':digest(Path(__file__).with_name('replay_level0_atlas.py')),
-        'variants':rows,'scope':'Frozen parameters, independent NumPy replay on training targets only. Half-step and doubled preparation are diagnostics, not refits or held-out scores.'}
+        'variants':rows,'scope':'Frozen parameters, independent NumPy replay on training targets only. Step/preparation variants and a zero-current control are diagnostics, not refits or held-out scores. Prediction energy is measured on observed target-neuron traces using the same confidence weights.'}
     with Path(a.output).open('x') as f:json.dump(receipt,f,indent=2,allow_nan=False)
     print(json.dumps(rows,indent=2))
 

@@ -49,3 +49,26 @@ python3 scripts/audit_dandi_overlap.py \
 The audit refuses incomplete pagination and duplicate or unrecognized paths.
 The draft is mutable: future inventories may differ, which must trigger a new
 provenance review rather than inheriting this conclusion.
+
+## TWISP deposition: compatibility unverified
+
+The [TWISP dataset, Figshare version 1](https://doi.org/10.6084/m9.figshare.23868972.v1)
+was also screened through archive metadata. Its published ZIP is 758,409,991
+bytes. The reproducible [directory receipt](twisp-inventory-audit.json) requests
+only the 22-byte ZIP end record and 5,999-byte central directory. It lists eight
+`*_behavior_data.mat` members and six supplementary `.docx` tables; the remaining
+entries are directories or macOS metadata. No data member was decompressed or
+interpreted. An initial exploratory tail request also received opaque compressed
+bytes adjoining the directory; those were not decompressed or used. The committed
+script reproduces the inventory using exact directory ranges only.
+
+These filenames do not establish available labeled single-neuron stimulation
+traces, nor do they provide recording timestamps for an overlap check. The
+candidate is therefore **unverified**, not a secured holdout and not proof of
+incompatibility. The published MD5 is recorded but not independently verified,
+since the archive payload was not downloaded. Before opening data values, a
+schema/recording manifest would need to establish compatibility and independence.
+
+```sh
+python3 scripts/inspect_twisp_inventory.py --output runs/twisp-inventory-new.json
+```

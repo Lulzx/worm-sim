@@ -1,0 +1,69 @@
+{
+  "checkpoint_sha256": "533e4e784e9a17ec4763538916fe5eae267cf8891ae0c69a2b38875b59ff2f73",
+  "manifest_sha256": "25c6531b9faca2f1fb1e6cc63477f21c78c09dfe1a3ae0a3f1e621cf3f6af0ac",
+  "training_sha256": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+  "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+  "script_sha256": "0e7e69c00e2727c709c043cdda52ce624c1b58a2b7b16b2c9a86da0d0a947551",
+  "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+  "variants": [
+    {
+      "variant": "reference",
+      "dt": 0.01,
+      "preparation_seconds": 120.0,
+      "training_mse": 0.04624397870199429,
+      "weighted_prediction_energy": 0.005303066124904308,
+      "stimulus_enabled": true,
+      "max_absolute_prediction_difference": 0.0,
+      "max_absolute_difference_from_previous_variant": 0.0,
+      "unforced_prepared_derivative_max": 1.3314237715440777e-06
+    },
+    {
+      "variant": "half_step",
+      "dt": 0.005,
+      "preparation_seconds": 120.0,
+      "training_mse": 0.0462438264703942,
+      "weighted_prediction_energy": 0.005300359292386547,
+      "stimulus_enabled": true,
+      "max_absolute_prediction_difference": 0.00048331196928075304,
+      "max_absolute_difference_from_previous_variant": 0.00048331196928075304,
+      "unforced_prepared_derivative_max": 1.3352969005186122e-06
+    },
+    {
+      "variant": "double_preparation",
+      "dt": 0.01,
+      "preparation_seconds": 240.0,
+      "training_mse": 0.046243872997359076,
+      "weighted_prediction_energy": 0.005304695532312129,
+      "stimulus_enabled": true,
+      "max_absolute_prediction_difference": 0.00023380798358418886,
+      "max_absolute_difference_from_previous_variant": 0.0006743971772472657,
+      "unforced_prepared_derivative_max": 3.0038242553655604e-11
+    },
+    {
+      "variant": "quadruple_preparation",
+      "dt": 0.01,
+      "preparation_seconds": 480.0,
+      "training_mse": 0.04624387299498148,
+      "weighted_prediction_energy": 0.005304695569040294,
+      "stimulus_enabled": true,
+      "max_absolute_prediction_difference": 0.00023381325153681853,
+      "max_absolute_difference_from_previous_variant": 5.267952629672834e-09,
+      "unforced_prepared_derivative_max": 2.2113100469404346e-14
+    },
+    {
+      "variant": "no_stimulus",
+      "dt": 0.01,
+      "preparation_seconds": 120.0,
+      "training_mse": 0.05145682039594732,
+      "weighted_prediction_energy": 2.367172979701225e-10,
+      "stimulus_enabled": false,
+      "max_absolute_prediction_difference": 1.005319263655257,
+      "max_absolute_difference_from_previous_variant": 1.0055186137661243,
+      "unforced_prepared_derivative_max": 1.3314237715440777e-06
+    }
+  ],
+  "scope": "Frozen parameters, independent NumPy replay on training targets only. Step/preparation variants and a zero-current control are diagnostics, not refits or held-out scores. Prediction energy is measured on observed target-neuron traces using the same confidence weights.",
+  "interim_checkpoint_epoch": 150,
+  "no_stimulus_to_stimulated_energy_ratio": 4.463781751814268e-08,
+  "run_status_at_audit": "1000-update fit still active; not a final outcome"
+}

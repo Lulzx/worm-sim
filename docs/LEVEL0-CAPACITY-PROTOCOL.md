@@ -175,3 +175,20 @@ The runner now records exact backend source hashes and its process ID. A live
 process and advancing progress file establish that the run is active; a manifest
 alone does not. Only a terminal `result.json`, followed by independent replay and
 preparation/step checks, supports reporting the completed outcome.
+
+### Interim zero-current control
+
+The longer run remains in progress. Its saved **150-update** checkpoint was
+checked with an additional control in `check_capacity_numerics.py`: set every
+stimulus-current sample to zero after the identical unforced preparation, leaving
+all fitted parameters and the readout fixed. This measures autonomous drift over
+the response window, rather than only the derivative at its start.
+
+The [interim receipt](capacity-prep120-interim-control.json) gives stimulated MSE
+0.04624398 and zero-current MSE 0.05145682 (the zero-response baseline is
+0.05145506). Zero-current prediction energy is 2.37e-10 versus 0.005303 with
+stimulation, a ratio of 4.46e-8 on the observed, confidence-weighted traces.
+Residual drift therefore does not explain the training improvement at this
+checkpoint. Doubling preparation changes MSE by about 1.06e-7. These controls
+must be repeated on the terminal checkpoint; they do not certify the ongoing
+run's final parameters, optimization convergence, or generalization.

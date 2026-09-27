@@ -1,0 +1,256 @@
+{
+  "schema_version": 1,
+  "metadata_url": "https://api.figshare.com/v2/articles/23868972/versions/1",
+  "metadata_sha256": "9144e3684b5d0b60a2e19263d56d6ffaa4317a4caf0981412256bb7c64986efc",
+  "doi": "10.6084/m9.figshare.23868972.v1",
+  "archive_url": "https://ndownloader.figshare.com/files/41865252",
+  "archive_bytes": 758409991,
+  "published_archive_md5": "0f5eb2c0b70ae3eb8176bb8123bb35d6",
+  "archive_md5_independently_verified": false,
+  "central_directory_sha256": "ce2d5f9d89fdc4198ef6d12e9598e865481ea8f83247498baf80005356046e78",
+  "script_sha256": "2171ebec9a153d01d4ea18248e12a9dec98bdf63ca05f35408154e48e0f14822",
+  "bytes_requested_from_archive": 6021,
+  "file_entries": [
+    {
+      "name": "Data_for_figshare/",
+      "compressed_bytes": 0,
+      "uncompressed_bytes": 0,
+      "crc32": "00000000"
+    },
+    {
+      "name": "__MACOSX/._Data_for_figshare",
+      "compressed_bytes": 96,
+      "uncompressed_bytes": 178,
+      "crc32": "c122667b"
+    },
+    {
+      "name": "Data_for_figshare/.DS_Store",
+      "compressed_bytes": 655,
+      "uncompressed_bytes": 10244,
+      "crc32": "184fdd28"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/._.DS_Store",
+      "compressed_bytes": 53,
+      "uncompressed_bytes": 120,
+      "crc32": "38c0880b"
+    },
+    {
+      "name": "Data_for_figshare/Fig. 5 and Supplementary Tables S3, S4 & S5/",
+      "compressed_bytes": 0,
+      "uncompressed_bytes": 0,
+      "crc32": "00000000"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/._Fig. 5 and Supplementary Tables S3, S4 & S5",
+      "compressed_bytes": 96,
+      "uncompressed_bytes": 178,
+      "crc32": "89e59000"
+    },
+    {
+      "name": "Data_for_figshare/Supplementary Table S2/",
+      "compressed_bytes": 0,
+      "uncompressed_bytes": 0,
+      "crc32": "00000000"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/._Supplementary Table S2",
+      "compressed_bytes": 95,
+      "uncompressed_bytes": 177,
+      "crc32": "3981c22a"
+    },
+    {
+      "name": "Data_for_figshare/Fig. 6 and Supplementary Table S6/",
+      "compressed_bytes": 0,
+      "uncompressed_bytes": 0,
+      "crc32": "00000000"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/._Fig. 6 and Supplementary Table S6",
+      "compressed_bytes": 96,
+      "uncompressed_bytes": 178,
+      "crc32": "d62625b3"
+    },
+    {
+      "name": "Data_for_figshare/Suppplementary Table S1/",
+      "compressed_bytes": 0,
+      "uncompressed_bytes": 0,
+      "crc32": "00000000"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/._Suppplementary Table S1",
+      "compressed_bytes": 96,
+      "uncompressed_bytes": 178,
+      "crc32": "636166c7"
+    },
+    {
+      "name": "Data_for_figshare/Fig. 5 and Supplementary Tables S3, S4 & S5/Supplementary Table S4.docx",
+      "compressed_bytes": 11684,
+      "uncompressed_bytes": 14369,
+      "crc32": "a8920079"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/Fig. 5 and Supplementary Tables S3, S4 & S5/._Supplementary Table S4.docx",
+      "compressed_bytes": 209,
+      "uncompressed_bytes": 301,
+      "crc32": "769b3223"
+    },
+    {
+      "name": "Data_for_figshare/Fig. 5 and Supplementary Tables S3, S4 & S5/Supplementary Table S5.docx",
+      "compressed_bytes": 11673,
+      "uncompressed_bytes": 14366,
+      "crc32": "8ecf7d54"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/Fig. 5 and Supplementary Tables S3, S4 & S5/._Supplementary Table S5.docx",
+      "compressed_bytes": 209,
+      "uncompressed_bytes": 301,
+      "crc32": "bf82e357"
+    },
+    {
+      "name": "Data_for_figshare/Fig. 5 and Supplementary Tables S3, S4 & S5/Supplementary Table S3.docx",
+      "compressed_bytes": 11582,
+      "uncompressed_bytes": 14273,
+      "crc32": "96376344"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/Fig. 5 and Supplementary Tables S3, S4 & S5/._Supplementary Table S3.docx",
+      "compressed_bytes": 359,
+      "uncompressed_bytes": 458,
+      "crc32": "fc7695a0"
+    },
+    {
+      "name": "Data_for_figshare/Supplementary Table S2/Supplementary Table S2.docx",
+      "compressed_bytes": 12371,
+      "uncompressed_bytes": 15072,
+      "crc32": "db655d5d"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/Supplementary Table S2/._Supplementary Table S2.docx",
+      "compressed_bytes": 359,
+      "uncompressed_bytes": 458,
+      "crc32": "662fdaae"
+    },
+    {
+      "name": "Data_for_figshare/Fig. 6 and Supplementary Table S6/AML456_behavior_data.mat",
+      "compressed_bytes": 103263203,
+      "uncompressed_bytes": 134546548,
+      "crc32": "9da725af"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/Fig. 6 and Supplementary Table S6/._AML456_behavior_data.mat",
+      "compressed_bytes": 96,
+      "uncompressed_bytes": 178,
+      "crc32": "14932683"
+    },
+    {
+      "name": "Data_for_figshare/Fig. 6 and Supplementary Table S6/AML462_behavior_data.mat",
+      "compressed_bytes": 119127514,
+      "uncompressed_bytes": 138778313,
+      "crc32": "48447425"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/Fig. 6 and Supplementary Table S6/._AML462_behavior_data.mat",
+      "compressed_bytes": 96,
+      "uncompressed_bytes": 178,
+      "crc32": "80acaf0f"
+    },
+    {
+      "name": "Data_for_figshare/Fig. 6 and Supplementary Table S6/AML318_behavior_data.mat",
+      "compressed_bytes": 116159805,
+      "uncompressed_bytes": 159226035,
+      "crc32": "c5ba08c4"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/Fig. 6 and Supplementary Table S6/._AML318_behavior_data.mat",
+      "compressed_bytes": 96,
+      "uncompressed_bytes": 178,
+      "crc32": "c8787522"
+    },
+    {
+      "name": "Data_for_figshare/Fig. 6 and Supplementary Table S6/N2_behavior_data.mat",
+      "compressed_bytes": 122132839,
+      "uncompressed_bytes": 161666972,
+      "crc32": "32c69c74"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/Fig. 6 and Supplementary Table S6/._N2_behavior_data.mat",
+      "compressed_bytes": 96,
+      "uncompressed_bytes": 178,
+      "crc32": "14800ad5"
+    },
+    {
+      "name": "Data_for_figshare/Fig. 6 and Supplementary Table S6/AML32_behavior_data.mat",
+      "compressed_bytes": 39421773,
+      "uncompressed_bytes": 47475255,
+      "crc32": "a636dc98"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/Fig. 6 and Supplementary Table S6/._AML32_behavior_data.mat",
+      "compressed_bytes": 96,
+      "uncompressed_bytes": 178,
+      "crc32": "420a8069"
+    },
+    {
+      "name": "Data_for_figshare/Fig. 6 and Supplementary Table S6/AML177_behavior_data.mat",
+      "compressed_bytes": 122790108,
+      "uncompressed_bytes": 154384039,
+      "crc32": "650f5a79"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/Fig. 6 and Supplementary Table S6/._AML177_behavior_data.mat",
+      "compressed_bytes": 96,
+      "uncompressed_bytes": 178,
+      "crc32": "4219ac3f"
+    },
+    {
+      "name": "Data_for_figshare/Fig. 6 and Supplementary Table S6/AML320_behavior_data.mat",
+      "compressed_bytes": 60008872,
+      "uncompressed_bytes": 70018735,
+      "crc32": "93d21794"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/Fig. 6 and Supplementary Table S6/._AML320_behavior_data.mat",
+      "compressed_bytes": 96,
+      "uncompressed_bytes": 178,
+      "crc32": "0384491d"
+    },
+    {
+      "name": "Data_for_figshare/Fig. 6 and Supplementary Table S6/AML462_dex_behavior_data.mat",
+      "compressed_bytes": 75407696,
+      "uncompressed_bytes": 90701529,
+      "crc32": "b7c70df4"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/Fig. 6 and Supplementary Table S6/._AML462_dex_behavior_data.mat",
+      "compressed_bytes": 96,
+      "uncompressed_bytes": 178,
+      "crc32": "550ec3a1"
+    },
+    {
+      "name": "Data_for_figshare/Fig. 6 and Supplementary Table S6/Supplementary Table S6.docx",
+      "compressed_bytes": 13348,
+      "uncompressed_bytes": 16039,
+      "crc32": "cb47b665"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/Fig. 6 and Supplementary Table S6/._Supplementary Table S6.docx",
+      "compressed_bytes": 206,
+      "uncompressed_bytes": 300,
+      "crc32": "0deb6aae"
+    },
+    {
+      "name": "Data_for_figshare/Suppplementary Table S1/Supplementary Table S1.docx",
+      "compressed_bytes": 21926,
+      "uncompressed_bytes": 24754,
+      "crc32": "6112af4c"
+    },
+    {
+      "name": "__MACOSX/Data_for_figshare/Suppplementary Table S1/._Supplementary Table S1.docx",
+      "compressed_bytes": 360,
+      "uncompressed_bytes": 458,
+      "crc32": "ba654b24"
+    }
+  ],
+  "scope": "Exact ZIP end record and central directory ranges only; no member payloads requested or decompressed. Filenames establish inventory, not contents or cohort independence."
+}
