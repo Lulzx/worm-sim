@@ -99,3 +99,27 @@ negative class to equivalence-only pairs or duplicate labels by trial count.
 ```sh
 python3 scripts/audit_atlas_pairs.py
 ```
+
+## Shared prediction scoring and paired comparison
+
+`atlas::rank_responses` accepts the common saved trace-prediction format, so the
+LDS and nonlinear models use identical integrated absolute-response rankings.
+It validates complete partition coverage and lineage, requires the same uniform
+grid and per-pair response area across repeated trials, and never fits against
+published q-values. The saved-prediction CLI is:
+
+```sh
+WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release --example evaluate_atlas_predictions --example compare_atlas_predictions
+target/release/examples/evaluate_atlas_predictions data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json runs/randi-pairs.json runs/level0-atlas-first-fit/test-predictions.json test runs/level0-atlas-first-fit-evaluation
+target/release/examples/compare_atlas_predictions data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json runs/randi-pairs.json runs/level0-atlas-first-fit/test-predictions.json runs/connectome-lds-first-fit/test-predictions.json test runs/atlas-first-comparison.json
+```
+
+Paired comparisons use identical resampled clusters for both models, reporting
+A minus B: negative MSE favors A; positive correlation or AUROC favors A.
+Correlation differences use only traces whose correlation is defined for both
+models, with the shared coverage count reported. Pair sets, trace sets, sample
+counts and confidence weights must match. Target and recording bootstrap analyses
+remain separate marginal intervals, conditional on the frozen fits; this is not
+a correction for crossed dependencies. The previously inspected test cohort makes
+these exploratory comparisons. Analytical tests cover zero/signed paired effects,
+one-class draws, ties and inconsistent-prediction rejection.

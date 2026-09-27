@@ -113,6 +113,75 @@ pub struct Predictions {
     pub selection_trials: Vec<String>,
     pub pairs: Vec<Prediction>,
 }
+/// Fixed absolute-response-area ranking from a complete common trace prediction.
+/// Requires identical uniform grids and identical per-pair areas across trials;
+/// no response labels are used to choose a ranking function or fit coefficients.
+pub fn rank_responses(
+    evidence: &Evidence,
+    data: &Dataset,
+    graph: &IndexedGraph,
+    split: &Split,
+    prediction: &super::Predictions,
+    partition: Partition,
+) -> Result<Predictions> {
+    // Validates complete coverage, lineage, finite values and recording grids.
+    super::evaluate(data, graph, split, prediction, partition)?;
+    evidence.validate(data, graph)?;
+    let indexed: BTreeMap<_, _> = data.trials.iter().map(|t| (&t.id, t)).collect();
+    let grid = &prediction.trials.first().ok_or("empty partition")?.times;
+    if grid.len() < 2 {
+        return Err("pair ranking requires at least two frames".into());
+    }
+    let dt = grid[1] - grid[0];
+    if !dt.is_finite() || dt <= 0.0 || grid.windows(2).any(|p| (p[1] - p[0] - dt).abs() > 1e-10) {
+        return Err("pair ranking requires a uniform grid".into());
+    }
+    let mut scores = BTreeMap::new();
+    for trial in &prediction.trials {
+        if &trial.times != grid {
+            return Err("pair ranking requires the same response grid for all trials".into());
+        }
+        let target = indexed[&trial.id]
+            .stimulated_neuron
+            .as_ref()
+            .ok_or("missing stimulus")?;
+        for (neuron, values) in &trial.fluorescence {
+            let value = values.iter().map(|v| v.abs()).sum::<f64>() * dt;
+            if !value.is_finite() {
+                return Err("nonfinite response area".into());
+            }
+            if let Some(previous) = scores.insert((target.clone(), neuron.clone()), value)
+                && previous != value
+            {
+                return Err("inconsistent impulse scores across trials".into());
+            }
+        }
+    }
+    let pairs = evidence
+        .partition_pairs(data, split, partition)?
+        .iter()
+        .map(|p| {
+            Ok(Prediction {
+                stimulated: p.stimulated.clone(),
+                responding: p.responding.clone(),
+                score: *scores
+                    .get(&(p.stimulated.clone(), p.responding.clone()))
+                    .ok_or("missing pair score")?,
+            })
+        })
+        .collect::<Result<Vec<_>>>()?;
+    Ok(Predictions {
+        evidence_hash: evidence.content_hash()?,
+        split_hash: prediction.split_hash.clone(),
+        model: prediction.model.clone(),
+        free_parameters: prediction.free_parameters,
+        source_commit: prediction.source_commit.clone(),
+        training_trials: prediction.training_trials.clone(),
+        selection_trials: prediction.selection_trials.clone(),
+        pairs,
+    })
+}
+
 #[derive(Debug, Serialize)]
 pub struct Report {
     pub evidence_hash: String,

@@ -222,6 +222,23 @@ fn atlas_bootstrap_retains_target_clusters_and_reports_undefined_draws() {
     assert_eq!(report.auroc.lower_95, Some(1.));
     assert_eq!(report.auroc.upper_95, Some(1.));
     assert!(report.auroc.defined_replicates > 800 && report.auroc.defined_replicates < 1200);
+    let mut reverse = predictions.clone();
+    reverse.pairs[0].score = 0.0;
+    reverse.pairs[1].score = 1.0;
+    let difference =
+        atlas_uncertainty::pair_difference(&evidence, &predictions, &reverse, 42, 2000).unwrap();
+    assert_eq!(difference.auroc.point, Some(1.0));
+    assert_eq!(difference.auroc.lower_95, Some(1.0));
+    assert_eq!(
+        difference.auroc.defined_replicates,
+        report.auroc.defined_replicates
+    );
+    let swapped =
+        atlas_uncertainty::pair_difference(&evidence, &reverse, &predictions, 42, 2000).unwrap();
+    assert_eq!(swapped.auroc.upper_95, Some(-1.0));
+    let same = atlas_uncertainty::pair_difference(&evidence, &predictions, &predictions, 42, 2000)
+        .unwrap();
+    assert_eq!(same.auroc.lower_95, Some(0.0));
     predictions.pairs[0].score = 0.;
     let tied = atlas_uncertainty::pairs(&evidence, &predictions, 42, 2000).unwrap();
     assert_eq!(tied.auroc.point, Some(0.5));
@@ -265,6 +282,27 @@ fn atlas_trace_intervals_keep_recordings_and_targets_distinct() {
             .collect(),
     };
     let report = bench::evaluate(&data, &graph, &split, &prediction, Partition::Test).unwrap();
+    let mut shifted = prediction.clone();
+    for trial in &mut shifted.trials {
+        for values in trial.fluorescence.values_mut() {
+            for v in values {
+                *v += 2.0;
+            }
+        }
+    }
+    let shifted_report = bench::evaluate(&data, &graph, &split, &shifted, Partition::Test).unwrap();
+    let difference =
+        bench::atlas_uncertainty::trace_difference(&data, &report, &shifted_report, 42, 100)
+            .unwrap();
+    for group in difference {
+        assert_eq!(group.pooled_mse.point, Some(-4.0));
+        assert_eq!(group.pooled_mse.upper_95, Some(-4.0));
+        assert!(group.macro_trace_correlation.point.unwrap().abs() < 1e-12);
+    }
+    let swapped =
+        bench::atlas_uncertainty::trace_difference(&data, &shifted_report, &report, 42, 100)
+            .unwrap();
+    assert_eq!(swapped[0].pooled_mse.lower_95, Some(4.0));
     let intervals = bench::atlas_uncertainty::traces(&data, &report, 42, 100).unwrap();
     assert_eq!(intervals[0].clusters, 1);
     assert_eq!(intervals[1].clusters, 2);
@@ -336,5 +374,96 @@ fn response_aggregation_preserves_original_weighted_loss_and_gradient() {
         bench::atlas_training::aggregate(&data, &graph, &split)
             .unwrap_err()
             .contains("complete")
+    );
+}
+
+#[test]
+fn generic_response_ranking_is_label_independent_and_rejects_inconsistent_trials() {
+    let (graph, data, split, mut evidence) = fixture();
+    let mut predictions = bench::Predictions {
+        schema_version: 1,
+        dataset_hash: split.dataset_hash.clone(),
+        split_hash: split.content_hash().unwrap(),
+        model: "synthetic fixed response".into(),
+        free_parameters: 0,
+        training_trials: vec![],
+        selection_trials: vec![],
+        source_commit: "test".into(),
+        seed: 42,
+        trials: data
+            .trials
+            .iter()
+            .filter(|t| split.test.contains(&t.id))
+            .map(|t| bench::PredictedTrial {
+                id: t.id.clone(),
+                times: t.recording.times.clone(),
+                fluorescence: t
+                    .recording
+                    .traces
+                    .iter()
+                    .enumerate()
+                    .map(|(i, r)| (r.neuron.clone(), vec![-0.2, 0.5 + i as f64]))
+                    .collect(),
+                response_scores: BTreeMap::new(),
+            })
+            .collect(),
+    };
+    let first = atlas::rank_responses(
+        &evidence,
+        &data,
+        &graph,
+        &split,
+        &predictions,
+        Partition::Test,
+    )
+    .unwrap();
+    for pair in &first.pairs {
+        let i = graph.neuron(&pair.responding).unwrap();
+        assert!((pair.score - (0.7 + i as f64)).abs() < 1e-12);
+    }
+    for pair in &mut evidence.pairs {
+        pair.q = 1. - pair.q;
+    }
+    let changed = atlas::rank_responses(
+        &evidence,
+        &data,
+        &graph,
+        &split,
+        &predictions,
+        Partition::Test,
+    )
+    .unwrap();
+    assert_eq!(
+        serde_json::to_value(first.pairs).unwrap(),
+        serde_json::to_value(changed.pairs).unwrap()
+    );
+    predictions.trials[0]
+        .fluorescence
+        .values_mut()
+        .next()
+        .unwrap()[1] += 1.;
+    assert!(
+        atlas::rank_responses(
+            &evidence,
+            &data,
+            &graph,
+            &split,
+            &predictions,
+            Partition::Test
+        )
+        .unwrap_err()
+        .contains("inconsistent")
+    );
+    predictions.trials.pop();
+    assert!(
+        atlas::rank_responses(
+            &evidence,
+            &data,
+            &graph,
+            &split,
+            &predictions,
+            Partition::Test
+        )
+        .is_err()
     );
 }
