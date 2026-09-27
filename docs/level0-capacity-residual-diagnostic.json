@@ -1,0 +1,221 @@
+{
+  "checkpoint_sha256": "7c1ab17f95fa19336b8795be9d6ef609f28520d04a300d50e5041e1880373114",
+  "manifest_sha256": "10c97686229cc0af50271f967d60df1ad5b8eb2b1968d05baffab5770320ac95",
+  "training_sha256": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+  "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+  "script_sha256": "d29b20230357914921e9f1b0cd71e5799d44f962251fb70c4e338d2bc8e56fe2",
+  "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+  "targets": [
+    "ADAL",
+    "ADAR"
+  ],
+  "epoch": 300,
+  "training_mse": 0.04484869091738359,
+  "frozen_dynamics_positive_recalibration_mse": 0.04473679594422632,
+  "frozen_dynamics_signed_recalibration_mse": 0.044485173810318294,
+  "positive_calibration_fraction_of_remaining_bound_gap": 0.033785314403171056,
+  "observed_neurons": 201,
+  "scope": "Training-only least squares shared across selected targets with frozen dynamics. Positive scale is an optimistic calibration diagnostic; a zero multiplier is a limiting value for log gains. Signed scale is an inadmissible readout diagnostic, not a proposed model. No held-out scoring or checkpoint selection.",
+  "full_receipt_sha256": "c0c5a75f862b57b77f6f85f34bc88114595cd08f57fd2acb23f11c17e7e211ad",
+  "top_residual_neurons": [
+    {
+      "neuron": "AVKL",
+      "observed_target_count": 2,
+      "gain": 145.81667027494348,
+      "positive_gain_multiplier": 0.9826975847300673,
+      "signed_gain_multiplier": 0.9826975847300673,
+      "weighted_mean_trace_squared_error": 0.00035778513778794187,
+      "positive_recalibrated_error": 0.00035746871501719313
+    },
+    {
+      "neuron": "RICR",
+      "observed_target_count": 2,
+      "gain": 34.932169029758356,
+      "positive_gain_multiplier": 50.237971086256174,
+      "signed_gain_multiplier": 50.237971086256174,
+      "weighted_mean_trace_squared_error": 0.00019532218074706266,
+      "positive_recalibrated_error": 0.00018237960023656126
+    },
+    {
+      "neuron": "RIGR",
+      "observed_target_count": 2,
+      "gain": 13.681451632073513,
+      "positive_gain_multiplier": 4252.811855567509,
+      "signed_gain_multiplier": 4252.811855567509,
+      "weighted_mean_trace_squared_error": 0.00019448862643892258,
+      "positive_recalibrated_error": 0.00018257107302300328
+    },
+    {
+      "neuron": "DD1",
+      "observed_target_count": 2,
+      "gain": 5.414696077393893,
+      "positive_gain_multiplier": 0.0,
+      "signed_gain_multiplier": -2689.969735821101,
+      "weighted_mean_trace_squared_error": 0.00012310285040829805,
+      "positive_recalibrated_error": 0.00012310213629413252
+    },
+    {
+      "neuron": "ADAL",
+      "observed_target_count": 2,
+      "gain": 16.116127302242152,
+      "positive_gain_multiplier": 0.998554928397362,
+      "signed_gain_multiplier": 0.998554928397362,
+      "weighted_mean_trace_squared_error": 8.317502104792382e-05,
+      "positive_recalibrated_error": 8.317029261241263e-05
+    },
+    {
+      "neuron": "SABD",
+      "observed_target_count": 2,
+      "gain": 130.49395035177892,
+      "positive_gain_multiplier": 1.0988546732264812,
+      "signed_gain_multiplier": 1.0988546732264812,
+      "weighted_mean_trace_squared_error": 7.492384386731317e-05,
+      "positive_recalibrated_error": 7.420076562564154e-05
+    },
+    {
+      "neuron": "M2L",
+      "observed_target_count": 2,
+      "gain": 7.567205592160579,
+      "positive_gain_multiplier": 0.0,
+      "signed_gain_multiplier": -11993.872127389268,
+      "weighted_mean_trace_squared_error": 7.232670987923093e-05,
+      "positive_recalibrated_error": 7.232669072513936e-05
+    },
+    {
+      "neuron": "RIS",
+      "observed_target_count": 2,
+      "gain": 119.67962173139618,
+      "positive_gain_multiplier": 1.0102023405736702,
+      "signed_gain_multiplier": 1.0102023405736702,
+      "weighted_mean_trace_squared_error": 6.745164060198037e-05,
+      "positive_recalibrated_error": 6.744970356475741e-05
+    },
+    {
+      "neuron": "M2R",
+      "observed_target_count": 2,
+      "gain": 6.968998628780771,
+      "positive_gain_multiplier": 0.0,
+      "signed_gain_multiplier": -115089.5883739207,
+      "weighted_mean_trace_squared_error": 6.506712507665984e-05,
+      "positive_recalibrated_error": 6.506659258361322e-05
+    },
+    {
+      "neuron": "ASKR",
+      "observed_target_count": 2,
+      "gain": 58.030305853144995,
+      "positive_gain_multiplier": 0.9925739638850803,
+      "signed_gain_multiplier": 0.9925739638850803,
+      "weighted_mean_trace_squared_error": 6.419094929225042e-05,
+      "positive_recalibrated_error": 6.419052942956125e-05
+    }
+  ],
+  "top_residual_pairs": [
+    {
+      "target": "ADAL",
+      "neuron": "AVKL",
+      "weighted_mean_trace_squared_error": 0.00028779727832208165,
+      "mean_trace_correlation": 0.7689552940852089
+    },
+    {
+      "target": "ADAR",
+      "neuron": "RICR",
+      "weighted_mean_trace_squared_error": 0.000191769275705457,
+      "mean_trace_correlation": 0.8930476432289675
+    },
+    {
+      "target": "ADAL",
+      "neuron": "RIGR",
+      "weighted_mean_trace_squared_error": 0.00014123574481741486,
+      "mean_trace_correlation": 0.04417562313323594
+    },
+    {
+      "target": "ADAR",
+      "neuron": "DD1",
+      "weighted_mean_trace_squared_error": 0.00011389980888354494,
+      "mean_trace_correlation": 0.5486187608655931
+    },
+    {
+      "target": "ADAR",
+      "neuron": "AVKL",
+      "weighted_mean_trace_squared_error": 6.998785946586029e-05,
+      "mean_trace_correlation": 0.4905384051336431
+    },
+    {
+      "target": "ADAL",
+      "neuron": "SABD",
+      "weighted_mean_trace_squared_error": 6.302707487696141e-05,
+      "mean_trace_correlation": 0.551036897072399
+    },
+    {
+      "target": "ADAL",
+      "neuron": "M2L",
+      "weighted_mean_trace_squared_error": 6.0997725025917794e-05,
+      "mean_trace_correlation": -0.5890418058662698
+    },
+    {
+      "target": "ADAR",
+      "neuron": "RIGR",
+      "weighted_mean_trace_squared_error": 5.325288162150774e-05,
+      "mean_trace_correlation": 0.5238887121582347
+    },
+    {
+      "target": "ADAL",
+      "neuron": "RIS",
+      "weighted_mean_trace_squared_error": 5.2969824654318174e-05,
+      "mean_trace_correlation": 0.9163076409292457
+    },
+    {
+      "target": "ADAR",
+      "neuron": "ADAL",
+      "weighted_mean_trace_squared_error": 5.2009908486618666e-05,
+      "mean_trace_correlation": 0.8364998132605375
+    }
+  ],
+  "numerical_convergence": {
+    "checkpoint_sha256": "7c1ab17f95fa19336b8795be9d6ef609f28520d04a300d50e5041e1880373114",
+    "manifest_sha256": "10c97686229cc0af50271f967d60df1ad5b8eb2b1968d05baffab5770320ac95",
+    "training_sha256": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "script_sha256": "715e4b1c8d64843fcb111cbebc38fe8b21b822fc4abb707b5561ae7dfdd9ce4b",
+    "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+    "variants": [
+      {
+        "variant": "reference",
+        "dt": 0.01,
+        "preparation_seconds": 60.0,
+        "training_mse": 0.044848690917383596,
+        "max_absolute_prediction_difference": 0.0,
+        "max_absolute_difference_from_previous_variant": 0.0,
+        "unforced_prepared_derivative_max": 8.298343291212104e-05
+      },
+      {
+        "variant": "half_step",
+        "dt": 0.005,
+        "preparation_seconds": 60.0,
+        "training_mse": 0.044848703996145906,
+        "max_absolute_prediction_difference": 0.0007158294369975504,
+        "max_absolute_difference_from_previous_variant": 0.0007158294369975504,
+        "unforced_prepared_derivative_max": 8.322194523632101e-05
+      },
+      {
+        "variant": "double_preparation",
+        "dt": 0.01,
+        "preparation_seconds": 120.0,
+        "training_mse": 0.0448454353143927,
+        "max_absolute_prediction_difference": 0.013090973558598784,
+        "max_absolute_difference_from_previous_variant": 0.013105213268008509,
+        "unforced_prepared_derivative_max": 4.553684543460356e-08
+      },
+      {
+        "variant": "quadruple_preparation",
+        "dt": 0.01,
+        "preparation_seconds": 240.0,
+        "training_mse": 0.04484543416956195,
+        "max_absolute_prediction_difference": 0.01309782822754424,
+        "max_absolute_difference_from_previous_variant": 6.854668945455167e-06,
+        "unforced_prepared_derivative_max": 2.217287818156873e-14
+      }
+    ],
+    "scope": "Frozen parameters, independent NumPy replay on training targets only. Half-step and doubled preparation are diagnostics, not refits or held-out scores."
+  }
+}

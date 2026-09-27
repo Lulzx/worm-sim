@@ -31,6 +31,11 @@ class OverfitTests(unittest.TestCase):
         self.assertEqual(data['classification_pairs'],0)
         for targets in [[],['A','A'],['B'],['test']]:
             with self.assertRaises(ValueError):prepare(m,t,targets,10,.01,-.2)
+        longer,_,_=prepare(m,t,['A'],10,.01,-.2,120.)
+        self.assertEqual(longer['config']['preparation_seconds'],120.)
+        self.assertEqual((m,t),original)
+        for duration in [0.,-1.,float('nan'),float('inf')]:
+            with self.assertRaises(ValueError):prepare(m,t,['A'],10,.01,-.2,duration)
         t['groups'][0]['training_trials']=['validation']
         with self.assertRaises(ValueError):prepare(m,t,['A'],10,.01,-.2)
 

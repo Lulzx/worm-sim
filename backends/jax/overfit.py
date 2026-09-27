@@ -3,6 +3,7 @@ import argparse
 import copy
 import hashlib
 import json
+import os
 from pathlib import Path
 import subprocess
 import time
@@ -15,7 +16,7 @@ from extensions import pack
 from fit import checkpoint, make_optimizer
 
 
-def prepare(model, training, targets, steps, rate, rest):
+def prepare(model, training, targets, steps, rate, rest, preparation_seconds=None):
     """Keep an explicit subset lineage; these are diagnostic, not benchmark models."""
     if model['epoch'] != 0 or not model['config'].get('sign_initialization'):
         raise ValueError('requires epoch-zero, non-neutral sign initialization')
@@ -31,7 +32,11 @@ def prepare(model, training, targets, steps, rate, rest):
     available = {training['names'][g['target']]: g for g in training['groups']}
     if any(t not in available for t in targets):
         raise ValueError('requested target is not in the training export')
+    if preparation_seconds is not None and (not np.isfinite(preparation_seconds) or preparation_seconds <= 0):
+        raise ValueError('preparation duration must be finite and positive')
     m, t = copy.deepcopy(model), copy.deepcopy(training)
+    if preparation_seconds is not None:
+        m['config']['preparation_seconds'] = float(preparation_seconds)
     t['groups'] = [copy.deepcopy(available[name]) for name in targets]
     trials = [trial for g in t['groups'] for trial in g['training_trials']]
     if len(set(trials)) != len(trials) or not set(trials) <= set(model['training_trials']):
@@ -78,13 +83,14 @@ def main():
     p.add_argument('--steps', type=int, default=300)
     p.add_argument('--learning-rate', type=float, default=.01)
     p.add_argument('--rest', type=float, default=-.2)
+    p.add_argument('--preparation-seconds', type=float, default=None)
     a = p.parse_args()
     paths = {k:Path(getattr(a,k)) for k in ['model','graph','training']}
     hashes = {k:hashlib.sha256(v.read_bytes()).hexdigest() for k,v in paths.items()}
     model, graph, training = [json.loads(paths[k].read_text()) for k in ['model','graph','training']]
     if hashes['model'] != training['model_sha256']:
         raise ValueError('training export belongs to another checkpoint')
-    model, training, config = prepare(model, training, a.targets, a.steps, a.learning_rate, a.rest)
+    model, training, config = prepare(model, training, a.targets, a.steps, a.learning_rate, a.rest, a.preparation_seconds)
     theta, active, groups, data, prior = build(model, graph, training, config)
     reference = bounds(groups)
     source = subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
@@ -95,6 +101,8 @@ def main():
     write('manifest.json', {'format':'wormsim-training-capacity-diagnostic',
         'source_commit':source, 'source_worktree_dirty':bool(subprocess.check_output(['git','status','--porcelain'],text=True).strip()),
         'input_sha256':hashes, 'targets':a.targets, 'training_trials':training['training_trials'],
+        'process_id':os.getpid(),
+        'backend_source_sha256':{path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted(Path(__file__).parent.glob('*.py'))},
         'configuration':config, 'fit_config':model['config'], 'rest_initialization':a.rest,
         'bounds':reference, 'jax':jax.__version__, 'optax':optax.__version__,
         'devices':[str(d) for d in jax.devices()],

@@ -28,22 +28,26 @@ def main():
     gains=np.exp(packed['extension_parameters']['observation']['log_gain']['values'])
     total=sum(g['sample_weight'] for g in groups)
     variants={'reference':{},'half_step':{'dt':base['config']['dt']/2},
-              'double_preparation':{'preparation_seconds':base['config']['preparation_seconds']*2}}
-    reference={};rows=[]
+              'double_preparation':{'preparation_seconds':base['config']['preparation_seconds']*2},
+              'quadruple_preparation':{'preparation_seconds':base['config']['preparation_seconds']*4}}
+    reference={};previous={};rows=[]
     for name,changes in variants.items():
         model=copy.deepcopy(base);model['config'].update(changes)
-        replay=Replay(model,graph);mse=0.;maxdiff=0.
+        replay=Replay(model,graph);mse=0.;maxdiff=0.;previous_diff=0.
         for group in groups:
             target=training['names'][group['target']]
             pred=replay.response(target,group['recording']['times'])*gains/replay.gain
             if name=='reference':reference[target]=pred
             maxdiff=max(maxdiff,float(np.max(np.abs(pred-reference[target]))))
+            previous_diff=max(previous_diff,float(np.max(np.abs(pred-previous.get(target,pred)))))
+            previous[target]=pred
             traces=group['recording']['traces'];weights=np.array([t['provenance']['id_confidence'] for t in traces])
             mean=np.array([t['values'] for t in traces]).T
             observed=pred[:,[replay.index[t['neuron']] for t in traces]]
             mse+=group['sample_weight']/total*(float(np.sum((observed-mean)**2*weights)/(weights.sum()*len(pred)))+group['irreducible_mse'])
         rows.append({'variant':name,'dt':replay.dt,'preparation_seconds':replay.preparation,
                      'training_mse':mse,'max_absolute_prediction_difference':maxdiff,
+                     'max_absolute_difference_from_previous_variant':previous_diff,
                      'unforced_prepared_derivative_max':float(np.max(np.abs(replay.rhs(replay.state,None,0.))))})
     assert abs(rows[0]['training_mse']-saved['metrics']['mse'])<1e-10
     receipt={'checkpoint_sha256':digest(a.checkpoint),'manifest_sha256':digest(a.manifest),

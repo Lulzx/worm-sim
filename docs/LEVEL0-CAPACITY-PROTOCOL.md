@@ -136,3 +136,41 @@ Predeclare preprocessing, eligibility, endpoints, and the final comparison befor
 opening response values. If no independent cohort is available, report the
 limitation and make no confirmatory claim. Neuromodulation remains the first
 scientific extension after the core fitting and comparison gates are met.
+
+## Residual diagnosis and longer-run declaration
+
+The [independent residual audit](level0-capacity-residual-diagnostic.json) fits
+closed-form scales to the saved 300-update predictions, sharing each neuron's
+scale across both targets. An optimal nonnegative rescaling reduces MSE from
+0.04484869 to 0.04473680, closing only **3.38% of the remaining gap** to the
+zero-start bound. Even allowing inadmissible negative observation scales gives
+0.04448517. These are frozen-dynamics diagnostics, not new fitted checkpoints or
+held-out scores. Waveform and target dependence need further optimization;
+rescaling alone cannot remove most of the residual. The calculation is checked
+against independent weighted `numpy.linalg.lstsq` solutions, including negative
+optima and zero predictions.
+
+At the same frozen parameters, extending preparation from 120 to 240 seconds
+changes MSE by 1.14e-9 and predictions by at most 6.85e-6. This supports trying
+120 seconds for the next fit, but is not a convergence guarantee for future
+parameter values. Numerical checks must be repeated after training.
+
+The next run is declared as **1,000 updates**, seed 1, ADAL/ADAR, Adam 0.01,
+rest −0.2, initial per-neuron gain 10, and **120-second preparation**. It starts
+from the original epoch-zero model; it does not resume the 300-update optimizer.
+All other capacity-test settings and the 90% gate remain unchanged. Changing
+preparation means this is not a pure duration ablation. No validation/test
+selection or new dynamical features are introduced.
+
+```sh
+.venv-jax/bin/python backends/jax/overfit.py \
+  --model runs/level0-atlas-sign-seed1-fit/epoch-0.json \
+  --graph runs/c302-audit.json --training runs/overfit-seed1-training.json \
+  --targets ADAL ADAR --steps 1000 --preparation-seconds 120 \
+  --output runs/level0-capacity-adal-adar-1000-prep120
+```
+
+The runner now records exact backend source hashes and its process ID. A live
+process and advancing progress file establish that the run is active; a manifest
+alone does not. Only a terminal `result.json`, followed by independent replay and
+preparation/step checks, supports reporting the completed outcome.
