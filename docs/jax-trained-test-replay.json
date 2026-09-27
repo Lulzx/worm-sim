@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "source_commit": "4c5a0af69658225391420ab0a6127d82c0f3a214",
+  "source_worktree_dirty": false,
+  "inputs": {
+    "model": "c78e27b1e172c68d4bda5e200876de1af386bbb6a8619aa06d8817c6b5e4d0ea",
+    "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "data": "2063f69753f9ab0dce9ee489214fc3eb641c451651a09cc4b2ee81f261df4b2b",
+    "reference": "e88b37d7939905255560a02ac62a5656bef8666e9da02037eafabe6cbb7ab4a0"
+  },
+  "prediction_sha256": "58357f8491395f452f44f3236649ccc414dc4bb7a716d43f8048286fe03cbdac",
+  "jax": "0.11.2",
+  "diffrax": "0.7.2",
+  "equinox": "0.13.8",
+  "devices": [
+    "cpu:0"
+  ],
+  "precision": "float64",
+  "targets": 15,
+  "trials": 166,
+  "maximum_absolute_prediction_error": 2.084998840246044e-13,
+  "target_seconds_including_first_compile": [
+    0.7546708750305697,
+    0.07780445797834545,
+    0.07683675002772361,
+    0.07964270806405693,
+    0.0826890830649063,
+    0.09010100003797561,
+    0.0870501670287922,
+    0.08748866699170321,
+    0.08655349991749972,
+    0.09182295901700854,
+    0.09161670901812613,
+    0.09189199993852526,
+    0.09123333403840661,
+    0.09301704203244299,
+    0.09347670793067664
+  ],
+  "scope": "Frozen parameter forward replay, same Euler grid; no refit, no new biological result, no optimizer parity claim. Reference predictions used only for output schema and post-hoc numerical comparison.",
+  "rust_scoring": {
+    "evaluation_source_commit": "dcdd0fffc559f393c8c5e6838f88ba2b755d1d06",
+    "pooled_trace_scores": {
+      "samples": 503600,
+      "weight": 503600.0,
+      "mse": 0.04989684961428061,
+      "correlation": 0.12329083497982012,
+      "r2": -0.021586945852075656
+    },
+    "macro_trace_correlation": 0.00212668281884197,
+    "pair_auroc": {
+      "value": 0.6810058792712033,
+      "positive_pairs": 82,
+      "negative_pairs": 1676,
+      "positive_weight": 82.0,
+      "negative_weight": 1676.0
+    },
+    "artifacts_sha256": {
+      "trace-report.json": "4d262278a1182c6cd01417a7e6d01ef4cfd0098a05421812e4fd8fd0a135ce4e",
+      "pair-report.json": "a3f1d9ec37463bca20d62934e678d731d2bcbd1781909162ba2f4d90141c719b",
+      "uncertainty.json": "8823d6099acab207e799e3d69392eb92da599c86afe5ba71faffd225d4aaadff"
+    }
+  },
+  "fit_manifest": {
+    "source_commit": "db86f4c65c38790fec311cae539e20728a18f87e",
+    "source_worktree_dirty": false,
+    "input_sha256": {
+      "model": "f7f061464f4685f059f0a7d0a22b43af1011267277bc2d5fa239008b1f0c0f0e",
+      "graph_json": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+      "graph": "6951c45c3ad2a2b473ac0659dc7e7d7f923aa35cac27a6a67d9273646c7427fe",
+      "data": "2063f69753f9ab0dce9ee489214fc3eb641c451651a09cc4b2ee81f261df4b2b",
+      "split": "c3002a03460f7685f71bcddf2be58c78e8ec35a410abe4a5eb3c2b9f11375438",
+      "training": "280f98f05e4474dceba49fee922c8c8814d505c47a4684ea4a1475c0872e1b49",
+      "scorer": "526315186dfeb401e1f89743360ab39421979cd0d02e061aee959d988614773b"
+    },
+    "selection": "minimum Rust validation MSE; earliest epoch breaks ties",
+    "jax": "0.11.2",
+    "optax": "0.2.8",
+    "devices": [
+      "cpu:0"
+    ],
+    "scope": "New fit from saved epoch-zero initialization; no test scoring or optimizer resume."
+  },
+  "selection": [
+    {
+      "epoch": 0,
+      "validation_mse": 0.042328773260577934,
+      "preceding_training_components": null,
+      "elapsed_seconds": 3.0811397079378366
+    },
+    {
+      "epoch": 1,
+      "validation_mse": 0.04232687541976706,
+      "preceding_training_components": {
+        "mse": 0.07536645831538034,
+        "bce": 0.19570439936652007,
+        "correlation": 0.0,
+        "prior": 0.006931471805599447
+      },
+      "elapsed_seconds": 141.86363929207437
+    },
+    {
+      "epoch": 2,
+      "validation_mse": 0.04232537959317123,
+      "preceding_training_components": {
+        "mse": 0.07536428189029361,
+        "bce": 0.19559240634440084,
+        "correlation": 0.0,
+        "prior": 0.006932626401544992
+      },
+      "elapsed_seconds": 140.41854795906693
+    },
+    {
+      "epoch": 3,
+      "validation_mse": 0.04232417332010483,
+      "preceding_training_components": {
+        "mse": 0.07536240668610482,
+        "bce": 0.195478189863844,
+        "correlation": 0.0,
+        "prior": 0.006933944604686311
+      },
+      "elapsed_seconds": 165.18613641697448
+    },
+    {
+      "epoch": 4,
+      "validation_mse": 0.042323211425157985,
+      "preceding_training_components": {
+        "mse": 0.07536079162682943,
+        "bce": 0.19536603731922583,
+        "correlation": 0.0,
+        "prior": 0.006936027652057476
+      },
+      "elapsed_seconds": 141.89820762502495
+    },
+    {
+      "epoch": 5,
+      "validation_mse": 0.04232250530820956,
+      "preceding_training_components": {
+        "mse": 0.07535939932633239,
+        "bce": 0.19525501151853542,
+        "correlation": 0.0,
+        "prior": 0.006938451126113865
+      },
+      "elapsed_seconds": 237.17266875004862
+    }
+  ]
+}

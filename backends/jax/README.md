@@ -2,8 +2,10 @@
 
 Rust remains the data-import, split and scoring authority. New fitting work moves
 to JAX, Diffrax, Equinox and Optax; the Rust numerical core remains a reference.
-This backend currently implements frozen Level 0 forward migration and reverse
-AD, not a replacement population fit runner or a new biological result.
+This backend implements Level 0 dynamics, reverse AD and a population fit runner
+with independent Rust validation scoring. The original five-update fit has been
+reproduced; see [migration results](../../docs/JAX-MIGRATION.md). This is numerical
+reproduction, not a new biological result.
 
 ```sh
 uv venv .venv-jax --python 3.12
@@ -45,12 +47,11 @@ output hashes, package/device versions, source revision, dirty-worktree state an
 per-target elapsed time (including compilation for the first target). Raw data
 and large generated artifacts remain under ignored `runs/`.
 
-The training objective, frozen-coordinate masks and Rust training-statistics
-export are now implemented (see below). Remaining migration gates: preparation
-reuse across targets, validation-only
-selection, checkpoint round trips, optimizer trajectory comparison and a full
-reproduction of fitting. Matching saved predictions alone does not reproduce
-training, fix underfitting or establish superiority over the LDS baseline.
+The training objective, frozen masks, training-statistics export, Rust checkpoint
+validation/selection and original five-update trajectory reproduction are complete.
+Preparation reuse, optimizer resume and additional configuration parity checks
+remain. Reproducing this fit does not fix underfitting or establish superiority
+over the LDS baseline.
 
 Planned library reuse: Diffrax adaptive/stiff integration; Jaxley for suitable
 conductance-based cells after equation/unit audits; dynamax for LDS inference;
@@ -119,8 +120,9 @@ WORMSIM_COMMIT=$(git rev-parse HEAD) cargo build --release --example score_atlas
 This runner tests migration under the frozen configuration; it does not tune on
 the repeatedly inspected test cohort. Tests cover multiple optimizer updates,
 frozen coordinates under AdamW, earliest-epoch selection ties and cosine rates.
-A full fit and final scored prediction comparison are required before declaring
-the training migration reproduced.
+The original five-update fit and final Rust-scored test AUROC have been reproduced
+([receipt](../../docs/jax-trained-test-replay.json)). Other configurations still
+require their own numerical checks.
 
 Training export schema 2 also carries native chemical/gap topology; the JAX
 loader rejects a graph with different endpoints or weights, even if names match.

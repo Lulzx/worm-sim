@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "audit_source_commit": "4c5a0af69658225391420ab0a6127d82c0f3a214",
+  "jax_fit_source_commit": "db86f4c65c38790fec311cae539e20728a18f87e",
+  "jax_fit_source_worktree_dirty": false,
+  "selected_epoch": 5,
+  "reference_selected_epoch": 5,
+  "epochs": [
+    {
+      "epoch": 0,
+      "maximum_parameter_errors": {
+        "groups": 0.0,
+        "kernel": 0.0,
+        "classifier": 0.0
+      },
+      "validation_mse_error": 0.0,
+      "training_component_errors": {}
+    },
+    {
+      "epoch": 1,
+      "maximum_parameter_errors": {
+        "groups": 1.9077863420979835e-11,
+        "kernel": 8.881784197001252e-16,
+        "classifier": 0.0
+      },
+      "validation_mse_error": 1.3877787807814457e-17,
+      "training_component_errors": {
+        "mse": 0.0,
+        "bce": 0.0,
+        "prior": 5.143455106271233e-16
+      }
+    },
+    {
+      "epoch": 2,
+      "maximum_parameter_errors": {
+        "groups": 1.734989495821848e-11,
+        "kernel": 8.881784197001252e-16,
+        "classifier": 4.440892098500626e-16
+      },
+      "validation_mse_error": 2.7755575615628914e-17,
+      "training_component_errors": {
+        "mse": 1.3877787807814457e-17,
+        "bce": 3.0531133177191805e-16,
+        "prior": 1.1275702593849246e-17
+      }
+    },
+    {
+      "epoch": 3,
+      "maximum_parameter_errors": {
+        "groups": 1.718857781801697e-11,
+        "kernel": 8.881784197001252e-16,
+        "classifier": 1.3322676295501878e-15
+      },
+      "validation_mse_error": 1.3877787807814457e-17,
+      "training_component_errors": {
+        "mse": 1.3877787807814457e-17,
+        "bce": 2.498001805406602e-16,
+        "prior": 1.8214596497756474e-17
+      }
+    },
+    {
+      "epoch": 4,
+      "maximum_parameter_errors": {
+        "groups": 1.8847194638293985e-11,
+        "kernel": 1.7763568394002505e-15,
+        "classifier": 8.881784197001252e-16
+      },
+      "validation_mse_error": 4.85722573273506e-17,
+      "training_component_errors": {
+        "mse": 1.3877787807814457e-17,
+        "bce": 5.551115123125783e-16,
+        "prior": 1.5612511283791264e-17
+      }
+    },
+    {
+      "epoch": 5,
+      "maximum_parameter_errors": {
+        "groups": 5.921690048038553e-11,
+        "kernel": 1.7763568394002505e-15,
+        "classifier": 1.7763568394002505e-15
+      },
+      "validation_mse_error": 4.163336342344337e-17,
+      "training_component_errors": {
+        "mse": 2.7755575615628914e-17,
+        "bce": 1.942890293094024e-16,
+        "prior": 2.7755575615628914e-17
+      }
+    }
+  ],
+  "checkpoint_sha256": {
+    "runs/jax-level0-classification-fit/epoch-0.json": "fc364c397dfc9a848b697eb9aa4e6cc0c067df0b2d9c8a4bca0aeeaed147c650",
+    "runs/level0-atlas-classification-fit/epoch-0.json": "f7f061464f4685f059f0a7d0a22b43af1011267277bc2d5fa239008b1f0c0f0e",
+    "runs/jax-level0-classification-fit/epoch-1.json": "bc7337275fdd78b2c4b2667e664033a17bf1f0a95acb2c38f2000fc1d5fe8255",
+    "runs/level0-atlas-classification-fit/epoch-1.json": "31e2bce78bbe08d96c9ef964040fb2b2d4862046a7f7ae89106cbf07b096b144",
+    "runs/jax-level0-classification-fit/epoch-2.json": "1837e5f357eed1d1a1cf3dfc5aac4ec94ec1c1aea3ac7e07d197b6a1a0269611",
+    "runs/level0-atlas-classification-fit/epoch-2.json": "98491d45a86158565aca92f1139029f3bb492f35ecfa228ffef39ce88e81179f",
+    "runs/jax-level0-classification-fit/epoch-3.json": "435b9dbf223ca5d658dae64f7866c4ed16130ca663fdbab81d3535a754740e6a",
+    "runs/level0-atlas-classification-fit/epoch-3.json": "84b245bdf32f928646f30afa1f5c5f40c2200a896d1d83333ff5311751649eeb",
+    "runs/jax-level0-classification-fit/epoch-4.json": "906aa35fde64d863aa12d3c6527e2eff44fb09b0acb73759ec01ed76edaaf04a",
+    "runs/level0-atlas-classification-fit/epoch-4.json": "0487aba8329a50cf1a246b4539ec6c8c9166458c8757dc65c4199cf81525e5e4",
+    "runs/jax-level0-classification-fit/epoch-5.json": "c78e27b1e172c68d4bda5e200876de1af386bbb6a8619aa06d8817c6b5e4d0ea",
+    "runs/level0-atlas-classification-fit/epoch-5.json": "0d5c943e2e03feef048184b9703ea69d9d5a3418feb4563046c845c68a1eea0f"
+  },
+  "scope": "Completed training trajectory and validation-only selection parity. Checks identities, frozen parameters, objective components and parameter updates. Does not recompute gradients, audit source-data processing or inspect test results."
+}

@@ -134,5 +134,6 @@ for reusable work and explicit evidence boundaries.
 
 New fitting implementation uses JAX, Diffrax, Equinox and Optax while Rust keeps
 data, splits and independent scoring. The [JAX migration gate](backends/jax/README.md)
-implements frozen Level 0 replay and library-provided reverse AD; full training
-reproduction remains in progress.
+implements Level 0 fitting and library-provided reverse AD. The original
+five-update fit reproduces the Rust-scored test AUROC; see the
+[migration results](docs/JAX-MIGRATION.md).
