@@ -20,6 +20,12 @@ class ExternalSmokeTests(unittest.TestCase):
             raise unittest.SkipTest('build --release --example external_atlas --example export_external_atlas_fixture --example export_atlas_training to run Rust/JAX integration')
 
     def test_fit_reload_score_and_checkpoint_binding(self):
+        self.check_pipeline('checkpoint')
+
+    def test_continuous_adjoint_fit_reload_score(self):
+        self.check_pipeline('continuous')
+
+    def check_pipeline(self,adjoint):
         def run(*args, good=True):
             result=subprocess.run([str(a) for a in args],cwd=ROOT,text=True,capture_output=True)
             if good:self.assertEqual(result.returncode,0,result.stdout+result.stderr)
@@ -30,6 +36,11 @@ class ExternalSmokeTests(unittest.TestCase):
             common=[inputs/n for n in ['graph.wsc','data.json','split.json']]
             run(BIN/'export_atlas_training',*common,inputs/'model.json',folder/'training.json')
             config=json.loads((ROOT/'backends/jax/examples/extensions-synthetic.json').read_text())
+            config['solver']['adjoint']=adjoint
+            if adjoint=='checkpoint':
+                config['solver']['checkpoints']=2
+            else:
+                config['solver'].update(adjoint_rtol=1e-8,adjoint_atol=1e-10,adjoint_max_steps=10000)
             (folder/'configuration.json').write_text(json.dumps(config))
             out=folder/'fit'
             run(sys.executable,'backends/jax/fit_extensions.py','--model',inputs/'model.json','--configuration',folder/'configuration.json','--graph-json',inputs/'graph.json','--graph',common[0],'--data',common[1],'--split',common[2],'--training',folder/'training.json','--scorer',BIN/'external_atlas','--output',out)

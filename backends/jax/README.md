@@ -177,3 +177,9 @@ Rust plans; Rust scores each validation candidate. See the
 Optional [held-concentration splitting](../../docs/MULTIRATE.md) updates modulation
 on a declared coarse grid while Diffrax integrates fast states. Its settings
 survive fitting/checkpoint reload; tests check convergence and gradients.
+
+## Adjoint configuration
+
+Adaptive settings support an explicit recursive checkpoint budget or optional
+continuous adjoints with separate backward tolerances. See
+[configuration, numerical checks, and limits](../../docs/ADJOINTS.md).

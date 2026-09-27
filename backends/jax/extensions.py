@@ -33,7 +33,7 @@ def initialize(model, graph, times, configuration):
         if 'plasticity' in specs:
             modules['plasticity'] = Plasticity(graph, specs['plasticity'], modules.get('dark_edges'))
         if configuration['solver'] is not None:
-            fields(configuration['solver'], [], ['method', 'rtol', 'atol', 'dt0', 'dtmax', 'max_steps'])
+            fields(configuration['solver'], [], ['method', 'rtol', 'atol', 'dt0', 'dtmax', 'max_steps', 'adjoint', 'checkpoints', 'adjoint_rtol', 'adjoint_atol', 'adjoint_max_steps'])
             modules['adaptive'] = Adaptive(**configuration['solver'])
         if configuration.get('multirate') is not None:
             fields(configuration['multirate'], ['slow_dt'], ['max_windows'])
