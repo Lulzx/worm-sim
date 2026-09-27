@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "native_report": {
+    "catalog_hash": "58d6d9648250cde75a6df1b6eaba389880d0694f46b859805ec929aa93304e39",
+    "edge_states": {
+      "conflicting": 2743,
+      "excitatory": 8,
+      "incomplete_receptors": 139,
+      "inhibitory": 257,
+      "no_detected_receptor": 4,
+      "no_transmitter_evidence": 465,
+      "unmapped_postsynaptic_class": 22
+    },
+    "evidence_hash": "b4cc61bf6e0e3057aab35a25d0ba127b6d0f1d96e4e98381a3eb3f5112ee0905",
+    "expression_classes": 128,
+    "expression_hash": "cafac4bee717ffb1dfabb54baedb20458911d5d2693a7c94ae15e03e62b64737",
+    "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+    "mapped_cells": 300,
+    "mapping_hash": "8625355d38b7448c90feb9dc9db9f6a7fb3d31a1b89dc279cbf9e29a6199966b",
+    "missing_receptor_genes": [
+      "acr-1",
+      "acr-10",
+      "acr-13",
+      "acr-25",
+      "acr-4",
+      "eat-2",
+      "lgc-48"
+    ],
+    "present_receptor_genes": 55,
+    "scope": "Qualitative ionotropic molecular evidence, not calibrated probabilities. Mapping is an explicit L4-to-anatomical-cell transfer assumption; no response labels used. Existing graph and benchmark datasets are unchanged.",
+    "source_commit": "260ef299b7c5aedb991a2fa892d26b5fe286c748",
+    "threshold": 2,
+    "unmapped_cells": {
+      "AWCL": "AWC ON/OFF expression identity is not fixed by anatomical left/right side.",
+      "AWCR": "AWC ON/OFF expression identity is not fixed by anatomical left/right side."
+    }
+  },
+  "source_files": {
+    "xlsx_sha256": "85959066fd7cbdbc2024d0ebb323b71c4365f4083bc85e555ee973f470697c47",
+    "hdf5_sha256": "d8e6f6f2a25e05211676cfd9c3dd18b8a8bb5c3db4d673fd87b61ed91637ed23"
+  },
+  "artifacts": {
+    "data/fenyves-transmitter-receptors.json": "d1a7e13b8a9c3f71857d9e638b6e5fa8ca6d9d83c21d8594f24932944de6d5f9",
+    "data/cengen-cell-map.json": "f6d8a6082e0cec1eb72e23c8e416bc403686f4846188fffdf823b957405c61e6",
+    "runs/c302-audit.json": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "runs/molecular-th2/expression.json": "596371e988398bafce1fbab23d0215842b50c9aea5a31a990b248618b065813d",
+    "runs/molecular-th2/evidence.json": "71c987699a4f6388c9f66edda8a2ab8a5c30b1dc682afe37b8fda7e2713b8822"
+  },
+  "audit_script_sha256": "61c402e5342e27f6ee3f0d6606145d0caca6ac86f38160632f5278d8961ba6c1",
+  "exact_tpm_values_checked": 7040,
+  "directed_edges_checked": 3638,
+  "limitations": "Exact source-array, catalog-row, and qualitative-rule parity. Cell mapping is an explicit modeling transfer, not independently measured expression in anatomical cells. Zero TPM is thresholded non-detection, missing names remain unknown, and expression does not prove physiological synaptic polarity. No calibrated sign probability or fitted benchmark improvement claimed."
+}

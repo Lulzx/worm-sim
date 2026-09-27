@@ -93,3 +93,39 @@ a modeling assumption rather than independently measured cell expression.
 The [source audit](SIGN-PRIOR-SOURCE-AUDIT.md) describes software/data attribution
 boundaries. The GPL upstream Python implementation was inspected for source
 locations but has not been copied or executed in the MIT Rust core.
+
+
+## Source-stamped corpus verification
+
+Importer source `260ef29` was run separately at thresholds 2 and 4. The
+[independent threshold-2 audit](molecular-th2-audit.json) and
+[threshold-4 audit](molecular-th4-audit.json) each verify all 7,040 selected TPM
+values exactly in f32, all 302 transmitter rows, all 62 receptor rows and all
+3,638 directed edge results. Their receipts preserve full source and artifact
+hashes. No upstream neural-response labels are accessed by import or inference.
+
+| Evidence category | Threshold 2 | Threshold 4 |
+| --- | ---: | ---: |
+| Excitatory | 8 | 122 |
+| Inhibitory | 257 | 440 |
+| Conflicting | 2,743 | 1,829 |
+| Incomplete receptor catalog coverage | 139 | 640 |
+| No detected receptor | 4 | 120 |
+| No transmitter evidence | 465 | 465 |
+| Unmapped postsynaptic class | 22 | 22 |
+| Total anatomical chemical edges | 3,638 | 3,638 |
+
+The [paired category transition receipt](molecular-threshold-sensitivity.json)
+shows **971 edges change category** between thresholds. A stricter threshold
+can turn detected mixed receptor expression into apparently unopposed evidence;
+that is not proof that the opposing physiological pathway is absent. Most edges
+remain conflicting at either threshold. Missing genes, receptor localization,
+subunit assembly, metabotropic effects and L4-to-adult transfer limit this simple
+ionotropic expression rule. Do not collapse this table into a measured network
+sign ratio or tune the threshold against held-out response labels.
+
+All 93 Rust tests and strict all-target Clippy passed for the importer change.
+These checks establish source fidelity and declared rule behavior. The next step
+is to integrate the evidence into explicit parameter initialization and penalties,
+then perform a source-prior fit through the same benchmark; no improvement is
+claimed from this import alone.

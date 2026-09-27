@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "source_commit": "260ef29",
+  "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+  "mapping_hash": "8625355d38b7448c90feb9dc9db9f6a7fb3d31a1b89dc279cbf9e29a6199966b",
+  "catalog_hash": "58d6d9648250cde75a6df1b6eaba389880d0694f46b859805ec929aa93304e39",
+  "threshold2_evidence_file_sha256": "71c987699a4f6388c9f66edda8a2ab8a5c30b1dc682afe37b8fda7e2713b8822",
+  "threshold4_evidence_file_sha256": "ff73214dfa638f9aadeeacb69723013e1f6ada04d137d54cfb3df6fd303487ba",
+  "edges": 3638,
+  "changed_categories": 971,
+  "transitions": [
+    {
+      "threshold2": "conflicting",
+      "threshold4": "conflicting",
+      "edges": 1829
+    },
+    {
+      "threshold2": "conflicting",
+      "threshold4": "excitatory",
+      "edges": 116
+    },
+    {
+      "threshold2": "conflicting",
+      "threshold4": "incomplete_receptors",
+      "edges": 501
+    },
+    {
+      "threshold2": "conflicting",
+      "threshold4": "inhibitory",
+      "edges": 238
+    },
+    {
+      "threshold2": "conflicting",
+      "threshold4": "no_detected_receptor",
+      "edges": 59
+    },
+    {
+      "threshold2": "excitatory",
+      "threshold4": "excitatory",
+      "edges": 6
+    },
+    {
+      "threshold2": "excitatory",
+      "threshold4": "no_detected_receptor",
+      "edges": 2
+    },
+    {
+      "threshold2": "incomplete_receptors",
+      "threshold4": "incomplete_receptors",
+      "edges": 139
+    },
+    {
+      "threshold2": "inhibitory",
+      "threshold4": "inhibitory",
+      "edges": 202
+    },
+    {
+      "threshold2": "inhibitory",
+      "threshold4": "no_detected_receptor",
+      "edges": 55
+    },
+    {
+      "threshold2": "no_detected_receptor",
+      "threshold4": "no_detected_receptor",
+      "edges": 4
+    },
+    {
+      "threshold2": "no_transmitter_evidence",
+      "threshold4": "no_transmitter_evidence",
+      "edges": 465
+    },
+    {
+      "threshold2": "unmapped_postsynaptic_class",
+      "threshold4": "unmapped_postsynaptic_class",
+      "edges": 22
+    }
+  ],
+  "scope": "Evidence threshold sensitivity before fitted use. Counts are not a physiological sign balance; unknown catalog names and co-expressed receptor polarities remain explicit."
+}
