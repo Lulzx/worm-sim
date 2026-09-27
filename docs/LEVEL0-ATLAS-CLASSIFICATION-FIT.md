@@ -12,7 +12,8 @@ The classifier uses area = sample_dt * sum(sqrt(response² + epsilon²) - epsilo
 feature = log1p(area / area_scale), and logit = bias + softplus(raw_slope) * feature.
 Bias starts at the Jeffreys-smoothed training prevalence logit, and the effective
 slope starts at one. Both are learned jointly with network parameters and the
-positive shared current kernel. The positive slope cannot reverse a poor ranking.
+positive shared current kernel. Calcium scale and readout gain remain fixed at
+one, with zero readout offset. The positive slope cannot reverse a poor ranking.
 `area_scale` is a declared reference unit, not an empirical detection threshold;
 `epsilon` smooths the absolute value. Neither represents measurement noise.
 

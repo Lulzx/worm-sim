@@ -72,8 +72,11 @@ throughput or numerical convergence after fitting.
 nonnegative current kernel (softplus coordinates). All 302 cells use a shared
 fixed initial state generated once from the declared forecast defaults. This
 first protocol does not estimate trial-specific pre-stimulation states. The
-relative readout has fixed unit gains/zero offsets; the model's positive calcium
-scale remains among the tied learned parameters.
+relative readout has fixed unit gains/zero offsets. Calcium-scale groups are
+present in the tied representation but marked non-trainable and fixed at effective
+scale one. This applies to the first, prepared and joint-classification runs. An
+earlier version of this paragraph incorrectly called calcium scale learned; the
+saved checkpoint trainability flags and values establish that it was fixed.
 
 Each full-batch update sums exact response adjoints over the training target
 aggregates, weighted by original observed sample weight. The retained within-group
