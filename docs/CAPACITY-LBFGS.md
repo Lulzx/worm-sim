@@ -101,3 +101,22 @@ before interpreting subsequent progress; report any mismatch rather than
 silently treating it as a continuation. Use the command above with
 `--max-evaluations 1001 --max-iterations 1000` and output
 `runs/capacity-lbfgs-eval1001`. No model or objective settings change.
+
+Verify the repeated prefix with:
+
+```sh
+python3 scripts/audit_lbfgs_prefix.py \
+  --reference runs/capacity-lbfgs-eval201 \
+  --candidate runs/capacity-lbfgs-eval1001 \
+  --declaration configs/capacity-lbfgs-long.json \
+  --output runs/lbfgs-prefix-complete.json
+```
+
+The verifier checks the declaration's reference hashes and requires identical
+input, objective, backend-source and optimizer settings apart from the declared
+budgets. It compares all trial metrics and accepted-iterate scalar records,
+including evaluation/iteration indices, within absolute tolerance 1e-10. Only
+elapsed time is excluded. A live partial final line is ignored; missing complete
+rows reject full verification. `--allow-partial` emits an explicitly incomplete
+progress receipt and must not be treated as verification of the full prefix.
+This check does not establish bitwise equality of parameters or curvature state.
