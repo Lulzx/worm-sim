@@ -1,0 +1,20 @@
+{
+  "evidence_hash": "28633bafc09afac3c53eb24d76e038774f9d1470182233a4f8d4b50e07d47152",
+  "split_hash": "2d291f63668345396d9b08e984581841db7b8912897405993ba258bf9f013f47",
+  "model": "connectome-lds-shared-kernel",
+  "free_parameters": 6194,
+  "prediction_source_commit": "11330bc2a459fdf3ac6f3fe1275190ba16bccebd",
+  "partition": "test",
+  "pairs": 1758,
+  "detected": 82,
+  "not_detected": 1676,
+  "detected_and_equivalent": 19,
+  "auroc": {
+    "value": 0.6861866232027476,
+    "positive_pairs": 82,
+    "negative_pairs": 1676,
+    "positive_weight": 82.0,
+    "negative_weight": 1676.0
+  },
+  "interpretation": "One unit-weighted score per ordered non-self pair. Positive means published detection q below the declared threshold; negative means not detected, not proven absence. Missing q is excluded. Equivalence evidence is retained separately. Lineage declarations are checked but do not prove training information access."
+}

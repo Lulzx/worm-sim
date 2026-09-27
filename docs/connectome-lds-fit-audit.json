@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "source_commit": "11330bc2a459fdf3ac6f3fe1275190ba16bccebd",
+  "selected_iteration": 3,
+  "config": {
+    "iterations": 3,
+    "kernel_lags": 39,
+    "ridge": 0.0001,
+    "cap": 0.995
+  },
+  "selection": [
+    {
+      "iteration": 0,
+      "validation_mse": 0.04200919731175989,
+      "validation_correlation": -0.31405388379382193,
+      "defined_trace_correlations": 155,
+      "training_step": null
+    },
+    {
+      "iteration": 1,
+      "validation_mse": 0.04017477673745938,
+      "validation_correlation": 0.006705368044223032,
+      "defined_trace_correlations": 11746,
+      "training_step": {
+        "preceding_negative_log_likelihood": 1722575.659713094,
+        "observations": 7589040,
+        "transitions": 110838,
+        "fitted_noise_outputs": 205,
+        "unprojected_transition_norm": 0.948873357073615,
+        "elapsed_seconds": 318.435862459
+      }
+    },
+    {
+      "iteration": 2,
+      "validation_mse": 0.040145194306602794,
+      "validation_correlation": 0.0044960828798786745,
+      "defined_trace_correlations": 11746,
+      "training_step": {
+        "preceding_negative_log_likelihood": -116251.88409455681,
+        "observations": 7589040,
+        "transitions": 110838,
+        "fitted_noise_outputs": 205,
+        "unprojected_transition_norm": 0.9710557659967564,
+        "elapsed_seconds": 329.23589275
+      }
+    },
+    {
+      "iteration": 3,
+      "validation_mse": 0.040085322613056924,
+      "validation_correlation": 0.0018675828731208545,
+      "defined_trace_correlations": 11746,
+      "training_step": {
+        "preceding_negative_log_likelihood": -1529128.3103329735,
+        "observations": 7589040,
+        "transitions": 110838,
+        "fitted_noise_outputs": 205,
+        "unprojected_transition_norm": 0.9804551163869013,
+        "elapsed_seconds": 314.713897208
+      }
+    }
+  ],
+  "independent_trace_scores": {
+    "validation": {
+      "pooled_mse": 0.04008532261305745,
+      "zero_response_mse": 0.042458845587192255,
+      "macro_trace_correlation": 0.0018675828731208647,
+      "defined_trace_correlations": 11746
+    },
+    "test": {
+      "pooled_mse": 0.04734483559551986,
+      "zero_response_mse": 0.05003565246791083,
+      "macro_trace_correlation": 0.045285722730100925,
+      "defined_trace_correlations": 12588
+    }
+  },
+  "max_dense_impulse_error": 4.440892098500626e-16,
+  "nominal_free_parameters": 6194,
+  "dataset_file_sha256": "2063f69753f9ab0dce9ee489214fc3eb641c451651a09cc4b2ee81f261df4b2b",
+  "split_file_sha256": "c3002a03460f7685f71bcddf2be58c78e8ec35a410abe4a5eb3c2b9f11375438",
+  "neuron_ids_sha256": "a4bd11eaa6a6a3f16863d14046e36d157fd6cd5d4b177570469285cbe06882d4",
+  "selected_model_sha256": "54bcfc624409b4b5ae7054b2f479b579a6bd3011bb52ebefcf5d3d134934e404",
+  "audit_script_sha256": "ddcc0c95f9a3f872c61b180176f8043682bc6fbc3c70f9441cafb1d1d3806e53",
+  "artifacts": {
+    "iteration-0.json": "08ed11f1dba6901e15606f0587894d8b784f7b5feb50498ec1c194d4d8de7485",
+    "iteration-1.json": "b705224c26f4eb3dfe57e17dc29fe3ae17f06e89b2009093f4fd28e40d6116cf",
+    "iteration-2.json": "27656cb9d09bca3a1a6dc3baaf113a238fca025eacf1065f2973e8abb993f1fb",
+    "iteration-3.json": "54bcfc624409b4b5ae7054b2f479b579a6bd3011bb52ebefcf5d3d134934e404",
+    "validation-predictions.json": "3d9554a1e0daa3159e5cfb4594a5e402d345bb4211bb37878b31d463eb1317f9",
+    "validation-report.json": "eb1420e20c82b151d85e18d2a630af0fe60ddc9957574a2f675f1e7d5409fbb7",
+    "test-predictions.json": "80453688e3582f4c936a02454797c29fd1444576c463d08ad02a142b8f4e7df1",
+    "test-report.json": "bc1c25cc197a807cd28960a37fc1ab828f066ef660a8a2d1989177eebd6568fa"
+  },
+  "limitations": "Checks numerical propagation, trace scores, declared lineage and validation checkpoint selection. Does not independently refit EM, establish biological acceptance, or prove absence of upstream preprocessing leakage. Zero-response control has undefined trace correlation and constant-score AUROC 0.5 when both classes exist.",
+  "independent_test_pair_audit": {
+    "pairs": 1758,
+    "positive": 82,
+    "negative": 1676,
+    "auroc": 0.6861866232027476,
+    "max_dense_area_error": 1.1102230246251565e-16,
+    "evidence_file_sha256": "28633bafc09afac3c53eb24d76e038774f9d1470182233a4f8d4b50e07d47152",
+    "prediction_file_sha256": "880e2bf85567887771265cbf1338ed559ab30173a07e4d1898cbbcf5fb540131",
+    "report_file_sha256": "5301f947b10ea2060031289060a8ffdec3caaf7f2a379587781897dde73a9722",
+    "uncertainty_file_sha256": "8823edbee7a6090acbe5a750d898027ff0c619348dc44661be6ad67eea11e088",
+    "bootstrap_boundary": "Intervals copied from native cluster bootstrap, not independently recomputed by this audit."
+  }
+}

@@ -86,6 +86,8 @@ def main():
     parser.add_argument('--split', default='data/randi-neuron-split.json')
     parser.add_argument('--ids', default='data/c302-neuron-ids.json')
     parser.add_argument('--output', required=True)
+    parser.add_argument('--evaluation', help='Optional completed test pair-evaluation directory')
+    parser.add_argument('--evidence', default='runs/randi-pairs.json')
     args = parser.parse_args()
     run = Path(args.run)
     model = load(run/'selected.json')
@@ -155,6 +157,29 @@ def main():
             file_hashes[f'{partition}-{suffix}.json'] = digest(run/f'{partition}-{suffix}.json')
     assert abs(results['validation']['pooled_mse']-best['validation_mse']) < 1e-10
     receipt = {'schema_version':1, 'source_commit':model['source_commit'], 'selected_iteration':model['iteration'], 'config':config, 'selection':selection, 'independent_trace_scores':results, 'max_dense_impulse_error':max_error, 'nominal_free_parameters':report['free_parameters'], 'dataset_file_sha256':digest(args.data), 'split_file_sha256':digest(args.split), 'neuron_ids_sha256':digest(args.ids), 'selected_model_sha256':digest(run/'selected.json'), 'audit_script_sha256':digest(__file__), 'artifacts':file_hashes, 'limitations':'Checks numerical propagation, trace scores, declared lineage and validation checkpoint selection. Does not independently refit EM, establish biological acceptance, or prove absence of upstream preprocessing leakage. Zero-response control has undefined trace correlation and constant-score AUROC 0.5 when both classes exist.'}
+    if args.evaluation:
+        evaluation = Path(args.evaluation)
+        pair_prediction = load(evaluation/'pair-predictions.json')
+        pair_report = load(evaluation/'pair-report.json')
+        evidence = load(args.evidence)
+        test_targets = target_sets[2]
+        expected = {(p['stimulated'], p['responding']): p for p in evidence['pairs'] if p['stimulated'] in test_targets}
+        actual = {(p['stimulated'], p['responding']): p['score'] for p in pair_prediction['pairs']}
+        assert len(actual) == len(pair_prediction['pairs']) and set(actual) == set(expected)
+        assert pair_prediction['training_trials'] == split['train'] and pair_prediction['selection_trials'] == split['validation']
+        assert pair_prediction['source_commit'] == model['source_commit']
+        grids = {tuple(indexed[i]['recording']['times']) for i in split['test']}
+        assert len(grids) == 1
+        frames = len(next(iter(grids)))
+        cache = {target: impulse(model, name_index[target], frames) for target in test_targets}
+        area_error = max(abs(score-float(np.abs(cache[s][:,name_index[r]]).sum()*model['dynamics']['sample_dt'])) for (s,r),score in actual.items())
+        assert area_error < 1e-10
+        positive = np.array([actual[k] for k,p in expected.items() if p['q'] < evidence['detection_q_threshold']])
+        negative = np.array([actual[k] for k,p in expected.items() if p['q'] >= evidence['detection_q_threshold']])
+        # Independent direct Mann-Whitney comparison, no sorted-score algorithm.
+        auc = float(np.mean((positive[:,None] > negative).astype(float) + 0.5*(positive[:,None] == negative)))
+        assert abs(auc-pair_report['auroc']['value']) < 1e-12
+        receipt['independent_test_pair_audit'] = {'pairs':len(actual),'positive':len(positive),'negative':len(negative),'auroc':auc,'max_dense_area_error':area_error,'evidence_file_sha256':digest(args.evidence),'prediction_file_sha256':digest(evaluation/'pair-predictions.json'),'report_file_sha256':digest(evaluation/'pair-report.json'),'uncertainty_file_sha256':digest(evaluation/'uncertainty.json'),'bootstrap_boundary':'Intervals copied from native cluster bootstrap, not independently recomputed by this audit.'}
     Path(args.output).write_text(json.dumps(receipt, indent=2)+'\n')
     print(json.dumps(results, indent=2))
 

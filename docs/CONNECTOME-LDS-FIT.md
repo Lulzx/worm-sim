@@ -89,8 +89,8 @@ target/release/examples/benchmark_connectome_lds data/c302-herm.wsc runs/randi-d
 The workload command uses the lexically first **training** trial and measures one
 full-state E/M step with 39 kernel lags for its 40-frame window. It does not fit a
 population or evaluate validation/test data. The initial window timing must not
-be presented as whole-fit throughput or biological acceptance. Population fitting,
-validation selection, held-out trace/pair scoring and uncertainty remain pending.
+be presented as whole-fit throughput or biological acceptance. The first completed
+population fit and its separate evaluation are reported below.
 
 ### Exact covariance reuse
 
@@ -121,7 +121,8 @@ Measured on the local Apple M4 Pro with release Rust, f64 arithmetic and source
 and lag covariance arrays. The one-window E/M step took 2.041 s. The
 [receipt](connectome-lds-reuse-workload.json) pins the training trial, graph,
 dataset, split and timing boundaries. Measurements use diagonal initialization;
-trained-model and distinct-window population timing remain unmeasured.
+these microbenchmark timings do not represent trained-model throughput. Full
+population E/M timings are reported separately below.
 
 ## First population protocol
 
@@ -152,9 +153,9 @@ WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release --example 
 target/release/examples/fit_connectome_lds data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json configs/connectome-lds-first-fit.json runs/connectome-lds-first-fit
 ```
 
-This first protocol produces trace scores. Published pair classification and
-cluster uncertainty remain separate required evaluation steps; a point score
-alone is not evidence of improvement over the required baseline.
+This fit command produces trace scores. Published pair classification and cluster
+uncertainty are computed by the separate evaluator below; a point score alone is
+not evidence of improvement over the required baseline.
 
 ## Frozen-fit pair ranking and uncertainty
 
@@ -206,3 +207,49 @@ python3 scripts/audit_connectome_fit.py --output runs/connectome-lds-fit-audit.j
 The audit requires a completed run and NumPy. Small analytical tests check dense
 impulse timing/input routing, confidence weighting, missing samples and undefined
 correlations. They run in CI using the existing pinned NumPy environment.
+
+## First completed population result
+
+Training source `11330bc2a459fdf3ac6f3fe1275190ba16bccebd` completed all three
+predeclared EM updates on 2,842 training windows. Validation MSE selected update 3.
+Summed E/M timers were 962.39 seconds on the local Apple M4 Pro (f64 Rust CPU),
+excluding file loading, checkpoint serialization, validation and final scoring.
+The model has 6,194 nominal fitted parameters. This is the shared-kernel,
+302-state adaptation described above, not unchanged Creamer training.
+
+| Partition | Model MSE | Zero-response MSE | Mean defined trace correlation |
+|---|---:|---:|---:|
+| Validation | 0.0400853 | 0.0424588 | 0.0018676 |
+| Test | 0.0473448 | 0.0500357 | 0.0452857 |
+
+The test partition contains 166 trials, 15 stimulated identities and 67 recording
+IDs. All 12,588 test trace correlations are defined for the selected model.
+The test MSE is 5.38% lower than zero response as a point estimate; no paired
+significance claim is made. Trace correlation remains small.
+
+Published pair-detection AUROC is **0.68619** on 1,758 non-self pairs (82 detected,
+1,676 not detected). Its target-cluster bootstrap interval is **[0.62679, 0.75526]**.
+Only 13 stimulated identities have eligible pair labels: AVFR and VD1 have none
+under the fixed published-label eligibility rules. They remain in trace scoring.
+For comparison, constant pair scores have AUROC 0.5.
+
+Test trace-correlation intervals are [0.01344, 0.06817] when resampling the 15
+stimulated identities and [0.02861, 0.06337] when resampling 67 recordings. These
+are separate marginal analyses, with the crossed-dependence limitations stated
+above. All 2,000 replicates were defined in this result.
+
+The [independent audit](connectome-lds-fit-audit.json) verifies every candidate's
+validation MSE, selected checkpoint, every test/validation impulse prediction,
+trace scores, every test pair's integrated response score, and pair AUROC using
+direct positive-versus-negative comparisons. It pins artifact hashes and training
+source. [Pair scoring](connectome-lds-fit-pairs.json) and
+[uncertainty](connectome-lds-fit-uncertainty.json) retain source identities and
+coverage. Native bootstrap intervals have not been independently recomputed.
+
+```sh
+python3 scripts/audit_connectome_fit.py --evaluation runs/connectome-lds-first-fit-evaluation --output runs/connectome-lds-fit-audit.json
+```
+
+This establishes a runnable held-out-neuron linear comparator. A Level 0 atlas
+population fit and comparison are still required; this result does not establish
+biological-model success or completion of Task 1/the specification.
