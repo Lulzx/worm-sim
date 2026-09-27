@@ -30,6 +30,8 @@ pub struct FitConfig {
     pub sharing: Sharing,
     #[serde(default)]
     pub classification: Option<ClassificationConfig>,
+    #[serde(default)]
+    pub molecular_sign_priors: Option<crate::molecular::SignPriors>,
 }
 /// Fixed before fitting; validation selection continues to use trace MSE only.
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -135,6 +137,9 @@ impl AtlasModel {
     fn validate(&self, data: &Dataset, graph: &IndexedGraph, split: &Split) -> Result<Model> {
         split.validate(data, graph)?;
         self.config.validate()?;
+        if let Some(priors) = &self.config.molecular_sign_priors {
+            priors.probabilities(graph)?;
+        }
         match (
             &self.config.classification,
             &self.classifier,
@@ -257,7 +262,7 @@ impl AtlasModel {
             schema_version: 1,
             dataset_hash: self.dataset_hash.clone(),
             split_hash: self.split_hash.clone(),
-            model: if self.config.preparation_seconds == 0.0 {
+            model: (if self.config.preparation_seconds == 0.0 {
                 format!(
                     "level0-atlas-shared-positive-current-fixed-initial-state{}",
                     if self.classifier.is_some() {
@@ -276,6 +281,10 @@ impl AtlasModel {
                         ""
                     }
                 )
+            }) + if self.config.molecular_sign_priors.is_some() {
+                "-molecular-sign-priors"
+            } else {
+                ""
             },
             free_parameters: self.free_parameters(),
             training_trials: self.training_trials.clone(),
@@ -315,6 +324,11 @@ pub fn fit_select_with_evidence(
     mut checkpoint: impl FnMut(&AtlasModel, &EpochReport) -> Result<()>,
 ) -> Result<(AtlasModel, Vec<EpochReport>)> {
     config.validate()?;
+    let sign_probabilities = config
+        .molecular_sign_priors
+        .as_ref()
+        .map(|p| p.probabilities(graph))
+        .transpose()?;
     let labels = match (&config.classification, evidence) {
         (Some(_), Some(evidence)) => Some(atlas_classification::training_labels(
             evidence, data, graph, split,
@@ -362,7 +376,10 @@ pub fn fit_select_with_evidence(
     let model = Model::new(graph.clone())?;
     let raw = forecast_defaults(&model);
     let initial = model.initial(&model.prepare(&raw)?);
-    let parameters = TiedParameters::new(&model, &raw, config.sharing.clone())?;
+    let mut parameters = TiedParameters::new(&model, &raw, config.sharing.clone())?;
+    if let Some(probabilities) = &sign_probabilities {
+        parameters.initialize_sign_priors(&model, probabilities)?;
+    }
     let kernel_raw: Vec<_> = (0..config.kernel_lags)
         .map(|t| inverse_softplus(0.2 * (-(t as f64) * sample_dt / 2.).exp()))
         .collect();
@@ -498,10 +515,11 @@ pub fn fit_select_with_evidence(
                 classification_bce = Some(bce);
             }
 
-            let (mut loss, prior) = current.parameters.prior(
+            let (mut loss, prior) = current.parameters.prior_with_sign_probabilities(
                 &model,
                 config.prior_strength,
                 config.sign_prior_strength,
+                sign_probabilities.as_deref(),
             )?;
             for (a, b) in gradient.iter_mut().zip(prior) {
                 *a += b;

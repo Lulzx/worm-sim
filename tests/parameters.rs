@@ -96,3 +96,85 @@ fn tied_current_projection_sums_shared_neuron_gradients() {
     weights.neuron_to_group[0] = 2;
     assert!(weights.currents(&features).is_err());
 }
+
+#[test]
+fn molecular_sign_initialization_respects_ties_and_overlay_gradients() {
+    use wormsim::math::Scalar;
+    let model = Model::new(fixtures::synthetic(4, 2, 0).compile().unwrap()).unwrap();
+    let sharing = Sharing {
+        classes: model
+            .graph
+            .names
+            .iter()
+            .map(|n| (n.clone(), "same".into()))
+            .collect(),
+        ..Default::default()
+    };
+    let mut tied = TiedParameters::new(&model, &forecast_defaults(&model), sharing).unwrap();
+    let before = tied.clone();
+    let p: Vec<_> = (0..model.pre.len())
+        .map(|i| if i % 3 == 0 { 0.9 } else { 0.5 })
+        .collect();
+    tied.initialize_sign_priors(&model, &p).unwrap();
+    let raw = tied.expand(&model).unwrap();
+    let mean = p.iter().sum::<f64>() / p.len() as f64;
+    let start = 6 * model.n() + model.pre.len();
+    for &q in &raw.raw[start..start + p.len()] {
+        assert!((q.sigmoid() - mean).abs() < 1e-12);
+    }
+    for (a, b) in before.groups.iter().zip(&tied.groups) {
+        if !a.name.starts_with("chemical_sign/") {
+            assert_eq!(a.value, b.value);
+            assert_eq!(a.prior_mean, b.prior_mean);
+        }
+    }
+    let (_, g) = tied
+        .prior_with_sign_probabilities(&model, 0.2, 0.3, Some(&p))
+        .unwrap();
+    assert!(g.iter().all(|v| v.abs() < 1e-12));
+    let index = tied.raw_to_group[start];
+    tied.groups[index].value += 0.2;
+    let (_, gradient) = tied
+        .prior_with_sign_probabilities(&model, 0.2, 0.3, Some(&p))
+        .unwrap();
+    let eps = 1e-5;
+    for (i, &derivative) in gradient.iter().enumerate() {
+        if !tied.groups[i].trainable {
+            continue;
+        }
+        let mut plus = tied.clone();
+        let mut minus = tied.clone();
+        plus.groups[i].value += eps;
+        minus.groups[i].value -= eps;
+        let fd = (plus
+            .prior_with_sign_probabilities(&model, 0.2, 0.3, Some(&p))
+            .unwrap()
+            .0
+            - minus
+                .prior_with_sign_probabilities(&model, 0.2, 0.3, Some(&p))
+                .unwrap()
+                .0)
+            / (2. * eps);
+        assert!((fd - derivative).abs() < 1e-9);
+    }
+    assert_eq!(
+        tied.prior(&model, 0.2, 0.3).unwrap(),
+        tied.prior_with_sign_probabilities(&model, 0.2, 0.3, None)
+            .unwrap()
+    );
+    let original: Vec<_> = model.graph.chemical.iter().map(|e| e.3).collect();
+    assert_eq!(
+        tied.prior(&model, 0.2, 0.3).unwrap(),
+        tied.prior_with_sign_probabilities(&model, 0.2, 0.3, Some(&original))
+            .unwrap()
+    );
+    assert!(tied.initialize_sign_priors(&model, &[0.9]).is_err());
+    let mut invalid = p.clone();
+    invalid[0] = 0.;
+    assert!(tied.initialize_sign_priors(&model, &invalid).is_err());
+    invalid[0] = f64::NAN;
+    assert!(
+        tied.prior_with_sign_probabilities(&model, 0.2, 0.3, Some(&invalid))
+            .is_err()
+    );
+}

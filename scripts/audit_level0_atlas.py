@@ -5,6 +5,7 @@ Optionally replays the nonlinear ODE using independent NumPy dynamics; never ref
 """
 import argparse
 import json
+import hashlib
 from pathlib import Path
 import numpy as np
 from audit_connectome_fit import load, digest, trace_scores
@@ -34,6 +35,42 @@ def classification_scores(model, prediction, indexed, pairs, threshold):
             'brier': float(np.mean((probability-y)**2)), 'mean_probability': float(probability.mean())}
 
 
+def audit_molecular_initialization(config, initial, graph, evidence):
+    """Check the declared projection and tied-prior optimum, without a Rust call."""
+    prior = config['molecular_sign_priors']
+    encoded = json.dumps(evidence, separators=(',', ':'), ensure_ascii=False).encode()
+    assert hashlib.sha256(encoded).hexdigest() == prior['evidence_hash']
+    for field in ['graph_hash', 'catalog_hash', 'expression_hash', 'mapping_hash']:
+        assert prior[field] == evidence[field]
+    edges = sorted(graph['chemical'], key=lambda e: (e['pre'], e['post']))
+    assert [(e['pre'], e['post']) for e in edges] == [(e['pre'], e['post']) for e in evidence['edges']]
+    positive = [i for i,e in enumerate(evidence['edges']) if e['state'] == 'excitatory']
+    negative = [i for i,e in enumerate(evidence['edges']) if e['state'] == 'inhibitory']
+    assert prior['excitatory_edges'] == positive and prior['inhibitory_edges'] == negative
+    confidence = prior['confidence']
+    assert .5 < confidence < 1.
+    probability = np.full(len(edges), .5)
+    probability[positive] = confidence
+    probability[negative] = 1.-confidence
+    start = 6*len(graph['neurons'])+len(edges)
+    groups = initial['parameters']['groups']
+    mapping = initial['parameters']['raw_to_group'][start:start+len(edges)]
+    assert len(mapping) == len(edges)
+    means = {}
+    for group in sorted(set(mapping)):
+        target = float(np.mean(probability[np.asarray(mapping)==group]))
+        expected = float(np.log(target/(1.-target)))
+        assert groups[group]['name'].startswith('chemical_sign/') and groups[group]['trainable']
+        assert abs(groups[group]['value']-expected) < 1e-12
+        assert abs(groups[group]['prior_mean']-expected) < 1e-12
+        means[group] = target
+    return {'evidence_hash':prior['evidence_hash'],'confidence_assumption':confidence,
+            'excitatory_edges':len(positive),'inhibitory_edges':len(negative),
+            'neutral_edges':len(edges)-len(positive)-len(negative),
+            'tied_sign_groups':len(means),'nonneutral_initial_sign_groups':sum(abs(v-.5)>1e-12 for v in means.values()),
+            'scope':'Checks projection against the supplied molecular artifact and logit(mean edge probability) initialization. Source-array evidence was audited separately. Does not replay optimization or prove physiological polarity.'}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run', default='runs/level0-atlas-first-fit')
@@ -42,6 +79,7 @@ def main():
     parser.add_argument('--split', default='data/randi-neuron-split.json')
     parser.add_argument('--evidence', default='runs/randi-pairs.json')
     parser.add_argument('--output', required=True)
+    parser.add_argument('--molecular-evidence', help='Required for a molecular-prior fit audit, together with --graph-json')
     parser.add_argument('--graph-json', help='Canonical graph JSON from wormsim unpack; enables independent ODE replay')
     args = parser.parse_args()
     run, evaluation = Path(args.run), Path(args.evaluation)
@@ -125,6 +163,12 @@ def main():
     auc = float(np.mean((positive[:,None]>negative).astype(float)+0.5*(positive[:,None]==negative)))
     assert abs(auc-load(evaluation/'pair-report.json')['auroc']['value']) < 1e-12
     receipt = {'schema_version':1,'source_commit':model['source_commit'],'dataset_hash':model['dataset_hash'],'split_hash':model['split_hash'],'selected_epoch':model['epoch'],'config':config,'selection':selection,'free_parameters':report['free_parameters'],'independent_saved_trace_scores':scores,'independent_pair_auroc':auc,'max_pair_area_error':area_error,'validation_half_step':load(run/'validation-half-step.json'),'selected_model_sha256':digest(run/'selected.json'),'dataset_file_sha256':digest(args.data),'split_file_sha256':digest(args.split),'evidence_file_sha256':digest(args.evidence),'audit_script_sha256':digest(__file__),'shared_score_script_sha256':digest(Path(__file__).with_name('audit_connectome_fit.py')),'artifacts':hashes,'limitations':'Independent recomputation of saved-output MSE, correlation, response area and direct pairwise AUROC. Selection and declared lineage checked. Nonlinear ODE, optimization and bootstrap draws are not independently replayed here. See gradient tests and selected-checkpoint half-step check for separate numerical evidence. Shared fixed preparation seed, assumed positive shared input, neutral unannotated signs and previously inspected test cohort remain limitations.'}
+    if config.get('molecular_sign_priors') is not None:
+        assert args.molecular_evidence and args.graph_json, 'Molecular-prior audit requires evidence and canonical graph'
+        molecular = load(args.molecular_evidence)
+        receipt['molecular_initialization'] = audit_molecular_initialization(config, load(run/'epoch-0.json'), load(args.graph_json), molecular)
+        receipt['molecular_evidence_file_sha256'] = digest(args.molecular_evidence)
+        receipt['limitations'] = receipt['limitations'].replace('neutral unannotated signs', 'expression-based sign-prior assumptions')
     if model.get('classifier') is not None:
         assert model['classification_evidence_hash'] == predicted_pairs['evidence_hash']
         classifier = model['classifier']

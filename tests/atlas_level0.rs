@@ -51,6 +51,7 @@ fn fit_and_impulses_exclude_held_out_fluorescence() {
     let (graph, mut data, split) = fixture();
     let config = FitConfig {
         classification: None,
+        molecular_sign_priors: None,
         epochs: 2,
         dt: 0.02,
         preparation_seconds: 0.4,
@@ -151,6 +152,7 @@ fn joint_fit_uses_training_labels_and_preserves_mse_selection() {
             .collect(),
     };
     let config = FitConfig {
+        molecular_sign_priors: None,
         epochs: 2,
         dt: 0.02,
         preparation_seconds: 0.4,
@@ -284,6 +286,85 @@ fn joint_fit_uses_training_labels_and_preserves_mse_selection() {
     assert!(
         broken
             .predict(&data, &graph, &split, Partition::Test)
+            .is_err()
+    );
+}
+
+#[test]
+fn molecular_prior_fit_preserves_graph_and_excludes_test_fluorescence() {
+    use wormsim::{math::Scalar, molecular::SignPriors};
+    let (graph, mut data, split) = fixture();
+    let graph_before = serde_json::to_value(&graph.graph).unwrap();
+    let priors = SignPriors {
+        graph_hash: graph.hash.clone(),
+        evidence_hash: "1".repeat(64),
+        catalog_hash: "2".repeat(64),
+        expression_hash: "3".repeat(64),
+        mapping_hash: "4".repeat(64),
+        confidence: 0.75,
+        excitatory_edges: vec![0],
+        inhibitory_edges: vec![1],
+    };
+    let config = FitConfig {
+        molecular_sign_priors: Some(priors),
+        classification: None,
+        epochs: 2,
+        dt: 0.02,
+        preparation_seconds: 0.4,
+        learning_rate: 0.01,
+        kernel_lags: 1,
+        prior_strength: 0.01,
+        sign_prior_strength: 0.01,
+        kernel_prior_strength: 0.01,
+        sharing: Default::default(),
+    };
+    let mut checkpoints = vec![];
+    let (selected, _) = atlas_level0::fit_select(&data, &graph, &split, config.clone(), |m, _| {
+        checkpoints.push(m.clone());
+        Ok(())
+    })
+    .unwrap();
+    let network = wormsim::model::Model::new(graph.clone()).unwrap();
+    let initial = checkpoints[0].parameters.expand(&network).unwrap();
+    let start = 6 * network.n() + network.pre.len();
+    for (i, p) in [0.75, 0.25, 0.5].iter().enumerate() {
+        assert!((initial.raw[start + i].sigmoid() - p).abs() < 1e-12);
+    }
+    assert_eq!(serde_json::to_value(&graph.graph).unwrap(), graph_before);
+    assert_eq!(selected.dataset_hash, split.dataset_hash);
+    for trial in &mut data.trials {
+        if split.test.contains(&trial.id) {
+            for t in &mut trial.recording.traces {
+                t.values.fill(Some(999.));
+            }
+        }
+    }
+    let mut changed_split = split.clone();
+    changed_split.dataset_hash = data.content_hash().unwrap();
+    let mut changed = vec![];
+    let (other, _) = atlas_level0::fit_select(&data, &graph, &changed_split, config, |m, _| {
+        changed.push(m.clone());
+        Ok(())
+    })
+    .unwrap();
+    assert_eq!(selected.epoch, other.epoch);
+    for (a, b) in checkpoints.iter().zip(&changed) {
+        assert_eq!(
+            serde_json::to_value(&a.parameters).unwrap(),
+            serde_json::to_value(&b.parameters).unwrap()
+        );
+        assert_eq!(a.kernel_raw, b.kernel_raw);
+    }
+    let mut invalid = other;
+    invalid
+        .config
+        .molecular_sign_priors
+        .as_mut()
+        .unwrap()
+        .graph_hash = "0".repeat(64);
+    assert!(
+        invalid
+            .predict(&data, &graph, &changed_split, Partition::Test)
             .is_err()
     );
 }

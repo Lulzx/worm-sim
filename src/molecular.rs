@@ -435,3 +435,124 @@ pub fn infer(
     }
     Ok(Evidence { schema_version:1, graph_hash:graph.hash.clone(), catalog_hash:content_hash(catalog)?, expression_hash:content_hash(expression)?, mapping_hash:content_hash(mapping)?, rule:"Dominant plus alternative transmitter; source-threshold TPM > 0 ionotropic receptor evidence. Both polarities => conflict. Any missing candidate => incomplete unless conflict is already demonstrated. No anatomical edges added; no AWC ON/OFF side assignment.".into(), edges })
 }
+
+/// Compact projection of an audited evidence artifact into a fitting prior.
+/// Edge indices refer to the canonical chemical-edge order of graph_hash.
+/// All edges not listed are neutral; full uncertainty reasons remain in evidence.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct SignPriors {
+    pub graph_hash: String,
+    pub evidence_hash: String,
+    pub catalog_hash: String,
+    pub expression_hash: String,
+    pub mapping_hash: String,
+    /// Declared modeling confidence, not an estimated biological probability.
+    pub confidence: f64,
+    pub excitatory_edges: Vec<usize>,
+    pub inhibitory_edges: Vec<usize>,
+}
+impl SignPriors {
+    pub fn from_evidence(
+        evidence: &Evidence,
+        graph: &IndexedGraph,
+        confidence: f64,
+    ) -> Result<Self> {
+        if evidence.schema_version != 1
+            || evidence.graph_hash != graph.hash
+            || evidence.edges.len() != graph.chemical.len()
+            || evidence.rule.trim().is_empty()
+        {
+            return Err("molecular evidence graph or schema mismatch".into());
+        }
+        let mut excitatory_edges = vec![];
+        let mut inhibitory_edges = vec![];
+        for (i, (edge, anatomy)) in evidence.edges.iter().zip(&graph.graph.chemical).enumerate() {
+            let pos = !edge.expressed_excitatory.is_empty();
+            let neg = !edge.expressed_inhibitory.is_empty();
+            let missing = !edge.missing_receptor_genes.is_empty();
+            let nt = !edge.transmitters.is_empty();
+            let coherent = match edge.state {
+                EvidenceState::Excitatory => nt && pos && !neg && !missing,
+                EvidenceState::Inhibitory => nt && !pos && neg && !missing,
+                EvidenceState::Conflicting => nt && pos && neg,
+                EvidenceState::IncompleteReceptors => nt && missing && !(pos && neg),
+                EvidenceState::NoDetectedReceptor | EvidenceState::UnmappedPostsynapticClass => {
+                    nt && !pos && !neg && !missing
+                }
+                EvidenceState::NoTransmitterEvidence => !nt && !pos && !neg && !missing,
+            };
+            let invalid_list = [
+                &edge.transmitters,
+                &edge.expressed_excitatory,
+                &edge.expressed_inhibitory,
+                &edge.missing_receptor_genes,
+            ]
+            .iter()
+            .any(|v| v.iter().any(|s| s.trim().is_empty()) || v.windows(2).any(|p| p[0] >= p[1]));
+            if edge.pre != anatomy.pre
+                || edge.post != anatomy.post
+                || !coherent
+                || invalid_list
+                || edge.missing_receptor_genes.iter().any(|g| {
+                    edge.expressed_excitatory.contains(g) || edge.expressed_inhibitory.contains(g)
+                })
+            {
+                return Err("inconsistent molecular evidence or chemical-edge ordering".into());
+            }
+            match edge.state {
+                EvidenceState::Excitatory => excitatory_edges.push(i),
+                EvidenceState::Inhibitory => inhibitory_edges.push(i),
+                _ => {}
+            }
+        }
+        let out = Self {
+            graph_hash: graph.hash.clone(),
+            evidence_hash: content_hash(evidence)?,
+            catalog_hash: evidence.catalog_hash.clone(),
+            expression_hash: evidence.expression_hash.clone(),
+            mapping_hash: evidence.mapping_hash.clone(),
+            confidence,
+            excitatory_edges,
+            inhibitory_edges,
+        };
+        out.probabilities(graph)?;
+        Ok(out)
+    }
+    pub fn probabilities(&self, graph: &IndexedGraph) -> Result<Vec<f64>> {
+        let valid_hash = |s: &str| s.len() == 64 && s.bytes().all(|c| c.is_ascii_hexdigit());
+        if self.graph_hash != graph.hash
+            || ![
+                &self.evidence_hash,
+                &self.catalog_hash,
+                &self.expression_hash,
+                &self.mapping_hash,
+            ]
+            .iter()
+            .all(|s| valid_hash(s))
+            || !self.confidence.is_finite()
+            || self.confidence <= 0.5
+            || self.confidence >= 1.
+            || [&self.excitatory_edges, &self.inhibitory_edges]
+                .iter()
+                .any(|v| {
+                    v.iter().any(|&i| i >= graph.chemical.len())
+                        || v.windows(2).any(|p| p[0] >= p[1])
+                })
+            || self
+                .excitatory_edges
+                .iter()
+                .any(|i| self.inhibitory_edges.binary_search(i).is_ok())
+        {
+            return Err("invalid molecular sign-prior projection".into());
+        }
+        let mut out = vec![0.5; graph.chemical.len()];
+        for &i in &self.excitatory_edges {
+            out[i] = self.confidence;
+        }
+        for &i in &self.inhibitory_edges {
+            out[i] = 1. - self.confidence;
+        }
+        Ok(out)
+    }
+}

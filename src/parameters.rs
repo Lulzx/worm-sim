@@ -166,6 +166,35 @@ impl TiedParameters {
     pub fn free_parameters(&self) -> usize {
         self.groups.iter().filter(|g| g.trainable).count()
     }
+    /// Initialize each tied sign at logit(mean edge probability), the optimum
+    /// of its edge-uniform Bernoulli prior. Preserve ties and all other groups.
+    pub fn initialize_sign_priors(&mut self, model: &Model, probabilities: &[f64]) -> Result<()> {
+        validate_sign_probabilities(model, probabilities)?;
+        if probabilities.iter().any(|&p| p <= 0. || p >= 1.) {
+            return Err("sign initialization requires strictly interior probabilities".into());
+        }
+        self.expand(model)?;
+        let start = 6 * model.n() + model.pre.len();
+        let mut sums = BTreeMap::<usize, (f64, usize)>::new();
+        for (i, &p) in probabilities.iter().enumerate() {
+            let group = self.raw_to_group[start + i];
+            if !self.groups[group].name.starts_with("chemical_sign/")
+                || !self.groups[group].trainable
+            {
+                return Err("sign-prior initialization requires trainable sign groups".into());
+            }
+            let entry = sums.entry(group).or_default();
+            entry.0 += p;
+            entry.1 += 1;
+        }
+        for (group, (sum, count)) in sums {
+            let p = sum / count as f64;
+            let value = (p / (1. - p)).ln();
+            self.groups[group].value = value;
+            self.groups[group].prior_mean = value;
+        }
+        Ok(())
+    }
     /// Mean raw-coordinate shrinkage plus mean Bernoulli cross entropy of
     /// relaxed signs against graph priors. Unknown 0.5 stays explicitly neutral.
     pub fn prior(
@@ -174,6 +203,19 @@ impl TiedParameters {
         strength: f64,
         sign_strength: f64,
     ) -> Result<(f64, Vec<f64>)> {
+        self.prior_with_sign_probabilities(model, strength, sign_strength, None)
+    }
+    /// Explicit source overlay replaces graph sign priors without changing anatomy.
+    pub fn prior_with_sign_probabilities(
+        &self,
+        model: &Model,
+        strength: f64,
+        sign_strength: f64,
+        probabilities: Option<&[f64]>,
+    ) -> Result<(f64, Vec<f64>)> {
+        if let Some(p) = probabilities {
+            validate_sign_probabilities(model, p)?;
+        }
         if !strength.is_finite()
             || strength < 0.0
             || !sign_strength.is_finite()
@@ -196,6 +238,7 @@ impl TiedParameters {
         let m = model.pre.len();
         for (edge, &(_, _, _, prior)) in model.graph.chemical.iter().enumerate() {
             let index = 6 * n + m + edge;
+            let prior = probabilities.map_or(prior, |p| p[edge]);
             let q = raw.raw[index];
             let scale = sign_strength / m as f64;
             loss += scale * (q.softplus() - prior * q);
@@ -203,6 +246,16 @@ impl TiedParameters {
         }
         Ok((loss, grad))
     }
+}
+fn validate_sign_probabilities(model: &Model, probabilities: &[f64]) -> Result<()> {
+    if probabilities.len() != model.pre.len()
+        || probabilities
+            .iter()
+            .any(|p| !p.is_finite() || !(0.0..=1.0).contains(p))
+    {
+        return Err("invalid chemical sign prior probabilities".into());
+    }
+    Ok(())
 }
 /// Declared population-fit initialization, centered to the affine training readout.
 /// Time constants are starting assumptions, not biological estimates.

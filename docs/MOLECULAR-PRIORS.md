@@ -69,9 +69,9 @@ the network's excitatory/inhibitory balance.
 `Evidence::probabilities(confidence)` maps complete directional categories to
 confidence or 1−confidence and all other categories to 0.5. The confidence must
 lie strictly between 0.5 and 1 and is explicitly a modeling assumption, not a
-probability calibrated by the source. This conversion alone does not integrate
-the evidence into a fit; source-based parameter initialization and penalties are
-the next integration step. Existing atlas runs retain their neutral graph priors.
+probability calibrated by the source. The [atlas fitting integration](MOLECULAR-ATLAS-FIT.md) projects this evidence
+into source-linked parameter initialization and sign penalties. Earlier atlas
+runs retain their original neutral graph priors.
 
 ## Reproduction and checks
 
@@ -125,7 +125,5 @@ ionotropic expression rule. Do not collapse this table into a measured network
 sign ratio or tune the threshold against held-out response labels.
 
 All 93 Rust tests and strict all-target Clippy passed for the importer change.
-These checks establish source fidelity and declared rule behavior. The next step
-is to integrate the evidence into explicit parameter initialization and penalties,
-then perform a source-prior fit through the same benchmark; no improvement is
-claimed from this import alone.
+These checks establish source fidelity and declared rule behavior. The fitting integration is described in [MOLECULAR-ATLAS-FIT.md](MOLECULAR-ATLAS-FIT.md);
+no benchmark improvement is claimed from this import alone.

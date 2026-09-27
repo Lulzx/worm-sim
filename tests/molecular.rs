@@ -227,3 +227,37 @@ fn native_expression_import_checks_hash_orientation_missing_names_and_threshold(
     assert!(molecular::import_cengen(&path, &requested, 4, provenance).is_err());
     std::fs::remove_file(path).unwrap();
 }
+
+#[test]
+fn compact_sign_projection_keeps_uncertain_edges_neutral_and_checks_lineage() {
+    use wormsim::molecular::SignPriors;
+    let (graph, catalog, expression, mapping) = fixture();
+    let e = molecular::infer(&graph, &catalog, &expression, &mapping).unwrap();
+    let p = SignPriors::from_evidence(&e, &graph, 0.75).unwrap();
+    assert_eq!(
+        p.probabilities(&graph).unwrap(),
+        e.probabilities(0.75).unwrap()
+    );
+    assert_eq!(p.evidence_hash, molecular::content_hash(&e).unwrap());
+    let mut broken = p.clone();
+    broken.inhibitory_edges = broken.excitatory_edges.clone();
+    assert!(broken.probabilities(&graph).is_err());
+    let mut broken = p.clone();
+    broken.graph_hash = "0".repeat(64);
+    assert!(broken.probabilities(&graph).is_err());
+    let mut broken = p;
+    broken.excitatory_edges.push(graph.chemical.len());
+    assert!(broken.probabilities(&graph).is_err());
+    let mut broken = e.clone();
+    broken.edges.swap(0, 1);
+    assert!(SignPriors::from_evidence(&broken, &graph, 0.75).is_err());
+    let mut broken = e.clone();
+    let edge = broken
+        .edges
+        .iter_mut()
+        .find(|e| e.state == State::Conflicting)
+        .unwrap();
+    edge.state = State::Excitatory;
+    assert!(SignPriors::from_evidence(&broken, &graph, 0.75).is_err());
+    assert!(SignPriors::from_evidence(&e, &graph, 0.5).is_err());
+}
