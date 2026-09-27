@@ -1,0 +1,34 @@
+{
+  "measured_on": "2026-09-27",
+  "machine": "Apple M4 Pro",
+  "cpu_cores": 12,
+  "gpu_cores": 16,
+  "memory_bytes": 25769803776,
+  "backend": "one-thread CPU; GPU not used",
+  "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14) (Homebrew)",
+  "cargo": "cargo 1.97.1 (c980f4866 2026-06-30) (Homebrew)",
+  "rustflags": "-C target-cpu=native",
+  "profile": "release; thin LTO; codegen-units=1",
+  "binary_sha256": "cae49f0e77176eef2e6d76f671e2550930c2340a816d2bd4300d0eb0c1ba438e",
+  "source_sha256": {
+    "Cargo.lock": "4e0c558b65b9f63b46a475fc9bf55856dba89b6fc7bcd64a2f1f36eda43ac790",
+    "Cargo.toml": "3ce1ac004861ef99a707f39c22331ae0c0830e813ec982911ba5fe27cff026c5",
+    "src/codec.rs": "6f274aebdc5aef5b394826498c81e4c30b0b7859f0d214d3a88c10437c75c468",
+    "src/data.rs": "12e74519c7128da3a979bf1450158c065bea978f245c5f2f83500503bb422cd5",
+    "src/fit.rs": "6685dfe59869f8cdcaa58d16fdb7cc0a043155a68f9fdbd8705c2cce277b528a",
+    "src/fixtures.rs": "3bfa5106cf030f83a5913349a4d6bc3c9285173ecb970819abc99b42e3441c74",
+    "src/import.rs": "d1ad61c740569076b729130abc28ac77270bccc601f3e438ce59f4f9dd4b925b",
+    "src/lib.rs": "79f29ffd205cba240480833b6ebde4d311dc54388cb9668237f9a40b03d16977",
+    "src/main.rs": "ae296458acfc38932fa2d73104ce4f2b0b930a428bd5f2dbb6b87f8ec2730504",
+    "src/math.rs": "c4e0b3112e3223fe44313e8ef48bbbdc1f1e674601634baa8899d3175ccad172",
+    "src/model.rs": "42c2a09d991162954bbe9188d7a83bdcd7e746e85352238184209b4e79b6cc20",
+    "src/solve.rs": "cf4de4847903202a95c1e41a406c7ec2189d50cdb7d7b531d6941ea4240defcd",
+    "src/trace_codec.rs": "6a592786bb413ed2c59805e64f94d3f703bb23ce0341b91766d86284eccc5c6e"
+  },
+  "validation": {
+    "cargo_test_locked": "15 passed",
+    "cargo_clippy_locked_all_targets_deny_warnings": "passed",
+    "fit_small": "synthetic only; training 8.011728e-7 -> 1.760738e-10, held-out pulse MSE 7.986857e-11",
+    "cli_smoke": "AVAL pulse -> runs/aval.wst plus manifest"
+  }
+}

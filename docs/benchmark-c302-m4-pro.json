@@ -1,0 +1,52 @@
+{
+  "checksum": -389.45224417044,
+  "chemical_edges": 3638,
+  "decode_seconds": 0.0049195,
+  "edge_gate_reference_state_scalars": 4242,
+  "encode_seconds": 0.001410708,
+  "fixture": "data/c302-herm.wsc",
+  "gap_edges": 1080,
+  "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+  "json_bytes": 1395996,
+  "neurons": 302,
+  "simulation": {
+    "dt": 0.001,
+    "duration": 100.0,
+    "events": [],
+    "method": "rk4",
+    "save_dt": 1.0
+  },
+  "state_scalars": 906,
+  "target_arch": "aarch64",
+  "trace_benchmark": {
+    "columns": 302,
+    "config": {
+      "dt": 0.001,
+      "duration": 2.0,
+      "events": [
+        {
+          "amplitude": 1.0,
+          "end": 0.7,
+          "neuron": "ADAL",
+          "operation": "stimulate",
+          "start": 0.1
+        }
+      ],
+      "method": "rk4",
+      "save_dt": 0.005
+    },
+    "decode_seconds": 0.002218125,
+    "encode_seconds": 0.002566375,
+    "raw_f64_bytes": 968816,
+    "rows": 401,
+    "wst1_bytes": 729925,
+    "zstd_raw_f64_bytes": 885989
+  },
+  "wall_seconds": [
+    2.496909208,
+    2.523643583,
+    2.546356042
+  ],
+  "wsc1_bytes": 14382,
+  "zstd_json_bytes": 30674
+}

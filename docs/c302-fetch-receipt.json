@@ -1,0 +1,17 @@
+[
+  {
+    "url": "https://raw.githubusercontent.com/openworm/c302/6cd861f8ca4d3241ee9cf4627884caa930dab53c/c302/ConnectomeReader.py",
+    "sha256": "2320dde549f5ef949203215ecfcc859a57cfde50a2b9a38c8486d65e15fc7de9",
+    "bytes": 12020
+  },
+  {
+    "url": "https://raw.githubusercontent.com/openworm/c302/6cd861f8ca4d3241ee9cf4627884caa930dab53c/c302/data/herm_full_edgelist.csv",
+    "sha256": "142693f17556148d7f962835b18ac6dd5af18b7467eef61815ebc1dd5474c0ca",
+    "bytes": 245463
+  },
+  {
+    "url": "https://raw.githubusercontent.com/openworm/c302/6cd861f8ca4d3241ee9cf4627884caa930dab53c/LICENSE",
+    "sha256": "f5f2ef95445989d242132d0d1e72c9993b6da5e107170c24eaddffd3a81dfa65",
+    "bytes": 1065
+  }
+]

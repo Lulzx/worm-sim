@@ -1,0 +1,55 @@
+{
+  "checked_on": "2026-09-27",
+  "repositories": [
+    {
+      "repository": "openworm/c302",
+      "branch": "master",
+      "head": "6cd861f8ca4d3241ee9cf4627884caa930dab53c",
+      "head_date": "2026-08-03T10:46:54Z",
+      "license": "MIT",
+      "url": "https://github.com/openworm/c302"
+    },
+    {
+      "repository": "openworm/sibernetic",
+      "branch": "development",
+      "head": "2b3f1eb3770cb9e3142cf38391b40a1adf27c89d",
+      "head_date": "2026-05-28T16:27:34Z",
+      "license": "NOASSERTION",
+      "url": "https://github.com/openworm/sibernetic",
+      "license_file_review": "MIT; API reported NOASSERTION"
+    },
+    {
+      "repository": "Jessie940611/BAAIWorm",
+      "branch": "main",
+      "head": "b99ca5ab9c00aef739fceb1cf007bc50b06f2ccc",
+      "head_date": "2026-06-09T05:16:24Z",
+      "license": "Apache-2.0",
+      "url": "https://github.com/Jessie940611/BAAIWorm"
+    },
+    {
+      "repository": "Nondairy-Creamer/Creamer_LDS_2026",
+      "branch": "main",
+      "head": "bba43302d50a4947804d98b01779856e648237cc",
+      "head_date": "2026-05-11T16:26:42Z",
+      "license": "MIT",
+      "url": "https://github.com/Nondairy-Creamer/Creamer_LDS_2026"
+    },
+    {
+      "repository": "kairess/worm-whisperer",
+      "branch": "main",
+      "head": "327fd36e573b67ec040d345b8452c59badd4a343",
+      "head_date": "2026-09-11T08:07:32Z",
+      "license": "NOASSERTION",
+      "url": "https://github.com/kairess/worm-whisperer",
+      "license_file_review": "PolyForm Noncommercial 1.0.0; documentation CC BY-NC 4.0"
+    },
+    {
+      "repository": "francescorandi/wormneuroatlas",
+      "branch": "main",
+      "head": "b2e13d88b670efcb3438aeacba2ad4bd6c383933",
+      "head_date": "2025-08-24T18:47:55Z",
+      "license": "GPL-3.0",
+      "url": "https://github.com/francescorandi/wormneuroatlas"
+    }
+  ]
+}

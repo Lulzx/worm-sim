@@ -1,0 +1,52 @@
+{
+  "checksum": -302.1283907377658,
+  "chemical_edges": 6946,
+  "decode_seconds": 0.008997167,
+  "edge_gate_reference_state_scalars": 7550,
+  "encode_seconds": 0.002808417,
+  "fixture": "synthetic; not biological data",
+  "gap_edges": 906,
+  "graph_hash": "1990e204490baf9398ac17d8b74e23199ca501aab4534e3e3d34ae894a55750a",
+  "json_bytes": 1285366,
+  "neurons": 302,
+  "simulation": {
+    "dt": 0.001,
+    "duration": 100.0,
+    "events": [],
+    "method": "rk4",
+    "save_dt": 1.0
+  },
+  "state_scalars": 906,
+  "target_arch": "aarch64",
+  "trace_benchmark": {
+    "columns": 302,
+    "config": {
+      "dt": 0.001,
+      "duration": 2.0,
+      "events": [
+        {
+          "amplitude": 1.0,
+          "end": 0.7,
+          "neuron": "N000",
+          "operation": "stimulate",
+          "start": 0.1
+        }
+      ],
+      "method": "rk4",
+      "save_dt": 0.005
+    },
+    "decode_seconds": 0.002231625,
+    "encode_seconds": 0.00287325,
+    "raw_f64_bytes": 968816,
+    "rows": 401,
+    "wst1_bytes": 646626,
+    "zstd_raw_f64_bytes": 660885
+  },
+  "wall_seconds": [
+    3.102029375,
+    3.100260166,
+    3.059773375
+  ],
+  "wsc1_bytes": 1816,
+  "zstd_json_bytes": 16037
+}

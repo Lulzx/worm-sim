@@ -1,0 +1,509 @@
+{
+  "source_sha256": "142693f17556148d7f962835b18ac6dd5af18b7467eef61815ebc1dd5474c0ca",
+  "source_rows": 7379,
+  "excluded_unmapped_rows": 1573,
+  "name_mappings": [
+    {
+      "source": "AS01",
+      "canonical": "AS1"
+    },
+    {
+      "source": "AS02",
+      "canonical": "AS2"
+    },
+    {
+      "source": "AS03",
+      "canonical": "AS3"
+    },
+    {
+      "source": "AS04",
+      "canonical": "AS4"
+    },
+    {
+      "source": "AS05",
+      "canonical": "AS5"
+    },
+    {
+      "source": "AS06",
+      "canonical": "AS6"
+    },
+    {
+      "source": "AS07",
+      "canonical": "AS7"
+    },
+    {
+      "source": "AS08",
+      "canonical": "AS8"
+    },
+    {
+      "source": "AS09",
+      "canonical": "AS9"
+    },
+    {
+      "source": "DA01",
+      "canonical": "DA1"
+    },
+    {
+      "source": "DA02",
+      "canonical": "DA2"
+    },
+    {
+      "source": "DA03",
+      "canonical": "DA3"
+    },
+    {
+      "source": "DA04",
+      "canonical": "DA4"
+    },
+    {
+      "source": "DA05",
+      "canonical": "DA5"
+    },
+    {
+      "source": "DA06",
+      "canonical": "DA6"
+    },
+    {
+      "source": "DA07",
+      "canonical": "DA7"
+    },
+    {
+      "source": "DA08",
+      "canonical": "DA8"
+    },
+    {
+      "source": "DA09",
+      "canonical": "DA9"
+    },
+    {
+      "source": "DB01",
+      "canonical": "DB1"
+    },
+    {
+      "source": "DB02",
+      "canonical": "DB2"
+    },
+    {
+      "source": "DB03",
+      "canonical": "DB3"
+    },
+    {
+      "source": "DB04",
+      "canonical": "DB4"
+    },
+    {
+      "source": "DB05",
+      "canonical": "DB5"
+    },
+    {
+      "source": "DB06",
+      "canonical": "DB6"
+    },
+    {
+      "source": "DB07",
+      "canonical": "DB7"
+    },
+    {
+      "source": "DD01",
+      "canonical": "DD1"
+    },
+    {
+      "source": "DD02",
+      "canonical": "DD2"
+    },
+    {
+      "source": "DD03",
+      "canonical": "DD3"
+    },
+    {
+      "source": "DD04",
+      "canonical": "DD4"
+    },
+    {
+      "source": "DD05",
+      "canonical": "DD5"
+    },
+    {
+      "source": "DD06",
+      "canonical": "DD6"
+    },
+    {
+      "source": "VA01",
+      "canonical": "VA1"
+    },
+    {
+      "source": "VA02",
+      "canonical": "VA2"
+    },
+    {
+      "source": "VA03",
+      "canonical": "VA3"
+    },
+    {
+      "source": "VA04",
+      "canonical": "VA4"
+    },
+    {
+      "source": "VA05",
+      "canonical": "VA5"
+    },
+    {
+      "source": "VA06",
+      "canonical": "VA6"
+    },
+    {
+      "source": "VA07",
+      "canonical": "VA7"
+    },
+    {
+      "source": "VA08",
+      "canonical": "VA8"
+    },
+    {
+      "source": "VA09",
+      "canonical": "VA9"
+    },
+    {
+      "source": "VB01",
+      "canonical": "VB1"
+    },
+    {
+      "source": "VB02",
+      "canonical": "VB2"
+    },
+    {
+      "source": "VB03",
+      "canonical": "VB3"
+    },
+    {
+      "source": "VB04",
+      "canonical": "VB4"
+    },
+    {
+      "source": "VB05",
+      "canonical": "VB5"
+    },
+    {
+      "source": "VB06",
+      "canonical": "VB6"
+    },
+    {
+      "source": "VB07",
+      "canonical": "VB7"
+    },
+    {
+      "source": "VB08",
+      "canonical": "VB8"
+    },
+    {
+      "source": "VB09",
+      "canonical": "VB9"
+    },
+    {
+      "source": "VC01",
+      "canonical": "VC1"
+    },
+    {
+      "source": "VC02",
+      "canonical": "VC2"
+    },
+    {
+      "source": "VC03",
+      "canonical": "VC3"
+    },
+    {
+      "source": "VC04",
+      "canonical": "VC4"
+    },
+    {
+      "source": "VC05",
+      "canonical": "VC5"
+    },
+    {
+      "source": "VC06",
+      "canonical": "VC6"
+    },
+    {
+      "source": "VD01",
+      "canonical": "VD1"
+    },
+    {
+      "source": "VD02",
+      "canonical": "VD2"
+    },
+    {
+      "source": "VD03",
+      "canonical": "VD3"
+    },
+    {
+      "source": "VD04",
+      "canonical": "VD4"
+    },
+    {
+      "source": "VD05",
+      "canonical": "VD5"
+    },
+    {
+      "source": "VD06",
+      "canonical": "VD6"
+    },
+    {
+      "source": "VD07",
+      "canonical": "VD7"
+    },
+    {
+      "source": "VD08",
+      "canonical": "VD8"
+    },
+    {
+      "source": "VD09",
+      "canonical": "VD9"
+    }
+  ],
+  "excluded_self_gap_rows": 13,
+  "excluded_names": [
+    "anal",
+    "dBWML1",
+    "dBWML10",
+    "dBWML11",
+    "dBWML12",
+    "dBWML13",
+    "dBWML14",
+    "dBWML15",
+    "dBWML16",
+    "dBWML17",
+    "dBWML18",
+    "dBWML19",
+    "dBWML2",
+    "dBWML20",
+    "dBWML21",
+    "dBWML22",
+    "dBWML23",
+    "dBWML24",
+    "dBWML3",
+    "dBWML4",
+    "dBWML5",
+    "dBWML6",
+    "dBWML7",
+    "dBWML8",
+    "dBWML9",
+    "dBWMR1",
+    "dBWMR10",
+    "dBWMR11",
+    "dBWMR12",
+    "dBWMR13",
+    "dBWMR14",
+    "dBWMR15",
+    "dBWMR16",
+    "dBWMR17",
+    "dBWMR18",
+    "dBWMR19",
+    "dBWMR2",
+    "dBWMR20",
+    "dBWMR21",
+    "dBWMR22",
+    "dBWMR23",
+    "dBWMR24",
+    "dBWMR3",
+    "dBWMR4",
+    "dBWMR5",
+    "dBWMR6",
+    "dBWMR7",
+    "dBWMR8",
+    "dBWMR9",
+    "hyp",
+    "intL",
+    "intR",
+    "intestine",
+    "mc1dl",
+    "mc1dr",
+    "mc1v",
+    "mc2dl",
+    "mc2dr",
+    "mc2v",
+    "mc3dl",
+    "mc3dr",
+    "mc3v",
+    "pm1d",
+    "pm1vl",
+    "pm1vr",
+    "pm2d",
+    "pm2vl",
+    "pm2vr",
+    "pm3d",
+    "pm3vl",
+    "pm3vr",
+    "pm4d",
+    "pm4vl",
+    "pm4vr",
+    "pm5d",
+    "pm5vl",
+    "pm5vr",
+    "pm6d",
+    "pm6vl",
+    "pm6vr",
+    "pm7d",
+    "pm7vl",
+    "pm7vr",
+    "pm8",
+    "sph",
+    "um1aL",
+    "um1aR",
+    "um1pL",
+    "um1pR",
+    "um2aL",
+    "um2aR",
+    "um2pL",
+    "um2pR",
+    "vBWML1",
+    "vBWML10",
+    "vBWML11",
+    "vBWML12",
+    "vBWML13",
+    "vBWML14",
+    "vBWML15",
+    "vBWML16",
+    "vBWML17",
+    "vBWML18",
+    "vBWML19",
+    "vBWML2",
+    "vBWML20",
+    "vBWML21",
+    "vBWML22",
+    "vBWML23",
+    "vBWML3",
+    "vBWML4",
+    "vBWML5",
+    "vBWML6",
+    "vBWML7",
+    "vBWML8",
+    "vBWML9",
+    "vBWMR1",
+    "vBWMR10",
+    "vBWMR11",
+    "vBWMR12",
+    "vBWMR13",
+    "vBWMR14",
+    "vBWMR15",
+    "vBWMR16",
+    "vBWMR17",
+    "vBWMR18",
+    "vBWMR19",
+    "vBWMR2",
+    "vBWMR20",
+    "vBWMR21",
+    "vBWMR22",
+    "vBWMR23",
+    "vBWMR24",
+    "vBWMR3",
+    "vBWMR4",
+    "vBWMR5",
+    "vBWMR6",
+    "vBWMR7",
+    "vBWMR8",
+    "vBWMR9",
+    "vm1aL",
+    "vm1aR",
+    "vm1pL",
+    "vm1pR",
+    "vm2aL",
+    "vm2aR",
+    "vm2pL",
+    "vm2pR"
+  ],
+  "chemical_edges": 3638,
+  "gap_edges": 1080,
+  "gap_conflicts": [
+    {
+      "a": "AVAL",
+      "b": "VA5",
+      "forward": 4.0,
+      "reverse": 5.0,
+      "resolved": 4.5
+    },
+    {
+      "a": "AVAL",
+      "b": "VA9",
+      "forward": 5.0,
+      "reverse": 4.0,
+      "resolved": 4.5
+    },
+    {
+      "a": "AVAR",
+      "b": "VA5",
+      "forward": 5.0,
+      "reverse": 4.0,
+      "resolved": 4.5
+    },
+    {
+      "a": "AVAR",
+      "b": "VA9",
+      "forward": 4.0,
+      "reverse": 5.0,
+      "resolved": 4.5
+    },
+    {
+      "a": "AVBL",
+      "b": "DB6",
+      "forward": 4.0,
+      "reverse": 3.0,
+      "resolved": 3.5
+    },
+    {
+      "a": "AVBL",
+      "b": "VB10",
+      "forward": 4.0,
+      "reverse": 3.0,
+      "resolved": 3.5
+    },
+    {
+      "a": "AVBL",
+      "b": "VB8",
+      "forward": 4.0,
+      "reverse": 3.0,
+      "resolved": 3.5
+    },
+    {
+      "a": "AVBL",
+      "b": "VB9",
+      "forward": 3.0,
+      "reverse": 4.0,
+      "resolved": 3.5
+    },
+    {
+      "a": "AVBR",
+      "b": "DB6",
+      "forward": 3.0,
+      "reverse": 4.0,
+      "resolved": 3.5
+    },
+    {
+      "a": "AVBR",
+      "b": "VB10",
+      "forward": 3.0,
+      "reverse": 4.0,
+      "resolved": 3.5
+    },
+    {
+      "a": "AVBR",
+      "b": "VB8",
+      "forward": 3.0,
+      "reverse": 4.0,
+      "resolved": 3.5
+    },
+    {
+      "a": "AVBR",
+      "b": "VB9",
+      "forward": 4.0,
+      "reverse": 3.0,
+      "resolved": 3.5
+    }
+  ],
+  "gap_policy": "mean of mirrored directed totals",
+  "assumptions": [
+    "Only IDs in the manifest are neurons; explicit numbered-neuron zero-padding aliases are logged; other endpoints are excluded and reported.",
+    "Neuron class, side, and type are unannotated; no class tying is inferred.",
+    "Sign prior 0.5 is unknown, not a measured transmitter assignment.",
+    "ID confidence 1 means exact canonical-name match, not certainty about anatomical measurements."
+  ]
+}

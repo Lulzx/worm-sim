@@ -1,0 +1,28 @@
+{
+  "checksum": -302.1283907377658,
+  "chemical_edges": 6946,
+  "decode_seconds": 0.0090605,
+  "edge_gate_reference_state_scalars": 7550,
+  "encode_seconds": 0.002956875,
+  "fixture": "synthetic; not biological data",
+  "gap_edges": 906,
+  "graph_hash": "1990e204490baf9398ac17d8b74e23199ca501aab4534e3e3d34ae894a55750a",
+  "json_bytes": 1285366,
+  "neurons": 302,
+  "simulation": {
+    "dt": 0.001,
+    "duration": 100.0,
+    "events": [],
+    "method": "rk4",
+    "save_dt": 1.0
+  },
+  "state_scalars": 906,
+  "target_arch": "aarch64",
+  "wall_seconds": [
+    5.220584667,
+    5.257799042,
+    5.275399333
+  ],
+  "wsc1_bytes": 1816,
+  "zstd_json_bytes": 16037
+}
