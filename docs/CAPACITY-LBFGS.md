@@ -56,3 +56,48 @@ Report the last accepted and best accepted MSE, actual budget used, terminal
 reason, complete histories, independent NumPy replay, and step/preparation/drift
 controls. No validation/test response values enter this comparison. Dynamical
 features remain frozen and a fresh confirmatory holdout remains unsecured.
+
+
+## Outcome: finite budget exhaustion, small improvement
+
+At clean source `4031794`, the run used exactly 201 objective/gradient evaluations,
+accepted 181 steps and exited normally at the adapter's hard evaluation limit.
+Every trial was finite. The optimizer **did not converge**; budget exhaustion
+is not reported as optimizer success. The last accepted iterate is also the best.
+The [receipt](capacity-lbfgs-results.json) retains both complete histories,
+checkpoint/input hashes, terminal status and independent audits.
+
+| Optimizer | Evaluations | Accepted updates | Final MSE | Captured response energy |
+| --- | ---: | ---: | ---: | ---: |
+| Adam | 201 | 200 | 0.04384851 | 76.6920% |
+| L-BFGS | 201 | 181 | 0.04380470 | 77.1337% |
+
+L-BFGS improves MSE by 4.38e-5 and capture by **0.442 percentage points**. Both
+miss the unchanged 90% gate. This is one training-only comparison from one parent,
+not a held-out benefit or proof of optimizer superiority across initializations.
+The final accepted step was recorded after 1,196.48 seconds; this elapsed time
+includes compilation and is not a controlled machine performance benchmark.
+
+Independent NumPy replay matches MSE exactly. Halving the step changes MSE by
+2.22e-8 (maximum prediction change 0.00129); doubling preparation changes MSE
+by 4.20e-9. Quadrupling preparation adds negligible change. Unstimulated prediction
+energy is 2.20e-12 versus 0.007808 with stimulation. All 3,638 prepared chemical
+coupling coefficients remain nonzero. Frozen positive per-neuron recalibration
+would give 0.04373860, closing only 2.91% of the remaining gap. Learned gains
+span 0.0286–1,050.76 and have no physiological interpretation.
+
+The model remains underfit and this optimizer is not converged. The next bounded
+diagnostic increases the evaluation budget while holding all other settings
+fixed. It must preserve the distinction between reproducing the old trajectory,
+continuing optimization with reconstructed curvature history, and an independent
+restart. No new dynamics or held-out model selection is justified by this result.
+
+The [longer declaration](../configs/capacity-lbfgs-long.json) fixes 1,001 total
+evaluations and at most 1,000 accepted updates. Start from the same original
+saved-950 parent, rebuilding curvature history by repeating the earlier
+trajectory. This repeats work and is not an optimizer-state resume. Verify the
+first 201 trial metrics and 182 accepted iterates against the hashed reference
+before interpreting subsequent progress; report any mismatch rather than
+silently treating it as a continuation. Use the command above with
+`--max-evaluations 1001 --max-iterations 1000` and output
+`runs/capacity-lbfgs-eval1001`. No model or objective settings change.

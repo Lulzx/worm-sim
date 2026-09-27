@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "parent_checkpoint": "runs/level0-capacity-adal-adar-1000-prep120/epoch-950.json",
+  "parent_sha256": "009d9496075b2675978052118e7347a00ece38be8d4cc1ecf44ddd1489994e08",
+  "parent_epoch": 950,
+  "targets": [
+    "ADAL",
+    "ADAR"
+  ],
+  "preparation_seconds": 120.0,
+  "rest_initialization": -0.2,
+  "capacity_gate": "unchanged: final capture of at least 90% of zero-start mean-response energy",
+  "scope": "Longer training-only optimizer diagnostic; identical starting parameters and solver. Not an independent restart.",
+  "dt": 0.005,
+  "optimizer": "SciPy L-BFGS-B without box bounds, active coordinates only, fresh history",
+  "max_evaluations": 1001,
+  "max_iterations": 1000,
+  "maxls": 20,
+  "maxcor": 20,
+  "ftol": 1e-12,
+  "gtol": 1e-09,
+  "comparator": "Completed 201-evaluation run; first 201 trial metrics and first 182 accepted iterates must reproduce before interpreting the extension.",
+  "primary_comparison": "Last accepted training MSE at termination within 1001 total evaluations, including the repeated initial 201; unchanged 90% gate.",
+  "secondary_comparison": "Best accepted training MSE, all trial and accepted histories, actual evaluation count and elapsed time; independent endpoint replay and numerical checks.",
+  "failure_policy": "Abort on a nonfinite objective/gradient; preserve failing parameters and last accepted checkpoint. No silent retry or replacement of the declared run.",
+  "output": "runs/capacity-lbfgs-eval1001",
+  "history_policy": "Restart from original saved-950 parent and rebuild L-BFGS curvature by replaying prior work; no optimizer-state resume is claimed.",
+  "prefix_reference_sha256": {
+    "evaluations": "c318716f3e12a9a12a076771d25fe9828a307714b9eb7fc1c699debdeac3af41",
+    "accepted": "1655a586015a6d1473d757575f53d0d110621d6b378b73363569b145d8f09fa4",
+    "manifest": "cae73e0066698e31a11daa69057d19e9809beeaece147e9b729f1d5f43d953a5"
+  }
+}

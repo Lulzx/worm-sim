@@ -48,7 +48,9 @@ This verifies the fitting implementation, not biological adequacy.
    independent replay and numerical controls; final capture is 76.69%, still
    below the 90% capacity gate. The lower-rate failure's parameters remain unaudited. New runs
    retain finite failing parameters automatically on nonfinite evaluations.
-3. **Broader fitting, pending.** The refined fit is audited and remains underfit. Continue
+3. **Broader fitting, pending.** The refined fit is audited and remains underfit. An equal-evaluation
+   [L-BFGS comparison](CAPACITY-LBFGS.md) raises capture to 77.13% but exhausts
+   its budget without convergence; a longer fixed-model diagnostic is declared. Continue
    optimization/capacity diagnosis until the small-target gate passes; then
    replicate across unrelated training targets and fit the training population.
    A failed small-target gate alone does not identify model capacity as the cause.
