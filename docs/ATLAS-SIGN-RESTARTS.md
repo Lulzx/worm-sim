@@ -67,3 +67,21 @@ uncertainty ensemble, a convergence proof or a fresh confirmatory test. Changing
 initial signs may change basins and transient preparation; it does not guarantee
 better forecasting. The two existing control fits continue unchanged. Results
 for the sign-restart pilot are pending.
+
+## Launch checks
+
+All three runs launched from `a3768d1`. Independent hash-based checks reproduce
+all 2,457 tied sign draws per seed and confirm unchanged prior centers and
+non-sign initialization relative to the gain control. Positive/negative group
+counts are 1,238/1,219 for seed 1 and 1,250/1,207 for seeds 2 and 3 (equal counts
+do not mean equal assignments).
+
+At each prepared epoch-zero state, all 3,638 chemical gate derivatives are
+nonzero; unforced derivative norms are 1.19e-13, 1.22e-13 and 1.23e-13. The
+independent coupling audits verify the local coefficients and preparation:
+[seed 1](coupling-sign-seed1-initial-audit.json),
+[seed 2](coupling-sign-seed2-initial-audit.json),
+[seed 3](coupling-sign-seed3-initial-audit.json).
+This verifies the intended initialization intervention, not equilibrium
+uniqueness, optimization convergence or predictive improvement. Fits and final
+comparisons remain pending.
