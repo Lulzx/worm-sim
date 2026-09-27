@@ -44,3 +44,18 @@ unequal confidence and variable trial responses. Missing-data rejection and exac
 training membership are checked. Full nonlinear population fitting, learned
 shared stimulation currents, validation selection and comparison against the
 linear atlas baseline remain to be implemented and measured.
+
+## Native workload measurement
+
+`examples/benchmark_level0_atlas.rs` aggregates the training partition, then
+measures one full reverse-mode gradient for the lexically first training target
+on all 302 latent cells. It uses the existing forecast defaults, zero readout
+offsets and a declared assumed exponentially decaying current. It also compares
+Euler step sizes 0.01 and 0.005 seconds on that initial model. Timing boundaries,
+all source identities and the original-versus-mean-trace MSE are recorded.
+This is a workload check, not a fitted biological result.
+
+```sh
+WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release --example benchmark_level0_atlas
+target/release/examples/benchmark_level0_atlas data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json runs/level0-atlas-workload.json
+```
