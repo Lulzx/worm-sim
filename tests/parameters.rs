@@ -3,6 +3,62 @@ use wormsim::{
     model::Model,
     parameters::{Sharing, TiedParameters, forecast_defaults},
 };
+
+#[test]
+fn sign_restarts_preserve_priors_ties_and_other_parameters() {
+    use wormsim::math::Scalar;
+    let model = Model::new(fixtures::synthetic(8, 3, 0).compile().unwrap()).unwrap();
+    let raw = forecast_defaults(&model);
+    let mut sharing = Sharing::default();
+    for (i, name) in model.graph.names.iter().enumerate() {
+        sharing
+            .classes
+            .insert(name.clone(), format!("pair{}", i / 2));
+    }
+    let original = TiedParameters::new(&model, &raw, sharing).unwrap();
+    let probabilities = vec![0.5; model.pre.len()];
+    let mut a = original.clone();
+    let mut b = original.clone();
+    let mut c = original.clone();
+    a.initialize_sign_restart(&model, &probabilities, 42, 0.5)
+        .unwrap();
+    b.initialize_sign_restart(&model, &probabilities, 42, 0.5)
+        .unwrap();
+    c.initialize_sign_restart(&model, &probabilities, 43, 0.5)
+        .unwrap();
+    assert_eq!(
+        serde_json::to_value(&a).unwrap(),
+        serde_json::to_value(&b).unwrap()
+    );
+    assert_ne!(
+        serde_json::to_value(&a).unwrap(),
+        serde_json::to_value(&c).unwrap()
+    );
+    for (before, after) in original.groups.iter().zip(&a.groups) {
+        assert_eq!(before.prior_mean, after.prior_mean);
+        if before.name.starts_with("chemical_sign/") {
+            assert!(((2. * after.value.sigmoid() - 1.).abs() - 0.5).abs() < 1e-12);
+        } else {
+            assert_eq!(before.value, after.value);
+        }
+    }
+    for p in [0., 1.] {
+        let mut tied = original.clone();
+        tied.initialize_sign_restart(&model, &vec![p; model.pre.len()], 0, 0.5)
+            .unwrap();
+        for g in &tied.groups {
+            if g.name.starts_with("chemical_sign/") {
+                assert_eq!(g.value > 0., p == 1.);
+            }
+        }
+    }
+    for magnitude in [0., 1., -0.1, f64::NAN] {
+        assert!(
+            a.initialize_sign_restart(&model, &probabilities, 42, magnitude)
+                .is_err()
+        );
+    }
+}
 #[test]
 fn explicit_classes_tie_values_sum_gradients_and_match_prior_differences() {
     let model = Model::new(fixtures::synthetic(4, 2, 1).compile().unwrap()).unwrap();

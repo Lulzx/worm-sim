@@ -98,6 +98,25 @@ class AuditTests(unittest.TestCase):
         with self.assertRaises(AssertionError):
             audit_molecular_initialization(config,initial,graph,evidence)
 
+    def test_seeded_sign_audit_preserves_prior_center(self):
+        from audit_level0_atlas import audit_sign_restart, sign_restart_value
+        restart={'seed':42,'reversal_magnitude':.5}
+        name='chemical_sign/shared'
+        initial={'parameters':{'raw_to_group':[0]*16,'groups':[
+            {'name':name,'trainable':True,'prior_mean':0.,
+             'value':sign_restart_value(name,.5,restart)}]}}
+        graph={'neurons':[{},{}],'chemical':[
+            {'pre':'A','post':'B','sign_prior':.5},
+            {'pre':'B','post':'A','sign_prior':.5}]}
+        result=audit_sign_restart({'sign_initialization':restart},initial,graph)
+        self.assertEqual(result['positive_tied_groups']+result['negative_tied_groups'],1)
+        self.assertAlmostEqual(abs(initial['parameters']['groups'][0]['value']),np.log(3.))
+        self.assertGreater(sign_restart_value(name,1.,restart),0.)
+        self.assertLess(sign_restart_value(name,0.,restart),0.)
+        initial['parameters']['groups'][0]['prior_mean']=.1
+        with self.assertRaises(AssertionError):
+            audit_sign_restart({'sign_initialization':restart},initial,graph)
+
 
 if __name__ == '__main__':
     unittest.main()

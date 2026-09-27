@@ -50,6 +50,7 @@ fn fixture() -> (wormsim::data::IndexedGraph, Dataset, Split) {
 fn fit_and_impulses_exclude_held_out_fluorescence() {
     let (graph, mut data, split) = fixture();
     let config = FitConfig {
+        sign_initialization: None,
         optimizer: Default::default(),
         learning_rate_schedule: Default::default(),
         correlation: None,
@@ -156,6 +157,7 @@ fn joint_fit_uses_training_labels_and_preserves_mse_selection() {
             .collect(),
     };
     let config = FitConfig {
+        sign_initialization: None,
         optimizer: Default::default(),
         learning_rate_schedule: Default::default(),
         correlation: Some(atlas_level0::CorrelationConfig {
@@ -335,6 +337,10 @@ fn molecular_prior_fit_preserves_graph_and_excludes_test_fluorescence() {
         inhibitory_edges: vec![1],
     };
     let config = FitConfig {
+        sign_initialization: Some(atlas_level0::SignInitialization {
+            seed: 42,
+            reversal_magnitude: 0.5,
+        }),
         optimizer: Default::default(),
         learning_rate_schedule: Default::default(),
         correlation: Some(atlas_level0::CorrelationConfig {
@@ -367,7 +373,10 @@ fn molecular_prior_fit_preserves_graph_and_excludes_test_fluorescence() {
     let initial = checkpoints[0].parameters.expand(&network).unwrap();
     let start = 6 * network.n() + network.pre.len();
     for (i, p) in [0.75, 0.25, 0.5].iter().enumerate() {
-        assert!((initial.raw[start + i].sigmoid() - p).abs() < 1e-12);
+        let group =
+            &checkpoints[0].parameters.groups[checkpoints[0].parameters.raw_to_group[start + i]];
+        assert!((group.prior_mean.sigmoid() - p).abs() < 1e-12);
+        assert!(((2. * initial.raw[start + i].sigmoid() - 1.).abs() - 0.5).abs() < 1e-12);
     }
     assert_eq!(serde_json::to_value(&graph.graph).unwrap(), graph_before);
     assert_eq!(selected.dataset_hash, split.dataset_hash);

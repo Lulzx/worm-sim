@@ -5,6 +5,7 @@ use crate::{
     model::{Model, Parameters},
 };
 use serde::{Deserialize, Serialize};
+use sha2::{Digest, Sha256};
 use std::collections::{BTreeMap, BTreeSet};
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Sharing {
@@ -192,6 +193,52 @@ impl TiedParameters {
             let value = (p / (1. - p)).ln();
             self.groups[group].value = value;
             self.groups[group].prior_mean = value;
+        }
+        Ok(())
+    }
+
+    /// Draw one initial polarity per tied group, without changing prior centers.
+    /// A name-keyed SHA-256 stream makes draws independent of traversal order.
+    pub fn initialize_sign_restart(
+        &mut self,
+        model: &Model,
+        probabilities: &[f64],
+        seed: u64,
+        reversal_magnitude: f64,
+    ) -> Result<()> {
+        validate_sign_probabilities(model, probabilities)?;
+        if !reversal_magnitude.is_finite() || reversal_magnitude <= 0. || reversal_magnitude >= 1. {
+            return Err("initial reversal magnitude must be strictly between zero and one".into());
+        }
+        self.expand(model)?;
+        let start = 6 * model.n() + model.pre.len();
+        let mut sums = BTreeMap::<usize, (f64, usize)>::new();
+        for (i, p) in probabilities.iter().enumerate() {
+            let group = self.raw_to_group[start + i];
+            if !self.groups[group].trainable
+                || !self.groups[group].name.starts_with("chemical_sign/")
+            {
+                return Err("sign restart requires trainable chemical sign groups".into());
+            }
+            let entry = sums.entry(group).or_default();
+            entry.0 += p;
+            entry.1 += 1;
+        }
+        let magnitude = ((1. + reversal_magnitude) / (1. - reversal_magnitude)).ln();
+        for (index, (sum, count)) in sums {
+            let group = &mut self.groups[index];
+            let mut hash = Sha256::new();
+            hash.update(b"wormsim-sign-init-v1\0");
+            hash.update(seed.to_le_bytes());
+            hash.update(group.name.as_bytes());
+            let bytes = hash.finalize();
+            let bits = u64::from_le_bytes(bytes[..8].try_into().map_err(|_| "invalid sign hash")?);
+            let uniform = (bits >> 11) as f64 / (1_u64 << 53) as f64;
+            group.value = if uniform < sum / count as f64 {
+                magnitude
+            } else {
+                -magnitude
+            };
         }
         Ok(())
     }

@@ -37,9 +37,18 @@ pub struct FitConfig {
     #[serde(default)]
     pub molecular_sign_priors: Option<crate::molecular::SignPriors>,
     #[serde(default)]
+    pub sign_initialization: Option<SignInitialization>,
+    #[serde(default)]
     pub observation_gain: Option<ObservationGainConfig>,
     #[serde(default)]
     pub correlation: Option<CorrelationConfig>,
+}
+/// A declared optimization restart, not an inferred biological sign label.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct SignInitialization {
+    pub seed: u64,
+    pub reversal_magnitude: f64,
 }
 /// Optional pair-mean shape loss; validation selection remains trace MSE.
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -66,6 +75,13 @@ pub struct ClassificationConfig {
 }
 impl FitConfig {
     fn validate(&self) -> Result<()> {
+        if let Some(s) = &self.sign_initialization
+            && (!s.reversal_magnitude.is_finite()
+                || s.reversal_magnitude <= 0.
+                || s.reversal_magnitude >= 1.)
+        {
+            return Err("invalid sign initialization magnitude".into());
+        }
         self.learning_rate_schedule.validate()?;
         self.optimizer.validate()?;
         if let super::optimization::Optimizer::AdamW { weight_decay } = self.optimizer
@@ -369,12 +385,21 @@ impl AtlasModel {
                 "-adamw"
             } else {
                 ""
-            },
+            } + &self
+                .config
+                .sign_initialization
+                .as_ref()
+                .map(|s| format!("-sign-seed-{}", s.seed))
+                .unwrap_or_default(),
             free_parameters: self.free_parameters(),
             training_trials: self.training_trials.clone(),
             selection_trials: self.selection_trials.clone(),
             source_commit: self.source_commit.clone(),
-            seed: split.seed,
+            seed: self
+                .config
+                .sign_initialization
+                .as_ref()
+                .map_or(split.seed, |s| s.seed),
             trials,
         })
     }
@@ -470,6 +495,12 @@ pub fn fit_select_with_evidence(
     let mut parameters = TiedParameters::new(&model, &raw, config.sharing.clone())?;
     if let Some(probabilities) = &sign_probabilities {
         parameters.initialize_sign_priors(&model, probabilities)?;
+    }
+    if let Some(s) = &config.sign_initialization {
+        let probabilities = sign_probabilities
+            .clone()
+            .unwrap_or_else(|| model.graph.chemical.iter().map(|e| e.3).collect());
+        parameters.initialize_sign_restart(&model, &probabilities, s.seed, s.reversal_magnitude)?;
     }
     let kernel_raw: Vec<_> = (0..config.kernel_lags)
         .map(|t| inverse_softplus(0.2 * (-(t as f64) * sample_dt / 2.).exp()))

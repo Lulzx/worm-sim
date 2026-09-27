@@ -35,6 +35,51 @@ def classification_scores(model, prediction, indexed, pairs, threshold):
             'brier': float(np.mean((probability-y)**2)), 'mean_probability': float(probability.mean())}
 
 
+def sign_restart_value(name, probability, config):
+    magnitude=config['reversal_magnitude']
+    assert np.isfinite(magnitude) and 0 < magnitude < 1
+    seed=config['seed']
+    assert isinstance(seed,int) and 0 <= seed < 2**64
+    encoded=b'wormsim-sign-init-v1\0'+seed.to_bytes(8,'little')+name.encode('utf-8')
+    bits=int.from_bytes(hashlib.sha256(encoded).digest()[:8],'little')
+    uniform=(bits >> 11)/2**53
+    raw=float(np.log((1+magnitude)/(1-magnitude)))
+    return raw if uniform < probability else -raw
+
+
+def audit_sign_restart(config, initial, graph):
+    restart=config['sign_initialization']
+    edges=sorted(graph['chemical'],key=lambda e:(e['pre'],e['post']))
+    probability=np.asarray([e['sign_prior'] for e in edges],dtype=float)
+    overlay=config.get('molecular_sign_priors')
+    if overlay is not None:
+        probability[:]=.5
+        probability[overlay['excitatory_edges']]=overlay['confidence']
+        probability[overlay['inhibitory_edges']]=1-overlay['confidence']
+    start=6*len(graph['neurons'])+len(edges)
+    mapping=np.asarray(initial['parameters']['raw_to_group'][start:start+len(edges)])
+    assert len(mapping)==len(edges)
+    positive=negative=0
+    for group in sorted(set(mapping)):
+        g=initial['parameters']['groups'][group]
+        assert g['name'].startswith('chemical_sign/') and g['trainable']
+        probabilities=probability[mapping==group]
+        expected=sign_restart_value(g['name'],float(probabilities.mean()),restart)
+        assert abs(g['value']-expected)<1e-12
+        if overlay is not None:
+            mean=probabilities.mean()
+            center=float(np.log(mean/(1-mean)))
+        else:
+            clipped=np.clip(probabilities,1e-6,1-1e-6)
+            center=float(np.mean(np.log(clipped/(1-clipped))))
+        assert abs(g['prior_mean']-center)<1e-12
+        positive+=int(expected>0)
+        negative+=int(expected<0)
+    return {'seed':restart['seed'],'reversal_magnitude':restart['reversal_magnitude'],
+            'positive_tied_groups':positive,'negative_tied_groups':negative,
+            'scope':'Independent name-keyed SHA-256 initialization and unchanged prior centers; not physiological sign inference or an optimizer replay.'}
+
+
 def audit_molecular_initialization(config, initial, graph, evidence):
     """Check the declared projection and tied-prior optimum, without a Rust call."""
     prior = config['molecular_sign_priors']
@@ -61,14 +106,16 @@ def audit_molecular_initialization(config, initial, graph, evidence):
         target = float(np.mean(probability[np.asarray(mapping)==group]))
         expected = float(np.log(target/(1.-target)))
         assert groups[group]['name'].startswith('chemical_sign/') and groups[group]['trainable']
-        assert abs(groups[group]['value']-expected) < 1e-12
+        start_value=(sign_restart_value(groups[group]['name'],target,config['sign_initialization'])
+                     if config.get('sign_initialization') is not None else expected)
+        assert abs(groups[group]['value']-start_value) < 1e-12
         assert abs(groups[group]['prior_mean']-expected) < 1e-12
         means[group] = target
     return {'evidence_hash':prior['evidence_hash'],'confidence_assumption':confidence,
             'excitatory_edges':len(positive),'inhibitory_edges':len(negative),
             'neutral_edges':len(edges)-len(positive)-len(negative),
-            'tied_sign_groups':len(means),'nonneutral_initial_sign_groups':sum(abs(v-.5)>1e-12 for v in means.values()),
-            'scope':'Checks projection against the supplied molecular artifact and logit(mean edge probability) initialization. Source-array evidence was audited separately. Does not replay optimization or prove physiological polarity.'}
+            'tied_sign_groups':len(means),'nonneutral_initial_sign_groups':sum(abs(groups[g]['value'])>1e-12 for g in means),
+            'scope':'Checks projection against the supplied molecular artifact, logit(mean edge probability) prior centers and declared initialization. Source-array evidence was audited separately. Does not replay optimization or prove physiological polarity.'}
 
 
 def main():
@@ -148,6 +195,8 @@ def main():
         assert {t['id'] for t in pred['trials']} == set(split[partition])
         assert pred['training_trials'] == split['train'] and pred['selection_trials'] == split['validation']
         assert pred['source_commit'] == model['source_commit']
+        expected_seed=config['sign_initialization']['seed'] if config.get('sign_initialization') is not None else split['seed']
+        assert pred['seed']==expected_seed
         parameter_count = (sum(g['trainable'] for g in model['parameters']['groups'])
                            + len(model['kernel_raw'])
                            + (2 if model.get('classifier') is not None else 0)
@@ -196,6 +245,10 @@ def main():
     auc = float(np.mean((positive[:,None]>negative).astype(float)+0.5*(positive[:,None]==negative)))
     assert abs(auc-load(evaluation/'pair-report.json')['auroc']['value']) < 1e-12
     receipt = {'schema_version':1,'source_commit':model['source_commit'],'dataset_hash':model['dataset_hash'],'split_hash':model['split_hash'],'selected_epoch':model['epoch'],'config':config,'selection':selection,'free_parameters':report['free_parameters'],'independent_saved_trace_scores':scores,'independent_pair_auroc':auc,'max_pair_area_error':area_error,'validation_half_step':load(run/'validation-half-step.json'),'selected_model_sha256':digest(run/'selected.json'),'dataset_file_sha256':digest(args.data),'split_file_sha256':digest(args.split),'evidence_file_sha256':digest(args.evidence),'audit_script_sha256':digest(__file__),'shared_score_script_sha256':digest(Path(__file__).with_name('audit_connectome_fit.py')),'artifacts':hashes,'limitations':'Independent recomputation of saved-output MSE, correlation, response area and direct pairwise AUROC. Selection and declared lineage checked. Nonlinear ODE, optimization and bootstrap draws are not independently replayed here. See gradient tests and selected-checkpoint half-step check for separate numerical evidence. Shared fixed preparation seed, assumed positive shared input, neutral unannotated signs and previously inspected test cohort remain limitations.'}
+    if config.get('sign_initialization') is not None:
+        assert args.graph_json, 'Sign-restart audit requires canonical graph'
+        receipt['sign_initialization'] = audit_sign_restart(config,load(run/'epoch-0.json'),load(args.graph_json))
+        receipt['limitations'] = receipt['limitations'].replace('neutral unannotated signs','sampled initial signs with declared prior centers')
     if config.get('molecular_sign_priors') is not None:
         assert args.molecular_evidence and args.graph_json, 'Molecular-prior audit requires evidence and canonical graph'
         molecular = load(args.molecular_evidence)
