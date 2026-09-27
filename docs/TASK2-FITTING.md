@@ -106,3 +106,8 @@ approximate 0.70 / −0.35 / −0.63 table is not reproduced by removing confide
 weights alone. A different preprocessing revision or aggregation convention may
 explain it; its exact cause remains unverified. The scorer convention and the
 content hashes are retained rather than changed to match the supplied table.
+
+The first two-epoch Level 0 population fit is recorded in [LEVEL0-FIT.md](LEVEL0-FIT.md).
+Both trained epochs failed to improve validation, and selection retained the initial
+candidate. Validation history reconstruction decays almost completely by the
+forecast origin; inference quality, not backend throughput, is the next issue.

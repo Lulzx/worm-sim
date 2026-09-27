@@ -92,3 +92,51 @@ validation scores, selected epoch and test predictions unchanged. Passing these
 checks does not prove useful forecasting, biological parameter recovery or adequate
 Euler accuracy on the real fitted dynamics. The stable latent LDS baseline,
 source-backed sign/class annotations and further numerical checks remain required.
+
+## First-run outcome: training failed validation
+
+The [committed-source receipt](level0-first-fit-receipt.json) records all 720
+training updates, the three candidate evaluations, selected test scores, animal
+bootstrap intervals and a validation-only timestep sensitivity check.
+
+| Candidate | Validation 1 s R² | 10 s R² | 30 s R² |
+| --- | ---: | ---: | ---: |
+| Initial candidate (selected) | −0.00380 | −0.01107 | −0.01142 |
+| Epoch 1 | −0.04811 | −0.03645 | −0.05398 |
+| Epoch 2 | −0.00563 | −0.03593 | −0.05271 |
+
+Thus the trained network did not earn selection. The selected initial candidate's
+test scores are −0.00333 / −0.01968 / −0.02239. Its marginal animal-bootstrap 95%
+intervals are [−0.02130, −0.00333], [−0.03750, −0.01205], and
+[−0.03924, −0.01133]. These are not results of a successfully trained dynamics
+model. Epoch zero includes a training-calibrated readout and per-window state
+inference, but no population gradient updates.
+
+The declared trainable capacity is 7,040 scalars: 6,742 shared dynamics values and
+298 readout values. The 298 calibration statistics are separately reported. Since
+epoch zero won, the capacity count must not be read as 7,040 successfully estimated
+biological parameters. The original run's terminal message called this count
+“fitted”; the CLI wording is corrected to “trainable”.
+
+The complete fit, including initial and per-epoch validation, took approximately
+328 seconds on the M4 Pro CPU. This measured workload does not justify a backend
+rewrite. Halving the selected candidate's inference/forecast step from 0.01 to
+0.005 seconds changed validation R² by +0.0000573 / +0.000000932 /
++0.000000000087 at 1/10/30 seconds. This narrow check supports the reported selected
+scores' timestep stability; it does not validate all future trained dynamics.
+
+More useful is the validation history diagnostic: macro-neuron reconstruction R²
+is **0.64545 at the first observed sample but only 0.000514 at the forecast origin**.
+The ten-second prefix is available to inference, yet the fitted initial condition
+loses its reconstruction by the time prediction starts. This diagnoses a failure
+of this inference/model combination, not proof that the data are unpredictable.
+A filtering-based origin-state estimate and a stable latent LDS should be compared
+on validation before further attempts at long-horizon biological claims. Source
+preprocessing causality/units and biological sign/class annotations also remain
+open limitations.
+
+To reproduce the scored receipt from the selected artifact:
+
+```sh
+python3 scripts/score_level0_fit.py --receipt runs/level0-first-fit-receipt.json
+```

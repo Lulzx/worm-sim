@@ -137,7 +137,7 @@ fn run() -> Result<()> {
             let config:wormsim::bench::population::FitConfig=serde_json::from_slice(&fs::read(&args[5]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
             let (model,report)=wormsim::bench::population::fit(&data,&graph,&split,config,|model,epoch|{write_json(&format!("{}.epoch-{}.json",args[6],epoch.epoch),model)?;write_json(&format!("{}.epoch-{}.report.json",args[6],epoch.epoch),epoch)?;println!("epoch {} validation {:?}",epoch.epoch,epoch.validation_horizon_r2);Ok(())})?;
             write_json(&args[6],&model)?;write_json(&format!("{}.fit.json",args[6]),&report)?;
-            println!("selected epoch {}; {} fitted population scalars",model.selected_epoch,model.free_parameters());
+            println!("selected epoch {}; {} trainable population scalars",model.selected_epoch,model.free_parameters());
         }
         Some("level0-predict") if args.len()==8 => {
             let graph=load(&args[2])?;
