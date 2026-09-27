@@ -71,3 +71,18 @@ not a class-sharing instruction or evidence for excitatory/inhibitory identity.
 Explicit sharing maps and source-backed sign priors remain to be added, followed
 by a population parameter fit and common held-out scoring. A stable latent LDS
 baseline is also still required; the failed dense linear experiment is retained.
+
+The [committed-source training audit](initial-state-receipt.json) ran all 15
+preselected windows using 67–110 observed neurons each. Every run retained all
+906 state values and accepted 30 updates. Prefix objectives fell by 10.45–13.51%.
+Median inference time was 1.60 s per window, 23.62 s summed across the 15 windows
+on this M4 Pro CPU; these timings exclude data loading, training-readout calibration
+and artifact writing. No parameter-gradient or forecast-throughput claim follows.
+The modest prefix improvement under frozen defaults leaves substantial residuals;
+shared dynamics/readout fitting is the next required modeling step.
+
+Reproduce the complete training audit with:
+
+```sh
+python3 scripts/audit_initial_states.py --receipt runs/initial-state-receipt.json
+```
