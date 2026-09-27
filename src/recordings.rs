@@ -397,3 +397,5 @@ pub mod wormwideweb {
         Ok((data, report))
     }
 }
+
+pub mod randi;

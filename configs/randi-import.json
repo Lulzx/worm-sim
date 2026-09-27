@@ -1,0 +1,5 @@
+{
+  "baseline_seconds": 10.0,
+  "response_seconds": 20.0,
+  "minimum_baseline_fraction": 0.8
+}

@@ -1,0 +1,3399 @@
+{
+  "schema_version": 1,
+  "source": "Randi et al. Nature 2023, OSF e2syt, wild-type processed text export, file version 1",
+  "url": "https://osf.io/download/9mecf/?version=1",
+  "archive_sha256": "d6e7b3d93175b40b7ae17bde2182835e9c2144388142c522ee9be3832f6ce836",
+  "archive_bytes": 523093816,
+  "files": [
+    {
+      "path": "0_ds_name.txt",
+      "bytes": 85,
+      "sha256": "1dab277274c37ab1672a448f433d56487a18214091a38f1742b469f3196f77d8"
+    },
+    {
+      "path": "0_gcamp.txt",
+      "bytes": 12693902,
+      "sha256": "45519b52ab43a9e64d8dbfc105ea0852bba4582e24609d3a0832ed4788b30345"
+    },
+    {
+      "path": "0_labels.txt",
+      "bytes": 332,
+      "sha256": "e6ea5c5452035b746ae5e8e7ecf42d7696ab2dff78c51809e5a5782811791a7e"
+    },
+    {
+      "path": "0_stim_neurons.txt",
+      "bytes": 205,
+      "sha256": "7fe0104dba5fef2c6cd2b974f43bf360462f17600881cbda278e4f5aab3f8d06"
+    },
+    {
+      "path": "0_stim_volume_i.txt",
+      "bytes": 333,
+      "sha256": "d87aa17d32397a8bda9e0447e33b78c716d15f40496cad705c1151420b4e50ea"
+    },
+    {
+      "path": "0_t.txt",
+      "bytes": 111350,
+      "sha256": "a3299eaa760f49008ce2a2be58ed5d9b8c164a0cfc0cdabe5ae8595ea1bb980f"
+    },
+    {
+      "path": "100_ds_name.txt",
+      "bytes": 73,
+      "sha256": "d27ead6230d406f016bafec4de5723c5b733a85f0558ea12c0bd0130abfc1bf9"
+    },
+    {
+      "path": "100_gcamp.txt",
+      "bytes": 10428893,
+      "sha256": "aad18a384c927860bc8da7f1bb596356f921e3d3f6b4b50a7bcb6da013778fbd"
+    },
+    {
+      "path": "100_labels.txt",
+      "bytes": 522,
+      "sha256": "c26e4657fe2359e313475ab6f532c06e4c07b65b494cf2cf04ffa3e8a1ca4e61"
+    },
+    {
+      "path": "100_stim_neurons.txt",
+      "bytes": 130,
+      "sha256": "c588a2fbb971317995a31b753984a895991ebc51070a7e3e4a896d8ee4f1bbec"
+    },
+    {
+      "path": "100_stim_volume_i.txt",
+      "bytes": 205,
+      "sha256": "cd8db408bc204d1cc06283e127c258492e8cdc77b6321d865f469f13a76aa1c4"
+    },
+    {
+      "path": "100_t.txt",
+      "bytes": 89750,
+      "sha256": "0c067a7d9fa0498013e9903ab96d6b879af4dae318ee138dcdd68c18c2582e1f"
+    },
+    {
+      "path": "101_ds_name.txt",
+      "bytes": 73,
+      "sha256": "b3947f71b187654a32ddb73c049fbb280056f6b7a6ccbc66e43fd7f50cddc9a0"
+    },
+    {
+      "path": "101_gcamp.txt",
+      "bytes": 9102555,
+      "sha256": "050776925762deca0a470cbc2d7d2638d842f0756a63993cb44e285e8c72a3c5"
+    },
+    {
+      "path": "101_labels.txt",
+      "bytes": 530,
+      "sha256": "7872c152672133118aa5aba50adcc4afa8a4d00a54001595335a976d3d45eaaa"
+    },
+    {
+      "path": "101_stim_neurons.txt",
+      "bytes": 125,
+      "sha256": "21340a394ee1154d7ec5fe66ab6c5291859199c14f695f615b22a459e9fd9e64"
+    },
+    {
+      "path": "101_stim_volume_i.txt",
+      "bytes": 193,
+      "sha256": "8e9ac8521e38dfa78defa937161c29b521e3ead895451c8a1fb0836b23ef6a27"
+    },
+    {
+      "path": "101_t.txt",
+      "bytes": 79875,
+      "sha256": "400c8ba937f5f0c6868c6aea41d4cdfb34c0bd5144e72e0f1feb1ac58b3f5abe"
+    },
+    {
+      "path": "102_ds_name.txt",
+      "bytes": 73,
+      "sha256": "c6794f797ae67c5829c8b5d1484e7d8ac2d26483e0487f3cd3f53df39e76806e"
+    },
+    {
+      "path": "102_gcamp.txt",
+      "bytes": 12098157,
+      "sha256": "169301d4e875a28d5734413b02d8db3a68e551120a6e54ec8c50c536ce0bbbf6"
+    },
+    {
+      "path": "102_labels.txt",
+      "bytes": 533,
+      "sha256": "b23483daa3663e03298e0d5a5e5d07e1a103030c4db2d92e996b04e1c1353e13"
+    },
+    {
+      "path": "102_stim_neurons.txt",
+      "bytes": 158,
+      "sha256": "517f0e6ac0b5f88fda15bea2045768e869adb4e62d5c908d914d470b3342391d"
+    },
+    {
+      "path": "102_stim_volume_i.txt",
+      "bytes": 254,
+      "sha256": "5bd66be84f6615f1331a69469f4689d4dc1e000270670cd25fa60d7a3cdb9faa"
+    },
+    {
+      "path": "102_t.txt",
+      "bytes": 100250,
+      "sha256": "3f3586bc956c3c3708376403b052fd98c5e49c79a1679b16b51f1d806c2bcf42"
+    },
+    {
+      "path": "103_ds_name.txt",
+      "bytes": 73,
+      "sha256": "4e1b1b6ed37e6c78f155ea460c495cc5ca468acbfabbefb2dac1fd731b1395e1"
+    },
+    {
+      "path": "103_gcamp.txt",
+      "bytes": 2193300,
+      "sha256": "d4846ae256bfe8ba4f6ca82e8a0ad423e91b70750f6e4a08619ea33bda682e4a"
+    },
+    {
+      "path": "103_labels.txt",
+      "bytes": 253,
+      "sha256": "1ed1e5ec68cc0c53c7f99eac99369025aaffb17cc250b9ae630f0cefd9d771e7"
+    },
+    {
+      "path": "103_stim_neurons.txt",
+      "bytes": 24,
+      "sha256": "7432816ea2d7aca49a7f010d54a7b3333a54bf1f21363e3fccc3c504bb035c57"
+    },
+    {
+      "path": "103_stim_volume_i.txt",
+      "bytes": 31,
+      "sha256": "2c6ec5046de8f9cfeba81194b9dcae473bcebdaba829d111007f1fd0b8a2bdec"
+    },
+    {
+      "path": "103_t.txt",
+      "bytes": 19375,
+      "sha256": "77d07997454e53bdbe08509554432d9167cc68484487858950ced1337ea9c93d"
+    },
+    {
+      "path": "104_ds_name.txt",
+      "bytes": 73,
+      "sha256": "59495bb4ca4356c56c78c53a8c7e44c8a63ca565fd67aec52105ff8112500ec2"
+    },
+    {
+      "path": "104_gcamp.txt",
+      "bytes": 12279892,
+      "sha256": "52b20b1234ae46daa288b389653acdbe477d837454e43d591af1cec4819efdb8"
+    },
+    {
+      "path": "104_labels.txt",
+      "bytes": 570,
+      "sha256": "19df5c6467cccb192e83511c4de71cff6a15ae56cd79cac25b77761fbc09c36b"
+    },
+    {
+      "path": "104_stim_neurons.txt",
+      "bytes": 149,
+      "sha256": "1a7bb38b0701c41f2e2f8099660a9b30202fbec57732fc3e0253b40d0b81ad9f"
+    },
+    {
+      "path": "104_stim_volume_i.txt",
+      "bytes": 219,
+      "sha256": "61658c07d7bf2d8643860aa33ac23afb35bdaa953c1aab828c7317f5298dc870"
+    },
+    {
+      "path": "104_t.txt",
+      "bytes": 92525,
+      "sha256": "007070667e3ba376aa09e5acb92bc6d15f349a2ce17be9aabfde0a5e56dd4685"
+    },
+    {
+      "path": "105_ds_name.txt",
+      "bytes": 73,
+      "sha256": "5c0b85bd07162ccd75ecd7ab995c182f3923082c42254c5a2b90d56d23ac7677"
+    },
+    {
+      "path": "105_gcamp.txt",
+      "bytes": 12393003,
+      "sha256": "2dd5953303dd273817c34b31af6908ceca8159ed14c8f7e44f12a51eca3b0531"
+    },
+    {
+      "path": "105_labels.txt",
+      "bytes": 458,
+      "sha256": "5cc1043d95866455bae010cc0523193591f70308de24354222ba2337a5328b4f"
+    },
+    {
+      "path": "105_stim_neurons.txt",
+      "bytes": 164,
+      "sha256": "739f29bc701e297d501a82955d6ca4e7d65c47a9e9280a5122460acc237c48e6"
+    },
+    {
+      "path": "105_stim_volume_i.txt",
+      "bytes": 265,
+      "sha256": "f68157b421f7daa167208d5d3714104c872eb31fd330f8b87b4ccba3020fa284"
+    },
+    {
+      "path": "105_t.txt",
+      "bytes": 112050,
+      "sha256": "906477972bf93cf90777da6d1f1cb522399932932027d34aa153e16bb1a97bd8"
+    },
+    {
+      "path": "106_ds_name.txt",
+      "bytes": 73,
+      "sha256": "435df7b584567eb66d2981d09bca447e744645b16c7b6df4680df6fc0c4b5968"
+    },
+    {
+      "path": "106_gcamp.txt",
+      "bytes": 6801033,
+      "sha256": "d7764a9d5ba54e197f5ba028d27d4baec54b2a7636c7a47fc31c359ed9d6affe"
+    },
+    {
+      "path": "106_labels.txt",
+      "bytes": 402,
+      "sha256": "cf32e892660d70389f2f231189f74a5b8b2a0ac2a0ef1aa51c6a70a16ed3059a"
+    },
+    {
+      "path": "106_stim_neurons.txt",
+      "bytes": 94,
+      "sha256": "6a80310e97e58eebf1370eab2aae10c0bcb38a4be004e787b9352991f363c068"
+    },
+    {
+      "path": "106_stim_volume_i.txt",
+      "bytes": 155,
+      "sha256": "749962e52e9089fd739af8e50b99662be344a64d944487aaba8d96b624c4ca24"
+    },
+    {
+      "path": "106_t.txt",
+      "bytes": 67525,
+      "sha256": "cce739659e024c1f58de3590bc24e5553e3a1d836e0bde63362008837896e353"
+    },
+    {
+      "path": "107_ds_name.txt",
+      "bytes": 73,
+      "sha256": "77418289ce46518fe6e0efd484c5ab7892598ca2846b48bd1c7874323bc8498b"
+    },
+    {
+      "path": "107_gcamp.txt",
+      "bytes": 14635234,
+      "sha256": "4c3e84608bd0ec3e20130f7925857c936941104109c7580b25d3ddbe95162173"
+    },
+    {
+      "path": "107_labels.txt",
+      "bytes": 531,
+      "sha256": "d5fab76e1c3e2698a5ed93c37b2ce7e73bb35761bb8f248fe640fb631602f752"
+    },
+    {
+      "path": "107_stim_neurons.txt",
+      "bytes": 181,
+      "sha256": "0afb97f40ed461ff5ae9cb9f535a509f61b28d336c6c00816fe224266310df50"
+    },
+    {
+      "path": "107_stim_volume_i.txt",
+      "bytes": 261,
+      "sha256": "03bb60b7fc37fb0266537e2e0af102e2bb906d1c9679ebe8a133a2d57d368e1d"
+    },
+    {
+      "path": "107_t.txt",
+      "bytes": 102800,
+      "sha256": "27bf4215fdcaa3758417c6b02d8fd6379e6842ee6f1a6893810ceac7425bf154"
+    },
+    {
+      "path": "108_ds_name.txt",
+      "bytes": 73,
+      "sha256": "19c586d28dea4b81b42e94eaf25e88acbdd6e4bd93bdc4ecf12906de491ea395"
+    },
+    {
+      "path": "108_gcamp.txt",
+      "bytes": 14088512,
+      "sha256": "ee258ffb336ee3e4dd992013efcc617750aeda2d66812153e8d2a5aba6fd5152"
+    },
+    {
+      "path": "108_labels.txt",
+      "bytes": 454,
+      "sha256": "b6aec7f0827e300c91e738d497f95695ba235f27904dc3d498b31dce253e6bbb"
+    },
+    {
+      "path": "108_stim_neurons.txt",
+      "bytes": 171,
+      "sha256": "b7fa4392f7442f5ae36dd310c65f8715710929aa0f65db21029849a6e69fdb98"
+    },
+    {
+      "path": "108_stim_volume_i.txt",
+      "bytes": 253,
+      "sha256": "ed5a8e90a03b4c635c83c73611d35611be266288613ec5f8b780b2ee449b3258"
+    },
+    {
+      "path": "108_t.txt",
+      "bytes": 101825,
+      "sha256": "c185878381e9773a7e751fd457d61f4a4e4285578bf47cf3678bfd7240b1b8f7"
+    },
+    {
+      "path": "109_ds_name.txt",
+      "bytes": 85,
+      "sha256": "2034df4405c71679b8436f02f50b626fc956ed759068111d82dd4963b51f3398"
+    },
+    {
+      "path": "109_gcamp.txt",
+      "bytes": 16764987,
+      "sha256": "cc583a1153308635ac3b24e1dd472706b8c0b3449215a5cd1fe1add2f1860991"
+    },
+    {
+      "path": "109_labels.txt",
+      "bytes": 432,
+      "sha256": "a6658a7d39b3abf277f293c7d7df35211bc588cbbf41d25a1d1215ad36d20224"
+    },
+    {
+      "path": "109_stim_neurons.txt",
+      "bytes": 219,
+      "sha256": "d61fd063672b71b0352d0db77262d24831b4858eaf4fbdb5a8c932f25b88fe42"
+    },
+    {
+      "path": "109_stim_volume_i.txt",
+      "bytes": 333,
+      "sha256": "bf6407c955fa3f4268dd9c55bb8eb0a269fbec077e7249c1bd7c2058c6dd1b92"
+    },
+    {
+      "path": "109_t.txt",
+      "bytes": 111725,
+      "sha256": "84613ad65db95e5465d2dc2ec74581aba0a2adaa80799996bf9567a925c46463"
+    },
+    {
+      "path": "10_ds_name.txt",
+      "bytes": 73,
+      "sha256": "0ae12567f7b07776695a382fd5f414c260a864ca59d681c51305b5584f443b38"
+    },
+    {
+      "path": "10_gcamp.txt",
+      "bytes": 12937367,
+      "sha256": "b35689388190b96253b6a2b0dce005863a64d828e35be19218fe643050238928"
+    },
+    {
+      "path": "10_labels.txt",
+      "bytes": 343,
+      "sha256": "698fa80743db09a6b4cc7a17b82b07a58c41194b0161f4fc22e3795131f6ca08"
+    },
+    {
+      "path": "10_stim_neurons.txt",
+      "bytes": 183,
+      "sha256": "37f95d2612b46548832c7558a1a632d406f3cf5a4ec910afb5734ae7198d4ba1"
+    },
+    {
+      "path": "10_stim_volume_i.txt",
+      "bytes": 283,
+      "sha256": "65de315b220696f250e54d5a7ad523a1071387d12efe5e07f704a1c48fb26823"
+    },
+    {
+      "path": "10_t.txt",
+      "bytes": 95100,
+      "sha256": "7aa6bddc161a7d09109fce7b1882a4192b48f27c89cb1c77debc17752b09fab1"
+    },
+    {
+      "path": "110_ds_name.txt",
+      "bytes": 73,
+      "sha256": "0e35978508ff8daefdfb2d7a8abb2d5fc5c2f78ecbb41a421591157de3dbf7e5"
+    },
+    {
+      "path": "110_gcamp.txt",
+      "bytes": 8983145,
+      "sha256": "603f0d80cddbdb79f9d4fd4fb915266ff9e020fccbb434f5337805e51dafa765"
+    },
+    {
+      "path": "110_labels.txt",
+      "bytes": 356,
+      "sha256": "dd1cbe43bd421fc036e47635d7a77a486bd6d8805ba48779f08d2e05a900b6d6"
+    },
+    {
+      "path": "110_stim_neurons.txt",
+      "bytes": 171,
+      "sha256": "5bf63790f2961a41cf11735a3888f1d92853f4481f7668faf4ff458d0a957f0e"
+    },
+    {
+      "path": "110_stim_volume_i.txt",
+      "bytes": 283,
+      "sha256": "8141560c1d420b4d43e33f04a26337ed5deccee01dc6ce7ea86d191de42447c5"
+    },
+    {
+      "path": "110_t.txt",
+      "bytes": 96800,
+      "sha256": "67d50e53904a4f590547635958a303980534740633705e58cc1cc68f417d5b70"
+    },
+    {
+      "path": "111_ds_name.txt",
+      "bytes": 73,
+      "sha256": "8bd1b0028dc0096b558f6822ba3c21398ed240e7803cdc80d5afed9a8ba6406c"
+    },
+    {
+      "path": "111_gcamp.txt",
+      "bytes": 11223768,
+      "sha256": "53e175c1e47d5940fa0042140b1a79ae9acb695880968feb5da6e56fa9393831"
+    },
+    {
+      "path": "111_labels.txt",
+      "bytes": 456,
+      "sha256": "ececc527fbbd50e71d1119d5f064cfc67b8ba5b6c85aa912516197e5f7f1ca58"
+    },
+    {
+      "path": "111_stim_neurons.txt",
+      "bytes": 176,
+      "sha256": "13734560360fbda1ade8cc8559c39077cecb74361b886a0c1444e754ded3c78d"
+    },
+    {
+      "path": "111_stim_volume_i.txt",
+      "bytes": 283,
+      "sha256": "3d1da0fb934b6b33aa975c507ebf92ec97cc53052f4af34b32ef3fd8662d76ab"
+    },
+    {
+      "path": "111_t.txt",
+      "bytes": 98625,
+      "sha256": "f5bcd2ee7038ebeb6503d2f6ab93fde10639a12cb5849fb3b5cfa883b4c83cd6"
+    },
+    {
+      "path": "112_ds_name.txt",
+      "bytes": 73,
+      "sha256": "19b783ba1befbbbcc218ee6e54bffa240ae0dd2c6f59785e2e151e388d7672ba"
+    },
+    {
+      "path": "112_gcamp.txt",
+      "bytes": 10877256,
+      "sha256": "b6a1ca90de73324b9f4d94ef7a040c9390c48149996d802205c9abf56c2e6d9c"
+    },
+    {
+      "path": "112_labels.txt",
+      "bytes": 374,
+      "sha256": "328e9f52cd530d31f51f8ecba85e0569322df34954467172981707004aa1da55"
+    },
+    {
+      "path": "112_stim_neurons.txt",
+      "bytes": 178,
+      "sha256": "3251367941ca707f278dd690d734ee6c6f2b16bfa949e5dd236999b859b864e1"
+    },
+    {
+      "path": "112_stim_volume_i.txt",
+      "bytes": 286,
+      "sha256": "18785a4fc39769d172f8c1b21dfeede011d59a6f3f1661bf319eac7d905d4ca3"
+    },
+    {
+      "path": "112_t.txt",
+      "bytes": 101200,
+      "sha256": "238ab82c28f65becef78639fa2790707d332968c3a4e52a7537eb07a1c4b3d60"
+    },
+    {
+      "path": "11_ds_name.txt",
+      "bytes": 73,
+      "sha256": "90457db2f89c1cf90a4e64588fc357ab39270b1c6524be91798a95481bb60920"
+    },
+    {
+      "path": "11_gcamp.txt",
+      "bytes": 16265121,
+      "sha256": "abb5853ff0112f35156e395e32d6a9314d548ae6ef805cbab6a60b5ce0ae2a38"
+    },
+    {
+      "path": "11_labels.txt",
+      "bytes": 200,
+      "sha256": "178e77738f1b5dc03a43b72e6851614bd014e252511b6a6f7e97c382e6311f6c"
+    },
+    {
+      "path": "11_stim_neurons.txt",
+      "bytes": 184,
+      "sha256": "03e8b3dd0412f7eb60ce7098e0d6262cce5f04c88a3a312370cf5655108a5790"
+    },
+    {
+      "path": "11_stim_volume_i.txt",
+      "bytes": 284,
+      "sha256": "96666b9fe5708acc0e53336b473ecd7e107db36cba3159ad721b5d97c22bd4bc"
+    },
+    {
+      "path": "11_t.txt",
+      "bytes": 101025,
+      "sha256": "83f0f42d47b77221e4092471f5542941ef54a594596b40c90e7e6927b1e9c719"
+    },
+    {
+      "path": "12_ds_name.txt",
+      "bytes": 73,
+      "sha256": "ac82388c2c7afc859f3385598a77ed72cc0072797711a9d07a3ef73233549ed9"
+    },
+    {
+      "path": "12_gcamp.txt",
+      "bytes": 13079800,
+      "sha256": "02a311793d540e9b6680b52b562f778fa7e4a0d53ca56bcfe9b9d8cf7ecf4046"
+    },
+    {
+      "path": "12_labels.txt",
+      "bytes": 432,
+      "sha256": "41418d4308366db0baa195eb71c8240faa22201daecfc229d60edf605b1228dc"
+    },
+    {
+      "path": "12_stim_neurons.txt",
+      "bytes": 199,
+      "sha256": "4e387b87c9647e32d57c3c621eb3b7af0b26fd0cace8f6b98b71c5b5b13c273d"
+    },
+    {
+      "path": "12_stim_volume_i.txt",
+      "bytes": 283,
+      "sha256": "b13fa71dcc5652f2ed415a46ed89561b0beb657b79bc96e82bb3e9410e0f596b"
+    },
+    {
+      "path": "12_t.txt",
+      "bytes": 96175,
+      "sha256": "308532f4cb94f8fac3bccfa41fb2cad210b8031d0efedc6019e6d2598c3ec635"
+    },
+    {
+      "path": "13_ds_name.txt",
+      "bytes": 85,
+      "sha256": "7f34ebbc6bb8da7d70d79b4277020b37889a8557dd28e06dd257fa0ea2d7ca05"
+    },
+    {
+      "path": "13_gcamp.txt",
+      "bytes": 9331094,
+      "sha256": "580f593c9e99b189d2c9f1c935cf78af1e88bfd1f61feb3faf0cd191d230781c"
+    },
+    {
+      "path": "13_labels.txt",
+      "bytes": 318,
+      "sha256": "084110f2bc6dc8c54cde9f9d4bc2055e1fe9dcbcc174f5c0b7ed34dfbe4e065f"
+    },
+    {
+      "path": "13_stim_neurons.txt",
+      "bytes": 193,
+      "sha256": "1775482ed2fe6277c1f3db42aeb21afec5b039a993582c4f176106ecb8e09623"
+    },
+    {
+      "path": "13_stim_volume_i.txt",
+      "bytes": 308,
+      "sha256": "1d6d8a5dade47b7ae34f41834f7c0f57cb0acbd4f8909e5d455c0d0a1e08e217"
+    },
+    {
+      "path": "13_t.txt",
+      "bytes": 103675,
+      "sha256": "5d7b44202fced74c8deb773a7e9276d5d910973cf6fdc55775b73e6c94a4aa06"
+    },
+    {
+      "path": "14_ds_name.txt",
+      "bytes": 85,
+      "sha256": "a52331983e74fcbc26f24343c30dc275e311a7c89f15cf1c747095412b1b5f12"
+    },
+    {
+      "path": "14_gcamp.txt",
+      "bytes": 14006533,
+      "sha256": "8c8e5891ffa176a890b96237b0a9af46202971c9e882184ae3285ab0bf1d6816"
+    },
+    {
+      "path": "14_labels.txt",
+      "bytes": 405,
+      "sha256": "bb80dc4886ff6da36e89e413f2bdb2305c110f5d67efeab90b6c70f93800d749"
+    },
+    {
+      "path": "14_stim_neurons.txt",
+      "bytes": 235,
+      "sha256": "448877971d93efd19e7884427b04c246e3d0247fd0de9609296b87be60f9ce7c"
+    },
+    {
+      "path": "14_stim_volume_i.txt",
+      "bytes": 383,
+      "sha256": "418cb441cfb9d2147c46d67ba1fb3ce29aaa11bd135cb36721557e1cd686b2f7"
+    },
+    {
+      "path": "14_t.txt",
+      "bytes": 127325,
+      "sha256": "96f4f398b70d25e27774238e5a9ee9fea52de27160d3f6f5b68c208e5a73f164"
+    },
+    {
+      "path": "15_ds_name.txt",
+      "bytes": 85,
+      "sha256": "d4f3374c99ee7c1778af630abc6ae5ce402cf49f154bfedc8bf7ebf143bad471"
+    },
+    {
+      "path": "15_gcamp.txt",
+      "bytes": 22199651,
+      "sha256": "4bd65b8ac9ff9b19332c8c2bb8cdcdd6bb34499a610246cdd7cf4328cc192d76"
+    },
+    {
+      "path": "15_labels.txt",
+      "bytes": 507,
+      "sha256": "d5aeb7cba60cf209c8f998a7405e3b0d13292a0dd426d78fc969f81eff0acd36"
+    },
+    {
+      "path": "15_stim_neurons.txt",
+      "bytes": 278,
+      "sha256": "f5b6425065d613b8f25098b8d276ab43eae564fb63ece8c0ed557a4e0c3284af"
+    },
+    {
+      "path": "15_stim_volume_i.txt",
+      "bytes": 383,
+      "sha256": "43a832b86b72cb8ca30ba0bf562632111fc01fe541ae421bf7ff89d9cfe1d719"
+    },
+    {
+      "path": "15_t.txt",
+      "bytes": 127550,
+      "sha256": "8d62ab8b98d5d745db5875512409c4faa2f2ee53de45e7d117ffc1abb20b5526"
+    },
+    {
+      "path": "16_ds_name.txt",
+      "bytes": 73,
+      "sha256": "2b9f0b8d76347fb0c6114fd23d8774e2058822e4f56e0c150baec69520653b5f"
+    },
+    {
+      "path": "16_gcamp.txt",
+      "bytes": 31750569,
+      "sha256": "ac16d1528a7bc70c5481ad1b62722c43e2b3f4e5397a81b49b26fce454fb47f3"
+    },
+    {
+      "path": "16_labels.txt",
+      "bytes": 497,
+      "sha256": "a22cea14be3b759dda7724f319ac486cc76fe81505e3958123a438975f0ab0b7"
+    },
+    {
+      "path": "16_stim_neurons.txt",
+      "bytes": 231,
+      "sha256": "9b4afaffe319173b21b7005fd708d439bab98093748bdd23b7083e7cde1df898"
+    },
+    {
+      "path": "16_stim_volume_i.txt",
+      "bytes": 333,
+      "sha256": "d6bfb6bf7bf23871d78fb681ba15ffa9905c8ac69e63c768404b7afe8f8bee30"
+    },
+    {
+      "path": "16_t.txt",
+      "bytes": 112975,
+      "sha256": "fdd8b0316392ee6fa00b7f89a0bec74d1f8a3c23608500a5ebbe096ca55fa136"
+    },
+    {
+      "path": "17_ds_name.txt",
+      "bytes": 73,
+      "sha256": "984bf160ae9bdf581663e8a8c480ec6b3f0e1d39c641c629dcc4cfa0588989a5"
+    },
+    {
+      "path": "17_gcamp.txt",
+      "bytes": 12799628,
+      "sha256": "925b1e26784080016140a5cd624aff8f092df9bfddfac8601a079fa77bac613c"
+    },
+    {
+      "path": "17_labels.txt",
+      "bytes": 284,
+      "sha256": "4e517669998816759b6fc927b6d4a84405aad930462ee45eb6ffeb4f32536d8b"
+    },
+    {
+      "path": "17_stim_neurons.txt",
+      "bytes": 216,
+      "sha256": "3807d9105e7c13cb00e3b7ee22c1722362e4bd0192ec01821eb641c459b7120f"
+    },
+    {
+      "path": "17_stim_volume_i.txt",
+      "bytes": 333,
+      "sha256": "a38b83a6c10b6cd1375efcce6588dff6dcdb6e7b7f16b992df94434f44513e80"
+    },
+    {
+      "path": "17_t.txt",
+      "bytes": 111300,
+      "sha256": "7d1a96b6d5a8b92f32fa3f83486a68f9a3d25618fad5abc185d395c73824cf14"
+    },
+    {
+      "path": "18_ds_name.txt",
+      "bytes": 73,
+      "sha256": "c7f54fa06d595b167b85f3c6a57a976b2ebf31a9b1719c5e865b5359ac08d55f"
+    },
+    {
+      "path": "18_gcamp.txt",
+      "bytes": 15520575,
+      "sha256": "0cd5932415b07fd3e5015aa46909bfec4d5b909f337badef75acde799b60d541"
+    },
+    {
+      "path": "18_labels.txt",
+      "bytes": 364,
+      "sha256": "4c93f7fb14830e4e8c88fe4b7988ae5fc04ad4c15f9680a40052a1cc87096947"
+    },
+    {
+      "path": "18_stim_neurons.txt",
+      "bytes": 231,
+      "sha256": "40a792b8c4ae902b3f6a08770889f5ae48668020c902b58dd633630b4302e668"
+    },
+    {
+      "path": "18_stim_volume_i.txt",
+      "bytes": 333,
+      "sha256": "c1c3c137a97bd6425053122eda494678c32cc2ab3b8f2f04ed6cf5cf595f90fe"
+    },
+    {
+      "path": "18_t.txt",
+      "bytes": 110075,
+      "sha256": "de1eef543273afba8d1a3b9fa6729ccad4a793c051c68a6644c4ccf05f7ae382"
+    },
+    {
+      "path": "19_ds_name.txt",
+      "bytes": 73,
+      "sha256": "f8e15510f23f0d64443b6ab325a21241d9812f0f2975ca81bb2ae02543e57e49"
+    },
+    {
+      "path": "19_gcamp.txt",
+      "bytes": 24226357,
+      "sha256": "70b91e3d8db861bcff982db0e846aabfa826e3eb834a1ef7c488e26b31400091"
+    },
+    {
+      "path": "19_labels.txt",
+      "bytes": 475,
+      "sha256": "0f74d26caa42a37abfcf3e731f44d1956a45f2e65e43d2aae55f576d7b16d602"
+    },
+    {
+      "path": "19_stim_neurons.txt",
+      "bytes": 268,
+      "sha256": "37cd847a3341d21c25d9161d6e51afb8063f3c443e489a6990d10be4531f2a02"
+    },
+    {
+      "path": "19_stim_volume_i.txt",
+      "bytes": 383,
+      "sha256": "5e1b629c2fec86303a44e1c99157e65fb9ab47ddffc69714c1ad193c5305aef9"
+    },
+    {
+      "path": "19_t.txt",
+      "bytes": 127475,
+      "sha256": "86f898f4d3a6ecb8d2e934a095f10aebd3901acc504aae54b058581dd9b7b8e8"
+    },
+    {
+      "path": "1_ds_name.txt",
+      "bytes": 85,
+      "sha256": "b8b98f5e51bbf6d742fda0b7c3b73c1924f1ca7fd2eb38bd5be3f0b4119e556b"
+    },
+    {
+      "path": "1_gcamp.txt",
+      "bytes": 18343006,
+      "sha256": "44d08d5983deda23a752bcc33ba0ac420828b5aec1dfa288942168b7acdbf66f"
+    },
+    {
+      "path": "1_labels.txt",
+      "bytes": 411,
+      "sha256": "fc7c9d663ee8189090899f5b7206de11f2a5ce6653df9e812c7cca6d315e6862"
+    },
+    {
+      "path": "1_stim_neurons.txt",
+      "bytes": 264,
+      "sha256": "75a5e8ead617e0c8b4fcca9c4330b537a1573881c5328853582417f8e18c5cb7"
+    },
+    {
+      "path": "1_stim_volume_i.txt",
+      "bytes": 408,
+      "sha256": "c5aa2a8a45209dc3b30edc4becaf0ac86d483c9d85a2609102c6ff58c2ecc5b2"
+    },
+    {
+      "path": "1_t.txt",
+      "bytes": 134875,
+      "sha256": "500348722344d922a7c4ef09c5dfec8ab293f212e77744b64ae5f40029db740d"
+    },
+    {
+      "path": "20_ds_name.txt",
+      "bytes": 73,
+      "sha256": "4974100f00c1cc37b7e95fde0b9da2926828e8dd14f1089101717877e0cdee3a"
+    },
+    {
+      "path": "20_gcamp.txt",
+      "bytes": 16521201,
+      "sha256": "cd0fdda1fef994f7324fb250d3fcffee576ecd91c4ddc196b7ccf2fe720367f3"
+    },
+    {
+      "path": "20_labels.txt",
+      "bytes": 402,
+      "sha256": "f595b3fef88b444a310b2f406ddc512a829bd854ff4e0b5237f28c3dd03bb982"
+    },
+    {
+      "path": "20_stim_neurons.txt",
+      "bytes": 218,
+      "sha256": "3c01aac882adfce8653541019541542744730d6d2be85e280b5bb790a8c54574"
+    },
+    {
+      "path": "20_stim_volume_i.txt",
+      "bytes": 333,
+      "sha256": "2ce2164a3a1ec0d0efe5030a700b0f80696152f92ed7a615c60f24fe30bac33e"
+    },
+    {
+      "path": "20_t.txt",
+      "bytes": 111625,
+      "sha256": "1280e89ea3da9f98b5677bac01dcdd35afde62c062013ae84611ac6c08016c16"
+    },
+    {
+      "path": "21_ds_name.txt",
+      "bytes": 73,
+      "sha256": "a6cbdf66d0f8675a1dcbc9aeaf884c48f5bdb062a27b5e3db4862cd4b125fb35"
+    },
+    {
+      "path": "21_gcamp.txt",
+      "bytes": 19936107,
+      "sha256": "300e2dffc49c73c90758f27310f75083a2e6e684234f7cf75d8c0b58c32ab249"
+    },
+    {
+      "path": "21_labels.txt",
+      "bytes": 388,
+      "sha256": "60917ffaed1d2e3a5121238ca074f9a355028cd827b2a409ec8fcbb3ee4b5d60"
+    },
+    {
+      "path": "21_stim_neurons.txt",
+      "bytes": 254,
+      "sha256": "f7d27d3ac611027e33e546a94c6f109dfbe374b319f9538cbd8b581d0f0202b8"
+    },
+    {
+      "path": "21_stim_volume_i.txt",
+      "bytes": 383,
+      "sha256": "2ae9677aef780ffcec43f2324849e18d3d097a7600f97d00f7825bc602bac0b1"
+    },
+    {
+      "path": "21_t.txt",
+      "bytes": 126175,
+      "sha256": "5f753577744c33066404b50a759cee9b1674a64929911fc24ccd427d1c8248f0"
+    },
+    {
+      "path": "22_ds_name.txt",
+      "bytes": 73,
+      "sha256": "3238b0bbcaa7d4b28ab1f238c09e74b6ab8e3b457bf34fa10c1c600ea0e13251"
+    },
+    {
+      "path": "22_gcamp.txt",
+      "bytes": 19969570,
+      "sha256": "f16b8e0bf1b8a43eeb903e33d691a7e4f86d835df9fa78e0831f6af76b03b370"
+    },
+    {
+      "path": "22_labels.txt",
+      "bytes": 333,
+      "sha256": "ded908fa207b6a716619a5e868bab4175567d41202a003bb15e3bf5734242fcf"
+    },
+    {
+      "path": "22_stim_neurons.txt",
+      "bytes": 238,
+      "sha256": "b9e408b992c8eb2ce7cb3da679404accc645a6bc79958d8c6018cb6ac001be5c"
+    },
+    {
+      "path": "22_stim_volume_i.txt",
+      "bytes": 358,
+      "sha256": "2fff14801a2b4e8d3dee5f14eb87c4995a900d26c62244b32628d901d1ad0b2b"
+    },
+    {
+      "path": "22_t.txt",
+      "bytes": 118150,
+      "sha256": "3b8916942e547c396408e54d7d1eca3445df7eb0f00461e8f33bce4827c1cd4a"
+    },
+    {
+      "path": "23_ds_name.txt",
+      "bytes": 73,
+      "sha256": "420792b2b31c8303f3a7c866780ddb694fefb952c528c9ef5ff6a68975977bcc"
+    },
+    {
+      "path": "23_gcamp.txt",
+      "bytes": 8577049,
+      "sha256": "ed3b74e9bca8dfa35f9ad47ee8bf740ac67925ab4f47575c6161d8048cee223a"
+    },
+    {
+      "path": "23_labels.txt",
+      "bytes": 367,
+      "sha256": "d6a527fac7bf567796b3e6e3f107c6cdc9d17614e6a3a35a897e49a1494898aa"
+    },
+    {
+      "path": "23_stim_neurons.txt",
+      "bytes": 171,
+      "sha256": "8c585875f8ccfaf44edfbc1f22c8091c09094d4ba0cd02cfff88a8e7553f96a0"
+    },
+    {
+      "path": "23_stim_volume_i.txt",
+      "bytes": 283,
+      "sha256": "f6ac259a74b26b2311f8a5ee6ca02cdd5d259a6e4c5c7894eaa2857c5ff254ab"
+    },
+    {
+      "path": "23_t.txt",
+      "bytes": 95000,
+      "sha256": "d408b0681842246dc9a0f3323b0b6560b9067d82e5fea257378e6fa7adac7944"
+    },
+    {
+      "path": "24_ds_name.txt",
+      "bytes": 85,
+      "sha256": "a6fc76f374977941c043dd1e554ee1a40d79dc79cb31701a12a1c384448ec7f5"
+    },
+    {
+      "path": "24_gcamp.txt",
+      "bytes": 1031625,
+      "sha256": "74b24545faa809e181353a3ddd5c11c20f468c90cbd8d666fcde2641c7d57792"
+    },
+    {
+      "path": "24_labels.txt",
+      "bytes": 293,
+      "sha256": "8feee85c02a792821a719913206cadbe3a0cb3783a23e32390524a7072c64180"
+    },
+    {
+      "path": "24_stim_neurons.txt",
+      "bytes": 9,
+      "sha256": "d74821ff5b4e1dbf6187792a6088408a19ae2538e8d90f5ba1a2b9a70904d2cb"
+    },
+    {
+      "path": "24_stim_volume_i.txt",
+      "bytes": 11,
+      "sha256": "00523a27d7a673f2867221b1c83b1c454a8ed4e1cb5064ba30c561bca8d0c627"
+    },
+    {
+      "path": "24_t.txt",
+      "bytes": 9825,
+      "sha256": "753b109183b0534bf9020db295906fe4bc3d4b2581af78d7afd832bc55b6e860"
+    },
+    {
+      "path": "25_ds_name.txt",
+      "bytes": 85,
+      "sha256": "17bb6bfd3e3c87b3b3c20adcd333c31f6e0a751c8e8fe7ba94492b3885a61335"
+    },
+    {
+      "path": "25_gcamp.txt",
+      "bytes": 1133692,
+      "sha256": "d6840876a0290d344fc1a375cd75a99aa11aa347e97ff904e0e7080797b44604"
+    },
+    {
+      "path": "25_labels.txt",
+      "bytes": 321,
+      "sha256": "1c603f66a8771449a849d288f6fc8d048542bf424b011beda6f7e09145418167"
+    },
+    {
+      "path": "25_stim_neurons.txt",
+      "bytes": 9,
+      "sha256": "d175e2c0e4a5b4dbb9dbd54cf206b840c9bc3aa619e594ccf025da09c2e269d9"
+    },
+    {
+      "path": "25_stim_volume_i.txt",
+      "bytes": 11,
+      "sha256": "28e7584284116092f4599891b0644fef78fd41f6b0c50fd441c8d696db52db80"
+    },
+    {
+      "path": "25_t.txt",
+      "bytes": 10400,
+      "sha256": "9dc1188664e9d69a3e9295dd73bc2f334452eb886425eed5e62410511bb854a7"
+    },
+    {
+      "path": "26_ds_name.txt",
+      "bytes": 85,
+      "sha256": "24ec20ade65ee15e39ab04c3d7e5ffb953342c076dfbd63274ef2b6c6757e414"
+    },
+    {
+      "path": "26_gcamp.txt",
+      "bytes": 12944488,
+      "sha256": "64cadafa391091184141672170f2d1cd10405faa51f338c5ed7865221498b8a7"
+    },
+    {
+      "path": "26_labels.txt",
+      "bytes": 398,
+      "sha256": "bbbd475065f653b24459101e889ebcbd63621d7e1d76a5851f705afe74b6c601"
+    },
+    {
+      "path": "26_stim_neurons.txt",
+      "bytes": 211,
+      "sha256": "cb93db25cd8a7efc3f6f3c5028ec71926b55cb3bef16b8b615d80c5c2a7ae872"
+    },
+    {
+      "path": "26_stim_volume_i.txt",
+      "bytes": 348,
+      "sha256": "8e02a1ec2ef51ad17512d661c46f56c4af86e24e8c587b835b363f5d2631d249"
+    },
+    {
+      "path": "26_t.txt",
+      "bytes": 116575,
+      "sha256": "795ff6da444f3fc703fcf350964ec93b45e698618f83948a8e61fef578b547e8"
+    },
+    {
+      "path": "27_ds_name.txt",
+      "bytes": 85,
+      "sha256": "a2d8d9775f62179cd4f85eb4d85fdd36af31b1b3a45f68c4561655ce4c07a4ec"
+    },
+    {
+      "path": "27_gcamp.txt",
+      "bytes": 9580082,
+      "sha256": "378bb3799299532ea9e61a5a26c3b8bbbc17c91fdd23b05c25fbcbbb5fe14d1a"
+    },
+    {
+      "path": "27_labels.txt",
+      "bytes": 334,
+      "sha256": "80e6eb65e2ac90d3ef46e0da7df3a5c9eeb47b99d8af2316c47bf989185d2210"
+    },
+    {
+      "path": "27_stim_neurons.txt",
+      "bytes": 193,
+      "sha256": "95af5753eee5fa5663670193749fdc232a8aeeac1dabf0ee697491fcd7a0936b"
+    },
+    {
+      "path": "27_stim_volume_i.txt",
+      "bytes": 308,
+      "sha256": "d904360ba7ee731afaa7b15e1b8a96dc3ff05a1dde474e722bb4b51ec7d3ce97"
+    },
+    {
+      "path": "27_t.txt",
+      "bytes": 105225,
+      "sha256": "1769839c3abcdadc2aaa0a526e504130dfee33ac7181bd8f37de996697cfd120"
+    },
+    {
+      "path": "28_ds_name.txt",
+      "bytes": 85,
+      "sha256": "03eff4fc7dc986fc5ef1fa66e1d48288001bafa989b6b20e5fa93881aeae5278"
+    },
+    {
+      "path": "28_gcamp.txt",
+      "bytes": 6493608,
+      "sha256": "85f0c14d992bbf96274cc4e0287c13a2b8ebdfc16f670313334f5a761bde13b2"
+    },
+    {
+      "path": "28_labels.txt",
+      "bytes": 270,
+      "sha256": "eacdf16f0d0a2ea7e1a8c02b668590f03b8590fb5ad9aa0192c2071850a400e3"
+    },
+    {
+      "path": "28_stim_neurons.txt",
+      "bytes": 126,
+      "sha256": "540ae3bb957ce7ef90cda5bd454256b2bd7b945de76cd97cf14898d391594531"
+    },
+    {
+      "path": "28_stim_volume_i.txt",
+      "bytes": 199,
+      "sha256": "b4830b61b70dede48113dfc2cadc0caedd071a217656b8a2774d473cc05949c1"
+    },
+    {
+      "path": "28_t.txt",
+      "bytes": 68325,
+      "sha256": "42bcf3f9b22fda613fdc1282e93113119095615b66d97b81b03696a202649947"
+    },
+    {
+      "path": "29_ds_name.txt",
+      "bytes": 85,
+      "sha256": "10e2a3c534bcee18439980ce7b8ae18620229938656e8215bdad61a24077911f"
+    },
+    {
+      "path": "29_gcamp.txt",
+      "bytes": 1520068,
+      "sha256": "67395f975ee666f243cc16c5c477bdee9106c0a4fe7dbb335bb9bd55444fd550"
+    },
+    {
+      "path": "29_labels.txt",
+      "bytes": 315,
+      "sha256": "2dd01ca5991863c48947e66b4b5aa0242970f41d075c9d8b36d0682ab69f50c1"
+    },
+    {
+      "path": "29_stim_neurons.txt",
+      "bytes": 15,
+      "sha256": "bcb45410c9fcc8fa21e12844cc933da1d7e2b4400632d2323a33f82a6d6a9344"
+    },
+    {
+      "path": "29_stim_volume_i.txt",
+      "bytes": 19,
+      "sha256": "b2e1faed53b5a9a495a4c604ca223f01d1dfce8ebe58bad038086abcface0331"
+    },
+    {
+      "path": "29_t.txt",
+      "bytes": 19000,
+      "sha256": "2aa55cbc2bc5ad2698dcdd684290894620ebb10687cfb2c1804273e90e78860b"
+    },
+    {
+      "path": "2_ds_name.txt",
+      "bytes": 85,
+      "sha256": "e5a3ef4ae697e6a55247febc4008d57779d2aabe5e4d1c61551ac979180795bc"
+    },
+    {
+      "path": "2_gcamp.txt",
+      "bytes": 12504455,
+      "sha256": "4a0a37af5d62a60cd897593898f9afadbc0f0ba4d7fb442dd5373c0683e6678b"
+    },
+    {
+      "path": "2_labels.txt",
+      "bytes": 333,
+      "sha256": "19a70b64e6454047079286792368d6c6c9d3fb3f21991b60f160bdf813263485"
+    },
+    {
+      "path": "2_stim_neurons.txt",
+      "bytes": 190,
+      "sha256": "8aaa251f2cfd1ae50c3df3c352be3c87339b65c215d084c0ac1d2a519b330034"
+    },
+    {
+      "path": "2_stim_volume_i.txt",
+      "bytes": 288,
+      "sha256": "e4235f0f0e68a520bc0d6a13dae1fce81c96e7d191a29fe5a782e526f070657c"
+    },
+    {
+      "path": "2_t.txt",
+      "bytes": 94725,
+      "sha256": "2ab8cefe5af4127ebd9cb5881fb591b93847253d97d4f6d81559aea4a25cdc02"
+    },
+    {
+      "path": "30_ds_name.txt",
+      "bytes": 85,
+      "sha256": "f59574fe5062dfcd0f0485a251e21782286bcc28d9f8450f49088c8def8af5d5"
+    },
+    {
+      "path": "30_gcamp.txt",
+      "bytes": 10090996,
+      "sha256": "17b45ae3ffc5878542e14f19184aabcb8cb88c4e3d551fc523dc64ce2be6e12d"
+    },
+    {
+      "path": "30_labels.txt",
+      "bytes": 343,
+      "sha256": "4fff980841de1a168110f2ba17a3a72df62bfc6c9b0103b4747ac13c38419a1d"
+    },
+    {
+      "path": "30_stim_neurons.txt",
+      "bytes": 187,
+      "sha256": "b222280b78d9235e6a1da876669ff8588a8d8b4424a85093b51fdb5ba27a1afa"
+    },
+    {
+      "path": "30_stim_volume_i.txt",
+      "bytes": 308,
+      "sha256": "a215ed2fffed26d96436e43a6dbdce842862a207e2c9bfd12fbb0010cd731292"
+    },
+    {
+      "path": "30_t.txt",
+      "bytes": 104025,
+      "sha256": "68c6d89b8df6c00de41f07ed00ee9389b6770d5d1afa4cb67901d04f3c68d489"
+    },
+    {
+      "path": "31_ds_name.txt",
+      "bytes": 73,
+      "sha256": "0230c80e81c580b145ae0b2f2cc985d6b9fecac190a7cca1023a055e3acb3c0e"
+    },
+    {
+      "path": "31_gcamp.txt",
+      "bytes": 12382226,
+      "sha256": "7cd18e7a7a53d49039be650c89e5b21a85e1c02e9d8fe159f1f2c725ca046f48"
+    },
+    {
+      "path": "31_labels.txt",
+      "bytes": 299,
+      "sha256": "6be12cef600f293b3864e7f83e7dd05dfd80b3719e8281134aeed481e20acccf"
+    },
+    {
+      "path": "31_stim_neurons.txt",
+      "bytes": 239,
+      "sha256": "5aaf2a1243899389694ef08216178d517e631e39fa1587fe736864275f1cbad1"
+    },
+    {
+      "path": "31_stim_volume_i.txt",
+      "bytes": 383,
+      "sha256": "1545edc900131c1985b94d338471ae84f1dd352ef1315715e3c6667535075943"
+    },
+    {
+      "path": "31_t.txt",
+      "bytes": 126400,
+      "sha256": "ff93f06aac2e77204af849c5eaba0ac7d7d2d81f269445a32cf11d9ef3e340f4"
+    },
+    {
+      "path": "32_ds_name.txt",
+      "bytes": 73,
+      "sha256": "c724e116807228e5ca3173b60ad300903e20bef304a9994c10d1fc2865e02317"
+    },
+    {
+      "path": "32_gcamp.txt",
+      "bytes": 9363918,
+      "sha256": "209d6d0f3499dde034a07fbb3ae1f1847c50f58d8edaf6f7f94160b97daf7ead"
+    },
+    {
+      "path": "32_labels.txt",
+      "bytes": 373,
+      "sha256": "93a7402f6257b5d3925fea0f3dfba3bd0014d8cbe33dcb575f4b67a978a087e1"
+    },
+    {
+      "path": "32_stim_neurons.txt",
+      "bytes": 173,
+      "sha256": "6b0acfcf47079724dd9a073e4973e0171fd51c26001dcee47f5192bac72551b4"
+    },
+    {
+      "path": "32_stim_volume_i.txt",
+      "bytes": 283,
+      "sha256": "8bf586c10a865a1be12038e5d353135217f8ac363fa23af2659ad81a39039ad8"
+    },
+    {
+      "path": "32_t.txt",
+      "bytes": 96725,
+      "sha256": "e10999d59cfe1caed04b4341f2fde97cf57367f7e9bf996b553f796f783f1fc4"
+    },
+    {
+      "path": "33_ds_name.txt",
+      "bytes": 85,
+      "sha256": "1e54a6b101fcf891080bea06a4b2fcc56ca84951a110ad75dacede5646d6e745"
+    },
+    {
+      "path": "33_gcamp.txt",
+      "bytes": 9293621,
+      "sha256": "bed1a892b5f900f5d41e6b1f999a9a10aa3a9c786a5753f0d2558087d4ebdaf1"
+    },
+    {
+      "path": "33_labels.txt",
+      "bytes": 352,
+      "sha256": "d75860d88fd6b23027b5f4af671e7ccb51cc6aa70448721f8f936acd211efd83"
+    },
+    {
+      "path": "33_stim_neurons.txt",
+      "bytes": 190,
+      "sha256": "e681469f72067df47a8456b5f0dba6da4ef36569d5d1bc2c769ed52ae72993a3"
+    },
+    {
+      "path": "33_stim_volume_i.txt",
+      "bytes": 301,
+      "sha256": "926c37bfe3e425aaaf0eda35453579ece17c4de2f567b1e450cf031a908fc6a9"
+    },
+    {
+      "path": "33_t.txt",
+      "bytes": 97825,
+      "sha256": "1754f2aa43289dfa485a76275c95c2bb619c673b53089e9f3f4e30565050bbd3"
+    },
+    {
+      "path": "34_ds_name.txt",
+      "bytes": 85,
+      "sha256": "d296bc1bba0a943945b75868732a13e4548aa79a0ab8cfdd988d03e344320e7f"
+    },
+    {
+      "path": "34_gcamp.txt",
+      "bytes": 9313262,
+      "sha256": "91cdecadc392943bdf65bc096214285bf8195c295bc57062f679875d6d381b34"
+    },
+    {
+      "path": "34_labels.txt",
+      "bytes": 318,
+      "sha256": "d81e34abde9ccc794164dee5818837c500f8527b5400e66161e21288a1f47658"
+    },
+    {
+      "path": "34_stim_neurons.txt",
+      "bytes": 182,
+      "sha256": "c161f95a171128e4a3e74a51b9cd72d08b9faf2c95e31f3026ba7f6cfa6fabca"
+    },
+    {
+      "path": "34_stim_volume_i.txt",
+      "bytes": 303,
+      "sha256": "27250ad6fd1f344c412ce4dbe97284532b1d331142a4f888cf6b608d7797b0b3"
+    },
+    {
+      "path": "34_t.txt",
+      "bytes": 103475,
+      "sha256": "9910539def15636dc3c9a31c8ae9c5a85978ded86399c6a6f633e05611794f31"
+    },
+    {
+      "path": "35_ds_name.txt",
+      "bytes": 85,
+      "sha256": "8716d412b340485fa11f2ccc0ad1d97174cacac7b6b3cedcca0a585f5f9f75d0"
+    },
+    {
+      "path": "35_gcamp.txt",
+      "bytes": 11248123,
+      "sha256": "0a10318dbf7eb19fc44e5b25d44814cec216fe446f12ec5e28b8b7892eb74ffe"
+    },
+    {
+      "path": "35_labels.txt",
+      "bytes": 288,
+      "sha256": "599a0238c813fa3540e5d8e3841c062bd783b2ab06251bc77a4412392b7d0172"
+    },
+    {
+      "path": "35_stim_neurons.txt",
+      "bytes": 200,
+      "sha256": "1db5f48ba380b495f4e8e4ccc3d521119b1c5fc123e0d1d2d2fe0905894e92d4"
+    },
+    {
+      "path": "35_stim_volume_i.txt",
+      "bytes": 328,
+      "sha256": "6bfeb8d5377de9ac629bda6235b9928d959aa8ee46e605845d1b7be4eae5f234"
+    },
+    {
+      "path": "35_t.txt",
+      "bytes": 110275,
+      "sha256": "4cdd9d04a1207a04d1dd2034d7c051319f0be9d5a4e3627322788309a978af2c"
+    },
+    {
+      "path": "36_ds_name.txt",
+      "bytes": 85,
+      "sha256": "d0e52a75df879ab8d1d63bc82828dc5ec509e7af8b3d02b84aaa5d35966c8511"
+    },
+    {
+      "path": "36_gcamp.txt",
+      "bytes": 10770772,
+      "sha256": "f9b7d19e06dbcc95cad2be371bf84121aa6098f50b27afb51857d2ba7c886188"
+    },
+    {
+      "path": "36_labels.txt",
+      "bytes": 274,
+      "sha256": "6205bf5327e9729969ef5abc501a49507055687b968dc4f87f4fd1e4e95d32e8"
+    },
+    {
+      "path": "36_stim_neurons.txt",
+      "bytes": 202,
+      "sha256": "dbe164a9245c778ac7f1f6569b8e5a0cad18fa2ea66fe96ea25ebb9ad732a56f"
+    },
+    {
+      "path": "36_stim_volume_i.txt",
+      "bytes": 333,
+      "sha256": "cb91d54a2cc64ae0e876267164fd2e8b64bbbc1691a8ceb97ce599a3ac8d0364"
+    },
+    {
+      "path": "36_t.txt",
+      "bytes": 113375,
+      "sha256": "2a04752eeb3fca373dce4520b86d2688fd5bc6654ebfb17ccb04c10439ce2da9"
+    },
+    {
+      "path": "37_ds_name.txt",
+      "bytes": 85,
+      "sha256": "530eb5f50834d9739ec4b6ac2a03bec5ae92bfc52a561b4c9a283ca4a94e0c6d"
+    },
+    {
+      "path": "37_gcamp.txt",
+      "bytes": 11904349,
+      "sha256": "de3a167e9fa3d40d05b97b8879a663725a6e852b3bfe13ce6fd655833aa52771"
+    },
+    {
+      "path": "37_labels.txt",
+      "bytes": 338,
+      "sha256": "b269fab5e367a408acaa899c09701e821040074896cbfac75e8d04c52afce051"
+    },
+    {
+      "path": "37_stim_neurons.txt",
+      "bytes": 212,
+      "sha256": "a832e21fd5ad23b030979ec8f2a6a504592955a291703251b0510c7dee968570"
+    },
+    {
+      "path": "37_stim_volume_i.txt",
+      "bytes": 328,
+      "sha256": "bedc64670ac452feea88cf8a601b20a8b0d1e5bd7bf63900668faace215b8df2"
+    },
+    {
+      "path": "37_t.txt",
+      "bytes": 110225,
+      "sha256": "43c91113aa3406662724f1a384cac0840199e66e8a33e8dd447e4941227f46fe"
+    },
+    {
+      "path": "38_ds_name.txt",
+      "bytes": 85,
+      "sha256": "761b0efb2907b39e1017dc7a4c894a87734db14e298d5c83d699021295d52084"
+    },
+    {
+      "path": "38_gcamp.txt",
+      "bytes": 12716663,
+      "sha256": "4d750c719b9b5c29b41e691f760fdcc16749767bb77fe3f1b285c7a5000d047d"
+    },
+    {
+      "path": "38_labels.txt",
+      "bytes": 380,
+      "sha256": "36a629991ab26616c495e2a7bc8a4fc6cbd8b0b8aec527a888becaa70c7a2b6c"
+    },
+    {
+      "path": "38_stim_neurons.txt",
+      "bytes": 174,
+      "sha256": "4bf023ae37c011669bd96ea3a58a381b4ed3a18751b556fefd7ffb518a2264cb"
+    },
+    {
+      "path": "38_stim_volume_i.txt",
+      "bytes": 283,
+      "sha256": "7ce7d9c713ba8171b677eca475f265079ac8b2fcd1d33346e9422c7ff3819d81"
+    },
+    {
+      "path": "38_t.txt",
+      "bytes": 96325,
+      "sha256": "8c3d713cca6a08942fd2e1f57bac1a9b0b932a600e373c5b2e12b082339119c4"
+    },
+    {
+      "path": "39_ds_name.txt",
+      "bytes": 85,
+      "sha256": "7fdbfb3259660fdc33c963a18c14f039ddf9454dfd036a4dc68f9bc397bb56c2"
+    },
+    {
+      "path": "39_gcamp.txt",
+      "bytes": 10432381,
+      "sha256": "9fefd186974cade1c11a9cc62288f5b8e7dd1f87e1b55f85c597b2ba95df8f57"
+    },
+    {
+      "path": "39_labels.txt",
+      "bytes": 301,
+      "sha256": "e50119dfa4118a2647a0f8d2db02d43a17743cae4b5bda8ac0f4b06f9170c9b0"
+    },
+    {
+      "path": "39_stim_neurons.txt",
+      "bytes": 194,
+      "sha256": "4ff2984b5e8af2b4356bd079b363a585b69b457009891fee1f8ca02a4d91739c"
+    },
+    {
+      "path": "39_stim_volume_i.txt",
+      "bytes": 308,
+      "sha256": "04bebdca67100f0b62f2a55e369951d18e5b18816f9c19432ed3c7722e1816de"
+    },
+    {
+      "path": "39_t.txt",
+      "bytes": 105375,
+      "sha256": "393d1de2d2f05a234157bcd35269ce6673c677b1076521ed9875e3ead6661cb3"
+    },
+    {
+      "path": "3_ds_name.txt",
+      "bytes": 85,
+      "sha256": "55d4e79e7ae44d17ced77e5362e8b852d81c9c9d696687dd7fe55d8920760618"
+    },
+    {
+      "path": "3_gcamp.txt",
+      "bytes": 17317405,
+      "sha256": "52a10d634416e56719cea7c2514617ca1b30aa882d9e14207acebb6805f48ffb"
+    },
+    {
+      "path": "3_labels.txt",
+      "bytes": 342,
+      "sha256": "bf89e573879a67b4eb2af98d770f626ca2948a4a1d0989b8f985d211e20ac701"
+    },
+    {
+      "path": "3_stim_neurons.txt",
+      "bytes": 232,
+      "sha256": "4570bf4aa5f14239759231f03a6cbcc2eba400006443790c8942519aa12a7781"
+    },
+    {
+      "path": "3_stim_volume_i.txt",
+      "bytes": 333,
+      "sha256": "17068f830fba82c3fc99b36545c675d877b0f6fcc99b7fc5316d06aa63babb6b"
+    },
+    {
+      "path": "3_t.txt",
+      "bytes": 111725,
+      "sha256": "84613ad65db95e5465d2dc2ec74581aba0a2adaa80799996bf9567a925c46463"
+    },
+    {
+      "path": "40_ds_name.txt",
+      "bytes": 85,
+      "sha256": "d8396f2e7d1bed7cc60e4b90192e3997ea48d3b42759f78de11d1a867678d7a5"
+    },
+    {
+      "path": "40_gcamp.txt",
+      "bytes": 13241442,
+      "sha256": "f042d82076469f035b977a74044b45f05625dcb02fecb0dc4e1febbc8e93cc4a"
+    },
+    {
+      "path": "40_labels.txt",
+      "bytes": 388,
+      "sha256": "ca4a826881ff5d6e092a180cd3374fce25881835615d165a99d769e6707ac38d"
+    },
+    {
+      "path": "40_stim_neurons.txt",
+      "bytes": 207,
+      "sha256": "b916edb498a74a5adbe9ad1bb601fd767a46341dc22108e80382b2a1d606ad11"
+    },
+    {
+      "path": "40_stim_volume_i.txt",
+      "bytes": 308,
+      "sha256": "ba1926af801fc9b35054703e0fff7c47c12690fa27b7bfe9f8e90ea777dee78d"
+    },
+    {
+      "path": "40_t.txt",
+      "bytes": 104250,
+      "sha256": "8ecd8035df4838093056e2c626135fba175af6a1a5417dfdfa8f5b9147c56fc4"
+    },
+    {
+      "path": "41_ds_name.txt",
+      "bytes": 85,
+      "sha256": "12f07965c3d7eabfafb8bf43c7ee2aeea945aa7d7f1214aeaf924a493db42b51"
+    },
+    {
+      "path": "41_gcamp.txt",
+      "bytes": 10440001,
+      "sha256": "ce5a9e165469c701759f0b0c55d203ff69b357057c899095262f6d3fff62290d"
+    },
+    {
+      "path": "41_labels.txt",
+      "bytes": 334,
+      "sha256": "29b6ed46c72c7e4230e69e09873d8448a5e3010c8a50794bccf260d7849fa800"
+    },
+    {
+      "path": "41_stim_neurons.txt",
+      "bytes": 189,
+      "sha256": "e2f9c92de0a66fb6b8299c129f5717f8bf4d6ed19dd164f922ac003888c2c174"
+    },
+    {
+      "path": "41_stim_volume_i.txt",
+      "bytes": 308,
+      "sha256": "4a587d9d14f6681e4d8d7c70d31e7e35e9cb722d8f04da6a6e6ad1993995aa8c"
+    },
+    {
+      "path": "41_t.txt",
+      "bytes": 104400,
+      "sha256": "453615180b7269d0ece0a676654662eb82b1b1f0b51ae08a30149342dd1fe708"
+    },
+    {
+      "path": "42_ds_name.txt",
+      "bytes": 85,
+      "sha256": "50816c66f36652c05dc4b2f9baef898b6f6208e63332aa06a3bdb5592b1838ce"
+    },
+    {
+      "path": "42_gcamp.txt",
+      "bytes": 7490442,
+      "sha256": "3a1a5c78f7e26f10d3da62c2e1e3db0697807670beb422adc5641810d2fbcdd7"
+    },
+    {
+      "path": "42_labels.txt",
+      "bytes": 338,
+      "sha256": "0d54a5ddf6d4ed835d2ca0862a1d264747e45d40e0aa6e5bb5701090d470a3b2"
+    },
+    {
+      "path": "42_stim_neurons.txt",
+      "bytes": 146,
+      "sha256": "280627e695cada468a98e51ebcb90f709ba6b4a066459b8253b493d32261c595"
+    },
+    {
+      "path": "42_stim_volume_i.txt",
+      "bytes": 237,
+      "sha256": "6d5a50c01d445253c58e57b8003d0576629ac92c6ed8e74eb821840cc29723eb"
+    },
+    {
+      "path": "42_t.txt",
+      "bytes": 83225,
+      "sha256": "c1ea1cb65f8047077dd176170c3e47ff5a2fb212d893c08fac00b02833a4de03"
+    },
+    {
+      "path": "43_ds_name.txt",
+      "bytes": 85,
+      "sha256": "4e9f2729f8189815d2b8bcf13004f446ebee9b8ed919e59f6e68ae7753a6ea2f"
+    },
+    {
+      "path": "43_gcamp.txt",
+      "bytes": 14242814,
+      "sha256": "c9aa1bf92fec0d80a98420644662eda867120bacad392c1437f9ddef306a82ca"
+    },
+    {
+      "path": "43_labels.txt",
+      "bytes": 347,
+      "sha256": "e923c63728372fb2cf9cab7c7a33433ba28abd810ed7b8d53f324c2a2bad7d47"
+    },
+    {
+      "path": "43_stim_neurons.txt",
+      "bytes": 227,
+      "sha256": "cff61832683df094f852edd786f6ac9e443fd9b428f24f66156e1c291ace81ec"
+    },
+    {
+      "path": "43_stim_volume_i.txt",
+      "bytes": 333,
+      "sha256": "8e80c1cf18e862ea133daf5e2461cf67a9e3f05e723f80956e416bdf82d062b2"
+    },
+    {
+      "path": "43_t.txt",
+      "bytes": 111725,
+      "sha256": "84613ad65db95e5465d2dc2ec74581aba0a2adaa80799996bf9567a925c46463"
+    },
+    {
+      "path": "44_ds_name.txt",
+      "bytes": 85,
+      "sha256": "3b91b16019769d70054d9c73dffe1bad705562c99110a78c6be90fe1a3e2526a"
+    },
+    {
+      "path": "44_gcamp.txt",
+      "bytes": 16087952,
+      "sha256": "ca1dd7967fb620d504d863b56db4579ecdc37d016d6cfe3ed5d1351b7f582128"
+    },
+    {
+      "path": "44_labels.txt",
+      "bytes": 558,
+      "sha256": "d22d4fa9900ed0cc0b900eb4473a9211a7fbfe6c84a3e4c90d18d0f9fc436fb6"
+    },
+    {
+      "path": "44_stim_neurons.txt",
+      "bytes": 257,
+      "sha256": "05b07cbdcece727dfe84691fe1e6c530f1588d1ff95c502d48223f534b90e175"
+    },
+    {
+      "path": "44_stim_volume_i.txt",
+      "bytes": 383,
+      "sha256": "4583567249dd062bc5a661f894f2a101ab39cd39945690916ff92d1d59286a14"
+    },
+    {
+      "path": "44_t.txt",
+      "bytes": 127150,
+      "sha256": "c033a38f8b4b4b0668fd42c4471952548ccd8a3ba39331575621f84316051b61"
+    },
+    {
+      "path": "45_ds_name.txt",
+      "bytes": 85,
+      "sha256": "ba6dd02b4d5b12ef1699d5972c5d13feab30e13bf06cf05536a13ea69aed2291"
+    },
+    {
+      "path": "45_gcamp.txt",
+      "bytes": 18175466,
+      "sha256": "2bda8e1140118c4dd6c9fc4cb185feff1c51959c37eab6612070cc6e97b3eb47"
+    },
+    {
+      "path": "45_labels.txt",
+      "bytes": 638,
+      "sha256": "6e8431cddcd1d65e018f0fb80ea792b360e6c2abee5d89597bec1daf0b87ed5b"
+    },
+    {
+      "path": "45_stim_neurons.txt",
+      "bytes": 235,
+      "sha256": "c748370651a800631d6d37b5dfe0365c337317a3b6278604a3620bd6edbe559e"
+    },
+    {
+      "path": "45_stim_volume_i.txt",
+      "bytes": 383,
+      "sha256": "758dc8fd8a82035604c397d8fbeec302ad4906b5c49bac9aab7d9df5d411177e"
+    },
+    {
+      "path": "45_t.txt",
+      "bytes": 129225,
+      "sha256": "b9578be9f251c8ce37fb5f9c3abe061a9c830da77b6e2eda76d23b5b07e6e72a"
+    },
+    {
+      "path": "46_ds_name.txt",
+      "bytes": 85,
+      "sha256": "f7d51bc3a3668e00c9ac510bfb6dfc9ae3911f6b69827289259441ce4ecba6fb"
+    },
+    {
+      "path": "46_gcamp.txt",
+      "bytes": 19749507,
+      "sha256": "a87145e52f88e6f09fa20fcf3beeab692f8b0b8d8276c202f724a7b039944dff"
+    },
+    {
+      "path": "46_labels.txt",
+      "bytes": 366,
+      "sha256": "9bcb90eff02679ba4c7a55854f4c724ac84b9cc5ffc943412f9944b0a29d65ea"
+    },
+    {
+      "path": "46_stim_neurons.txt",
+      "bytes": 284,
+      "sha256": "878dd9e6ab9b49cedd7cbcd4d898b14c91c24b5037ec333223cf61bb60d06ef6"
+    },
+    {
+      "path": "46_stim_volume_i.txt",
+      "bytes": 443,
+      "sha256": "285a4a981722e3294c83eda9ca0af3ff53e622260460dbfda9c34b0397637ce5"
+    },
+    {
+      "path": "46_t.txt",
+      "bytes": 146200,
+      "sha256": "b7d86456603d0ead31ecc070490be8a7354d6f7892df7b44426b44b07d993c16"
+    },
+    {
+      "path": "47_ds_name.txt",
+      "bytes": 85,
+      "sha256": "5a12f40e84d6f541aa84156e6ffe9f02b9d4b0f1971c0d7030df87563c2b2c30"
+    },
+    {
+      "path": "47_gcamp.txt",
+      "bytes": 14873972,
+      "sha256": "0bfcc10213b34adde864b42e6de14e1c61d7c607a451adfe5c468cc66cb9e3a2"
+    },
+    {
+      "path": "47_labels.txt",
+      "bytes": 467,
+      "sha256": "d2f68210a277e78e232acea09fd89e15178323d4798091119a52984691e23c26"
+    },
+    {
+      "path": "47_stim_neurons.txt",
+      "bytes": 241,
+      "sha256": "c15f06f79cd7fd077e4c46d76e07e7c14302b08364b4ce3a156e8291bb8fe266"
+    },
+    {
+      "path": "47_stim_volume_i.txt",
+      "bytes": 383,
+      "sha256": "7115e26080c7028e43b68658d3a17b5e1c67ce5026966fd1b7daac14e70ed395"
+    },
+    {
+      "path": "47_t.txt",
+      "bytes": 126950,
+      "sha256": "f068a43a9cb4faada634eaca646a9edc98ea279ebda4df49bb69d1a48c08dc38"
+    },
+    {
+      "path": "48_ds_name.txt",
+      "bytes": 73,
+      "sha256": "c12436185aa3aef40a5400984a2c89c03b750ef1ffd5f5a330138b399426995a"
+    },
+    {
+      "path": "48_gcamp.txt",
+      "bytes": 14666652,
+      "sha256": "25e4ea3cef7297f14a83afd427fcf64dd3d01e0af7c4c4af3c15fb762aa24fec"
+    },
+    {
+      "path": "48_labels.txt",
+      "bytes": 514,
+      "sha256": "d17fd2a16962b1c390a2655785caa01b447868c2c527d223a9f2d401d9cb81d7"
+    },
+    {
+      "path": "48_stim_neurons.txt",
+      "bytes": 176,
+      "sha256": "7998d10624a9432511fea392637f60629e39ad6f8a41196038e07d06eeaeaade"
+    },
+    {
+      "path": "48_stim_volume_i.txt",
+      "bytes": 283,
+      "sha256": "59220a879917f9f9bcc25c1fab92e5b6938cc8f0d3d2d6642dc10e477c7c98cc"
+    },
+    {
+      "path": "48_t.txt",
+      "bytes": 110200,
+      "sha256": "9df2742c78dd88bd1353d65d9358a8f62bdc1d0267a0d04c8e597da744e019f8"
+    },
+    {
+      "path": "49_ds_name.txt",
+      "bytes": 73,
+      "sha256": "9d5db9864115d05410089dc9ed38c9f8781af1cfa4908f729b783e5662a6b928"
+    },
+    {
+      "path": "49_gcamp.txt",
+      "bytes": 16605977,
+      "sha256": "812e3d35ffd13f1dffe2079719f4fdb6916af3c1d2d6abbe01c45222a9f7cfdb"
+    },
+    {
+      "path": "49_labels.txt",
+      "bytes": 520,
+      "sha256": "2b49e5bee1b92873388a52bebb326e0281c7e5fc7bf148801e37687be3b61781"
+    },
+    {
+      "path": "49_stim_neurons.txt",
+      "bytes": 232,
+      "sha256": "ff9c2f55bbed3b269092ad82dc55110c4e161d74294488144d11db0640de07ab"
+    },
+    {
+      "path": "49_stim_volume_i.txt",
+      "bytes": 358,
+      "sha256": "33fbbb8e65eb9d4d801f9d7a00f0ab43fda0d767c74e6db547c759c12dc8e18d"
+    },
+    {
+      "path": "49_t.txt",
+      "bytes": 121000,
+      "sha256": "8991b6d73b40226fd7f69d9b88671a2f98b0d27208014935be63a829f591e72a"
+    },
+    {
+      "path": "4_ds_name.txt",
+      "bytes": 73,
+      "sha256": "3d638d28c571ad0a05e3ae0ba83bbcb63edcee5ca28bad0c95abdb92629b4485"
+    },
+    {
+      "path": "4_gcamp.txt",
+      "bytes": 14222057,
+      "sha256": "c1d115a90e990d0efd5122f5b3db0f2d4745d745b17c67a028da4e7d31d82f6c"
+    },
+    {
+      "path": "4_labels.txt",
+      "bytes": 445,
+      "sha256": "80ca8b79f392cfaf6ec1897f388d531fa49ce3217552b74ee8163faf4affbca6"
+    },
+    {
+      "path": "4_stim_neurons.txt",
+      "bytes": 189,
+      "sha256": "f413b9d1d6a09abde18805e3dc3d7cb7bc3b4b8a68386d55cd290f4f723dc7b0"
+    },
+    {
+      "path": "4_stim_volume_i.txt",
+      "bytes": 283,
+      "sha256": "59cee0be4ecc1251377e384745a6a46020ecb0cca5970f7f0d821fa59d18d4c7"
+    },
+    {
+      "path": "4_t.txt",
+      "bytes": 95450,
+      "sha256": "591d7fabdc157a11b63d9dc5574528798ad74f3102bf3e6099e42497447644a5"
+    },
+    {
+      "path": "50_ds_name.txt",
+      "bytes": 85,
+      "sha256": "7fc0a51373f33616498a1af4f402900e9bff5bc949b243fcf2ef62c8af7d33e9"
+    },
+    {
+      "path": "50_gcamp.txt",
+      "bytes": 11756900,
+      "sha256": "c5e982c9e0297c2b225d084b3495f2c4e535b334eeac700ed2e6d83933273b49"
+    },
+    {
+      "path": "50_labels.txt",
+      "bytes": 421,
+      "sha256": "dd7fab7c46d55bbbc0d507f31846a8b83b1500f244ed4ec4dbd55d55a894899c"
+    },
+    {
+      "path": "50_stim_neurons.txt",
+      "bytes": 178,
+      "sha256": "b510fc0f07bf0b889b11d260ef63fdd494dafa8a5e22a7774fe7fa2e1a41b06a"
+    },
+    {
+      "path": "50_stim_volume_i.txt",
+      "bytes": 282,
+      "sha256": "a73456d1c19567db12b1323e591e972bd7ad29888aafbe3eb6ebcbea011a2a67"
+    },
+    {
+      "path": "50_t.txt",
+      "bytes": 95575,
+      "sha256": "48eeea66a555288e86ed4e7c52c76fe232b4cc15f82a284fdf84683e599c0e49"
+    },
+    {
+      "path": "51_ds_name.txt",
+      "bytes": 73,
+      "sha256": "0b74053133af8560eed5cadf196723bc75945d688af3d602dfc466b3217af27b"
+    },
+    {
+      "path": "51_gcamp.txt",
+      "bytes": 12163599,
+      "sha256": "3738e0c7f98f129b62c17e3d753868ce1c3d64fae44aaf1daa05f0b605a6eb7f"
+    },
+    {
+      "path": "51_labels.txt",
+      "bytes": 369,
+      "sha256": "6a20b495b14c04717460bcb0a863be311dfec61dd5be3359fde57b917c555289"
+    },
+    {
+      "path": "51_stim_neurons.txt",
+      "bytes": 172,
+      "sha256": "b66226cc463be0846cc202acb1e4ae314904d4594751ba44b4027bdbc7d24ee8"
+    },
+    {
+      "path": "51_stim_volume_i.txt",
+      "bytes": 284,
+      "sha256": "afc2e603749f572d0c2ffdf3c45186ac7b4680ea784c339b488828ec76884740"
+    },
+    {
+      "path": "51_t.txt",
+      "bytes": 102075,
+      "sha256": "8c8cee10be933ff00d16dff9f2203aadc7e7b6a75732e8fc24ebed45534b7c55"
+    },
+    {
+      "path": "52_ds_name.txt",
+      "bytes": 85,
+      "sha256": "0e6d3ccdf3edd6a9aacd270a600250bff6b9effadc95fdf1c0df3349f0218342"
+    },
+    {
+      "path": "52_gcamp.txt",
+      "bytes": 2009255,
+      "sha256": "68d7adb80b3b3e95bfe48eb3bd33d62d8b801fd84c846986065b4e94876046a0"
+    },
+    {
+      "path": "52_labels.txt",
+      "bytes": 255,
+      "sha256": "792fa69db4a45627a8433e864adb241e09fb20bc02654621bce7c0944f3a7994"
+    },
+    {
+      "path": "52_stim_neurons.txt",
+      "bytes": 18,
+      "sha256": "76f51fe080b4b9fabb0541f83f80abf4f31e5171eb01fd61d9a2230df97b6fd6"
+    },
+    {
+      "path": "52_stim_volume_i.txt",
+      "bytes": 28,
+      "sha256": "3ebdb6d533981b7d728b2a175f4becad4dbe97e3ace022cf59d4e7b331d5d4f0"
+    },
+    {
+      "path": "52_t.txt",
+      "bytes": 22325,
+      "sha256": "bac9d6648032fe86e34d740626f0d273690542b575c33b4a38aaf14942fca077"
+    },
+    {
+      "path": "53_ds_name.txt",
+      "bytes": 85,
+      "sha256": "c0f581aa26034f1f0e98816bb89c46c8a6611569450f7581fae2214a3644a5e1"
+    },
+    {
+      "path": "53_gcamp.txt",
+      "bytes": 2908125,
+      "sha256": "5c63ebda7b99f80a1010a3c6b1b325f16ee3c0011507e8cc95ece92cb1bda299"
+    },
+    {
+      "path": "53_labels.txt",
+      "bytes": 295,
+      "sha256": "861176082d1b976caeaefe5f97d3b2240704441d9abf508c058570bef49ee413"
+    },
+    {
+      "path": "53_stim_neurons.txt",
+      "bytes": 39,
+      "sha256": "96a1318bd81be118e6a12a5a0070769890e9f1d40d0088b7ce72af9fabbd2ee3"
+    },
+    {
+      "path": "53_stim_volume_i.txt",
+      "bytes": 52,
+      "sha256": "b3b246f988a8fdd146733683fc661097a5fc9c9fd7e7620d934314b3c69ffd6f"
+    },
+    {
+      "path": "53_t.txt",
+      "bytes": 29375,
+      "sha256": "8033557330a81fb7388fdc9f0bd9c652ef69cf102bbe780ef3c5c28dec6fc8d5"
+    },
+    {
+      "path": "54_ds_name.txt",
+      "bytes": 85,
+      "sha256": "6b8651d193fe8aec96bc1ddc504525a04ea8f9378eeaf2916e33734a76f5c1b0"
+    },
+    {
+      "path": "54_gcamp.txt",
+      "bytes": 1995386,
+      "sha256": "626168263d4af1fda453480e8f7f392cb64781e3bf4edc60bc33e7455f589189"
+    },
+    {
+      "path": "54_labels.txt",
+      "bytes": 177,
+      "sha256": "5b80b8dce23f4d70ea3143dd751ea6036d13684f17303b5073f5b6a3a0830b99"
+    },
+    {
+      "path": "54_stim_neurons.txt",
+      "bytes": 16,
+      "sha256": "a5796740953b9c8c8784cc77b19ae1d2dfa00a44a57f03a37354dc8aa3cfafc6"
+    },
+    {
+      "path": "54_stim_volume_i.txt",
+      "bytes": 23,
+      "sha256": "426f1e9880b75de31485c5734da908cb61babf44ce34d0318de53fc69b3a343b"
+    },
+    {
+      "path": "54_t.txt",
+      "bytes": 23475,
+      "sha256": "5b0d7190431daa5a71fa8cdecb74602efb6eab61e1deb9a5c939f052d5dbdf8d"
+    },
+    {
+      "path": "55_ds_name.txt",
+      "bytes": 85,
+      "sha256": "9d65a3d2c46577281335b95db82cce9b0caf1abb1e61cebaddb228ee69fc1fb1"
+    },
+    {
+      "path": "55_gcamp.txt",
+      "bytes": 2700655,
+      "sha256": "ed3b2bcb7278433ac8422c167f1f867fee86a57fbd2c3708974d381dc78a17d4"
+    },
+    {
+      "path": "55_labels.txt",
+      "bytes": 197,
+      "sha256": "4957262993b8d1388a00dcfe7020a0b7a92ebd0179caa20b5cb0bf43e2878277"
+    },
+    {
+      "path": "55_stim_neurons.txt",
+      "bytes": 22,
+      "sha256": "40748c7563ec422fbb6c7e5590023e31c2a23406873c63493b8bbe2e978d5148"
+    },
+    {
+      "path": "55_stim_volume_i.txt",
+      "bytes": 33,
+      "sha256": "0bfd20c4d35b2ecb70e75609d014eb20b9844dd96c4fa028046674e4b6a3195b"
+    },
+    {
+      "path": "55_t.txt",
+      "bytes": 31000,
+      "sha256": "96c403d1974925828555c2d7922b9bd8ec2e6fe22b4978c6057a604f54d003e0"
+    },
+    {
+      "path": "56_ds_name.txt",
+      "bytes": 73,
+      "sha256": "8ed0246bd08ee1e0dffd14bb80a351ee3e94237a294a4abd9190f276de9ac547"
+    },
+    {
+      "path": "56_gcamp.txt",
+      "bytes": 1491769,
+      "sha256": "e239efae1ace58f625cf673a96d8ec53735b9c921d3507c0745e4dc341992b78"
+    },
+    {
+      "path": "56_labels.txt",
+      "bytes": 159,
+      "sha256": "3696e18704cc348aa40e4dcae97ee5affd99b67ccbf284750d42cd645cd3a2fc"
+    },
+    {
+      "path": "56_stim_neurons.txt",
+      "bytes": 10,
+      "sha256": "20084489c9763e3bd167a3a46d3977c356a5d1d7890a092949c71164ffebe9c0"
+    },
+    {
+      "path": "56_stim_volume_i.txt",
+      "bytes": 16,
+      "sha256": "3e842ff667d8ab5ea5cbc776e0d4a4f0867a031a3cbfd4b5f7fa59eed49e4676"
+    },
+    {
+      "path": "56_t.txt",
+      "bytes": 16950,
+      "sha256": "df5b32c125e5d6b5ef69f1ac66e9cd9467761550f3bb67397714c8ebe99c2a28"
+    },
+    {
+      "path": "57_ds_name.txt",
+      "bytes": 73,
+      "sha256": "3c2f050e52691b8a61337f50b9a40ec21c35949d8f1e3a540d7588edaf58e7d6"
+    },
+    {
+      "path": "57_gcamp.txt",
+      "bytes": 2365598,
+      "sha256": "8299b06a940c2ba183afc63ba8b86c521403d0a794244f099d853b1ad28911d3"
+    },
+    {
+      "path": "57_labels.txt",
+      "bytes": 273,
+      "sha256": "15679b53562dab98625c3b898abbf393f70b5bb719af6355b7303a89699fb9e9"
+    },
+    {
+      "path": "57_stim_neurons.txt",
+      "bytes": 15,
+      "sha256": "9d949f78dba69c9d7456aac2716325a76de031a843fc8f99b2685c326a3d3531"
+    },
+    {
+      "path": "57_stim_volume_i.txt",
+      "bytes": 19,
+      "sha256": "2cab3b3a530637fea1063883e872e8a9154df148972c5d550aae54a49b79a519"
+    },
+    {
+      "path": "57_t.txt",
+      "bytes": 20750,
+      "sha256": "7025b87df49f97ee5e4ac1de849a5303b4053be085aedda8d7b3c3d047c17caa"
+    },
+    {
+      "path": "58_ds_name.txt",
+      "bytes": 85,
+      "sha256": "a85ff843790e8651dc5a6810387b241c4284ff528b17252747184a62f79d60b9"
+    },
+    {
+      "path": "58_gcamp.txt",
+      "bytes": 3319902,
+      "sha256": "b35197f49ccad4aaf82b7df078b44560ee029e873b7cd9930c0089fb2b9813cf"
+    },
+    {
+      "path": "58_labels.txt",
+      "bytes": 241,
+      "sha256": "752cca1a97d94a7a7b883d81df559b48010e4293f014fdbe6e08e6656e21a54c"
+    },
+    {
+      "path": "58_stim_neurons.txt",
+      "bytes": 29,
+      "sha256": "cfd015a055f822e3f2a19ad7a2c6f905e23d9e92dae6177c0abc40c58dca4859"
+    },
+    {
+      "path": "58_stim_volume_i.txt",
+      "bytes": 47,
+      "sha256": "54b701f9501907bf950ea0ad63fca3dac6bd01db37ff33c73c1982f696286947"
+    },
+    {
+      "path": "58_t.txt",
+      "bytes": 40725,
+      "sha256": "ff091d594cdd9765d2d2d28a7497190cb53582fd2edc4ad43640342b5fbdaef1"
+    },
+    {
+      "path": "59_ds_name.txt",
+      "bytes": 85,
+      "sha256": "9b309e578713dc34dfeaa72487c60ca3e1e8b019d37a7f8684d8d75892090ec6"
+    },
+    {
+      "path": "59_gcamp.txt",
+      "bytes": 1452541,
+      "sha256": "5f3554cc0642357bf5e412c80b88f55bcda7bb3c07c4aa6713394979959fcf49"
+    },
+    {
+      "path": "59_labels.txt",
+      "bytes": 239,
+      "sha256": "7de5aaf78c690b8204cb44c2b544f0e713f14a5b220362bfcbcbeb9e7397ef20"
+    },
+    {
+      "path": "59_stim_neurons.txt",
+      "bytes": 12,
+      "sha256": "b7de2c8fafade1acace8196ac59b5ad27565d6dc69c83065176a09efe9ebb264"
+    },
+    {
+      "path": "59_stim_volume_i.txt",
+      "bytes": 16,
+      "sha256": "bd5c2a899783a66c2497f5bca0e9b660624d694f7dae1f6282b53ed2c5f08c2c"
+    },
+    {
+      "path": "59_t.txt",
+      "bytes": 17500,
+      "sha256": "79d22112928b791469e585dd5e61ca426f480a039c0b9c1923f606ced07830b9"
+    },
+    {
+      "path": "5_ds_name.txt",
+      "bytes": 73,
+      "sha256": "b3b42f4d8a5b156a5eacda427432aaf7c914520181d11b997ac835b74f93d252"
+    },
+    {
+      "path": "5_gcamp.txt",
+      "bytes": 15387553,
+      "sha256": "5586f0e82a5654247752fb6ac0183e51421c72bf1dda1770de4a2cbcd6ba6d77"
+    },
+    {
+      "path": "5_labels.txt",
+      "bytes": 334,
+      "sha256": "7eac48664c43e69a3cfc784da5689f079b96514b023cfdeadf8975eeec1d1980"
+    },
+    {
+      "path": "5_stim_neurons.txt",
+      "bytes": 194,
+      "sha256": "6a248c91237a69d37c8d47baaf78405b6b2de7aa8ceb185118651dda903e859f"
+    },
+    {
+      "path": "5_stim_volume_i.txt",
+      "bytes": 283,
+      "sha256": "c697b50c70ebc33d6806f9efe2810ef057e8c3d9ddb8554ec1364d7dfb2203ab"
+    },
+    {
+      "path": "5_t.txt",
+      "bytes": 94400,
+      "sha256": "00f507bda7ebb0309310ee655b38df1a1ad671ee19051babe7c616f516196c15"
+    },
+    {
+      "path": "60_ds_name.txt",
+      "bytes": 85,
+      "sha256": "6a07d5b42965b97b55d68636dbcdcf3b56eae0187e28195f265c36be8c0fa642"
+    },
+    {
+      "path": "60_gcamp.txt",
+      "bytes": 3256774,
+      "sha256": "4e6d4540ac25711e605ee45dbde4a978449390b73b16ca7a6b5ee795eaa36031"
+    },
+    {
+      "path": "60_labels.txt",
+      "bytes": 353,
+      "sha256": "92f589a3614f3335223a31c1adb539ed4876998da0861bad5e8f6fceebe1e51a"
+    },
+    {
+      "path": "60_stim_neurons.txt",
+      "bytes": 39,
+      "sha256": "439263af6c07689d09e33135e1e70d36486c19c3b56c9c1ddead9c71acc1d855"
+    },
+    {
+      "path": "60_stim_volume_i.txt",
+      "bytes": 55,
+      "sha256": "be8d9a9bcf48a84b9e235521c41450ef8241c13bc916424cb69114e53f94cc1f"
+    },
+    {
+      "path": "60_t.txt",
+      "bytes": 33300,
+      "sha256": "e0818f57b45a5e50075aa63a7ffc8ca9a192559019f5ee39c20d05e2af5a5cee"
+    },
+    {
+      "path": "61_ds_name.txt",
+      "bytes": 85,
+      "sha256": "a6bd9ede64d0428b63ba7851cacb25973aed4fdf68642ab2ef66b7e7e4967bdb"
+    },
+    {
+      "path": "61_gcamp.txt",
+      "bytes": 5633114,
+      "sha256": "d0b49b0ff9222c3fd8d6b8f040e2f633358a53f5e15b46f2514e0ba6f17af9bc"
+    },
+    {
+      "path": "61_labels.txt",
+      "bytes": 541,
+      "sha256": "0aec4065d8d5d73d464ded9a28a61dde5ed64dbec54ee2a4eaeb217baad017c1"
+    },
+    {
+      "path": "61_stim_neurons.txt",
+      "bytes": 68,
+      "sha256": "b2365cb5bb66234d2e71bc8107d3ec3e1f29641f7ef889e24b5dc325769f256d"
+    },
+    {
+      "path": "61_stim_volume_i.txt",
+      "bytes": 88,
+      "sha256": "609140e5f291a34430885ee4fa80e7da91835e25d7324a692a47fc808104192d"
+    },
+    {
+      "path": "61_t.txt",
+      "bytes": 44950,
+      "sha256": "1625465e166fa5d2a2ad5fa3783231d57effcd494068cfa0bdc9c4e7d9c21559"
+    },
+    {
+      "path": "62_ds_name.txt",
+      "bytes": 85,
+      "sha256": "778a581240fb87f711a0afe05fa547d5c2c401323a1206bbe938760b1a44eadf"
+    },
+    {
+      "path": "62_gcamp.txt",
+      "bytes": 2514420,
+      "sha256": "51af503c31a8da0e8f1e1aefa540826493f0d58662f58fb211095fe212d1ba3d"
+    },
+    {
+      "path": "62_labels.txt",
+      "bytes": 439,
+      "sha256": "960d0c753708b0f238cdbc7a907007da9fe4494d5751353c753ef5ee6392d07a"
+    },
+    {
+      "path": "62_stim_neurons.txt",
+      "bytes": 19,
+      "sha256": "4894158cca8e73facf64616eb6d6c97d1c435bf052b1da2d35ce3dea870bd509"
+    },
+    {
+      "path": "62_stim_volume_i.txt",
+      "bytes": 23,
+      "sha256": "9a9020155716ca43cbf287ece458c0c82cea302033e30edbbd7653dac2aeb44f"
+    },
+    {
+      "path": "62_t.txt",
+      "bytes": 22900,
+      "sha256": "5a2d7c1b16a31906d7a858e1942581fe026a0be4dfb385488dad0be9984eb9d6"
+    },
+    {
+      "path": "63_ds_name.txt",
+      "bytes": 73,
+      "sha256": "f86725a4f7f55e904db6a66a07daa701ba3b479bf75f1868d7625cae3ef0044e"
+    },
+    {
+      "path": "63_gcamp.txt",
+      "bytes": 10161800,
+      "sha256": "55059bfe20ded81905879cfdb086bf9314db63c442b1e575e0cafe824254eacf"
+    },
+    {
+      "path": "63_labels.txt",
+      "bytes": 365,
+      "sha256": "b691deed79d635718bb72a63796f9119c4b74e35e7e3c82641ac54b6e0db6e52"
+    },
+    {
+      "path": "63_stim_neurons.txt",
+      "bytes": 205,
+      "sha256": "d04d55d13a436e44cbadf0c908d1cfba57ca3adcc4f2652fb68ee2116064e7c8"
+    },
+    {
+      "path": "63_stim_volume_i.txt",
+      "bytes": 333,
+      "sha256": "18af729c6a8df70b905474c8714261e4802a5c32f3f8b9145ec89cdfc36dda4f"
+    },
+    {
+      "path": "63_t.txt",
+      "bytes": 115475,
+      "sha256": "73ab3ad1e02f67c29f9686f05f87bd501bc71d21fe341107fb3901da8bcf075c"
+    },
+    {
+      "path": "64_ds_name.txt",
+      "bytes": 73,
+      "sha256": "388d1c765d457c873908e80f97de38452552e9e48c02ee3638431c4b076abe16"
+    },
+    {
+      "path": "64_gcamp.txt",
+      "bytes": 10471349,
+      "sha256": "71994464faf3b9829752d7c5e95b83540c0aca9a6a29667ab15031e82898ff38"
+    },
+    {
+      "path": "64_labels.txt",
+      "bytes": 385,
+      "sha256": "5cb710cdd0d8f5177d47cb4069555e0e78a2ba15763cb8d5a8cc49a3519e7254"
+    },
+    {
+      "path": "64_stim_neurons.txt",
+      "bytes": 182,
+      "sha256": "0ce1d9e6bf9b072e285b527a68e8e330d41649c48e456041ae52600ad393a8f4"
+    },
+    {
+      "path": "64_stim_volume_i.txt",
+      "bytes": 283,
+      "sha256": "c2057c939fc902e1162a06dd1490d287bcb06835f0a019dca7e966d9002476ce"
+    },
+    {
+      "path": "64_t.txt",
+      "bytes": 95125,
+      "sha256": "3a638fa1ca5844b018db2df464d41c3fa8d9f4f46176438945dd150fffc1f8dd"
+    },
+    {
+      "path": "65_ds_name.txt",
+      "bytes": 73,
+      "sha256": "61719f62bec2bedd5e66da27276124a8435d285f9a88ab17db7a7c19fcd6356e"
+    },
+    {
+      "path": "65_gcamp.txt",
+      "bytes": 8256031,
+      "sha256": "fe343f81229e1f3fa754237b384e724d9bf079f1800035fa4f0e1122c72756dd"
+    },
+    {
+      "path": "65_labels.txt",
+      "bytes": 271,
+      "sha256": "42a5e48c2b39ee9690671cebb13cca5367e38fd605a60d92995bfe46e77f206e"
+    },
+    {
+      "path": "65_stim_neurons.txt",
+      "bytes": 173,
+      "sha256": "bf5f6ffb756bb039753d3d168d9dbd0ef1206eb69047ab3faee028b709cd2238"
+    },
+    {
+      "path": "65_stim_volume_i.txt",
+      "bytes": 284,
+      "sha256": "0d89db05b8e4491a1c217dca8c68957a744f230494bb6c6707d4d715a353ff11"
+    },
+    {
+      "path": "65_t.txt",
+      "bytes": 95950,
+      "sha256": "b771ed1c84727171150d7e8d3bcb8dd3020bfcee3c21ffc12e61800353e56d10"
+    },
+    {
+      "path": "66_ds_name.txt",
+      "bytes": 85,
+      "sha256": "e8989e4782f9efca4e65886349925c780f19f214c01dda82361d75e9757d1194"
+    },
+    {
+      "path": "66_gcamp.txt",
+      "bytes": 5455818,
+      "sha256": "62fa5a7fff04fe70715f2ce2c9702fc1d05c85b454f13a4ddb69b784de456193"
+    },
+    {
+      "path": "66_labels.txt",
+      "bytes": 509,
+      "sha256": "f81034719052f37ca810268e9f6526d07d51edc8145e06419df613cf27579b23"
+    },
+    {
+      "path": "66_stim_neurons.txt",
+      "bytes": 91,
+      "sha256": "aa353af38d7cb5f800e0dd20238948a106f16c74872d8b06ab8eb7eb4072d9ef"
+    },
+    {
+      "path": "66_stim_volume_i.txt",
+      "bytes": 125,
+      "sha256": "25d99da22742ac578b739d4829834b2d1c54d8f15ed06034daefc4ee0d5b9729"
+    },
+    {
+      "path": "66_t.txt",
+      "bytes": 49725,
+      "sha256": "6684e222f41db03d4ec720b15083d85c6fd1cfde37dd6c3fa49a4f7f4823e586"
+    },
+    {
+      "path": "67_ds_name.txt",
+      "bytes": 85,
+      "sha256": "80b8baf146a2c3316ade46c7b3349231c1c3d195f78345c6479efb9de3826365"
+    },
+    {
+      "path": "67_gcamp.txt",
+      "bytes": 8897640,
+      "sha256": "501693f8a6869b4b30ffb1ee5793f5eb00cb5a00605bca21cc07fe2ba8ef5219"
+    },
+    {
+      "path": "67_labels.txt",
+      "bytes": 484,
+      "sha256": "8cf6589f0e9ee5e796f1cbfa05fc53e14d2e400308ce2326316571c5c75f67d0"
+    },
+    {
+      "path": "67_stim_neurons.txt",
+      "bytes": 136,
+      "sha256": "9316e809ab35eb78351b5f4e13d18df286ed66831096de173a6bb1e4faeb1eb9"
+    },
+    {
+      "path": "67_stim_volume_i.txt",
+      "bytes": 210,
+      "sha256": "2a5c5706981276818f4ca545d01f6e4fbe989935b1ee71dca12843912fc6c613"
+    },
+    {
+      "path": "67_t.txt",
+      "bytes": 76625,
+      "sha256": "6ad040785a226321797714eb7796777ed932074ffb7154244b0d17832228e661"
+    },
+    {
+      "path": "68_ds_name.txt",
+      "bytes": 85,
+      "sha256": "1a455f97ecdd104b2fd15e35ffbf6f0df567b5f9bd0343374f3c8d8413f42288"
+    },
+    {
+      "path": "68_gcamp.txt",
+      "bytes": 7141461,
+      "sha256": "ba4ca0702610c0590147efa969ccee91b08e4e7f9fff561c68642f282f38587f"
+    },
+    {
+      "path": "68_labels.txt",
+      "bytes": 455,
+      "sha256": "cba4d6062cdbdd37fcf9070cba657dce3dc6008c1b2962db29f7b22485a29f97"
+    },
+    {
+      "path": "68_stim_neurons.txt",
+      "bytes": 122,
+      "sha256": "f27eb337f040d51b9914f1761f7e8bd886ee2fbc4e0626048f09783ffe2465c4"
+    },
+    {
+      "path": "68_stim_volume_i.txt",
+      "bytes": 191,
+      "sha256": "2e6da21d72f1c61f576e9387ca7506ffe7b1d5bcab965662692bf15e26e21bcd"
+    },
+    {
+      "path": "68_t.txt",
+      "bytes": 71300,
+      "sha256": "ae43662aa8eb2cf11fce185e4cffbbb3c00dd0c86997e7f964e037d6b9828352"
+    },
+    {
+      "path": "69_ds_name.txt",
+      "bytes": 85,
+      "sha256": "73bcf117652b4aeb3b1c49b6f39c839d61e57c7e5e50c6e43734d7e8d3cdc005"
+    },
+    {
+      "path": "69_gcamp.txt",
+      "bytes": 8502683,
+      "sha256": "58ffb2ead8ffd8c95073a3f447eb9972ef54c38c7410211bb10689e23a7a82ed"
+    },
+    {
+      "path": "69_labels.txt",
+      "bytes": 580,
+      "sha256": "474707b0c8112d7634d2fa9a47634ea9af44cde06e9ca237a9d6e60551858a49"
+    },
+    {
+      "path": "69_stim_neurons.txt",
+      "bytes": 140,
+      "sha256": "4a8f52a985d8bb78470e8f3fca4194a2e677c8c368a0c2692430817466d01f63"
+    },
+    {
+      "path": "69_stim_volume_i.txt",
+      "bytes": 211,
+      "sha256": "6088ccae973582bd84c2e4e9ef9829a4e315b1e9eee21c04e22d76f5fa2398d5"
+    },
+    {
+      "path": "69_t.txt",
+      "bytes": 78375,
+      "sha256": "efd5fbce773588b825b173e53a4b8e3ce9009f3be122b231db325be8de91f3b0"
+    },
+    {
+      "path": "6_ds_name.txt",
+      "bytes": 85,
+      "sha256": "4eb6d1d6d7839a9adeeb518359fd847fd3526649b974b78d1a2a26c6480e5b26"
+    },
+    {
+      "path": "6_gcamp.txt",
+      "bytes": 12889252,
+      "sha256": "19cd9c5163ba6301fc9951e3154416d81446f14c257f7aa8d409cafc4ad6f021"
+    },
+    {
+      "path": "6_labels.txt",
+      "bytes": 311,
+      "sha256": "f6690f8717242a66c4bb79b0b53dc9d2f654f73373b9d7920417aa2854ad121f"
+    },
+    {
+      "path": "6_stim_neurons.txt",
+      "bytes": 243,
+      "sha256": "48839ec0c3b2029bee0f454a263f56bc556766a714faa0625775a2e30a6ec53b"
+    },
+    {
+      "path": "6_stim_volume_i.txt",
+      "bytes": 408,
+      "sha256": "69d9f358d91f529296f06a4aafb3edab6ba55345c857a5ec58f2410995076a41"
+    },
+    {
+      "path": "6_t.txt",
+      "bytes": 135675,
+      "sha256": "49b3863c3e6d9416023bb4ca1301fad82515a6bf29b1b1daab74158d142da5e9"
+    },
+    {
+      "path": "70_ds_name.txt",
+      "bytes": 85,
+      "sha256": "1dea9469516f68f599589d0d45062f6ff46c5737e7a01c08e7318b04614fefab"
+    },
+    {
+      "path": "70_gcamp.txt",
+      "bytes": 9869194,
+      "sha256": "c280bc079350a68307fd10330589ce758cdb63f203730a51f4600484f0c507a1"
+    },
+    {
+      "path": "70_labels.txt",
+      "bytes": 631,
+      "sha256": "a6673c76d0a6a61eff8f88ffb1f969bcfa9de6095252f16402ae05d83c85db79"
+    },
+    {
+      "path": "70_stim_neurons.txt",
+      "bytes": 151,
+      "sha256": "a6ea18cac476ba1bbe799aea13d801de86ebfd7f33ab3c782110231a3bb18540"
+    },
+    {
+      "path": "70_stim_volume_i.txt",
+      "bytes": 225,
+      "sha256": "05114ea7f7db9c815276a655584570e95534e83c501216b8b4ebf8d2ca8067ff"
+    },
+    {
+      "path": "70_t.txt",
+      "bytes": 83750,
+      "sha256": "7ec8a511b1ac6e8482ca5eb3316f0c48ae98459d2b6c12c832075e4e9dd7c93b"
+    },
+    {
+      "path": "71_ds_name.txt",
+      "bytes": 85,
+      "sha256": "b2d094943538b0c99a68b75c08df67b81407004d7b9af29d6a0fa763b45b4c13"
+    },
+    {
+      "path": "71_gcamp.txt",
+      "bytes": 9935185,
+      "sha256": "49577b425ee41286312a0a4ab27b909da3d48ba8c15d72148d639158b3c64a41"
+    },
+    {
+      "path": "71_labels.txt",
+      "bytes": 514,
+      "sha256": "ee6c8e753571090d8c138dca5bd0c6faa39cfd9e4028cd6f53de0d881eca02d6"
+    },
+    {
+      "path": "71_stim_neurons.txt",
+      "bytes": 136,
+      "sha256": "b5127510b23283b75858ea2e9eee739ed58ebc2d6b27fdc05ae4ce412cb6484d"
+    },
+    {
+      "path": "71_stim_volume_i.txt",
+      "bytes": 211,
+      "sha256": "719cb11063ad59ebaf7820c3a8fd9bfaa23652138d4689a7008e5185c7576d5c"
+    },
+    {
+      "path": "71_t.txt",
+      "bytes": 78725,
+      "sha256": "3d42d097762a1d1267b55d9cc66dcf302fdc5a0325a48cc376363cf8c3ff4662"
+    },
+    {
+      "path": "72_ds_name.txt",
+      "bytes": 85,
+      "sha256": "c11668cc92f45b94d07c1e37f8f8801fc091ae465a0a4f4c9ba03173ea3a5f23"
+    },
+    {
+      "path": "72_gcamp.txt",
+      "bytes": 11633589,
+      "sha256": "6c40da87e6b8d041b84629657b24a881c0ab28776e356f19d759e93af60fc099"
+    },
+    {
+      "path": "72_labels.txt",
+      "bytes": 553,
+      "sha256": "5f0e802ddbb8d24f98ea7d5d46524326ab8ef70e218245fb9e389a46944c5f5d"
+    },
+    {
+      "path": "72_stim_neurons.txt",
+      "bytes": 162,
+      "sha256": "165b8764c9f445b2cd0b9801bc644f8623458b42ba6c1da470d6a23ab59cb461"
+    },
+    {
+      "path": "72_stim_volume_i.txt",
+      "bytes": 230,
+      "sha256": "28df408c03565d34556b10df49fe0e61bf64763d7694c2f16726a2456e0f59f4"
+    },
+    {
+      "path": "72_t.txt",
+      "bytes": 84225,
+      "sha256": "5b4dfa59c22c7be5d903d848dbb45c245ff25bdd1e8f5e9ccb29f1e9c04cf787"
+    },
+    {
+      "path": "73_ds_name.txt",
+      "bytes": 85,
+      "sha256": "68cf185a7fcb21879fe13ee468d86a5b5683d15b6de0b4c1dd258636dba591df"
+    },
+    {
+      "path": "73_gcamp.txt",
+      "bytes": 10973069,
+      "sha256": "fbec08d896c1f3b01c835c705ea556ef3cc38d4dba9c70cb482fb6244e574fb7"
+    },
+    {
+      "path": "73_labels.txt",
+      "bytes": 831,
+      "sha256": "469c4b1ea677f620c5d64b224948dd9810d4ab4e43b5c59104c88acec6cba872"
+    },
+    {
+      "path": "73_stim_neurons.txt",
+      "bytes": 172,
+      "sha256": "2740cdcc5a37bfb14d3df36351d2385c8fb2554b5c291a9789ef67eb0cc14708"
+    },
+    {
+      "path": "73_stim_volume_i.txt",
+      "bytes": 239,
+      "sha256": "7e951874e6168f97aef335c87a604f77a44f6bcfe858e5854bf61fe38e578750"
+    },
+    {
+      "path": "73_t.txt",
+      "bytes": 85300,
+      "sha256": "2473965320df982f1321ac82b3aa3ba2c7dcc8611401338bd39ad2140ba1892b"
+    },
+    {
+      "path": "74_ds_name.txt",
+      "bytes": 85,
+      "sha256": "7aec2a952b8e73ffb04c362e6ec3f17dca23d87001389e4015acc6cbc67f04b4"
+    },
+    {
+      "path": "74_gcamp.txt",
+      "bytes": 8704888,
+      "sha256": "cd98dea6bcec492706a7aead3e7a30fd15cad4c0ef25477eb8ad86c941539df9"
+    },
+    {
+      "path": "74_labels.txt",
+      "bytes": 664,
+      "sha256": "ae1e812ec904b53359522eb27a6a30613855580dce49544c3c452d0b004ee06b"
+    },
+    {
+      "path": "74_stim_neurons.txt",
+      "bytes": 116,
+      "sha256": "9d81236dcefa3ee69d1285f9c88d2fc9d7e3b634209153a18aabdfa15487d692"
+    },
+    {
+      "path": "74_stim_volume_i.txt",
+      "bytes": 164,
+      "sha256": "f5a91dd0949d35a23471c509f8f817fc5443272ee2fa99a1db982e9e21baab72"
+    },
+    {
+      "path": "74_t.txt",
+      "bytes": 62625,
+      "sha256": "8a7849bdcb4a0d7296fed032b0446c5540db8ef726bda3405e99a760df01a2e6"
+    },
+    {
+      "path": "75_ds_name.txt",
+      "bytes": 85,
+      "sha256": "f8050f68a9aa0e27d72d34b65d08501660266be2d1aa367768f57654c571e1ce"
+    },
+    {
+      "path": "75_gcamp.txt",
+      "bytes": 9112501,
+      "sha256": "58f3b204f02985c0e3bc0160fe342a5956ca671911e46f9be2e269263010d6c4"
+    },
+    {
+      "path": "75_labels.txt",
+      "bytes": 721,
+      "sha256": "28f8b00d5ec8fb6bf3beb8050c386b43196eee2667b09185ec4be301b382c81b"
+    },
+    {
+      "path": "75_stim_neurons.txt",
+      "bytes": 132,
+      "sha256": "862972f19e14cef21ca9c84707f4f5dedc341cd7e97f3041802ec3ecdf116bee"
+    },
+    {
+      "path": "75_stim_volume_i.txt",
+      "bytes": 174,
+      "sha256": "9bf839fe7ac3d13e01720cfb76657bff18cb6386d28cbabf77c37123aca948fd"
+    },
+    {
+      "path": "75_t.txt",
+      "bytes": 65425,
+      "sha256": "f97f0cd20d77e9e18c1f909bc5b0db2fb96b9bdb3e2e3c29e0db14a86e0b0a28"
+    },
+    {
+      "path": "76_ds_name.txt",
+      "bytes": 85,
+      "sha256": "74412959ec6527c3677f132685062542c6c2456a9074582ab78acb765056f5b5"
+    },
+    {
+      "path": "76_gcamp.txt",
+      "bytes": 11105757,
+      "sha256": "eb161fb2b3289c16d001adf22c55e4fd25ded349634fc70e7579bb2b741ae0ee"
+    },
+    {
+      "path": "76_labels.txt",
+      "bytes": 636,
+      "sha256": "50715d3e1a8149080ec012397bf4ff4c9a054ee223d4a4b9d7ffa3a5ce7bbb6a"
+    },
+    {
+      "path": "76_stim_neurons.txt",
+      "bytes": 142,
+      "sha256": "0eaa1b22e9cb9f49869b76f93c44307ee07e3796c92dd76db79b1c2daf5813c4"
+    },
+    {
+      "path": "76_stim_volume_i.txt",
+      "bytes": 195,
+      "sha256": "11bb59ceb32d15c0f5d741b9d7b6b10cbfa1513a362a0fb83838ed48b1530517"
+    },
+    {
+      "path": "76_t.txt",
+      "bytes": 72275,
+      "sha256": "70964f8ad0f148b71a8e2f012c735dd288f5e943c42bb6971e342e3e04082326"
+    },
+    {
+      "path": "77_ds_name.txt",
+      "bytes": 85,
+      "sha256": "ac25b5fc8f58c30f4bf0475bac235dbf1bdcdb64ec40dc3558f8e53ed35cbbc3"
+    },
+    {
+      "path": "77_gcamp.txt",
+      "bytes": 5437048,
+      "sha256": "d568a0f29cc6fbf141c2ff51c0e40d302a36cf41882e6047cd106aeaff3f33cf"
+    },
+    {
+      "path": "77_labels.txt",
+      "bytes": 526,
+      "sha256": "e2522c6b7a4c890f22712ec8d70b8e2ecd5aed12741aed5580d13c90c08161bf"
+    },
+    {
+      "path": "77_stim_neurons.txt",
+      "bytes": 67,
+      "sha256": "94be400439e41d0f15bcc91e0849d8891762d25f022bf6644b2b639c4b9164b0"
+    },
+    {
+      "path": "77_stim_volume_i.txt",
+      "bytes": 90,
+      "sha256": "24d8364942efae3cc58f1406957cdd0caeb0185af8e859890fe8775f3159e86d"
+    },
+    {
+      "path": "77_t.txt",
+      "bytes": 40025,
+      "sha256": "eb4e48c87586fa6fe0eedd26ccc3ab5382aa64f66941ebaed8f2e3bba8f3e613"
+    },
+    {
+      "path": "78_ds_name.txt",
+      "bytes": 85,
+      "sha256": "0feb37e0ce3e018056849d8c2a50d2a9518505e1ee28a74be2bde8a325167345"
+    },
+    {
+      "path": "78_gcamp.txt",
+      "bytes": 11778919,
+      "sha256": "e74ef71956c268a888232d0296126a0d35b44ff2c4069845486d9735aa644505"
+    },
+    {
+      "path": "78_labels.txt",
+      "bytes": 482,
+      "sha256": "8d459089ff5d571a77665bd643c9fe2a2eaba5d615f05294a8da55e0a3c8cb65"
+    },
+    {
+      "path": "78_stim_neurons.txt",
+      "bytes": 154,
+      "sha256": "073cb101b5b391ed361e0f4def13946cc6d41d0254e28e7b8274581c631ace79"
+    },
+    {
+      "path": "78_stim_volume_i.txt",
+      "bytes": 229,
+      "sha256": "431cd575da5ac0f0cce105e01bc84165a8705f4afa1b7c246e53e3167ffd2c52"
+    },
+    {
+      "path": "78_t.txt",
+      "bytes": 83325,
+      "sha256": "c0ce7ddf2a78c438c0fb1388500ae359191604a61399d4813177232c655d28e1"
+    },
+    {
+      "path": "79_ds_name.txt",
+      "bytes": 85,
+      "sha256": "bc51e7f4ed6cca4b2bca61c53d267de67b9d844494d6430519f1507abe53dfc9"
+    },
+    {
+      "path": "79_gcamp.txt",
+      "bytes": 10809311,
+      "sha256": "ef9048311f334d63f69195c4019b16c44a8954c4ebfb00f48e2e8b5fec478acf"
+    },
+    {
+      "path": "79_labels.txt",
+      "bytes": 703,
+      "sha256": "4ceca21f4895d3802f02d01891ee23de2d0a87b00e5b4ac867e299e161180bea"
+    },
+    {
+      "path": "79_stim_neurons.txt",
+      "bytes": 151,
+      "sha256": "2b2a68ae1924bf5ddd2253a73c54a6438f062d4dff53b885d0f44dcdae9068fa"
+    },
+    {
+      "path": "79_stim_volume_i.txt",
+      "bytes": 209,
+      "sha256": "58ae1daec4f31146337b7d7d37ca7f961650b68dd8d423edd0833e88e5501bc5"
+    },
+    {
+      "path": "79_t.txt",
+      "bytes": 79100,
+      "sha256": "b9e0d37fdd53af274373d4bb77ed14baa590f72b9c3a8eeb5d4614af435b2f0f"
+    },
+    {
+      "path": "7_ds_name.txt",
+      "bytes": 85,
+      "sha256": "5bb5af62e4058545836da575f5ebec15d03a2f26ffe6a6987d3c1b8fbaf627b1"
+    },
+    {
+      "path": "7_gcamp.txt",
+      "bytes": 14693995,
+      "sha256": "e56ba32a294101ff810da6b8d7231f4f3f87c6b1b9b8bba4c1fc363a754e9ea9"
+    },
+    {
+      "path": "7_labels.txt",
+      "bytes": 344,
+      "sha256": "db8348cb24a7d82f47ab202ae920b9f3bbbf5c39bd47a6f4df985af4d95f6827"
+    },
+    {
+      "path": "7_stim_neurons.txt",
+      "bytes": 238,
+      "sha256": "1d02f35660bf915d0f68fc7ef22d3d0128b7b249fdbbea1075623ded5ba6d192"
+    },
+    {
+      "path": "7_stim_volume_i.txt",
+      "bytes": 373,
+      "sha256": "2ca8d638ff14a961634cc93141b3bd5c83321a79144aa5085e3d9a521dc8e92f"
+    },
+    {
+      "path": "7_t.txt",
+      "bytes": 124525,
+      "sha256": "ce3d87838b2574c172ed6c02e7d71de53e3ecbdc16086386c39b32cbe7e16d7c"
+    },
+    {
+      "path": "80_ds_name.txt",
+      "bytes": 85,
+      "sha256": "3b84606493467c030a97e92cdd0d0b0ebf6b7a920c1d0a44d3bd8161ea2d6a7b"
+    },
+    {
+      "path": "80_gcamp.txt",
+      "bytes": 9721250,
+      "sha256": "2349ec182376353556b847d9a1faf24d8f5cdfec4da1b1ac9f0b693b65de132a"
+    },
+    {
+      "path": "80_labels.txt",
+      "bytes": 597,
+      "sha256": "ae6072b1a56b8484cf911b182a4b37ea7f191fe1f1f2de069dcda398e2fdac5a"
+    },
+    {
+      "path": "80_stim_neurons.txt",
+      "bytes": 155,
+      "sha256": "531cb4c2a7abd53590fedd4862a5f35e8267d2faac2fe1cdd9f9612c38cda22b"
+    },
+    {
+      "path": "80_stim_volume_i.txt",
+      "bytes": 220,
+      "sha256": "cd158029149c4886ff72040dbe6a413ad19620313575509ec90e998aae976891"
+    },
+    {
+      "path": "80_t.txt",
+      "bytes": 82325,
+      "sha256": "e2910d07b3d9cff940e395451a07e3e6f407e486c7c87c4b460e8608229d8efc"
+    },
+    {
+      "path": "81_ds_name.txt",
+      "bytes": 85,
+      "sha256": "9099accb9d3c70f217a4792cb1bbf56944af87188bf1f6e1bb7f289d3a898eb0"
+    },
+    {
+      "path": "81_gcamp.txt",
+      "bytes": 10455403,
+      "sha256": "2c1805d80e2d2d1de7eba8ba453fcd3d0acf928a4f4e236534aea4bd59122455"
+    },
+    {
+      "path": "81_labels.txt",
+      "bytes": 574,
+      "sha256": "dee203d5b37cc02cbc2531e54aa13e3f9879f7c0636f556ef0d048ec698e1003"
+    },
+    {
+      "path": "81_stim_neurons.txt",
+      "bytes": 139,
+      "sha256": "276f05c2aea83708f3a7fb24204b8e452a1fa1bf131dd8b4337a7d95df63a424"
+    },
+    {
+      "path": "81_stim_volume_i.txt",
+      "bytes": 214,
+      "sha256": "745d0a1de75650ed59d2729d9596877d7ba0995278521b3927b9e35a99b79266"
+    },
+    {
+      "path": "81_t.txt",
+      "bytes": 79400,
+      "sha256": "f54f0ee31105fde2e7f9d5be2063ee6eed3f1ac1964972b96f92ce91b27e4156"
+    },
+    {
+      "path": "82_ds_name.txt",
+      "bytes": 85,
+      "sha256": "975af91b840696d331ee655c60294185dbbd30c863809e5ae1b96575dbb3f3e5"
+    },
+    {
+      "path": "82_gcamp.txt",
+      "bytes": 10436380,
+      "sha256": "96c2c1429e27ac3d479576cda483e9ed4a8974e4ae798d61c7f475e5622a36b3"
+    },
+    {
+      "path": "82_labels.txt",
+      "bytes": 582,
+      "sha256": "0f1024517c67627652b00c0d7131fc0ae5be587f9e79ee5d7eeb2c2c2d1ded06"
+    },
+    {
+      "path": "82_stim_neurons.txt",
+      "bytes": 132,
+      "sha256": "89804b8300b25c4d2d69371979ff76c8b26ad57a3ba946f8c41bfe581dfc6ca8"
+    },
+    {
+      "path": "82_stim_volume_i.txt",
+      "bytes": 184,
+      "sha256": "638176bbef1c6858200ff3fd5ae709ce267a3a7a74c1e55c727e4e5b0eb7f0f8"
+    },
+    {
+      "path": "82_t.txt",
+      "bytes": 69575,
+      "sha256": "8dae4490950b8bf04d276ad8f08f8d786bf26e04f130747a8c5da2622dc86af0"
+    },
+    {
+      "path": "83_ds_name.txt",
+      "bytes": 85,
+      "sha256": "99e991721d2e72d3317315e8c09068eb5025b40528e7161f8eb0ef0294b06a64"
+    },
+    {
+      "path": "83_gcamp.txt",
+      "bytes": 11419316,
+      "sha256": "0d1600aed4c93f3f617890d35da61eb41dc28f9fa154ed6c0e612ee2ef477ab8"
+    },
+    {
+      "path": "83_labels.txt",
+      "bytes": 588,
+      "sha256": "d9ab2d2a600d54a48e6dadaec997aaf34c826d6f638d161745765e45d42776ae"
+    },
+    {
+      "path": "83_stim_neurons.txt",
+      "bytes": 151,
+      "sha256": "1cb8b11df04f378571f16f4b6f67f2be383ea39258f55c65be02db3e7a7de164"
+    },
+    {
+      "path": "83_stim_volume_i.txt",
+      "bytes": 209,
+      "sha256": "a0ce39130a0b965e7b3b2494d37e0789fe6a02df26cca7f203a003cd53d308cf"
+    },
+    {
+      "path": "83_t.txt",
+      "bytes": 77725,
+      "sha256": "a15bb34d16c62ebf4ddc2e09d516b4202f6308b6019e5dc2ec3fe2f38b58fca1"
+    },
+    {
+      "path": "84_ds_name.txt",
+      "bytes": 85,
+      "sha256": "0323f0530de7afbe33a3e4c77e2ca242b49a464282d43351c5cc6296de98d1a6"
+    },
+    {
+      "path": "84_gcamp.txt",
+      "bytes": 8375683,
+      "sha256": "2d279a98cfd04e38641ac7b9221305aaf18dc05a0eac4aecf9e54883f861b5fd"
+    },
+    {
+      "path": "84_labels.txt",
+      "bytes": 480,
+      "sha256": "67ab64f644d5691e98ee7bb4af2c1ad365fb7ec6a4ca594912909813f0a04506"
+    },
+    {
+      "path": "84_stim_neurons.txt",
+      "bytes": 135,
+      "sha256": "603a7fb489990135b7b9e549da8c8785da3a37c48860add8707a66273b6e24cd"
+    },
+    {
+      "path": "84_stim_volume_i.txt",
+      "bytes": 209,
+      "sha256": "92977445e867403599074811fd433757d4f40033e3816c66b95792f03e6ec780"
+    },
+    {
+      "path": "84_t.txt",
+      "bytes": 78600,
+      "sha256": "98f252834ed51de0d5323df0f68e45252065d852b7af88f5784ffdcbfe7b0505"
+    },
+    {
+      "path": "85_ds_name.txt",
+      "bytes": 85,
+      "sha256": "ba95572c220c48003fc491f3eedd2f2cad33eaa863e9b5bc1e04ad71059735f5"
+    },
+    {
+      "path": "85_gcamp.txt",
+      "bytes": 10057830,
+      "sha256": "a03e426c0de491e9bf2e837616f8680df21fe6eb6a67c6861f9dc90a4068c878"
+    },
+    {
+      "path": "85_labels.txt",
+      "bytes": 636,
+      "sha256": "9ac5af85918aedc7bbd5072d6b614b93fc46875af7ce35853c869af927726e21"
+    },
+    {
+      "path": "85_stim_neurons.txt",
+      "bytes": 162,
+      "sha256": "72e9da5b9b492cfc25db3f88b13220b0144b3b1054c4ee50f74fa8b21bd1a26c"
+    },
+    {
+      "path": "85_stim_volume_i.txt",
+      "bytes": 229,
+      "sha256": "24a5a746b3aa933940b2ea3d512c41e2d8cf77241f3c80686813158c984bc717"
+    },
+    {
+      "path": "85_t.txt",
+      "bytes": 82900,
+      "sha256": "951be5659e50f959047c8a0b494f1cc3dadc20379997a90c988a7c69cf6e7b87"
+    },
+    {
+      "path": "86_ds_name.txt",
+      "bytes": 85,
+      "sha256": "4dc65379cbcfe90f89b6656d9d8bf8a68ed995dd7de218c243802b1c306e7aa2"
+    },
+    {
+      "path": "86_gcamp.txt",
+      "bytes": 9353689,
+      "sha256": "dec8bc8d312fbde28c56879cb4e352c37672c81bd27abbe3084be06fc45b28c7"
+    },
+    {
+      "path": "86_labels.txt",
+      "bytes": 465,
+      "sha256": "57cba97b33fb224dd01a1d0a9e4a4a579687a6b68e790df1f899e9b08bedadf2"
+    },
+    {
+      "path": "86_stim_neurons.txt",
+      "bytes": 142,
+      "sha256": "c47bf7b8195467bb3bd5b4a63e674fca901395540ade214e610b5c73f9ad5322"
+    },
+    {
+      "path": "86_stim_volume_i.txt",
+      "bytes": 218,
+      "sha256": "9f5b4f5a7906ee5bc8ca51537af825d5e830111293e7b730a9756f92bca7d250"
+    },
+    {
+      "path": "86_t.txt",
+      "bytes": 83875,
+      "sha256": "538c25d03b5d9bf783076cd898015347770383c5d158273b654658a5f5c1b217"
+    },
+    {
+      "path": "87_ds_name.txt",
+      "bytes": 85,
+      "sha256": "a18270fe4e1db7bed3574154c1ffdd34913564e3c257996f09b659e95e69622c"
+    },
+    {
+      "path": "87_gcamp.txt",
+      "bytes": 8655527,
+      "sha256": "6145d9780856aef6dd411db496b283f5aaa909ee616faa2970d4d1a22b80a53e"
+    },
+    {
+      "path": "87_labels.txt",
+      "bytes": 522,
+      "sha256": "9a61543e52ea358c4929d7d83d399d921e5dfb0f3c6d66ba3180347b174a95bc"
+    },
+    {
+      "path": "87_stim_neurons.txt",
+      "bytes": 140,
+      "sha256": "bccaa025ab67720f989fd9e368d273d52af25a19f026980ec3fbb41dc12d2177"
+    },
+    {
+      "path": "87_stim_volume_i.txt",
+      "bytes": 225,
+      "sha256": "06f51f30b9c76a90879abdef1a3385f32449c4cc7d78c57730bcd1ba08700dd1"
+    },
+    {
+      "path": "87_t.txt",
+      "bytes": 83000,
+      "sha256": "7a52ba9befbe0bdbbd9d0baedb117735fe315badc0ad07d174bae818a34dfedc"
+    },
+    {
+      "path": "88_ds_name.txt",
+      "bytes": 85,
+      "sha256": "9aefc4410c58beb8e28a85defb3bd1ade42721054e661b5e72f8c6fde44a2716"
+    },
+    {
+      "path": "88_gcamp.txt",
+      "bytes": 11768665,
+      "sha256": "cee4f2dcff0d040dcf384c413727b76bfabd98cb5c853b46abbe1bc398ec5a40"
+    },
+    {
+      "path": "88_labels.txt",
+      "bytes": 977,
+      "sha256": "46901eec13a795530966a719b5e04f8066bb2cefd84ae00a994111f0ed3b2e3d"
+    },
+    {
+      "path": "88_stim_neurons.txt",
+      "bytes": 184,
+      "sha256": "1080ede3d876c15bb9408ab2abdcbc260f2f9536caf5bd497255d14f1ad4676f"
+    },
+    {
+      "path": "88_stim_volume_i.txt",
+      "bytes": 224,
+      "sha256": "384b513f13b21de581f015da504d763b21147eb04b76f8efdcd0a34836f4d2df"
+    },
+    {
+      "path": "88_t.txt",
+      "bytes": 81050,
+      "sha256": "ccbe647f6a054ad55b470b8258163238e2c7f44eb8df79d8cb57255315489fcb"
+    },
+    {
+      "path": "89_ds_name.txt",
+      "bytes": 85,
+      "sha256": "d99e40a096a904c0337c02ff539bd411822b9b16c577f3b08c2bfbeeef3c18d3"
+    },
+    {
+      "path": "89_gcamp.txt",
+      "bytes": 8487874,
+      "sha256": "e6cf7c09d98fea220aa07ba5aa35de8d751d0dcf9158e6285890a529c839a342"
+    },
+    {
+      "path": "89_labels.txt",
+      "bytes": 581,
+      "sha256": "ab58aae6e6ae9cf0eb3400dcd30f2e4b069b064860d8e76f0c74a10b0c6b3b99"
+    },
+    {
+      "path": "89_stim_neurons.txt",
+      "bytes": 128,
+      "sha256": "8634685bb24014bfe85806bd6bee189db9db0dd7d1513fdff259794a6ff2fd58"
+    },
+    {
+      "path": "89_stim_volume_i.txt",
+      "bytes": 184,
+      "sha256": "d6af35b999f4be5fe7487b0ba56d4c487fde3e6fc9c475c8ac485c7b2f5f7380"
+    },
+    {
+      "path": "89_t.txt",
+      "bytes": 68850,
+      "sha256": "b8b46c1d1de0b97631bbc9e648223c00c4a42a1f0fc363b30e947ff0581e9373"
+    },
+    {
+      "path": "8_ds_name.txt",
+      "bytes": 85,
+      "sha256": "791808f9e3df331a0130454b2d038112af6757a73f08c7e14acd82addb3e8b49"
+    },
+    {
+      "path": "8_gcamp.txt",
+      "bytes": 11577518,
+      "sha256": "6d5865bd631cc9bc3aa6402a500be238db53493d5b9b868e98663b01b8cf4136"
+    },
+    {
+      "path": "8_labels.txt",
+      "bytes": 337,
+      "sha256": "1d2de31db64f73d68f329fa9a8f6c64f54ae0f48e6e6618bef1f0d3f3cd674d8"
+    },
+    {
+      "path": "8_stim_neurons.txt",
+      "bytes": 207,
+      "sha256": "709aa1b8ba5ee786703aed196851b4a4fdfd83f1d61a89c60942396c164d12d8"
+    },
+    {
+      "path": "8_stim_volume_i.txt",
+      "bytes": 333,
+      "sha256": "430c778947f2e110b0d735f19a6dd89f2a1427c80845d6174e54b39a7af25e0d"
+    },
+    {
+      "path": "8_t.txt",
+      "bytes": 112350,
+      "sha256": "7626bf78e1ece229fb125f8c54f8488584de08a5b22520a4bfcc780ee47cc538"
+    },
+    {
+      "path": "90_ds_name.txt",
+      "bytes": 85,
+      "sha256": "490a668790e0ad0fe6be71c4ee66ab5080063d5c1217bd638082ba4fc6de8835"
+    },
+    {
+      "path": "90_gcamp.txt",
+      "bytes": 12625336,
+      "sha256": "065934f7492b54dc0a8f16ff437de0deab46a81cad64896682f7a59de8dda652"
+    },
+    {
+      "path": "90_labels.txt",
+      "bytes": 622,
+      "sha256": "9491f3febc6a00e0ac0dfc8e8f9a9abf9d6143af51e5099207f928b729e81dac"
+    },
+    {
+      "path": "90_stim_neurons.txt",
+      "bytes": 181,
+      "sha256": "3bd5aaeed1987650beb4714d9a007a93d6b288eae661770b7e3bcb1d157ce1ac"
+    },
+    {
+      "path": "90_stim_volume_i.txt",
+      "bytes": 259,
+      "sha256": "2821e49c850bf35753bdfdcbb8ce9300a4b8a9b952e5bad4d3df8239d1580ae6"
+    },
+    {
+      "path": "90_t.txt",
+      "bytes": 93575,
+      "sha256": "65a51ec17b2f2abc5207bb969663a566ef606af87ac400110c608391c7bb5ac5"
+    },
+    {
+      "path": "91_ds_name.txt",
+      "bytes": 85,
+      "sha256": "386f2ffdbe809d16ea2fc98e320cd1f9c1f0bb526c27c51970fd5fb219b2ebf8"
+    },
+    {
+      "path": "91_gcamp.txt",
+      "bytes": 13417072,
+      "sha256": "6833c94bbed441619b6aebe8a774332f984e75fb26fe96587e65046e9be29e0f"
+    },
+    {
+      "path": "91_labels.txt",
+      "bytes": 547,
+      "sha256": "8b21c0a18073a1c386ccb78d61f0b2d1e10759343f95a90578cf939b7436b64f"
+    },
+    {
+      "path": "91_stim_neurons.txt",
+      "bytes": 161,
+      "sha256": "9566c018e1677f42cd3e928bab0a7d131b509108bda5c298ebb85e47247772f3"
+    },
+    {
+      "path": "91_stim_volume_i.txt",
+      "bytes": 244,
+      "sha256": "3b1ec5b40dcda0128a4ef46f6d4ba0f6a3b6ecc97df1d6025cca20ea6db0e4ff"
+    },
+    {
+      "path": "91_t.txt",
+      "bytes": 92175,
+      "sha256": "4b1fbf8a012ca9b5c577fbe8480cad649d93730e599c7970ef2fd867f9d962d5"
+    },
+    {
+      "path": "92_ds_name.txt",
+      "bytes": 85,
+      "sha256": "6b5a6a697c38bf5a3c59ddae553de3ba1c1bb9467b23bc67adc169df5e4498e4"
+    },
+    {
+      "path": "92_gcamp.txt",
+      "bytes": 14105046,
+      "sha256": "7ac098657d1da0225ac916b06a3198d85d9f69f5e675b9de7879cb75e185b392"
+    },
+    {
+      "path": "92_labels.txt",
+      "bytes": 869,
+      "sha256": "07eb544af93b21dba223bd950106f163b99ca7f0679ce49f36213a6a20e62fd6"
+    },
+    {
+      "path": "92_stim_neurons.txt",
+      "bytes": 178,
+      "sha256": "188a5ba6884ac972246329196ac77264ee053c1bf476ba256bad194149dc2b23"
+    },
+    {
+      "path": "92_stim_volume_i.txt",
+      "bytes": 234,
+      "sha256": "8c2c2059026362fcc3c7bdec61957cdf64d3f0ce8e498397c1e94f37f7c065f4"
+    },
+    {
+      "path": "92_t.txt",
+      "bytes": 85650,
+      "sha256": "592a96ad3c03327a0501f6bc8fc2b64cf150c986a7242aeadee8bdf71126da2c"
+    },
+    {
+      "path": "93_ds_name.txt",
+      "bytes": 85,
+      "sha256": "2f7da4a3b376e4c129cb82326d32b8075362745c8100c50ada11118272365c7c"
+    },
+    {
+      "path": "93_gcamp.txt",
+      "bytes": 12293499,
+      "sha256": "2c5ce319bb7a656ff37133a9b0589ea5688cc77ae14a100e0ac6ff936896714a"
+    },
+    {
+      "path": "93_labels.txt",
+      "bytes": 633,
+      "sha256": "61c4cf0ce283dea1303769c162a5315a1397a599ee3426594e32c194b90d2938"
+    },
+    {
+      "path": "93_stim_neurons.txt",
+      "bytes": 163,
+      "sha256": "8b3b7c430a8500199afa0fbe061e7cb074653bdb9cad9990b04e5e51751a50af"
+    },
+    {
+      "path": "93_stim_volume_i.txt",
+      "bytes": 234,
+      "sha256": "8ffc7182917a792ee42ca67032e2d80f68b95c71eab35b7d5bfababf845d5478"
+    },
+    {
+      "path": "93_t.txt",
+      "bytes": 84150,
+      "sha256": "60bd977f43aa671532576f545b8bdc64095aacc23bacd2e9a856b70c635bf770"
+    },
+    {
+      "path": "94_ds_name.txt",
+      "bytes": 85,
+      "sha256": "d25aeac58451cf98d147c3b03a00f5a0fe2146fa130d8f73d930e8f14c4af2c7"
+    },
+    {
+      "path": "94_gcamp.txt",
+      "bytes": 12577775,
+      "sha256": "83eed51673db88f1235b9ec15548c6d0b5fc0e1dbca3f6f9775e9e0d94ac829c"
+    },
+    {
+      "path": "94_labels.txt",
+      "bytes": 567,
+      "sha256": "533fd416c768062b12bc2c6883869ddbf05c5b71112b27cf7b778cbe03a9e4bb"
+    },
+    {
+      "path": "94_stim_neurons.txt",
+      "bytes": 186,
+      "sha256": "bb52062c0d1c93bf8a7b0fcdf0cf85a798fc40c6eecd73df74781c074a4609e9"
+    },
+    {
+      "path": "94_stim_volume_i.txt",
+      "bytes": 279,
+      "sha256": "01fa8e6cad84fdcaffcb009dd254f10b3112719afa3d819db4c8f17ed7917409"
+    },
+    {
+      "path": "94_t.txt",
+      "bytes": 99950,
+      "sha256": "649161c29fc95b2e4dacccfa2ec000837ed83efdcdaea77d7f6f5003fef21464"
+    },
+    {
+      "path": "95_ds_name.txt",
+      "bytes": 73,
+      "sha256": "c91b92d4ebae587c3db16d6f34aa4f8aad84bba9f94776063b076fa2bc039d3d"
+    },
+    {
+      "path": "95_gcamp.txt",
+      "bytes": 3577160,
+      "sha256": "9a71e1b2fcd1bd4d46058c7c9ad4d116bdc96c9220ea8e9451ad1ed7d447c781"
+    },
+    {
+      "path": "95_labels.txt",
+      "bytes": 424,
+      "sha256": "c45fad1274cefefdbc5604ef6b0895535aae9e489c8d3050692c59c73efad9bf"
+    },
+    {
+      "path": "95_stim_neurons.txt",
+      "bytes": 59,
+      "sha256": "1fba0a33690c97467e36715cc7edcbf29e8f60ae50034dbc26d7bff62e0747e5"
+    },
+    {
+      "path": "95_stim_volume_i.txt",
+      "bytes": 84,
+      "sha256": "56267d8f512ee6fad783135449e7b746a41a355ac60b54367ad564ceb82481b3"
+    },
+    {
+      "path": "95_t.txt",
+      "bytes": 35125,
+      "sha256": "9e419ccac93e3a06f702edaedc365bdfe6e83807e058fff0db07dc19de4f8712"
+    },
+    {
+      "path": "96_ds_name.txt",
+      "bytes": 73,
+      "sha256": "e7fe4feae49499b9291be8bae4cec13a5d4400c51eee82e6644b96ddb1ec53e7"
+    },
+    {
+      "path": "96_gcamp.txt",
+      "bytes": 9091671,
+      "sha256": "6d0722b87496741eee2240a52e8820f6a74b9e43fb2cf6d02bab8978426e312b"
+    },
+    {
+      "path": "96_labels.txt",
+      "bytes": 510,
+      "sha256": "f9539b7be42dcba1c285ef256d5a437b2f024f40054830cbf178ee1495df79a8"
+    },
+    {
+      "path": "96_stim_neurons.txt",
+      "bytes": 124,
+      "sha256": "35315602ba5ee8abe7eeccd9a97bee1ae9218d6c3c455fc682898a250f283344"
+    },
+    {
+      "path": "96_stim_volume_i.txt",
+      "bytes": 194,
+      "sha256": "5abeb5486dbcbce14ecb11fc4237ed08eaa711ad5617749fa754782e532148aa"
+    },
+    {
+      "path": "96_t.txt",
+      "bytes": 76375,
+      "sha256": "38ab961fcd2fd23a814b8c47b1010b02f55653c1b9a957c7a9db02b3bd71a398"
+    },
+    {
+      "path": "97_ds_name.txt",
+      "bytes": 73,
+      "sha256": "a86f37cb13c9c1ead8cf5e230a65b30d577e5ed46f5646b62918f9684fa4b2b9"
+    },
+    {
+      "path": "97_gcamp.txt",
+      "bytes": 7851370,
+      "sha256": "fcd9d3cb4ef09e7a2474b95a1f5b9e6fbd916a02ca95eec8970f07353e7b9244"
+    },
+    {
+      "path": "97_labels.txt",
+      "bytes": 372,
+      "sha256": "5ecf01707b238566d1f2015ad6cd07a9e69ed76007d7f6f18735ca3280ac185d"
+    },
+    {
+      "path": "97_stim_neurons.txt",
+      "bytes": 110,
+      "sha256": "c19ffe65e2222351499ab01f46f0c7b749abf2a8f3074bdd6dc68cc52a97052b"
+    },
+    {
+      "path": "97_stim_volume_i.txt",
+      "bytes": 174,
+      "sha256": "459d32fb82fe532b145a711f54865dcd92b17670124c4e0dc44b9563e9d93684"
+    },
+    {
+      "path": "97_t.txt",
+      "bytes": 73050,
+      "sha256": "650ffc05e0bb0cac92fcd8c859083787fbc646cf023c93a21eaa767494b78b95"
+    },
+    {
+      "path": "98_ds_name.txt",
+      "bytes": 73,
+      "sha256": "7c1f1abd5bf8a0ff38857b52ce50a7a9f234a1c110bcc9fdb5951c2e0911e3c8"
+    },
+    {
+      "path": "98_gcamp.txt",
+      "bytes": 14061268,
+      "sha256": "04a552eeca6236523b0b4483acf62f12c6eaa7cb15ef0539cd77eeb929515998"
+    },
+    {
+      "path": "98_labels.txt",
+      "bytes": 570,
+      "sha256": "20d793f2e527c7c4b0e215b28e9f166a8d66bd6279d06ffe52c9f01e6f4b215d"
+    },
+    {
+      "path": "98_stim_neurons.txt",
+      "bytes": 173,
+      "sha256": "51a94982869bc3bd9a87149e6e2a737eb0fbfa60a8a30800cfb78f1ae7ec01c0"
+    },
+    {
+      "path": "98_stim_volume_i.txt",
+      "bytes": 266,
+      "sha256": "97bcb8e82b866688d19c47cf98421c1e3fbbc6a94644ba2913f050e649e3389c"
+    },
+    {
+      "path": "98_t.txt",
+      "bytes": 100725,
+      "sha256": "c26f3fc88bd958dc4d4d6d4e66ab9c3c6e3f8a89793d2eb8afa56893c7090025"
+    },
+    {
+      "path": "99_ds_name.txt",
+      "bytes": 73,
+      "sha256": "1e4ebc56b6c2e4d61fb2d8de98e1e52ef328cd645851d00572599c310161c07a"
+    },
+    {
+      "path": "99_gcamp.txt",
+      "bytes": 15062887,
+      "sha256": "48fcc8f810cc14163444728c8d1115c43a25be3f71238547b6d018b994650b08"
+    },
+    {
+      "path": "99_labels.txt",
+      "bytes": 574,
+      "sha256": "460f9417fa564af536266484497dc9fa65327b8123423f8eec34f2f718c34520"
+    },
+    {
+      "path": "99_stim_neurons.txt",
+      "bytes": 171,
+      "sha256": "3c48cf90b0a0bc05bc69f8e31accbf04e07269a4aa32dbd006d70acb43660030"
+    },
+    {
+      "path": "99_stim_volume_i.txt",
+      "bytes": 257,
+      "sha256": "8e78b99d5dfac24a2b5366c26b5c62bb65d6344a00dafebd519a7fb01b2590e2"
+    },
+    {
+      "path": "99_t.txt",
+      "bytes": 100175,
+      "sha256": "f5d7e2d3457008df9589f22996eed77efd5eb0881017117a0d4d54af2788cfd9"
+    },
+    {
+      "path": "9_ds_name.txt",
+      "bytes": 73,
+      "sha256": "bdca5339581b91822804bbc03a3103f5f0199be867bbbedf5f64fea2cc245b21"
+    },
+    {
+      "path": "9_gcamp.txt",
+      "bytes": 12998141,
+      "sha256": "3ee1c241559652c6818b4854df3b54bc6f6c5fb9f54e21cb4aee0671807e8487"
+    },
+    {
+      "path": "9_labels.txt",
+      "bytes": 418,
+      "sha256": "f3ec300961db9c99fbab36c1133128d28547c0f4854a47355cd884ea2f76e34b"
+    },
+    {
+      "path": "9_stim_neurons.txt",
+      "bytes": 195,
+      "sha256": "a395b02de146e10d25786d28e052bbee2217fc672881816c9401ea3a0a67b218"
+    },
+    {
+      "path": "9_stim_volume_i.txt",
+      "bytes": 283,
+      "sha256": "8367c54630ce14bf4854638999a8828005267dee0fe16e89eb3116cd4b4434a7"
+    },
+    {
+      "path": "9_t.txt",
+      "bytes": 94875,
+      "sha256": "59a5fb9ef5a426ced2d711b6297f4f6f9804cf943951912f12d91a2646126ceb"
+    }
+  ]
+}
