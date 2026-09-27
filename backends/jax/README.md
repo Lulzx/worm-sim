@@ -149,3 +149,10 @@ See [equations, API and acceptance limits](../../docs/NEUROMODULATION.md).
 on explicitly selected anatomical pairs. Zero asymmetry preserves the baseline;
 source provenance and canonical pair orientation are required. See the
 [law, API and limitations](../../docs/GAP-RECTIFICATION.md).
+
+## Optional off-connectome connections
+
+`DarkEdges` declares a budgeted sparse set of extra chemical candidates with
+physical-strength L1 regularization. The low-level Level 0 API supports their
+dynamics and reverse gradients. See [configuration and limits](../../docs/DARK-EDGES.md);
+population checkpoint and scoring integration remains open.
