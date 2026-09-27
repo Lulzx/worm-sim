@@ -1,0 +1,426 @@
+{
+  "schema_version": 1,
+  "selection": {
+    "rule": "Next two recordings in lexicographic asset-path order after the first inspected recording; selected using names only, before reading metadata values or response outcomes.",
+    "inventory_sha256": "44402befd01d0bc39a81d0407925c5d2a8b36989fcca84d0fd1a870d40649a59",
+    "records": [
+      {
+        "record": {
+          "recording": "20220316-15-34-20",
+          "path": "sub-20220316-15-34-20/sub-20220316-15-34-20_ses-20220316T153420.nwb",
+          "asset_id": "fbffdc4a-470f-434c-8986-6d2a24db02a9",
+          "bytes": 8076745436,
+          "timestamp_matches_randi": false,
+          "processed_pickle_metadata": {
+            "size": 130885444,
+            "checksum": "md5:41375cb364bdfa4834a3ecdb480b273e"
+          }
+        },
+        "file": {
+          "id": "7681bdf7-fd60-4257-98ce-395b7045e361",
+          "key": "20220316-15-34-20.pkl",
+          "size": 130885444,
+          "checksum": "md5:41375cb364bdfa4834a3ecdb480b273e",
+          "links": {
+            "self": "https://zenodo.org/api/records/17353307/files/20220316-15-34-20.pkl/content"
+          }
+        }
+      },
+      {
+        "record": {
+          "recording": "20220426-11-26-14",
+          "path": "sub-20220426-11-26-14/sub-20220426-11-26-14_ses-20220426T112614.nwb",
+          "asset_id": "7036e1e7-9663-4bb8-af28-ce402f6017d1",
+          "bytes": 8078567443,
+          "timestamp_matches_randi": false,
+          "processed_pickle_metadata": {
+            "size": 143894235,
+            "checksum": "md5:53104bd05d608e3f2d59f912a5e281fd"
+          }
+        },
+        "file": {
+          "id": "4fd217d8-3de1-40d0-8356-20a4c70b494d",
+          "key": "20220426-11-26-14.pkl",
+          "size": 143894235,
+          "checksum": "md5:53104bd05d608e3f2d59f912a5e281fd",
+          "links": {
+            "self": "https://zenodo.org/api/records/17353307/files/20220426-11-26-14.pkl/content"
+          }
+        }
+      }
+    ]
+  },
+  "selection_sha256": "3c71259db5c916ae1732f5a684101d8269ea23ee60b67a9bb0f99471c9aa68b2",
+  "records": [
+    {
+      "recording": "20220316-15-34-20",
+      "download": {
+        "file": "runs/dunn-20220316-15-34-20.pkl",
+        "source": {
+          "id": "7681bdf7-fd60-4257-98ce-395b7045e361",
+          "key": "20220316-15-34-20.pkl",
+          "size": 130885444,
+          "checksum": "md5:41375cb364bdfa4834a3ecdb480b273e",
+          "links": {
+            "self": "https://zenodo.org/api/records/17353307/files/20220316-15-34-20.pkl/content"
+          }
+        },
+        "bytes": 130885444,
+        "sha256": "102e743a482bae47f4937c21092830298f393bbb36ff1e5d123fbf1271f617f4",
+        "md5_verified": true,
+        "selection": "Next two recordings in lexicographic asset-path order after the first inspected recording; selected using names only, before reading metadata values or response outcomes.",
+        "selection_sha256": "3c71259db5c916ae1732f5a684101d8269ea23ee60b67a9bb0f99471c9aa68b2",
+        "scope": "Downloaded bytes only; no pickle decoding performed."
+      },
+      "structure": {
+        "object_global": [
+          "wbliveDataClass",
+          "wbliveDataClass"
+        ],
+        "object_fields": {
+          "DERIV_PRECALCULATED_FLAG": "bool",
+          "ID1": "opaque:numpy.core.multiarray._reconstruct",
+          "baseline_window": "int",
+          "datadir": "str",
+          "derivs": "NoneType",
+          "dff": "opaque:numpy.core.multiarray._reconstruct",
+          "dff_nobacksub": "NoneType",
+          "fname_root": "str",
+          "md": "dict",
+          "metadata_fname": "str",
+          "metadatadir": "str",
+          "nn": "int",
+          "pre_post_frames": "int",
+          "quant_method": "str",
+          "raw_datadir": "str",
+          "stim_intensity_list": "list",
+          "stim_off_list": "list",
+          "stim_on_list": "list",
+          "stim_param_list": "list",
+          "timeseries_fname": "str",
+          "timevec": "opaque:numpy.core.multiarray._reconstruct",
+          "tracestate_colors": "list",
+          "tracestate_names": "list",
+          "tracestatedir": "str",
+          "tracestates": "opaque:numpy.core.multiarray._reconstruct",
+          "wbstruct": "opaque:pandas.core.frame.DataFrame",
+          "x": "opaque:numpy.core.multiarray._reconstruct",
+          "y": "opaque:numpy.core.multiarray._reconstruct",
+          "z": "opaque:numpy.core.multiarray._reconstruct"
+        },
+        "metadata_fields": {
+          "alg_metadata": "dict",
+          "frame_time_list": "list",
+          "gooey_args": "dict",
+          "id": "str",
+          "mmc_metadata": "dict",
+          "postprocessing": "dict",
+          "roi": "list",
+          "stim_metadata": "dict",
+          "xsize": "int",
+          "ysize": "int"
+        },
+        "nested_metadata_fields": {
+          "alg_metadata": {
+            "model_time_list": "list",
+            "process_time_list": "list",
+            "stim_param_list": "list"
+          },
+          "gooey_args": {
+            "acquisition_backend": "str",
+            "atr_concentration": "int",
+            "microscope_name": "str",
+            "nose_orientation": "str",
+            "num_eggs": "int",
+            "save_structural_scan": "str",
+            "stim_interface": "str",
+            "subject_strain": "str",
+            "total_frames": "int",
+            "trigger_algorithm": "str",
+            "vnc_orientation": "str",
+            "z_step_size": "float",
+            "zsize": "int"
+          },
+          "mmc_metadata": {
+            "GB_info": "dict",
+            "binning": "str",
+            "camera_mode": "str",
+            "exposure": "float",
+            "intensity_405": "float",
+            "intensity_488": "float",
+            "intensity_561": "float",
+            "intensity_639": "float",
+            "objective": "str"
+          },
+          "postprocessing": {
+            "moco": "dict",
+            "timeseries_extraction": "dict"
+          },
+          "stim_metadata": {
+            "stim_off_list": "list",
+            "stim_off_time_list": "list",
+            "stim_on_list": "list",
+            "stim_on_time_list": "list",
+            "stim_onset_times_simple": "list",
+            "stim_param_list": "list"
+          }
+        },
+        "delivered_event_schema": {
+          "count": 0,
+          "field_types": {},
+          "event_type_counts": {}
+        },
+        "stimulus_list_lengths": {
+          "md.alg_metadata.stim_param_list": 0,
+          "md.stim_metadata.stim_off_list": 0,
+          "md.stim_metadata.stim_off_time_list": 0,
+          "md.stim_metadata.stim_on_list": 0,
+          "md.stim_metadata.stim_on_time_list": 0,
+          "md.stim_metadata.stim_onset_times_simple": 0,
+          "md.stim_metadata.stim_param_list": 0,
+          "object.stim_intensity_list": 0,
+          "object.stim_off_list": 0,
+          "object.stim_on_list": 0,
+          "object.stim_param_list": 0
+        },
+        "replaced_globals": [
+          [
+            "builtins",
+            "slice"
+          ],
+          [
+            "numpy",
+            "dtype"
+          ],
+          [
+            "numpy",
+            "ndarray"
+          ],
+          [
+            "numpy.core.multiarray",
+            "_reconstruct"
+          ],
+          [
+            "pandas._libs.internals",
+            "_unpickle_block"
+          ],
+          [
+            "pandas.core.frame",
+            "DataFrame"
+          ],
+          [
+            "pandas.core.indexes.base",
+            "Index"
+          ],
+          [
+            "pandas.core.indexes.base",
+            "_new_Index"
+          ],
+          [
+            "pandas.core.indexes.range",
+            "RangeIndex"
+          ],
+          [
+            "pandas.core.internals.managers",
+            "BlockManager"
+          ],
+          [
+            "wbliveDataClass",
+            "wbliveDataClass"
+          ]
+        ],
+        "schema_version": 1,
+        "pickle_sha256": "102e743a482bae47f4937c21092830298f393bbb36ff1e5d123fbf1271f617f4",
+        "download_receipt_sha256": "1a9f69d8a521171c0dfb5eb4d1d369ae78fa2dbda206d06e94189059b9b58678",
+        "script_sha256": "5cde8b54eb81d7847be667e8895f359973931ed3eaf392305bcdf52e0fc1e817",
+        "scope": "One candidate processed recording: field names/types and delivered-event count/type categories only. All pickle globals replaced by inert placeholders; numerical arrays not constructed, response values not reported. Does not establish stimulus eligibility or animal independence."
+      }
+    },
+    {
+      "recording": "20220426-11-26-14",
+      "download": {
+        "file": "runs/dunn-20220426-11-26-14.pkl",
+        "source": {
+          "id": "4fd217d8-3de1-40d0-8356-20a4c70b494d",
+          "key": "20220426-11-26-14.pkl",
+          "size": 143894235,
+          "checksum": "md5:53104bd05d608e3f2d59f912a5e281fd",
+          "links": {
+            "self": "https://zenodo.org/api/records/17353307/files/20220426-11-26-14.pkl/content"
+          }
+        },
+        "bytes": 143894235,
+        "sha256": "20f0174d9ed923188c2e668cfc4584e0fbc378b5004d579879d7f87002aeb93b",
+        "md5_verified": true,
+        "selection": "Next two recordings in lexicographic asset-path order after the first inspected recording; selected using names only, before reading metadata values or response outcomes.",
+        "selection_sha256": "3c71259db5c916ae1732f5a684101d8269ea23ee60b67a9bb0f99471c9aa68b2",
+        "scope": "Downloaded bytes only; no pickle decoding performed."
+      },
+      "structure": {
+        "object_global": [
+          "wbliveDataClass",
+          "wbliveDataClass"
+        ],
+        "object_fields": {
+          "DERIV_PRECALCULATED_FLAG": "bool",
+          "ID1": "opaque:numpy.core.multiarray._reconstruct",
+          "baseline_window": "int",
+          "datadir": "str",
+          "derivs": "NoneType",
+          "dff": "opaque:numpy.core.multiarray._reconstruct",
+          "dff_nobacksub": "NoneType",
+          "fname_root": "str",
+          "md": "dict",
+          "metadata_fname": "str",
+          "metadatadir": "str",
+          "nn": "int",
+          "pre_post_frames": "int",
+          "quant_method": "str",
+          "raw_datadir": "str",
+          "stim_intensity_list": "list",
+          "stim_off_list": "list",
+          "stim_on_list": "list",
+          "stim_param_list": "list",
+          "timeseries_fname": "str",
+          "timevec": "opaque:numpy.core.multiarray._reconstruct",
+          "tracestate_colors": "list",
+          "tracestate_names": "list",
+          "tracestatedir": "str",
+          "tracestates": "opaque:numpy.core.multiarray._reconstruct",
+          "wbstruct": "opaque:pandas.core.frame.DataFrame",
+          "x": "opaque:numpy.core.multiarray._reconstruct",
+          "y": "opaque:numpy.core.multiarray._reconstruct",
+          "z": "opaque:numpy.core.multiarray._reconstruct"
+        },
+        "metadata_fields": {
+          "alg_metadata": "dict",
+          "frame_time_list": "list",
+          "gooey_args": "dict",
+          "id": "str",
+          "mmc_metadata": "dict",
+          "postprocessing": "dict",
+          "roi": "list",
+          "stim_metadata": "dict",
+          "xsize": "int",
+          "ysize": "int"
+        },
+        "nested_metadata_fields": {
+          "alg_metadata": {
+            "model_time_list": "list",
+            "process_time_list": "list",
+            "stim_param_list": "list"
+          },
+          "gooey_args": {
+            "acquisition_backend": "str",
+            "atr_concentration": "int",
+            "microscope_name": "str",
+            "nose_orientation": "str",
+            "num_eggs": "int",
+            "save_structural_scan": "str",
+            "stim_interface": "str",
+            "subject_strain": "str",
+            "total_frames": "int",
+            "trigger_algorithm": "str",
+            "vnc_orientation": "str",
+            "z_step_size": "float",
+            "zsize": "int"
+          },
+          "mmc_metadata": {
+            "GB_info": "dict",
+            "binning": "str",
+            "camera_mode": "str",
+            "exposure": "float",
+            "intensity_405": "float",
+            "intensity_488": "float",
+            "intensity_561": "float",
+            "intensity_639": "float",
+            "objective": "str"
+          },
+          "postprocessing": {
+            "ID labeling": "dict",
+            "moco": "dict",
+            "timeseries_extraction": "dict"
+          },
+          "stim_metadata": {
+            "stim_off_list": "list",
+            "stim_off_time_list": "list",
+            "stim_on_list": "list",
+            "stim_on_time_list": "list",
+            "stim_onset_times_simple": "list",
+            "stim_param_list": "list"
+          }
+        },
+        "delivered_event_schema": {
+          "count": 0,
+          "field_types": {},
+          "event_type_counts": {}
+        },
+        "stimulus_list_lengths": {
+          "md.alg_metadata.stim_param_list": 0,
+          "md.stim_metadata.stim_off_list": 0,
+          "md.stim_metadata.stim_off_time_list": 0,
+          "md.stim_metadata.stim_on_list": 0,
+          "md.stim_metadata.stim_on_time_list": 0,
+          "md.stim_metadata.stim_onset_times_simple": 0,
+          "md.stim_metadata.stim_param_list": 0,
+          "object.stim_intensity_list": 0,
+          "object.stim_off_list": 0,
+          "object.stim_on_list": 0,
+          "object.stim_param_list": 0
+        },
+        "replaced_globals": [
+          [
+            "builtins",
+            "slice"
+          ],
+          [
+            "numpy",
+            "dtype"
+          ],
+          [
+            "numpy",
+            "ndarray"
+          ],
+          [
+            "numpy.core.multiarray",
+            "_reconstruct"
+          ],
+          [
+            "pandas._libs.internals",
+            "_unpickle_block"
+          ],
+          [
+            "pandas.core.frame",
+            "DataFrame"
+          ],
+          [
+            "pandas.core.indexes.base",
+            "Index"
+          ],
+          [
+            "pandas.core.indexes.base",
+            "_new_Index"
+          ],
+          [
+            "pandas.core.indexes.range",
+            "RangeIndex"
+          ],
+          [
+            "pandas.core.internals.managers",
+            "BlockManager"
+          ],
+          [
+            "wbliveDataClass",
+            "wbliveDataClass"
+          ]
+        ],
+        "schema_version": 1,
+        "pickle_sha256": "20f0174d9ed923188c2e668cfc4584e0fbc378b5004d579879d7f87002aeb93b",
+        "download_receipt_sha256": "3a2ecfbc6351d63496b9f00a7376019dbae865e6b2d3738489af8c646af99d22",
+        "script_sha256": "5cde8b54eb81d7847be667e8895f359973931ed3eaf392305bcdf52e0fc1e817",
+        "scope": "One candidate processed recording: field names/types and delivered-event count/type categories only. All pickle globals replaced by inert placeholders; numerical arrays not constructed, response values not reported. Does not establish stimulus eligibility or animal independence."
+      }
+    }
+  ],
+  "scope": "Metadata-only eligibility inspection of the next two records in fixed name order. Both have empty stimulus lists. No neural response values reported; no cohort-wide exclusion or independence claim."
+}

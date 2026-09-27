@@ -280,3 +280,19 @@ placeholders, and the stored DataFrame remained an inert pandas placeholder.
 The report contains only field types, stimulus counts and event-type categories
 (empty here), not neural response values. These are eligibility observations,
 not held-out model scores or a claim that a confirmatory cohort is secured.
+
+### Next two records in fixed name order
+
+The next two asset paths in lexicographic order identify recordings
+`20220316-15-34-20` and `20220426-11-26-14`. Their selection used names alone,
+before inspecting their metadata. Both processed files downloaded completely
+(130,885,444 and 143,894,235 bytes) and matched their published MD5 checksums.
+The [combined receipt](dunn-next-two-metadata.json) retains the selection,
+download hashes and complete structure reports, with verified links between them.
+
+Each has the same **11 empty stimulus lists**, including the delivered event
+list and processed onsets/offsets. Together with the first recording, these are
+three candidates that cannot supply Task 1 perturbation trials through the
+inspected metadata. The remaining 92 recordings are not classified by this
+result. No neural response arrays were constructed or response values reported;
+no fresh confirmatory cohort is secured.
