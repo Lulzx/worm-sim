@@ -126,3 +126,11 @@ require their own numerical checks.
 
 Training export schema 2 also carries native chemical/gap topology; the JAX
 loader rejects a graph with different endpoints or weights, even if names match.
+
+## Adaptive solver API
+
+The optional `Adaptive` settings enable Diffrax Tsit5 or implicit Kvaerno5 with
+PID control and reverse differentiation through preparation and all response
+intervals. The default Euler reproduction path and population runner remain
+unchanged. See [adaptive solver semantics and checks](../../docs/ADAPTIVE-SOLVERS.md),
+including why implicit stages require interval-local input values.

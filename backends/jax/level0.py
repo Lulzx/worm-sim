@@ -9,6 +9,13 @@ import jax.numpy as jnp
 import equinox as eqx
 import diffrax
 import numpy as np
+from solvers import Adaptive, integrate
+from typing import NamedTuple
+
+
+class AdaptiveSolution(NamedTuple):
+    ys: jax.Array
+    stats: dict
 
 
 class Level0(eqx.Module):
@@ -25,8 +32,13 @@ class Level0(eqx.Module):
     n: int = eqx.field(static=True)
     m: int = eqx.field(static=True)
     max_steps: int = eqx.field(static=True)
+    adaptive: Adaptive | None = eqx.field(static=True)
+    preparation: float = eqx.field(static=True)
 
-    def __init__(self, model, graph, times):
+    def __init__(self, model, graph, times, adaptive=None):
+        if adaptive is not None and not isinstance(adaptive,Adaptive):
+            raise TypeError('adaptive settings must be an Adaptive instance')
+        self.adaptive=adaptive
         names = sorted(n['id'] for n in graph['neurons'])
         index = {name:i for i,name in enumerate(names)}
         self.n = len(names)
@@ -52,7 +64,12 @@ class Level0(eqx.Module):
                 or np.any(np.diff(times)<=0) or not np.isfinite(dt) or dt<=0
                 or not np.isfinite(prep) or prep<0):
             raise ValueError('invalid time grid')
+        self.preparation=prep
         self.save_times = jnp.asarray(prep+times)
+        if adaptive is not None:
+            self.steps=jnp.asarray([0.,float(prep+times[-1])])
+            self.max_steps=adaptive.max_steps
+            return
         # Reproduce the reference's floating-point step accumulation, including
         # final fractional steps, instead of silently changing the integrator.
         steps = [0.]
@@ -68,15 +85,18 @@ class Level0(eqx.Module):
         self.max_steps = len(steps)-1
 
     def rhs(self, t, state, args):
-        theta, target = args
+        theta,target=args
+        interval=jnp.searchsorted(self.save_times,t,side='right')-1
+        kernel=jax.nn.softplus(theta['kernel'])
+        current=jnp.where((interval>=0)&(interval<len(kernel)),kernel[jnp.clip(interval,0,len(kernel)-1)],0.)
+        return self.rhs_current(state,theta,target,current)
+
+    def rhs_current(self, state, theta, target, current):
         raw = theta['groups'][self.mapping]
         positive = jax.nn.softplus(raw)+1e-9
         n,m = self.n,self.m
         v,c,s = state[:n],state[n:2*n],state[2*n:]
         release = jax.nn.sigmoid((v-raw[2*n:3*n])*positive[3*n:4*n])
-        interval = jnp.searchsorted(self.save_times, t, side='right')-1
-        kernel = jax.nn.softplus(theta['kernel'])
-        current = jnp.where((interval>=0)&(interval<len(kernel)),kernel[jnp.clip(interval,0,len(kernel)-1)],0.)
         dv = (-(v-raw[n:2*n])).at[target].add(current)
         weight = positive[6*n:6*n+m]*self.counts
         reversal = 2*jax.nn.sigmoid(raw[6*n+m:6*n+2*m])-1
@@ -86,14 +106,42 @@ class Level0(eqx.Module):
         return jnp.concatenate((dv/positive[:n], (release-c)/positive[4*n:5*n],
                                 (release*(1-s)-s)/positive[-1]))
 
-    def response(self, theta, target):
-        solution = diffrax.diffeqsolve(
+    def solve(self, theta, target):
+        if self.adaptive is not None:
+            # Implicit RK stages may evaluate beyond an interval's end.
+            # Keep the input constant within each solve so those stages cannot
+            # sample the next stimulus; carry state and gradients across solves.
+            kernel=jax.nn.softplus(theta['kernel'])
+            indices=jnp.arange(len(self.save_times)-1)
+            currents=jnp.where(indices<len(kernel),kernel[jnp.clip(indices,0,len(kernel)-1)],0.)
+            if self.preparation>0:
+                boundaries=jnp.concatenate((jnp.zeros(1),self.save_times))
+                currents=jnp.concatenate((jnp.zeros(1),currents))
+            else:
+                boundaries=self.save_times
+            def rhs(t,state,args):
+                p,cell,current=args
+                return self.rhs_current(state,p,cell,current)
+            def advance(state,interval):
+                start,end,current=interval
+                solution=integrate(rhs,state,(theta,target,current),jnp.asarray([end]),self.adaptive,t0=start)
+                state=solution.ys[0]
+                counts=jnp.stack([solution.stats[k] for k in ['num_steps','num_accepted_steps','num_rejected_steps']])
+                return state,(state,counts)
+            _,(states,counts)=jax.lax.scan(advance,self.initial,(boundaries[:-1],boundaries[1:],currents))
+            if self.preparation==0:
+                states=jnp.concatenate((self.initial[None,:],states),axis=0)
+            totals=jnp.sum(counts,axis=0)
+            return AdaptiveSolution(states,dict(zip(['num_steps','num_accepted_steps','num_rejected_steps'],totals)))
+        return diffrax.diffeqsolve(
             diffrax.ODETerm(self.rhs), diffrax.Euler(),
             t0=self.steps[0], t1=self.steps[-1], dt0=None,
             y0=self.initial, args=(theta,target),
             stepsize_controller=diffrax.StepTo(ts=self.steps),
             saveat=diffrax.SaveAt(ts=self.save_times),
             adjoint=diffrax.RecursiveCheckpointAdjoint(), max_steps=self.max_steps)
+    def response(self, theta, target):
+        solution=self.solve(theta,target)
         calcium = solution.ys[:,self.n:2*self.n]
         raw = theta['groups'][self.mapping]
         scale = jax.nn.softplus(raw[5*self.n:6*self.n])+1e-9
