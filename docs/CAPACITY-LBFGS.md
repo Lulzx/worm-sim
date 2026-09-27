@@ -130,3 +130,26 @@ time and use absolute tolerance 1e-10. At the receipt snapshot, the candidate ha
 recorded scalar trajectory before the extension, not bitwise optimizer-state
 equality. The longer run was still live; its terminal capacity outcome remains
 pending.
+
+## Prepared-activation screen
+
+While the longer fit runs, a [frozen-checkpoint screen](capacity-prepared-activation-screen.json)
+checks the independently audited 201-evaluation endpoint for a return to a broadly
+dead activation state. Using `Replay`'s prepared voltage, threshold and slope,
+compute `q = sigmoid((v - threshold) * slope)` and `dq/dv = q*(1-q)*slope`.
+The descriptive saturation cutoff is `q < 1e-6` or `q > 1-1e-6`; it is not a
+biological threshold.
+
+Six of 302 neurons meet this cutoff, all observed in the training subset:
+AUAL, AUAR, RMFL, RMFR, SMBDR and URADR. Among the 201 observed neurons, median
+release is 0.0547 and median voltage derivative is 0.2639 in normalized units.
+The six neurons contribute 3.63% of the summed weighted mean-trace error in the
+existing residual diagnostic. That error includes the first-sample mismatch;
+its denominator differs from the zero-start capacity-gap denominator.
+
+This screen does not support treating the whole prepared network as switched
+off. It does not inspect activation during stimulation, all fitted-parameter
+gradients, or downstream effects mediated by hidden neurons, and therefore does
+not establish that saturation is irrelevant to optimization. No fit settings
+or capacity criteria were changed. The receipt pins the checkpoint, input,
+residual-report and independent replay source hashes and records the formula.

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "input_sha256": {
+    "checkpoint": "d0ce8e7a309a0286aa7a1f07a7b218acf9b6b221d6c71a495d0f5479400449c7",
+    "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "training": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "residuals": "fa0a1ffeedd83ca432dd3e63a95d50a344a28c58840ed2dcb9d6a799da0ca585"
+  },
+  "replay_source_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+  "checkpoint_epoch": 181,
+  "quantile_probabilities": [
+    0,
+    0.1,
+    0.5,
+    0.9,
+    1
+  ],
+  "formula": "q = sigmoid((prepared_voltage - threshold) * slope); dq/dv = q * (1-q) * slope",
+  "screen_threshold": 1e-06,
+  "summaries": {
+    "all_neurons": {
+      "count": 302,
+      "saturated_count": 6,
+      "release_quantiles": [
+        2.4226140633406004e-09,
+        4.212744625262088e-05,
+        0.027958855445366894,
+        0.5725720447283231,
+        0.9747434882411248
+      ],
+      "voltage_derivative_quantiles": [
+        1.0855916755848713e-08,
+        0.0001968410042700635,
+        0.12445228778014528,
+        0.9806324887829742,
+        1.8067552306345913
+      ]
+    },
+    "observed_neurons": {
+      "count": 201,
+      "saturated_count": 6,
+      "release_quantiles": [
+        2.4226140633406004e-09,
+        1.3968237764939687e-05,
+        0.0547158871612,
+        0.5731102877798083,
+        0.9747434882411248
+      ],
+      "voltage_derivative_quantiles": [
+        1.0855916755848713e-08,
+        6.921735438359216e-05,
+        0.2639189956291562,
+        1.1174235312571503,
+        1.8067552306345913
+      ]
+    }
+  },
+  "saturated_neurons": [
+    {
+      "neuron": "AUAL",
+      "release": 2.4226140633406004e-09,
+      "voltage_derivative": 1.0855916755848713e-08,
+      "weighted_mean_trace_squared_error": 6.084277490442644e-06
+    },
+    {
+      "neuron": "AUAR",
+      "release": 4.250219074682668e-07,
+      "voltage_derivative": 1.9045544921220367e-06,
+      "weighted_mean_trace_squared_error": 3.417889909138439e-05
+    },
+    {
+      "neuron": "RMFL",
+      "release": 4.602176701540865e-08,
+      "voltage_derivative": 2.2377699348474902e-07,
+      "weighted_mean_trace_squared_error": 8.643515475009215e-06
+    },
+    {
+      "neuron": "RMFR",
+      "release": 5.703095842084173e-09,
+      "voltage_derivative": 2.773082772170042e-08,
+      "weighted_mean_trace_squared_error": 1.326922958442379e-05
+    },
+    {
+      "neuron": "SMBDR",
+      "release": 6.401444255870857e-07,
+      "voltage_derivative": 2.9897699285798478e-06,
+      "weighted_mean_trace_squared_error": 8.029089643461844e-06
+    },
+    {
+      "neuron": "URADR",
+      "release": 5.691814883603331e-07,
+      "voltage_derivative": 2.6977324853975244e-06,
+      "weighted_mean_trace_squared_error": 1.4068529796131743e-05
+    }
+  ],
+  "total_weighted_mean_trace_error": 0.002319454613488223,
+  "saturated_neurons_weighted_mean_trace_error": 8.427354108085362e-05,
+  "saturated_neurons_fraction_of_mean_trace_error": 0.03633334344667982,
+  "scope": "Frozen 201-evaluation endpoint, unforced prepared state only. Threshold is a numerical screen, not a biological cutoff. Error sums include the unavoidable first-sample mismatch, so denominator is MSE minus unconstrained mean bound, not zero-start bound. Does not test saturation during stimulation, all parameter gradients, or causal effects of hidden neurons; no claim that saturation is absent or irrelevant."
+}
