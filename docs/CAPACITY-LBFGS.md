@@ -153,3 +153,39 @@ gradients, or downstream effects mediated by hidden neurons, and therefore does
 not establish that saturation is irrelevant to optimization. No fit settings
 or capacity criteria were changed. The receipt pins the checkpoint, input,
 residual-report and independent replay source hashes and records the formula.
+
+## Frozen-checkpoint gradient diagnostic
+
+The [201-evaluation gradient receipt](capacity-lbfgs-201-stationarity.json)
+re-evaluates the accepted endpoint using the unchanged fitting source and inputs.
+It reproduces MSE exactly and finds **7,083 active coordinates**, gradient L2
+norm **0.00120705**, and maximum absolute active gradient **0.000766651**.
+The latter exceeds the declared `gtol=1e-9`; this checkpoint does not satisfy
+that gradient criterion. This reinforces the reported budget exhaustion,
+not a claim that the model has reached its capacity limit.
+
+`backends/jax/audit_capacity_stationarity.py` reports norms by native parameter
+family, stimulus kernel and observation gains. Frozen coordinates are excluded
+from these norms. Values are in the optimizer's raw coordinates: differences
+between families are not condition numbers or physiological importance scores.
+This is an evaluation of the existing AD gradient, not an independent finite-
+difference gradient check, a refit, or an optimizer termination decision.
+
+The auditor checks training-subset and input hashes, all backend source hashes
+recorded by the original manifest, JAX version, and checkpoint MSE. Two focused
+tests verify grouping/masking against known norms and reject malformed masks,
+misaligned names and nonfinite gradients. The real-data frozen evaluation also
+passes. Apply the same diagnostic to the longer run's terminal accepted
+checkpoint, after it finishes:
+
+```sh
+.venv-jax/bin/python backends/jax/audit_capacity_stationarity.py \
+  --checkpoint runs/capacity-lbfgs-eval1001/last-accepted.json \
+  --manifest runs/capacity-lbfgs-eval1001/manifest.json \
+  --training runs/overfit-seed1-training.json --graph runs/c302-audit.json \
+  --output runs/capacity-lbfgs-1001-stationarity.json
+```
+
+Even meeting a local gradient tolerance would not establish global optimality,
+biological adequacy, or the unchanged 90% capacity gate. The longer run remains
+pending until its terminal receipt and independent endpoint checks exist.

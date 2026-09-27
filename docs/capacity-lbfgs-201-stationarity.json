@@ -1,0 +1,92 @@
+{
+  "active_coordinates": 7083,
+  "active_gradient_l2": 0.0012070491632650974,
+  "active_gradient_linf": 0.0007666509001060826,
+  "families": [
+    {
+      "family": "kernel",
+      "active_coordinates": 39,
+      "gradient_l2": 2.452293452977068e-05,
+      "gradient_linf": 1.0662884592539019e-05
+    },
+    {
+      "family": "native/calcium_tau",
+      "active_coordinates": 203,
+      "gradient_l2": 4.466999080025901e-06,
+      "gradient_linf": 3.192615675924787e-06
+    },
+    {
+      "family": "native/chemical_sign",
+      "active_coordinates": 2457,
+      "gradient_l2": 2.426521965128122e-05,
+      "gradient_linf": 1.3296651662654729e-05
+    },
+    {
+      "family": "native/chemical_strength",
+      "active_coordinates": 2457,
+      "gradient_l2": 0.00014074589801278193,
+      "gradient_linf": 7.244069179009063e-05
+    },
+    {
+      "family": "native/gap_strength",
+      "active_coordinates": 812,
+      "gradient_l2": 9.325783793177055e-05,
+      "gradient_linf": 6.235656388524087e-05
+    },
+    {
+      "family": "native/rest",
+      "active_coordinates": 203,
+      "gradient_l2": 0.0007179246485441264,
+      "gradient_linf": 0.000651900412763046
+    },
+    {
+      "family": "native/slope",
+      "active_coordinates": 203,
+      "gradient_l2": 6.35622166067477e-05,
+      "gradient_linf": 5.549953396514508e-05
+    },
+    {
+      "family": "native/synapse_tau",
+      "active_coordinates": 1,
+      "gradient_l2": 2.711139737328833e-06,
+      "gradient_linf": 2.711139737328833e-06
+    },
+    {
+      "family": "native/tau",
+      "active_coordinates": 203,
+      "gradient_l2": 1.2294680284330153e-05,
+      "gradient_linf": 1.0397598641394806e-05
+    },
+    {
+      "family": "native/threshold",
+      "active_coordinates": 203,
+      "gradient_l2": 0.0009505985456979872,
+      "gradient_linf": 0.0007666509001060826
+    },
+    {
+      "family": "observation/log_gain",
+      "active_coordinates": 302,
+      "gradient_l2": 6.323812315457968e-05,
+      "gradient_linf": 4.0795152507737286e-05
+    }
+  ],
+  "schema_version": 1,
+  "metrics": {
+    "mse": 0.04380469603882667,
+    "bce": 0.0,
+    "correlation": 0.0,
+    "prior": 0.0
+  },
+  "epoch": 181,
+  "declared_gtol": 1e-09,
+  "active_gradient_linf_meets_declared_gtol": false,
+  "input_sha256": {
+    "checkpoint": "d0ce8e7a309a0286aa7a1f07a7b218acf9b6b221d6c71a495d0f5479400449c7",
+    "manifest": "cae73e0066698e31a11daa69057d19e9809beeaece147e9b729f1d5f43d953a5",
+    "training": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629"
+  },
+  "script_sha256": "8c05dc851bdd8d5904fa12c11060fc22e56f85d49f866d34a23d3c2d62dc9b59",
+  "jax": "0.11.2",
+  "scope": "One frozen training checkpoint, existing objective and raw active parameter coordinates. No parameter updates, finite-difference claim or held-out selection. A small gradient does not prove global optimality or sufficient model capacity; this is not an optimizer termination report."
+}
