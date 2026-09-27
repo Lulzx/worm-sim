@@ -3,6 +3,7 @@ import copy
 import jax
 import jax.numpy as jnp
 import numpy as np
+from observation import Observation
 from modulation import Modulation, fields
 from rectification import GapRectification
 from dark_edges import DarkEdges
@@ -23,8 +24,10 @@ def initialize(model, graph, times, configuration):
         if configuration['schema_version'] != 1:
             raise ValueError('unsupported JAX configuration version')
         specs = configuration['extensions']
-        fields(specs, [], ['modulation', 'rectification', 'dark_edges', 'plasticity'])
+        fields(specs, [], ['modulation', 'rectification', 'dark_edges', 'plasticity', 'observation'])
         modules = {}
+        if 'observation' in specs:
+            modules['observation'] = Observation(sorted(n['id'] for n in graph['neurons']), specs['observation'])
         if 'modulation' in specs:
             modules['modulation'] = Modulation(sorted(n['id'] for n in graph['neurons']), specs['modulation'])
         if 'rectification' in specs:
@@ -46,6 +49,12 @@ def initialize(model, graph, times, configuration):
     active = jax.tree.map(lambda v: jnp.ones_like(v, dtype=bool), theta)
     active['groups'] = jnp.asarray([g['trainable'] for g in model['parameters']['groups']])
     active['log_gain'] = jnp.asarray(model.get('observation_log_gain') is not None)
+    if 'observation' in modules:
+        # Replace the global gain; keep the native calcium scale fixed to avoid
+        # two independently trainable amplitude factors for each neuron.
+        active['log_gain'] = jnp.asarray(False)
+        if any(g['trainable'] and g['name'].startswith('calcium_scale/') for g in model['parameters']['groups']):
+            raise ValueError('per-neuron observation gains require frozen native calcium scales')
     if configuration is not None and 'plasticity' in modules:
         by_type = {t['id']: t for t in configuration['extensions']['plasticity']['types']}
         modes = [by_type[t]['mode'] for t in modules['plasticity'].types]

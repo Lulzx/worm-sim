@@ -72,6 +72,11 @@ features, experimental components, and unmet acceptance gates.
 
 ## Results and limitations
 
+The immediate focus is [Level 0 training capacity](docs/LEVEL0-CAPACITY-PROTOCOL.md):
+longer optimization, non-neutral initialization, and per-neuron observation gains.
+New dynamical features are paused. Existing validation/test results are
+exploratory; a fresh confirmatory cohort remains outstanding.
+
 The JAX backend reproduced the original five-update Level 0 fit through the
 unchanged Rust scorer: test pair-response **AUROC 0.681**, with maximum held-out
 prediction difference **2.09 × 10⁻¹³**. This establishes numerical reproduction;

@@ -1,0 +1,96 @@
+# Level 0 training capacity protocol
+
+Feature development is paused. The immediate question is whether the existing
+Level 0 dynamics can fit training responses, before another held-out comparison.
+The original five-update result is not a convergence result. The later 25-update
+controls and three sign restarts also remain substantially underfit.
+
+## First experiment: two training targets, 300 updates
+
+Use ADAL and ADAR, the first two targets in the authoritative sorted training
+export, comprising 50 trials. This is a deliberately small, related target pair;
+success would need replication on unrelated training targets. No target is chosen
+by validation or test error. Use seed 1's saved epoch-zero random-sign model,
+without selecting between seeds. Its signs are optimization initializations, not
+biological polarity assignments.
+
+- Set normalized resting voltages and the voltage preparation seed to −0.2.
+  Retain the full parameter-dependent 60-second unforced preparation.
+- Retain the 302-neuron connectome, original ties, 0.01-second Euler grid, shared
+  stimulus kernel, and calcium dynamics. Disable all optional dynamical extensions.
+- Fit positive per-neuron observation gains, initially 10, using log coordinates.
+  These replace the global gain; freeze global gain and native calcium scales.
+  Neurons absent from both target observations have zero gain data gradients.
+- Optimize confidence-weighted trace MSE with Adam at 0.01 for 300 updates.
+  Disable classification, correlation, weight decay, and all priors for this
+  capacity test. These settings do not define a production benchmark fit.
+- Record every iterate's MSE, gradient norm, gain range, and elapsed time. Save
+  checkpoints every 50 updates and the final iterate. Abort on nonfinite values.
+- Compute the within-target empirical mean-response bound, plus the stricter
+  bound requiring response at time zero to be zero. Report
+  `(zero-response MSE − model MSE) / (zero-response MSE − zero-start bound)`.
+  The provisional capacity gate is at least 90% at the final iterate.
+
+The bounds concern shared deterministic responses to a target. They are neither
+biological noise estimates nor attainable guarantees for these dynamics.
+Selection uses training MSE only. The best-iterate metric is recorded, but only
+scheduled checkpoints are saved; it is not a claim that every best iterate is
+recoverable. Diagnostic envelopes explicitly name their subset and are not
+accepted as ordinary full-training benchmark checkpoints.
+
+## Execution
+
+After building the Rust examples and installing the pinned JAX environment:
+
+```sh
+target/release/examples/export_atlas_training \
+  data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json \
+  runs/level0-atlas-sign-seed1-fit/epoch-0.json \
+  runs/overfit-seed1-training.json runs/randi-pairs.json
+
+.venv-jax/bin/python backends/jax/overfit.py \
+  --model runs/level0-atlas-sign-seed1-fit/epoch-0.json \
+  --graph runs/c302-audit.json --training runs/overfit-seed1-training.json \
+  --targets ADAL ADAR --steps 300 --output runs/level0-capacity-adal-adar-300
+
+.venv-jax/bin/python scripts/audit_capacity_fit.py \
+  --checkpoint runs/level0-capacity-adal-adar-300/epoch-300.json \
+  --manifest runs/level0-capacity-adal-adar-300/manifest.json \
+  --training runs/overfit-seed1-training.json --graph runs/c302-audit.json \
+  --output runs/capacity-final-audit.json
+```
+
+Output paths must be new. The fitter and independent NumPy auditor load only the
+Rust training export, graph, and model artifacts. They do not load the full atlas
+or held-out recordings. Input file hashes and exact subset trial IDs are retained.
+The native export command validates the original split before emitting training
+statistics. The independent audit checks weighted bounds, MSE, and chemical
+coupling at the prepared state.
+
+## Decisions after this run
+
+If training error is still falling at 300 steps, test a declared 1,000-update
+budget from the same initialization; optimizer resume is not implemented. If it
+plateaus far above the bound, inspect response shape, stimulus amplitude and
+calcium time constants, then compare learning rates on these training targets.
+A missed capacity gate does not distinguish optimization from model capacity by
+itself. Do not add plasticity, dark edges, or more backends to explain the miss.
+
+After a convincing small-target fit, repeat on unrelated training targets and
+seeds, then run the full training cohort for 1,000 updates. Restore explicit
+regularization and compare trace-only and joint classification objectives using
+the existing validation partition, labeled exploratory. Use the same Rust
+scorers and LDS comparison, with paired target-cluster uncertainty. Passing a
+training gate does not establish superiority over LDS.
+
+## Fresh confirmation
+
+The existing validation and test targets have been inspected. They remain useful
+for exploratory comparisons but cannot become fresh by reshuffling. No fresh
+confirmatory holdout has yet been secured. Before new model selection, identify
+additional uninspected recordings and freeze their identities and hashes using
+metadata only, including recording/animal overlap checks against this atlas.
+Predeclare preprocessing, eligibility, endpoints, and the final comparison before
+opening response values. If no independent cohort is available, report the
+limitation and make no confirmatory claim. Neuromodulation remains the first
+scientific extension after the core fitting and comparison gates are met.

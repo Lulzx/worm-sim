@@ -7,6 +7,11 @@ Optional Taichi acceleration remains separately audited. A software feature, a s
 check, and a successful biological benchmark are distinct acceptance levels.
 This ledger does not declare scientific targets achieved merely because code exists.
 
+Current priority: **feature development is paused** while Level 0 training capacity
+is tested with non-neutral initialization and learned per-neuron gains. See the
+[training-only capacity protocol](LEVEL0-CAPACITY-PROTOCOL.md). Existing held-out
+comparisons are exploratory; a fresh confirmatory cohort is not yet secured.
+
 | Spec area | Current evidence | Work required for full acceptance |
 | --- | --- | --- |
 | Data (§3) | Canonical identities, aliases/provenance, content-hashed c302 anatomy, WSC1/WST1 codecs, pinned Creamer operators; native HDF5 import of 21 freely moving animals with behavior; source audit confirms retrospective whole-recording normalization; native Randi text import of 3,166 event trials; native CeNGEN receptor import and explicit molecular polarity evidence (MOLECULAR-PRIORS.md) | Direct Cook/Witvliet variation, broader CeNGEN channel/peptide annotations and gene-alias coverage, peptide network, per-event atlas observation eligibility/pulse calibration, further moving cohorts and prospectively processed signals; graph exports |

@@ -11,6 +11,7 @@ import diffrax
 import numpy as np
 from solvers import Adaptive, integrate
 from typing import NamedTuple
+from observation import Observation
 from modulation import Modulation
 from rectification import GapRectification
 from dark_edges import DarkEdges
@@ -39,6 +40,7 @@ class Level0(eqx.Module):
     max_steps: int = eqx.field(static=True)
     adaptive: Adaptive | None = eqx.field(static=True)
     preparation: float = eqx.field(static=True)
+    observation: Observation | None
     modulation: Modulation | None
     rectification: GapRectification | None
     dark_edges: DarkEdges | None
@@ -48,9 +50,10 @@ class Level0(eqx.Module):
     slow_boundaries: jax.Array
     slow_output_indices: jax.Array
 
-    def __init__(self, model, graph, times, adaptive=None, modulation=None, rectification=None, dark_edges=None, plasticity=None, multirate=None):
+    def __init__(self, model, graph, times, adaptive=None, modulation=None, rectification=None, dark_edges=None, plasticity=None, multirate=None, observation=None):
         if adaptive is not None and not isinstance(adaptive,Adaptive):
             raise TypeError('adaptive settings must be an Adaptive instance')
+        self.observation=observation
         self.adaptive=adaptive
         self.modulation=modulation
         self.rectification=rectification
@@ -171,7 +174,10 @@ class Level0(eqx.Module):
 
     def extension_penalty(self, theta):
         """Add once to a training objective, independently of batch/trace count."""
-        return jnp.asarray(0.) if self.dark_edges is None else self.dark_edges.penalty(theta['dark_edges'])
+        penalty = jnp.asarray(0.) if self.dark_edges is None else self.dark_edges.penalty(theta['dark_edges'])
+        if self.observation is not None:
+            penalty += self.observation.penalty(theta['observation'])
+        return penalty
 
     def initial_state(self, theta):
         if self.plasticity is None:
@@ -221,13 +227,16 @@ class Level0(eqx.Module):
         calcium = solution.ys[:,self.n:2*self.n]
         raw = theta['groups'][self.mapping]
         scale = jax.nn.softplus(raw[5*self.n:6*self.n])+1e-9
-        return jnp.exp(theta['log_gain'])*scale*(calcium-calcium[0])
+        log_gain = theta['log_gain'] if self.observation is None else theta['observation']['log_gain']
+        return jnp.exp(log_gain)*scale*(calcium-calcium[0])
 
 
-def parameters(model, modulation=None, rectification=None, dark_edges=None, plasticity=None):
+def parameters(model, modulation=None, rectification=None, dark_edges=None, plasticity=None, observation=None):
     out = {'groups':jnp.asarray([g['value'] for g in model['parameters']['groups']]),
             'kernel':jnp.asarray(model['kernel_raw']),
             'log_gain':jnp.asarray(model.get('observation_log_gain') or 0.)}
+    if observation is not None:
+        out['observation'] = observation.parameters()
     if modulation is not None:
         out['modulation']=modulation.parameters()
     if rectification is not None:
