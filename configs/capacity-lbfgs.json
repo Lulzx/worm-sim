@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "parent_checkpoint": "runs/level0-capacity-adal-adar-1000-prep120/epoch-950.json",
+  "parent_sha256": "009d9496075b2675978052118e7347a00ece38be8d4cc1ecf44ddd1489994e08",
+  "parent_epoch": 950,
+  "targets": [
+    "ADAL",
+    "ADAR"
+  ],
+  "preparation_seconds": 120.0,
+  "rest_initialization": -0.2,
+  "capacity_gate": "unchanged: final capture of at least 90% of zero-start mean-response energy",
+  "scope": "Training-only optimizer comparison with fixed dynamics, readout and targets.",
+  "dt": 0.005,
+  "optimizer": "SciPy L-BFGS-B without box bounds, active coordinates only, fresh history",
+  "max_evaluations": 201,
+  "max_iterations": 200,
+  "maxls": 20,
+  "maxcor": 20,
+  "ftol": 1e-12,
+  "gtol": 1e-09,
+  "comparator": "Completed refined-step Adam run: runs/capacity-warm-lr0001-dt0005; same parent, dt and 201 objective/gradient evaluations.",
+  "primary_comparison": "Last accepted training MSE at termination within a hard 201-evaluation budget; report convergence, evaluation limit, iteration limit or failure separately.",
+  "secondary_comparison": "Best accepted training MSE, all trial and accepted histories, actual evaluation count and elapsed time; independent endpoint replay and numerical checks.",
+  "failure_policy": "Abort on a nonfinite objective/gradient; preserve failing parameters and last accepted checkpoint. No silent retry or replacement of the declared run.",
+  "output": "runs/capacity-lbfgs-eval201"
+}
