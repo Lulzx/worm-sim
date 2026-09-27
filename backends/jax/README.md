@@ -45,8 +45,9 @@ output hashes, package/device versions, source revision, dirty-worktree state an
 per-target elapsed time (including compilation for the first target). Raw data
 and large generated artifacts remain under ignored `runs/`.
 
-Remaining migration gates: full training objective and frozen-coordinate masks,
-training-only data loader, preparation reuse across targets, validation-only
+The training objective, frozen-coordinate masks and Rust training-statistics
+export are now implemented (see below). Remaining migration gates: preparation
+reuse across targets, validation-only
 selection, checkpoint round trips, optimizer trajectory comparison and a full
 reproduction of fitting. Matching saved predictions alone does not reproduce
 training, fix underfitting or establish superiority over the LDS baseline.
