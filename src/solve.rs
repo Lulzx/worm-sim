@@ -55,6 +55,8 @@ pub struct Trajectory<S> {
     pub times: Vec<f64>,
     pub voltage: Vec<Vec<S>>,
     pub fluorescence: Vec<Vec<S>>,
+    /// Full voltage/calcium/gate state at the final time, for causal continuation.
+    pub final_state: Vec<S>,
 }
 impl Config {
     pub fn validate(&self) -> Result<()> {
@@ -75,6 +77,15 @@ pub fn simulate<S: Scalar>(
     model: &Model,
     params: &Parameters<S>,
     cfg: &Config,
+) -> Result<Trajectory<S>> {
+    simulate_from_state(model, params, cfg, None)
+}
+/// Continue from an explicit differentiable state, or use model equilibrium defaults.
+pub fn simulate_from_state<S: Scalar>(
+    model: &Model,
+    params: &Parameters<S>,
+    cfg: &Config,
+    initial: Option<&[S]>,
 ) -> Result<Trajectory<S>> {
     cfg.validate()?;
     let p = model.prepare(params)?;
@@ -107,7 +118,15 @@ pub fn simulate<S: Scalar>(
     }
     boundaries.sort_by(f64::total_cmp);
     boundaries.dedup();
-    let mut y = model.initial(&p);
+    let mut y = match initial {
+        Some(state) => {
+            if state.len() != len || state.iter().any(|v| !v.value().is_finite()) {
+                return Err("initial state has wrong size or nonfinite values".into());
+            }
+            state.to_vec()
+        }
+        None => model.initial(&p),
+    };
     let mut temp = y.clone();
     let mut k1 = vec![S::constant(0.0); len];
     let mut k2 = k1.clone();
@@ -119,6 +138,7 @@ pub fn simulate<S: Scalar>(
         times: vec![],
         voltage: vec![],
         fluorescence: vec![],
+        final_state: vec![],
     };
     let save = |t: f64, y: &[S], out: &mut Trajectory<S>| {
         out.times.push(t);
@@ -193,5 +213,6 @@ pub fn simulate<S: Scalar>(
             sample += 1;
         }
     }
+    result.final_state = y;
     Ok(result)
 }

@@ -130,6 +130,14 @@ fn run() -> Result<()> {
             write_json(&format!("{}.import.json",args[7]),&report)?;
             println!("imported {} windows from {} animals; data {}",data.trials.len(),report.animals.len(),report.dataset_hash);
         }
+        Some("level0-infer") if args.len()==7 => {
+            let graph=load(&args[2])?;
+            let data:wormsim::bench::Dataset=serde_json::from_slice(&fs::read(&args[3]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let split:wormsim::bench::Split=serde_json::from_slice(&fs::read(&args[4]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let audit=wormsim::bench::level0::infer_trial(&data,&graph,&split,&args[5],Default::default())?;
+            println!("inferred {} state values from {} observed neurons; history objective {:?} -> {:?}; {} seconds",audit.inferred.forecast_state.len(),audit.inferred.observed_neurons,audit.inferred.history_objective.first(),audit.inferred.history_objective.last(),audit.elapsed_seconds);
+            write_json(&args[6],&audit)?;
+        }
         Some("linear-fit") if args.len()==6 => {
             let graph=load(&args[2])?;
             let data:wormsim::bench::Dataset=serde_json::from_slice(&fs::read(&args[3]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
@@ -226,7 +234,7 @@ fn run() -> Result<()> {
             println!("saved {} samples to {}",result.times.len(),args[4]);
         }
         Some("bench") if args.len()<=3 => {benchmark(args.get(2).map(String::as_str))?;}
-        _ => return Err("usage: wormsim bench-control GRAPH DATA.json SPLIT.json PARTITION history-mean|half-blend|training-mean|ar PREDICTIONS.json | linear-fit GRAPH DATA.json SPLIT.json MODEL.json | linear-predict GRAPH DATA.json SPLIT.json MODEL.json PARTITION PREDICTIONS.json | bench-persist GRAPH DATA.json SPLIT.json PARTITION PREDICTIONS.json | import-wormwideweb GRAPH H5_DIR LABELS.json RECEIPT.json CONFIG.json OUTPUT.json (hdf5 feature) | bench-split GRAPH DATA.json neuron|animal SEED VALIDATION_GROUPS TEST_GROUPS SPLIT.json | bench-score GRAPH DATA.json SPLIT.json PREDICTIONS.json train|validation|test REPORT.json | baseline-pack BUNDLE.json BUNDLE.wsb | baseline-eval BUNDLE.wsb REPORT.json | import-c302 CSV IDS.json VERSION OUTPUT.wsc --strict|--mean-mirrors | pack GRAPH.json GRAPH.wsc | unpack GRAPH.wsc GRAPH.json | simulate GRAPH CONFIG.json OUTPUT.json|OUTPUT.wst | bench [GRAPH]".into()),
+        _ => return Err("usage: wormsim level0-infer GRAPH DATA.json SPLIT.json TRIAL OUTPUT.json | bench-control GRAPH DATA.json SPLIT.json PARTITION history-mean|half-blend|training-mean|ar PREDICTIONS.json | linear-fit GRAPH DATA.json SPLIT.json MODEL.json | linear-predict GRAPH DATA.json SPLIT.json MODEL.json PARTITION PREDICTIONS.json | bench-persist GRAPH DATA.json SPLIT.json PARTITION PREDICTIONS.json | import-wormwideweb GRAPH H5_DIR LABELS.json RECEIPT.json CONFIG.json OUTPUT.json (hdf5 feature) | bench-split GRAPH DATA.json neuron|animal SEED VALIDATION_GROUPS TEST_GROUPS SPLIT.json | bench-score GRAPH DATA.json SPLIT.json PREDICTIONS.json train|validation|test REPORT.json | baseline-pack BUNDLE.json BUNDLE.wsb | baseline-eval BUNDLE.wsb REPORT.json | import-c302 CSV IDS.json VERSION OUTPUT.wsc --strict|--mean-mirrors | pack GRAPH.json GRAPH.wsc | unpack GRAPH.wsc GRAPH.json | simulate GRAPH CONFIG.json OUTPUT.json|OUTPUT.wst | bench [GRAPH]".into()),
     }
     Ok(())
 }

@@ -74,7 +74,8 @@ Numerical/causality tests cover recovery of a known linear system, independent
 normal equations with missing data, held-out-future invariance, merged moments
 versus explicit duplicated observations, and exact two-animal bootstrap support.
 
-Next: fit initial states from observed history, introduce left/right and class
+History-only full-network initial-state inference is now implemented and audited
+in [INITIAL-STATE.md](INITIAL-STATE.md). Next: introduce left/right and class
 sharing with explicit sign priors, and run the first Level 0 training/validation
 experiment. The test results already inspected are exploratory evidence; further
 model development must not be described as fresh confirmation on these animals.
