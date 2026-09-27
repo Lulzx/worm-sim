@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "native_report": {
+    "dataset_hash": "3f3a537ff8424d89da72699e9b342185959afbd9380f7ecc6aa0fed06fafe843",
+    "energy_identity_residual": 3.661675461772396e-18,
+    "epoch": 1,
+    "initial_unforced_derivative_l2": 0.5219171868125898,
+    "model_sha256": "ec9c7b2a53c9237cad33134cecf51f00cac1a2915df017622a91b5de0c3fb199",
+    "model_source_commit": "2a510efbc972e0b60732f6291ced59bed69d5d16",
+    "observed_weighted_mean_square": {
+      "cross_term": 5.723115152180273e-06,
+      "driven": 0.00028484509819256854,
+      "stimulus_difference": 5.520232345881394e-06,
+      "zero_current": 0.0002736017506945032
+    },
+    "partition": "validation",
+    "schema_version": 1,
+    "scope": "Frozen model diagnostic on validation only. No refitting or test scoring. Driven = zero-current drift + stimulus difference exactly, up to floating-point error. Subtracted predictions are diagnostic and are not a newly trained model. Mean squares include only observed positive-weight validation samples; cross term means these are not orthogonal variance fractions.",
+    "scores": {
+      "driven": {
+        "correlation": -0.011936962388379385,
+        "defined_correlations": 11746,
+        "mse": 0.04192679367559813,
+        "pair_auroc": 0.5469712780759293
+      },
+      "stimulus_difference": {
+        "correlation": -0.001148637059462219,
+        "defined_correlations": 11703,
+        "mse": 0.04232812098514862,
+        "pair_auroc": 0.7560375670840788
+      },
+      "zero_current": {
+        "correlation": -0.005601373993909799,
+        "defined_correlations": 11746,
+        "mse": 0.04205179516248823,
+        "pair_auroc": 0.526019926455973
+      }
+    },
+    "source_commit": "5d9bb4de0e8755f62d040e28cd7f9bbd8fe2f843",
+    "split_hash": "2d291f63668345396d9b08e984581841db7b8912897405993ba258bf9f013f47"
+  },
+  "independent_audit": {
+    "script_sha256": "c9c174953e84980f59206946e49ba2f2e7e23cb9e2f5d567d5da91ef6cb85ee8",
+    "shared_score_script_sha256": "ddcc0c95f9a3f872c61b180176f8043682bc6fbc3c70f9441cafb1d1d3806e53",
+    "max_decomposition_error": 0.0,
+    "zero_current_identical_across_stimulated_targets": true,
+    "only_validation_trial_ids": true,
+    "dataset_file_sha256": "2063f69753f9ab0dce9ee489214fc3eb641c451651a09cc4b2ee81f261df4b2b",
+    "split_file_sha256": "c3002a03460f7685f71bcddf2be58c78e8ec35a410abe4a5eb3c2b9f11375438",
+    "prediction_sha256": {
+      "driven": "39c546cba6944580d4c2700c0115a5d40e7b8782813483f743a66b2b6fc23f54",
+      "zero_current": "2b9e02b7889fdf8c56b7bed21a8934e6a6b870241af3a57bcc2cff3712ce8507",
+      "stimulus_difference": "b79978dc63cd1c59a5120a5eb4aa1130effe59215d959800e34a46bfdcbcad88"
+    },
+    "scope": "Independent saved-output decomposition, weighted mean squares and trace scores. No independent ODE replay or pair-label/AUROC audit in this script."
+  }
+}

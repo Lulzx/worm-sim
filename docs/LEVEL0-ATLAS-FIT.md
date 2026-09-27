@@ -175,3 +175,45 @@ WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release --example 
 target/release/examples/diagnose_atlas_drift data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json runs/randi-pairs.json runs/level0-atlas-first-fit/selected.json runs/level0-atlas-selected-drift
 target/release/examples/diagnose_atlas_drift data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json runs/randi-pairs.json runs/level0-atlas-first-fit/epoch-0.json runs/level0-atlas-initial-drift
 ```
+
+### Drift diagnosis result and next fitting requirement
+
+The [initialization diagnostic](level0-atlas-initial-drift.json) and
+[selected-checkpoint diagnostic](level0-atlas-selected-drift.json) use only the
+158 validation trials. Independent saved-output audits reproduce the decomposition,
+mean squares and trace scores, and verify that the zero-current trajectory for
+each neuron is identical across all stimulated identities. Neither audit is an
+independent ODE replay. Diagnostic source: `5d9bb4d`.
+
+| Validation quantity | Initialization | Selected epoch 1 |
+|---|---:|---:|
+| Initial unforced state-derivative L2 | 4.82e−15 | 0.52192 |
+| Zero-current mean square | 0 | 2.7360e−4 |
+| Stimulus-difference mean square | 5.4756e−6 | 5.5202e−6 |
+| Driven pair AUROC | 0.75485 | 0.54697 |
+| Stimulus-difference pair AUROC | 0.75485 | 0.75604 |
+| Driven MSE | 0.0423288 | 0.0419268 |
+| Stimulus-difference MSE | 0.0423288 | 0.0423281 |
+
+In the fitted checkpoint, zero-current mean square is about 49.6 times the
+stimulus-specific mean square. This is an energy comparison, not a variance
+fraction: the components have a nonzero cross term. The optimizer changed the
+dynamics but retained the old fixed state; that state was near equilibrium at
+initialization and is no longer near equilibrium after fitting. Validation MSE
+improves through the resulting stimulus-independent transient while pair ranking
+degrades. This supplies a concrete mechanism to investigate, rather than evidence
+that more epochs or acceleration are needed.
+
+The next fitting requirement is a parameter-consistent pre-stimulation state,
+with derivatives through its preparation. A finite unforced preparation period
+must be accompanied by stationarity and preparation-duration checks; merely
+resetting calcium or subtracting a detached baseline would give incorrect or
+incomplete parameter gradients. The diagnostic difference is not substituted into
+existing test results. A training-only classification objective remains a separate
+specification requirement; the MSE/ranking tradeoff above is not resolved by
+selecting a metric after viewing test outcomes.
+
+```sh
+python3 scripts/audit_atlas_drift.py --diagnostic runs/level0-atlas-selected-drift --output runs/level0-atlas-selected-drift-audit.json
+python3 scripts/audit_atlas_drift.py --diagnostic runs/level0-atlas-initial-drift --output runs/level0-atlas-initial-drift-audit.json
+```
