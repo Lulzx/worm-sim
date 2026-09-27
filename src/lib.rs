@@ -29,3 +29,5 @@ pub mod parameters;
 pub mod state_filter;
 
 pub mod molecular;
+
+pub mod protocol;

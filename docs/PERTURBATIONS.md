@@ -1,10 +1,10 @@
 # Perturbation protocols
 
-The Rust solver accepts `solve::Config` serialized as JSON. Run the waveform
+The Rust solver accepts `solve::Config` serialized as JSON or YAML. Run the waveform
 example with:
 
 ```sh
-cargo run --release -- simulate data/c302-herm.wsc examples/aval-waveform.json runs/aval-waveform.wst
+cargo run --release -- simulate data/c302-herm.wsc examples/aval-waveform.yaml runs/aval-waveform.wst
 ```
 
 `current_waveform` specifies one canonical neuron, absolute `times` in seconds,
@@ -33,6 +33,18 @@ controls or event times is not implemented. Gradients through neural parameters
 and initial state remain available through the generic scalar solver.
 
 This implements configurable current waveforms in specification §9. Conductance
-waveforms, voltage clamps, gene/drug mappings, YAML and the published phenotype
+waveforms, voltage clamps, gene/drug mappings and the published phenotype
 registry remain separate requirements. It does not establish optogenetic pulse
 calibration or any biological phenotype match.
+
+
+YAML files use `.yaml` or `.yml` (case-insensitive). Other filenames retain JSON
+parsing. `protocol::parse` accepts an explicit format for in-memory callers.
+Both formats use the strict Serde schema and the same simulation validation;
+there is no retry in another format after a parse error. YAML supports comments
+and block mappings through the standard [serde_yaml_ng parser](https://docs.rs/serde_yaml_ng/0.10.0/serde_yaml_ng/).
+Unknown fields, duplicate configuration keys and multiple documents are rejected.
+Neurons and event intervals are checked against the graph before integration.
+The existing JSON examples remain supported. Tests verify YAML/JSON trajectory
+identity; output metadata retains the normalized configuration, independently of
+its source format. New perturbation operations are still required to complete §9.

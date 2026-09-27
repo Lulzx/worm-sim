@@ -37,7 +37,7 @@ It demonstrates plumbing, not biological validation or parameter identifiability
   signs; symmetric gap junctions; learned calcium time constants and scales.
 - Euler and RK4 with exact event boundaries; stimulation/inhibition through
   signed current, piecewise-linear current waveforms, silencing, and ablation.
-  Declarative protocols are JSON; see [perturbations](docs/PERTURBATIONS.md).
+  Declarative protocols support JSON and YAML; see [perturbations](docs/PERTURBATIONS.md).
 - Softplus constraints and forward-mode AD for every implemented parameter;
   confidence-weighted fluorescence loss and a small-circuit Adam example.
 - Compact incoming sparse rows, u16 indices, shared presynaptic gates, contiguous
@@ -122,7 +122,7 @@ needs one rollout per selected parameter and is a reference/audit path, not the
 full-scale training implementation. Full-network Metal training, streaming observations,
 stiff/adaptive solvers, class/hierarchical tying, calibrated observation models,
 real recording ingestion and held-out benchmarks, peptides, mixed fidelity,
-YAML protocols, mutants/drugs/clamps, uncertainty, and body feedback remain.
+Mutants/drugs/clamps, uncertainty, and body feedback remain.
 Output accumulation is still in memory; incremental trajectory writers and
 on-the-fly loss accumulation are needed for long recordings.
 

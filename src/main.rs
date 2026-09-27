@@ -270,7 +270,7 @@ fn run() -> Result<()> {
         Some("unpack") if args.len()==4 => {write_json(&args[3],&load(&args[2])?.graph)?;}
         Some("simulate") if args.len()==5 => {
             let model=Model::new(load(&args[2])?)?;
-            let cfg:Config=serde_json::from_slice(&fs::read(&args[3]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let cfg=wormsim::protocol::read(&args[3])?;
             let params=model.defaults();let start=Instant::now();let result=simulate(&model,&params,&cfg)?;
             let mut output=serde_json::json!({"schema_version":1,"graph_hash":model.graph.hash,"neuron_order":model.graph.names,"config":cfg,"parameters_raw":params.raw,"seed":0,"stochastic":false,"package_version":env!("CARGO_PKG_VERSION"),"source_commit":option_env!("WORMSIM_COMMIT").unwrap_or("unversioned"),"elapsed_seconds":start.elapsed().as_secs_f64(),"times":result.times});
             if args[4].ends_with(".wst") {

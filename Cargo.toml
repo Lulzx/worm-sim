@@ -12,6 +12,7 @@ csv = "1"
 sha2 = "0.10"
 zstd = "0.13"
 hdf5 = { version = "=0.14.1", package = "hdf5-metno", optional = true }
+serde_yaml_ng = "0.10.0"
 
 [profile.release]
 lto = "thin"
