@@ -310,20 +310,20 @@ impl FitConfig {
         Ok(())
     }
 }
-struct Adam {
+pub(crate) struct Adam {
     m: Vec<f64>,
     v: Vec<f64>,
     step: usize,
 }
 impl Adam {
-    fn new(n: usize) -> Self {
+    pub(crate) fn new(n: usize) -> Self {
         Self {
             m: vec![0.0; n],
             v: vec![0.0; n],
             step: 0,
         }
     }
-    fn update(&mut self, values: &mut [f64], gradient: &[f64], lr: f64) -> Result<()> {
+    pub(crate) fn update(&mut self, values: &mut [f64], gradient: &[f64], lr: f64) -> Result<()> {
         let norm = gradient.iter().map(|g| g * g).sum::<f64>().sqrt();
         if !norm.is_finite() {
             return Err("nonfinite population gradient norm".into());

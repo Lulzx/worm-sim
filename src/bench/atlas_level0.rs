@@ -1,0 +1,371 @@
+//! Deterministic Level 0 atlas response fitting with a shared positive input kernel.
+use super::{
+    Axis, Dataset, Partition, PredictedTrial, Predictions, Split, atlas_training, population::Adam,
+};
+use crate::{
+    Result,
+    data::IndexedGraph,
+    initial_state::{self, Readout},
+    math::{Scalar, inverse_softplus},
+    model::Model,
+    parameters::{Sharing, TiedParameters, forecast_defaults},
+};
+use serde::{Deserialize, Serialize};
+use std::collections::BTreeMap;
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct FitConfig {
+    pub epochs: usize,
+    pub dt: f64,
+    pub learning_rate: f64,
+    pub kernel_lags: usize,
+    pub prior_strength: f64,
+    pub sign_prior_strength: f64,
+    pub kernel_prior_strength: f64,
+    pub sharing: Sharing,
+}
+impl FitConfig {
+    fn validate(&self) -> Result<()> {
+        if self.epochs == 0
+            || self.epochs > 1000
+            || self.kernel_lags == 0
+            || self.kernel_lags > 512
+            || !self.dt.is_finite()
+            || self.dt <= 0.
+            || self.dt > 0.1
+            || !self.learning_rate.is_finite()
+            || self.learning_rate <= 0.
+            || [
+                self.prior_strength,
+                self.sign_prior_strength,
+                self.kernel_prior_strength,
+            ]
+            .iter()
+            .any(|v| !v.is_finite() || *v < 0.)
+        {
+            return Err("invalid Level 0 atlas fit configuration".into());
+        }
+        Ok(())
+    }
+}
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct AtlasModel {
+    pub schema_version: u32,
+    pub dataset_hash: String,
+    pub split_hash: String,
+    pub graph_hash: String,
+    pub source_commit: String,
+    pub config: FitConfig,
+    pub epoch: usize,
+    pub sample_dt: f64,
+    pub parameters: TiedParameters,
+    /// Shared across targets; fixed at declared initialization during this first fit.
+    pub initial: Vec<f64>,
+    /// Softplus coordinates; effective current is nonnegative and shared across targets.
+    pub kernel_raw: Vec<f64>,
+    pub kernel_prior: Vec<f64>,
+    pub training_trials: Vec<String>,
+    pub selection_trials: Vec<String>,
+}
+#[derive(Debug, Serialize)]
+pub struct EpochReport {
+    pub epoch: usize,
+    pub preceding_training_mse: Option<f64>,
+    pub preceding_penalty: Option<f64>,
+    pub validation_mse: f64,
+    pub validation_correlation: Option<f64>,
+    pub defined_trace_correlations: usize,
+    pub elapsed_seconds: f64,
+}
+impl AtlasModel {
+    pub fn free_parameters(&self) -> usize {
+        self.parameters.free_parameters() + self.kernel_raw.len()
+    }
+    fn currents(&self, target: usize, frames: usize, n: usize) -> Result<Vec<Vec<f64>>> {
+        if target >= n || frames < 2 {
+            return Err("invalid response target/grid".into());
+        }
+        let mut rows = vec![vec![0.; n]; frames];
+        for (t, row) in rows.iter_mut().take(frames - 1).enumerate() {
+            if t < self.kernel_raw.len() {
+                row[target] = self.kernel_raw[t].softplus();
+            }
+        }
+        Ok(rows)
+    }
+    fn validate(&self, data: &Dataset, graph: &IndexedGraph, split: &Split) -> Result<Model> {
+        split.validate(data, graph)?;
+        self.config.validate()?;
+        let model = Model::new(graph.clone())?;
+        if split.axis != Axis::StimulatedNeuron
+            || self.schema_version != 1
+            || self.graph_hash != graph.hash
+            || self.dataset_hash != split.dataset_hash
+            || self.split_hash != split.content_hash()?
+            || self.source_commit.is_empty()
+            || self.training_trials != split.train
+            || self.selection_trials != split.validation
+            || self.kernel_raw.len() != self.config.kernel_lags
+            || self.kernel_prior.len() != self.kernel_raw.len()
+            || self.initial.len() != model.state_len()
+            || !self.sample_dt.is_finite()
+            || self.sample_dt <= 0.
+            || self
+                .initial
+                .iter()
+                .chain(&self.kernel_raw)
+                .chain(&self.kernel_prior)
+                .any(|v| !v.is_finite())
+        {
+            return Err("invalid atlas Level 0 lineage or dimensions".into());
+        }
+        model.prepare(&self.parameters.expand(&model)?)?;
+        Ok(model)
+    }
+    pub fn predict(
+        &self,
+        data: &Dataset,
+        graph: &IndexedGraph,
+        split: &Split,
+        partition: Partition,
+    ) -> Result<Predictions> {
+        self.predict_dt(data, graph, split, partition, self.config.dt)
+    }
+    pub fn predict_dt(
+        &self,
+        data: &Dataset,
+        graph: &IndexedGraph,
+        split: &Split,
+        partition: Partition,
+        dt: f64,
+    ) -> Result<Predictions> {
+        let model = self.validate(data, graph, split)?;
+        let params = self.parameters.expand(&model)?;
+        let readout = Readout::identity(model.n());
+        let indexed: BTreeMap<_, _> = data.trials.iter().map(|t| (&t.id, t)).collect();
+        let mut cache = BTreeMap::new();
+        let mut trials = vec![];
+        for id in split.ids(partition) {
+            let trial = indexed[id];
+            let times = &trial.recording.times;
+            check_grid(times, self.sample_dt)?;
+            if trial.forecast_origin.is_some() {
+                return Err("atlas responses cannot have forecast origins".into());
+            }
+            let target = graph.neuron(
+                trial
+                    .stimulated_neuron
+                    .as_deref()
+                    .ok_or("missing stimulus")?,
+            )?;
+            let frames = times.len();
+            if let std::collections::btree_map::Entry::Vacant(e) = cache.entry((target, frames)) {
+                let currents = self.currents(target, frames, model.n())?;
+                e.insert(initial_state::response_with_currents(
+                    &model,
+                    &params,
+                    &self.initial,
+                    times,
+                    &readout,
+                    dt,
+                    &currents,
+                )?);
+            }
+            let response = &cache[&(target, frames)];
+            let mut fluorescence = BTreeMap::new();
+            for trace in &trial.recording.traces {
+                let i = graph.neuron(&trace.neuron)?;
+                fluorescence.insert(
+                    trace.neuron.clone(),
+                    response.iter().map(|r| r[i]).collect::<Vec<_>>(),
+                );
+            }
+            let response_scores = trial
+                .response_labels
+                .keys()
+                .map(|name| {
+                    (
+                        name.clone(),
+                        fluorescence[name].iter().map(|v| v.abs()).sum::<f64>() * self.sample_dt,
+                    )
+                })
+                .collect();
+            trials.push(PredictedTrial {
+                id: id.clone(),
+                times: times.clone(),
+                fluorescence,
+                response_scores,
+            });
+        }
+        Ok(Predictions {
+            schema_version: 1,
+            dataset_hash: self.dataset_hash.clone(),
+            split_hash: self.split_hash.clone(),
+            model: "level0-atlas-shared-positive-current-fixed-initial-state".into(),
+            free_parameters: self.free_parameters(),
+            training_trials: self.training_trials.clone(),
+            selection_trials: self.selection_trials.clone(),
+            source_commit: self.source_commit.clone(),
+            seed: split.seed,
+            trials,
+        })
+    }
+}
+fn check_grid(times: &[f64], dt: f64) -> Result<()> {
+    if times.len() < 2
+        || times[0].abs() > 1e-10
+        || times.windows(2).any(|p| (p[1] - p[0] - dt).abs() > 1e-10)
+    {
+        return Err(
+            "atlas Level 0 requires a shared uniform response grid starting at zero".into(),
+        );
+    }
+    Ok(())
+}
+pub fn fit_select(
+    data: &Dataset,
+    graph: &IndexedGraph,
+    split: &Split,
+    config: FitConfig,
+    mut checkpoint: impl FnMut(&AtlasModel, &EpochReport) -> Result<()>,
+) -> Result<(AtlasModel, Vec<EpochReport>)> {
+    config.validate()?;
+    let groups = atlas_training::aggregate(data, graph, split)?;
+    if groups.is_empty() || split.validation.is_empty() {
+        return Err("atlas fit needs training and validation groups".into());
+    }
+    let times = &groups[0].recording.times;
+    let sample_dt = times[1] - times[0];
+    for g in &groups {
+        check_grid(&g.recording.times, sample_dt)?;
+    }
+    if config.kernel_lags
+        >= groups
+            .iter()
+            .map(|g| g.recording.times.len())
+            .max()
+            .unwrap()
+    {
+        return Err("unrepresented atlas input kernel lag".into());
+    }
+    let model = Model::new(graph.clone())?;
+    let raw = forecast_defaults(&model);
+    let initial = model.initial(&model.prepare(&raw)?);
+    let parameters = TiedParameters::new(&model, &raw, config.sharing.clone())?;
+    let kernel_raw: Vec<_> = (0..config.kernel_lags)
+        .map(|t| inverse_softplus(0.2 * (-(t as f64) * sample_dt / 2.).exp()))
+        .collect();
+    let mut current = AtlasModel {
+        schema_version: 1,
+        dataset_hash: split.dataset_hash.clone(),
+        split_hash: split.content_hash()?,
+        graph_hash: graph.hash.clone(),
+        source_commit: option_env!("WORMSIM_COMMIT")
+            .unwrap_or("unversioned")
+            .into(),
+        config: config.clone(),
+        epoch: 0,
+        sample_dt,
+        parameters,
+        initial,
+        kernel_prior: kernel_raw.clone(),
+        kernel_raw,
+        training_trials: split.train.clone(),
+        selection_trials: split.validation.clone(),
+    };
+    let pcount = current.parameters.groups.len();
+    let mut optimizer = Adam::new(pcount + config.kernel_lags);
+    let total_weight = groups.iter().map(|g| g.sample_weight).sum::<f64>();
+    let readout = Readout::identity(model.n());
+    let mut best = f64::INFINITY;
+    let mut selected = None;
+    let mut reports = vec![];
+    for epoch in 0..=config.epochs {
+        let start = std::time::Instant::now();
+        let mut training = None;
+        let mut penalty = None;
+        if epoch > 0 {
+            let raw = current.parameters.expand(&model)?;
+            let mut gradient = vec![0.; pcount + config.kernel_lags];
+            let mut mse = 0.;
+            for group in &groups {
+                let target = graph.neuron(&group.stimulated_neuron)?;
+                let currents = current.currents(target, group.recording.times.len(), model.n())?;
+                let g = initial_state::response_gradient_with_currents(
+                    &model,
+                    &raw,
+                    &group.recording,
+                    &readout,
+                    &current.initial,
+                    config.dt,
+                    &currents,
+                )?;
+                let w = group.sample_weight / total_weight;
+                mse += w * (g.value + group.irreducible_mse);
+                for (a, b) in gradient
+                    .iter_mut()
+                    .zip(current.parameters.reduce_gradient(&g.parameters)?)
+                {
+                    *a += w * b;
+                }
+                for t in 0..config.kernel_lags.min(g.currents.len() - 1) {
+                    gradient[pcount + t] +=
+                        w * g.currents[t][target] * current.kernel_raw[t].sigmoid();
+                }
+            }
+            let (mut loss, prior) = current.parameters.prior(
+                &model,
+                config.prior_strength,
+                config.sign_prior_strength,
+            )?;
+            for (a, b) in gradient.iter_mut().zip(prior) {
+                *a += b;
+            }
+            for t in 0..config.kernel_lags {
+                let delta = current.kernel_raw[t] - current.kernel_prior[t];
+                let scale = config.kernel_prior_strength / config.kernel_lags as f64;
+                loss += scale * delta * delta;
+                gradient[pcount + t] += 2. * scale * delta;
+            }
+            let mut values: Vec<_> = current
+                .parameters
+                .groups
+                .iter()
+                .map(|g| g.value)
+                .chain(current.kernel_raw.iter().copied())
+                .collect();
+            optimizer.update(&mut values, &gradient, config.learning_rate)?;
+            for (i, g) in current.parameters.groups.iter_mut().enumerate() {
+                if g.trainable {
+                    g.value = values[i];
+                }
+            }
+            current.kernel_raw.copy_from_slice(&values[pcount..]);
+            training = Some(mse);
+            penalty = Some(loss);
+        }
+        current.epoch = epoch;
+        let pred = current.predict(data, graph, split, Partition::Validation)?;
+        let score = super::evaluate(data, graph, split, &pred, Partition::Validation)?;
+        let mse = score
+            .pooled_trace_scores
+            .mse
+            .ok_or("no validation observations")?;
+        let report = EpochReport {
+            epoch,
+            preceding_training_mse: training,
+            preceding_penalty: penalty,
+            validation_mse: mse,
+            validation_correlation: score.macro_trace_correlation,
+            defined_trace_correlations: score.defined_trace_correlations,
+            elapsed_seconds: start.elapsed().as_secs_f64(),
+        };
+        checkpoint(&current, &report)?;
+        if mse < best {
+            best = mse;
+            selected = Some(current.clone());
+        }
+        reports.push(report);
+    }
+    Ok((selected.ok_or("no finite atlas checkpoint")?, reports))
+}

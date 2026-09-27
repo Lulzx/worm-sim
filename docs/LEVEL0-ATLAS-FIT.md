@@ -41,9 +41,8 @@ It is never an evaluation recording or an animal-level observation.
 
 Analytical tests verify original-versus-aggregated MSE and its derivative with
 unequal confidence and variable trial responses. Missing-data rejection and exact
-training membership are checked. Full nonlinear population fitting, learned
-shared stimulation currents, validation selection and comparison against the
-linear atlas baseline remain to be implemented and measured.
+training membership are checked. The population runner below uses these
+components; its measured comparison against the linear baseline remains pending.
 
 ## Native workload measurement
 
@@ -66,3 +65,43 @@ groups. On the local Apple M4 Pro, one full 302-neuron response gradient took
 0.11185 seconds. Halving dt from 0.01 to 0.005 s changed predictions by at most
 4.22e−5 on this initial model. This single target does not establish population
 throughput or numerical convergence after fitting.
+
+## First population fit protocol
+
+`bench::atlas_level0` now fits tied raw neuron/synapse parameters and a shared
+nonnegative current kernel (softplus coordinates). All 302 cells use a shared
+fixed initial state generated once from the declared forecast defaults. This
+first protocol does not estimate trial-specific pre-stimulation states. The
+relative readout has fixed unit gains/zero offsets; the model's positive calcium
+scale remains among the tied learned parameters.
+
+Each full-batch update sums exact response adjoints over the training target
+aggregates, weighted by original observed sample weight. The retained within-group
+variance restores the original training MSE. Raw-parameter shrinkage, graph sign
+priors and kernel-coordinate shrinkage are added before Adam (global gradient norm
+cap 10, beta1 0.9, beta2 0.999, epsilon 1e−8). Unknown graph signs remain neutral
+0.5 priors; suffix L/R sharing is a declared assumption, not an annotation.
+
+`configs/level0-atlas-first-fit.json` fixes five updates at learning rate 0.01,
+Euler dt 0.01 s, 39 input lags, and each prior strength 0.01. The current starts
+at 0.2 exp(−t/2) on the 0.5 s grid; its final unused row is zero. It represents an
+uncalibrated effective drive, not a measured optical waveform. All targets,
+including held-out targets, receive the same learned kernel.
+
+Minimum validation pooled MSE selects among initialization and all five updates;
+ties retain the earlier checkpoint. No test fluorescence enters fitting or
+prediction. A test replaces all test outcomes and verifies identical tied
+parameters, shared kernel, initial state, validation selection and predictions.
+Every candidate is saved, and the selected model gets a validation-only half-step
+check. The shared initial-state restriction and possible mismatch between its
+calcium baseline and experimental baseline remain scientific limitations.
+
+```sh
+WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release --example fit_level0_atlas
+target/release/examples/fit_level0_atlas data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json configs/level0-atlas-first-fit.json runs/level0-atlas-first-fit
+```
+
+This implements the first nonlinear fit runner; measured population results and
+comparison against the linear atlas baseline remain pending. The test partition
+has already been inspected for the linear baseline, so subsequent results are
+exploratory comparisons on that fixed benchmark, not a fresh confirmatory cohort.
