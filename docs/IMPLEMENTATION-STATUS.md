@@ -1,8 +1,9 @@
 # Specification implementation and acceptance ledger
 
-The active objective is the complete [specification](../SPEC.md), with Rust
-replacing its proposed Python/JAX core at the user's request. Optional Taichi
-acceleration remains separately audited. A software feature, a synthetic numerical
+The active objective is the complete [specification](../SPEC.md), with a hybrid architecture following the user's revised direction: Rust owns
+data, splits and common scorers; new fitting implementation uses JAX/Diffrax/
+Equinox/Optax. The existing Rust core remains an independent numerical reference.
+Optional Taichi acceleration remains separately audited. A software feature, a synthetic numerical
 check, and a successful biological benchmark are distinct acceptance levels.
 This ledger does not declare scientific targets achieved merely because code exists.
 
@@ -26,6 +27,9 @@ This ledger does not declare scientific targets achieved merely because code exi
 The user has reprioritized implementation before further fitting experiments.
 Existing scientific results remain acceptance evidence; new fit sweeps and model
 selection diagnostics are deferred while missing software requirements are built.
+The subsequent hybrid-stack decision adds a first migration gate: reproduce the
+frozen Level 0 forward result through the Rust scorer, then reproduce the fitting
+loop before new model experiments. See [JAX backend](../backends/jax/README.md).
 
 1. Complete perturbation protocols: current waveforms (implemented), conductance
    inputs, clamps, YAML, gene/drug mappings and the phenotype registry.

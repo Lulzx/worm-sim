@@ -129,3 +129,10 @@ on-the-fly loss accumulation are needed for long recordings.
 See [performance and formats](docs/PERFORMANCE.md) for measurements, representation
 contracts, and the next optimization experiments. See [upstream review](docs/UPSTREAM-REVIEW.md)
 for reusable work and explicit evidence boundaries.
+
+## Hybrid fitting backend
+
+New fitting implementation uses JAX, Diffrax, Equinox and Optax while Rust keeps
+data, splits and independent scoring. The [JAX migration gate](backends/jax/README.md)
+implements frozen Level 0 replay and library-provided reverse AD; full training
+reproduction remains in progress.

@@ -1,0 +1,15 @@
+absl-py==2.5.0
+diffrax==0.7.2
+equinox==0.13.8
+jax==0.11.2
+jaxlib==0.11.2
+jaxtyping==0.3.11
+lineax==0.1.1
+ml-dtypes==0.6.0
+numpy==2.5.3
+opt-einsum==3.4.0
+optax==0.2.8
+optimistix==0.1.0
+scipy==1.18.1
+typing-extensions==4.16.0
+wadler-lindig==0.1.7
