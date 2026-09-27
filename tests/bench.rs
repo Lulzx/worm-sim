@@ -18,6 +18,7 @@ fn fixture() -> (IndexedGraph, Dataset) {
                 stimulated_neuron: Some(format!("N{i:03}")),
                 forecast_origin: Some(0.0),
                 recording: Recording {
+                    behavior: Default::default(),
                     dataset: "synthetic-benchmark-contract-test".into(),
                     animal_id: format!("animal-{i}"),
                     condition: "synthetic".into(),
@@ -283,4 +284,31 @@ fn cli_split_and_score_round_trip() {
         serde_json::from_slice(&std::fs::read(report_path).unwrap()).unwrap();
     assert_eq!(report.response_auroc.value, Some(1.0));
     std::fs::remove_dir_all(dir).unwrap();
+}
+
+#[test]
+fn persistence_reads_only_observed_history() {
+    let (graph, mut data) = fixture();
+    for trial in &mut data.trials {
+        trial.response_labels.clear();
+    }
+    let split = Split::generate(&data, &graph, Axis::Animal, 42, 1, 2).unwrap();
+    let predictions = bench::persistence(&data, &graph, &split, Partition::Test).unwrap();
+    assert_eq!(predictions.free_parameters, 0);
+    assert!(predictions.training_trials.is_empty());
+    let report = bench::evaluate(&data, &graph, &split, &predictions, Partition::Test).unwrap();
+    assert_eq!(report.forecast_horizons[0].pooled.mse, Some(1.0));
+    assert_eq!(report.forecast_horizons[2].pooled.mse, Some(9.0));
+    // Change all future outcomes, rebuild only the content binding, and prove
+    // that predictions themselves are unchanged.
+    for trial in &mut data.trials {
+        for trace in &mut trial.recording.traces {
+            trace.values[1..].fill(Some(-999.0));
+        }
+    }
+    let updated = Split::generate(&data, &graph, Axis::Animal, 42, 1, 2).unwrap();
+    let other = bench::persistence(&data, &graph, &updated, Partition::Test).unwrap();
+    for (a, b) in predictions.trials.iter().zip(other.trials) {
+        assert_eq!(a.fluorescence, b.fluorescence);
+    }
 }

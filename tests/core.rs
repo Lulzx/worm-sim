@@ -116,6 +116,7 @@ fn ablation_removes_outgoing_and_incoming_coupling() {
 fn target(m: &Model, cfg: &Config) -> Recording {
     let out = simulate(m, &m.defaults(), cfg).unwrap();
     Recording {
+        behavior: Default::default(),
         dataset: "synthetic".into(),
         animal_id: "a".into(),
         condition: "test".into(),

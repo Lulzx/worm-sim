@@ -11,7 +11,11 @@ serde_json = { version = "1", features = ["float_roundtrip"] }
 csv = "1"
 sha2 = "0.10"
 zstd = "0.13"
+hdf5 = { version = "=0.14.1", package = "hdf5-metno", optional = true }
 
 [profile.release]
 lto = "thin"
 codegen-units = 1
+
+[features]
+hdf5 = ["dep:hdf5"]

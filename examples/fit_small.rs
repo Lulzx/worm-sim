@@ -20,6 +20,7 @@ fn main() -> Result<()> {
     let truth = model.defaults();
     let target = simulate(&model, &truth, &config)?;
     let recording = Recording {
+        behavior: Default::default(),
         dataset: "synthetic".into(),
         animal_id: "teacher".into(),
         condition: "pulse".into(),

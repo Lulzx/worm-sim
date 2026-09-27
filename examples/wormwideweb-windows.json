@@ -1,0 +1,8 @@
+{
+  "sample_dt": 0.5,
+  "history_seconds": 10.0,
+  "forecast_seconds": 30.0,
+  "stride_seconds": 40.0,
+  "maximum_source_gap": 1.0,
+  "minimum_label_rating": 3.0
+}

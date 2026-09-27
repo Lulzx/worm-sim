@@ -1,0 +1,271 @@
+{
+  "schema_version": 1,
+  "source_paper": "https://doi.org/10.1016/j.cell.2023.07.035",
+  "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+  "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+  "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+  "config": {
+    "sample_dt": 0.5,
+    "history_seconds": 10.0,
+    "forecast_seconds": 30.0,
+    "stride_seconds": 40.0,
+    "maximum_source_gap": 1.0,
+    "minimum_label_rating": 3.0
+  },
+  "animals": [
+    {
+      "animal": "2022-06-14-01",
+      "source_sha256": "aabca135ef82e4be6821bf515cd2e936ae2f78014bf2979ed8a10aeaa7c4ac11",
+      "source_frames": 1600,
+      "source_neurons": 109,
+      "accepted_neurons": 77,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2022-06-14-07",
+      "source_sha256": "e509f47041d9faf86057832ffe5ab623ffaf2611419b90322bf8d634cfc6c2ec",
+      "source_frames": 1600,
+      "source_neurons": 130,
+      "accepted_neurons": 87,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2022-06-14-13",
+      "source_sha256": "a87a19529ef8d647d4801abef3d0716d90a9f8294067db63c4a8894893fa7252",
+      "source_frames": 1600,
+      "source_neurons": 134,
+      "accepted_neurons": 93,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2022-06-28-01",
+      "source_sha256": "df97fa9d2576f340d874d4ae40d76ed345d1a96cd7e9300a5c844f1584496842",
+      "source_frames": 1600,
+      "source_neurons": 142,
+      "accepted_neurons": 74,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2022-06-28-07",
+      "source_sha256": "74bad5e04bbd72c59eb45975c07bb02a066b33db172ad3478a46a85913d31ab4",
+      "source_frames": 1600,
+      "source_neurons": 142,
+      "accepted_neurons": 82,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2022-07-15-06",
+      "source_sha256": "fd98a50596e86b06c4c86e56ee9569e74d1bcc4311ee9eec5be9acc9bf85f448",
+      "source_frames": 1600,
+      "source_neurons": 128,
+      "accepted_neurons": 68,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2022-07-15-12",
+      "source_sha256": "a151870788b0f1b5e2833594f882f013d5393726415a18a3cd3206a52163038f",
+      "source_frames": 1600,
+      "source_neurons": 132,
+      "accepted_neurons": 90,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2022-07-20-01",
+      "source_sha256": "9bc1e197491e1e267f2a76dc21670598d7a257ece91fb8214dfdef9c1aa27ca6",
+      "source_frames": 1600,
+      "source_neurons": 144,
+      "accepted_neurons": 94,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2022-07-26-01",
+      "source_sha256": "84ef44b1b5bb6d5a74ba694b0133838ae379f54cbe86fc693264881e61c1347c",
+      "source_frames": 1600,
+      "source_neurons": 133,
+      "accepted_neurons": 67,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2022-08-02-01",
+      "source_sha256": "fdc30fb834fbbc9fc12bac4c36bd122597bcef398b94189cf2a818d363d7ee6a",
+      "source_frames": 1600,
+      "source_neurons": 152,
+      "accepted_neurons": 110,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2023-01-09-28",
+      "source_sha256": "811ab2a3fc3bd792967ad677c7ac6b8f92c0e29c31f021cfa84db34cae96e2a5",
+      "source_frames": 1615,
+      "source_neurons": 145,
+      "accepted_neurons": 90,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2023-01-17-01",
+      "source_sha256": "edb3df7ee253d58501f6645e9cf50a80ee37ad68aa33478b60514a13a2cc3d51",
+      "source_frames": 1615,
+      "source_neurons": 138,
+      "accepted_neurons": 89,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2023-01-19-01",
+      "source_sha256": "fc3207951da52fa6186b83259b0c6cccffb1803513eeb5ee6efa7b2212ab7f12",
+      "source_frames": 1600,
+      "source_neurons": 124,
+      "accepted_neurons": 71,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2023-01-19-08",
+      "source_sha256": "80b0922aca67c77b48d3d05116efff308060f877b31c1471fab8120fb2c03d17",
+      "source_frames": 1600,
+      "source_neurons": 147,
+      "accepted_neurons": 85,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2023-01-19-15",
+      "source_sha256": "8b55cdaea4e02b1287ab194a0e790ddb48c1ca6be8cf0342e128f7d0aa7dbdae",
+      "source_frames": 1600,
+      "source_neurons": 144,
+      "accepted_neurons": 59,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2023-01-19-22",
+      "source_sha256": "727ed035454485d9728fa4f946259454c979534543188358caf63de55b5a84bc",
+      "source_frames": 1600,
+      "source_neurons": 153,
+      "accepted_neurons": 92,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2023-01-23-01",
+      "source_sha256": "6a415a6a18123cc160d2841c4aada05cc9afd0fea5c86138ae68764367ac9861",
+      "source_frames": 1600,
+      "source_neurons": 151,
+      "accepted_neurons": 86,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2023-01-23-08",
+      "source_sha256": "ad514f3e768f908c41ea416f68f73c585e81db63dd2b4b324b440949d368edd9",
+      "source_frames": 1600,
+      "source_neurons": 143,
+      "accepted_neurons": 85,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2023-01-23-15",
+      "source_sha256": "090a6cd463c64074100d099bd2d098e852a389b656f9ad46120689db0d16d3ef",
+      "source_frames": 1600,
+      "source_neurons": 147,
+      "accepted_neurons": 95,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2023-01-23-21",
+      "source_sha256": "e124994f82c6ffd05671f53762bce165f04238dcab46c976ed28a857ee7a47b4",
+      "source_frames": 1600,
+      "source_neurons": 126,
+      "accepted_neurons": 94,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    },
+    {
+      "animal": "2023-03-07-01",
+      "source_sha256": "e4e9786717c0963e919f67b1c02f91cf435c249cff6af217c25192346a1fbf54",
+      "source_frames": 1600,
+      "source_neurons": 153,
+      "accepted_neurons": 80,
+      "windows": 24,
+      "windows_skipped_for_gaps_or_no_labels": 0
+    }
+  ],
+  "label_decisions": {
+    "accepted": 1768,
+    "not an exact canonical neuron": 93
+  },
+  "labels_sha256": "829870212eb2795c52166340606fce61c565e867a4c90b13cea2d5be1824b08b",
+  "import_report_sha256": "7a85619e6f521f4c1c59fc6b3d25602f4cb3e1453e44961cc36658175ac3f729",
+  "preprocessing": "Published gcamp/trace_array unchanged in scale; forecast origin aligned to a real source frame; linear interpolation to a fixed relative grid using no post-origin sample for observed history; no extrapolation, interpolation across gaps, z-scoring, smoothing or fitting; exact canonical labels only; unknown/ambiguous/duplicate labels excluded and logged.",
+  "confidence_mapping": "Upstream ordinal confidence / 5 used as an explicit heuristic weight, not a calibrated identity probability.",
+  "control": {
+    "model": "last-observation persistence; no fitted parameters",
+    "free_parameters": 0,
+    "trials": 72,
+    "seed": 0,
+    "missing_samples": 0,
+    "zero_confidence_traces": 0,
+    "prediction_source_commit": "unversioned",
+    "scorer_source_commit": "unversioned"
+  },
+  "forecast_horizons": [
+    {
+      "seconds": 1.0,
+      "pooled": {
+        "samples": 5544,
+        "weight": 4353.600000000067,
+        "mse": 0.2815400634775459,
+        "correlation": 0.8687116752900924,
+        "r2": 0.706499179999249
+      },
+      "macro_neuron_r2": 0.7064140298411056,
+      "defined_neuron_r2": 126,
+      "unavailable_grid_or_missing_samples": 0
+    },
+    {
+      "seconds": 10.0,
+      "pooled": {
+        "samples": 5544,
+        "weight": 4353.600000000067,
+        "mse": 1.1838036129343137,
+        "correlation": 0.41454252469837005,
+        "r2": -0.35387538228649085
+      },
+      "macro_neuron_r2": -0.4660244619731428,
+      "defined_neuron_r2": 126,
+      "unavailable_grid_or_missing_samples": 0
+    },
+    {
+      "seconds": 30.0,
+      "pooled": {
+        "samples": 5544,
+        "weight": 4353.600000000067,
+        "mse": 1.581338941094895,
+        "correlation": 0.2531112632081397,
+        "r2": -0.6170182133589992
+      },
+      "macro_neuron_r2": -0.6506216115014981,
+      "defined_neuron_r2": 126,
+      "unavailable_grid_or_missing_samples": 0
+    }
+  ],
+  "limitations": [
+    "Persistence is a pipeline control, not the specification LDS or GRU baseline.",
+    "No nonlinear model has been fitted or tested.",
+    "Original source preprocessing must be audited before claiming causal forecasting acceptance.",
+    "Neuron-ID confidence is an ordinal heuristic, not a calibrated probability."
+  ]
+}

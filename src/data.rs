@@ -221,6 +221,8 @@ pub struct Recording {
     pub condition: String,
     pub times: Vec<f64>,
     pub traces: Vec<Trace>,
+    #[serde(default)]
+    pub behavior: BTreeMap<String, Vec<Option<f64>>>,
 }
 impl Recording {
     pub fn validate(&self, graph: &IndexedGraph) -> Result<()> {
@@ -231,6 +233,13 @@ impl Recording {
             || self.times.windows(2).any(|t| t[1] <= t[0])
         {
             return Err("invalid recording metadata or times".into());
+        }
+        if self.behavior.iter().any(|(name, values)| {
+            name.is_empty()
+                || values.len() != self.times.len()
+                || values.iter().flatten().any(|value| !value.is_finite())
+        }) {
+            return Err("invalid behavior channel name, length or sample".into());
         }
         let mut seen = BTreeSet::new();
         for trace in &self.traces {

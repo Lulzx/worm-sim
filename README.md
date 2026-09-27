@@ -53,6 +53,9 @@ It demonstrates plumbing, not biological validation or parameter identifiability
 - [Checkpointed reverse differentiation](docs/CHECKPOINTING.md), audited over
   1,024 steps on CPU/Metal; trades recomputation for smaller state storage.
 
+- Native [WormWideWeb HDF5 import](docs/WORMWIDEWEB.md): 21 labeled baseline
+  animals, fixed animal splits, behavior channels, and a persistence control.
+
 ## Scientific and numerical conventions
 
 Time is seconds. Voltages and currents are normalized consistent units, **not**

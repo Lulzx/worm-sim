@@ -121,6 +121,23 @@ fn benchmark(path: Option<&str>) -> Result<()> {
 fn run() -> Result<()> {
     let args: Vec<_> = std::env::args().collect();
     match args.get(1).map(String::as_str) {
+        #[cfg(feature="hdf5")]
+        Some("import-wormwideweb") if args.len()==8 => {
+            let graph=load(&args[2])?;
+            let config:wormsim::recordings::WindowConfig=serde_json::from_slice(&fs::read(&args[6]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let (data,report)=wormsim::recordings::wormwideweb::import(std::path::Path::new(&args[3]),std::path::Path::new(&args[4]),std::path::Path::new(&args[5]),&graph,&config)?;
+            write_json(&args[7],&data)?;
+            write_json(&format!("{}.import.json",args[7]),&report)?;
+            println!("imported {} windows from {} animals; data {}",data.trials.len(),report.animals.len(),report.dataset_hash);
+        }
+        Some("bench-persist") if args.len()==7 => {
+            let graph=load(&args[2])?;
+            let data:wormsim::bench::Dataset=serde_json::from_slice(&fs::read(&args[3]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let split:wormsim::bench::Split=serde_json::from_slice(&fs::read(&args[4]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let partition=match args[5].as_str() {"train"=>wormsim::bench::Partition::Train,"validation"=>wormsim::bench::Partition::Validation,"test"=>wormsim::bench::Partition::Test,_=>return Err("partition must be train, validation or test".into())};
+            let predictions=wormsim::bench::persistence(&data,&graph,&split,partition)?;
+            write_json(&args[6],&predictions)?;
+        }
         Some("bench-split") if args.len()==9 => {
             let graph=load(&args[2])?;
             let data:wormsim::bench::Dataset=serde_json::from_slice(&fs::read(&args[3]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
@@ -185,7 +202,7 @@ fn run() -> Result<()> {
             println!("saved {} samples to {}",result.times.len(),args[4]);
         }
         Some("bench") if args.len()<=3 => {benchmark(args.get(2).map(String::as_str))?;}
-        _ => return Err("usage: wormsim bench-split GRAPH DATA.json neuron|animal SEED VALIDATION_GROUPS TEST_GROUPS SPLIT.json | bench-score GRAPH DATA.json SPLIT.json PREDICTIONS.json train|validation|test REPORT.json | baseline-pack BUNDLE.json BUNDLE.wsb | baseline-eval BUNDLE.wsb REPORT.json | import-c302 CSV IDS.json VERSION OUTPUT.wsc --strict|--mean-mirrors | pack GRAPH.json GRAPH.wsc | unpack GRAPH.wsc GRAPH.json | simulate GRAPH CONFIG.json OUTPUT.json|OUTPUT.wst | bench [GRAPH]".into()),
+        _ => return Err("usage: wormsim bench-persist GRAPH DATA.json SPLIT.json PARTITION PREDICTIONS.json | import-wormwideweb GRAPH H5_DIR LABELS.json RECEIPT.json CONFIG.json OUTPUT.json (hdf5 feature) | bench-split GRAPH DATA.json neuron|animal SEED VALIDATION_GROUPS TEST_GROUPS SPLIT.json | bench-score GRAPH DATA.json SPLIT.json PREDICTIONS.json train|validation|test REPORT.json | baseline-pack BUNDLE.json BUNDLE.wsb | baseline-eval BUNDLE.wsb REPORT.json | import-c302 CSV IDS.json VERSION OUTPUT.wsc --strict|--mean-mirrors | pack GRAPH.json GRAPH.wsc | unpack GRAPH.wsc GRAPH.json | simulate GRAPH CONFIG.json OUTPUT.json|OUTPUT.wst | bench [GRAPH]".into()),
     }
     Ok(())
 }

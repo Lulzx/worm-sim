@@ -1,0 +1,159 @@
+{
+  "source_commit": "0422546192ef58d0de4740a0aa91fd38de22da2e",
+  "zenodo_record": "19388374",
+  "paper": "https://doi.org/10.1016/j.cell.2023.07.035",
+  "selection": "baseline and NeuroPAL labels; no neural-outcome-based selection",
+  "license_metadata": "No license field in the inspected Zenodo metadata; raw data are not redistributed in this repository.",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/flavell-lab/WormWideWeb-data/0422546192ef58d0de4740a0aa91fd38de22da2e/activity/papers.json",
+      "git_blob_sha1": "3b181eff9d929f7e2689b38b2a8243ca557b5870",
+      "sha256": "d187cd0d88157c99e493558d510ec4a967704eccea162f5a088d6e8502d59b8a"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/flavell-lab/WormWideWeb-data/0422546192ef58d0de4740a0aa91fd38de22da2e/activity/raw/atanas_kim_2023.csv",
+      "git_blob_sha1": "39c8f0fcdd113080dd2f21014a0189940e9422d8",
+      "sha256": "2376e4d5a6a45e35393689ea573f64da0cd5d8e0423ab5a75c1649b0949ecbba"
+    },
+    {
+      "url": "https://zenodo.org/api/records/19388374/files/processed_h5.tar.bz2/content",
+      "bytes": 568776589,
+      "md5": "4689839382dd8855e3d6f64aadf89403",
+      "sha256": "c93e0cea3941b9e72bd7f09a36d7d26c8c5eca0e26fc2694dac739bbfa51c3c8"
+    },
+    {
+      "url": "https://zenodo.org/api/records/19388374/files/neuropal_label.json.bz2/content",
+      "bytes": 16169,
+      "md5": "1b8b0edf02badd6d8d028e2f6c30d24d",
+      "sha256": "b371e3dae9a0f78c6f6b9ba63c7076a55aa8fccecb650f579f53918d10402684"
+    }
+  ],
+  "animals": [
+    {
+      "file": "2022-06-14-01-data.h5",
+      "animal_id": "2022-06-14-01",
+      "sha256": "aabca135ef82e4be6821bf515cd2e936ae2f78014bf2979ed8a10aeaa7c4ac11",
+      "bytes": 7852520
+    },
+    {
+      "file": "2022-06-14-07-data.h5",
+      "animal_id": "2022-06-14-07",
+      "sha256": "e509f47041d9faf86057832ffe5ab623ffaf2611419b90322bf8d634cfc6c2ec",
+      "bytes": 8953728
+    },
+    {
+      "file": "2022-06-14-13-data.h5",
+      "animal_id": "2022-06-14-13",
+      "sha256": "a87a19529ef8d647d4801abef3d0716d90a9f8294067db63c4a8894893fa7252",
+      "bytes": 9414008
+    },
+    {
+      "file": "2022-06-28-01-data.h5",
+      "animal_id": "2022-06-28-01",
+      "sha256": "df97fa9d2576f340d874d4ae40d76ed345d1a96cd7e9300a5c844f1584496842",
+      "bytes": 9774320
+    },
+    {
+      "file": "2022-06-28-07-data.h5",
+      "animal_id": "2022-06-28-07",
+      "sha256": "74bad5e04bbd72c59eb45975c07bb02a066b33db172ad3478a46a85913d31ab4",
+      "bytes": 9386984
+    },
+    {
+      "file": "2022-07-15-06-data.h5",
+      "animal_id": "2022-07-15-06",
+      "sha256": "fd98a50596e86b06c4c86e56ee9569e74d1bcc4311ee9eec5be9acc9bf85f448",
+      "bytes": 8797048
+    },
+    {
+      "file": "2022-07-15-12-data.h5",
+      "animal_id": "2022-07-15-12",
+      "sha256": "a151870788b0f1b5e2833594f882f013d5393726415a18a3cd3206a52163038f",
+      "bytes": 9023408
+    },
+    {
+      "file": "2022-07-20-01-data.h5",
+      "animal_id": "2022-07-20-01",
+      "sha256": "9bc1e197491e1e267f2a76dc21670598d7a257ece91fb8214dfdef9c1aa27ca6",
+      "bytes": 9664016
+    },
+    {
+      "file": "2022-07-26-01-data.h5",
+      "animal_id": "2022-07-26-01",
+      "sha256": "84ef44b1b5bb6d5a74ba694b0133838ae379f54cbe86fc693264881e61c1347c",
+      "bytes": 9153768
+    },
+    {
+      "file": "2022-08-02-01-data.h5",
+      "animal_id": "2022-08-02-01",
+      "sha256": "fdc30fb834fbbc9fc12bac4c36bd122597bcef398b94189cf2a818d363d7ee6a",
+      "bytes": 9999088
+    },
+    {
+      "file": "2023-01-09-28-data.h5",
+      "animal_id": "2023-01-09-28",
+      "sha256": "811ab2a3fc3bd792967ad677c7ac6b8f92c0e29c31f021cfa84db34cae96e2a5",
+      "bytes": 9624840
+    },
+    {
+      "file": "2023-01-17-01-data.h5",
+      "animal_id": "2023-01-17-01",
+      "sha256": "edb3df7ee253d58501f6645e9cf50a80ee37ad68aa33478b60514a13a2cc3d51",
+      "bytes": 9263376
+    },
+    {
+      "file": "2023-01-19-01-data.h5",
+      "animal_id": "2023-01-19-01",
+      "sha256": "fc3207951da52fa6186b83259b0c6cccffb1803513eeb5ee6efa7b2212ab7f12",
+      "bytes": 8178312
+    },
+    {
+      "file": "2023-01-19-08-data.h5",
+      "animal_id": "2023-01-19-08",
+      "sha256": "80b0922aca67c77b48d3d05116efff308060f877b31c1471fab8120fb2c03d17",
+      "bytes": 9613624
+    },
+    {
+      "file": "2023-01-19-15-data.h5",
+      "animal_id": "2023-01-19-15",
+      "sha256": "8b55cdaea4e02b1287ab194a0e790ddb48c1ca6be8cf0342e128f7d0aa7dbdae",
+      "bytes": 9586600
+    },
+    {
+      "file": "2023-01-19-22-data.h5",
+      "animal_id": "2023-01-19-22",
+      "sha256": "727ed035454485d9728fa4f946259454c979534543188358caf63de55b5a84bc",
+      "bytes": 9739632
+    },
+    {
+      "file": "2023-01-23-01-data.h5",
+      "animal_id": "2023-01-23-01",
+      "sha256": "6a415a6a18123cc160d2841c4aada05cc9afd0fea5c86138ae68764367ac9861",
+      "bytes": 9792128
+    },
+    {
+      "file": "2023-01-23-08-data.h5",
+      "animal_id": "2023-01-23-08",
+      "sha256": "ad514f3e768f908c41ea416f68f73c585e81db63dd2b4b324b440949d368edd9",
+      "bytes": 10122088
+    },
+    {
+      "file": "2023-01-23-15-data.h5",
+      "animal_id": "2023-01-23-15",
+      "sha256": "090a6cd463c64074100d099bd2d098e852a389b656f9ad46120689db0d16d3ef",
+      "bytes": 9612136
+    },
+    {
+      "file": "2023-01-23-21-data.h5",
+      "animal_id": "2023-01-23-21",
+      "sha256": "e124994f82c6ffd05671f53762bce165f04238dcab46c976ed28a857ee7a47b4",
+      "bytes": 8562048
+    },
+    {
+      "file": "2023-03-07-01-data.h5",
+      "animal_id": "2023-03-07-01",
+      "sha256": "e4e9786717c0963e919f67b1c02f91cf435c249cff6af217c25192346a1fbf54",
+      "bytes": 9946640
+    }
+  ]
+}

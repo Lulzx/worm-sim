@@ -50,6 +50,7 @@ fn main() -> Result<()> {
     };
     let result = simulate(&model, &params, &cfg)?;
     let recording = Recording {
+        behavior: Default::default(),
         dataset: "synthetic-gradient-audit".into(),
         animal_id: "synthetic".into(),
         condition: "current injection".into(),

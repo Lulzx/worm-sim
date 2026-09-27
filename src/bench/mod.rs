@@ -106,13 +106,14 @@ impl Dataset {
                     &r.animal_id,
                     &r.condition,
                     &r.times,
+                    &r.behavior,
                     traces,
                     &trial.response_labels,
                 )
             })
             .collect();
         hash(&(
-            "wormsim-benchmark-data-v1",
+            "wormsim-benchmark-data-v2",
             self.schema_version,
             &self.name,
             &self.graph_hash,
@@ -536,5 +537,72 @@ pub fn evaluate(
         traces,
         response_auroc: metrics::auroc(&pairs)?,
         forecast_horizons,
+    })
+}
+
+/// Zero-parameter forecasting control: last observed value at/before origin.
+/// This reads no future target values and fits no parameters on any partition.
+pub fn persistence(
+    data: &Dataset,
+    graph: &IndexedGraph,
+    split: &Split,
+    partition: Partition,
+) -> Result<Predictions> {
+    split.validate(data, graph)?;
+    if split.axis != Axis::Animal {
+        return Err("persistence control requires an animal forecast split".into());
+    }
+    let mut trials = vec![];
+    for trial in data
+        .trials
+        .iter()
+        .filter(|trial| split.ids(partition).contains(&trial.id))
+    {
+        if !trial.response_labels.is_empty() {
+            return Err("persistence control does not predict response labels".into());
+        }
+        let origin = trial.forecast_origin.ok_or("missing forecast origin")?;
+        let mut fluorescence = BTreeMap::new();
+        for trace in &trial.recording.traces {
+            let value = trial
+                .recording
+                .times
+                .iter()
+                .zip(&trace.values)
+                .take_while(|(t, _)| **t <= origin)
+                .filter_map(|(_, v)| *v)
+                .last()
+                .ok_or_else(|| {
+                    format!(
+                        "{} / {}: no observed history for persistence",
+                        trial.id, trace.neuron
+                    )
+                })?;
+            fluorescence.insert(
+                trace.neuron.clone(),
+                vec![value; trial.recording.times.len()],
+            );
+        }
+        trials.push(PredictedTrial {
+            id: trial.id.clone(),
+            times: trial.recording.times.clone(),
+            fluorescence,
+            response_scores: BTreeMap::new(),
+        });
+    }
+    trials.sort_by(|a, b| a.id.cmp(&b.id));
+    Ok(Predictions {
+        schema_version: 1,
+        dataset_hash: split.dataset_hash.clone(),
+        split_hash: split.content_hash()?,
+        model: "last-observation persistence; no fitted parameters".into(),
+        free_parameters: 0,
+        training_trials: vec![],
+        selection_trials: vec![],
+        source_commit: option_env!("WORMSIM_COMMIT")
+            .unwrap_or("unversioned")
+            .into(),
+        seed: 0,
+        trials,
     })
 }

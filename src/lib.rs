@@ -19,3 +19,5 @@ pub mod trace_codec;
 pub mod baseline;
 
 pub mod bench;
+
+pub mod recordings;

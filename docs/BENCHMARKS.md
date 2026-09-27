@@ -32,7 +32,7 @@ compiled graph hash, and uniquely identified trials. Each trial contains:
 - `id`: a stable trial/window identifier.
 - `stimulated_neuron`: a canonical neuron ID for Task 1, otherwise null.
 - `forecast_origin`: an exact observed timestamp for Task 2, otherwise null.
-- `recording`: dataset, animal ID, condition, times and per-neuron traces using
+- `recording`: dataset, animal ID, condition, times, optional aligned behavior channels, and per-neuron traces using
   the existing `Recording` schema. Missing values are JSON null; each trace has
   dataset/version/ID-confidence provenance.
 - `response_labels`: canonical responding neuron → measured boolean label.
@@ -62,7 +62,8 @@ The manifest covers every trial exactly once. Validation rejects overlap at both
 trial and group level, unknown IDs, omitted trials, stale graph hashes and
 changed dataset content.
 
-Dataset identity uses a versioned canonical tuple of metadata, trials sorted by
+Dataset identity uses the `wormsim-benchmark-data-v2` canonical tuple (including
+aligned behavior channels; earlier development manifests must be regenerated) of metadata, trials sorted by
 ID, and traces sorted by canonical neuron name. Times and sample order retain
 meaning. Hashing sorts references and streams serialized bytes into SHA-256;
 it does not clone trace arrays or allocate another complete JSON serialization.
@@ -104,11 +105,12 @@ comparisons; the scorer does not verify a model's claimed parameter count.
 
 ## Remaining data/training work
 
-Source-specific importers still need to map stimuli, confidence, observed labels,
+The [WormWideWeb importer](WORMWIDEWEB.md) now supplies a fixed animal split and
+persistence control. Further source-specific importers still need to map stimuli, confidence, observed labels,
 recording units and preprocessing into this contract. The current Creamer export
 uses its upstream split and cannot substitute for a held-out-stimulated-neuron
 training/evaluation run. The prescribed LDS/GRU comparisons, nonlinear training,
-and fixed real-data split manifests remain outstanding.
+and a fixed atlas neuron-split manifest remain outstanding.
 
 Primary source discovery for the next import stage:
 [WormWideWeb datasets](https://wormwideweb.org/activity/dataset/),
