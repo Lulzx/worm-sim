@@ -67,6 +67,48 @@ The native export command validates the original split before emitting training
 statistics. The independent audit checks weighted bounds, MSE, and chemical
 coupling at the prepared state.
 
+## First run result
+
+The declared 300-update run completed in 505 seconds on CPU (including JAX
+compilation; concurrent tests ran during part of it, so this is not a controlled
+performance benchmark). [Receipt and training curve](level0-capacity-adal-adar-300.json)
+retain input hashes, subset IDs, source hashes, and independent NumPy checks.
+The implementation is `497f083`; the original manifest correctly records launch
+from its dirty parent. The separate source receipt identifies the exact committed
+backend files without rewriting that launch history.
+
+| Quantity | MSE |
+| --- | ---: |
+| Zero response | 0.05145506 |
+| Initialized model | 0.05092815 |
+| 100 updates | 0.04856137 |
+| 200 updates | 0.04548843 |
+| 300 updates | 0.04484869 |
+| Zero-start empirical mean bound | 0.04153675 |
+
+Captured zero-start mean-response energy rises from **5.31% to 66.61%**. The final
+iterate is also the best observed training iterate, but it **fails the declared
+90% capacity gate**. This is substantial training improvement, not convergence,
+a held-out comparison, or proof that the remaining gap is a capacity limit.
+The intervention combines longer optimization, shifted rest, random signs and
+per-neuron gains; this run does not isolate their individual contributions.
+
+Independent NumPy replay matches both endpoint MSEs to the displayed floating-point
+precision and confirms all 3,638 chemical coupling coefficients are nonzero.
+Final half-step MSE is 0.044848704, with maximum prediction change 0.000716.
+Doubling preparation to 120 seconds gives MSE 0.044845435, maximum prediction
+change 0.01309, and reduces the unforced derivative maximum from 8.30e-5 to
+4.55e-8. Aggregate improvement survives both checks, but 60 seconds is no longer
+an equilibrated initial state for every fitted parameter set. Before a larger
+fit, test longer preparation and require sensitivity checks on its checkpoints.
+
+Final unregularized observation gains span 0.513–215.924. They are diagnostic
+calibration parameters, not physiological estimates. Their growth and the
+remaining shape error warrant investigation before full-cohort fitting. No new
+validation or test response scores were produced. All 49 JAX tests passed,
+including gain gradients, subset rejection, checkpoint reload, and the existing
+Rust-scored integration tests.
+
 ## Decisions after this run
 
 If training error is still falling at 300 steps, test a declared 1,000-update

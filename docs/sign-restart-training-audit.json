@@ -1,0 +1,470 @@
+{
+  "scope": "Training-component audit only. Reports contain pre-update loss, so epoch-25 report measures epoch-24 parameters. No test predictions or test scores read. This is not the predefined validation cohort selection.",
+  "runs": [
+    {
+      "seed": 1,
+      "training_reports": [
+        {
+          "reported_after_update": 1,
+          "measured_at_epoch": 0,
+          "training_mse": 0.07491045429358795,
+          "report_sha256": "4497fce38bbc3137c1be829157e3b5e5836aca09d27bfdb7eb1c1b5ffe833e43"
+        },
+        {
+          "reported_after_update": 2,
+          "measured_at_epoch": 1,
+          "training_mse": 0.0749038813150105,
+          "report_sha256": "d95df8d1cb1774d30124ffd0a9d64f48b18e13151e68916204e857e236ced4eb"
+        },
+        {
+          "reported_after_update": 3,
+          "measured_at_epoch": 2,
+          "training_mse": 0.07489863597664341,
+          "report_sha256": "1c89b76f6d799881e7a8e0788bf59d5a25acdd44a838f215dbf7a63720dea753"
+        },
+        {
+          "reported_after_update": 4,
+          "measured_at_epoch": 3,
+          "training_mse": 0.07489448739656834,
+          "report_sha256": "0c3767e0a75713b7a08369a31953c9a74aad93a2364b45decc9b6a490da7e754"
+        },
+        {
+          "reported_after_update": 5,
+          "measured_at_epoch": 4,
+          "training_mse": 0.07489127200550973,
+          "report_sha256": "0e6dc199fe1a5e1b0abe601d9b33111db80e3e6d651ed302106ad4b7537898d1"
+        },
+        {
+          "reported_after_update": 6,
+          "measured_at_epoch": 5,
+          "training_mse": 0.07488879455759909,
+          "report_sha256": "5161e26368c6d78c54e0d0de50e35091f3559f2c8f4b74ba1a9b0666ba416273"
+        },
+        {
+          "reported_after_update": 7,
+          "measured_at_epoch": 6,
+          "training_mse": 0.07488685930844732,
+          "report_sha256": "3db0b25b84b83113ed54c34ff1479b5d5b576f5fcbfedb8261b47fb076d3b249"
+        },
+        {
+          "reported_after_update": 8,
+          "measured_at_epoch": 7,
+          "training_mse": 0.07488524751921097,
+          "report_sha256": "0793666f3c8130ed8420c16b5118f453465ddb8c134288c87caf40aec6e9a096"
+        },
+        {
+          "reported_after_update": 9,
+          "measured_at_epoch": 8,
+          "training_mse": 0.07488371376285796,
+          "report_sha256": "381761de81e970724a4ce51e55ac3bab28034549880a1b114f72a28b9dc78663"
+        },
+        {
+          "reported_after_update": 10,
+          "measured_at_epoch": 9,
+          "training_mse": 0.0748820421517352,
+          "report_sha256": "459cff79416412d561291888a7b74671522a132eca721d3982e0465910e7342a"
+        },
+        {
+          "reported_after_update": 11,
+          "measured_at_epoch": 10,
+          "training_mse": 0.07488008135180829,
+          "report_sha256": "e4bbbd6ebe56179d84c1836f429f1e0ed9bbaf7e4d322a4ae4c3e6e28beea3fc"
+        },
+        {
+          "reported_after_update": 12,
+          "measured_at_epoch": 11,
+          "training_mse": 0.07487774487626628,
+          "report_sha256": "460556795072c3bf68d5073ce4634bb25b40e0ff01b8689f4d0c5ee590c2dff6"
+        },
+        {
+          "reported_after_update": 13,
+          "measured_at_epoch": 12,
+          "training_mse": 0.07487500007642738,
+          "report_sha256": "46d7d9345c265c4abe0a772d634e36c90bd241cc0ecd4503b520835bd6c6834e"
+        },
+        {
+          "reported_after_update": 14,
+          "measured_at_epoch": 13,
+          "training_mse": 0.0748718445149473,
+          "report_sha256": "faa68327eb419c7d3fb000edbb145c6ab71fbe09cacbb0561174f3765c04dc3d"
+        },
+        {
+          "reported_after_update": 15,
+          "measured_at_epoch": 14,
+          "training_mse": 0.07486828217684088,
+          "report_sha256": "bd1c128adf8d84b73236e9ef7b7673cf230918fd5d14f8aadc2661573cca2d6d"
+        },
+        {
+          "reported_after_update": 16,
+          "measured_at_epoch": 15,
+          "training_mse": 0.07486432527141754,
+          "report_sha256": "8b8f7beb08e61e38ceffdde971aac237374a8f16bef74a977af17b8cec3a6bc6"
+        },
+        {
+          "reported_after_update": 17,
+          "measured_at_epoch": 16,
+          "training_mse": 0.07486000032310478,
+          "report_sha256": "0d370015797ec5f11aef99214a6035c904913b5b6758b8d0d50138b41a5a3ab0"
+        },
+        {
+          "reported_after_update": 18,
+          "measured_at_epoch": 17,
+          "training_mse": 0.07485535201318713,
+          "report_sha256": "543ae1096ac27139e38665c46a5e4f3b490d0cdcf76ff7d54b723b5429162482"
+        },
+        {
+          "reported_after_update": 19,
+          "measured_at_epoch": 18,
+          "training_mse": 0.07485044113616182,
+          "report_sha256": "77adabc7d702b7b6c20fa82dcec67e7fab5a3104a764f3ff9d5e5dd0434cbe05"
+        },
+        {
+          "reported_after_update": 20,
+          "measured_at_epoch": 19,
+          "training_mse": 0.07484533082441522,
+          "report_sha256": "a3e26b994f2707aafbfd549ef772dccef008c8a95693fc7bc0964af9112046c8"
+        },
+        {
+          "reported_after_update": 21,
+          "measured_at_epoch": 20,
+          "training_mse": 0.07484007513220431,
+          "report_sha256": "7efc7a777b3678262efc17f5140cc6613b59a71cdd302570b7445edfc92d795f"
+        },
+        {
+          "reported_after_update": 22,
+          "measured_at_epoch": 21,
+          "training_mse": 0.07483471491421771,
+          "report_sha256": "7d03c46db49cb63d4491cbd751d41c89b182ca5bdeb96f97138f993a2d35f66a"
+        },
+        {
+          "reported_after_update": 23,
+          "measured_at_epoch": 22,
+          "training_mse": 0.07482928518849051,
+          "report_sha256": "61868c95cc2b70931d4d225d037bbee6d535f3d584a82d2e7b69c51f6e2431fc"
+        },
+        {
+          "reported_after_update": 24,
+          "measured_at_epoch": 23,
+          "training_mse": 0.07482382879555945,
+          "report_sha256": "0e1f4344e4f8bc4727bbc9571e2ab4179c4e131ceff0429b9e11d29e9fbf758b"
+        },
+        {
+          "reported_after_update": 25,
+          "measured_at_epoch": 24,
+          "training_mse": 0.07481839786240498,
+          "report_sha256": "f2a2ce2cac51e4abb5e19d96b56d7636d29ba7a9dacdaa232358327b8d70659e"
+        }
+      ]
+    },
+    {
+      "seed": 2,
+      "training_reports": [
+        {
+          "reported_after_update": 1,
+          "measured_at_epoch": 0,
+          "training_mse": 0.07491041757814233,
+          "report_sha256": "4f58226efd180c541949a06b41be64430527e05b9242be1b5a5f841460c7b024"
+        },
+        {
+          "reported_after_update": 2,
+          "measured_at_epoch": 1,
+          "training_mse": 0.07490390059017149,
+          "report_sha256": "61237bb3e9f8f5c76c7aed01376389953db30890d0696af1d0bd6ac802a453ee"
+        },
+        {
+          "reported_after_update": 3,
+          "measured_at_epoch": 2,
+          "training_mse": 0.07489871853979119,
+          "report_sha256": "64c2a184ce369ecafe210d279872d8c01737b6795731df54ff86aab816fb40d7"
+        },
+        {
+          "reported_after_update": 4,
+          "measured_at_epoch": 3,
+          "training_mse": 0.07489475203685278,
+          "report_sha256": "aa1f1c9ec30ca529d32a5a761283219fb5585026e64bf9ea9e72eeb7932da8f4"
+        },
+        {
+          "reported_after_update": 5,
+          "measured_at_epoch": 4,
+          "training_mse": 0.07489177408379205,
+          "report_sha256": "130cd34ea6ebe80dd80c7c1c4b2bc528c80a1969d60213cb1268f2639e44c5c2"
+        },
+        {
+          "reported_after_update": 6,
+          "measured_at_epoch": 5,
+          "training_mse": 0.07488952955326211,
+          "report_sha256": "83a39d838ef2c3b13fa84aaf4507a97e56c8025e3743ad16056d10a0821d56c2"
+        },
+        {
+          "reported_after_update": 7,
+          "measured_at_epoch": 6,
+          "training_mse": 0.07488778102557338,
+          "report_sha256": "b812169ef8ad528e67be835af8d431ea2ecfa1b29ea8effe1c8bfd1ce5e8a8bb"
+        },
+        {
+          "reported_after_update": 8,
+          "measured_at_epoch": 7,
+          "training_mse": 0.07488630323133874,
+          "report_sha256": "1304559a01a47c84c8bda96379060a4d85ca0263c9d30d58c73198fbf1e6dce2"
+        },
+        {
+          "reported_after_update": 9,
+          "measured_at_epoch": 8,
+          "training_mse": 0.07488486405630157,
+          "report_sha256": "4be7ca0616f4a15cbaf988a968f27192926ba7dfd885472e7498ef7d85cd2f6c"
+        },
+        {
+          "reported_after_update": 10,
+          "measured_at_epoch": 9,
+          "training_mse": 0.07488326569020305,
+          "report_sha256": "f7fac79de3c3bfdb64e663f6344cccb7303031a28d1bebe13105bb11ee187fd0"
+        },
+        {
+          "reported_after_update": 11,
+          "measured_at_epoch": 10,
+          "training_mse": 0.07488136830972081,
+          "report_sha256": "1b6e12e3648db16fe3668101c9138c3bc42b891a82910cf82bac90207ae63926"
+        },
+        {
+          "reported_after_update": 12,
+          "measured_at_epoch": 11,
+          "training_mse": 0.0748790930272974,
+          "report_sha256": "4974d23d386997dce32984fc86855befe35a6f577875a3eb5b7162594a94618d"
+        },
+        {
+          "reported_after_update": 13,
+          "measured_at_epoch": 12,
+          "training_mse": 0.07487641305717764,
+          "report_sha256": "6303e027c30d408d33bed8b10c9f810aa67f9596e29a25aab2dd87f05e05e428"
+        },
+        {
+          "reported_after_update": 14,
+          "measured_at_epoch": 13,
+          "training_mse": 0.07487333198492484,
+          "report_sha256": "67c3e4098e5c64d7051f25af8f522e2e2c2a4ee453eb0edc761ed5c490e9f036"
+        },
+        {
+          "reported_after_update": 15,
+          "measured_at_epoch": 14,
+          "training_mse": 0.07486986072696922,
+          "report_sha256": "6febfa1c28be9b0faf233ac40307c5af6f84f5517505efc3ac3d2ee54c8380a9"
+        },
+        {
+          "reported_after_update": 16,
+          "measured_at_epoch": 15,
+          "training_mse": 0.07486601328370832,
+          "report_sha256": "e9c6bfafa16e28a29271463d340181a2a0c227eff4063461539bf8d440a3af42"
+        },
+        {
+          "reported_after_update": 17,
+          "measured_at_epoch": 16,
+          "training_mse": 0.07486180887897524,
+          "report_sha256": "7cc694962a1347a15591e4f5fe3d411035d9ea324b4daf082b9a4b0b6627a3b8"
+        },
+        {
+          "reported_after_update": 18,
+          "measured_at_epoch": 17,
+          "training_mse": 0.07485727871407498,
+          "report_sha256": "5fd70906d16f738c31a51f4b666e4797a01fe97e8d7c95867e18130782057637"
+        },
+        {
+          "reported_after_update": 19,
+          "measured_at_epoch": 18,
+          "training_mse": 0.07485246745198924,
+          "report_sha256": "1b805b524558a42c9e90d5e2b50fc612aa18571499eeefcccace09e9cc52fc24"
+        },
+        {
+          "reported_after_update": 20,
+          "measured_at_epoch": 19,
+          "training_mse": 0.07484742416262226,
+          "report_sha256": "750e0619c55cc4212c60339a80bcb06ca2903c3a1e7eba6d2ced814c6f07fb17"
+        },
+        {
+          "reported_after_update": 21,
+          "measured_at_epoch": 20,
+          "training_mse": 0.07484219317806914,
+          "report_sha256": "638a9b465acc7a3f1c70bf82432554ae8581e500ea8ccb8b7180c32030aca444"
+        },
+        {
+          "reported_after_update": 22,
+          "measured_at_epoch": 21,
+          "training_mse": 0.07483680848690043,
+          "report_sha256": "7ebe8046997820d98637f317ba417f7531a4acab5dee073b1142d55f1050fcb8"
+        },
+        {
+          "reported_after_update": 23,
+          "measured_at_epoch": 22,
+          "training_mse": 0.07483130389936302,
+          "report_sha256": "f85cc6d17b8101eca5a3b58015a84faa0e5317fb075622e423eea6c6462d8a6a"
+        },
+        {
+          "reported_after_update": 24,
+          "measured_at_epoch": 23,
+          "training_mse": 0.07482572598308196,
+          "report_sha256": "566f76f930b928e63e82077630f31997827d82fed62dda4ad873d155426c4979"
+        },
+        {
+          "reported_after_update": 25,
+          "measured_at_epoch": 24,
+          "training_mse": 0.07482013466078656,
+          "report_sha256": "0f34742da0b80460d65aac55d99dcc3bb714525a7bc73ecf1e55ff40e4dadf17"
+        }
+      ]
+    },
+    {
+      "seed": 3,
+      "training_reports": [
+        {
+          "reported_after_update": 1,
+          "measured_at_epoch": 0,
+          "training_mse": 0.07490893565312548,
+          "report_sha256": "faaf74f5583bbc9d27fcb30e9a5291f2195d1e1d8cf6674a8650e2f628c2d21b"
+        },
+        {
+          "reported_after_update": 2,
+          "measured_at_epoch": 1,
+          "training_mse": 0.07490230011072047,
+          "report_sha256": "53a6c93d5ba01ce0bfe63df412717f2b7f89b4ad5d38ff41f616732cbe5a913d"
+        },
+        {
+          "reported_after_update": 3,
+          "measured_at_epoch": 2,
+          "training_mse": 0.07489701874406383,
+          "report_sha256": "7fd3eb81a6fb51952f0c485b228bbe4763e8e500355d8db0fe5cc4050f66e1f1"
+        },
+        {
+          "reported_after_update": 4,
+          "measured_at_epoch": 3,
+          "training_mse": 0.07489294419889805,
+          "report_sha256": "4034fb5a4f53625946dfddd3e9d66fc07d86c714ae4065df5d321d087bba7bfe"
+        },
+        {
+          "reported_after_update": 5,
+          "measured_at_epoch": 4,
+          "training_mse": 0.07488983408088315,
+          "report_sha256": "a44291119773926c7e590e09711a14ff3495bec3acad30a9e1d162d79a8fa555"
+        },
+        {
+          "reported_after_update": 6,
+          "measured_at_epoch": 5,
+          "training_mse": 0.07488741610974202,
+          "report_sha256": "7ee2f45a42d80e6bd2eef70ec508977c1a8234c80bc755c73bee057dc5ab336a"
+        },
+        {
+          "reported_after_update": 7,
+          "measured_at_epoch": 6,
+          "training_mse": 0.07488545932588944,
+          "report_sha256": "f8c6b49a43ac224d37130bf64add5a5d26f15b09263bdb132a23bd3551ca7996"
+        },
+        {
+          "reported_after_update": 8,
+          "measured_at_epoch": 7,
+          "training_mse": 0.07488375445819348,
+          "report_sha256": "d015f936f19603cbeb13f36e02efb632c7dd75149b83aaf6f5e026a1ebbf9da4"
+        },
+        {
+          "reported_after_update": 9,
+          "measured_at_epoch": 8,
+          "training_mse": 0.0748820874396295,
+          "report_sha256": "0a9df0c4d06ee9a925c08cd77dbc0ce018651ad355087acd59175b00326af578"
+        },
+        {
+          "reported_after_update": 10,
+          "measured_at_epoch": 9,
+          "training_mse": 0.0748802673403226,
+          "report_sha256": "b8083996bad08446977476725b88b64d153712d4e8ee2af3e95615d1f3c45093"
+        },
+        {
+          "reported_after_update": 11,
+          "measured_at_epoch": 10,
+          "training_mse": 0.07487815847905463,
+          "report_sha256": "f05ea97623cddd6b8758560599729598fa4667d28f0dd648f51ee4cc2fc30139"
+        },
+        {
+          "reported_after_update": 12,
+          "measured_at_epoch": 11,
+          "training_mse": 0.0748756885386528,
+          "report_sha256": "f73a1953730500f9ee98fe25a22683a185cbe438cd57335b45988846af6fca39"
+        },
+        {
+          "reported_after_update": 13,
+          "measured_at_epoch": 12,
+          "training_mse": 0.07487283469763562,
+          "report_sha256": "b0daa5e3521e7b1dbb0641bec5c5844b5696de8b830b72a2e8942faf9fdd7f9f"
+        },
+        {
+          "reported_after_update": 14,
+          "measured_at_epoch": 13,
+          "training_mse": 0.07486960019652439,
+          "report_sha256": "411cfb85c12cf6dc2b3cf87da44eeae1ebe9393deec1492d9021887906cab0a3"
+        },
+        {
+          "reported_after_update": 15,
+          "measured_at_epoch": 14,
+          "training_mse": 0.07486599460112,
+          "report_sha256": "583c83d53a997cbc90f94fd46eae948d80f25b2c7b649635636840d59b7220fd"
+        },
+        {
+          "reported_after_update": 16,
+          "measured_at_epoch": 15,
+          "training_mse": 0.07486203031805197,
+          "report_sha256": "0fd31eeed03ab72f1b0be7179079cdef2a8e7316dd727fa5c541c0fc290bab98"
+        },
+        {
+          "reported_after_update": 17,
+          "measured_at_epoch": 16,
+          "training_mse": 0.07485772822478427,
+          "report_sha256": "90e42449116ad45b130f474bd8608ddc2311276954e7f56153804a33fbf40abd"
+        },
+        {
+          "reported_after_update": 18,
+          "measured_at_epoch": 17,
+          "training_mse": 0.07485312376949622,
+          "report_sha256": "3368d3dfc4750f87219e7488dd4b66ba6020de4afdc225e94f469b074e800598"
+        },
+        {
+          "reported_after_update": 19,
+          "measured_at_epoch": 18,
+          "training_mse": 0.07484826408679617,
+          "report_sha256": "8e866f57149520925006c0fbb5b631f9a29b330daa3378dffff22ba135d9a574"
+        },
+        {
+          "reported_after_update": 20,
+          "measured_at_epoch": 19,
+          "training_mse": 0.07484319843303867,
+          "report_sha256": "f8cbba97401096d79ada7bc929879891cbaf6b8c4f56f64efe06a86a67855f10"
+        },
+        {
+          "reported_after_update": 21,
+          "measured_at_epoch": 20,
+          "training_mse": 0.07483796612812138,
+          "report_sha256": "a28d31fe7fd62e112405e0d2396ad46d4ff06d1d133de0c81c2d927115168557"
+        },
+        {
+          "reported_after_update": 22,
+          "measured_at_epoch": 21,
+          "training_mse": 0.07483259773786613,
+          "report_sha256": "e74ad477345ef0a873a0cee0b22e5c1dda6115ed0ca2495f05e370a20206ca23"
+        },
+        {
+          "reported_after_update": 23,
+          "measured_at_epoch": 22,
+          "training_mse": 0.0748271248724983,
+          "report_sha256": "e272f81013571a70354675655931c87578e2a911f87d878e0d3cba98c0ef81a3"
+        },
+        {
+          "reported_after_update": 24,
+          "measured_at_epoch": 23,
+          "training_mse": 0.0748215896877827,
+          "report_sha256": "0d6d7963fabe283fb904981ba7706486489000e196b261e015b08e377473e793"
+        },
+        {
+          "reported_after_update": 25,
+          "measured_at_epoch": 24,
+          "training_mse": 0.07481604492113962,
+          "report_sha256": "805e35c5f023d85716960757d410a64d9d760385c9f04ea7c0dfef9d1a623be1"
+        }
+      ]
+    }
+  ]
+}

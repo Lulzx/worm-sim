@@ -65,8 +65,7 @@ checks and independent replay must pass before interpreting outcomes.
 This is a three-seed optimization pilot, not the specification's 10–50-member
 uncertainty ensemble, a convergence proof or a fresh confirmatory test. Changing
 initial signs may change basins and transient preparation; it does not guarantee
-better forecasting. The two control fits completed their frozen protocols; see the [gain/control results](ATLAS-OBSERVATION-GAIN.md). Results
-for the sign-restart pilot are pending.
+better forecasting. The two control fits completed their frozen protocols; see the [gain/control results](ATLAS-OBSERVATION-GAIN.md). All three 25-update runs have completed. The [training-component audit](sign-restart-training-audit.json) shows epoch-24 MSE of 0.07481840, 0.07482013, and 0.07481604 for seeds 1–3, respectively; the epoch-25 reports contain pre-update loss. Final cohort selection and held-out comparison remain unaudited. Current work instead follows the [training capacity protocol](LEVEL0-CAPACITY-PROTOCOL.md).
 
 ## Launch checks
 
@@ -83,15 +82,14 @@ independent coupling audits verify the local coefficients and preparation:
 [seed 2](coupling-sign-seed2-initial-audit.json),
 [seed 3](coupling-sign-seed3-initial-audit.json).
 This verifies the intended initialization intervention, not equilibrium
-uniqueness, optimization convergence or predictive improvement. Fits and final
-comparisons remain pending.
+uniqueness, optimization convergence or predictive improvement. The fits completed; final comparisons remain unaudited.
 
 ## Validation-only cohort selector
 
 The [cohort manifest](../configs/level0-atlas-sign-restarts.json) fixes all three
 seeds, configuration file hashes, fit source, data/split identities and input file
 hashes. It records the selection rule above in executable form; it does not
-change the already running fits. Once every run completes:
+change the completed fits. To perform the separate cohort-selection audit:
 
 ```sh
 python3 scripts/select_atlas_restart.py --manifest configs/level0-atlas-sign-restarts.json --output runs/sign-restart-selection.json

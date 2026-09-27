@@ -190,3 +190,20 @@ The extended configuration supports [learning-rate multipliers](../../docs/GROUP
 for native parameter types, exact tied groups, and module arrays. Zero freezes a
 coordinate through gradient clipping and AdamW decay; checkpoint reload preserves
 these settings.
+
+## Training capacity and observation calibration
+
+Feature work is paused for the [Level 0 capacity protocol](../../docs/LEVEL0-CAPACITY-PROTOCOL.md).
+`overfit.py` uses only a named subset of the Rust training export and saves
+explicit diagnostic envelopes. It does not select on validation or test scores.
+
+The regular extended checkpoint path also supports this observation declaration:
+
+```json
+{"schema_version":1,"solver":null,"extensions":{"observation":{"initial_gain":10.0,"prior_strength":0.0}}}
+```
+
+It learns one positive gain per canonical neuron in log coordinates. It replaces
+the global observation gain and requires frozen native calcium scales, avoiding
+redundant trainable amplitude factors. The optional penalty is the mean squared
+log-gain displacement from initialization. No neural dynamics are added.
