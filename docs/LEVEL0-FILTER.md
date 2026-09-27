@@ -1,5 +1,9 @@
 # Level 0 history filtering
 
+**Preprocessing qualification:** the source traces are whole-recording z-scores.
+These results concern retrospective processed-signal prediction, not an end-to-end
+causal forecast. See the [content-bound audit](PREPROCESSING-AUDIT.md).
+
 The first shooting-based fit lost almost all reconstruction by the forecast
 origin. This experiment replaces shooting with an approximate extended Kalman
 history filter, retaining the same population objective and parameter capacity.
@@ -45,7 +49,7 @@ identical dynamics/readouts first. Train two epochs on the same 15 animals and
 select among epochs 0/1/2 by mean validation R² at 1/10/30 seconds. Score the
 selected candidate with the common animal-bootstrap scorer and audit half-step
 validation sensitivity. Test animals were inspected previously, so results are
-exploratory. Source preprocessing causality remains an open limitation.
+exploratory. Source preprocessing is now confirmed retrospective; see the audit above.
 
 ```sh
 WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release
@@ -112,8 +116,8 @@ To reproduce the fixed-parameter comparison:
 python3 scripts/compare_level0_inference.py
 ```
 
-The next required comparator is the masked GRU, followed by equal access to
-behavior channels. A subsequent Level 0 training change must explicitly address
+The masked GRU comparator is now scored in [GRU.md](GRU.md); equal access to
+behavior channels is next. A subsequent Level 0 training change must explicitly address
 its conditional-gradient approximation, dynamics/readout assumptions or biological
 priors and be evaluated on validation before test scoring. Source preprocessing
 causality and held-out generalization remain unresolved.

@@ -1,5 +1,9 @@
 # Freely moving recording import and forecasting control
 
+**Preprocessing qualification:** the source traces are whole-recording z-scores.
+These results concern retrospective processed-signal prediction, not an end-to-end
+causal forecast. See the [content-bound audit](PREPROCESSING-AUDIT.md).
+
 A native Rust HDF5 importer now converts the labeled baseline subset of
 [Atanas & Kim et al. (Cell 2023)](https://doi.org/10.1016/j.cell.2023.07.035)
 into the shared benchmark contract. This is a real-data pipeline and a
@@ -102,9 +106,9 @@ AUROC is null because freely moving trials do not supply response labels.
 
 These are pipeline-control results. They do not replace the required fitted LDS
 and GRU baselines, nor demonstrate forecasting success by WormSim. The source's
-own preprocessing still needs an explicit causality/unit audit before declaring
-Task 2 acceptance; preserving a published trace does not prove that all upstream
-normalization or filtering was causal. All later models must use the same fixed
+preprocessing audit now confirms whole-recording neural standardization; reference
+processing also contains noncausal operations. These receipts cannot establish
+prospective Task 2 acceptance. All later models must use the same fixed
 observations, preprocessing declaration, and held-out animal manifest.
 
 ## Validation

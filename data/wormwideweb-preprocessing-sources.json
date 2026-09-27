@@ -1,0 +1,50 @@
+[
+  {
+    "repo": "AtanasKim-Cell2023",
+    "commit": "f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3",
+    "path": "src/CePNEM/ANTSUNDataJLD2.jl/src/data_h5.jl",
+    "sha256": "8f5cd88369c3700c7f2b185c78638d537278e98c0ef890ffa87a7c0e2b9b7674"
+  },
+  {
+    "repo": "AtanasKim-Cell2023",
+    "commit": "f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3",
+    "path": "src/CePNEM/ANTSUNDataJLD2.jl/src/data_h5_utility.jl",
+    "sha256": "4825fc5c91d301903849324872731580f791a8eb401171109f7b50d7654ffc80"
+  },
+  {
+    "repo": "AtanasKim-Cell2023",
+    "commit": "f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3",
+    "path": "src/ANTSUN/CaAnalysis.jl/src/noise_correction.jl",
+    "sha256": "81ce5527ee3123f83b842d8a654e5e550d9ee647f7f08133339e71753c1786fa"
+  },
+  {
+    "repo": "AtanasKim-Cell2023",
+    "commit": "f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3",
+    "path": "src/ANTSUN/BehaviorDataNIR.jl/src/behaviors.jl",
+    "sha256": "96f88c847fecfb603210979865be298ecdceb6dcdde11687caa8210582781c85"
+  },
+  {
+    "repo": "AtanasKim-Cell2023",
+    "commit": "f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3",
+    "path": "src/ANTSUN/BehaviorDataNIR.jl/src/util.jl",
+    "sha256": "339e6f47a85b5cb50b5841e4c796be50fe2fc7ba76d0afd81b56fa1b6b7cf25a"
+  },
+  {
+    "repo": "AtanasKim-Cell2023",
+    "commit": "f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3",
+    "path": "notebook/ANTSUN_NeuroPAL.ipynb",
+    "sha256": "e1aed3cc59f6559b4442746c55902b0acd1fab6dcc1c6279daba5e4c31f4e8fe"
+  },
+  {
+    "repo": "WormWideWebData.jl",
+    "commit": "da73782cb00510a54f47f09199eedb49da1ca9f7",
+    "path": "src/data_integrity.jl",
+    "sha256": "e238844023d0a15d7f05fe0c03664c47df4e76774e041285af51f99dae8a1ff6"
+  },
+  {
+    "repo": "WormWideWebData.jl",
+    "commit": "da73782cb00510a54f47f09199eedb49da1ca9f7",
+    "path": "src/data_generator.jl",
+    "sha256": "3ec189183d0d3ef5b514b2d10772b684af0a9eedf5367c127c60b5d7481437fa"
+  }
+]

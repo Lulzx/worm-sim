@@ -1,5 +1,9 @@
 # Task 2: controls before biological fitting
 
+**Preprocessing qualification:** the source traces are whole-recording z-scores.
+These results concern retrospective processed-signal prediction, not an end-to-end
+causal forecast. See the [content-bound audit](PREPROCESSING-AUDIT.md).
+
 The immediate priority is initial-state inference and a first Level 0 fit on the
 15 training animals. Backend optimization is deferred until that fit reveals a
 measured bottleneck. Task 1 remains untested: the raw signal-propagation atlas and

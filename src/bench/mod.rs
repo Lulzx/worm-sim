@@ -9,6 +9,7 @@ pub mod level0;
 pub mod linear;
 pub mod metrics;
 pub mod population;
+pub mod preprocessing;
 pub mod uncertainty;
 use crate::{
     Result,
@@ -336,6 +337,8 @@ pub struct HorizonScore {
 pub struct Report {
     pub schema_version: u32,
     pub dataset_hash: String,
+    #[serde(default)]
+    pub preprocessing_assessment: preprocessing::Assessment,
     pub graph_hash: String,
     pub split_hash: String,
     pub axis: Axis,
@@ -527,6 +530,7 @@ pub fn evaluate(
     Ok(Report {
         schema_version: 1,
         dataset_hash: split.dataset_hash.clone(),
+        preprocessing_assessment: preprocessing::assess(&split.dataset_hash, &graph.hash)?,
         graph_hash: graph.hash.clone(),
         split_hash,
         axis: split.axis,

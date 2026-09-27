@@ -30,7 +30,7 @@ def score(path, partition, label):
     subprocess.run([args.binary, 'level0-predict', *inputs, path, partition, pred], check=True)
     subprocess.run([args.binary, 'bench-score', *inputs, pred, partition, report], check=True)
     r = load(report)
-    return {key: r[key] for key in ['dataset_hash', 'split_hash', 'graph_hash', 'partition', 'model', 'free_parameters', 'prediction_source_commit', 'scorer_source_commit', 'animal_bootstrap']}
+    return {key: r[key] for key in ['dataset_hash', 'split_hash', 'graph_hash', 'partition', 'model', 'free_parameters', 'prediction_source_commit', 'scorer_source_commit', 'preprocessing_assessment', 'animal_bootstrap']}
 
 validation = score(args.model, 'validation', 'validation')
 # Numerical audit only, not another trained candidate or a test-based choice.

@@ -8,7 +8,7 @@ This ledger does not declare scientific targets achieved merely because code exi
 
 | Spec area | Current evidence | Work required for full acceptance |
 | --- | --- | --- |
-| Data (§3) | Canonical identities, aliases/provenance, content-hashed c302 anatomy, WSC1/WST1 codecs, pinned Creamer operators; native HDF5 import of 21 freely moving animals with behavior | Direct Cook/Witvliet variation, CeNGEN, peptide network, atlas trial recordings, further moving cohorts/preprocessing validation; graph exports |
+| Data (§3) | Canonical identities, aliases/provenance, content-hashed c302 anatomy, WSC1/WST1 codecs, pinned Creamer operators; native HDF5 import of 21 freely moving animals with behavior; source audit confirms retrospective whole-recording normalization | Direct Cook/Witvliet variation, CeNGEN, peptide network, atlas trial recordings, further moving cohorts and prospectively processed signals; graph exports |
 | Neurons (§4) | Differentiable Level 0 | Mixed Level 1 conductance channels and published Level 2 adapters with source-specific tests |
 | Coupling (§5) | Anatomical chemistry, relaxed signs, symmetric gaps, shared equivalent gates | Dark edges/penalty, plasticity, rectification, peptide/monoamine compartments and receptor modulation |
 | Numerics (§6) | Euler/RK4, exact events, Rust forward AD, Taichi reverse AD, segment checkpoints | Stiff/adaptive and multirate solvers, recursive checkpoints/continuous adjoint, truncated training, heterogeneous batches, multi-GPU orchestration |
@@ -26,7 +26,8 @@ This ledger does not declare scientific targets achieved merely because code exi
 1. Prioritize Task 2 fitting: controls and animal-level intervals, stable LDS,
    302-neuron initial-state inference, tied parameters/sign priors, then a real
    Level 0 fit through the same scorer. Defer backend/performance expansion.
-2. Audit source preprocessing and add equal behavior inputs to the fitted models,
+2. Add equal behavior inputs to the fitted models under the explicitly retrospective
+   benchmark; retain prospective preprocessing as a separate acceptance requirement,
    then ingest the Task 1 atlas and publish
    its held-out stimulated-neuron split; complete staged comparisons.
 3. Extend coupling with slow modulation; compare against the same held-out tasks.

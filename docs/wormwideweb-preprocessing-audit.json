@@ -1,0 +1,732 @@
+{
+  "schema_version": 1,
+  "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+  "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+  "import_receipt_sha256": "7a85619e6f521f4c1c59fc6b3d25602f4cb3e1453e44961cc36658175ac3f729",
+  "source_manifest_sha256": "bfc768cfe38ee79ce18cd3e26c6e34b82f5524769f569f5fbc8c7bcd2475035c",
+  "python_dependencies": {
+    "numpy": "2.2.6",
+    "h5py": "3.15.1"
+  },
+  "sources": [
+    {
+      "repo": "AtanasKim-Cell2023",
+      "commit": "f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3",
+      "path": "src/CePNEM/ANTSUNDataJLD2.jl/src/data_h5.jl",
+      "sha256": "8f5cd88369c3700c7f2b185c78638d537278e98c0ef890ffa87a7c0e2b9b7674",
+      "url": "https://raw.githubusercontent.com/flavell-lab/AtanasKim-Cell2023/f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3/src/CePNEM/ANTSUNDataJLD2.jl/src/data_h5.jl"
+    },
+    {
+      "repo": "AtanasKim-Cell2023",
+      "commit": "f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3",
+      "path": "src/CePNEM/ANTSUNDataJLD2.jl/src/data_h5_utility.jl",
+      "sha256": "4825fc5c91d301903849324872731580f791a8eb401171109f7b50d7654ffc80",
+      "url": "https://raw.githubusercontent.com/flavell-lab/AtanasKim-Cell2023/f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3/src/CePNEM/ANTSUNDataJLD2.jl/src/data_h5_utility.jl"
+    },
+    {
+      "repo": "AtanasKim-Cell2023",
+      "commit": "f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3",
+      "path": "src/ANTSUN/CaAnalysis.jl/src/noise_correction.jl",
+      "sha256": "81ce5527ee3123f83b842d8a654e5e550d9ee647f7f08133339e71753c1786fa",
+      "url": "https://raw.githubusercontent.com/flavell-lab/AtanasKim-Cell2023/f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3/src/ANTSUN/CaAnalysis.jl/src/noise_correction.jl"
+    },
+    {
+      "repo": "AtanasKim-Cell2023",
+      "commit": "f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3",
+      "path": "src/ANTSUN/BehaviorDataNIR.jl/src/behaviors.jl",
+      "sha256": "96f88c847fecfb603210979865be298ecdceb6dcdde11687caa8210582781c85",
+      "url": "https://raw.githubusercontent.com/flavell-lab/AtanasKim-Cell2023/f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3/src/ANTSUN/BehaviorDataNIR.jl/src/behaviors.jl"
+    },
+    {
+      "repo": "AtanasKim-Cell2023",
+      "commit": "f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3",
+      "path": "src/ANTSUN/BehaviorDataNIR.jl/src/util.jl",
+      "sha256": "339e6f47a85b5cb50b5841e4c796be50fe2fc7ba76d0afd81b56fa1b6b7cf25a",
+      "url": "https://raw.githubusercontent.com/flavell-lab/AtanasKim-Cell2023/f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3/src/ANTSUN/BehaviorDataNIR.jl/src/util.jl"
+    },
+    {
+      "repo": "AtanasKim-Cell2023",
+      "commit": "f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3",
+      "path": "notebook/ANTSUN_NeuroPAL.ipynb",
+      "sha256": "e1aed3cc59f6559b4442746c55902b0acd1fab6dcc1c6279daba5e4c31f4e8fe",
+      "url": "https://raw.githubusercontent.com/flavell-lab/AtanasKim-Cell2023/f08dbd2eb85fbb97b759aa900f2bfdb05e9f14d3/notebook/ANTSUN_NeuroPAL.ipynb"
+    },
+    {
+      "repo": "WormWideWebData.jl",
+      "commit": "da73782cb00510a54f47f09199eedb49da1ca9f7",
+      "path": "src/data_integrity.jl",
+      "sha256": "e238844023d0a15d7f05fe0c03664c47df4e76774e041285af51f99dae8a1ff6",
+      "url": "https://raw.githubusercontent.com/flavell-lab/WormWideWebData.jl/da73782cb00510a54f47f09199eedb49da1ca9f7/src/data_integrity.jl"
+    },
+    {
+      "repo": "WormWideWebData.jl",
+      "commit": "da73782cb00510a54f47f09199eedb49da1ca9f7",
+      "path": "src/data_generator.jl",
+      "sha256": "3ec189183d0d3ef5b514b2d10772b684af0a9eedf5367c127c60b5d7481437fa",
+      "url": "https://raw.githubusercontent.com/flavell-lab/WormWideWebData.jl/da73782cb00510a54f47f09199eedb49da1ca9f7/src/data_generator.jl"
+    }
+  ],
+  "observed_status": "retrospective_whole_recording_standardization",
+  "animals": [
+    {
+      "animal": "2022-06-14-01",
+      "sha256": "aabca135ef82e4be6821bf515cd2e936ae2f78014bf2979ed8a10aeaa7c4ac11",
+      "frames": 1600,
+      "neurons": 109,
+      "max_abs_published_mean": 2.081113059659856e-15,
+      "max_abs_published_sample_std_minus_one": 1.3322676295501878e-15,
+      "max_abs_whole_recording_zscore_error": 2.3092638912203256e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.170933007981951
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2022-06-14-07",
+      "sha256": "e509f47041d9faf86057832ffe5ab623ffaf2611419b90322bf8d634cfc6c2ec",
+      "frames": 1600,
+      "neurons": 130,
+      "max_abs_published_mean": 2.2810919819704623e-15,
+      "max_abs_published_sample_std_minus_one": 1.3322676295501878e-15,
+      "max_abs_whole_recording_zscore_error": 1.4654943925052066e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.7635274141333301
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2022-06-14-13",
+      "sha256": "a87a19529ef8d647d4801abef3d0716d90a9f8294067db63c4a8894893fa7252",
+      "frames": 1600,
+      "neurons": 134,
+      "max_abs_published_mean": 1.6729326257625132e-15,
+      "max_abs_published_sample_std_minus_one": 1.3322676295501878e-15,
+      "max_abs_whole_recording_zscore_error": 1.9984014443252818e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.165128963279619
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2022-06-28-01",
+      "sha256": "df97fa9d2576f340d874d4ae40d76ed345d1a96cd7e9300a5c844f1584496842",
+      "frames": 1600,
+      "neurons": 142,
+      "max_abs_published_mean": 2.5571211814678917e-15,
+      "max_abs_published_sample_std_minus_one": 2.220446049250313e-15,
+      "max_abs_whole_recording_zscore_error": 3.552713678800501e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.4513171862453271
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2022-06-28-07",
+      "sha256": "74bad5e04bbd72c59eb45975c07bb02a066b33db172ad3478a46a85913d31ab4",
+      "frames": 1600,
+      "neurons": 142,
+      "max_abs_published_mean": 2.531377885084396e-15,
+      "max_abs_published_sample_std_minus_one": 1.3322676295501878e-15,
+      "max_abs_whole_recording_zscore_error": 2.042810365310288e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 0.9210833769765574
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2022-07-15-06",
+      "sha256": "fd98a50596e86b06c4c86e56ee9569e74d1bcc4311ee9eec5be9acc9bf85f448",
+      "frames": 1600,
+      "neurons": 128,
+      "max_abs_published_mean": 3.577971252610723e-15,
+      "max_abs_published_sample_std_minus_one": 1.6653345369377348e-15,
+      "max_abs_whole_recording_zscore_error": 1.7319479184152442e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 2.1106855612644644
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2022-07-15-12",
+      "sha256": "a151870788b0f1b5e2833594f882f013d5393726415a18a3cd3206a52163038f",
+      "frames": 1600,
+      "neurons": 132,
+      "max_abs_published_mean": 1.812369698761529e-15,
+      "max_abs_published_sample_std_minus_one": 1.3322676295501878e-15,
+      "max_abs_whole_recording_zscore_error": 2.842170943040401e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.3608365927789183
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2022-07-20-01",
+      "sha256": "9bc1e197491e1e267f2a76dc21670598d7a257ece91fb8214dfdef9c1aa27ca6",
+      "frames": 1600,
+      "neurons": 144,
+      "max_abs_published_mean": 2.223221606811876e-15,
+      "max_abs_published_sample_std_minus_one": 1.5543122344752192e-15,
+      "max_abs_whole_recording_zscore_error": 2.6645352591003757e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.8992507198844857
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2022-07-26-01",
+      "sha256": "84ef44b1b5bb6d5a74ba694b0133838ae379f54cbe86fc693264881e61c1347c",
+      "frames": 1600,
+      "neurons": 133,
+      "max_abs_published_mean": 2.0491941477018826e-15,
+      "max_abs_published_sample_std_minus_one": 1.3322676295501878e-15,
+      "max_abs_whole_recording_zscore_error": 1.865174681370263e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.373014293270745
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2022-08-02-01",
+      "sha256": "fdc30fb834fbbc9fc12bac4c36bd122597bcef398b94189cf2a818d363d7ee6a",
+      "frames": 1600,
+      "neurons": 152,
+      "max_abs_published_mean": 3.1227104235753698e-15,
+      "max_abs_published_sample_std_minus_one": 1.6653345369377348e-15,
+      "max_abs_whole_recording_zscore_error": 2.3092638912203256e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.2531024094160537
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2023-01-09-28",
+      "sha256": "811ab2a3fc3bd792967ad677c7ac6b8f92c0e29c31f021cfa84db34cae96e2a5",
+      "frames": 1615,
+      "neurons": 145,
+      "max_abs_published_mean": 2.219758604653022e-15,
+      "max_abs_published_sample_std_minus_one": 1.9984014443252818e-15,
+      "max_abs_whole_recording_zscore_error": 2.0872192862952943e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 807,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.2474324061956694
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2023-01-17-01",
+      "sha256": "edb3df7ee253d58501f6645e9cf50a80ee37ad68aa33478b60514a13a2cc3d51",
+      "frames": 1615,
+      "neurons": 138,
+      "max_abs_published_mean": 2.4937052766735326e-15,
+      "max_abs_published_sample_std_minus_one": 1.3322676295501878e-15,
+      "max_abs_whole_recording_zscore_error": 2.5757174171303632e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 807,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 0.9731153519055902
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2023-01-19-01",
+      "sha256": "fc3207951da52fa6186b83259b0c6cccffb1803513eeb5ee6efa7b2212ab7f12",
+      "frames": 1600,
+      "neurons": 124,
+      "max_abs_published_mean": 2.249606750881483e-15,
+      "max_abs_published_sample_std_minus_one": 1.5543122344752192e-15,
+      "max_abs_whole_recording_zscore_error": 1.9539925233402755e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.3737636954266486
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2023-01-19-08",
+      "sha256": "80b0922aca67c77b48d3d05116efff308060f877b31c1471fab8120fb2c03d17",
+      "frames": 1600,
+      "neurons": 147,
+      "max_abs_published_mean": 3.0348466795171448e-15,
+      "max_abs_published_sample_std_minus_one": 2.1094237467877974e-15,
+      "max_abs_whole_recording_zscore_error": 2.842170943040401e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.4095258551403846
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2023-01-19-15",
+      "sha256": "8b55cdaea4e02b1287ab194a0e790ddb48c1ca6be8cf0342e128f7d0aa7dbdae",
+      "frames": 1600,
+      "neurons": 144,
+      "max_abs_published_mean": 3.6574909767495e-15,
+      "max_abs_published_sample_std_minus_one": 1.4432899320127035e-15,
+      "max_abs_whole_recording_zscore_error": 2.4868995751603507e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.0437727245038744
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2023-01-19-22",
+      "sha256": "727ed035454485d9728fa4f946259454c979534543188358caf63de55b5a84bc",
+      "frames": 1600,
+      "neurons": 153,
+      "max_abs_published_mean": 4.6477578730108604e-15,
+      "max_abs_published_sample_std_minus_one": 1.3322676295501878e-15,
+      "max_abs_whole_recording_zscore_error": 2.1316282072803006e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.1590619135823244
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2023-01-23-01",
+      "sha256": "6a415a6a18123cc160d2841c4aada05cc9afd0fea5c86138ae68764367ac9861",
+      "frames": 1600,
+      "neurons": 151,
+      "max_abs_published_mean": 2.230715612228096e-15,
+      "max_abs_published_sample_std_minus_one": 1.5543122344752192e-15,
+      "max_abs_whole_recording_zscore_error": 1.865174681370263e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.9840880101658094
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2023-01-23-08",
+      "sha256": "ad514f3e768f908c41ea416f68f73c585e81db63dd2b4b324b440949d368edd9",
+      "frames": 1600,
+      "neurons": 143,
+      "max_abs_published_mean": 3.1719071813540723e-15,
+      "max_abs_published_sample_std_minus_one": 1.887379141862766e-15,
+      "max_abs_whole_recording_zscore_error": 1.9095836023552692e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.9065734322808714
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2023-01-23-15",
+      "sha256": "090a6cd463c64074100d099bd2d098e852a389b656f9ad46120689db0d16d3ef",
+      "frames": 1600,
+      "neurons": 147,
+      "max_abs_published_mean": 3.4495323264494004e-15,
+      "max_abs_published_sample_std_minus_one": 1.9984014443252818e-15,
+      "max_abs_whole_recording_zscore_error": 1.4210854715202004e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.7005518357026874
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2023-01-23-21",
+      "sha256": "e124994f82c6ffd05671f53762bce165f04238dcab46c976ed28a857ee7a47b4",
+      "frames": 1600,
+      "neurons": 126,
+      "max_abs_published_mean": 4.080624727009763e-15,
+      "max_abs_published_sample_std_minus_one": 1.7763568394002505e-15,
+      "max_abs_whole_recording_zscore_error": 3.197442310920451e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.0434215007433494
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    },
+    {
+      "animal": "2023-03-07-01",
+      "sha256": "e4e9786717c0963e919f67b1c02f91cf435c249cff6af217c25192346a1fbf54",
+      "frames": 1600,
+      "neurons": 153,
+      "max_abs_published_mean": 2.0318469129421146e-15,
+      "max_abs_published_sample_std_minus_one": 1.6653345369377348e-15,
+      "max_abs_whole_recording_zscore_error": 2.398081733190338e-14,
+      "matches_whole_recording_zscore_at_1e_minus_10": true,
+      "future_only_counterfactual": {
+        "description": "Add one original full-recording sample SD per neuron to the later half, recompute whole-recording z-score; original prefix unchanged. Demonstration of normalization dependence, not a measured performance effect.",
+        "changed_from_source_frame_zero_based": 800,
+        "prefix_frames_compared": 17,
+        "original_prefix_max_change": 0.0,
+        "normalized_prefix_max_change": 1.2105571700944955
+      },
+      "behavior_channels": [
+        "angular_velocity",
+        "body_angle",
+        "body_angle_absolute",
+        "body_angle_all",
+        "head_angle",
+        "pumping",
+        "reversal_events",
+        "reversal_vec",
+        "velocity",
+        "worm_curvature",
+        "zeroed_x_confocal",
+        "zeroed_y_confocal"
+      ]
+    }
+  ],
+  "interpretation": [
+    "All input hashes are checked against fetch and import receipts. Numerical normalization checks cover every exported ROI, not only selected NeuroPAL labels.",
+    "The present benchmark is prediction of retrospectively processed traces; code-level exclusion of future targets does not establish end-to-end temporal causality.",
+    "Whole-recording mean/scale include future frames of the same animal. This is distinct from train/test animal identity leakage.",
+    "Reference notebook cell 179 enables interpolation, marker division and bleach correction before original and z-scored exports. Exact per-file processing invocations are not attested by this source audit.",
+    "Reference behavior code contains centered angular-velocity/pumping filtering, imputation and velocity artifact interpolation; notebook cell 9 sets lag 150 at 20 Hz. Exact effective lookahead for each exported behavior sample is not recovered.",
+    "Choosing trace_array_original or adding prefix-only normalization removes neither previously applied interpolation nor global bleaching correction.",
+    "Existing scores remain reproducible on the hashed retrospective benchmark; their bias relative to a prospectively processed benchmark is unmeasured."
+  ]
+}

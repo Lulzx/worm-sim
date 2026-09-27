@@ -30,7 +30,7 @@ for partition in ['validation', 'test']:
     full = json.loads(Path(report).read_text())
     assert full['dataset_hash'] == model['dataset_hash'] == selection['dataset_hash']
     assert full['split_hash'] == model['split_hash'] == selection['split_hash']
-    reports[partition] = {key: full[key] for key in ['dataset_hash', 'split_hash', 'graph_hash', 'partition', 'model', 'free_parameters', 'prediction_source_commit', 'scorer_source_commit', 'animal_bootstrap']}
+    reports[partition] = {key: full[key] for key in ['dataset_hash', 'split_hash', 'graph_hash', 'partition', 'model', 'free_parameters', 'prediction_source_commit', 'scorer_source_commit', 'preprocessing_assessment', 'animal_bootstrap']}
 
 data = json.loads(Path(args.data).read_text())
 indexed = {t['id']: t for t in data['trials']}
@@ -67,8 +67,8 @@ receipt = {
         'No paired-bootstrap significance claim against AR(1).',
         'Training-unseen neuron outputs use persistence; this differs from Level 0 readout assumptions.',
         'Constrained EM-style updates with fixed process jitter, observation floor, ridge and operator-norm cap.',
-        'Source preprocessing causality/units remain to be audited.',
-        'GRU and a successful fitted biological model remain outstanding.',
+        'Consult preprocessing_assessment; the current WormWideWeb benchmark is retrospectively processed.',
+        'GRU is scored separately; a successful fitted biological model remains outstanding.',
     ],
 }
 Path(args.receipt).write_text(json.dumps(receipt, indent=2) + '\n')

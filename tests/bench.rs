@@ -283,6 +283,20 @@ fn cli_split_and_score_round_trip() {
     let report: bench::Report =
         serde_json::from_slice(&std::fs::read(report_path).unwrap()).unwrap();
     assert_eq!(report.response_auroc.value, Some(1.0));
+    assert_eq!(
+        report.preprocessing_assessment.status,
+        bench::preprocessing::Status::Unaudited
+    );
+    let mut old = serde_json::to_value(&report).unwrap();
+    old.as_object_mut()
+        .unwrap()
+        .remove("preprocessing_assessment");
+    let decoded: bench::Report = serde_json::from_value(old).unwrap();
+    assert_eq!(
+        decoded.preprocessing_assessment.status,
+        bench::preprocessing::Status::Unaudited
+    );
+
     std::fs::remove_dir_all(dir).unwrap();
 }
 

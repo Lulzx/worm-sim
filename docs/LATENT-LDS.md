@@ -1,5 +1,9 @@
 # Stable latent LDS baseline
 
+**Preprocessing qualification:** the source traces are whole-recording z-scores.
+These results concern retrospective processed-signal prediction, not an end-to-end
+causal forecast. See the [content-bound audit](PREPROCESSING-AUDIT.md).
+
 This replaces neither the retained failed dense VAR experiment nor the Level 0
 model. It supplies the missing latent linear dynamical baseline for Task 2:
 

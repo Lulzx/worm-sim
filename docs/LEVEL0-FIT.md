@@ -1,5 +1,9 @@
 # First Level 0 population fit
 
+**Preprocessing qualification:** the source traces are whole-recording z-scores.
+These results concern retrospective processed-signal prediction, not an end-to-end
+causal forecast. See the [content-bound audit](PREPROCESSING-AUDIT.md).
+
 This experiment fits shared Level 0 dynamics and affine fluorescence readouts to
 the 360 windows from all 15 training animals. The 72 validation windows select an
 epoch; test predictions are generated only after selection. It uses the same

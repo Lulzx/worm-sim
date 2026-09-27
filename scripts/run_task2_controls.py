@@ -38,7 +38,7 @@ for name in ['persistence', 'history-mean', 'half-blend', 'training-mean', 'ar',
     result = read(report)
     rows.append({
         'name': name,
-        **{key: result[key] for key in ['model', 'free_parameters', 'prediction_source_commit', 'scorer_source_commit', 'trials', 'animal_bootstrap']},
+        **{key: result[key] for key in ['model', 'free_parameters', 'prediction_source_commit', 'scorer_source_commit', 'preprocessing_assessment', 'trials', 'animal_bootstrap']},
         'report': report,
     })
 receipt = {

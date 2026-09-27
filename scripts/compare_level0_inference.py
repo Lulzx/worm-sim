@@ -61,7 +61,7 @@ for name, path in [('shooting', args.shooting), ('filter', args.filter)]:
         'model_sha256': hashlib.sha256(Path(path).read_bytes()).hexdigest(),
         'inference_config': models[name]['config']['inference'],
         'history_reconstruction': history,
-        'score': {k: scored[k] for k in ['dataset_hash', 'split_hash', 'graph_hash', 'model', 'free_parameters', 'prediction_source_commit', 'scorer_source_commit', 'animal_bootstrap']},
+        'score': {k: scored[k] for k in ['dataset_hash', 'split_hash', 'graph_hash', 'model', 'free_parameters', 'prediction_source_commit', 'scorer_source_commit', 'preprocessing_assessment', 'animal_bootstrap']},
     }
 receipt['limitations'] = [
     'History reconstruction uses assimilated observations; it is not forecast accuracy.',

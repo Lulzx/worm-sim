@@ -56,7 +56,8 @@ It demonstrates plumbing, not biological validation or parameter identifiability
 - Native [WormWideWeb HDF5 import](docs/WORMWIDEWEB.md): 21 labeled baseline
   animals, fixed animal splits, behavior channels, [trivial and AR controls](docs/TASK2-FITTING.md),
   animal-bootstrap uncertainty, a fitted [stable latent LDS](docs/LATENT-LDS.md)
-  and a [connectome-free GRU](docs/GRU.md).
+  and a [connectome-free GRU](docs/GRU.md). The [source audit](docs/PREPROCESSING-AUDIT.md)
+  identifies this benchmark as retrospective whole-recording-normalized signals.
 - Full-network [history state inference](docs/INITIAL-STATE.md), tied-parameter
   [Level 0 population fitting](docs/LEVEL0-FIT.md), and an approximate
   [history filter](docs/LEVEL0-FILTER.md). Scientific acceptance remains open.

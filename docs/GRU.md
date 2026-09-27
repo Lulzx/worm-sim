@@ -1,5 +1,9 @@
 # Connectome-free masked GRU
 
+**Preprocessing qualification:** the source traces are whole-recording z-scores.
+These results concern retrospective processed-signal prediction, not an end-to-end
+causal forecast. See the [content-bound audit](PREPROCESSING-AUDIT.md).
+
 This Task 2 baseline uses a dense recurrent network and the same fixed animals,
 10-second observation prefix, 30-second free forecast and common scorer as the
 LDS and Level 0 experiments. Anatomy supplies canonical names and lineage checks;
@@ -64,8 +68,8 @@ is saved; these artifacts are not optimizer-resume checkpoints. Selected-model
 test scoring occurs after selection and includes the same whole-animal bootstrap.
 This is one fixed architecture and seed, not an exhaustive GRU hyperparameter
 search. Test animals were inspected in earlier experiments, so claims remain
-exploratory. Source preprocessing causality and biological forecasting acceptance
-are still open.
+exploratory. Source preprocessing is retrospective; prospective biological forecasting acceptance
+remains open.
 
 ```sh
 WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release
@@ -115,5 +119,5 @@ python3 scripts/score_gru.py
 
 The next comparison should give all fitted models equal access to behavior, with
 an explicit distinction between behavior observed during history and future
-behavior unavailable at forecast time. Upstream neural/behavior preprocessing
-causality must be audited before interpreting that comparison as a causal forecast.
+behavior unavailable at forecast time. The audit confirms retrospective source processing, so this comparison cannot be
+interpreted as a causal forecast.

@@ -28,7 +28,7 @@ for partition in ['validation', 'test']:
     full = json.loads(Path(report).read_text())
     assert full['dataset_hash'] == model['dataset_hash'] == selection['dataset_hash']
     assert full['split_hash'] == model['split_hash'] == selection['split_hash']
-    reports[partition] = {key: full[key] for key in ['dataset_hash', 'split_hash', 'graph_hash', 'partition', 'model', 'free_parameters', 'prediction_source_commit', 'scorer_source_commit', 'animal_bootstrap']}
+    reports[partition] = {key: full[key] for key in ['dataset_hash', 'split_hash', 'graph_hash', 'partition', 'model', 'free_parameters', 'prediction_source_commit', 'scorer_source_commit', 'preprocessing_assessment', 'animal_bootstrap']}
 
 receipt = {
     'schema_version': 1,
@@ -44,7 +44,7 @@ receipt = {
         'Marginal animal-bootstrap intervals are not paired-difference significance tests.',
         'Training-unseen identities use persistence, differing from Level 0 default readouts.',
         'Standardized forecast MSE differs from the Level 0 raw fluorescence training objective; common selection/scoring uses unstandardized fluorescence.',
-        'No behavior inputs; source preprocessing causality/units remain unaudited.',
+        'No behavior inputs; consult preprocessing_assessment for content-bound source causality evidence.',
         'Benchmark code and engineering tests do not establish biological validity.',
     ],
 }

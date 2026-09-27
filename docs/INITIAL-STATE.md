@@ -1,5 +1,9 @@
 # Level 0 initial-state inference
 
+**Preprocessing qualification:** the source traces are whole-recording z-scores.
+These results concern retrospective processed-signal prediction, not an end-to-end
+causal forecast. See the [content-bound audit](PREPROCESSING-AUDIT.md).
+
 Task 2 now has a history-only inference path for the complete Level 0 state:
 voltage, calcium and presynaptic gates for all 302 neurons (906 scalars). It uses
 only finite, positive-confidence observations at or before the supplied origin;

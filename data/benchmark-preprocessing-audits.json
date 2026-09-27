@@ -1,0 +1,10 @@
+[
+  {
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+    "status": "retrospective",
+    "evidence_path": "docs/wormwideweb-preprocessing-audit.json",
+    "evidence_sha256": "56aab7c5ccde23df045d21d29ede3df5d25dc7daf862ba801294fea7919dcab6",
+    "description": "Whole-recording neural z-scoring is numerically confirmed for all 21 source animals. Reference neural and behavior processing includes noncausal operations; exact per-file settings are not fully attested. This benchmark supports retrospective processed-signal prediction, not end-to-end prospective forecasting."
+  }
+]
