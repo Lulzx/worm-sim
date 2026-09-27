@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "scope": "Interim same-update-count comparison; the declared 1000-update run remains active. No held-out scores.",
+  "previous_60_second_preparation": {
+    "checkpoint_sha256": "7c1ab17f95fa19336b8795be9d6ef609f28520d04a300d50e5041e1880373114",
+    "manifest_sha256": "10c97686229cc0af50271f967d60df1ad5b8eb2b1968d05baffab5770320ac95",
+    "training_sha256": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "audit_script_sha256": "74b89999635eeff5dd6f5f8558e59a0af659a335e9bfc5fc08a3f11bbe7e47f2",
+    "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+    "epoch": 300,
+    "targets": [
+      "ADAL",
+      "ADAR"
+    ],
+    "training_trials": 50,
+    "numpy_mse": 0.044848690917383596,
+    "jax_mse": 0.044848690917383596,
+    "mse_absolute_difference": 0.0,
+    "bounds": {
+      "zero_response_mse": 0.05145505909970581,
+      "mean_response_bound": 0.04148524142533844,
+      "start_zero_mean_response_bound": 0.041536749763839996
+    },
+    "captured_start_zero_energy": 0.6660780540926251,
+    "nonzero_prepared_chemical_coefficients": 3638,
+    "chemical_edges": 3638,
+    "unforced_prepared_derivative_max": 8.298343291212104e-05,
+    "scope": "Independent NumPy dynamics and weighted scoring of Rust-exported training sufficient statistics; no held-out observations or generalization estimate."
+  },
+  "current_120_second_preparation": {
+    "checkpoint_sha256": "21fc351b9e085be4c3e1cca6ed4a17b80086f9f1b216aee295ddbd38edc63c91",
+    "manifest_sha256": "25c6531b9faca2f1fb1e6cc63477f21c78c09dfe1a3ae0a3f1e621cf3f6af0ac",
+    "training_sha256": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "audit_script_sha256": "74b89999635eeff5dd6f5f8558e59a0af659a335e9bfc5fc08a3f11bbe7e47f2",
+    "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+    "epoch": 300,
+    "targets": [
+      "ADAL",
+      "ADAR"
+    ],
+    "training_trials": 50,
+    "numpy_mse": 0.04486786899091405,
+    "jax_mse": 0.04486786899091405,
+    "mse_absolute_difference": 0.0,
+    "bounds": {
+      "zero_response_mse": 0.05145505909970581,
+      "mean_response_bound": 0.04148524142533844,
+      "start_zero_mean_response_bound": 0.041536749763839996
+    },
+    "captured_start_zero_energy": 0.6641444510075606,
+    "nonzero_prepared_chemical_coefficients": 3638,
+    "chemical_edges": 3638,
+    "unforced_prepared_derivative_max": 5.115701607750676e-07,
+    "scope": "Independent NumPy dynamics and weighted scoring of Rust-exported training sufficient statistics; no held-out observations or generalization estimate."
+  },
+  "numerical_controls": {
+    "checkpoint_sha256": "21fc351b9e085be4c3e1cca6ed4a17b80086f9f1b216aee295ddbd38edc63c91",
+    "manifest_sha256": "25c6531b9faca2f1fb1e6cc63477f21c78c09dfe1a3ae0a3f1e621cf3f6af0ac",
+    "training_sha256": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "script_sha256": "0e7e69c00e2727c709c043cdda52ce624c1b58a2b7b16b2c9a86da0d0a947551",
+    "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+    "variants": [
+      {
+        "variant": "reference",
+        "dt": 0.01,
+        "preparation_seconds": 120.0,
+        "training_mse": 0.04486786899091405,
+        "weighted_prediction_energy": 0.0065308847124849224,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 0.0,
+        "max_absolute_difference_from_previous_variant": 0.0,
+        "unforced_prepared_derivative_max": 5.115701607750676e-07
+      },
+      {
+        "variant": "half_step",
+        "dt": 0.005,
+        "preparation_seconds": 120.0,
+        "training_mse": 0.04486789558926904,
+        "weighted_prediction_energy": 0.006527748986804461,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 0.0007224799014172723,
+        "max_absolute_difference_from_previous_variant": 0.0007224799014172723,
+        "unforced_prepared_derivative_max": 5.134248687303177e-07
+      },
+      {
+        "variant": "double_preparation",
+        "dt": 0.01,
+        "preparation_seconds": 240.0,
+        "training_mse": 0.04486783235755016,
+        "weighted_prediction_energy": 0.006531725212260852,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 8.09740184161134e-05,
+        "max_absolute_difference_from_previous_variant": 0.0007224971358291699,
+        "unforced_prepared_derivative_max": 2.5811455916431434e-12
+      },
+      {
+        "variant": "quadruple_preparation",
+        "dt": 0.01,
+        "preparation_seconds": 480.0,
+        "training_mse": 0.04486783235736664,
+        "weighted_prediction_energy": 0.006531725216447912,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 8.097442131527188e-05,
+        "max_absolute_difference_from_previous_variant": 4.0289915848035207e-10,
+        "unforced_prepared_derivative_max": 2.2085148784334036e-14
+      },
+      {
+        "variant": "no_stimulus",
+        "dt": 0.01,
+        "preparation_seconds": 120.0,
+        "training_mse": 0.0514559475594178,
+        "weighted_prediction_energy": 4.316538169346553e-11,
+        "stimulus_enabled": false,
+        "max_absolute_prediction_difference": 1.035209230384148,
+        "max_absolute_difference_from_previous_variant": 1.0352784266261104,
+        "unforced_prepared_derivative_max": 5.115701607750676e-07
+      }
+    ],
+    "scope": "Frozen parameters, independent NumPy replay on training targets only. Step/preparation variants and a zero-current control are diagnostics, not refits or held-out scores. Prediction energy is measured on observed target-neuron traces using the same confidence weights."
+  },
+  "training_mse_difference_current_minus_previous": 1.9178073530454198e-05,
+  "no_stimulus_to_stimulated_energy_ratio": 6.609423316101017e-09
+}

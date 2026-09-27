@@ -192,3 +192,18 @@ Residual drift therefore does not explain the training improvement at this
 checkpoint. Doubling preparation changes MSE by about 1.06e-7. These controls
 must be repeated on the terminal checkpoint; they do not certify the ongoing
 run's final parameters, optimization convergence, or generalization.
+
+### Comparison at 300 updates
+
+At the same update count, the 120-second-preparation run reaches MSE
+**0.04486787** (66.41% captured energy), compared with **0.04484869** (66.61%)
+for the earlier 60-second run. The [independent comparison receipt](capacity-preparation-300-comparison.json)
+retains both checkpoint identities. This shows that the broad training improvement
+survives longer preparation; it does not establish that either initialization is
+better or that optimization has converged.
+
+For the new checkpoint, doubling preparation changes MSE by 3.66e-8 and
+predictions by at most 8.10e-5; halving the integration step changes MSE by
+2.66e-8. Zero-current prediction energy is 6.61e-9 of stimulated energy.
+The 1,000-update run continues with its declared settings. These remain interim
+checks, not a completed longer-run result or a passed capacity gate.
