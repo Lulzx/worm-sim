@@ -77,3 +77,17 @@ It does not call the Rust correlation implementation or refit the model. Analyti
 Python checks cover matching, reversed, shifted and constant signals and confirm
 the effect of the variance floor. These diagnostic values are distinct from
 held-out performance and do not justify selecting epsilon using test outcomes.
+
+The first real-data diagnostic on the selected five-update neutral joint fit
+(`fe2972f`) uses epsilon **0.01**, evaluates **24,635** eligible training pairs,
+and gives mean shape loss **1.002181599** (stabilized mean correlation
+**-0.002181599**). This epsilon was specified for diagnosis, not used in that fit.
+The [native receipt](neutral-shape-diagnostic.json) was generated from `fdcd6eb`;
+the [independent audit](neutral-shape-audit.json) replays all 161 training target
+grids and agrees within 1e-10. Original MSE decomposition and model predictions
+also agree. Receipts retain source and input hashes.
+
+The poor pair-uniform shape score can coexist with a small MSE improvement:
+MSE and this shape objective weight traces differently. It supports investigating
+shape fitting, but is not evidence that adding correlation loss will improve
+held-out predictions. No new test evaluation was performed for this diagnostic.
