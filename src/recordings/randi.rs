@@ -66,6 +66,7 @@ pub struct Report {
     pub config: Config,
     pub source_recordings: usize,
     pub source_events: usize,
+    pub trailing_blank_labels: BTreeMap<usize, usize>,
     pub excluded_events: BTreeMap<String, usize>,
     pub excluded_trace_windows: BTreeMap<String, usize>,
     pub excluded_labels: BTreeMap<String, usize>,
@@ -154,7 +155,8 @@ pub fn import(
     let mut report = Report {
         schema_version: 1, source_commit: option_env!("WORMSIM_COMMIT").unwrap_or("unversioned").into(),
         manifest_sha256: manifest_hash.clone(), dataset_hash: String::new(), config: config.clone(),
-        source_recordings: records.len(), source_events: 0, excluded_events: BTreeMap::new(),
+        source_recordings: records.len(), source_events: 0,
+        trailing_blank_labels: BTreeMap::new(), excluded_events: BTreeMap::new(),
         excluded_trace_windows: BTreeMap::new(), excluded_labels: BTreeMap::new(), events: vec![],
         limitations: vec![
             "Processed fluorescence export: upstream spike removal, smoothing and photobleaching correction; not raw images or prospectively processed signals.".into(),
@@ -189,7 +191,26 @@ pub fn import(
             )
         };
         let labels_text = read("labels.txt")?;
-        let labels: Vec<_> = labels_text.lines().map(str::trim).collect();
+        let mut labels: Vec<_> = labels_text.lines().map(str::trim).collect();
+        let matrix_text = read("gcamp.txt")?;
+        let columns = matrix_text
+            .lines()
+            .next()
+            .ok_or("empty fluorescence matrix")?
+            .split_whitespace()
+            .count();
+        if columns == 0 || labels.len() < columns || labels[columns..].iter().any(|s| !s.is_empty())
+        {
+            return Err(format!(
+                "fluorescence/label dimension mismatch in recording {record}"
+            ));
+        }
+        if labels.len() > columns {
+            report
+                .trailing_blank_labels
+                .insert(record, labels.len() - columns);
+            labels.truncate(columns);
+        }
         let mut multiplicity = BTreeMap::new();
         for label in &labels {
             *multiplicity.entry(*label).or_insert(0usize) += 1;
@@ -223,7 +244,6 @@ pub fn import(
                 "invalid times/events/dimensions in recording {record}"
             ));
         }
-        let matrix_text = read("gcamp.txt")?;
         let mut matrix = Vec::with_capacity(times.len() * labels.len());
         let mut rows = 0;
         for line in matrix_text.lines() {

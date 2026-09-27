@@ -38,7 +38,10 @@ and response ranges are half-open. For each ROI, ΔF/F is `(F - mean_baseline) /
 mean_baseline`; the baseline excludes the stimulation frame and all subsequent
 samples. At least 80% of the baseline samples must be finite, its mean must be
 positive, and at least two response samples must be finite. NaNs remain missing;
-infinities or malformed matrix dimensions reject the source.
+infinities or malformed matrix dimensions reject the source. Three recordings
+have surplus label rows (39, 2 and 1 respectively), all blank. Only such trailing
+blank rows beyond the matrix width are discarded, with counts in the receipt;
+extra nonblank labels cause an error.
 
 The complete baseline-plus-response ranges of retained events must not overlap.
 Both events are rejected when their proposed ranges overlap, even if one event

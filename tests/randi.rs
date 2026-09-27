@@ -130,3 +130,14 @@ fn malformed_sources_fail_and_nonpositive_baselines_are_excluded() {
     );
     assert!(source.import().is_err());
 }
+
+#[test]
+fn surplus_label_rows_are_accepted_only_when_blank() {
+    let mut source = Source::new();
+    source.set("labels.txt", "N000\nN001\nN002\nN002\nAWCON\n\n\n \n");
+    let (data, report) = source.import().unwrap();
+    assert_eq!(report.trailing_blank_labels[&0], 2);
+    assert_eq!(data.trials.len(), 2);
+    source.set("labels.txt", "N000\nN001\nN002\nN002\nAWCON\n\nN000\n");
+    assert!(source.import().unwrap_err().contains("dimension mismatch"));
+}
