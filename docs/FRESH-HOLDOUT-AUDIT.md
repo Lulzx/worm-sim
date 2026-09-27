@@ -118,3 +118,16 @@ python3 scripts/audit_dunn_inventory.py \
 The script downloads only JSON inventories and pinned repository source text,
 rejects incomplete pagination or duplicate/conflicting recording identifiers,
 and verifies the existing Randi recording-name files before comparison.
+
+
+The processed-data ZIP was subsequently screened using exact directory ranges:
+[archive inventory](dunn-archive-inventory.json). Only its 22-byte end record and
+791-byte central directory were requested. Its eight entries comprise named
+sine-fit CSVs, three compressed NumPy files, embedding accuracy, reversal labels,
+and a reversal dataframe. None is separately named as an event manifest; filenames
+alone do not prove that no useful metadata exists within these files. No member
+payload was requested or decompressed, so per-event eligibility remains unresolved.
+
+```sh
+python3 scripts/inspect_dunn_archive.py --output runs/dunn-archive-inventory-new.json
+```

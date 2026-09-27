@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "metadata_url": "https://zenodo.org/api/records/17353307",
+  "metadata_sha256": "b870bdc3d064cf8b3d3c4f10fb14474ce4e482c9c614b8a672574afbdfa562ed",
+  "doi": "10.5281/zenodo.17353307",
+  "archive_url": "https://zenodo.org/api/records/17353307/files/intermediate_datafiles.zip/content",
+  "archive_bytes": 665788261,
+  "published_archive_checksum": "md5:b5d0cae8bb830157367f0abf5cf6f266",
+  "archive_checksum_independently_verified": false,
+  "central_directory_sha256": "78daf545ee3352535c6a589db9643e64fe3a46969f63cfc2c7b8beec9ebed909",
+  "script_sha256": "25284ce1ba7b9865b92c6df06fc11defc871141aec4e44d1beee83b0157e28dd",
+  "bytes_requested_from_archive": 813,
+  "file_entries": [
+    {
+      "name": "20241215_sine_fits_all_fastsmooth.csv",
+      "compressed_bytes": 23191141,
+      "uncompressed_bytes": 151967481,
+      "crc32": "1e7fd836"
+    },
+    {
+      "name": "20250131_all_sine_fits_fastsmooth_rescaled.csv",
+      "compressed_bytes": 32892294,
+      "uncompressed_bytes": 240924797,
+      "crc32": "52dbb230"
+    },
+    {
+      "name": "20250328_hco_t.npy.gz",
+      "compressed_bytes": 1392353,
+      "uncompressed_bytes": 10680125,
+      "crc32": "d592c66b"
+    },
+    {
+      "name": "20250328_hco_y.npy.gz",
+      "compressed_bytes": 337803401,
+      "uncompressed_bytes": 337700576,
+      "crc32": "22873dfb"
+    },
+    {
+      "name": "20250328_hco_y_k0.npy.gz",
+      "compressed_bytes": 267508821,
+      "uncompressed_bytes": 267624062,
+      "crc32": "7638153b"
+    },
+    {
+      "name": "embedding_accuracy.csv",
+      "compressed_bytes": 904,
+      "uncompressed_bytes": 1880,
+      "crc32": "392e4cf2"
+    },
+    {
+      "name": "20241108_rev_code_labeling.csv",
+      "compressed_bytes": 1675,
+      "uncompressed_bytes": 6548,
+      "crc32": "3c7ecfee"
+    },
+    {
+      "name": "20241129_rev_df_fastsmooth.csv",
+      "compressed_bytes": 2996004,
+      "uncompressed_bytes": 7577701,
+      "crc32": "67a0a129"
+    }
+  ],
+  "scope": "Exact ZIP end record and central directory ranges only; no member payloads requested or decompressed. Filenames establish inventory, not contents or cohort independence."
+}
