@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "failure_sha256": "e3a5d45d9ead1e353c6ab649477dba4a414cb79294b742dbe6e829feac512593",
+  "manifest_sha256": "0e889d561174eef7bd5f9a0558c2c64f42aa4d72cc52928ccac1a06d07564d2d",
+  "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+  "training_sha256": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+  "script_sha256": "98e16c9fe64fd1827d087ff2cc292ec611e42f779e50c9f3ecb034f5e22f37d6",
+  "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+  "epoch": 20,
+  "matched_finite_replay_epochs": 20,
+  "failure_observation": {
+    "epoch": 20,
+    "objective_finite": false,
+    "nonfinite_gradient_coordinates": 7076,
+    "metrics": {
+      "mse": null,
+      "bce": 0.0,
+      "correlation": 0.0,
+      "prior": 0.0
+    }
+  },
+  "step_refinement": [
+    {
+      "dt": 0.01,
+      "finite_preparation": false,
+      "finite_responses": false,
+      "training_mse": null,
+      "failure_type": "AssertionError",
+      "local_euler_amplification_radius": 0.9988480113436139
+    },
+    {
+      "dt": 0.005,
+      "finite_preparation": true,
+      "finite_responses": true,
+      "training_mse": 0.04478080648655994,
+      "prepared_derivative_max": 5.1415026097300676e-08,
+      "local_euler_amplification_radius": 0.9994240056718069
+    },
+    {
+      "dt": 0.0025,
+      "finite_preparation": true,
+      "finite_responses": true,
+      "training_mse": 0.04478096729793504,
+      "prepared_derivative_max": 5.151652740517809e-08,
+      "local_euler_amplification_radius": 0.9997120028359034
+    }
+  ],
+  "linearization": {
+    "state_source_dt": 0.0025,
+    "prepared_derivative_max": 5.151652740517809e-08,
+    "eigenvalue_count": 906,
+    "max_real_eigenvalue": -0.11519886563861553,
+    "min_real_eigenvalue": -181.32485998215725,
+    "negative_mode_euler_step_limit": 0.011029927171579254,
+    "directional_finite_difference_max_error": 1.8890361275225587e-08
+  },
+  "scope": "Frozen failing parameters, independent NumPy trajectories and local Jacobian at the finest-step prepared state. Euler amplification is local, not a global nonlinear stability guarantee; smaller-step replay is not a retrained model or a successful gradient check."
+}

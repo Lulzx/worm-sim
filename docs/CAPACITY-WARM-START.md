@@ -1,7 +1,7 @@
 # Paired learning-rate test after the long capacity fit
 
 The [1,000-update result](LEVEL0-LONG-RUN.md) improved training fit but missed the
-90% capacity gate and showed transient loss spikes. The next experiment compares
+90% capacity gate and showed transient loss spikes. The declared experiment compared
 a lower learning rate with a reset-optimizer control, keeping the dynamics,
 readout, target subset and objective unchanged.
 
@@ -61,3 +61,49 @@ been reconstructed or silently replaced.
 A separate one-update integration smoke reproduced the parent at local epoch
 zero (MSE 0.04386919577634917), then exercised the new best-checkpoint path. It is
 not either declared 200-update run or an optimizer comparison result.
+
+
+## Outcome: both runs failed before 200 updates
+
+Both runs launched from clean source `d44b04f`. The [complete receipt](capacity-warm-results.json)
+retains both manifests and every finite training iterate. Neither produced a
+normal terminal result; the predeclared final-at-200 comparison is unavailable.
+
+| Learning rate | Last finite update | Best retained MSE | Captured response energy | Failure update |
+| --- | ---: | ---: | ---: | ---: |
+| 0.001 | 180 | 0.04385085 | 76.67% | 181 |
+| 0.01 | 19 | 0.04386920 (initial parent) | 76.48% | 20 |
+
+Both exited with a nonfinite objective/gradient error. The lower rate improved
+slowly but did not pass the 90% gate. Its best retained checkpoint independently
+replays in NumPy with identical MSE. Halving the step changes MSE by 1.81e-7;
+doubling preparation changes it by 5.23e-11. Unstimulated prediction energy is
+3.38e-13 versus 0.00761 with stimulation. These checks validate the retained
+iterate, not the next failed update.
+
+### Reproduced higher-rate failure
+
+`backends/jax/replay_capacity_failure.py` verifies original backend and input
+hashes, reconstructs fresh Adam moments, matches all 20 finite recorded MSEs,
+and captures the finite parameters whose evaluation fails at update 20.
+It is a diagnostic replay, not a completed or restarted comparison run.
+The evaluation has a nonfinite objective and 7,076 nonfinite gradient coordinates.
+
+The [independent stability audit](capacity-reset-stability-audit.json) finds that
+Euler preparation fails at a 0.01-second step but succeeds at 0.005 and 0.0025.
+Their training MSEs are 0.04478081 and 0.04478097. At the finer-step prepared
+state, the analytically assembled Jacobian agrees with directional finite
+differences to 1.89e-8. Its local Euler step limit is about 0.01103 seconds:
+the original step is locally stable there. Thus equilibrium linearization does
+**not** establish the cause of failure along the nonlinear preparation path.
+Finer-step finite predictions also do not establish finite or accurate gradients.
+The lower-rate failure has not been reproduced at its failing parameters.
+
+### Decision
+
+Keep dynamical features frozen. Before another longer fit, check the preparation
+trajectory and differentiated objective at refined steps or with the existing
+adaptive solver. Retain a failing parameter snapshot automatically in future
+runs. Declare any changed-solver fit separately; do not treat it as completion
+of these failed runs. The capacity gate and fresh-holdout requirement remain
+unchanged.

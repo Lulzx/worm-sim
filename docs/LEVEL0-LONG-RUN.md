@@ -92,3 +92,5 @@ python3 scripts/plot_capacity_curve.py \
   --curve docs/capacity-prep120-1000-training.csv \
   --output docs/capacity-prep120-1000.svg
 ```
+
+The subsequent [paired warm-start experiment](CAPACITY-WARM-START.md#outcome-both-runs-failed-before-200-updates) stopped on nonfinite gradients in both runs. Solver robustness must be checked before another long fit.
