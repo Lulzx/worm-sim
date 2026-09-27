@@ -11,9 +11,19 @@ fn main() -> Result<()> {
     let mut args = std::env::args().skip(1);
     let path = args.next().unwrap_or("runs/taichi-reference.json".into());
     let graph_path = args.next();
-    if args.next().is_some() {
-        return Err("usage: export_taichi_reference [OUTPUT [GRAPH.wsc]]".into());
+    let steps = args
+        .next()
+        .map(|value| value.parse::<usize>())
+        .transpose()
+        .map_err(|_| "STEPS must be a positive integer")?
+        .unwrap_or(64);
+    if steps == 0 {
+        return Err("STEPS must be a positive integer".into());
     }
+    if args.next().is_some() {
+        return Err("usage: export_taichi_reference [OUTPUT [GRAPH.wsc|- [STEPS]]]".into());
+    }
+    let graph_path = graph_path.filter(|path| path != "-");
     let real_graph = graph_path.is_some();
     let graph = match graph_path {
         Some(path) => codec::decode(&fs::read(path).map_err(|e| e.to_string())?)?,
@@ -21,7 +31,6 @@ fn main() -> Result<()> {
     };
     let model = Model::new(graph)?;
     let n = model.n();
-    let steps = 64;
     let dt = 0.001;
     let mut params = model.defaults();
     for i in 0..n {

@@ -10,14 +10,17 @@ import time
 import numpy as np
 import taichi as ti
 from level0 import Level0
+from checkpoint import CheckpointLevel0
 
 def main():
     p=argparse.ArgumentParser()
     p.add_argument('fixture',type=Path);p.add_argument('--arch',choices=['cpu','metal'],default='cpu')
     p.add_argument('--batch',type=int,default=1);p.add_argument('--output',type=Path,required=True)
     p.add_argument('--repeats',type=int,default=5);p.add_argument('--validate',action='store_true')
+    p.add_argument('--checkpoint-steps',type=int,default=0,help='Replay windows of this size; 0 retains the full tape')
     p.add_argument('--ad-stack-size',type=int,default=256,help='Explicit CPU AD stack capacity; automatic sizing crashes on c302 with Taichi 1.7.4')
     args=p.parse_args()
+    if args.checkpoint_steps<0:p.error('--checkpoint-steps must be nonnegative')
     if args.repeats<1:p.error('--repeats must be positive')
     if args.ad_stack_size<1:p.error('--ad-stack-size must be positive')
     fixture_bytes=args.fixture.read_bytes()
@@ -25,7 +28,8 @@ def main():
     dtype=ti.f64 if args.arch=='cpu' else ti.f32
     ti.init(arch=ti.cpu if args.arch=='cpu' else ti.metal,enable_fallback=False,
             default_fp=dtype,fast_math=False,debug=args.validate,cpu_max_num_threads=1,offline_cache=False,ad_stack_size=args.ad_stack_size)
-    model=Level0(fixture,batch=args.batch,dtype=dtype)
+    model=(CheckpointLevel0(fixture,args.checkpoint_steps,batch=args.batch,dtype=dtype)
+           if args.checkpoint_steps else Level0(fixture,batch=args.batch,dtype=dtype))
     start=time.perf_counter();value,gradient=model.value_and_grad(validation=args.validate)
     compile_and_first_seconds=time.perf_counter()-start
     forward=[];backward=[]
@@ -36,12 +40,19 @@ def main():
     reference=fixture['reference'];expected=np.asarray(reference['gradient'])
     indices=np.asarray(fixture.get('gradient_indices',list(range(len(expected)))),dtype=int)
     actual=gradient[indices]
-    voltage=model.voltage.to_numpy()
-    fluorescence=model.calcium.to_numpy()*model.prepared.to_numpy()[5*model.n:6*model.n][None,None,:]
     atol,rtol=(1e-11,1e-8) if args.arch=='cpu' else (2e-8,2e-3)
-    passed=bool(np.allclose(actual,expected,atol=atol,rtol=rtol)
-                and np.allclose(voltage,np.asarray(reference['voltage'])[:,None,:],atol=atol*100,rtol=rtol)
-                and np.allclose(fluorescence,np.asarray(reference['fluorescence'])[:,None,:],atol=atol*100,rtol=rtol)
+    if args.checkpoint_steps:
+        state_passed,max_voltage_error,max_fluorescence_error=model.audit_states(reference,atol*100,rtol)
+    else:
+        voltage=model.voltage.to_numpy()
+        fluorescence=model.calcium.to_numpy()*model.prepared.to_numpy()[5*model.n:6*model.n][None,None,:]
+        expected_v=np.asarray(reference['voltage'])[:,None,:]
+        expected_f=np.asarray(reference['fluorescence'])[:,None,:]
+        state_passed=bool(np.allclose(voltage,expected_v,atol=atol*100,rtol=rtol)
+                          and np.allclose(fluorescence,expected_f,atol=atol*100,rtol=rtol))
+        max_voltage_error=float(np.max(np.abs(voltage-expected_v)))
+        max_fluorescence_error=float(np.max(np.abs(fluorescence-expected_f)))
+    passed=bool(np.allclose(actual,expected,atol=atol,rtol=rtol) and state_passed
                 and np.isclose(value,reference['loss'],atol=atol,rtol=rtol))
     report={'backend':'taichi','taichi_version':ti.__version__,'arch_requested':args.arch,
             'arch_actual':str(ti.lang.impl.current_cfg().arch),'fallback_allowed':False,
@@ -61,14 +72,17 @@ def main():
             'forward_seconds':forward,'forward_reverse_seconds':backward,
             'median_forward_reverse_seconds':statistics.median(backward),
             'loss':value,'reference_loss':reference['loss'],
-            'max_voltage_error':float(np.max(np.abs(voltage-np.asarray(reference['voltage'])[:,None,:]))),
-            'max_fluorescence_error':float(np.max(np.abs(fluorescence-np.asarray(reference['fluorescence'])[:,None,:]))),
+            'max_voltage_error':max_voltage_error,
+            'max_fluorescence_error':max_fluorescence_error,
             'max_gradient_error':float(np.max(np.abs(actual-expected))),
             'gradient_tolerance':{'absolute':atol,'relative':rtol},
             'gradients':actual.tolist(),'reference_gradients':expected.tolist(),
             'autodiff_validation':args.validate,'ad_stack_size':args.ad_stack_size,
             'offline_cache':False,'parity_passed':passed,
-            'state_and_adjoint_bytes':3*(model.steps+1)*model.batch*model.n*(8 if dtype==ti.f64 else 4)*2}
+            'state_and_adjoint_bytes':3*(model.state_steps+1)*model.batch*model.n*(8 if dtype==ti.f64 else 4)*2}
+    report['checkpoint_steps']=model.state_steps if args.checkpoint_steps else 0
+    if args.checkpoint_steps:
+        report['memory_accounting']=model.memory_accounting()
     # Full-network receipts retain diagnostics rather than duplicating all vectors.
     if len(indices)>128:
         errors=np.abs(actual-expected)

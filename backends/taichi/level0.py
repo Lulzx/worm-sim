@@ -2,12 +2,30 @@
 Rust owns graph compilation, codecs, parameters, and the numerical reference.
 States are time-indexed to satisfy Taichi's global data access rules.
 """
+from contextlib import contextmanager
 import numpy as np
 import taichi as ti
 
+@contextmanager
+def replay_safe_tape(loss, validation=False):
+    """Restore repeated-kernel modes correctly for pinned Taichi 1.7.4.
+
+    Tape.__exit__ restores in call order, leaving a repeatedly invoked kernel
+    in VALIDATION mode. Reverse-order restoration preserves validation inside
+    the tape and permits later primal-only replay without stale checkbits.
+    """
+    tape = ti.ad.Tape(loss, validation=validation)
+    try:
+        with tape:
+            yield tape
+    finally:
+        for (kernel, _), mode in reversed(list(zip(tape.calls, tape.modes))):
+            kernel.autodiff_mode = mode
+
+
 @ti.data_oriented
 class Level0:
-    def __init__(self,fixture,batch=1,dtype=ti.f32):
+    def __init__(self,fixture,batch=1,dtype=ti.f32,state_steps=None):
         self.static_neighbors=ti.lang.impl.current_cfg().arch==ti.metal
         if fixture.get('schema_version')!=1 or fixture.get('method')!='euler':
             raise ValueError('Expected schema 1 Euler reference')
@@ -19,7 +37,9 @@ class Level0:
             raise ValueError('Invalid Level 0 fixture')
         self.raw=ti.field(dtype,shape=self.p,needs_grad=True)
         self.prepared=ti.field(dtype,shape=self.p,needs_grad=True)
-        shape=(self.steps+1,batch,self.n)
+        self.state_steps=self.steps if state_steps is None else state_steps
+        if not 1<=self.state_steps<=self.steps:raise ValueError("Invalid state window")
+        shape=(self.state_steps+1,batch,self.n)
         self.voltage=ti.field(dtype,shape=shape,needs_grad=True)
         self.calcium=ti.field(dtype,shape=shape,needs_grad=True)
         self.gate=ti.field(dtype,shape=shape,needs_grad=True)
@@ -149,6 +169,6 @@ class Level0:
         return float(self.loss[None])
 
     def value_and_grad(self,validation=False):
-        with ti.ad.Tape(self.loss,validation=validation):self.rollout()
+        with replay_safe_tape(self.loss,validation=validation):self.rollout()
         ti.sync()
         return float(self.loss[None]),self.raw.grad.to_numpy()

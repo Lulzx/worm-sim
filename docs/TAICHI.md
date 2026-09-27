@@ -50,16 +50,17 @@ current reductions is an alternative if unrolling becomes expensive.
 
 Time-indexed voltage, calcium, and shared presynaptic gate fields respect
 [Taichi's autodiff access rules](https://docs.taichi-lang.org/docs/differentiable_programming).
-They currently retain every step and its adjoint: `6*(T+1)*B*N*sizeof(float)`
+The default full-tape path retains every step and its adjoint: `6*(T+1)*B*N*sizeof(float)`
 bytes, excluding parameters, constants, tape/compiler/runtime overhead. This is
-not checkpointed or a compressed training tape. State remains differentiable
+not a compressed training tape. An optional [checkpoint path](CHECKPOINTING.md)
+now recomputes windows and carries boundary adjoints. State remains differentiable
 floating point; the lossless Rust trajectory codecs serve archival output.
 
 [Metal supports f32, not f64](https://docs.taichi-lang.org/docs/type). CPU f64
 therefore remains the numerical reference. Metal timings on this tiny fixture
 are dominated by overhead and do not demonstrate acceleration. Long-horizon
 stability, mixed precision, distinct batched stimuli,
-checkpoint/recompute, and end-to-end fitting still need measurement. Metal
+and end-to-end fitting still need measurement beyond the audited cases. Metal
 AOT/C API integration is not established here; the documented stable/master
 support differs, so this backend uses the verified Python runtime.
 
@@ -123,7 +124,8 @@ are included in CI. Metal is audited locally because hosted CI has no Metal GPU.
 
 This establishes short-horizon gradient parity on the imported anatomy. It does
 not establish stable long-horizon training, heterogeneous trial batching,
-checkpointing, measured total peak memory, biological fitting, or body feedback.
-The next performance experiments are reducing Metal dispatch/reduction costs and
-checkpointing the time-indexed states, with the complete derivative audit retained
-as the correctness gate.
+measured total peak memory, biological fitting, or body feedback.
+The subsequent [checkpoint experiment](CHECKPOINTING.md) audits 1,024 steps and
+measures the recomputation/storage tradeoff. Metal dispatch/reduction costs remain
+optimization targets, with the complete derivative audit retained as the
+correctness gate.

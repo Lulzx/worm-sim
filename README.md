@@ -50,6 +50,8 @@ It demonstrates plumbing, not biological validation or parameter identifiability
 - Experimental [DiffTaichi-style reverse gradients](docs/TAICHI.md) on CPU and
   Apple Metal, audited against Rust for all 10,169 parameters of the 302-neuron
   anatomy, using short synthetic-target trials.
+- [Checkpointed reverse differentiation](docs/CHECKPOINTING.md), audited over
+  1,024 steps on CPU/Metal; trades recomputation for smaller state storage.
 
 ## Scientific and numerical conventions
 
@@ -96,7 +98,7 @@ Chemical signs/types are not inferred from anatomy or names.
 
 The GPU performance targets and Tasks 1–5 in the spec are **not met**. Forward AD
 needs one rollout per selected parameter and is a reference/audit path, not the
-full-scale training implementation. Full-network Metal training, reverse-mode checkpointing,
+full-scale training implementation. Full-network Metal training, streaming observations,
 stiff/adaptive solvers, class/hierarchical tying, calibrated observation models,
 real recording ingestion and held-out benchmarks, peptides, mixed fidelity,
 YAML protocols, mutants/drugs/clamps, uncertainty, and body feedback remain.
