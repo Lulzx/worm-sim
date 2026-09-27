@@ -146,6 +146,7 @@ impl FitConfig {
     }
 }
 #[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct AtlasModel {
     pub schema_version: u32,
     pub dataset_hash: String,
@@ -405,7 +406,7 @@ impl AtlasModel {
         })
     }
 }
-fn check_grid(times: &[f64], dt: f64) -> Result<()> {
+pub(crate) fn check_grid(times: &[f64], dt: f64) -> Result<()> {
     if times.len() < 2
         || times[0].abs() > 1e-10
         || times.windows(2).any(|p| (p[1] - p[0] - dt).abs() > 1e-10)

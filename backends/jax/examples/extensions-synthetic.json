@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "solver": {
+    "method": "tsit5",
+    "rtol": 1e-08,
+    "atol": 1e-10
+  },
+  "extensions": {
+    "dark_edges": {
+      "schema_version": 1,
+      "source": "synthetic pipeline check",
+      "max_edges": 1,
+      "l1_strength": 0.03,
+      "edges": [
+        {
+          "pre": "N001",
+          "post": "N000",
+          "group": "extra",
+          "strength": 0.2,
+          "reversal": 0.5
+        }
+      ]
+    },
+    "plasticity": {
+      "schema_version": 1,
+      "source": "synthetic pipeline check",
+      "types": [
+        {
+          "id": "type",
+          "mode": "both",
+          "utilization": 0.3,
+          "tau_depression": 0.4,
+          "tau_facilitation": 0.2,
+          "rate_scale": 3.0
+        }
+      ],
+      "edges": [
+        {
+          "pre": "N000",
+          "post": "N001",
+          "type": "type"
+        },
+        {
+          "pre": "N001",
+          "post": "N000",
+          "type": "type"
+        }
+      ]
+    },
+    "modulation": {
+      "schema_version": 1,
+      "source": "synthetic pipeline check",
+      "channels": [
+        {
+          "id": "test",
+          "species": "test",
+          "compartment": "head",
+          "tau_seconds": 2.0
+        }
+      ],
+      "release": [
+        {
+          "neuron": "N000",
+          "channel": "test",
+          "group": "release",
+          "alpha": 2.0
+        }
+      ],
+      "receptors": [
+        {
+          "neuron": "N001",
+          "channel": "test",
+          "effect": "gain",
+          "group": "gain",
+          "kd": 0.5,
+          "beta": 0.2
+        }
+      ]
+    },
+    "rectification": {
+      "schema_version": 1,
+      "source": "synthetic pipeline check",
+      "edges": [
+        {
+          "a": "N000",
+          "b": "N001",
+          "group": "gap",
+          "asymmetry": 0.1,
+          "voltage_scale": 0.3
+        }
+      ]
+    }
+  }
+}

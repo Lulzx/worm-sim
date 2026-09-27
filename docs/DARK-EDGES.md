@@ -57,9 +57,10 @@ invalid candidate masks, topology binding, composed rollout/penalty gradients
 against finite differences, and an Optax step that reduces the composed loss.
 The default model remains unchanged when this option is omitted.
 
-The population fit CLI and native AtlasModel checkpoint/scoring schema do not yet
-serialize these extensions. They must be extended together before fitting real
-atlas data with extra connections. Candidate selection must use training evidence
+The [extended fit runner](EXTENDED-FITTING.md) now serializes declarations and
+learned parameters, adds this penalty once, and submits predictions to Rust
+scoring. The native AtlasModel simulator cannot execute the extension and rejects
+its separate checkpoint envelope. Candidate selection must use training evidence
 only, with validation-selected budgets and penalties; test responses must not
 select candidate edges. Native protocol operations are not yet available through
-this JAX API. These integration and biological validation requirements remain open.
+this JAX API. Biological validation remains open.

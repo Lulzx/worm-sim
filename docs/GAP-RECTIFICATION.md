@@ -54,5 +54,6 @@ Tests check conservation and dissipation at both voltage polarities, zero-effect
 trajectory parity, reverse gradients against finite differences, sparse edge
 selection, tying and invalid-map handling. Biological innexin assignments,
 mutation mapping, priors and held-out evaluation remain unimplemented. The
-legacy population runner and Rust checkpoint format do not yet accept this
-extension; archive its specification separately with any experimental parameters.
+separate [extended population runner](EXTENDED-FITTING.md) saves this
+extension and uses Rust to score JAX predictions. Native model loading rejects
+the extended checkpoint rather than dropping rectification.

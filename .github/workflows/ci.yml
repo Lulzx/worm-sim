@@ -46,6 +46,8 @@ jobs:
       JAX_ENABLE_X64: 'true'
     steps:
       - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - run: WORMSIM_COMMIT=$(git rev-parse HEAD) cargo build --locked --release --example external_atlas --example export_external_atlas_fixture --example export_atlas_training
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

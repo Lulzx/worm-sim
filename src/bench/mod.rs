@@ -10,6 +10,7 @@ pub mod behavior;
 pub mod connectome_fit;
 pub mod connectome_lds;
 pub mod controls;
+pub mod external_atlas;
 pub mod gru;
 mod gru_cell;
 pub mod lds;

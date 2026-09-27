@@ -87,6 +87,6 @@ zero-drive recovery, inward boundary derivatives, source/type sharing against
 independent per-edge equations, unchanged empty-mode behavior, invalid mappings,
 combined modulation/extra-edge currents, and finite-difference gradients through
 the full prepared response. Euler step refinement is compared with a tight-tolerance
-Kvaerno5 solution. It exercises the low-level API; population fitting,
-checkpoint serialization, and native scorer integration remain open, as do
-source-backed type assignments and biological validation.
+Kvaerno5 solution. The [extended fitting pipeline](EXTENDED-FITTING.md) additionally trains,
+serializes, reloads, and submits these dynamics to independent Rust scoring.
+Source-backed type assignments and biological validation remain open.

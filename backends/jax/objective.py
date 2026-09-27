@@ -3,10 +3,10 @@ import jax
 import jax.numpy as jnp
 import equinox as eqx
 import numpy as np
-from level0 import Level0, parameters
+from extensions import initialize
 
 
-def build(model, graph, training):
+def build(model, graph, training, configuration=None):
     if training.get('schema_version')!=2:
         raise ValueError('training export requires schema version 2')
     for key in ['graph_hash','dataset_hash','split_hash','training_trials']:
@@ -23,14 +23,8 @@ def build(model, graph, training):
             or [[index[e['a']],index[e['b']],e['size']] for e in gaps]!=training['gap_topology']):
         raise ValueError('JAX graph differs from authoritative Rust topology')
     times=training['groups'][0]['recording']['times']
-    engine=Level0(model,graph,times)
-    theta=parameters(model)
+    engine,theta,active=initialize(model,graph,times,configuration)
     classifier=model.get('classifier')
-    if classifier:
-        theta['classifier']=jnp.asarray([classifier['bias'],classifier['raw_slope']])
-    active={k:jnp.ones_like(v,dtype=bool) for k,v in theta.items()}
-    active['groups']=jnp.asarray([g['trainable'] for g in model['parameters']['groups']])
-    active['log_gain']=jnp.asarray(model.get('observation_log_gain') is not None)
     total=sum(g['sample_weight'] for g in training['groups'])
     pairs=training['classification_pairs']
     groups=[]
@@ -100,7 +94,7 @@ def build(model, graph, training):
         if config.get('observation_gain'):
             c=config['observation_gain']
             penalty+=c['prior_strength']*(p['log_gain']-np.log(c['initial_gain']))**2
-        return penalty
+        return penalty+engine.extension_penalty(p)
     return theta,active,groups,eqx.filter_jit(eqx.filter_value_and_grad(data_loss,has_aux=True)),eqx.filter_jit(eqx.filter_value_and_grad(prior_loss))
 
 

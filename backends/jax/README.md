@@ -28,8 +28,8 @@ uses float64. Apple Silicon currently uses the standard JAX CPU backend; GPU
 speed is not assumed. The compatibility path deliberately retains the original
 Euler grid, positive transforms, tied parameters, unforced preparation, shared
 input kernel and relative calcium readout. Diffrax `StepTo` follows the actual
-floating-point reference step accumulation. Switching to adaptive or implicit
-integration will be a separate numerical comparison.
+floating-point reference step accumulation. Adaptive and implicit integration are available through the separate
+[extended fitting path](../../docs/EXTENDED-FITTING.md), with explicit solver settings.
 
 Equinox carries the sparse topology. JAX scatters implement chemical and gap
 currents. Diffrax supplies the integrator and recursive checkpointed adjoint;
@@ -53,7 +53,7 @@ Preparation reuse, optimizer resume and additional configuration parity checks
 remain. Reproducing this fit does not fix underfitting or establish superiority
 over the LDS baseline.
 
-Planned library reuse: Diffrax adaptive/stiff integration; Jaxley for suitable
+Further planned library reuse: Jaxley for suitable
 conductance-based cells after equation/unit audits; dynamax for LDS inference;
 NumPyro or sbi for the relevant inference tasks after identifying the actual
 posterior/likelihood requirements. Library availability is not implementation or
@@ -91,7 +91,7 @@ WORMSIM_COMMIT=$(git rev-parse HEAD) cargo run --release --example export_atlas_
 The epoch-one comparison starts from zero optimizer moments and checks the
 existing Adam settings (global gradient clip 10, beta1 .9, beta2 .999, epsilon
 1e-8). It is not an optimizer resume implementation. Preparation is currently
-repeated per target; sharing that work and a full population fit runner remain.
+repeated per target; sharing that work remains. The population fit runner is described below.
 
 ## Population fit runner
 
@@ -155,7 +155,8 @@ source provenance and canonical pair orientation are required. See the
 `DarkEdges` declares a budgeted sparse set of extra chemical candidates with
 physical-strength L1 regularization. The low-level Level 0 API supports their
 dynamics and reverse gradients. See [configuration and limits](../../docs/DARK-EDGES.md);
-population checkpoint and scoring integration remains open.
+the [extended fitter](../../docs/EXTENDED-FITTING.md) preserves these parameters
+and submits predictions to the Rust scorer.
 
 ## Short-term plasticity
 
@@ -163,3 +164,10 @@ The optional `Plasticity` module adds type-tied depression and facilitation to
 anatomical or declared extra chemical edges, sharing states by source/type.
 [Equations, configuration, checks, and integration limits](../../docs/PLASTICITY.md)
 distinguish this rate-adapted mechanism from calibrated worm biology.
+
+## Extended population fitting
+
+`fit_extensions.py` trains declared coupling modules and saves complete JAX
+checkpoint envelopes. `predict_extensions.py` reloads them against observation-free
+Rust plans; Rust scores each validation candidate. See the
+[reproduction guide and boundaries](../../docs/EXTENDED-FITTING.md).

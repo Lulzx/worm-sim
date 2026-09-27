@@ -57,9 +57,10 @@ This command compares explicit/implicit adaptive full-state trajectories at fixe
 parameters, recording input/source hashes, settings, step counts and timings.
 It does not fit data or select a model. Dense implicit solves may be costly on the
 full graph; no speedup or memory-efficiency claim is implied by library support.
-The existing fit runner and Rust selection scorer retain Euler; using adaptive
-training requires a matching prediction/scoring contract so validation does not
-silently use a different integrator. Continuous adjoints, multirate modulation,
+The compatibility fit runner retains Euler. The separate
+[extended fitter](EXTENDED-FITTING.md) serializes adaptive settings and evaluates
+training and validation dynamics with the same solver; Rust scores the generated
+predictions instead of rerunning them with a different integrator. Continuous adjoints, multirate modulation,
 truncated training and distributed execution remain separate §6 requirements.
 
 Primary documentation: [Diffrax ODE solvers](https://docs.kidger.site/diffrax/api/solvers/ode_solvers/),

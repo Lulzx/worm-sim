@@ -55,13 +55,14 @@ with the unmodulated path. Bath is a nonnegative constant contribution to the
 concentration's equilibrium drive, expressed in the same normalized units as the
 release sum. It is not a calibrated drug dose or a timed pharmacology protocol.
 
-Full state order is voltage, calcium, synaptic gates, then concentration channels
-in declared order. `theta['modulation']` contains named arrays `raw_tau`,
+State order is voltage, calcium, synaptic gates, then concentration channels
+in declared order, followed by optional plasticity states. `theta['modulation']` contains named arrays `raw_tau`,
 `raw_release`, `raw_kd` and `sensitivity`. It is an ordinary JAX pytree. The existing
 Euler and optional Diffrax solvers carry the coupled state and its gradients
 through unforced preparation and stimulus intervals. No hand-written adjoint is
-needed. Keep the original modulation specification with any parameter artifact;
-the legacy Rust atlas checkpoint schema does not yet serialize these extra states.
+needed. The [extended fitting checkpoint](EXTENDED-FITTING.md) preserves both
+the original specification and learned arrays, and Rust scores its predictions.
+The native simulator does not execute this extension.
 
 ## Checks and remaining requirements
 
@@ -72,6 +73,5 @@ differences, and invalid map/tie handling. Test maps and parameter values are
 synthetic. No biological fit, phenotype, or improved forecasting is claimed.
 
 Remaining acceptance work includes source-backed peptide/monoamine maps,
-receptor-specific priors, timed drug/gene perturbations, modulation-aware fitting
-checkpoints and Rust scoring contracts, multirate integration, spatial transport
+receptor-specific priors, timed drug/gene perturbations, multirate integration, spatial transport
 if needed, and held-out comparisons against the model without modulation.

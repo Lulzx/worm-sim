@@ -592,3 +592,55 @@ fn adamw_fit_decays_only_trainable_raw_coordinates() {
     );
     assert_eq!(decayed[1].free_parameters(), baseline[1].free_parameters());
 }
+
+#[test]
+fn external_plans_exclude_observations_and_native_models_reject_extensions() {
+    use wormsim::bench::external_atlas::{Checkpoint, PredictionPlan};
+    let (graph, mut data, mut split) = fixture();
+    let config: FitConfig = serde_json::from_value(serde_json::json!({
+        "epochs":1,"dt":0.05,"learning_rate":0.001,"kernel_lags":1,
+        "prior_strength":0.01,"sign_prior_strength":0.01,"kernel_prior_strength":0.01,
+        "sharing":wormsim::parameters::Sharing::default()
+    }))
+    .unwrap();
+    let (mut model, _) =
+        atlas_level0::fit_select(&data, &graph, &split, config, |_, _| Ok(())).unwrap();
+    let plan = PredictionPlan::new(&model, &data, &graph, &split, Partition::Validation).unwrap();
+    assert_eq!(
+        plan.trials.iter().map(|t| t.id.clone()).collect::<Vec<_>>(),
+        split.validation
+    );
+    let encoded = serde_json::to_value(&plan).unwrap();
+    assert!(encoded["trials"][0].get("values").is_none());
+    assert!(encoded["trials"][0].get("recording").is_none());
+    assert!(PredictionPlan::new(&model, &data, &graph, &split, Partition::Train).is_err());
+    for trial in &mut data.trials {
+        for trace in &mut trial.recording.traces {
+            trace.values.fill(Some(999.));
+        }
+    }
+    split.dataset_hash = data.content_hash().unwrap();
+    model.dataset_hash = split.dataset_hash.clone();
+    model.split_hash = split.content_hash().unwrap();
+    let changed =
+        PredictionPlan::new(&model, &data, &graph, &split, Partition::Validation).unwrap();
+    assert_eq!(
+        serde_json::to_value(&plan.trials).unwrap(),
+        serde_json::to_value(&changed.trials).unwrap()
+    );
+    let wrapper = Checkpoint {
+        format: "wormsim-jax-atlas".into(),
+        schema_version: 1,
+        base_model: model.clone(),
+        configuration: serde_json::json!({}),
+        extension_parameters: serde_json::json!({}),
+    };
+    wrapper.validate(&data, &graph, &split).unwrap();
+    assert!(
+        serde_json::from_value::<atlas_level0::AtlasModel>(serde_json::to_value(wrapper).unwrap())
+            .is_err()
+    );
+    let mut wrong = serde_json::to_value(model).unwrap();
+    wrong["extensions"] = serde_json::json!({});
+    assert!(serde_json::from_value::<atlas_level0::AtlasModel>(wrong).is_err());
+}

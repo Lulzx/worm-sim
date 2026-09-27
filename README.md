@@ -62,7 +62,7 @@ Apple Silicon environment uses JAX on CPU. GPU performance targets are unverifie
 | Anatomy and storage | Canonical 302-neuron identities, sparse chemical and electrical connectivity, source hashes, lossless graph and trajectory codecs |
 | Level 0 dynamics | Graded neurons, chemical synapses, gap junctions, calcium readout, tied parameters, and history-based initial-state inference |
 | Integration | Native Euler/RK4; JAX reference-grid replay and separately tested Diffrax adaptive and implicit solvers |
-| Experimental extensions | Compartmental neuromodulation and voltage-dependent gap rectification, checked on synthetic cases; population fitting integration remains open |
+| Experimental extensions | Neuromodulation, gap rectification, extra chemical edges, and plasticity; fitting, checkpoint reload, and Rust scoring checked on synthetic data |
 | Spontaneous activity | 21 labeled animals, fixed animal splits, history-based forecasts, trivial/AR/LDS/GRU controls, and animal-bootstrap uncertainty |
 | Perturbation responses | 3,166 Randi atlas trials, held-out stimulated-neuron splits, trace and pair-response scoring, and fitted Level 0/LDS comparisons |
 | Reproducibility | Input hashes, explicit masks, fixed neuron ordering, run manifests, independent scorers, and numerical parity checks |
@@ -95,7 +95,7 @@ remain unfinished.
 
 - [Specification](SPEC.md), [implementation status](docs/IMPLEMENTATION-STATUS.md), and [benchmark contracts](docs/BENCHMARKS.md)
 - [WormWideWeb data](docs/WORMWIDEWEB.md), [Randi atlas](docs/RANDI-ATLAS.md), and [molecular priors](docs/MOLECULAR-PRIORS.md)
-- [Initial-state inference](docs/INITIAL-STATE.md) and [JAX fitting](backends/jax/README.md)
+- [Initial-state inference](docs/INITIAL-STATE.md), [JAX fitting](backends/jax/README.md), and [extended model checkpoints](docs/EXTENDED-FITTING.md)
 - [Perturbation protocols](docs/PERTURBATIONS.md), [adaptive solvers](docs/ADAPTIVE-SOLVERS.md), [neuromodulation](docs/NEUROMODULATION.md), and [gap rectification](docs/GAP-RECTIFICATION.md)
 - [Performance and storage formats](docs/PERFORMANCE.md), [experimental Taichi backend](docs/TAICHI.md), and [upstream review](docs/UPSTREAM-REVIEW.md)
 

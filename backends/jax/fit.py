@@ -11,6 +11,7 @@ import jax.numpy as jnp
 import numpy as np
 import optax
 from objective import build, evaluate
+from extensions import pack
 
 
 def make_optimizer(config, active):
@@ -60,10 +61,10 @@ def checkpoint(template, theta, epoch, source):
     return out
 
 
-def fit(model,graph,training,source,score_and_save,progress=None):
+def fit(model,graph,training,source,score_and_save,progress=None,configuration=None):
     if model['epoch']!=0:
         raise ValueError('fit requires epoch zero; optimizer resume is not implemented')
-    theta,active,groups,data,prior=build(model,graph,training)
+    theta,active,groups,data,prior=build(model,graph,training,configuration)
     optimizer=make_optimizer(model['config'],active)
     state=optimizer.init(theta)
     reports=[];selected=None;best=float('inf')
@@ -78,6 +79,8 @@ def fit(model,graph,training,source,score_and_save,progress=None):
             updated=optax.apply_updates(theta,updates)
             theta=jax.tree.map(lambda new,old,a:jnp.where(a,new,old),updated,theta,active)
         candidate=checkpoint(model,theta,epoch,source)
+        if configuration is not None:
+            candidate=pack(candidate,theta,configuration)
         score=score_and_save(candidate)
         if not np.isfinite(score):
             raise ValueError('nonfinite validation MSE')
