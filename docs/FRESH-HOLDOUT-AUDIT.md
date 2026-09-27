@@ -224,3 +224,35 @@ larger limit. Together with the converter source audit, this favors using the
 processed metadata to establish stimulus eligibility instead of spending more
 requests traversing raw-image structures. Animal-level independence and a fresh
 confirmatory cohort remain unverified.
+
+### Processed-recording structure reader
+
+`scripts/inspect_dunn_pickle_structure.py` locates metadata fields without
+loading upstream analysis classes or constructing NumPy arrays. All pickle
+globals are replaced with inert placeholders; extension-cache and persistent
+reference opcodes are rejected. The report includes only field names and types
+from the object's state, its `md` dictionary and nested metadata dictionaries.
+It deliberately omits values and does not establish delivered events or animal
+identity. Pickle primitive values and opaque byte payloads are parsed in memory;
+this is not a claim that only metadata bytes are downloaded.
+
+The reader requires an exact size/SHA-256 match to a download receipt and records
+its own source hash. Three focused tests pass in the JAX environment: global
+callables remain inert, unsupported reference/root forms are rejected, and
+NumPy arrays under pickle protocols 4 and 5 remain opaque. These are reader
+checks, not evidence that the candidate cohort is eligible. The first candidate's
+processed file is selected by recording name, before inspecting outcomes; its
+published size and MD5 must be verified before structure inspection.
+
+```sh
+.venv-jax/bin/python -m unittest discover -s scripts \
+  -p 'test_dunn_pickle_structure.py' -v
+python3 scripts/inspect_dunn_pickle_structure.py \
+  --pickle runs/dunn-first-processed.pkl \
+  --download-receipt runs/dunn-first-processed-download.json \
+  --output runs/dunn-first-processed-structure.json
+```
+
+The download and real-file structure inspection must complete before reporting
+candidate field availability. No processed-file eligibility result is claimed
+by the reader tests.
