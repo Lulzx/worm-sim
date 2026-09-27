@@ -120,3 +120,13 @@ elapsed time is excluded. A live partial final line is ignored; missing complete
 rows reject full verification. `--allow-partial` emits an explicitly incomplete
 progress receipt and must not be treated as verification of the full prefix.
 This check does not establish bitwise equality of parameters or curvature state.
+
+The [complete prefix receipt](capacity-lbfgs-prefix.json) now verifies all 201
+reference trial evaluations and all 182 accepted records (including initialization)
+against the longer run launched at clean source `1b984d3`. Input, configuration,
+backend-source and optimizer checks pass; scalar comparisons exclude only elapsed
+time and use absolute tolerance 1e-10. At the receipt snapshot, the candidate had
+203 evaluations and 184 accepted records. This establishes reproduction of the
+recorded scalar trajectory before the extension, not bitwise optimizer-state
+equality. The longer run was still live; its terminal capacity outcome remains
+pending.

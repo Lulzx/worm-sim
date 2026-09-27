@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "complete_reference_prefix_verified": true,
+  "comparisons": {
+    "evaluations": {
+      "matched": 201,
+      "required": 201,
+      "candidate_complete_rows": 203
+    },
+    "accepted": {
+      "matched": 182,
+      "required": 182,
+      "candidate_complete_rows": 184
+    }
+  },
+  "declaration_sha256": "861a925a05ec9d648515462b5ca4c98843bcb98e3c443aa47ff5a311119deb3f",
+  "reference_sha256": {
+    "manifest": "cae73e0066698e31a11daa69057d19e9809beeaece147e9b729f1d5f43d953a5",
+    "evaluations": "c318716f3e12a9a12a076771d25fe9828a307714b9eb7fc1c699debdeac3af41",
+    "accepted": "1655a586015a6d1473d757575f53d0d110621d6b378b73363569b145d8f09fa4"
+  },
+  "candidate_snapshot_sha256": {
+    "manifest": "0810b585a0a486733deacf5e7d30bdb65329614b659214fe66f4e80ce86ded52",
+    "evaluations": "7d6d707cf04b329cc1dbc3c9591ddc00a8b9f85591e1feff81e924340cab1439",
+    "accepted": "e33de28969622439faa936d8118b0608217613e7e6e9ae148dd4f6868ee21f78"
+  },
+  "script_sha256": "cb158b93a533d50ba0cbf6d83853fa2d834944bd4b435572c785077a7314c925",
+  "float_absolute_tolerance": 1e-10,
+  "excluded_comparison_fields": [
+    "elapsed_seconds"
+  ],
+  "scope": "Declared input/configuration/source agreement and trial/accepted scalar history only. No claim of bitwise parameter or optimizer-state equality, convergence, capacity acceptance or held-out performance."
+}
