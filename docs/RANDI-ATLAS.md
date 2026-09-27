@@ -43,6 +43,11 @@ have surplus label rows (39, 2 and 1 respectively), all blank. Only such trailin
 blank rows beyond the matrix width are discarded, with counts in the receipt;
 extra nonblank labels cause an error.
 
+Recording 33 has a terminal event entry repeating its first stimulation frame.
+Events are ordered by frame while retaining their original source indices; every
+entry at a duplicated frame is excluded. The importer does not choose which
+duplicate target annotation to trust. These exclusions are counted separately.
+
 The complete baseline-plus-response ranges of retained events must not overlap.
 Both events are rejected when their proposed ranges overlap, even if one event
 has an unknown target identity. This prevents source-frame duplication across

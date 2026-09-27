@@ -67,6 +67,7 @@ pub struct Report {
     pub source_recordings: usize,
     pub source_events: usize,
     pub trailing_blank_labels: BTreeMap<usize, usize>,
+    pub reordered_event_recordings: Vec<usize>,
     pub excluded_events: BTreeMap<String, usize>,
     pub excluded_trace_windows: BTreeMap<String, usize>,
     pub excluded_labels: BTreeMap<String, usize>,
@@ -156,7 +157,7 @@ pub fn import(
         schema_version: 1, source_commit: option_env!("WORMSIM_COMMIT").unwrap_or("unversioned").into(),
         manifest_sha256: manifest_hash.clone(), dataset_hash: String::new(), config: config.clone(),
         source_recordings: records.len(), source_events: 0,
-        trailing_blank_labels: BTreeMap::new(), excluded_events: BTreeMap::new(),
+        trailing_blank_labels: BTreeMap::new(), reordered_event_recordings: vec![], excluded_events: BTreeMap::new(),
         excluded_trace_windows: BTreeMap::new(), excluded_labels: BTreeMap::new(), events: vec![],
         limitations: vec![
             "Processed fluorescence export: upstream spike removal, smoothing and photobleaching correction; not raw images or prospectively processed signals.".into(),
@@ -237,7 +238,6 @@ pub fn import(
             || times.windows(2).any(|v| v[1] <= v[0])
             || events.len() != neurons.len()
             || events.iter().any(|i| *i >= times.len())
-            || events.windows(2).any(|v| v[1] <= v[0])
             || neurons.iter().any(|i| *i >= labels.len() as i64)
         {
             return Err(format!(
@@ -267,7 +267,25 @@ pub fn import(
         }
         let recording_id = format!("recording:{name}");
         report.source_events += events.len();
-        for (event, &frame) in events.iter().enumerate() {
+        let mut order: Vec<_> = (0..events.len()).collect();
+        order.sort_by_key(|i| events[*i]);
+        if order
+            .iter()
+            .enumerate()
+            .any(|(position, event)| position != *event)
+        {
+            report.reordered_event_recordings.push(record);
+        }
+        let mut frame_counts = BTreeMap::new();
+        for frame in &events {
+            *frame_counts.entry(*frame).or_insert(0usize) += 1;
+        }
+        for (position, &event) in order.iter().enumerate() {
+            let frame = events[event];
+            if frame_counts[&frame] != 1 {
+                count(&mut report.excluded_events, "duplicate_stimulation_frame");
+                continue;
+            }
             let onset = times[frame];
             let start = onset - config.baseline_seconds;
             let end = onset + config.response_seconds;
@@ -275,9 +293,10 @@ pub fn import(
                 count(&mut report.excluded_events, "incomplete_window");
                 continue;
             }
-            if (event > 0 && times[events[event - 1]] + config.response_seconds > start + 1e-9)
-                || (event + 1 < events.len()
-                    && end > times[events[event + 1]] - config.baseline_seconds + 1e-9)
+            if (position > 0
+                && times[events[order[position - 1]]] + config.response_seconds > start + 1e-9)
+                || (position + 1 < order.len()
+                    && end > times[events[order[position + 1]]] - config.baseline_seconds + 1e-9)
             {
                 count(&mut report.excluded_events, "overlapping_source_windows");
                 continue;

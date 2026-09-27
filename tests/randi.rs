@@ -114,7 +114,7 @@ fn malformed_sources_fail_and_nonpositive_baselines_are_excluded() {
     fs::write(source.root.join("0_labels.txt"), "tampered").unwrap();
     assert!(source.import().unwrap_err().contains("hash mismatch"));
     source.set("labels.txt", "N000\nN001\nN002\nN002\nAWCON\n\n");
-    source.set("stim_volume_i.txt", "20\n20\n70\n120\n160\n");
+    source.set("stim_volume_i.txt", "20\n60\n70\n120\n999\n");
     assert!(source.import().is_err());
     source.set("stim_volume_i.txt", "20\n60\n70\n120\n160\n");
     source.set(
@@ -140,4 +140,17 @@ fn surplus_label_rows_are_accepted_only_when_blank() {
     assert_eq!(data.trials.len(), 2);
     source.set("labels.txt", "N000\nN001\nN002\nN002\nAWCON\n\nN000\n");
     assert!(source.import().unwrap_err().contains("dimension mismatch"));
+}
+
+#[test]
+fn unordered_events_preserve_source_indices_and_duplicate_frames_are_excluded() {
+    let mut source = Source::new();
+    source.set("stim_volume_i.txt", "160\n20\n60\n70\n20\n");
+    source.set("stim_neurons.txt", "1\n0\n1\n-1\n-2\n");
+    let (data, report) = source.import().unwrap();
+    assert_eq!(report.reordered_event_recordings, vec![0]);
+    assert_eq!(report.excluded_events["duplicate_stimulation_frame"], 2);
+    assert_eq!(data.trials.len(), 1);
+    assert_eq!(report.events[0].event_index, 0);
+    assert_eq!(report.events[0].source_stimulation_frame, 160);
 }
