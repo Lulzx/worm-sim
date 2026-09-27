@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "scope": "Training-only paired learning-rate experiment; no new dynamical features or held-out selection.",
+  "parent_checkpoint": "runs/level0-capacity-adal-adar-1000-prep120/epoch-950.json",
+  "parent_sha256": "009d9496075b2675978052118e7347a00ece38be8d4cc1ecf44ddd1489994e08",
+  "parent_epoch": 950,
+  "targets": [
+    "ADAL",
+    "ADAR"
+  ],
+  "additional_updates_per_run": 200,
+  "optimizer": "Adam with freshly initialized moments in both runs; not exact resume",
+  "preparation_seconds": 120.0,
+  "rest_initialization": -0.2,
+  "primary_comparison": "final training MSE at 200 additional updates; report both runs",
+  "secondary_comparison": "best saved training MSE and complete loss/gain trajectories",
+  "capacity_gate": "unchanged: final capture of at least 90% of zero-start mean-response energy",
+  "runs": [
+    {
+      "learning_rate": 0.001,
+      "directory": "runs/capacity-warm-lr0001"
+    },
+    {
+      "learning_rate": 0.01,
+      "directory": "runs/capacity-warm-lr001-reset-control"
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 import copy
 import json
 import unittest
+from pathlib import Path
+import tempfile
 import jax
 import jax.numpy as jnp
 import numpy as np
@@ -8,7 +10,7 @@ from test_objective import example
 from objective import build, evaluate
 from extensions import initialize, pack, restore
 from fit import checkpoint
-from overfit import prepare, bounds
+from overfit import prepare, bounds, warm_parameters, atomic_best
 
 
 class OverfitTests(unittest.TestCase):
@@ -38,6 +40,37 @@ class OverfitTests(unittest.TestCase):
             with self.assertRaises(ValueError):prepare(m,t,['A'],10,.01,-.2,duration)
         t['groups'][0]['training_trials']=['validation']
         with self.assertRaises(ValueError):prepare(m,t,['A'],10,.01,-.2)
+
+    def test_warm_start_preserves_predictions_and_rejects_incompatible_parents(self):
+        m,g,t=self.fixture();m,t,c=prepare(m,t,['A'],10,.01,-.2)
+        engine,theta,active=initialize(m,g,[0.,.05,.1],c)
+        theta=jax.tree.map(lambda value,mask:jnp.where(mask,value+.03,value),theta,active)
+        saved={'format':'wormsim-training-capacity-diagnostic','targets':['A'],
+            'model':pack(checkpoint(m,theta,7,'parent'),theta,c),'metrics':{'epoch':7,'mse':.03}}
+        new=copy.deepcopy(m);new['config'].update(epochs=3,learning_rate=.001)
+        q=warm_parameters(saved,new,g,t,c,['A'])
+        for left,right in zip(jax.tree.leaves(theta),jax.tree.leaves(q),strict=True):
+            np.testing.assert_array_equal(left,right)
+        np.testing.assert_allclose(engine.response(theta,jnp.asarray(0)),engine.response(q,jnp.asarray(0)),atol=0.)
+        for mutate in [lambda x:x.update(targets=['B']),
+                       lambda x:x['model']['base_model'].update(training_trials=['test']),
+                       lambda x:x['model']['base_model']['initial'].__setitem__(0,99.),
+                       lambda x:x['model']['base_model']['config'].update(preparation_seconds=5.),
+                       lambda x:x['model']['base_model']['parameters']['groups'][2].update(value=99.),
+                       lambda x:x['model']['base_model']['parameters']['groups'][0].update(name='wrong'),
+                       lambda x:x['metrics'].update(epoch=8)]:
+            invalid=copy.deepcopy(saved);mutate(invalid)
+            with self.assertRaises(ValueError):warm_parameters(invalid,new,g,t,c,['A'])
+
+    def test_best_checkpoint_replacement_keeps_previous_on_invalid_json(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path=Path(temporary)/'best.json'
+            atomic_best(path,{'epoch':0,'mse':1.})
+            atomic_best(path,{'epoch':1,'mse':.5})
+            self.assertEqual(json.loads(path.read_text()),{'epoch':1,'mse':.5})
+            with self.assertRaises(ValueError):atomic_best(path,{'epoch':2,'mse':float('nan')})
+            self.assertEqual(json.loads(path.read_text())['epoch'],1)
+            self.assertFalse(path.with_name('best.json.tmp').exists())
 
     def test_per_neuron_gains_gradient_roundtrip_and_bounds(self):
         m,g,t=self.fixture();m,t,c=prepare(m,t,['A'],10,.01,-.2)

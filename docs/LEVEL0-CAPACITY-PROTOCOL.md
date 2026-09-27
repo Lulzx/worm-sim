@@ -36,9 +36,9 @@ biological polarity assignments.
 
 The bounds concern shared deterministic responses to a target. They are neither
 biological noise estimates nor attainable guarantees for these dynamics.
-Selection uses training MSE only. The best-iterate metric is recorded, but only
-scheduled checkpoints are saved; it is not a claim that every best iterate is
-recoverable. Diagnostic envelopes explicitly name their subset and are not
+Selection uses training MSE only. The original 300- and 1,000-update runs recorded the best-iterate metric but
+saved only scheduled checkpoints; not every best iterate is recoverable. New runs
+also retain an atomic `best.json` artifact; see [warm-start fitting](CAPACITY-WARM-START.md). Diagnostic envelopes explicitly name their subset and are not
 accepted as ordinary full-training benchmark checkpoints.
 
 ## Execution

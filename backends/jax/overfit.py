@@ -12,7 +12,7 @@ import jax.numpy as jnp
 import numpy as np
 import optax
 from objective import build, evaluate
-from extensions import pack
+from extensions import pack, restore
 from fit import checkpoint, make_optimizer
 
 
@@ -75,6 +75,39 @@ def bounds(groups):
             'start_zero_mean_response_bound':start_zero}
 
 
+
+def warm_parameters(saved, model, graph, training, configuration, targets):
+    """Reuse only fitted parameters; keep the new run's initialization and objective."""
+    if saved.get('format') != 'wormsim-training-capacity-diagnostic' or saved.get('targets') != targets:
+        raise ValueError('warm start requires the same diagnostic target subset')
+    packed = saved['model']
+    if packed['configuration'] != configuration:
+        raise ValueError('warm-start configuration differs')
+    base = packed['base_model']
+    if type(base['epoch']) is not int or base['epoch'] < 0 or saved['metrics']['epoch'] != base['epoch']:
+        raise ValueError('invalid warm-start epoch')
+    _, theta, _ = restore(packed, graph, training['groups'][0]['recording']['times'])
+    # This also rejects modifications to coordinates frozen in the original model.
+    reconstructed = checkpoint(model, theta, base['epoch'], base['source_commit'])
+    expected = copy.deepcopy(base)
+    for key in ['epochs', 'learning_rate']:
+        expected['config'][key] = model['config'][key]
+    if reconstructed != expected:
+        raise ValueError('warm-start lineage, objective, initialization, or parameter layout differs')
+    return theta
+
+
+def atomic_best(path, value):
+    """Replace only the best artifact in this run's newly created output directory."""
+    encoded = json.dumps(value, indent=2, allow_nan=False)
+    temporary = path.with_name(path.name + '.tmp')
+    with temporary.open('x') as f:
+        f.write(encoded)
+        f.flush()
+        os.fsync(f.fileno())
+    temporary.replace(path)
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     for key in ['model', 'graph', 'training', 'output']:
@@ -84,6 +117,7 @@ def main():
     p.add_argument('--learning-rate', type=float, default=.01)
     p.add_argument('--rest', type=float, default=-.2)
     p.add_argument('--preparation-seconds', type=float, default=None)
+    p.add_argument('--warm-start', help='Diagnostic checkpoint; reuses parameters with fresh Adam state')
     a = p.parse_args()
     paths = {k:Path(getattr(a,k)) for k in ['model','graph','training']}
     hashes = {k:hashlib.sha256(v.read_bytes()).hexdigest() for k,v in paths.items()}
@@ -92,6 +126,16 @@ def main():
         raise ValueError('training export belongs to another checkpoint')
     model, training, config = prepare(model, training, a.targets, a.steps, a.learning_rate, a.rest, a.preparation_seconds)
     theta, active, groups, data, prior = build(model, graph, training, config)
+    warm = None; warm_info = None
+    if a.warm_start:
+        raw = Path(a.warm_start).read_bytes()
+        hashes['warm_start'] = hashlib.sha256(raw).hexdigest()
+        warm = json.loads(raw)
+        theta = warm_parameters(warm, model, graph, training, config, a.targets)
+        warm_info = {'checkpoint_sha256':hashes['warm_start'],
+            'source_epoch':warm['model']['base_model']['epoch'],
+            'source_commit':warm['model']['base_model']['source_commit'],
+            'optimizer_state':'reset', 'epoch_convention':'additional updates in this run'}
     reference = bounds(groups)
     source = subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
     out = Path(a.output);out.mkdir(exist_ok=False)
@@ -101,6 +145,7 @@ def main():
     write('manifest.json', {'format':'wormsim-training-capacity-diagnostic',
         'source_commit':source, 'source_worktree_dirty':bool(subprocess.check_output(['git','status','--porcelain'],text=True).strip()),
         'input_sha256':hashes, 'targets':a.targets, 'training_trials':training['training_trials'],
+        'warm_start':warm_info,
         'process_id':os.getpid(),
         'backend_source_sha256':{path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted(Path(__file__).parent.glob('*.py'))},
         'configuration':config, 'fit_config':model['config'], 'rest_initialization':a.rest,
@@ -116,18 +161,26 @@ def main():
             value, gradient, metrics = evaluate(theta,groups,data,prior)
             if not np.isfinite(float(value)) or not all(np.isfinite(np.asarray(x)).all() for x in jax.tree.leaves(gradient)):
                 raise ValueError(f'nonfinite objective/gradient at epoch {epoch}; prior progress retained')
+            if epoch == 0 and warm is not None:
+                parent_mse = warm['metrics']['mse']
+                if not np.isfinite(parent_mse) or abs(metrics['mse'] - parent_mse) > 1e-10:
+                    raise ValueError('warm-start initial score differs from parent checkpoint')
             gains = np.exp(np.asarray(theta['observation']['log_gain']))
             captured = (reference['zero_response_mse']-metrics['mse'])/(reference['zero_response_mse']-reference['start_zero_mean_response_bound'])
             report = dict(epoch=epoch, **metrics, captured_start_zero_energy=captured,
                 gradient_norm=float(optax.global_norm(gradient)), gain_min=float(gains.min()),
                 gain_max=float(gains.max()), elapsed_seconds=time.perf_counter()-start)
             progress.write(json.dumps(report,allow_nan=False)+'\n')
-            if metrics['mse'] < best:
-                best=metrics['mse'];best_epoch=epoch
-            if epoch%50 == 0 or epoch==a.steps:
+            improved = metrics['mse'] < best
+            if improved or epoch%50 == 0 or epoch==a.steps:
                 saved=pack(checkpoint(model,theta,epoch,source),theta,config)
-                write(f'epoch-{epoch}.json', {'format':'wormsim-training-capacity-diagnostic',
-                    'targets':a.targets, 'model':saved, 'metrics':report})
+                artifact={'format':'wormsim-training-capacity-diagnostic',
+                    'targets':a.targets, 'model':saved, 'metrics':report, 'warm_start':warm_info}
+                if improved:
+                    atomic_best(out/'best.json', artifact)
+                    best=metrics['mse'];best_epoch=epoch
+                if epoch%50 == 0 or epoch==a.steps:
+                    write(f'epoch-{epoch}.json', artifact)
             if epoch%10 == 0 or epoch==a.steps:
                 print(json.dumps(report,allow_nan=False),flush=True)
             if epoch<a.steps:
@@ -136,6 +189,8 @@ def main():
                 candidate=optax.apply_updates(theta,updates)
                 theta=jax.tree.map(lambda new,old,mask:jnp.where(mask,new,old),candidate,theta,active)
     write('result.json',{'completed_steps':a.steps,'best_training_mse':best,'best_epoch':best_epoch,
+        'best_checkpoint_sha256':hashlib.sha256((out/'best.json').read_bytes()).hexdigest(),
+        'warm_start':warm_info,
         'final':report,'bounds':reference,'capacity_gate':captured>=.9,
         'capacity_gate_definition':'final iterate captures at least 90% of the zero-start mean-response energy; no generalization claim'})
 

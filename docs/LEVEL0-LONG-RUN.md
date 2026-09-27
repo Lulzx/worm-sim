@@ -3,7 +3,8 @@
 The declared two-target capacity test **did not pass its 90% gate**. Longer
 training improves the fit substantially, but it does not establish convergence
 or adequate capacity. New dynamical features remain paused; optimization remains
-the next task. This experiment produces no validation/test score or LDS comparison.
+the next task. The [paired warm-start experiment](CAPACITY-WARM-START.md) implements
+the learning-rate follow-up. This experiment produces no validation/test score or LDS comparison.
 
 The [protocol](LEVEL0-CAPACITY-PROTOCOL.md) was executed from clean source
 `205c02a`, using ADAL/ADAR's 50 training trials, seed 1's random-sign initialization,
