@@ -96,14 +96,14 @@ aggregation only as a separate mapping.
 ## License and actual reuse record
 
 These are repository declarations, not a blanket statement about every embedded
-third-party dataset. No third-party simulation or fitting source was copied.
+third-party dataset. Creamer inference equations are reimplemented with its MIT notice retained; no upstream fitting source is executed.
 
 | Repository | Observed declaration | Current handling |
 | --- | --- | --- |
 | c302 | MIT | Canonical IDs and anatomy imported; notice retained in `licenses/c302-MIT.txt` |
 | Sibernetic | MIT in LICENSE (API reported NOASSERTION) | Reference only |
 | BAAIWorm | Apache-2.0 | Reference only; preserve notices for any future port |
-| Creamer_LDS_2026 | MIT | Reference only; baseline export/reproduction remains pending |
+| Creamer_LDS_2026 | MIT | Pinned numeric export and Rust inference reproduction; MIT notice retained |
 | worm-whisperer | PolyForm Noncommercial 1.0.0; documentation CC BY-NC 4.0 | Reference only; do not silently include in MIT distribution |
 | wormneuroatlas | GPL-3.0 | Reference only; evaluate separate offline exporter and individual dataset terms |
 
@@ -121,13 +121,15 @@ third-party dataset. No third-party simulation or fitting source was copied.
 2. **Done:** exact shared-presynaptic gates, incoming sparse rows, f64 reference
    solver, finite-difference gradient tests, conservation tests, two lossless
    storage formats. These are original implementations of our specified equations.
-3. **Next:** export Creamer's complete model and evaluation inputs to a neutral
-   numeric format, reproduce their own metrics, then add our neuron-held-out
-   split as a separately labeled task. Never substitute one split for the other.
+3. **Done:** pinned Creamer inference export and Rust/NumPy parity; see
+   [baseline results](BASELINE.md). **Next:** add our neuron-held-out split as a
+   separately labeled task. Never substitute one split for the other.
 4. **Next:** atlas preprocessing and calcium calibration, immutable split
    manifests, linear baseline; require held-out benefit before adding parameters.
 5. **Next:** checkpointed reverse-mode gradients and batched Metal kernels,
    measured against the Rust CPU reference. Then stiff integration, peptide
    ablations, and body coupling, in that order.
 
-No upstream model has been installed or independently rerun in this milestone.
+The pretrained Creamer models have now been exported and evaluated; upstream
+training has not been rerun. A small [Taichi Metal gradient audit](TAICHI.md)
+also passes; full-network training and checkpointing remain open.

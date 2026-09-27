@@ -2,7 +2,8 @@
 
 Native Rust implementation of the first build stage in [SPEC.md](SPEC.md).
 The specification's Python/JAX stack is replaced by Rust at the user's request.
-This is a tested Level 0 CPU foundation, not a fitted whole-worm model.
+This is a tested Level 0 Rust foundation with an experimental Taichi Metal
+backend and a reproduced pretrained linear baseline, not a fitted whole-worm model.
 
 ## Run
 
@@ -43,6 +44,11 @@ It demonstrates plumbing, not biological validation or parameter identifiability
 - WSC1 graph and WST1 trajectory codecs, checksums, lossless numerical storage,
   selected-window trace decoding, and measured compression baselines.
 - Pinned c302 identity/anatomy import and [upstream audit](docs/UPSTREAM-REVIEW.md).
+
+- Pinned [Creamer linear baseline](docs/BASELINE.md): complete inference operators,
+  compact export, Rust evaluation, and independent NumPy parity.
+- Experimental [DiffTaichi-style reverse gradients](docs/TAICHI.md) on CPU and
+  Apple Metal, audited against Rust on a small circuit.
 
 ## Scientific and numerical conventions
 
@@ -89,7 +95,7 @@ Chemical signs/types are not inferred from anatomy or names.
 
 The GPU performance targets and Tasks 1–5 in the spec are **not met**. Forward AD
 needs one rollout per selected parameter and is a reference/audit path, not the
-full-scale training implementation. Metal batching, reverse-mode checkpointing,
+full-scale training implementation. Full-network Metal training, reverse-mode checkpointing,
 stiff/adaptive solvers, class/hierarchical tying, calibrated observation models,
 real recording ingestion and held-out benchmarks, peptides, mixed fidelity,
 YAML protocols, mutants/drugs/clamps, uncertainty, and body feedback remain.

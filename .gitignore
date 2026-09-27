@@ -1,3 +1,5 @@
 /target/
 /runs/
 .DS_Store
+/.venv-taichi/
+__pycache__/
