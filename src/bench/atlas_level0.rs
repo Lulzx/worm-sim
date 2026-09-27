@@ -32,6 +32,16 @@ pub struct FitConfig {
     pub classification: Option<ClassificationConfig>,
     #[serde(default)]
     pub molecular_sign_priors: Option<crate::molecular::SignPriors>,
+    #[serde(default)]
+    pub observation_gain: Option<ObservationGainConfig>,
+}
+/// One global positive observation gain; calcium scales remain frozen.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ObservationGainConfig {
+    pub initial_gain: f64,
+    /// Squared log-gain displacement from initialization, without neuron multiplicity.
+    pub prior_strength: f64,
 }
 /// Fixed before fitting; validation selection continues to use trace MSE only.
 #[derive(Clone, Debug, Serialize, Deserialize)]
@@ -43,6 +53,14 @@ pub struct ClassificationConfig {
 }
 impl FitConfig {
     fn validate(&self) -> Result<()> {
+        if let Some(g) = &self.observation_gain
+            && (!g.initial_gain.is_finite()
+                || g.initial_gain <= 0.
+                || !g.prior_strength.is_finite()
+                || g.prior_strength < 0.)
+        {
+            return Err("invalid observation gain configuration".into());
+        }
         if let Some(c) = &self.classification {
             if !c.weight.is_finite() || c.weight <= 0. {
                 return Err("invalid classification weight".into());
@@ -104,6 +122,8 @@ pub struct AtlasModel {
     /// Identity of all supplied evidence; only train-target labels enter gradients.
     #[serde(default)]
     pub classification_evidence_hash: Option<String>,
+    #[serde(default)]
+    pub observation_log_gain: Option<f64>,
 }
 #[derive(Debug, Serialize)]
 pub struct EpochReport {
@@ -117,9 +137,23 @@ pub struct EpochReport {
     pub elapsed_seconds: f64,
 }
 impl AtlasModel {
+    pub fn readout(&self, n: usize) -> Result<Readout> {
+        let gain = match (&self.config.observation_gain, self.observation_log_gain) {
+            (None, None) => 1.,
+            (Some(_), Some(log_gain)) if log_gain.is_finite() => log_gain.exp(),
+            _ => return Err("observation gain/configuration mismatch".into()),
+        };
+        let readout = Readout {
+            offset: vec![0.; n],
+            gain: vec![gain; n],
+        };
+        readout.validate(n)?;
+        Ok(readout)
+    }
     pub fn free_parameters(&self) -> usize {
         self.parameters.free_parameters()
             + self.kernel_raw.len()
+            + usize::from(self.observation_log_gain.is_some())
             + if self.classifier.is_some() { 2 } else { 0 }
     }
     fn currents(&self, target: usize, frames: usize, n: usize) -> Result<Vec<Vec<f64>>> {
@@ -157,6 +191,7 @@ impl AtlasModel {
             _ => return Err("invalid classification fit lineage".into()),
         }
         let model = Model::new(graph.clone())?;
+        self.readout(model.n())?;
         if split.axis != Axis::StimulatedNeuron
             || self.schema_version != 1
             || self.graph_hash != graph.hash
@@ -201,7 +236,7 @@ impl AtlasModel {
     ) -> Result<Predictions> {
         let model = self.validate(data, graph, split)?;
         let params = self.parameters.expand(&model)?;
-        let readout = Readout::identity(model.n());
+        let readout = self.readout(model.n())?;
         let indexed: BTreeMap<_, _> = data.trials.iter().map(|t| (&t.id, t)).collect();
         let mut cache = BTreeMap::new();
         let mut trials = vec![];
@@ -283,6 +318,10 @@ impl AtlasModel {
                 )
             }) + if self.config.molecular_sign_priors.is_some() {
                 "-molecular-sign-priors"
+            } else {
+                ""
+            } + if self.observation_log_gain.is_some() {
+                "-learned-global-gain"
             } else {
                 ""
             },
@@ -402,13 +441,17 @@ pub fn fit_select_with_evidence(
         selection_trials: split.validation.clone(),
         classifier,
         classification_evidence_hash: labels.as_ref().map(|l| l.evidence_hash.clone()),
+        observation_log_gain: config
+            .observation_gain
+            .as_ref()
+            .map(|g| g.initial_gain.ln()),
     };
     let pcount = current.parameters.groups.len();
     let classifier_index = pcount + config.kernel_lags;
-    let parameter_count = classifier_index + if labels.is_some() { 2 } else { 0 };
+    let gain_index = classifier_index + if labels.is_some() { 2 } else { 0 };
+    let parameter_count = gain_index + usize::from(current.observation_log_gain.is_some());
     let mut optimizer = Adam::new(parameter_count);
     let total_weight = groups.iter().map(|g| g.sample_weight).sum::<f64>();
-    let readout = Readout::identity(model.n());
     let mut best = f64::INFINITY;
     let mut selected = None;
     let mut reports = vec![];
@@ -418,6 +461,7 @@ pub fn fit_select_with_evidence(
         let mut penalty = None;
         let mut classification_bce = None;
         if epoch > 0 {
+            let readout = current.readout(model.n())?;
             let raw = current.parameters.expand(&model)?;
             let mut gradient = vec![0.; parameter_count];
             let mut bce = 0.;
@@ -500,6 +544,10 @@ pub fn fit_select_with_evidence(
                     mse += w * (g.value + group.irreducible_mse);
                     (g, w)
                 };
+                if current.observation_log_gain.is_some() {
+                    gradient[gain_index] +=
+                        gradient_weight * g.readout_log_gain.iter().sum::<f64>();
+                }
                 for (a, b) in gradient
                     .iter_mut()
                     .zip(current.parameters.reduce_gradient(&g.parameters)?)
@@ -540,7 +588,18 @@ pub fn fit_select_with_evidence(
             if let Some(classifier) = &current.classifier {
                 values.extend([classifier.bias, classifier.raw_slope]);
             }
+            if let (Some(log_gain), Some(g)) =
+                (current.observation_log_gain, &config.observation_gain)
+            {
+                let delta = log_gain - g.initial_gain.ln();
+                loss += g.prior_strength * delta * delta;
+                gradient[gain_index] += 2. * g.prior_strength * delta;
+                values.push(log_gain);
+            }
             optimizer.update(&mut values, &gradient, config.learning_rate)?;
+            if current.observation_log_gain.is_some() {
+                current.observation_log_gain = Some(values[gain_index]);
+            }
             for (i, g) in current.parameters.groups.iter_mut().enumerate() {
                 if g.trainable {
                     g.value = values[i];

@@ -725,11 +725,26 @@ fn prepared_classification_adjoint_matches_network_seed_readout_and_drive_differ
                 .unwrap()
                 .value
         };
-    let eps = 1e-5;
+    let eps = 1e-5_f64;
     let compare = |a: f64, b: f64| assert!((a - b).abs() < 2e-7, "{a} != {b}");
     compare(
         objective(&params, &initial, &readout, &currents),
         gradient.value,
+    );
+    // A shared log-gain coordinate must sum, not average, neuron derivatives.
+    let mut plus = readout.clone();
+    let mut minus = readout.clone();
+    for gain in &mut plus.gain {
+        *gain *= eps.exp();
+    }
+    for gain in &mut minus.gain {
+        *gain *= (-eps).exp();
+    }
+    compare(
+        (objective(&params, &initial, &plus, &currents)
+            - objective(&params, &initial, &minus, &currents))
+            / (2. * eps),
+        gradient.readout_log_gain.iter().sum(),
     );
     for i in 0..params.raw.len() {
         let mut plus = params.clone();

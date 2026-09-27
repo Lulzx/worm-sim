@@ -1,0 +1,24 @@
+{
+  "epochs": 25,
+  "dt": 0.01,
+  "learning_rate": 0.01,
+  "kernel_lags": 39,
+  "prior_strength": 0.01,
+  "sign_prior_strength": 0.01,
+  "kernel_prior_strength": 0.01,
+  "sharing": {
+    "classes": {},
+    "allow_suffix_pairs": true,
+    "provenance": "Graph annotations when available; matching terminal L/R names otherwise. Suffix pairing is an explicit modeling assumption, not a biological annotation."
+  },
+  "preparation_seconds": 60.0,
+  "classification": {
+    "weight": 0.1,
+    "area_scale": 0.01,
+    "epsilon": 1e-08
+  },
+  "observation_gain": {
+    "initial_gain": 10.0,
+    "prior_strength": 0.0
+  }
+}

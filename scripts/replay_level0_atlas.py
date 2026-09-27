@@ -10,6 +10,11 @@ import numpy as np
 class Replay:
     def __init__(self, model, graph):
         self.model = model
+        gain_config = model['config'].get('observation_gain')
+        log_gain = model.get('observation_log_gain')
+        assert (gain_config is None) == (log_gain is None)
+        self.gain = 1. if log_gain is None else np.exp(log_gain)
+        assert np.isfinite(self.gain) and self.gain > 0
         self.names = sorted(n['id'] for n in graph['neurons'])
         self.index = {n:i for i,n in enumerate(self.names)}
         self.n = n = len(self.names)
@@ -74,5 +79,5 @@ class Replay:
         for t,end in enumerate(times[1:]):
             current = self.kernel[t] if t < len(self.kernel) else 0.
             state,time = self.advance(state,time,self.preparation+end,self.index[target],current)
-            output.append(self.scale*(state[self.n:2*self.n]-baseline))
+            output.append(self.gain*self.scale*(state[self.n:2*self.n]-baseline))
         return np.asarray(output)

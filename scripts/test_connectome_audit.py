@@ -38,6 +38,14 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(response[0,0],0.)
         self.assertGreater(response[1,0],0.)
         self.assertGreater(response[2,0],response[1,0])
+        model['config']['observation_gain'] = {'initial_gain':3.,'prior_strength':0.}
+        model['observation_log_gain'] = float(np.log(3.))
+        scaled = Replay(model,graph)
+        np.testing.assert_allclose(scaled.state,replay.state,atol=1e-15)
+        np.testing.assert_allclose(scaled.response('X',[0.,.1,.2]),3*response,atol=1e-15)
+        del model['observation_log_gain']
+        with self.assertRaises(AssertionError):
+            Replay(model,graph)
 
     def test_classifier_audit_counts_pairs_once_and_handles_extreme_logits(self):
         from audit_level0_atlas import classification_scores

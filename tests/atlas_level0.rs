@@ -50,6 +50,7 @@ fn fixture() -> (wormsim::data::IndexedGraph, Dataset, Split) {
 fn fit_and_impulses_exclude_held_out_fluorescence() {
     let (graph, mut data, split) = fixture();
     let config = FitConfig {
+        observation_gain: None,
         classification: None,
         molecular_sign_priors: None,
         epochs: 2,
@@ -152,6 +153,10 @@ fn joint_fit_uses_training_labels_and_preserves_mse_selection() {
             .collect(),
     };
     let config = FitConfig {
+        observation_gain: Some(atlas_level0::ObservationGainConfig {
+            initial_gain: 2.,
+            prior_strength: 0.01,
+        }),
         molecular_sign_priors: None,
         epochs: 2,
         dt: 0.02,
@@ -191,6 +196,10 @@ fn joint_fit_uses_training_labels_and_preserves_mse_selection() {
     );
     let initial: &Classifier = checkpoints[0].classifier.as_ref().unwrap();
     let last = checkpoints[2].classifier.as_ref().unwrap();
+    assert_ne!(
+        checkpoints[0].observation_log_gain,
+        checkpoints[2].observation_log_gain
+    );
     assert_ne!(initial.bias, last.bias);
     assert!(reports[0].preceding_training_classification_bce.is_none());
     // Independent forward evaluation confirms the reported MSE retains original
@@ -253,6 +262,7 @@ fn joint_fit_uses_training_labels_and_preserves_mse_selection() {
             serde_json::to_value(&b.parameters).unwrap()
         );
         assert_eq!(a.kernel_raw, b.kernel_raw);
+        assert_eq!(a.observation_log_gain, b.observation_log_gain);
         assert_eq!(
             serde_json::to_value(&a.classifier).unwrap(),
             serde_json::to_value(&b.classifier).unwrap()
@@ -306,6 +316,10 @@ fn molecular_prior_fit_preserves_graph_and_excludes_test_fluorescence() {
         inhibitory_edges: vec![1],
     };
     let config = FitConfig {
+        observation_gain: Some(atlas_level0::ObservationGainConfig {
+            initial_gain: 3.,
+            prior_strength: 0.01,
+        }),
         molecular_sign_priors: Some(priors),
         classification: None,
         epochs: 2,
@@ -354,6 +368,7 @@ fn molecular_prior_fit_preserves_graph_and_excludes_test_fluorescence() {
             serde_json::to_value(&b.parameters).unwrap()
         );
         assert_eq!(a.kernel_raw, b.kernel_raw);
+        assert_eq!(a.observation_log_gain, b.observation_log_gain);
     }
     let mut invalid = other;
     invalid
@@ -367,4 +382,81 @@ fn molecular_prior_fit_preserves_graph_and_excludes_test_fluorescence() {
             .predict(&data, &graph, &changed_split, Partition::Test)
             .is_err()
     );
+}
+
+#[test]
+fn global_gain_first_update_matches_finite_difference_and_legacy_is_identity() {
+    let (graph, data, split) = fixture();
+    let config: FitConfig = serde_json::from_value(serde_json::json!({
+        "epochs":1,"dt":0.02,"preparation_seconds":0.4,"learning_rate":0.01,
+        "kernel_lags":1,"prior_strength":0.01,"sign_prior_strength":0.01,
+        "kernel_prior_strength":0.01,"sharing":wormsim::parameters::Sharing::default(),
+        "observation_gain":{"initial_gain":3.,"prior_strength":0.1}
+    }))
+    .unwrap();
+    let mut checkpoints = vec![];
+    atlas_level0::fit_select(&data, &graph, &split, config, |m, _| {
+        checkpoints.push(m.clone());
+        Ok(())
+    })
+    .unwrap();
+    let start = &checkpoints[0];
+    let score = |model: &atlas_level0::AtlasModel| {
+        let pred = model
+            .predict(&data, &graph, &split, Partition::Train)
+            .unwrap();
+        wormsim::bench::evaluate(&data, &graph, &split, &pred, Partition::Train)
+            .unwrap()
+            .pooled_trace_scores
+            .mse
+            .unwrap()
+    };
+    let eps = 1e-5;
+    let mut plus = start.clone();
+    let mut minus = start.clone();
+    *plus.observation_log_gain.as_mut().unwrap() += eps;
+    *minus.observation_log_gain.as_mut().unwrap() -= eps;
+    let derivative = (score(&plus) - score(&minus)) / (2. * eps);
+    assert!(derivative.abs() > 1e-6);
+    // At initialization the log-gain shrinkage gradient is zero. First Adam
+    // moment bias correction gives this exact scalar update.
+    let expected = 3.0_f64.ln() - 0.01 * derivative / (derivative.abs() + 1e-8);
+    assert!((checkpoints[1].observation_log_gain.unwrap() - expected).abs() < 1e-9);
+
+    let mut serialized = serde_json::to_value(start).unwrap();
+    serialized
+        .as_object_mut()
+        .unwrap()
+        .remove("observation_log_gain");
+    serialized["config"]
+        .as_object_mut()
+        .unwrap()
+        .remove("observation_gain");
+    let legacy: atlas_level0::AtlasModel = serde_json::from_value(serialized).unwrap();
+    assert_eq!(
+        legacy.readout(graph.names.len()).unwrap().gain,
+        vec![1.; graph.names.len()]
+    );
+    assert_eq!(start.free_parameters(), legacy.free_parameters() + 1);
+    let a = start
+        .predict(&data, &graph, &split, Partition::Test)
+        .unwrap();
+    let b = legacy
+        .predict(&data, &graph, &split, Partition::Test)
+        .unwrap();
+    for (a, b) in a.trials.iter().zip(&b.trials) {
+        for (name, values) in &a.fluorescence {
+            for (x, y) in values.iter().zip(&b.fluorescence[name]) {
+                assert!((x - 3. * y).abs() < 1e-12);
+            }
+        }
+    }
+    for bad_gain in [None, Some(f64::NAN), Some(1000.), Some(-1000.)] {
+        let mut bad = start.clone();
+        bad.observation_log_gain = bad_gain;
+        assert!(bad.predict(&data, &graph, &split, Partition::Test).is_err());
+    }
+    let mut bad = legacy;
+    bad.observation_log_gain = Some(0.);
+    assert!(bad.predict(&data, &graph, &split, Partition::Test).is_err());
 }

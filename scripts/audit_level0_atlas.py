@@ -110,6 +110,13 @@ def main():
         assert checkpoint['config'] == config and checkpoint['epoch'] == c['epoch']
         assert checkpoint['training_trials'] == split['train'] and checkpoint['selection_trials'] == split['validation']
         assert checkpoint['initial'] == model['initial'] and checkpoint['source_commit'] == model['source_commit']
+        gain_config = config.get('observation_gain')
+        log_gain = checkpoint.get('observation_log_gain')
+        assert (gain_config is None) == (log_gain is None)
+        if gain_config is not None:
+            assert np.isfinite(log_gain) and np.isfinite(np.exp(log_gain)) and np.exp(log_gain) > 0
+            if c['epoch'] == 0:
+                assert abs(log_gain - np.log(gain_config['initial_gain'])) < 1e-12
         hashes[f'{name}.json'] = digest(run/f'{name}.json')
     scores = {}
     classification = {}
@@ -120,6 +127,11 @@ def main():
         assert {t['id'] for t in pred['trials']} == set(split[partition])
         assert pred['training_trials'] == split['train'] and pred['selection_trials'] == split['validation']
         assert pred['source_commit'] == model['source_commit']
+        parameter_count = (sum(g['trainable'] for g in model['parameters']['groups'])
+                           + len(model['kernel_raw'])
+                           + (2 if model.get('classifier') is not None else 0)
+                           + (1 if model.get('observation_log_gain') is not None else 0))
+        assert pred['free_parameters'] == report['free_parameters'] == parameter_count
         if replay is not None:
             for trial in pred['trials']:
                 target = indexed[trial['id']]['stimulated_neuron']
