@@ -1,0 +1,414 @@
+{
+  "schema_version": 1,
+  "source_commit": "dcdd0fffc559f393c8c5e6838f88ba2b755d1d06",
+  "dataset_hash": "3f3a537ff8424d89da72699e9b342185959afbd9380f7ecc6aa0fed06fafe843",
+  "split_hash": "2d291f63668345396d9b08e984581841db7b8912897405993ba258bf9f013f47",
+  "selected_epoch": 25,
+  "config": {
+    "epochs": 25,
+    "dt": 0.01,
+    "preparation_seconds": 60.0,
+    "learning_rate": 0.01,
+    "kernel_lags": 39,
+    "prior_strength": 0.01,
+    "sign_prior_strength": 0.01,
+    "kernel_prior_strength": 0.01,
+    "sharing": {
+      "classes": {},
+      "allow_suffix_pairs": true,
+      "provenance": "Graph annotations when available; matching terminal L/R names otherwise. Suffix pairing is an explicit modeling assumption, not a biological annotation."
+    },
+    "classification": {
+      "weight": 0.1,
+      "area_scale": 0.01,
+      "epsilon": 1e-08
+    },
+    "molecular_sign_priors": null,
+    "observation_gain": {
+      "initial_gain": 10.0,
+      "prior_strength": 0.0
+    }
+  },
+  "selection": [
+    {
+      "epoch": 0,
+      "preceding_training_mse": null,
+      "preceding_penalty": null,
+      "preceding_training_classification_bce": null,
+      "validation_mse": 0.04165092765136991,
+      "validation_correlation": -0.0006802823236541265,
+      "defined_trace_correlations": 10659,
+      "elapsed_seconds": 3.870872292
+    },
+    {
+      "epoch": 1,
+      "preceding_training_mse": 0.07490799725713694,
+      "preceding_penalty": 0.006931471805598933,
+      "preceding_training_classification_bce": 0.19572168977581944,
+      "validation_mse": 0.041648302526791435,
+      "validation_correlation": -8.538548229176123e-05,
+      "defined_trace_correlations": 11398,
+      "elapsed_seconds": 124.095611417
+    },
+    {
+      "epoch": 2,
+      "preceding_training_mse": 0.07489993199955554,
+      "preceding_penalty": 0.006932987654542689,
+      "preceding_training_classification_bce": 0.1951749645344678,
+      "validation_mse": 0.04164631731063801,
+      "validation_correlation": 0.0009864953838896716,
+      "defined_trace_correlations": 11484,
+      "elapsed_seconds": 130.236365958
+    },
+    {
+      "epoch": 3,
+      "preceding_training_mse": 0.07489264733169265,
+      "preceding_penalty": 0.006935287123274191,
+      "preceding_training_classification_bce": 0.19462090411262878,
+      "validation_mse": 0.041645108795594875,
+      "validation_correlation": -0.0005442359558091794,
+      "defined_trace_correlations": 11531,
+      "elapsed_seconds": 143.745855667
+    },
+    {
+      "epoch": 4,
+      "preceding_training_mse": 0.07488612045237696,
+      "preceding_penalty": 0.006938752089118094,
+      "preceding_training_classification_bce": 0.19411051441187352,
+      "validation_mse": 0.04164473907308958,
+      "validation_correlation": -0.0023152790451609995,
+      "defined_trace_correlations": 11655,
+      "elapsed_seconds": 130.770222208
+    },
+    {
+      "epoch": 5,
+      "preceding_training_mse": 0.07488020242927636,
+      "preceding_penalty": 0.006942761663216702,
+      "preceding_training_classification_bce": 0.19365528342964158,
+      "validation_mse": 0.04164452033446636,
+      "validation_correlation": -0.0026831039122935563,
+      "defined_trace_correlations": 11669,
+      "elapsed_seconds": 133.790787625
+    },
+    {
+      "epoch": 6,
+      "preceding_training_mse": 0.07487460155935396,
+      "preceding_penalty": 0.006946876606346528,
+      "preceding_training_classification_bce": 0.19324004948335277,
+      "validation_mse": 0.0416437691787313,
+      "validation_correlation": -0.0025684972298877177,
+      "defined_trace_correlations": 11697,
+      "elapsed_seconds": 127.884484667
+    },
+    {
+      "epoch": 7,
+      "preceding_training_mse": 0.07486905524652505,
+      "preceding_penalty": 0.006951037787366731,
+      "preceding_training_classification_bce": 0.1928527199581514,
+      "validation_mse": 0.04164242746615771,
+      "validation_correlation": -0.0011346695735599236,
+      "defined_trace_correlations": 11681,
+      "elapsed_seconds": 130.206634542
+    },
+    {
+      "epoch": 8,
+      "preceding_training_mse": 0.07486337776134559,
+      "preceding_penalty": 0.006955260518604514,
+      "preceding_training_classification_bce": 0.1924852575290508,
+      "validation_mse": 0.041640628553586315,
+      "validation_correlation": -0.0009344123262474323,
+      "defined_trace_correlations": 11726,
+      "elapsed_seconds": 138.823683541
+    },
+    {
+      "epoch": 9,
+      "preceding_training_mse": 0.07485749161029795,
+      "preceding_penalty": 0.006959504448410535,
+      "preceding_training_classification_bce": 0.19213244839670354,
+      "validation_mse": 0.04163846111313079,
+      "validation_correlation": -0.0010642945504323069,
+      "defined_trace_correlations": 11728,
+      "elapsed_seconds": 92.845975833
+    },
+    {
+      "epoch": 10,
+      "preceding_training_mse": 0.07485138915699122,
+      "preceding_penalty": 0.006963704032892603,
+      "preceding_training_classification_bce": 0.19179414752307153,
+      "validation_mse": 0.04163594430960799,
+      "validation_correlation": -0.00012884077813921723,
+      "defined_trace_correlations": 11731,
+      "elapsed_seconds": 83.827615041
+    },
+    {
+      "epoch": 11,
+      "preceding_training_mse": 0.07484507885790993,
+      "preceding_penalty": 0.00696788227039905,
+      "preceding_training_classification_bce": 0.19147154684099874,
+      "validation_mse": 0.04163297316000748,
+      "validation_correlation": -0.0004939476581697531,
+      "defined_trace_correlations": 11726,
+      "elapsed_seconds": 81.163881292
+    },
+    {
+      "epoch": 12,
+      "preceding_training_mse": 0.07483856251965965,
+      "preceding_penalty": 0.006972128783958709,
+      "preceding_training_classification_bce": 0.1911593585323699,
+      "validation_mse": 0.041629619046123695,
+      "validation_correlation": -0.0011506663900167798,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 82.073165542
+    },
+    {
+      "epoch": 13,
+      "preceding_training_mse": 0.07483185375202847,
+      "preceding_penalty": 0.0069765286976765425,
+      "preceding_training_classification_bce": 0.1908541997761559,
+      "validation_mse": 0.04162584450963661,
+      "validation_correlation": -0.0013448417919415885,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 82.2974185
+    },
+    {
+      "epoch": 14,
+      "preceding_training_mse": 0.07482496371277272,
+      "preceding_penalty": 0.006981124607077341,
+      "preceding_training_classification_bce": 0.1905537486717244,
+      "validation_mse": 0.04162167681830064,
+      "validation_correlation": -0.0016257668882723433,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 81.738846834
+    },
+    {
+      "epoch": 15,
+      "preceding_training_mse": 0.07481791435613316,
+      "preceding_penalty": 0.006985925169651216,
+      "preceding_training_classification_bce": 0.19025936091753023,
+      "validation_mse": 0.041617208977799164,
+      "validation_correlation": -0.00092455800560436,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 83.746963458
+    },
+    {
+      "epoch": 16,
+      "preceding_training_mse": 0.07481074058886504,
+      "preceding_penalty": 0.006990930518375119,
+      "preceding_training_classification_bce": 0.1899716410353283,
+      "validation_mse": 0.041612561170266536,
+      "validation_correlation": -0.001098646513960162,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 81.288595375
+    },
+    {
+      "epoch": 17,
+      "preceding_training_mse": 0.07480348934379799,
+      "preceding_penalty": 0.0069961381444733975,
+      "preceding_training_classification_bce": 0.1896875628822073,
+      "validation_mse": 0.04160785270419128,
+      "validation_correlation": -0.0014621434755630706,
+      "defined_trace_correlations": 11742,
+      "elapsed_seconds": 86.89649775
+    },
+    {
+      "epoch": 18,
+      "preceding_training_mse": 0.07479622317734227,
+      "preceding_penalty": 0.007001538275368068,
+      "preceding_training_classification_bce": 0.18940418803451825,
+      "validation_mse": 0.041603142418983136,
+      "validation_correlation": -0.0014170079042884055,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 89.218074
+    },
+    {
+      "epoch": 19,
+      "preceding_training_mse": 0.07478899924113844,
+      "preceding_penalty": 0.007007107974543358,
+      "preceding_training_classification_bce": 0.18912314370071845,
+      "validation_mse": 0.04159846913055927,
+      "validation_correlation": -0.0006327146979504859,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 104.641203584
+    },
+    {
+      "epoch": 20,
+      "preceding_training_mse": 0.07478186424214357,
+      "preceding_penalty": 0.007012818416607039,
+      "preceding_training_classification_bce": 0.18884498640464542,
+      "validation_mse": 0.04159390227545951,
+      "validation_correlation": -0.00034779535382364104,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 119.791477834
+    },
+    {
+      "epoch": 21,
+      "preceding_training_mse": 0.07477486592499327,
+      "preceding_penalty": 0.007018640234965286,
+      "preceding_training_classification_bce": 0.18856952356452775,
+      "validation_mse": 0.04158942979681649,
+      "validation_correlation": -0.0004391020543110225,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 130.201804208
+    },
+    {
+      "epoch": 22,
+      "preceding_training_mse": 0.07476803883551845,
+      "preceding_penalty": 0.0070245603592615745,
+      "preceding_training_classification_bce": 0.18829473194567986,
+      "validation_mse": 0.04158499878099805,
+      "validation_correlation": -0.0013123836237582767,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 92.228772917
+    },
+    {
+      "epoch": 23,
+      "preceding_training_mse": 0.07476140840595612,
+      "preceding_penalty": 0.007030571418591263,
+      "preceding_training_classification_bce": 0.18801989521644566,
+      "validation_mse": 0.041580586406103855,
+      "validation_correlation": -0.0019856996085398197,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 90.816544917
+    },
+    {
+      "epoch": 24,
+      "preceding_training_mse": 0.07475499633669518,
+      "preceding_penalty": 0.0070366610134875805,
+      "preceding_training_classification_bce": 0.18774463805516134,
+      "validation_mse": 0.04157619105203639,
+      "validation_correlation": -0.0017948613651910092,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 107.251690292
+    },
+    {
+      "epoch": 25,
+      "preceding_training_mse": 0.07474881585258766,
+      "preceding_penalty": 0.007042808861745151,
+      "preceding_training_classification_bce": 0.18746929204715296,
+      "validation_mse": 0.04157182455101937,
+      "validation_correlation": -0.001697131171707216,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 100.5737285
+    }
+  ],
+  "free_parameters": 6784,
+  "independent_saved_trace_scores": {
+    "validation": {
+      "pooled_mse": 0.041571824551018696,
+      "zero_response_mse": 0.042458845587192255,
+      "macro_trace_correlation": -0.001697131171707209,
+      "defined_trace_correlations": 11746
+    },
+    "test": {
+      "pooled_mse": 0.04904275364194349,
+      "zero_response_mse": 0.05003565246791083,
+      "macro_trace_correlation": 0.011943356125193384,
+      "defined_trace_correlations": 12588
+    }
+  },
+  "independent_pair_auroc": 0.698658245532336,
+  "max_pair_area_error": 1.1102230246251565e-16,
+  "validation_half_step": {
+    "coarse_mse": 0.04157182455101937,
+    "dt": 0.01,
+    "epoch": 25,
+    "fine_dt": 0.005,
+    "fine_mse": 0.04157126102757779,
+    "max_prediction_change": 0.0006013823403410168,
+    "scope": "Validation-only numerical sensitivity at the selected checkpoint; not a convergence proof.",
+    "source_commit": "dcdd0fffc559f393c8c5e6838f88ba2b755d1d06"
+  },
+  "selected_model_sha256": "96315d747e555adca6d88bfc9fa8686d6d5b0350eb246808919cb54e370e1ca2",
+  "dataset_file_sha256": "2063f69753f9ab0dce9ee489214fc3eb641c451651a09cc4b2ee81f261df4b2b",
+  "split_file_sha256": "c3002a03460f7685f71bcddf2be58c78e8ec35a410abe4a5eb3c2b9f11375438",
+  "evidence_file_sha256": "28633bafc09afac3c53eb24d76e038774f9d1470182233a4f8d4b50e07d47152",
+  "audit_script_sha256": "42de51d41e560a1801d7ed6d0de8f2b26d3e40f1d8a90188d9c476e7e419c814",
+  "shared_score_script_sha256": "ddcc0c95f9a3f872c61b180176f8043682bc6fbc3c70f9441cafb1d1d3806e53",
+  "artifacts": {
+    "epoch-0.json": "e574c41c692e9328f62e6da072c2377eb39426d9b9ea59b563a7f3ed63ce07c6",
+    "epoch-1.json": "bd815067b54b9ea2cf8ab90de1c6e78096bfeba7a17a7010f5057eab8f8e1e79",
+    "epoch-2.json": "7d7eb9ac14f29b0efe21e1af1430714899fca6a5c0b3f1980c2c9e8769910b12",
+    "epoch-3.json": "5e2642deb353e2800879d48b5d4dc46e6ec0daefc4903fe16f9b03a1783a4fb8",
+    "epoch-4.json": "ceb0c346e57e4f759d9e3a8af5f6dd09fe636fc25ccd5be903937dcd10558af2",
+    "epoch-5.json": "d7dee8812e7b18147ed9de297379c790a18f66a2590701d28709091cde5bba8b",
+    "epoch-6.json": "1a57271e7ce5d76f80ef221f2765abb3ca841bbb1f5680e70a2c4506308129cb",
+    "epoch-7.json": "805bddefa1f6b2993da0e1e5fa091ff3368ea2b9a445b3dbb9b4cceb4412300a",
+    "epoch-8.json": "385f9d881d585d475af99acd2d80f5b92317fabdea39e955c11b1bced856e3d0",
+    "epoch-9.json": "b96642a740b3710eb28bfeef4552c91a51137ecbb6fb680a053fa86f50fcc659",
+    "epoch-10.json": "042ad2ec0f1e0a4cdaf09ef257b84da8e39c4370d50df79677b1df388cca5d56",
+    "epoch-11.json": "df7fdfd5d161b12fafd3512ebf8a89b56c4596666a4a47b390f4862de998a476",
+    "epoch-12.json": "f4ffa4357c64651db293d29f993af7d1f08084305953b4e46be707c3ce558f0c",
+    "epoch-13.json": "c3f1c46746f9a612b021aea92ca57377ffd1e4d2fe7824deec3d4f13aa5e7c1e",
+    "epoch-14.json": "2c40b6aa550d36208f2844d9dddab83eeb3bcbf1c2d38e34c5f316b87f539472",
+    "epoch-15.json": "6cf9d3549c3a18af3da7f19f8c0f790851bdac07c7d1373e28fbffe18015e673",
+    "epoch-16.json": "4e4751598f5215e47eae941e9d48c42d2dcf0f658e6897eb87613efbed97271f",
+    "epoch-17.json": "58fa92d0f7501b71c0c25da2b5dfa2b78496f0302ea1f2d1ce1adb835b18eeea",
+    "epoch-18.json": "977a08c718227f62a3f072ccaec6890264b87141df9845bc2b16ad6adfc13b62",
+    "epoch-19.json": "9c9a97b8500b8174d3abc59cbef2c2e7a05ad4a4becbaa636454dc895ba5ed68",
+    "epoch-20.json": "94f319bdf0f3d4fa71188858b7efe5aac34cb040c745ef90297e40ba3f5a1ee3",
+    "epoch-21.json": "6629f0c8392e2341ff0acb1e6bb497b7fbf0b449796adfb0853a66f99aac506d",
+    "epoch-22.json": "c98d9aaad67e2ba61b5dcfbb1d0646acd01e4253467349ce06e7342bfd0c6740",
+    "epoch-23.json": "cbc48f99e93711771e5c9df4e27cf234b5406540512738284be2937ef4956d66",
+    "epoch-24.json": "960e3ff7000f73d7ed1a8de42057470bc924bc74511e3b7085736607378cff48",
+    "epoch-25.json": "96315d747e555adca6d88bfc9fa8686d6d5b0350eb246808919cb54e370e1ca2",
+    "validation-report.json": "3c1ad2e1d8e22537791e22374aa58e82ba861bdb25de9f32d43636013ab7c6d7",
+    "validation-predictions.json": "cc625e54d0bd88b8e3b7daccbc2934a3207e2b54e12679cf29b35a74df114e5f",
+    "test-report.json": "c56591283b54b733f5374d5a91a00a9d523458de3e960390011a407f0fddf37e",
+    "test-predictions.json": "95f1c69162cfab8b3bed373cdaa6eb3eed35e11d8b36f752c2a0d6d7f27db3c7",
+    "validation-preparation-check.json": "15965b710614e950dd3c9a49d6cadac9732f384078953dc41628a448cbcf863c"
+  },
+  "limitations": "Independent recomputation of saved-output MSE, correlation, response area and direct pairwise AUROC. Selection and declared lineage checked. Nonlinear ODE replay is audited separately below; optimization and bootstrap draws are not independently replayed. See gradient tests and selected-checkpoint half-step check for separate numerical evidence. Shared fixed preparation seed, assumed positive shared input, neutral unannotated signs and previously inspected test cohort remain limitations.",
+  "independent_classifier_scores": {
+    "validation": {
+      "pairs": 1725,
+      "detected": 48,
+      "bce": 0.1293394895900999,
+      "brier": 0.02742971833380026,
+      "mean_probability": 0.04959359593838602,
+      "constant_train_prevalence_bce": 0.13305685591272112,
+      "constant_train_prevalence_brier": 0.027527511201568933
+    },
+    "test": {
+      "pairs": 1758,
+      "detected": 82,
+      "bce": 0.18641415516029158,
+      "brier": 0.04454963246997274,
+      "mean_probability": 0.049300983854720246,
+      "constant_train_prevalence_bce": 0.1886091079645606,
+      "constant_train_prevalence_brier": 0.04447721735666124
+    }
+  },
+  "classifier": {
+    "bias": -3.131490594051395,
+    "raw_slope": 0.42224120182283487,
+    "area_scale": 0.01,
+    "epsilon": 1e-08
+  },
+  "training_pair_labels": {
+    "pairs": 19833,
+    "detected": 984,
+    "initial_smoothed_prevalence": 0.04963698699203388
+  },
+  "classification_scope": "Saved-trace pair-uniform BCE and Brier; training-count initialization checked. No refitting, probability threshold selection or replacement of common absolute-area AUROC. Gradients and optimizer are not independently replayed.",
+  "validation_preparation_check": {
+    "derivative_l2": 7.052582780108971e-12,
+    "epoch": 25,
+    "longer_derivative_l2": 7.719558941166543e-14,
+    "longer_duration_mse": 0.04157182455053456,
+    "longer_seconds": 120.0,
+    "max_prediction_change": 5.1229693310021824e-11,
+    "max_state_change": 4.570510636625613e-12,
+    "preparation_seconds": 60.0,
+    "scope": "Validation-only preparation duration sensitivity and residual unforced derivative; not a proof of equilibrium uniqueness or a biological resting state.",
+    "selected_duration_mse": 0.04157182455101937,
+    "source_commit": "dcdd0fffc559f393c8c5e6838f88ba2b755d1d06"
+  },
+  "independent_ode_replay": {
+    "script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+    "graph_json_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "target_grids_replayed": 30,
+    "max_fluorescence_error": 2.489328188026718e-15,
+    "prepared_unforced_derivative_l2": 7.052569651012975e-12,
+    "scope": "Independent NumPy Euler dynamics including unforced preparation, positive parameter transforms, chemical and gap currents, calcium/synapse dynamics and baseline-relative readout. All saved selected validation/test predictions checked. Does not refit parameters, replay optimization or independently bootstrap."
+  }
+}

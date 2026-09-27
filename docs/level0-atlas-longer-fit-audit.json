@@ -1,0 +1,411 @@
+{
+  "schema_version": 1,
+  "source_commit": "dcdd0fffc559f393c8c5e6838f88ba2b755d1d06",
+  "dataset_hash": "3f3a537ff8424d89da72699e9b342185959afbd9380f7ecc6aa0fed06fafe843",
+  "split_hash": "2d291f63668345396d9b08e984581841db7b8912897405993ba258bf9f013f47",
+  "selected_epoch": 8,
+  "config": {
+    "epochs": 25,
+    "dt": 0.01,
+    "preparation_seconds": 60.0,
+    "learning_rate": 0.01,
+    "kernel_lags": 39,
+    "prior_strength": 0.01,
+    "sign_prior_strength": 0.01,
+    "kernel_prior_strength": 0.01,
+    "sharing": {
+      "classes": {},
+      "allow_suffix_pairs": true,
+      "provenance": "Graph annotations when available; matching terminal L/R names otherwise. Suffix pairing is an explicit modeling assumption, not a biological annotation."
+    },
+    "classification": {
+      "weight": 0.1,
+      "area_scale": 0.01,
+      "epsilon": 1e-08
+    },
+    "molecular_sign_priors": null,
+    "observation_gain": null
+  },
+  "selection": [
+    {
+      "epoch": 0,
+      "preceding_training_mse": null,
+      "preceding_penalty": null,
+      "preceding_training_classification_bce": null,
+      "validation_mse": 0.042328773260577934,
+      "validation_correlation": -0.0006802823236541249,
+      "defined_trace_correlations": 10659,
+      "elapsed_seconds": 3.9036649580000002
+    },
+    {
+      "epoch": 1,
+      "preceding_training_mse": 0.07536645831538034,
+      "preceding_penalty": 0.006931471805598933,
+      "preceding_training_classification_bce": 0.19570439936652007,
+      "validation_mse": 0.04232687541976705,
+      "validation_correlation": -0.0004951442385471414,
+      "defined_trace_correlations": 11303,
+      "elapsed_seconds": 125.696709
+    },
+    {
+      "epoch": 2,
+      "preceding_training_mse": 0.07536428189029362,
+      "preceding_penalty": 0.006932626401545003,
+      "preceding_training_classification_bce": 0.19559240634440053,
+      "validation_mse": 0.04232537959317126,
+      "validation_correlation": 4.109586376435189e-05,
+      "defined_trace_correlations": 11555,
+      "elapsed_seconds": 126.6065815
+    },
+    {
+      "epoch": 3,
+      "preceding_training_mse": 0.07536240668610483,
+      "preceding_penalty": 0.006933944604686329,
+      "preceding_training_classification_bce": 0.19547818986384424,
+      "validation_mse": 0.04232417332010482,
+      "validation_correlation": -0.002425264862361546,
+      "defined_trace_correlations": 11683,
+      "elapsed_seconds": 140.376177167
+    },
+    {
+      "epoch": 4,
+      "preceding_training_mse": 0.07536079162682945,
+      "preceding_penalty": 0.00693602765205746,
+      "preceding_training_classification_bce": 0.1953660373192264,
+      "validation_mse": 0.042323211425157936,
+      "validation_correlation": -0.001595098785135831,
+      "defined_trace_correlations": 11728,
+      "elapsed_seconds": 131.792836
+    },
+    {
+      "epoch": 5,
+      "preceding_training_mse": 0.07535939932633241,
+      "preceding_penalty": 0.006938451126113837,
+      "preceding_training_classification_bce": 0.19525501151853522,
+      "validation_mse": 0.04232250530820952,
+      "validation_correlation": -0.0009142586262034135,
+      "defined_trace_correlations": 11730,
+      "elapsed_seconds": 134.707956
+    },
+    {
+      "epoch": 6,
+      "preceding_training_mse": 0.07535819924599955,
+      "preceding_penalty": 0.00694091221025686,
+      "preceding_training_classification_bce": 0.19514123479712112,
+      "validation_mse": 0.04232204011102096,
+      "validation_correlation": -0.00082809969254845,
+      "defined_trace_correlations": 11732,
+      "elapsed_seconds": 126.414292042
+    },
+    {
+      "epoch": 7,
+      "preceding_training_mse": 0.0753571722754589,
+      "preceding_penalty": 0.006943490606085506,
+      "preceding_training_classification_bce": 0.19502361311601418,
+      "validation_mse": 0.042321777526799546,
+      "validation_correlation": -0.0007731530290569919,
+      "defined_trace_correlations": 11732,
+      "elapsed_seconds": 127.959106875
+    },
+    {
+      "epoch": 8,
+      "preceding_training_mse": 0.07535629880642848,
+      "preceding_penalty": 0.006946264916359315,
+      "preceding_training_classification_bce": 0.1949028350670425,
+      "validation_mse": 0.04232168991988854,
+      "validation_correlation": -0.000781343267894298,
+      "defined_trace_correlations": 11741,
+      "elapsed_seconds": 137.3542005
+    },
+    {
+      "epoch": 9,
+      "preceding_training_mse": 0.07535556366784328,
+      "preceding_penalty": 0.006949152217334095,
+      "preceding_training_classification_bce": 0.19477998810635375,
+      "validation_mse": 0.0423217564743481,
+      "validation_correlation": -0.0015873379679080856,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 93.742365458
+    },
+    {
+      "epoch": 10,
+      "preceding_training_mse": 0.07535494797581914,
+      "preceding_penalty": 0.0069520113180979535,
+      "preceding_training_classification_bce": 0.19465548439718444,
+      "validation_mse": 0.04232196264973504,
+      "validation_correlation": -0.0020179983135680817,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 80.411832875
+    },
+    {
+      "epoch": 11,
+      "preceding_training_mse": 0.07535442982321608,
+      "preceding_penalty": 0.006954814499222621,
+      "preceding_training_classification_bce": 0.19452973825537556,
+      "validation_mse": 0.0423222985121725,
+      "validation_correlation": -0.0020482694333678695,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 79.353197375
+    },
+    {
+      "epoch": 12,
+      "preceding_training_mse": 0.07535399032699443,
+      "preceding_penalty": 0.0069576299198257216,
+      "preceding_training_classification_bce": 0.19440303355915095,
+      "validation_mse": 0.04232275946744832,
+      "validation_correlation": -0.002027532424374475,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 78.499577
+    },
+    {
+      "epoch": 13,
+      "preceding_training_mse": 0.07535360804161957,
+      "preceding_penalty": 0.006960511086520137,
+      "preceding_training_classification_bce": 0.19427492460249132,
+      "validation_mse": 0.04232332348614125,
+      "validation_correlation": -0.0018357414775790142,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 80.965140875
+    },
+    {
+      "epoch": 14,
+      "preceding_training_mse": 0.07535326355022401,
+      "preceding_penalty": 0.006963455672782908,
+      "preceding_training_classification_bce": 0.19414504368886512,
+      "validation_mse": 0.04232395731302046,
+      "validation_correlation": -0.002775062903685992,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 79.873069666
+    },
+    {
+      "epoch": 15,
+      "preceding_training_mse": 0.07535294218389553,
+      "preceding_penalty": 0.006966440977230956,
+      "preceding_training_classification_bce": 0.1940130808061222,
+      "validation_mse": 0.04232461382685049,
+      "validation_correlation": -0.0030485641717877903,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 81.237611292
+    },
+    {
+      "epoch": 16,
+      "preceding_training_mse": 0.07535263657243546,
+      "preceding_penalty": 0.006969471377871095,
+      "preceding_training_classification_bce": 0.19387890800863952,
+      "validation_mse": 0.04232525652555454,
+      "validation_correlation": -0.003095803857299364,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 80.989215916
+    },
+    {
+      "epoch": 17,
+      "preceding_training_mse": 0.07535234362697735,
+      "preceding_penalty": 0.006972576866575716,
+      "preceding_training_classification_bce": 0.19374269029947663,
+      "validation_mse": 0.042325865204816446,
+      "validation_correlation": -0.002360332622126568,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 84.812201667
+    },
+    {
+      "epoch": 18,
+      "preceding_training_mse": 0.07535206176997543,
+      "preceding_penalty": 0.006975780906446279,
+      "preceding_training_classification_bce": 0.19360454642154026,
+      "validation_mse": 0.04232642357485638,
+      "validation_correlation": -0.002678790577172584,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 86.594224584
+    },
+    {
+      "epoch": 19,
+      "preceding_training_mse": 0.07535178856293778,
+      "preceding_penalty": 0.006979088075974285,
+      "preceding_training_classification_bce": 0.19346486819426356,
+      "validation_mse": 0.042326930349630844,
+      "validation_correlation": -0.0024854123039256704,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 92.085138583
+    },
+    {
+      "epoch": 20,
+      "preceding_training_mse": 0.07535152775017784,
+      "preceding_penalty": 0.006982494534806713,
+      "preceding_training_classification_bce": 0.19332370835485027,
+      "validation_mse": 0.04232738550815938,
+      "validation_correlation": -0.0025278654586068424,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 114.293144792
+    },
+    {
+      "epoch": 21,
+      "preceding_training_mse": 0.07535127644174267,
+      "preceding_penalty": 0.006986003426781971,
+      "preceding_training_classification_bce": 0.19318092323394379,
+      "validation_mse": 0.0423277879641706,
+      "validation_correlation": -0.002512966259463214,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 125.091490167
+    },
+    {
+      "epoch": 22,
+      "preceding_training_mse": 0.075351025682001,
+      "preceding_penalty": 0.006989628020160063,
+      "preceding_training_classification_bce": 0.1930364362391371,
+      "validation_mse": 0.04232812621129549,
+      "validation_correlation": -0.0025942897363055695,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 104.38972825
+    },
+    {
+      "epoch": 23,
+      "preceding_training_mse": 0.07535077026783557,
+      "preceding_penalty": 0.006993387874227466,
+      "preceding_training_classification_bce": 0.1928901755121617,
+      "validation_mse": 0.04232839843494824,
+      "validation_correlation": -0.0028796265974639205,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 87.917170292
+    },
+    {
+      "epoch": 24,
+      "preceding_training_mse": 0.0753505106025889,
+      "preceding_penalty": 0.006997298416652752,
+      "preceding_training_classification_bce": 0.1927420003548604,
+      "validation_mse": 0.04232861097527608,
+      "validation_correlation": -0.0033178286743318036,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 100.4771265
+    },
+    {
+      "epoch": 25,
+      "preceding_training_mse": 0.07535024531400274,
+      "preceding_penalty": 0.007001362192227656,
+      "preceding_training_classification_bce": 0.19259176376738904,
+      "validation_mse": 0.04232877544121464,
+      "validation_correlation": -0.003203283897794811,
+      "defined_trace_correlations": 11746,
+      "elapsed_seconds": 101.15873825
+    }
+  ],
+  "free_parameters": 6783,
+  "independent_saved_trace_scores": {
+    "validation": {
+      "pooled_mse": 0.04232168991988899,
+      "zero_response_mse": 0.042458845587192255,
+      "macro_trace_correlation": -0.0007813432678942987,
+      "defined_trace_correlations": 11741
+    },
+    "test": {
+      "pooled_mse": 0.04989413754668315,
+      "zero_response_mse": 0.05003565246791083,
+      "macro_trace_correlation": 0.003963325457205896,
+      "defined_trace_correlations": 12588
+    }
+  },
+  "independent_pair_auroc": 0.6841783572966995,
+  "max_pair_area_error": 1.3877787807814457e-17,
+  "validation_half_step": {
+    "coarse_mse": 0.04232168991988854,
+    "dt": 0.01,
+    "epoch": 8,
+    "fine_dt": 0.005,
+    "fine_mse": 0.042321667246919166,
+    "max_prediction_change": 5.457874095216725e-05,
+    "scope": "Validation-only numerical sensitivity at the selected checkpoint; not a convergence proof.",
+    "source_commit": "dcdd0fffc559f393c8c5e6838f88ba2b755d1d06"
+  },
+  "selected_model_sha256": "a68acbdcd9c8ef826c167e90940bead25a356310de3c4b3ee866a9b230af0af9",
+  "dataset_file_sha256": "2063f69753f9ab0dce9ee489214fc3eb641c451651a09cc4b2ee81f261df4b2b",
+  "split_file_sha256": "c3002a03460f7685f71bcddf2be58c78e8ec35a410abe4a5eb3c2b9f11375438",
+  "evidence_file_sha256": "28633bafc09afac3c53eb24d76e038774f9d1470182233a4f8d4b50e07d47152",
+  "audit_script_sha256": "42de51d41e560a1801d7ed6d0de8f2b26d3e40f1d8a90188d9c476e7e419c814",
+  "shared_score_script_sha256": "ddcc0c95f9a3f872c61b180176f8043682bc6fbc3c70f9441cafb1d1d3806e53",
+  "artifacts": {
+    "epoch-0.json": "b9f45f474413acc6e2431349d90007367246199fe3ce96752d4c722b6f2e0dd7",
+    "epoch-1.json": "bb7b88f1b7484772228f8b1f7e65b599c3777b0faf221ad05b117e0ddf166a69",
+    "epoch-2.json": "8723c5b6c7896784c6c6f3107dd055b2e169a0f95447e1c5c86b3e52f2c3a28e",
+    "epoch-3.json": "e7c350dac0b6b96b04961fa47faf59db40b0b0e91c14eb5a6cda0c29bb36fa45",
+    "epoch-4.json": "1ac8f9f369f0eea8eb9f7c302eb51447b211bf4ccd56e9299ad41ec4beae9bb1",
+    "epoch-5.json": "b019a1a12af69931d1ec19e2e918dc63b75cfef4a185cd542ddb1b38df1925ec",
+    "epoch-6.json": "e477920b9b8caf071031ac4be710ed9312618370e12456b61c992c87640c58cf",
+    "epoch-7.json": "b134103aedbca7b1c7e8ebe58342df3c0a9e3d4d437f41c28202857f32986765",
+    "epoch-8.json": "a68acbdcd9c8ef826c167e90940bead25a356310de3c4b3ee866a9b230af0af9",
+    "epoch-9.json": "287643a1ec7430edd85d46f9eb64b116db9ea37de188513fdc0c8d600645d493",
+    "epoch-10.json": "5a33a809130feda20f259a5ae4cb70f45f06b5b2b7934a0175769f1a99a17ad9",
+    "epoch-11.json": "7b016829ffce90513d9ca72f5c71ec2629cfddbfc647c91f5b81f0f0c6d9e7d0",
+    "epoch-12.json": "9d8fbed4c27bff8c95f6ceced3318d3d7a245e9bd77764abfa9f2835859b7742",
+    "epoch-13.json": "94612f09613a9e2bb78c39c1747ed46aeaa7f362ad1717203399bad3317a35b3",
+    "epoch-14.json": "5ad3df9e45819d4f7d3023320dcc713c2a063d15572dc4a5c390e36f004d2a1f",
+    "epoch-15.json": "29b43e9455e165cc420e3c60d6f51f2844db03b2f4b655aef4a1f4546af6191d",
+    "epoch-16.json": "b850cf6daa4ba6c795def77c158e5d7298b1ccdd09c77047894a0c9842149d61",
+    "epoch-17.json": "f16240e9b2f3e55fd6032729fa54193e0f85246c7c859a3fdab952989071dada",
+    "epoch-18.json": "883c5f4d551612c2f7d4dc3e28b58eca9a1196ffc9a76744815a5041da649dda",
+    "epoch-19.json": "cbba436180334a390287c8b8224a79470823ba2e425952a65ab52550491c1a07",
+    "epoch-20.json": "05099e005bbac065bcaccdeec941292c0abd3d5d44b39f66c55f1729f86ade02",
+    "epoch-21.json": "1fc70b2cd799b37731aabc76b7e15756dd4372dad483c1429667c292bf27b829",
+    "epoch-22.json": "cbba7998fc3a9a6031f1193277e511f7c0e813e3208eeaf1c53608a1e7743afb",
+    "epoch-23.json": "246e04d6dd26ea10a51a5f2870e1b6df3cdc7062e8724f2834c7f95d2ff6db9d",
+    "epoch-24.json": "2e4383bf1b1197601afd530bf701c40163824f52f46b7bfd9f3b2e9776df7f42",
+    "epoch-25.json": "9cd87ecf98a6c98b0fda507660699cad3b5839f37a507320cee51e6c11ae27b7",
+    "validation-report.json": "5e06513e3da94940793fec2f0c80704e9a9315d276861f3e99d866b5c13497ad",
+    "validation-predictions.json": "f301175cfb1061d3cc55fdcd016fdea140a52d37c7fe68e12969007e7dc05541",
+    "test-report.json": "98025c6dc91b4d8e89cd2f3a4ef7e29ba75b2b681e31a24f693134d385ab5395",
+    "test-predictions.json": "a640022952049d937806028c32d11ba95b7550f805beceec579d6f638e3e9a8c",
+    "validation-preparation-check.json": "34cf2c0ef52a8452b2c2fb0c1e0e755e6b510cfcafdf7ceb6e0f53c3263f8d2b"
+  },
+  "limitations": "Independent recomputation of saved-output MSE, correlation, response area and direct pairwise AUROC. Selection and declared lineage checked. Nonlinear ODE replay is audited separately below; optimization and bootstrap draws are not independently replayed. See gradient tests and selected-checkpoint half-step check for separate numerical evidence. Shared fixed preparation seed, assumed positive shared input, neutral unannotated signs and previously inspected test cohort remain limitations.",
+  "independent_classifier_scores": {
+    "validation": {
+      "pairs": 1725,
+      "detected": 48,
+      "bce": 0.13049236276718693,
+      "brier": 0.02704999668926357,
+      "mean_probability": 0.04930707787849807,
+      "constant_train_prevalence_bce": 0.13305685591272112,
+      "constant_train_prevalence_brier": 0.027527511201568933
+    },
+    "test": {
+      "pairs": 1758,
+      "detected": 82,
+      "bce": 0.18733503176410976,
+      "brier": 0.04428822021131963,
+      "mean_probability": 0.049214446518356755,
+      "constant_train_prevalence_bce": 0.1886091079645606,
+      "constant_train_prevalence_brier": 0.04447721735666124
+    }
+  },
+  "classifier": {
+    "bias": -2.989984275166954,
+    "raw_slope": 0.6220680754296916,
+    "area_scale": 0.01,
+    "epsilon": 1e-08
+  },
+  "training_pair_labels": {
+    "pairs": 19833,
+    "detected": 984,
+    "initial_smoothed_prevalence": 0.04963698699203388
+  },
+  "classification_scope": "Saved-trace pair-uniform BCE and Brier; training-count initialization checked. No refitting, probability threshold selection or replacement of common absolute-area AUROC. Gradients and optimizer are not independently replayed.",
+  "validation_preparation_check": {
+    "derivative_l2": 3.728596763486443e-13,
+    "epoch": 8,
+    "longer_derivative_l2": 7.018373215501516e-14,
+    "longer_duration_mse": 0.04232168991988659,
+    "longer_seconds": 120.0,
+    "max_prediction_change": 2.139954882107387e-13,
+    "max_state_change": 2.1399548799649892e-13,
+    "preparation_seconds": 60.0,
+    "scope": "Validation-only preparation duration sensitivity and residual unforced derivative; not a proof of equilibrium uniqueness or a biological resting state.",
+    "selected_duration_mse": 0.04232168991988854,
+    "source_commit": "dcdd0fffc559f393c8c5e6838f88ba2b755d1d06"
+  },
+  "independent_ode_replay": {
+    "script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+    "graph_json_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "target_grids_replayed": 30,
+    "max_fluorescence_error": 1.6653346031121838e-16,
+    "prepared_unforced_derivative_l2": 3.7282140599716367e-13,
+    "scope": "Independent NumPy Euler dynamics including unforced preparation, positive parameter transforms, chemical and gap currents, calcium/synapse dynamics and baseline-relative readout. All saved selected validation/test predictions checked. Does not refit parameters, replay optimization or independently bootstrap."
+  }
+}

@@ -65,7 +65,7 @@ checks and independent replay must pass before interpreting outcomes.
 This is a three-seed optimization pilot, not the specification's 10–50-member
 uncertainty ensemble, a convergence proof or a fresh confirmatory test. Changing
 initial signs may change basins and transient preparation; it does not guarantee
-better forecasting. The two existing control fits continue unchanged. Results
+better forecasting. The two control fits completed their frozen protocols; see the [gain/control results](ATLAS-OBSERVATION-GAIN.md). Results
 for the sign-restart pilot are pending.
 
 ## Launch checks
