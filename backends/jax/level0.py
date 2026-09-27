@@ -14,6 +14,7 @@ from typing import NamedTuple
 from modulation import Modulation
 from rectification import GapRectification
 from dark_edges import DarkEdges
+from plasticity import Plasticity
 
 
 class AdaptiveSolution(NamedTuple):
@@ -40,14 +41,17 @@ class Level0(eqx.Module):
     modulation: Modulation | None
     rectification: GapRectification | None
     dark_edges: DarkEdges | None
+    plasticity: Plasticity | None
+    plasticity_start: int = eqx.field(static=True)
 
-    def __init__(self, model, graph, times, adaptive=None, modulation=None, rectification=None, dark_edges=None):
+    def __init__(self, model, graph, times, adaptive=None, modulation=None, rectification=None, dark_edges=None, plasticity=None):
         if adaptive is not None and not isinstance(adaptive,Adaptive):
             raise TypeError('adaptive settings must be an Adaptive instance')
         self.adaptive=adaptive
         self.modulation=modulation
         self.rectification=rectification
         self.dark_edges=dark_edges
+        self.plasticity=plasticity
         names = sorted(n['id'] for n in graph['neurons'])
         index = {name:i for i,name in enumerate(names)}
         self.n = len(names)
@@ -59,6 +63,9 @@ class Level0(eqx.Module):
             raise ValueError('dark-edge anatomy differs from model')
         if rectification is not None and (not isinstance(rectification,GapRectification) or rectification.pairs!=tuple((e['a'],e['b']) for e in gaps)):
             raise ValueError('rectification topology differs from model')
+        extra_pairs=() if dark_edges is None else tuple((names[int(a)],names[int(b)]) for a,b in zip(np.asarray(dark_edges.pre),np.asarray(dark_edges.post)))
+        if plasticity is not None and (not isinstance(plasticity,Plasticity) or plasticity.names!=tuple(names) or plasticity.pairs!=tuple((e['pre'],e['post']) for e in chemical)+extra_pairs):
+            raise ValueError('plasticity topology differs from model')
         self.m = len(chemical)
         self.mapping = jnp.asarray(model['parameters']['raw_to_group'], dtype=jnp.int32)
         if len(self.mapping) != 6*self.n+2*self.m+len(gaps)+1:
@@ -74,6 +81,9 @@ class Level0(eqx.Module):
             raise ValueError('initial state size mismatch')
         if modulation is not None:
             self.initial=jnp.concatenate((self.initial,modulation.initial))
+        self.plasticity_start=len(self.initial)
+        if plasticity is not None:
+            self.initial=jnp.concatenate((self.initial,plasticity.initial_state(plasticity.parameters())))
         times = np.asarray(times, dtype=float)
         dt = model['config']['dt']
         prep = model['config'].get('preparation_seconds', 0.)
@@ -117,16 +127,19 @@ class Level0(eqx.Module):
             release = jax.nn.sigmoid((v-raw[2*n:3*n])*positive[3*n:4*n])
             dv = (-(v-raw[n:2*n])).at[target].add(current)
         else:
-            gain,leak,synapse=self.modulation.multipliers(state[3*n:],theta['modulation'])
+            gain,leak,synapse=self.modulation.multipliers(state[3*n:self.plasticity_start],theta['modulation'])
             release=jax.nn.sigmoid((v-raw[2*n:3*n])*positive[3*n:4*n]*gain)
             dv=(-(v-raw[n:2*n])*leak).at[target].add(current)
         weight = positive[6*n:6*n+m]*self.counts
         if self.modulation is not None:
             weight=weight*synapse[self.post]
+        efficacy=None if self.plasticity is None else self.plasticity.multiplier(state[self.plasticity_start:])
+        if efficacy is not None:
+            weight=weight*efficacy[:m]
         reversal = 2*jax.nn.sigmoid(raw[6*n+m:6*n+2*m])-1
         dv = dv.at[self.post].add(weight*s[self.pre]*(reversal-v[self.post]))
         if self.dark_edges is not None:
-            dv=dv+self.dark_edges.current(v,s,theta['dark_edges'],None if self.modulation is None else synapse)
+            dv=dv+self.dark_edges.current(v,s,theta['dark_edges'],None if self.modulation is None else synapse,None if efficacy is None else efficacy[m:])
         delta=v[self.gb]-v[self.ga]
         gap = positive[6*n+2*m:-1]*self.sizes*delta
         if self.rectification is not None:
@@ -134,15 +147,24 @@ class Level0(eqx.Module):
         dv = dv.at[self.ga].add(gap).at[self.gb].add(-gap)
         fast=jnp.concatenate((dv/positive[:n], (release-c)/positive[4*n:5*n],
                                 (release*(1-s)-s)/positive[-1]))
-        if self.modulation is None:
-            return fast
-        return jnp.concatenate((fast,self.modulation.derivative(state[3*n:],release,theta['modulation'])))
+        parts=[fast]
+        if self.modulation is not None:
+            parts.append(self.modulation.derivative(state[3*n:self.plasticity_start],release,theta['modulation']))
+        if self.plasticity is not None:
+            parts.append(self.plasticity.derivative(state[self.plasticity_start:],release,theta['plasticity']))
+        return jnp.concatenate(parts)
 
     def extension_penalty(self, theta):
         """Add once to a training objective, independently of batch/trace count."""
         return jnp.asarray(0.) if self.dark_edges is None else self.dark_edges.penalty(theta['dark_edges'])
 
+    def initial_state(self, theta):
+        if self.plasticity is None:
+            return self.initial
+        return jnp.concatenate((self.initial[:self.plasticity_start],self.plasticity.initial_state(theta['plasticity'])))
+
     def solve(self, theta, target):
+        initial=self.initial_state(theta)
         if self.adaptive is not None:
             # Implicit RK stages may evaluate beyond an interval's end.
             # Keep the input constant within each solve so those stages cannot
@@ -164,15 +186,15 @@ class Level0(eqx.Module):
                 state=solution.ys[0]
                 counts=jnp.stack([solution.stats[k] for k in ['num_steps','num_accepted_steps','num_rejected_steps']])
                 return state,(state,counts)
-            _,(states,counts)=jax.lax.scan(advance,self.initial,(boundaries[:-1],boundaries[1:],currents))
+            _,(states,counts)=jax.lax.scan(advance,initial,(boundaries[:-1],boundaries[1:],currents))
             if self.preparation==0:
-                states=jnp.concatenate((self.initial[None,:],states),axis=0)
+                states=jnp.concatenate((initial[None,:],states),axis=0)
             totals=jnp.sum(counts,axis=0)
             return AdaptiveSolution(states,dict(zip(['num_steps','num_accepted_steps','num_rejected_steps'],totals)))
         return diffrax.diffeqsolve(
             diffrax.ODETerm(self.rhs), diffrax.Euler(),
             t0=self.steps[0], t1=self.steps[-1], dt0=None,
-            y0=self.initial, args=(theta,target),
+            y0=initial, args=(theta,target),
             stepsize_controller=diffrax.StepTo(ts=self.steps),
             saveat=diffrax.SaveAt(ts=self.save_times),
             adjoint=diffrax.RecursiveCheckpointAdjoint(), max_steps=self.max_steps)
@@ -184,7 +206,7 @@ class Level0(eqx.Module):
         return jnp.exp(theta['log_gain'])*scale*(calcium-calcium[0])
 
 
-def parameters(model, modulation=None, rectification=None, dark_edges=None):
+def parameters(model, modulation=None, rectification=None, dark_edges=None, plasticity=None):
     out = {'groups':jnp.asarray([g['value'] for g in model['parameters']['groups']]),
             'kernel':jnp.asarray(model['kernel_raw']),
             'log_gain':jnp.asarray(model.get('observation_log_gain') or 0.)}
@@ -194,6 +216,8 @@ def parameters(model, modulation=None, rectification=None, dark_edges=None):
         out['rectification']=rectification.parameters()
     if dark_edges is not None:
         out['dark_edges']=dark_edges.parameters()
+    if plasticity is not None:
+        out['plasticity']=plasticity.parameters()
     return out
 
 

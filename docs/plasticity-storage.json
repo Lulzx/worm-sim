@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "purpose": "Synthetic all-chemical-edges single-type storage audit; not biological assignments",
+  "graph_json_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+  "chemical_edges": 3638,
+  "source_type_slots": 292,
+  "state_dtype": "float64",
+  "shared_state_bytes": 4672,
+  "per_edge_state_bytes": 58208,
+  "scope": "State vector only; excludes topology maps, parameter arrays, solver/AD workspace, compiler and runtime memory. No speed benchmark."
+}

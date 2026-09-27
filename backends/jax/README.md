@@ -156,3 +156,10 @@ source provenance and canonical pair orientation are required. See the
 physical-strength L1 regularization. The low-level Level 0 API supports their
 dynamics and reverse gradients. See [configuration and limits](../../docs/DARK-EDGES.md);
 population checkpoint and scoring integration remains open.
+
+## Short-term plasticity
+
+The optional `Plasticity` module adds type-tied depression and facilitation to
+anatomical or declared extra chemical edges, sharing states by source/type.
+[Equations, configuration, checks, and integration limits](../../docs/PLASTICITY.md)
+distinguish this rate-adapted mechanism from calibrated worm biology.

@@ -63,10 +63,12 @@ class DarkEdges(eqx.Module):
     def strengths(self, params):
         return (jax.nn.softplus(params['raw_strength'])+1e-9)[self.group]
 
-    def current(self, voltage, gate, params, receptor_multiplier=None):
+    def current(self, voltage, gate, params, receptor_multiplier=None, edge_multiplier=None):
         weight=self.strengths(params)
         if receptor_multiplier is not None:
             weight=weight*receptor_multiplier[self.post]
+        if edge_multiplier is not None:
+            weight=weight*edge_multiplier
         reversal=(2*jax.nn.sigmoid(params['raw_sign'])-1)[self.group]
         current=weight*gate[self.pre]*(reversal-voltage[self.post])
         return jnp.zeros(len(self.names)).at[self.post].add(current)
