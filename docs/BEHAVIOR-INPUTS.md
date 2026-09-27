@@ -47,11 +47,14 @@ cohort is deterministic. No model may fit behavior dynamics to held-out animals.
 - **LDS implemented:** the same vectors enter a learned transition input matrix,
   including controlled Kalman inference and EM sufficient statistics. See
   [LDS details](LATENT-LDS.md#behavior-input-extension).
-- **Level 0 pending:** the same vectors must enter tied current-input weights
-  during history inference and free prediction, with matching parameter gradients.
+- **Level 0 implemented:** the same vectors enter signed membrane-current weights
+  shared according to the neuron rest-parameter groups. Currents are held constant
+  between behavior sample times during both history inference and free prediction.
+  Conditional reverse-mode gradients include input weights and the input-dependent
+  membrane time-constant term. They hold the inferred origin state fixed.
 
-The equal-input comparison is incomplete until Level 0 is integrated and all three models are fitted
-and scored. A GRU-only result must not be presented as that comparison.
+The equal-input comparison remains incomplete until the Level 0 fit and all three
+selected models have been scored.
 
 With six hidden units and 149 training identities, the driven GRU has 6,677 neural
 weights/biases, 298 neural normalization statistics and 16 behavior scalars:
@@ -91,8 +94,7 @@ identifiers. This is evidence about information access, not forecast skill.
 
 The same committed executable loaded the archived no-behavior GRU artifact and
 reproduced all 72 saved test trial prediction arrays exactly. Source/model metadata
-changes as expected; neural numerical outputs are unchanged. Level 0
-behavior integration and the equal-input model comparison remain pending.
+changes as expected; neural numerical outputs are unchanged. The real-data Level 0 behavior fit and equal-input model comparison remain pending.
 
 ## Baseline fits: validation only
 
@@ -120,11 +122,35 @@ preparation but excludes per-rank PCA initialization. These differing boundaries
 must not be treated as an apples-to-apples performance comparison.
 
 The receipt also verifies exact numerical compatibility on all 72 archived
-no-behavior LDS test predictions. Level 0 input weights/inference/gradients and
-the three-model test comparison remain outstanding.
+no-behavior LDS test predictions. The real-data Level 0 fit and three-model test comparison remain outstanding.
 
 ```sh
 target/release/wormsim lds-fit data/c302-herm.wsc   runs/wormwideweb-benchmark.json data/wormwideweb-animal-split.json   configs/lds-behavior-fit.json runs/lds-behavior-fit.json
 target/release/wormsim gru-fit data/c302-herm.wsc   runs/wormwideweb-benchmark.json data/wormwideweb-animal-split.json   configs/gru-behavior-fit.json runs/gru-behavior-fit.json
 python3 scripts/record_behavior_baseline_fits.py
 ```
+
+## Level 0 input extension
+
+The declared [configuration](../configs/level0-behavior-fit.json) retains the
+unconditioned filter experiment's two epochs, learning rate, initialization,
+block-EKF settings and validation criterion. Each input row starts at zero and
+receives a zero-centered mean-square prior with strength 0.01. The c302 graph's
+203 neuron sharing groups produce 1,624 signed weights for eight features.
+These learned currents are an empirical coupling, not a source-backed sensory
+projection. Missing class/transmitter annotations and assumed L/R sharing remain
+limitations.
+
+The standalone count is 8,680 fitted parameters including the 16 common behavior
+scalars, plus 298 neural calibration statistics: **8,978 scalars including
+calibration**. The 906 inferred state variables per trial are reported separately.
+Behavior coefficients remain fixed during neural fitting; gradients do not pass
+through the behavior fit or the history-state inference algorithm.
+
+Finite-difference tests cover every raw dynamics parameter, initial-state
+component and sample-current component on a coupled synthetic graph. An independent
+event-driven solver agrees with the driven forecast. Both shooting and block-EKF
+inference ignore post-origin currents. Tied-current reduction is separately checked
+against finite differences. A full synthetic refit with altered test neural and
+behavior futures preserves every candidate's weights, selection and predictions.
+Legacy artifacts without input fields remain readable and numerically compatible.

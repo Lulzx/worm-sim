@@ -182,3 +182,138 @@ fn population_filter_forecast_carries_assimilated_origin_not_unforced_replay() {
         assert_eq!(a.fluorescence, b.fluorescence);
     }
 }
+
+#[test]
+fn driven_population_refit_excludes_test_futures_and_learns_tied_inputs() {
+    use wormsim::initial_state::InferenceMethod;
+    let (graph, mut data) = fixture();
+    for trial in &mut data.trials {
+        trial.recording.behavior.insert(
+            "velocity".into(),
+            trial
+                .recording
+                .times
+                .iter()
+                .map(|t| Some((t * 0.13).cos()))
+                .collect(),
+        );
+    }
+    let split = Split::generate(&data, &graph, Axis::Animal, 42, 2, 2).unwrap();
+    let config = FitConfig {
+        epochs: 1,
+        behavior_channels: vec!["velocity".into()],
+        inference: InferenceConfig {
+            method: InferenceMethod::BlockEkf,
+            dt: 0.05,
+            ..Default::default()
+        },
+        ..Default::default()
+    };
+    let mut snapshots = vec![];
+    let (model, report) = population::fit(&data, &graph, &split, config.clone(), |m, _| {
+        snapshots.push(m.clone());
+        Ok(())
+    })
+    .unwrap();
+    assert!(
+        snapshots[0]
+            .input_weights
+            .as_ref()
+            .unwrap()
+            .weights
+            .iter()
+            .all(|w| *w == 0.0)
+    );
+    assert!(
+        snapshots[1]
+            .input_weights
+            .as_ref()
+            .unwrap()
+            .weights
+            .iter()
+            .any(|w| w.abs() > 1e-8)
+    );
+    assert_eq!(report.behavior_forecast_parameters, 4);
+    assert_eq!(
+        report.input_parameters,
+        model.input_weights.as_ref().unwrap().weights.len()
+    );
+    let before = model
+        .predict(&data, &graph, &split, Partition::Test)
+        .unwrap();
+    for trial in &mut data.trials {
+        if split.test.contains(&trial.id) {
+            for trace in &mut trial.recording.traces {
+                trace.values[21..].fill(Some(12345.0));
+            }
+            trial.recording.behavior.get_mut("velocity").unwrap()[21..].fill(Some(-98765.0));
+        }
+    }
+    let updated = Split::generate(&data, &graph, Axis::Animal, 42, 2, 2).unwrap();
+    let mut others = vec![];
+    let (other, other_report) = population::fit(&data, &graph, &updated, config, |m, _| {
+        others.push(m.clone());
+        Ok(())
+    })
+    .unwrap();
+    assert_eq!(model.selected_epoch, other.selected_epoch);
+    for (a, b) in snapshots.iter().zip(&others) {
+        assert_eq!(a.readout.offset, b.readout.offset);
+        assert_eq!(a.readout.gain, b.readout.gain);
+        assert_eq!(
+            serde_json::to_value(&a.input_weights).unwrap(),
+            serde_json::to_value(&b.input_weights).unwrap()
+        );
+        for (x, y) in a.parameters.groups.iter().zip(&b.parameters.groups) {
+            assert_eq!(x.value, y.value);
+        }
+        assert_eq!(
+            serde_json::to_value(&a.behavior.as_ref().unwrap().channels).unwrap(),
+            serde_json::to_value(&b.behavior.as_ref().unwrap().channels).unwrap()
+        );
+    }
+    for (a, b) in report.epochs.iter().zip(&other_report.epochs) {
+        assert_eq!(a.validation_horizon_r2, b.validation_horizon_r2);
+        assert_eq!(a.training_conditional_mse, b.training_conditional_mse);
+    }
+    let after = other
+        .predict(&data, &graph, &updated, Partition::Test)
+        .unwrap();
+    for (a, b) in before.trials.iter().zip(after.trials) {
+        assert_eq!(a.fluorescence, b.fluorescence);
+    }
+}
+
+#[test]
+fn legacy_population_artifact_defaults_to_no_behavior() {
+    let (graph, data) = fixture();
+    let split = Split::generate(&data, &graph, Axis::Animal, 42, 2, 2).unwrap();
+    let config = FitConfig {
+        epochs: 1,
+        inference: InferenceConfig {
+            dt: 0.05,
+            iterations: 0,
+            ..Default::default()
+        },
+        ..Default::default()
+    };
+    let (model, _) = population::fit(&data, &graph, &split, config, |_, _| Ok(())).unwrap();
+    let mut legacy = serde_json::to_value(&model).unwrap();
+    let object = legacy.as_object_mut().unwrap();
+    object.remove("behavior");
+    object.remove("input_weights");
+    let cfg = object.get_mut("config").unwrap().as_object_mut().unwrap();
+    cfg.remove("behavior_channels");
+    cfg.remove("input_prior_strength");
+    let restored: population::PopulationModel = serde_json::from_value(legacy).unwrap();
+    assert!(restored.behavior.is_none());
+    let a = model
+        .predict(&data, &graph, &split, Partition::Test)
+        .unwrap();
+    let b = restored
+        .predict(&data, &graph, &split, Partition::Test)
+        .unwrap();
+    for (a, b) in a.trials.iter().zip(b.trials) {
+        assert_eq!(a.fluorescence, b.fluorescence);
+    }
+}

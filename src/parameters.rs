@@ -219,3 +219,114 @@ pub fn forecast_defaults(model: &Model) -> Parameters<f64> {
     p.raw[last] = inverse_softplus(0.2);
     p
 }
+
+/// Signed current weights tied by the same neuron groups as leak-rest parameters.
+#[derive(Clone, Debug, Serialize, Deserialize)]
+pub struct TiedInputs {
+    pub groups: Vec<String>,
+    pub neuron_to_group: Vec<usize>,
+    pub columns: usize,
+    pub weights: Vec<f64>,
+}
+impl TiedInputs {
+    pub fn new(model: &Model, tied: &TiedParameters, columns: usize) -> Result<Self> {
+        tied.expand(model)?;
+        if columns == 0 || columns > 64 {
+            return Err("invalid input width".into());
+        }
+        let names: Vec<_> = (0..model.n())
+            .map(|i| tied.groups[tied.raw_to_group[model.n() + i]].name.clone())
+            .collect();
+        let groups: Vec<_> = names
+            .iter()
+            .cloned()
+            .collect::<BTreeSet<_>>()
+            .into_iter()
+            .collect();
+        let neuron_to_group = names
+            .iter()
+            .map(|name| groups.binary_search(name).unwrap())
+            .collect();
+        let weights = vec![0.0; groups.len() * columns];
+        Ok(Self {
+            groups,
+            neuron_to_group,
+            columns,
+            weights,
+        })
+    }
+    pub fn validate(&self, model: &Model, tied: &TiedParameters, columns: usize) -> Result<()> {
+        let expected = Self::new(model, tied, columns)?;
+        if self.groups != expected.groups
+            || self.neuron_to_group != expected.neuron_to_group
+            || self.columns != columns
+            || self.weights.len() != expected.weights.len()
+            || self.weights.iter().any(|v| !v.is_finite())
+        {
+            return Err("invalid tied current weights".into());
+        }
+        Ok(())
+    }
+    fn check(&self, features: &[Vec<f64>]) -> Result<()> {
+        if self.columns == 0
+            || self.columns > 64
+            || self.weights.len() != self.groups.len() * self.columns
+            || self.weights.iter().any(|v| !v.is_finite())
+            || self.neuron_to_group.iter().any(|&g| g >= self.groups.len())
+            || features
+                .iter()
+                .any(|r| r.len() != self.columns || r.iter().any(|v| !v.is_finite()))
+        {
+            return Err("invalid current projection dimensions/values".into());
+        }
+        Ok(())
+    }
+    pub fn currents(&self, features: &[Vec<f64>]) -> Result<Vec<Vec<f64>>> {
+        self.check(features)?;
+        let rows: Vec<Vec<f64>> = features
+            .iter()
+            .map(|u| {
+                self.neuron_to_group
+                    .iter()
+                    .map(|&g| {
+                        self.weights[g * self.columns..(g + 1) * self.columns]
+                            .iter()
+                            .zip(u)
+                            .map(|(w, u)| w * u)
+                            .sum()
+                    })
+                    .collect()
+            })
+            .collect();
+        if rows.iter().flatten().any(|v| !v.is_finite()) {
+            return Err("current projection overflow".into());
+        }
+        Ok(rows)
+    }
+    pub fn reduce_gradient(
+        &self,
+        features: &[Vec<f64>],
+        current_gradients: &[Vec<f64>],
+    ) -> Result<Vec<f64>> {
+        self.check(features)?;
+        if features.len() != current_gradients.len()
+            || current_gradients
+                .iter()
+                .any(|r| r.len() != self.neuron_to_group.len() || r.iter().any(|v| !v.is_finite()))
+        {
+            return Err("current gradient dimensions/values".into());
+        }
+        let mut out = vec![0.0; self.weights.len()];
+        for (u, g) in features.iter().zip(current_gradients) {
+            for (i, &row) in self.neuron_to_group.iter().enumerate() {
+                for j in 0..self.columns {
+                    out[row * self.columns + j] += g[i] * u[j];
+                }
+            }
+        }
+        if out.iter().any(|v| !v.is_finite()) {
+            return Err("current gradient overflow".into());
+        }
+        Ok(out)
+    }
+}

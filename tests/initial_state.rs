@@ -246,3 +246,167 @@ fn conditional_parameter_and_readout_gradients_match_finite_differences() {
         }
     }
 }
+
+#[test]
+fn driven_state_parameter_and_current_adjoints_match_finite_differences() {
+    let (model, mut p, recording, mut initial, readout, cfg) = fixture();
+    let mut currents: Vec<Vec<f64>> = (0..recording.times.len())
+        .map(|t| {
+            (0..model.n())
+                .map(|i| 0.4 * (t as f64 * 0.3 + i as f64).sin())
+                .collect()
+        })
+        .collect();
+    let g = initial_state::parameter_gradient_with_currents(
+        &model, &p, &recording, &readout, &initial, cfg.dt, &currents,
+    )
+    .unwrap();
+    let loss = |p: &wormsim::model::Parameters<f64>, initial: &[f64], u: &[Vec<f64>]| {
+        let ys = initial_state::forecast_with_currents(
+            &model,
+            p,
+            initial,
+            &recording.times,
+            &readout,
+            cfg.dt,
+            u,
+        )
+        .unwrap();
+        let (mut sum, mut weight) = (0.0, 0.0);
+        for tr in &recording.traces {
+            let i = model.graph.neuron(&tr.neuron).unwrap();
+            for (t, y) in tr.values.iter().enumerate() {
+                if let Some(y) = y {
+                    let w = tr.provenance.id_confidence;
+                    sum += w * (ys[t][i] - y).powi(2);
+                    weight += w;
+                }
+            }
+        }
+        sum / weight
+    };
+    assert!((g.value - loss(&p, &initial, &currents)).abs() < 1e-14);
+    let eps = 1e-6;
+    for i in 0..p.raw.len() {
+        let old = p.raw[i];
+        p.raw[i] = old + eps;
+        let a = loss(&p, &initial, &currents);
+        p.raw[i] = old - eps;
+        let b = loss(&p, &initial, &currents);
+        p.raw[i] = old;
+        assert!(
+            ((a - b) / (2.0 * eps) - g.parameters[i]).abs() < 1e-7,
+            "parameter {i}"
+        );
+    }
+    for i in 0..initial.len() {
+        let old = initial[i];
+        initial[i] = old + eps;
+        let a = loss(&p, &initial, &currents);
+        initial[i] = old - eps;
+        let b = loss(&p, &initial, &currents);
+        initial[i] = old;
+        assert!(
+            ((a - b) / (2.0 * eps) - g.initial[i]).abs() < 1e-7,
+            "initial {i}"
+        );
+    }
+    for t in 0..currents.len() {
+        for i in 0..model.n() {
+            let old = currents[t][i];
+            currents[t][i] = old + eps;
+            let a = loss(&p, &initial, &currents);
+            currents[t][i] = old - eps;
+            let b = loss(&p, &initial, &currents);
+            currents[t][i] = old;
+            assert!(
+                ((a - b) / (2.0 * eps) - g.currents[t][i]).abs() < 1e-7,
+                "current {t} {i}"
+            );
+        }
+    }
+    assert!(g.currents.last().unwrap().iter().all(|g| *g == 0.0));
+}
+#[test]
+fn driven_forecast_matches_independent_event_solver_and_inference_ignores_future_currents() {
+    let (model, p, mut recording, initial, readout, mut cfg) = fixture();
+    let currents: Vec<Vec<f64>> = (0..recording.times.len())
+        .map(|t| {
+            (0..model.n())
+                .map(|i| 0.4 * (t as f64 * 0.3 + i as f64).sin())
+                .collect()
+        })
+        .collect();
+    for (t, pair) in recording.times.windows(2).enumerate() {
+        for (i, amplitude) in currents[t].iter().enumerate() {
+            cfg.events.push(solve::Event::Stimulate {
+                neuron: model.graph.names[i].clone(),
+                start: pair[0],
+                end: pair[1],
+                amplitude: *amplitude,
+            });
+        }
+    }
+    let truth = solve::simulate_from_state(&model, &p, &cfg, Some(&initial)).unwrap();
+    let pred = initial_state::forecast_with_currents(
+        &model,
+        &p,
+        &initial,
+        &recording.times,
+        &readout,
+        cfg.dt,
+        &currents,
+    )
+    .unwrap();
+    for (actual, expected) in pred.iter().zip(&truth.fluorescence) {
+        for i in 0..model.n() {
+            assert!((actual[i] - readout.offset[i] - readout.gain[i] * expected[i]).abs() < 1e-12);
+        }
+    }
+    let prior = model.initial(&model.prepare(&p).unwrap());
+    for tr in &mut recording.traces {
+        tr.values.fill(None);
+        let i = model.graph.neuron(&tr.neuron).unwrap();
+        tr.values[0] = Some(
+            readout.offset[i]
+                + readout.gain[i]
+                    * model.prepare(&p).unwrap().calcium_scale[i]
+                    * prior[model.n() + i],
+        );
+    }
+    let origin = recording.times[5];
+    cfg.duration = origin;
+    cfg.events
+        .retain(|e| matches!(e,solve::Event::Stimulate{end,..} if *end<=origin));
+    let expected = solve::simulate_from_state(&model, &p, &cfg, Some(&prior)).unwrap();
+    for method in [
+        initial_state::InferenceMethod::Shooting,
+        initial_state::InferenceMethod::BlockEkf,
+    ] {
+        let options = InferenceConfig {
+            method,
+            dt: cfg.dt,
+            iterations: 0,
+            ..Default::default()
+        };
+        let inferred = initial_state::infer_with_currents(
+            &model, &p, &recording, origin, &readout, &options, &currents,
+        )
+        .unwrap();
+        for (a, b) in inferred.forecast_state.iter().zip(&expected.final_state) {
+            assert!((a - b).abs() < 1e-12);
+        }
+        let mut changed = currents.clone();
+        for r in &mut changed[6..] {
+            r.fill(f64::NAN);
+        }
+        assert_eq!(
+            inferred.forecast_state,
+            initial_state::infer_with_currents(
+                &model, &p, &recording, origin, &readout, &options, &changed
+            )
+            .unwrap()
+            .forecast_state
+        );
+    }
+}

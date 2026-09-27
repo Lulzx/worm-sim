@@ -83,6 +83,22 @@ struct Tape {
     states: Vec<Vec<f64>>,
     steps: Vec<f64>,
     samples: Vec<usize>,
+    intervals: Vec<usize>,
+}
+pub(crate) fn validate_currents(
+    currents: Option<&[Vec<f64>]>,
+    frames: usize,
+    neurons: usize,
+) -> Result<()> {
+    if currents.is_some_and(|rows| {
+        rows.len() != frames
+            || rows
+                .iter()
+                .any(|r| r.len() != neurons || r.iter().any(|v| !v.is_finite()))
+    }) {
+        return Err("invalid piecewise current shape/values".into());
+    }
+    Ok(())
 }
 fn rollout(
     model: &Model,
@@ -90,6 +106,7 @@ fn rollout(
     initial: &[f64],
     times: &[f64],
     dt: f64,
+    currents: Option<&[Vec<f64>]>,
 ) -> Result<Tape> {
     if !dt.is_finite()
         || dt <= 0.0
@@ -103,14 +120,19 @@ fn rollout(
     if initial.len() != model.state_len() || initial.iter().any(|v| !v.is_finite()) {
         return Err("invalid initial state".into());
     }
+    validate_currents(currents, times.len(), model.n())?;
+    let mut intervals = vec![];
     let mut states = vec![initial.to_vec()];
     let mut steps = vec![];
     let mut samples = vec![0];
     let mut rhs = vec![0.0; model.state_len()];
     let mut release = vec![0.0; model.n()];
-    let input = Inputs::new(model.n());
+    let mut input = Inputs::new(model.n());
     let mut t = 0.0;
-    for &target in &times[1..] {
+    for (interval, &target) in times[1..].iter().enumerate() {
+        if let Some(rows) = currents {
+            input.current.copy_from_slice(&rows[interval]);
+        }
         while t < target {
             let next = (t + dt).min(target);
             let h = next - t;
@@ -125,6 +147,7 @@ fn rollout(
             }
             states.push(state);
             steps.push(h);
+            intervals.push(interval);
             t = next;
         }
         samples.push(states.len() - 1);
@@ -133,6 +156,7 @@ fn rollout(
         states,
         steps,
         samples,
+        intervals,
     })
 }
 /// J(state)^T * cotangent for the unforced, unablated Level 0 RHS.
@@ -164,6 +188,7 @@ fn state_vjp(model: &Model, p: &Prepared<f64>, y: &[f64], adj: &[f64], out: &mut
     }
 }
 /// Accumulate h * (d RHS / d raw parameters)^T * adjoint.
+#[allow(clippy::too_many_arguments)]
 fn parameter_vjp(
     model: &Model,
     raw: &Parameters<f64>,
@@ -172,12 +197,18 @@ fn parameter_vjp(
     adj: &[f64],
     h: f64,
     g: &mut [f64],
+    input_current: Option<&[f64]>,
 ) {
     let n = model.n();
     let m = model.pre.len();
     // Reconstruct the current before division by voltage tau. This avoids
     // dividing by a parameter derivative and matches the forward arithmetic.
     let mut current: Vec<f64> = (0..n).map(|i| -(y[i] - p.rest[i])).collect();
+    if let Some(input) = input_current {
+        for (i, v) in current.iter_mut().enumerate() {
+            *v += input[i];
+        }
+    }
     for e in 0..m {
         let a = model.pre[e] as usize;
         let b = model.post[e] as usize;
@@ -241,6 +272,8 @@ pub struct ObjectiveGradient {
     pub readout_offset: Vec<f64>,
     pub readout_log_gain: Vec<f64>,
     pub terminal: Vec<f64>,
+    /// Derivatives with respect to held current rows; last row is unused.
+    pub currents: Vec<Vec<f64>>,
 }
 pub fn objective_gradient(
     model: &Model,
@@ -252,7 +285,7 @@ pub fn objective_gradient(
     cfg: &InferenceConfig,
 ) -> Result<(f64, Vec<f64>, Vec<f64>)> {
     let g = objective_impl(
-        model, params, recording, readout, initial, prior, cfg, false,
+        model, params, recording, readout, initial, prior, cfg, false, None,
     )?;
     Ok((g.value, g.initial, g.terminal))
 }
@@ -270,8 +303,60 @@ pub fn parameter_gradient(
         ..Default::default()
     };
     objective_impl(
-        model, params, recording, readout, initial, initial, &cfg, true,
+        model, params, recording, readout, initial, initial, &cfg, true, None,
     )
+}
+pub fn parameter_gradient_with_currents(
+    model: &Model,
+    params: &Parameters<f64>,
+    recording: &Recording,
+    readout: &Readout,
+    initial: &[f64],
+    dt: f64,
+    currents: &[Vec<f64>],
+) -> Result<ObjectiveGradient> {
+    let cfg = InferenceConfig {
+        dt,
+        prior_weight: 0.0,
+        ..Default::default()
+    };
+    objective_impl(
+        model,
+        params,
+        recording,
+        readout,
+        initial,
+        initial,
+        &cfg,
+        true,
+        Some(currents),
+    )
+}
+/// Affine readout at sample boundaries; each current row drives its following interval.
+pub fn forecast_with_currents(
+    model: &Model,
+    params: &Parameters<f64>,
+    initial: &[f64],
+    times: &[f64],
+    readout: &Readout,
+    dt: f64,
+    currents: &[Vec<f64>],
+) -> Result<Vec<Vec<f64>>> {
+    readout.validate(model.n())?;
+    let p = model.prepare(params)?;
+    let tape = rollout(model, &p, initial, times, dt, Some(currents))?;
+    Ok(tape
+        .samples
+        .iter()
+        .map(|&s| {
+            (0..model.n())
+                .map(|i| {
+                    readout.offset[i]
+                        + readout.gain[i] * (p.calcium_scale[i] * tape.states[s][model.n() + i])
+                })
+                .collect()
+        })
+        .collect())
 }
 #[allow(clippy::too_many_arguments)]
 fn objective_impl(
@@ -283,6 +368,7 @@ fn objective_impl(
     prior: &[f64],
     cfg: &InferenceConfig,
     parameter_derivatives: bool,
+    currents: Option<&[Vec<f64>]>,
 ) -> Result<ObjectiveGradient> {
     recording.validate(&model.graph)?;
     readout.validate(model.n())?;
@@ -294,7 +380,7 @@ fn objective_impl(
         return Err("invalid state prior".into());
     }
     let p = model.prepare(params)?;
-    let tape = rollout(model, &p, initial, &recording.times, cfg.dt)?;
+    let tape = rollout(model, &p, initial, &recording.times, cfg.dt, currents)?;
     let n = model.n();
     let weight: f64 = recording
         .traces
@@ -339,6 +425,11 @@ fn objective_impl(
             }
         }
     }
+    let mut current_gradient = if currents.is_some() {
+        vec![vec![0.0; n]; recording.times.len()]
+    } else {
+        vec![]
+    };
     let mut adj = vec![0.0; model.state_len()];
     let mut vjp = adj.clone();
     let mut sample = tape.samples.len();
@@ -350,6 +441,12 @@ fn objective_impl(
             }
         }
         if step > 0 {
+            let interval = tape.intervals[step - 1];
+            if currents.is_some() {
+                for i in 0..n {
+                    current_gradient[interval][i] += tape.steps[step - 1] * adj[i] * p.inv_tau[i];
+                }
+            }
             if parameter_derivatives {
                 parameter_vjp(
                     model,
@@ -359,6 +456,7 @@ fn objective_impl(
                     &adj,
                     tape.steps[step - 1],
                     &mut param_gradient,
+                    currents.map(|rows| rows[interval].as_slice()),
                 );
             }
             state_vjp(model, &p, &tape.states[step - 1], &adj, &mut vjp);
@@ -379,6 +477,7 @@ fn objective_impl(
         .iter()
         .chain(&offset_gradient)
         .chain(&gain_gradient)
+        .chain(current_gradient.iter().flatten())
         .any(|g| !g.is_finite())
     {
         return Err("nonfinite parameter/readout gradient".into());
@@ -390,6 +489,7 @@ fn objective_impl(
         readout_offset: offset_gradient,
         readout_log_gain: gain_gradient,
         terminal: tape.states.last().unwrap().clone(),
+        currents: current_gradient,
     })
 }
 /// Optimize a full-network initial condition using only samples <= origin.
@@ -401,6 +501,36 @@ pub fn infer(
     origin: f64,
     readout: &Readout,
     cfg: &InferenceConfig,
+) -> Result<InferredState> {
+    infer_impl(model, params, recording, origin, readout, cfg, None)
+}
+pub fn infer_with_currents(
+    model: &Model,
+    params: &Parameters<f64>,
+    recording: &Recording,
+    origin: f64,
+    readout: &Readout,
+    cfg: &InferenceConfig,
+    currents: &[Vec<f64>],
+) -> Result<InferredState> {
+    infer_impl(
+        model,
+        params,
+        recording,
+        origin,
+        readout,
+        cfg,
+        Some(currents),
+    )
+}
+fn infer_impl(
+    model: &Model,
+    params: &Parameters<f64>,
+    recording: &Recording,
+    origin: f64,
+    readout: &Readout,
+    cfg: &InferenceConfig,
+    currents: Option<&[Vec<f64>]>,
 ) -> Result<InferredState> {
     recording.validate(&model.graph)?;
     readout.validate(model.n())?;
@@ -427,8 +557,21 @@ pub fn infer(
     for values in history.behavior.values_mut() {
         values.truncate(end + 1);
     }
+    if currents.is_some_and(|r| r.len() != recording.times.len()) {
+        return Err("current grid differs from recording".into());
+    }
+    let history_currents = currents.map(|r| &r[..=end]);
+    validate_currents(history_currents, history.times.len(), model.n())?;
     if cfg.method == InferenceMethod::BlockEkf {
-        return crate::state_filter::infer(model, params, &history, readout, cfg.dt, &cfg.filter);
+        return crate::state_filter::infer(
+            model,
+            params,
+            &history,
+            readout,
+            cfg.dt,
+            &cfg.filter,
+            history_currents,
+        );
     }
     if !cfg.learning_rate.is_finite() || cfg.learning_rate <= 0.0 || cfg.iterations > 10000 {
         return Err("invalid shooting-inference configuration".into());
@@ -443,8 +586,21 @@ pub fn infer(
     let mut m = vec![0.0; state.len()];
     let mut v = m.clone();
     let mut objectives = vec![];
-    let (mut value, mut grad, mut terminal) =
-        objective_gradient(model, params, &history, readout, &state, &prior, cfg)?;
+    let objective = |state: &[f64]| -> Result<(f64, Vec<f64>, Vec<f64>)> {
+        let g = objective_impl(
+            model,
+            params,
+            &history,
+            readout,
+            state,
+            &prior,
+            cfg,
+            false,
+            history_currents,
+        )?;
+        Ok((g.value, g.initial, g.terminal))
+    };
+    let (mut value, mut grad, mut terminal) = objective(&state)?;
     objectives.push(value);
     for iteration in 1..=cfg.iterations {
         let mut direction = vec![0.0; state.len()];
@@ -470,8 +626,7 @@ pub fn infer(
                     }
                 })
                 .collect();
-            if let Ok((next, g, end)) =
-                objective_gradient(model, params, &history, readout, &candidate, &prior, cfg)
+            if let Ok((next, g, end)) = objective(&candidate)
                 && next < value
             {
                 accepted = Some((candidate, next, g, end));
@@ -488,7 +643,14 @@ pub fn infer(
         objectives.push(value);
     }
     let prepared = model.prepare(params)?;
-    let tape = rollout(model, &prepared, &state, &history.times, cfg.dt)?;
+    let tape = rollout(
+        model,
+        &prepared,
+        &state,
+        &history.times,
+        cfg.dt,
+        history_currents,
+    )?;
     let history_predictions = tape
         .samples
         .iter()

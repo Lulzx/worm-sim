@@ -59,3 +59,40 @@ fn unknown_annotations_do_not_tie_the_whole_network_and_bad_maps_fail() {
     bad.raw_to_group[0] = usize::MAX;
     assert!(bad.expand(&model).is_err());
 }
+
+#[test]
+fn tied_current_projection_sums_shared_neuron_gradients() {
+    use wormsim::parameters::TiedInputs;
+    let model = Model::new(fixtures::synthetic(4, 1, 0).compile().unwrap()).unwrap();
+    let mut sharing = Sharing::default();
+    for name in &model.graph.names {
+        sharing.classes.insert(name.clone(), "same".into());
+    }
+    let tied = TiedParameters::new(&model, &forecast_defaults(&model), sharing).unwrap();
+    let mut weights = TiedInputs::new(&model, &tied, 2).unwrap();
+    assert_eq!(weights.groups.len(), 1);
+    weights.weights = vec![0.4, -0.2];
+    let features = vec![vec![0.8, 1.0], vec![-0.3, 0.0]];
+    let gradients = vec![vec![1.0, 2.0, 3.0, 4.0], vec![-1.0, 0.2, 0.3, 0.5]];
+    let actual = weights.reduce_gradient(&features, &gradients).unwrap();
+    let loss = |w: &TiedInputs| {
+        w.currents(&features)
+            .unwrap()
+            .iter()
+            .flatten()
+            .zip(gradients.iter().flatten())
+            .map(|(a, b)| a * b)
+            .sum::<f64>()
+    };
+    for (i, derivative) in actual.iter().enumerate() {
+        let old = weights.weights[i];
+        weights.weights[i] = old + 1e-6;
+        let a = loss(&weights);
+        weights.weights[i] = old - 1e-6;
+        let b = loss(&weights);
+        weights.weights[i] = old;
+        assert!(((a - b) / 2e-6 - derivative).abs() < 1e-9);
+    }
+    weights.neuron_to_group[0] = 2;
+    assert!(weights.currents(&features).is_err());
+}

@@ -158,8 +158,10 @@ pub(crate) fn infer(
     readout: &Readout,
     dt: f64,
     cfg: &FilterConfig,
+    currents: Option<&[Vec<f64>]>,
 ) -> Result<InferredState> {
     cfg.validate()?;
+    crate::initial_state::validate_currents(currents, history.times.len(), model.n())?;
     history.validate(&model.graph)?;
     readout.validate(model.n())?;
     if !dt.is_finite()
@@ -185,7 +187,7 @@ pub(crate) fn infer(
     let mut cross = vec![0.0; n];
     let mut dy = vec![0.0; model.state_len()];
     let mut release = vec![0.0; n];
-    let input = Inputs::new(n);
+    let mut input = Inputs::new(n);
     let mut traces = vec![];
     for trace in &history.traces {
         if trace.provenance.id_confidence > 0.0 {
@@ -204,6 +206,11 @@ pub(crate) fn infer(
     let mut projected = 0;
     let mut time = 0.0;
     for (frame, &target) in history.times.iter().enumerate() {
+        if frame > 0
+            && let Some(rows) = currents
+        {
+            input.current.copy_from_slice(&rows[frame - 1]);
+        }
         while time < target {
             let next = (time + dt).min(target);
             let h = next - time;

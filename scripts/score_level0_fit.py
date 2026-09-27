@@ -83,7 +83,7 @@ receipt = {
         'Suffix-based bilateral sharing is an assumption; graph class and transmitter annotations remain missing.',
         'Graph sign priors are all neutral 0.5; these are not CeNGEN-informed sign priors.',
         'Only three test animals, and baseline results on them were previously inspected.',
-        'A stable latent LDS is scored separately; GRU and parameter-matched comparisons remain outstanding.',
+        'LDS and GRU are scored separately; parameter-matched comparisons remain outstanding.',
     ],
 }
 Path(args.receipt).write_text(json.dumps(receipt, indent=2) + '\n')

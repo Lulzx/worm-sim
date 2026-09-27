@@ -7,7 +7,7 @@ use crate::{
     data::IndexedGraph,
     initial_state::{self, InferenceConfig, Readout},
     model::Model,
-    parameters::{Sharing, TiedParameters, forecast_defaults},
+    parameters::{Sharing, TiedInputs, TiedParameters, forecast_defaults},
     solve::{self, Config, Method},
 };
 use serde::{Deserialize, Serialize};
@@ -24,6 +24,10 @@ pub struct FitConfig {
     pub seed: u64,
     pub inference: InferenceConfig,
     pub sharing: Sharing,
+    #[serde(default)]
+    pub behavior_channels: Vec<String>,
+    #[serde(default)]
+    pub input_prior_strength: f64,
 }
 impl Default for FitConfig {
     fn default() -> Self {
@@ -40,6 +44,8 @@ impl Default for FitConfig {
                 ..Default::default()
             },
             sharing: Sharing::default(),
+            behavior_channels: vec![],
+            input_prior_strength: 0.01,
         }
     }
 }
@@ -52,6 +58,10 @@ pub struct PopulationModel {
     pub source_commit: String,
     pub config: FitConfig,
     pub parameters: TiedParameters,
+    #[serde(default)]
+    pub behavior: Option<super::behavior::BehaviorModel>,
+    #[serde(default)]
+    pub input_weights: Option<TiedInputs>,
     pub readout: Readout,
     pub calibration: Readout,
     pub readout_fitted: Vec<bool>,
@@ -80,11 +90,22 @@ pub struct FitReport {
     pub selected_epoch: usize,
     pub free_parameters: usize,
     pub calibration_statistics: usize,
+    #[serde(default)]
+    pub input_parameters: usize,
+    #[serde(default)]
+    pub behavior_forecast_parameters: usize,
     pub inferred_state_variables_per_trial: usize,
+}
+struct TrialDrive {
+    features: Vec<Vec<f64>>,
+    currents: Vec<Vec<f64>>,
 }
 impl PopulationModel {
     pub fn free_parameters(&self) -> usize {
-        self.parameters.free_parameters() + 2 * self.readout_fitted.iter().filter(|x| **x).count()
+        self.parameters.free_parameters()
+            + 2 * self.readout_fitted.iter().filter(|x| **x).count()
+            + self.input_weights.as_ref().map_or(0, |w| w.weights.len())
+            + self.behavior.as_ref().map_or(0, |b| b.free_parameters())
     }
     fn validate(&self, data: &Dataset, graph: &IndexedGraph, split: &Split) -> Result<()> {
         split.validate(data, graph)?;
@@ -100,7 +121,36 @@ impl PopulationModel {
             return Err("invalid population model lineage/dimensions".into());
         }
         self.config.validate()?;
+        match (&self.behavior, &self.input_weights) {
+            (Some(b), Some(w)) => {
+                b.validate_lineage(data, graph, split)?;
+                let mut names = self.config.behavior_channels.clone();
+                names.sort();
+                if names
+                    != b.channels
+                        .iter()
+                        .map(|c| c.name.clone())
+                        .collect::<Vec<_>>()
+                {
+                    return Err("population behavior channels mismatch".into());
+                }
+                w.validate(&Model::new(graph.clone())?, &self.parameters, b.input_dim())?;
+            }
+            (None, None) if self.config.behavior_channels.is_empty() => {}
+            _ => return Err("population behavior/input artifacts missing or inconsistent".into()),
+        }
         Ok(())
+    }
+    fn drives(&self, trial: &super::Trial) -> Result<Option<TrialDrive>> {
+        match (&self.behavior, &self.input_weights) {
+            (Some(b), Some(w)) => {
+                let features = b.inputs(trial)?;
+                let currents = w.currents(&features)?;
+                Ok(Some(TrialDrive { features, currents }))
+            }
+            (None, None) => Ok(None),
+            _ => Err("incomplete population input artifact".into()),
+        }
     }
     pub fn predict(
         &self,
@@ -122,14 +172,27 @@ impl PopulationModel {
                 return Err("population forecast does not classify stimulation labels".into());
             }
             let origin = trial.forecast_origin.ok_or("missing forecast origin")?;
-            let inferred = initial_state::infer(
-                &model,
-                &params,
-                &trial.recording,
-                origin,
-                &self.readout,
-                &self.config.inference,
-            )?;
+            let drive = self.drives(trial)?;
+            let inferred = if let Some(TrialDrive { currents: rows, .. }) = &drive {
+                initial_state::infer_with_currents(
+                    &model,
+                    &params,
+                    &trial.recording,
+                    origin,
+                    &self.readout,
+                    &self.config.inference,
+                    rows,
+                )?
+            } else {
+                initial_state::infer(
+                    &model,
+                    &params,
+                    &trial.recording,
+                    origin,
+                    &self.readout,
+                    &self.config.inference,
+                )?
+            };
             let times = &trial.recording.times;
             let dt = times[1] - times[0];
             if times.windows(2).any(|p| (p[1] - p[0] - dt).abs() > 1e-8) {
@@ -143,29 +206,50 @@ impl PopulationModel {
                 method: Method::Euler,
                 events: vec![],
             };
-            let trajectory =
-                solve::simulate_from_state(&model, &params, &cfg, Some(&inferred.forecast_state))?;
-            if trajectory.times.len() != times.len() - origin_index
-                || trajectory
-                    .times
+            let future_predictions = if let Some(TrialDrive { currents: rows, .. }) = &drive {
+                let relative: Vec<_> = times[origin_index..].iter().map(|t| t - origin).collect();
+                initial_state::forecast_with_currents(
+                    &model,
+                    &params,
+                    &inferred.forecast_state,
+                    &relative,
+                    &self.readout,
+                    self.config.inference.dt,
+                    &rows[origin_index..],
+                )?
+            } else {
+                let trajectory = solve::simulate_from_state(
+                    &model,
+                    &params,
+                    &cfg,
+                    Some(&inferred.forecast_state),
+                )?;
+                if trajectory.times.len() != times.len() - origin_index
+                    || trajectory
+                        .times
+                        .iter()
+                        .zip(&times[origin_index..])
+                        .any(|(a, b)| (*a + origin - b).abs() > 1e-8)
+                {
+                    return Err("forecast output grid differs from recording".into());
+                }
+                trajectory
+                    .fluorescence
                     .iter()
-                    .zip(&times[origin_index..])
-                    .any(|(a, b)| (*a + origin - b).abs() > 1e-8)
-            {
-                return Err("forecast output grid differs from recording".into());
-            }
+                    .map(|row| {
+                        (0..model.n())
+                            .map(|i| self.readout.offset[i] + self.readout.gain[i] * row[i])
+                            .collect()
+                    })
+                    .collect::<Vec<Vec<f64>>>()
+            };
             let mut fluorescence = BTreeMap::new();
             for trace in &trial.recording.traces {
                 let i = graph.neuron(&trace.neuron)?;
                 let values: Vec<_> = inferred.history_predictions[..origin_index]
                     .iter()
                     .map(|row| row[i])
-                    .chain(
-                        trajectory
-                            .fluorescence
-                            .iter()
-                            .map(|y| self.readout.offset[i] + self.readout.gain[i] * y[i]),
-                    )
+                    .chain(future_predictions.iter().map(|row| row[i]))
                     .collect();
                 if values.iter().any(|v| !v.is_finite()) {
                     return Err("nonfinite population prediction".into());
@@ -180,12 +264,19 @@ impl PopulationModel {
             });
         }
         trials.sort_by(|a, b| a.id.cmp(&b.id));
+        let behavior_description = match &self.behavior {
+            Some(b) => format!(
+                "behavior AR artifact {}; no actual future behavior",
+                b.content_hash()?
+            ),
+            None => "no behavior inputs".into(),
+        };
         Ok(Predictions {
             schema_version: 1,
             dataset_hash: self.dataset_hash.clone(),
             split_hash: self.split_hash.clone(),
             model: format!(
-                "Level 0 conditional-gradient population fit; selected epoch {}; full 3N history-only {:?} inference; neutral graph sign priors remain unannotated",
+                "Level 0 conditional-gradient population fit; selected epoch {}; full 3N history-only {:?} inference; neutral graph sign priors remain unannotated; {behavior_description}",
                 self.selected_epoch, self.config.inference.method
             ),
             free_parameters: self.free_parameters(),
@@ -209,6 +300,7 @@ impl FitConfig {
                 self.prior_strength,
                 self.sign_prior_strength,
                 self.readout_prior_strength,
+                self.input_prior_strength,
             ]
             .iter()
             .any(|v| !v.is_finite() || *v < 0.0)
@@ -286,6 +378,20 @@ pub fn fit(
     let (readout, unseen) = super::level0::training_readout(data, graph, split)?;
     let model = Model::new(graph.clone())?;
     let parameters = TiedParameters::new(&model, &forecast_defaults(&model), cfg.sharing.clone())?;
+    let behavior = if cfg.behavior_channels.is_empty() {
+        None
+    } else {
+        Some(super::behavior::fit(
+            data,
+            graph,
+            split,
+            &cfg.behavior_channels,
+        )?)
+    };
+    let input_weights = behavior
+        .as_ref()
+        .map(|b| TiedInputs::new(&model, &parameters, b.input_dim()))
+        .transpose()?;
     let mut current = PopulationModel {
         schema_version: 1,
         dataset_hash: split.dataset_hash.clone(),
@@ -296,6 +402,8 @@ pub fn fit(
             .into(),
         config: cfg.clone(),
         parameters,
+        behavior,
+        input_weights,
         calibration: readout.clone(),
         readout,
         readout_fitted: graph
@@ -321,7 +429,11 @@ pub fn fit(
     checkpoint(&current, &epochs[0])?;
     let group_count = current.parameters.groups.len();
     let n = model.n();
-    let mut optimizer = Adam::new(group_count + 2 * n);
+    let input_count = current
+        .input_weights
+        .as_ref()
+        .map_or(0, |w| w.weights.len());
+    let mut optimizer = Adam::new(group_count + 2 * n + input_count);
     for epoch in 1..=cfg.epochs {
         let start = std::time::Instant::now();
         let mut loss = 0.0;
@@ -341,14 +453,27 @@ pub fn fit(
         for (batch, (_, trial)) in training.iter().enumerate() {
             let params = current.parameters.expand(&model)?;
             let origin = trial.forecast_origin.ok_or("missing training origin")?;
-            let inferred = initial_state::infer(
-                &model,
-                &params,
-                &trial.recording,
-                origin,
-                &current.readout,
-                &cfg.inference,
-            )?;
+            let drive = current.drives(trial)?;
+            let inferred = if let Some(TrialDrive { currents: rows, .. }) = &drive {
+                initial_state::infer_with_currents(
+                    &model,
+                    &params,
+                    &trial.recording,
+                    origin,
+                    &current.readout,
+                    &cfg.inference,
+                    rows,
+                )?
+            } else {
+                initial_state::infer(
+                    &model,
+                    &params,
+                    &trial.recording,
+                    origin,
+                    &current.readout,
+                    &cfg.inference,
+                )?
+            };
             let index = trial
                 .recording
                 .times
@@ -364,14 +489,26 @@ pub fn fit(
             for values in future.behavior.values_mut() {
                 *values = values[index..].to_vec();
             }
-            let g = initial_state::parameter_gradient(
-                &model,
-                &params,
-                &future,
-                &current.readout,
-                &inferred.forecast_state,
-                cfg.inference.dt,
-            )?;
+            let g = if let Some(TrialDrive { currents: rows, .. }) = &drive {
+                initial_state::parameter_gradient_with_currents(
+                    &model,
+                    &params,
+                    &future,
+                    &current.readout,
+                    &inferred.forecast_state,
+                    cfg.inference.dt,
+                    &rows[index..],
+                )?
+            } else {
+                initial_state::parameter_gradient(
+                    &model,
+                    &params,
+                    &future,
+                    &current.readout,
+                    &inferred.forecast_state,
+                    cfg.inference.dt,
+                )?
+            };
             loss += g.value;
             let mut gradient = current.parameters.reduce_gradient(&g.parameters)?;
             let (_, prior) =
@@ -409,6 +546,16 @@ pub fn fit(
             values.extend(
                 (0..n).map(|i| (current.readout.gain[i] / current.calibration.gain[i]).ln()),
             );
+            if let (Some(w), Some(TrialDrive { features, .. })) = (&current.input_weights, &drive) {
+                let input_gradient = w.reduce_gradient(&features[index..], &g.currents)?;
+                gradient.extend(
+                    input_gradient
+                        .iter()
+                        .zip(&w.weights)
+                        .map(|(g, w)| g + 2.0 * cfg.input_prior_strength * w / input_count as f64),
+                );
+                values.extend(&w.weights);
+            }
             optimizer.update(&mut values, &gradient, cfg.learning_rate)?;
             for (i, group) in current.parameters.groups.iter_mut().enumerate() {
                 if group.trainable {
@@ -422,6 +569,9 @@ pub fn fit(
                     current.readout.gain[i] =
                         current.calibration.gain[i] * values[group_count + n + i].exp();
                 }
+            }
+            if let Some(w) = &mut current.input_weights {
+                w.weights.copy_from_slice(&values[group_count + 2 * n..]);
             }
             if (batch + 1) % 24 == 0 {
                 eprintln!(
@@ -449,6 +599,6 @@ pub fn fit(
             best = current.clone();
         }
     }
-    let report=FitReport{schema_version:1,dataset_hash:split.dataset_hash.clone(),split_hash:split.content_hash()?,source_commit:current.source_commit.clone(),config:cfg,criterion:"Maximum mean validation macro-neuron R² at 1/10/30 s, including epoch 0; ties retain earlier epoch. Conditional gradients hold history-inferred state fixed. No test targets used.".into(),epochs,selected_epoch:best.selected_epoch,free_parameters:best.free_parameters(),calibration_statistics:2*best.readout_fitted.iter().filter(|x|**x).count(),inferred_state_variables_per_trial:model.state_len()};
+    let report=FitReport{schema_version:1,dataset_hash:split.dataset_hash.clone(),split_hash:split.content_hash()?,source_commit:current.source_commit.clone(),config:cfg,criterion:"Maximum mean validation macro-neuron R² at 1/10/30 s, including epoch 0; ties retain earlier epoch. Conditional gradients hold history-inferred state fixed. No test targets used.".into(),epochs,selected_epoch:best.selected_epoch,free_parameters:best.free_parameters(),calibration_statistics:2*best.readout_fitted.iter().filter(|x|**x).count(),input_parameters:input_count,behavior_forecast_parameters:best.behavior.as_ref().map_or(0,|b|b.free_parameters()),inferred_state_variables_per_trial:model.state_len()};
     Ok((best, report))
 }
