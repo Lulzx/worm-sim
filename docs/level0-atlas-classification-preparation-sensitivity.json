@@ -1,0 +1,49 @@
+{
+  "dataset_hash": "3f3a537ff8424d89da72699e9b342185959afbd9380f7ecc6aa0fed06fafe843",
+  "epoch": 5,
+  "model_sha256": "0d5c943e2e03feef048184b9703ea69d9d5a3418feb4563046c845c68a1eea0f",
+  "model_source_commit": "fe2972f1a7bbb105534b6a0eb9b7671e1f81ee26",
+  "partition": "validation",
+  "schema_version": 1,
+  "scope": "Frozen parameters, validation-only numerical sensitivity; no refitting or test predictions. Duration/dt overrides are diagnostics, not replacements for the selected checkpoint. Correlation and ranking can magnify tiny residual responses even when MSE is stable.",
+  "settings": [
+    {
+      "correlation": -0.0009142586262034135,
+      "defined_correlations": 11730,
+      "dt": 0.01,
+      "mse": 0.04232250530820952,
+      "pair_auroc": 0.7630441264162194,
+      "preparation_seconds": 60.0,
+      "unforced_derivative_l2": 2.1850620698721187e-13
+    },
+    {
+      "correlation": -0.0010805200461277038,
+      "defined_correlations": 11560,
+      "dt": 0.01,
+      "mse": 0.04232250530820842,
+      "pair_auroc": 0.7630938183263765,
+      "preparation_seconds": 120.0,
+      "unforced_derivative_l2": 6.965604456766095e-14
+    },
+    {
+      "correlation": -0.0010805200461077842,
+      "defined_correlations": 11560,
+      "dt": 0.01,
+      "mse": 0.04232250530820842,
+      "pair_auroc": 0.7630938183263765,
+      "preparation_seconds": 240.0,
+      "unforced_derivative_l2": 6.965604456766095e-14
+    },
+    {
+      "correlation": -0.00011805228904919526,
+      "defined_correlations": 11407,
+      "dt": 0.005,
+      "mse": 0.04232248236916128,
+      "pair_auroc": 0.7630441264162194,
+      "preparation_seconds": 240.0,
+      "unforced_derivative_l2": 1.3999130826757986e-13
+    }
+  ],
+  "source_commit": "fe2972f1a7bbb105534b6a0eb9b7671e1f81ee26",
+  "split_hash": "2d291f63668345396d9b08e984581841db7b8912897405993ba258bf9f013f47"
+}

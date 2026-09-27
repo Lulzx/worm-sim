@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "source_commit": "fe2972f1a7bbb105534b6a0eb9b7671e1f81ee26",
+  "dataset_hash": "3f3a537ff8424d89da72699e9b342185959afbd9380f7ecc6aa0fed06fafe843",
+  "split_hash": "2d291f63668345396d9b08e984581841db7b8912897405993ba258bf9f013f47",
+  "selected_epoch": 5,
+  "config": {
+    "epochs": 5,
+    "dt": 0.01,
+    "preparation_seconds": 60.0,
+    "learning_rate": 0.01,
+    "kernel_lags": 39,
+    "prior_strength": 0.01,
+    "sign_prior_strength": 0.01,
+    "kernel_prior_strength": 0.01,
+    "sharing": {
+      "classes": {},
+      "allow_suffix_pairs": true,
+      "provenance": "Graph annotations when available; matching terminal L/R names otherwise. Suffix pairing is an explicit modeling assumption, not a biological annotation."
+    },
+    "classification": {
+      "weight": 0.1,
+      "area_scale": 0.01,
+      "epsilon": 1e-08
+    }
+  },
+  "selection": [
+    {
+      "epoch": 0,
+      "preceding_training_mse": null,
+      "preceding_penalty": null,
+      "preceding_training_classification_bce": null,
+      "validation_mse": 0.042328773260577934,
+      "validation_correlation": -0.0006802823236541249,
+      "defined_trace_correlations": 10659,
+      "elapsed_seconds": 4.664641
+    },
+    {
+      "epoch": 1,
+      "preceding_training_mse": 0.07536645831538034,
+      "preceding_penalty": 0.006931471805598933,
+      "preceding_training_classification_bce": 0.19570439936652007,
+      "validation_mse": 0.04232687541976705,
+      "validation_correlation": -0.0004951442385471414,
+      "defined_trace_correlations": 11303,
+      "elapsed_seconds": 158.63371825
+    },
+    {
+      "epoch": 2,
+      "preceding_training_mse": 0.07536428189029362,
+      "preceding_penalty": 0.006932626401545003,
+      "preceding_training_classification_bce": 0.19559240634440053,
+      "validation_mse": 0.04232537959317126,
+      "validation_correlation": 4.109586376435189e-05,
+      "defined_trace_correlations": 11555,
+      "elapsed_seconds": 164.181529958
+    },
+    {
+      "epoch": 3,
+      "preceding_training_mse": 0.07536240668610483,
+      "preceding_penalty": 0.006933944604686329,
+      "preceding_training_classification_bce": 0.19547818986384424,
+      "validation_mse": 0.04232417332010482,
+      "validation_correlation": -0.002425264862361546,
+      "defined_trace_correlations": 11683,
+      "elapsed_seconds": 139.577126084
+    },
+    {
+      "epoch": 4,
+      "preceding_training_mse": 0.07536079162682945,
+      "preceding_penalty": 0.00693602765205746,
+      "preceding_training_classification_bce": 0.1953660373192264,
+      "validation_mse": 0.042323211425157936,
+      "validation_correlation": -0.001595098785135831,
+      "defined_trace_correlations": 11728,
+      "elapsed_seconds": 139.757986375
+    },
+    {
+      "epoch": 5,
+      "preceding_training_mse": 0.07535939932633241,
+      "preceding_penalty": 0.006938451126113837,
+      "preceding_training_classification_bce": 0.19525501151853522,
+      "validation_mse": 0.04232250530820952,
+      "validation_correlation": -0.0009142586262034135,
+      "defined_trace_correlations": 11730,
+      "elapsed_seconds": 140.348550959
+    }
+  ],
+  "free_parameters": 6783,
+  "independent_saved_trace_scores": {
+    "validation": {
+      "pooled_mse": 0.04232250530820969,
+      "zero_response_mse": 0.042458845587192255,
+      "macro_trace_correlation": -0.0009142586262033951,
+      "defined_trace_correlations": 11730
+    },
+    "test": {
+      "pooled_mse": 0.049896849614279884,
+      "zero_response_mse": 0.05003565246791083,
+      "macro_trace_correlation": 0.0021253979534602684,
+      "defined_trace_correlations": 12588
+    }
+  },
+  "independent_pair_auroc": 0.6810058792712033,
+  "max_pair_area_error": 2.0816681711721685e-17,
+  "validation_half_step": {
+    "coarse_mse": 0.04232250530820952,
+    "dt": 0.01,
+    "epoch": 5,
+    "fine_dt": 0.005,
+    "fine_mse": 0.042322482369162154,
+    "max_prediction_change": 5.316818272586843e-05,
+    "scope": "Validation-only numerical sensitivity at the selected checkpoint; not a convergence proof.",
+    "source_commit": "fe2972f1a7bbb105534b6a0eb9b7671e1f81ee26"
+  },
+  "selected_model_sha256": "0d5c943e2e03feef048184b9703ea69d9d5a3418feb4563046c845c68a1eea0f",
+  "dataset_file_sha256": "2063f69753f9ab0dce9ee489214fc3eb641c451651a09cc4b2ee81f261df4b2b",
+  "split_file_sha256": "c3002a03460f7685f71bcddf2be58c78e8ec35a410abe4a5eb3c2b9f11375438",
+  "evidence_file_sha256": "28633bafc09afac3c53eb24d76e038774f9d1470182233a4f8d4b50e07d47152",
+  "audit_script_sha256": "aec03b63934414c97f61ff81a9ecf8240dadcca573c35690b1e32980b0edf99b",
+  "shared_score_script_sha256": "ddcc0c95f9a3f872c61b180176f8043682bc6fbc3c70f9441cafb1d1d3806e53",
+  "artifacts": {
+    "epoch-0.json": "f7f061464f4685f059f0a7d0a22b43af1011267277bc2d5fa239008b1f0c0f0e",
+    "epoch-1.json": "31e2bce78bbe08d96c9ef964040fb2b2d4862046a7f7ae89106cbf07b096b144",
+    "epoch-2.json": "98491d45a86158565aca92f1139029f3bb492f35ecfa228ffef39ce88e81179f",
+    "epoch-3.json": "84b245bdf32f928646f30afa1f5c5f40c2200a896d1d83333ff5311751649eeb",
+    "epoch-4.json": "0487aba8329a50cf1a246b4539ec6c8c9166458c8757dc65c4199cf81525e5e4",
+    "epoch-5.json": "0d5c943e2e03feef048184b9703ea69d9d5a3418feb4563046c845c68a1eea0f",
+    "validation-report.json": "13d6aa30d806b52de12a7149a55866e1c77ced15a252ccbc83762401ca7a06a9",
+    "validation-predictions.json": "f13cb9ff198d9d40c20a03e23d60d923e569f16380cac5ac3e1af61b8f2c5d2e",
+    "test-report.json": "06dc0e13c6a34dcc81b593f1b4111345e95172c696b0810953f12e2192f9298d",
+    "test-predictions.json": "e88b37d7939905255560a02ac62a5656bef8666e9da02037eafabe6cbb7ab4a0",
+    "validation-preparation-check.json": "11d08284e363dbd6809fd37cff1f90e245338026d904a24529331ae4a3e27e34"
+  },
+  "limitations": "Independent recomputation of saved-output MSE, correlation, response area and direct pairwise AUROC. Selection and declared lineage checked. Nonlinear ODE replay is audited separately below; optimization and bootstrap draws are not independently replayed. See gradient tests and selected-checkpoint half-step check for separate numerical evidence. Shared fixed preparation seed, assumed positive shared input, neutral unannotated signs and previously inspected test cohort remain limitations.",
+  "independent_classifier_scores": {
+    "validation": {
+      "pairs": 1725,
+      "detected": 48,
+      "bce": 0.13049832701408198,
+      "brier": 0.027055750887935333,
+      "mean_probability": 0.049161244526861915,
+      "constant_train_prevalence_bce": 0.13305685591272112,
+      "constant_train_prevalence_brier": 0.027527511201568933
+    },
+    "test": {
+      "pairs": 1758,
+      "detected": 82,
+      "bce": 0.18740990606522137,
+      "brier": 0.044294375999193294,
+      "mean_probability": 0.049088788376749654,
+      "constant_train_prevalence_bce": 0.1886091079645606,
+      "constant_train_prevalence_brier": 0.04447721735666124
+    }
+  },
+  "classifier": {
+    "bias": -2.9909272827574993,
+    "raw_slope": 0.5915203164595922,
+    "area_scale": 0.01,
+    "epsilon": 1e-08
+  },
+  "training_pair_labels": {
+    "pairs": 19833,
+    "detected": 984,
+    "initial_smoothed_prevalence": 0.04963698699203388
+  },
+  "classification_scope": "Saved-trace pair-uniform BCE and Brier; training-count initialization checked. No refitting, probability threshold selection or replacement of common absolute-area AUROC. Gradients and optimizer are not independently replayed.",
+  "validation_preparation_check": {
+    "derivative_l2": 2.1850620698721187e-13,
+    "epoch": 5,
+    "longer_derivative_l2": 6.965604456766095e-14,
+    "longer_duration_mse": 0.04232250530820842,
+    "longer_seconds": 120.0,
+    "max_prediction_change": 1.236788450669318e-13,
+    "max_state_change": 1.2367884494324244e-13,
+    "preparation_seconds": 60.0,
+    "scope": "Validation-only preparation duration sensitivity and residual unforced derivative; not a proof of equilibrium uniqueness or a biological resting state.",
+    "selected_duration_mse": 0.04232250530820952,
+    "source_commit": "fe2972f1a7bbb105534b6a0eb9b7671e1f81ee26"
+  },
+  "independent_ode_replay": {
+    "script_sha256": "3ed4cc5807676e467968619765b28b2a464a5ed3fe96ffc09442adbd8f08220d",
+    "graph_json_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "target_grids_replayed": 30,
+    "max_fluorescence_error": 2.2204460514707593e-16,
+    "prepared_unforced_derivative_l2": 2.1848334773669602e-13,
+    "scope": "Independent NumPy Euler dynamics including unforced preparation, positive parameter transforms, chemical and gap currents, calcium/synapse dynamics and baseline-relative readout. All saved selected validation/test predictions checked. Does not refit parameters, replay optimization or independently bootstrap."
+  }
+}

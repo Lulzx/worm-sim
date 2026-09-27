@@ -1,0 +1,62 @@
+{
+  "dataset_hash": "3f3a537ff8424d89da72699e9b342185959afbd9380f7ecc6aa0fed06fafe843",
+  "evaluation_source_commit": "ff5b122cf89a328fdf7e1b992b12e736fea1709e",
+  "evidence_hash": "28633bafc09afac3c53eb24d76e038774f9d1470182233a4f8d4b50e07d47152",
+  "limitations": "Separate percentile 95% cluster bootstraps, conditional on the frozen fit. Target and recording dependence is crossed; separate marginal intervals do not account for both simultaneously. Recording IDs are not verified animal IDs. Aggregate published pair labels have no event-level recording decomposition. Undefined correlations and one-class AUROC draws are excluded and their defined counts are reported. No claim of biological acceptance or reproduction of original Creamer fitting.",
+  "model": "level0-atlas-shared-positive-current-preparation-60s-joint-pair-bce",
+  "model_source_commit": "fe2972f1a7bbb105534b6a0eb9b7671e1f81ee26",
+  "pair_bootstrap": {
+    "auroc": {
+      "defined_replicates": 2000,
+      "lower_95": 0.6105110886197604,
+      "point": 0.6810058792712033,
+      "upper_95": 0.7519617515899443
+    },
+    "clusters": 13,
+    "grouping": "stimulated_neuron",
+    "replicates": 2000,
+    "seed": 42
+  },
+  "pair_score": "dt times sum of absolute predicted fluorescence on the common post-stimulation grid; one score per ordered non-self pair; untransformed area, not classifier probability; training-label use is declared by the fitted model",
+  "partition": "test",
+  "schema_version": 1,
+  "split_hash": "2d291f63668345396d9b08e984581841db7b8912897405993ba258bf9f013f47",
+  "trace_bootstrap": [
+    {
+      "clusters": 15,
+      "grouping": "stimulated_neuron",
+      "macro_trace_correlation": {
+        "defined_replicates": 2000,
+        "lower_95": -0.012845815977356852,
+        "point": 0.002125397953460259,
+        "upper_95": 0.019683713694649628
+      },
+      "pooled_mse": {
+        "defined_replicates": 2000,
+        "lower_95": 0.03954397586042739,
+        "point": 0.04989684961428056,
+        "upper_95": 0.05912487111013583
+      },
+      "replicates": 2000,
+      "seed": 42
+    },
+    {
+      "clusters": 67,
+      "grouping": "recording_id_not_verified_animal",
+      "macro_trace_correlation": {
+        "defined_replicates": 2000,
+        "lower_95": -0.009733821603739026,
+        "point": 0.002125397953460259,
+        "upper_95": 0.012344244866849392
+      },
+      "pooled_mse": {
+        "defined_replicates": 2000,
+        "lower_95": 0.04105972102972994,
+        "point": 0.04989684961428056,
+        "upper_95": 0.05882637095108012
+      },
+      "replicates": 2000,
+      "seed": 42
+    }
+  ]
+}
