@@ -125,3 +125,8 @@ interpreted as a causal forecast.
 An optional [shared behavior-input protocol](BEHAVIOR-INPUTS.md) now augments GRU
 recurrent inputs. The original receipts above remain the no-behavior experiment;
 the equal-input LDS/Level 0 comparison is not yet complete.
+
+The behavior-assisted run now selects epoch 11 on validation; see the
+[shared-input baseline receipt](BEHAVIOR-INPUTS.md#baseline-fits-validation-only).
+The reported test scores earlier in this document remain the original
+no-behavior model's results.

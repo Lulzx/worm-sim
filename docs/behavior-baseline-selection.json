@@ -1,0 +1,1344 @@
+{
+  "schema_version": 1,
+  "scope": "Training/validation selection only. This script does not generate or score behavior-assisted test predictions. Level 0 input integration and equal-input test comparison remain pending.",
+  "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+  "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+  "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+  "model_sha256": {
+    "lds": "3ed38adac1f093a989f547b25656c66d12a5759759c9b3c12258354426e761ae",
+    "gru": "f78eb0ac1bc23ae2a88df50871ecd7aa3a04615679d6b341da0c6a9f65b972d1"
+  },
+  "common_behavior_artifacts_exactly_equal": true,
+  "common_behavior_forecast": {
+    "schema_version": 1,
+    "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+    "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+    "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+    "source_commit": "ad1b06d41911e50547b420804bf9d213a4536746",
+    "training_trials": [
+      "2022-06-14-01-window-0000",
+      "2022-06-14-01-window-0001",
+      "2022-06-14-01-window-0002",
+      "2022-06-14-01-window-0003",
+      "2022-06-14-01-window-0004",
+      "2022-06-14-01-window-0005",
+      "2022-06-14-01-window-0006",
+      "2022-06-14-01-window-0007",
+      "2022-06-14-01-window-0008",
+      "2022-06-14-01-window-0009",
+      "2022-06-14-01-window-0010",
+      "2022-06-14-01-window-0011",
+      "2022-06-14-01-window-0012",
+      "2022-06-14-01-window-0013",
+      "2022-06-14-01-window-0014",
+      "2022-06-14-01-window-0015",
+      "2022-06-14-01-window-0016",
+      "2022-06-14-01-window-0017",
+      "2022-06-14-01-window-0018",
+      "2022-06-14-01-window-0019",
+      "2022-06-14-01-window-0020",
+      "2022-06-14-01-window-0021",
+      "2022-06-14-01-window-0022",
+      "2022-06-14-01-window-0023",
+      "2022-06-14-13-window-0000",
+      "2022-06-14-13-window-0001",
+      "2022-06-14-13-window-0002",
+      "2022-06-14-13-window-0003",
+      "2022-06-14-13-window-0004",
+      "2022-06-14-13-window-0005",
+      "2022-06-14-13-window-0006",
+      "2022-06-14-13-window-0007",
+      "2022-06-14-13-window-0008",
+      "2022-06-14-13-window-0009",
+      "2022-06-14-13-window-0010",
+      "2022-06-14-13-window-0011",
+      "2022-06-14-13-window-0012",
+      "2022-06-14-13-window-0013",
+      "2022-06-14-13-window-0014",
+      "2022-06-14-13-window-0015",
+      "2022-06-14-13-window-0016",
+      "2022-06-14-13-window-0017",
+      "2022-06-14-13-window-0018",
+      "2022-06-14-13-window-0019",
+      "2022-06-14-13-window-0020",
+      "2022-06-14-13-window-0021",
+      "2022-06-14-13-window-0022",
+      "2022-06-14-13-window-0023",
+      "2022-06-28-01-window-0000",
+      "2022-06-28-01-window-0001",
+      "2022-06-28-01-window-0002",
+      "2022-06-28-01-window-0003",
+      "2022-06-28-01-window-0004",
+      "2022-06-28-01-window-0005",
+      "2022-06-28-01-window-0006",
+      "2022-06-28-01-window-0007",
+      "2022-06-28-01-window-0008",
+      "2022-06-28-01-window-0009",
+      "2022-06-28-01-window-0010",
+      "2022-06-28-01-window-0011",
+      "2022-06-28-01-window-0012",
+      "2022-06-28-01-window-0013",
+      "2022-06-28-01-window-0014",
+      "2022-06-28-01-window-0015",
+      "2022-06-28-01-window-0016",
+      "2022-06-28-01-window-0017",
+      "2022-06-28-01-window-0018",
+      "2022-06-28-01-window-0019",
+      "2022-06-28-01-window-0020",
+      "2022-06-28-01-window-0021",
+      "2022-06-28-01-window-0022",
+      "2022-06-28-01-window-0023",
+      "2022-06-28-07-window-0000",
+      "2022-06-28-07-window-0001",
+      "2022-06-28-07-window-0002",
+      "2022-06-28-07-window-0003",
+      "2022-06-28-07-window-0004",
+      "2022-06-28-07-window-0005",
+      "2022-06-28-07-window-0006",
+      "2022-06-28-07-window-0007",
+      "2022-06-28-07-window-0008",
+      "2022-06-28-07-window-0009",
+      "2022-06-28-07-window-0010",
+      "2022-06-28-07-window-0011",
+      "2022-06-28-07-window-0012",
+      "2022-06-28-07-window-0013",
+      "2022-06-28-07-window-0014",
+      "2022-06-28-07-window-0015",
+      "2022-06-28-07-window-0016",
+      "2022-06-28-07-window-0017",
+      "2022-06-28-07-window-0018",
+      "2022-06-28-07-window-0019",
+      "2022-06-28-07-window-0020",
+      "2022-06-28-07-window-0021",
+      "2022-06-28-07-window-0022",
+      "2022-06-28-07-window-0023",
+      "2022-07-15-06-window-0000",
+      "2022-07-15-06-window-0001",
+      "2022-07-15-06-window-0002",
+      "2022-07-15-06-window-0003",
+      "2022-07-15-06-window-0004",
+      "2022-07-15-06-window-0005",
+      "2022-07-15-06-window-0006",
+      "2022-07-15-06-window-0007",
+      "2022-07-15-06-window-0008",
+      "2022-07-15-06-window-0009",
+      "2022-07-15-06-window-0010",
+      "2022-07-15-06-window-0011",
+      "2022-07-15-06-window-0012",
+      "2022-07-15-06-window-0013",
+      "2022-07-15-06-window-0014",
+      "2022-07-15-06-window-0015",
+      "2022-07-15-06-window-0016",
+      "2022-07-15-06-window-0017",
+      "2022-07-15-06-window-0018",
+      "2022-07-15-06-window-0019",
+      "2022-07-15-06-window-0020",
+      "2022-07-15-06-window-0021",
+      "2022-07-15-06-window-0022",
+      "2022-07-15-06-window-0023",
+      "2022-07-20-01-window-0000",
+      "2022-07-20-01-window-0001",
+      "2022-07-20-01-window-0002",
+      "2022-07-20-01-window-0003",
+      "2022-07-20-01-window-0004",
+      "2022-07-20-01-window-0005",
+      "2022-07-20-01-window-0006",
+      "2022-07-20-01-window-0007",
+      "2022-07-20-01-window-0008",
+      "2022-07-20-01-window-0009",
+      "2022-07-20-01-window-0010",
+      "2022-07-20-01-window-0011",
+      "2022-07-20-01-window-0012",
+      "2022-07-20-01-window-0013",
+      "2022-07-20-01-window-0014",
+      "2022-07-20-01-window-0015",
+      "2022-07-20-01-window-0016",
+      "2022-07-20-01-window-0017",
+      "2022-07-20-01-window-0018",
+      "2022-07-20-01-window-0019",
+      "2022-07-20-01-window-0020",
+      "2022-07-20-01-window-0021",
+      "2022-07-20-01-window-0022",
+      "2022-07-20-01-window-0023",
+      "2022-07-26-01-window-0000",
+      "2022-07-26-01-window-0001",
+      "2022-07-26-01-window-0002",
+      "2022-07-26-01-window-0003",
+      "2022-07-26-01-window-0004",
+      "2022-07-26-01-window-0005",
+      "2022-07-26-01-window-0006",
+      "2022-07-26-01-window-0007",
+      "2022-07-26-01-window-0008",
+      "2022-07-26-01-window-0009",
+      "2022-07-26-01-window-0010",
+      "2022-07-26-01-window-0011",
+      "2022-07-26-01-window-0012",
+      "2022-07-26-01-window-0013",
+      "2022-07-26-01-window-0014",
+      "2022-07-26-01-window-0015",
+      "2022-07-26-01-window-0016",
+      "2022-07-26-01-window-0017",
+      "2022-07-26-01-window-0018",
+      "2022-07-26-01-window-0019",
+      "2022-07-26-01-window-0020",
+      "2022-07-26-01-window-0021",
+      "2022-07-26-01-window-0022",
+      "2022-07-26-01-window-0023",
+      "2022-08-02-01-window-0000",
+      "2022-08-02-01-window-0001",
+      "2022-08-02-01-window-0002",
+      "2022-08-02-01-window-0003",
+      "2022-08-02-01-window-0004",
+      "2022-08-02-01-window-0005",
+      "2022-08-02-01-window-0006",
+      "2022-08-02-01-window-0007",
+      "2022-08-02-01-window-0008",
+      "2022-08-02-01-window-0009",
+      "2022-08-02-01-window-0010",
+      "2022-08-02-01-window-0011",
+      "2022-08-02-01-window-0012",
+      "2022-08-02-01-window-0013",
+      "2022-08-02-01-window-0014",
+      "2022-08-02-01-window-0015",
+      "2022-08-02-01-window-0016",
+      "2022-08-02-01-window-0017",
+      "2022-08-02-01-window-0018",
+      "2022-08-02-01-window-0019",
+      "2022-08-02-01-window-0020",
+      "2022-08-02-01-window-0021",
+      "2022-08-02-01-window-0022",
+      "2022-08-02-01-window-0023",
+      "2023-01-09-28-window-0000",
+      "2023-01-09-28-window-0001",
+      "2023-01-09-28-window-0002",
+      "2023-01-09-28-window-0003",
+      "2023-01-09-28-window-0004",
+      "2023-01-09-28-window-0005",
+      "2023-01-09-28-window-0006",
+      "2023-01-09-28-window-0007",
+      "2023-01-09-28-window-0008",
+      "2023-01-09-28-window-0009",
+      "2023-01-09-28-window-0010",
+      "2023-01-09-28-window-0011",
+      "2023-01-09-28-window-0012",
+      "2023-01-09-28-window-0013",
+      "2023-01-09-28-window-0014",
+      "2023-01-09-28-window-0015",
+      "2023-01-09-28-window-0016",
+      "2023-01-09-28-window-0017",
+      "2023-01-09-28-window-0018",
+      "2023-01-09-28-window-0019",
+      "2023-01-09-28-window-0020",
+      "2023-01-09-28-window-0021",
+      "2023-01-09-28-window-0022",
+      "2023-01-09-28-window-0023",
+      "2023-01-17-01-window-0000",
+      "2023-01-17-01-window-0001",
+      "2023-01-17-01-window-0002",
+      "2023-01-17-01-window-0003",
+      "2023-01-17-01-window-0004",
+      "2023-01-17-01-window-0005",
+      "2023-01-17-01-window-0006",
+      "2023-01-17-01-window-0007",
+      "2023-01-17-01-window-0008",
+      "2023-01-17-01-window-0009",
+      "2023-01-17-01-window-0010",
+      "2023-01-17-01-window-0011",
+      "2023-01-17-01-window-0012",
+      "2023-01-17-01-window-0013",
+      "2023-01-17-01-window-0014",
+      "2023-01-17-01-window-0015",
+      "2023-01-17-01-window-0016",
+      "2023-01-17-01-window-0017",
+      "2023-01-17-01-window-0018",
+      "2023-01-17-01-window-0019",
+      "2023-01-17-01-window-0020",
+      "2023-01-17-01-window-0021",
+      "2023-01-17-01-window-0022",
+      "2023-01-17-01-window-0023",
+      "2023-01-19-01-window-0000",
+      "2023-01-19-01-window-0001",
+      "2023-01-19-01-window-0002",
+      "2023-01-19-01-window-0003",
+      "2023-01-19-01-window-0004",
+      "2023-01-19-01-window-0005",
+      "2023-01-19-01-window-0006",
+      "2023-01-19-01-window-0007",
+      "2023-01-19-01-window-0008",
+      "2023-01-19-01-window-0009",
+      "2023-01-19-01-window-0010",
+      "2023-01-19-01-window-0011",
+      "2023-01-19-01-window-0012",
+      "2023-01-19-01-window-0013",
+      "2023-01-19-01-window-0014",
+      "2023-01-19-01-window-0015",
+      "2023-01-19-01-window-0016",
+      "2023-01-19-01-window-0017",
+      "2023-01-19-01-window-0018",
+      "2023-01-19-01-window-0019",
+      "2023-01-19-01-window-0020",
+      "2023-01-19-01-window-0021",
+      "2023-01-19-01-window-0022",
+      "2023-01-19-01-window-0023",
+      "2023-01-19-22-window-0000",
+      "2023-01-19-22-window-0001",
+      "2023-01-19-22-window-0002",
+      "2023-01-19-22-window-0003",
+      "2023-01-19-22-window-0004",
+      "2023-01-19-22-window-0005",
+      "2023-01-19-22-window-0006",
+      "2023-01-19-22-window-0007",
+      "2023-01-19-22-window-0008",
+      "2023-01-19-22-window-0009",
+      "2023-01-19-22-window-0010",
+      "2023-01-19-22-window-0011",
+      "2023-01-19-22-window-0012",
+      "2023-01-19-22-window-0013",
+      "2023-01-19-22-window-0014",
+      "2023-01-19-22-window-0015",
+      "2023-01-19-22-window-0016",
+      "2023-01-19-22-window-0017",
+      "2023-01-19-22-window-0018",
+      "2023-01-19-22-window-0019",
+      "2023-01-19-22-window-0020",
+      "2023-01-19-22-window-0021",
+      "2023-01-19-22-window-0022",
+      "2023-01-19-22-window-0023",
+      "2023-01-23-01-window-0000",
+      "2023-01-23-01-window-0001",
+      "2023-01-23-01-window-0002",
+      "2023-01-23-01-window-0003",
+      "2023-01-23-01-window-0004",
+      "2023-01-23-01-window-0005",
+      "2023-01-23-01-window-0006",
+      "2023-01-23-01-window-0007",
+      "2023-01-23-01-window-0008",
+      "2023-01-23-01-window-0009",
+      "2023-01-23-01-window-0010",
+      "2023-01-23-01-window-0011",
+      "2023-01-23-01-window-0012",
+      "2023-01-23-01-window-0013",
+      "2023-01-23-01-window-0014",
+      "2023-01-23-01-window-0015",
+      "2023-01-23-01-window-0016",
+      "2023-01-23-01-window-0017",
+      "2023-01-23-01-window-0018",
+      "2023-01-23-01-window-0019",
+      "2023-01-23-01-window-0020",
+      "2023-01-23-01-window-0021",
+      "2023-01-23-01-window-0022",
+      "2023-01-23-01-window-0023",
+      "2023-01-23-08-window-0000",
+      "2023-01-23-08-window-0001",
+      "2023-01-23-08-window-0002",
+      "2023-01-23-08-window-0003",
+      "2023-01-23-08-window-0004",
+      "2023-01-23-08-window-0005",
+      "2023-01-23-08-window-0006",
+      "2023-01-23-08-window-0007",
+      "2023-01-23-08-window-0008",
+      "2023-01-23-08-window-0009",
+      "2023-01-23-08-window-0010",
+      "2023-01-23-08-window-0011",
+      "2023-01-23-08-window-0012",
+      "2023-01-23-08-window-0013",
+      "2023-01-23-08-window-0014",
+      "2023-01-23-08-window-0015",
+      "2023-01-23-08-window-0016",
+      "2023-01-23-08-window-0017",
+      "2023-01-23-08-window-0018",
+      "2023-01-23-08-window-0019",
+      "2023-01-23-08-window-0020",
+      "2023-01-23-08-window-0021",
+      "2023-01-23-08-window-0022",
+      "2023-01-23-08-window-0023",
+      "2023-03-07-01-window-0000",
+      "2023-03-07-01-window-0001",
+      "2023-03-07-01-window-0002",
+      "2023-03-07-01-window-0003",
+      "2023-03-07-01-window-0004",
+      "2023-03-07-01-window-0005",
+      "2023-03-07-01-window-0006",
+      "2023-03-07-01-window-0007",
+      "2023-03-07-01-window-0008",
+      "2023-03-07-01-window-0009",
+      "2023-03-07-01-window-0010",
+      "2023-03-07-01-window-0011",
+      "2023-03-07-01-window-0012",
+      "2023-03-07-01-window-0013",
+      "2023-03-07-01-window-0014",
+      "2023-03-07-01-window-0015",
+      "2023-03-07-01-window-0016",
+      "2023-03-07-01-window-0017",
+      "2023-03-07-01-window-0018",
+      "2023-03-07-01-window-0019",
+      "2023-03-07-01-window-0020",
+      "2023-03-07-01-window-0021",
+      "2023-03-07-01-window-0022",
+      "2023-03-07-01-window-0023"
+    ],
+    "sample_dt": 0.5,
+    "channels": [
+      {
+        "name": "angular_velocity",
+        "mean": 0.017757910949595487,
+        "scale": 0.18267044303114915,
+        "slope": 0.992312471741494,
+        "intercept": -0.0002603800528394834,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      },
+      {
+        "name": "head_angle",
+        "mean": 0.1425842653754989,
+        "scale": 0.5239418049540822,
+        "slope": 0.8943424130284194,
+        "intercept": 7.498990470735712e-05,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      },
+      {
+        "name": "pumping",
+        "mean": 0.40649844464134083,
+        "scale": 0.6821585704172426,
+        "slope": 0.995,
+        "intercept": -0.0003497716131240635,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      },
+      {
+        "name": "velocity",
+        "mean": 0.009318797116076296,
+        "scale": 0.063829588674733,
+        "slope": 0.9525314670598677,
+        "intercept": 2.070629891200005e-05,
+        "observations": 29160,
+        "adjacent_pairs": 28800
+      }
+    ]
+  },
+  "selection": {
+    "lds": {
+      "schema_version": 1,
+      "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+      "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+      "source_commit": "ad1b06d41911e50547b420804bf9d213a4536746",
+      "config": {
+        "ranks": [
+          4,
+          8,
+          16,
+          32
+        ],
+        "iterations": 8,
+        "ridge": 0.0001,
+        "transition_cap": 0.995,
+        "behavior_channels": [
+          "angular_velocity",
+          "head_angle",
+          "pumping",
+          "velocity"
+        ]
+      },
+      "criterion": "Maximum mean validation macro-neuron R\u00b2 at 1/10/30 s; ties retain earlier declared rank/iteration. All normalization, latent initialization and EM moments use training animals only. Optional shared behavior AR inputs exclude actual future behavior.",
+      "candidates": [
+        {
+          "rank": 4,
+          "iteration": 0,
+          "preceding_training_nll_per_observation": null,
+          "validation_horizon_r2": [
+            0.26144788080809156,
+            0.026853394114842603,
+            -0.01923706659515845
+          ],
+          "validation_criterion": 0.0896880694425919,
+          "transition_norm_bound": 0.9500000000004756,
+          "elapsed_seconds": 0.924216291
+        },
+        {
+          "rank": 4,
+          "iteration": 1,
+          "preceding_training_nll_per_observation": 1.2421992880016233,
+          "validation_horizon_r2": [
+            0.30167443647192016,
+            0.047207839367686716,
+            0.014366703184645817
+          ],
+          "validation_criterion": 0.12108299300808423,
+          "transition_norm_bound": 0.9786404362500079,
+          "elapsed_seconds": 1.096350583
+        },
+        {
+          "rank": 4,
+          "iteration": 2,
+          "preceding_training_nll_per_observation": 1.159810846347708,
+          "validation_horizon_r2": [
+            0.3031295054297712,
+            0.030337948298064226,
+            0.020920719939762352
+          ],
+          "validation_criterion": 0.11812939122253259,
+          "transition_norm_bound": 0.9871243798925675,
+          "elapsed_seconds": 1.024715292
+        },
+        {
+          "rank": 4,
+          "iteration": 3,
+          "preceding_training_nll_per_observation": 1.1533980145884097,
+          "validation_horizon_r2": [
+            0.30407311718631735,
+            0.02159494795826829,
+            0.021680553829945885
+          ],
+          "validation_criterion": 0.11578287299151051,
+          "transition_norm_bound": 0.9908076756389399,
+          "elapsed_seconds": 1.0239492079999999
+        },
+        {
+          "rank": 4,
+          "iteration": 4,
+          "preceding_training_nll_per_observation": 1.1514793699587416,
+          "validation_horizon_r2": [
+            0.30472264084054695,
+            0.01741591256444412,
+            0.02312771582578061
+          ],
+          "validation_criterion": 0.11508875641025723,
+          "transition_norm_bound": 0.9928569863642773,
+          "elapsed_seconds": 1.024640666
+        },
+        {
+          "rank": 4,
+          "iteration": 5,
+          "preceding_training_nll_per_observation": 1.150684506452943,
+          "validation_horizon_r2": [
+            0.3051854521427068,
+            0.0153469494249523,
+            0.025054193117367105
+          ],
+          "validation_criterion": 0.1151955315616754,
+          "transition_norm_bound": 0.9941552105223155,
+          "elapsed_seconds": 1.022440041
+        },
+        {
+          "rank": 4,
+          "iteration": 6,
+          "preceding_training_nll_per_observation": 1.150267763259681,
+          "validation_horizon_r2": [
+            0.3055130818164754,
+            0.014412063610947427,
+            0.02702013889730595
+          ],
+          "validation_criterion": 0.11564842810824294,
+          "transition_norm_bound": 0.9949999999999999,
+          "elapsed_seconds": 1.040208458
+        },
+        {
+          "rank": 4,
+          "iteration": 7,
+          "preceding_training_nll_per_observation": 1.1500112120789128,
+          "validation_horizon_r2": [
+            0.3058342759738125,
+            0.016002633152136212,
+            0.02959233811297462
+          ],
+          "validation_criterion": 0.11714308241297446,
+          "transition_norm_bound": 0.995,
+          "elapsed_seconds": 1.09122125
+        },
+        {
+          "rank": 4,
+          "iteration": 8,
+          "preceding_training_nll_per_observation": 1.149837725631854,
+          "validation_horizon_r2": [
+            0.30604046910233845,
+            0.01724335096309012,
+            0.031590593035159056
+          ],
+          "validation_criterion": 0.1182914710335292,
+          "transition_norm_bound": 0.995,
+          "elapsed_seconds": 1.039318875
+        },
+        {
+          "rank": 8,
+          "iteration": 0,
+          "preceding_training_nll_per_observation": null,
+          "validation_horizon_r2": [
+            0.324077965779722,
+            0.03632558856167916,
+            -0.017595557581472656
+          ],
+          "validation_criterion": 0.1142693322533095,
+          "transition_norm_bound": 0.9500000000004756,
+          "elapsed_seconds": 0.908922208
+        },
+        {
+          "rank": 8,
+          "iteration": 1,
+          "preceding_training_nll_per_observation": 1.1772265147595964,
+          "validation_horizon_r2": [
+            0.3749606225575462,
+            0.07147541885756235,
+            0.03098587612910445
+          ],
+          "validation_criterion": 0.15914063918140434,
+          "transition_norm_bound": 0.9797957583350616,
+          "elapsed_seconds": 1.27657675
+        },
+        {
+          "rank": 8,
+          "iteration": 2,
+          "preceding_training_nll_per_observation": 1.0679914095408847,
+          "validation_horizon_r2": [
+            0.37453779741861454,
+            0.05359370947917458,
+            0.04656877329954507
+          ],
+          "validation_criterion": 0.15823342673244473,
+          "transition_norm_bound": 0.9881860553627175,
+          "elapsed_seconds": 1.267877875
+        },
+        {
+          "rank": 8,
+          "iteration": 3,
+          "preceding_training_nll_per_observation": 1.0574309535646222,
+          "validation_horizon_r2": [
+            0.37313453142977093,
+            0.04297988797844563,
+            0.05172812849618581
+          ],
+          "validation_criterion": 0.15594751596813414,
+          "transition_norm_bound": 0.9917260344874195,
+          "elapsed_seconds": 1.2540507920000001
+        },
+        {
+          "rank": 8,
+          "iteration": 4,
+          "preceding_training_nll_per_observation": 1.0528599737368194,
+          "validation_horizon_r2": [
+            0.37178100405965375,
+            0.037318581065142305,
+            0.05448172261291356
+          ],
+          "validation_criterion": 0.15452710257923655,
+          "transition_norm_bound": 0.9936565345744839,
+          "elapsed_seconds": 1.254189208
+        },
+        {
+          "rank": 8,
+          "iteration": 5,
+          "preceding_training_nll_per_observation": 1.050084512352262,
+          "validation_horizon_r2": [
+            0.3708298786100532,
+            0.03440524109728376,
+            0.05645122177576444
+          ],
+          "validation_criterion": 0.1538954471610338,
+          "transition_norm_bound": 0.9948822209120117,
+          "elapsed_seconds": 1.259586625
+        },
+        {
+          "rank": 8,
+          "iteration": 6,
+          "preceding_training_nll_per_observation": 1.0483512753613202,
+          "validation_horizon_r2": [
+            0.37043814589509705,
+            0.035716036061290576,
+            0.05781526956574661
+          ],
+          "validation_criterion": 0.15465648384071143,
+          "transition_norm_bound": 0.9949999999999999,
+          "elapsed_seconds": 1.262167542
+        },
+        {
+          "rank": 8,
+          "iteration": 7,
+          "preceding_training_nll_per_observation": 1.0473290899163024,
+          "validation_horizon_r2": [
+            0.3703034722076075,
+            0.037510279361546925,
+            0.05908256932697237
+          ],
+          "validation_criterion": 0.1556321069653756,
+          "transition_norm_bound": 0.9949999999999998,
+          "elapsed_seconds": 1.2758378750000001
+        },
+        {
+          "rank": 8,
+          "iteration": 8,
+          "preceding_training_nll_per_observation": 1.0466987631825102,
+          "validation_horizon_r2": [
+            0.37027319073718945,
+            0.03922107329702009,
+            0.060286091068755786
+          ],
+          "validation_criterion": 0.15659345170098843,
+          "transition_norm_bound": 0.9949999999999999,
+          "elapsed_seconds": 1.274745042
+        },
+        {
+          "rank": 16,
+          "iteration": 0,
+          "preceding_training_nll_per_observation": null,
+          "validation_horizon_r2": [
+            0.3703142602435478,
+            0.04724740491344131,
+            -0.01631814383724603
+          ],
+          "validation_criterion": 0.13374784043991436,
+          "transition_norm_bound": 0.9500000000004756,
+          "elapsed_seconds": 0.924476292
+        },
+        {
+          "rank": 16,
+          "iteration": 1,
+          "preceding_training_nll_per_observation": 1.1111524376744102,
+          "validation_horizon_r2": [
+            0.42142415979940706,
+            0.09659946105950151,
+            0.03367310255846011
+          ],
+          "validation_criterion": 0.18389890780578957,
+          "transition_norm_bound": 0.9797728830265252,
+          "elapsed_seconds": 2.032265167
+        },
+        {
+          "rank": 16,
+          "iteration": 2,
+          "preceding_training_nll_per_observation": 0.9726575675153005,
+          "validation_horizon_r2": [
+            0.4169280153615284,
+            0.08493823356453171,
+            0.047498029536619656
+          ],
+          "validation_criterion": 0.18312142615422658,
+          "transition_norm_bound": 0.9883366141069396,
+          "elapsed_seconds": 2.00784075
+        },
+        {
+          "rank": 16,
+          "iteration": 3,
+          "preceding_training_nll_per_observation": 0.9539025571651475,
+          "validation_horizon_r2": [
+            0.4117501310719867,
+            0.0761105642554306,
+            0.05181091691605685
+          ],
+          "validation_criterion": 0.17989053741449137,
+          "transition_norm_bound": 0.9921701449025684,
+          "elapsed_seconds": 1.972999625
+        },
+        {
+          "rank": 16,
+          "iteration": 4,
+          "preceding_training_nll_per_observation": 0.9448319530263638,
+          "validation_horizon_r2": [
+            0.4078208848408782,
+            0.07068500981617569,
+            0.05335663041490195
+          ],
+          "validation_criterion": 0.17728750835731863,
+          "transition_norm_bound": 0.9942816490612163,
+          "elapsed_seconds": 1.982237208
+        },
+        {
+          "rank": 16,
+          "iteration": 5,
+          "preceding_training_nll_per_observation": 0.9391431597700108,
+          "validation_horizon_r2": [
+            0.4044970669902569,
+            0.06839946786618474,
+            0.052884777441073345
+          ],
+          "validation_criterion": 0.175260437432505,
+          "transition_norm_bound": 0.9949999999999998,
+          "elapsed_seconds": 1.995888833
+        },
+        {
+          "rank": 16,
+          "iteration": 6,
+          "preceding_training_nll_per_observation": 0.9352347167098098,
+          "validation_horizon_r2": [
+            0.4011917877875087,
+            0.06742296268187656,
+            0.051715126128678006
+          ],
+          "validation_criterion": 0.17344329219935442,
+          "transition_norm_bound": 0.995,
+          "elapsed_seconds": 2.003895958
+        },
+        {
+          "rank": 16,
+          "iteration": 7,
+          "preceding_training_nll_per_observation": 0.9323039599815571,
+          "validation_horizon_r2": [
+            0.39760430981229,
+            0.06571142547539813,
+            0.05048950267958706
+          ],
+          "validation_criterion": 0.1712684126557584,
+          "transition_norm_bound": 0.9950000000000002,
+          "elapsed_seconds": 2.017677833
+        },
+        {
+          "rank": 16,
+          "iteration": 8,
+          "preceding_training_nll_per_observation": 0.9298486183988189,
+          "validation_horizon_r2": [
+            0.39385268804880774,
+            0.06355951263431969,
+            0.04925324492047631
+          ],
+          "validation_criterion": 0.1688884818678679,
+          "transition_norm_bound": 0.9950000000000001,
+          "elapsed_seconds": 2.008846667
+        },
+        {
+          "rank": 32,
+          "iteration": 0,
+          "preceding_training_nll_per_observation": null,
+          "validation_horizon_r2": [
+            0.4229685394242494,
+            0.05740957973059846,
+            -0.015295689227332194
+          ],
+          "validation_criterion": 0.1550274766425052,
+          "transition_norm_bound": 0.9500000000004756,
+          "elapsed_seconds": 0.980332042
+        },
+        {
+          "rank": 32,
+          "iteration": 1,
+          "preceding_training_nll_per_observation": 1.0200959436938506,
+          "validation_horizon_r2": [
+            0.49029418120426166,
+            0.10616531943885234,
+            0.031800908162893424
+          ],
+          "validation_criterion": 0.20942013626866915,
+          "transition_norm_bound": 0.9815020550942137,
+          "elapsed_seconds": 5.290921875
+        },
+        {
+          "rank": 32,
+          "iteration": 2,
+          "preceding_training_nll_per_observation": 0.8304292170705627,
+          "validation_horizon_r2": [
+            0.4964181199835562,
+            0.09818819581256699,
+            0.04877705323991305
+          ],
+          "validation_criterion": 0.21446112301201206,
+          "transition_norm_bound": 0.9913215258967123,
+          "elapsed_seconds": 5.25384025
+        },
+        {
+          "rank": 32,
+          "iteration": 3,
+          "preceding_training_nll_per_observation": 0.7969507105128267,
+          "validation_horizon_r2": [
+            0.4981310471992992,
+            0.09174891432110989,
+            0.05143022973683331
+          ],
+          "validation_criterion": 0.21377006375241414,
+          "transition_norm_bound": 0.9949999999999996,
+          "elapsed_seconds": 5.281874792
+        },
+        {
+          "rank": 32,
+          "iteration": 4,
+          "preceding_training_nll_per_observation": 0.779990342345172,
+          "validation_horizon_r2": [
+            0.4957480607822191,
+            0.08973359373830166,
+            0.04740614800103129
+          ],
+          "validation_criterion": 0.21096260084051735,
+          "transition_norm_bound": 0.9949999999999998,
+          "elapsed_seconds": 5.306306375
+        },
+        {
+          "rank": 32,
+          "iteration": 5,
+          "preceding_training_nll_per_observation": 0.7682033707859524,
+          "validation_horizon_r2": [
+            0.48804161488232145,
+            0.08396548369149255,
+            0.042920568093400405
+          ],
+          "validation_criterion": 0.20497588888907148,
+          "transition_norm_bound": 0.995,
+          "elapsed_seconds": 5.150371584
+        },
+        {
+          "rank": 32,
+          "iteration": 6,
+          "preceding_training_nll_per_observation": 0.7588334539975874,
+          "validation_horizon_r2": [
+            0.47636571215631046,
+            0.0765733238778232,
+            0.03819197785478792
+          ],
+          "validation_criterion": 0.19704367129630718,
+          "transition_norm_bound": 0.9950000000000001,
+          "elapsed_seconds": 5.186938292
+        },
+        {
+          "rank": 32,
+          "iteration": 7,
+          "preceding_training_nll_per_observation": 0.7508643596328485,
+          "validation_horizon_r2": [
+            0.46256352560552777,
+            0.06918492824825463,
+            0.03326420013881436
+          ],
+          "validation_criterion": 0.1883375513308656,
+          "transition_norm_bound": 0.9949999999999999,
+          "elapsed_seconds": 5.178197667
+        },
+        {
+          "rank": 32,
+          "iteration": 8,
+          "preceding_training_nll_per_observation": 0.7438618116252053,
+          "validation_horizon_r2": [
+            0.44853495906727864,
+            0.06268200546410249,
+            0.028286257527404227
+          ],
+          "validation_criterion": 0.17983440735292844,
+          "transition_norm_bound": 0.9949999999999999,
+          "elapsed_seconds": 5.183923458
+        }
+      ],
+      "selected_rank": 32,
+      "selected_iteration": 2,
+      "free_parameters": 7567,
+      "input_parameters": 256,
+      "behavior_forecast_parameters": 16,
+      "training_preparation_seconds": 0.694805916
+    },
+    "gru": {
+      "schema_version": 1,
+      "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+      "split_hash": "eaf202052a22bd2c2cd2421394cb4200901a14fd0ca3bc82d0d4bc9b696ad73c",
+      "source_commit": "ad1b06d41911e50547b420804bf9d213a4536746",
+      "config": {
+        "hidden": 6,
+        "epochs": 30,
+        "learning_rate": 0.003,
+        "weight_decay": 0.0001,
+        "gradient_clip": 1.0,
+        "seed": 42,
+        "behavior_channels": [
+          "angular_velocity",
+          "head_angle",
+          "pumping",
+          "velocity"
+        ]
+      },
+      "criterion": "Maximum mean validation macro-neuron R\u00b2 at 1/10/30 s including epoch zero; ties retain earlier epoch. Training-only normalization; exact full-window BPTT through autoregressive feedback; no future teacher forcing. Optional shared behavior AR covariates use history only, then extrapolate without actual future behavior.",
+      "candidates": [
+        {
+          "epoch": 0,
+          "updates": 0,
+          "training_standardized_mse": null,
+          "validation_horizon_r2": [
+            -0.0016188330001915105,
+            -0.02417114223192338,
+            -0.027574914374737167
+          ],
+          "validation_criterion": -0.01778829653561735,
+          "elapsed_seconds": 0.899907084
+        },
+        {
+          "epoch": 1,
+          "updates": 360,
+          "training_standardized_mse": 0.9922653075688508,
+          "validation_horizon_r2": [
+            0.013596143716464492,
+            -0.021421872028252294,
+            -0.025923428360417253
+          ],
+          "validation_criterion": -0.01124971889073502,
+          "elapsed_seconds": 1.143052916
+        },
+        {
+          "epoch": 2,
+          "updates": 360,
+          "training_standardized_mse": 0.9508984727751933,
+          "validation_horizon_r2": [
+            0.09807423960008269,
+            0.010554897229280722,
+            0.014814477249178774
+          ],
+          "validation_criterion": 0.04114787135951406,
+          "elapsed_seconds": 1.122841041
+        },
+        {
+          "epoch": 3,
+          "updates": 360,
+          "training_standardized_mse": 0.9103553484095811,
+          "validation_horizon_r2": [
+            0.11402111439311625,
+            0.01278972648455014,
+            0.017047100129874822
+          ],
+          "validation_criterion": 0.04795264700251373,
+          "elapsed_seconds": 1.113527417
+        },
+        {
+          "epoch": 4,
+          "updates": 360,
+          "training_standardized_mse": 0.8867409190980383,
+          "validation_horizon_r2": [
+            0.1202978220954755,
+            0.02595096683663014,
+            0.029234782477563087
+          ],
+          "validation_criterion": 0.058494523803222905,
+          "elapsed_seconds": 1.112087792
+        },
+        {
+          "epoch": 5,
+          "updates": 360,
+          "training_standardized_mse": 0.8796788695728491,
+          "validation_horizon_r2": [
+            0.1423732433327413,
+            0.03592057151930284,
+            0.04140410109609837
+          ],
+          "validation_criterion": 0.07323263864938083,
+          "elapsed_seconds": 1.11117
+        },
+        {
+          "epoch": 6,
+          "updates": 360,
+          "training_standardized_mse": 0.8646667413014053,
+          "validation_horizon_r2": [
+            0.15426928279561103,
+            0.04548997977676286,
+            0.02245474656273739
+          ],
+          "validation_criterion": 0.07407133637837042,
+          "elapsed_seconds": 1.111532375
+        },
+        {
+          "epoch": 7,
+          "updates": 360,
+          "training_standardized_mse": 0.855286576143601,
+          "validation_horizon_r2": [
+            0.15753591791792634,
+            0.02397185270996569,
+            0.029519518690289855
+          ],
+          "validation_criterion": 0.0703424297727273,
+          "elapsed_seconds": 1.114250333
+        },
+        {
+          "epoch": 8,
+          "updates": 360,
+          "training_standardized_mse": 0.8461685021300909,
+          "validation_horizon_r2": [
+            0.15753794212511563,
+            0.01704049705286149,
+            0.020253345381292226
+          ],
+          "validation_criterion": 0.06494392818642311,
+          "elapsed_seconds": 1.123149417
+        },
+        {
+          "epoch": 9,
+          "updates": 360,
+          "training_standardized_mse": 0.8440934053265937,
+          "validation_horizon_r2": [
+            0.14456893656870667,
+            0.017311783491683646,
+            0.027553903186704854
+          ],
+          "validation_criterion": 0.0631448744156984,
+          "elapsed_seconds": 1.134415208
+        },
+        {
+          "epoch": 10,
+          "updates": 360,
+          "training_standardized_mse": 0.8394237415305414,
+          "validation_horizon_r2": [
+            0.1686707610439877,
+            0.01677487102340367,
+            0.03298399519053804
+          ],
+          "validation_criterion": 0.07280987575264314,
+          "elapsed_seconds": 1.127844791
+        },
+        {
+          "epoch": 11,
+          "updates": 360,
+          "training_standardized_mse": 0.8340643353617527,
+          "validation_horizon_r2": [
+            0.16134615938822564,
+            0.04424399124936716,
+            0.05656651659631288
+          ],
+          "validation_criterion": 0.08738555574463523,
+          "elapsed_seconds": 1.129347708
+        },
+        {
+          "epoch": 12,
+          "updates": 360,
+          "training_standardized_mse": 0.828520709226853,
+          "validation_horizon_r2": [
+            0.14815532093035205,
+            0.03649219387261423,
+            0.04389694228725125
+          ],
+          "validation_criterion": 0.07618148569673917,
+          "elapsed_seconds": 1.127306833
+        },
+        {
+          "epoch": 13,
+          "updates": 360,
+          "training_standardized_mse": 0.8282325479228749,
+          "validation_horizon_r2": [
+            0.1728192923304028,
+            0.03838343092918201,
+            0.04160284181684795
+          ],
+          "validation_criterion": 0.08426852169214426,
+          "elapsed_seconds": 1.126100166
+        },
+        {
+          "epoch": 14,
+          "updates": 360,
+          "training_standardized_mse": 0.8210140391018841,
+          "validation_horizon_r2": [
+            0.16379575432018645,
+            0.038116944602012745,
+            0.023179525881735264
+          ],
+          "validation_criterion": 0.0750307416013115,
+          "elapsed_seconds": 1.118434708
+        },
+        {
+          "epoch": 15,
+          "updates": 360,
+          "training_standardized_mse": 0.8184907583415916,
+          "validation_horizon_r2": [
+            0.149781563972833,
+            0.03751682991351772,
+            0.035747594099507375
+          ],
+          "validation_criterion": 0.0743486626619527,
+          "elapsed_seconds": 1.117246958
+        },
+        {
+          "epoch": 16,
+          "updates": 360,
+          "training_standardized_mse": 0.8169688247084304,
+          "validation_horizon_r2": [
+            0.1556609184442928,
+            0.04320938801395881,
+            0.03730763711781241
+          ],
+          "validation_criterion": 0.07872598119202133,
+          "elapsed_seconds": 1.118029375
+        },
+        {
+          "epoch": 17,
+          "updates": 360,
+          "training_standardized_mse": 0.8166461712895565,
+          "validation_horizon_r2": [
+            0.12516690204524586,
+            0.01956253464784818,
+            0.01430263090036584
+          ],
+          "validation_criterion": 0.05301068919781996,
+          "elapsed_seconds": 1.117753833
+        },
+        {
+          "epoch": 18,
+          "updates": 360,
+          "training_standardized_mse": 0.8163962937409852,
+          "validation_horizon_r2": [
+            0.13608333893084604,
+            0.03566563586889231,
+            0.026524807871157595
+          ],
+          "validation_criterion": 0.06609126089029865,
+          "elapsed_seconds": 1.1183335
+        },
+        {
+          "epoch": 19,
+          "updates": 360,
+          "training_standardized_mse": 0.8164533030531184,
+          "validation_horizon_r2": [
+            0.14956064107015377,
+            0.030341935285447368,
+            0.04171258462785686
+          ],
+          "validation_criterion": 0.07387172032781934,
+          "elapsed_seconds": 1.126852541
+        },
+        {
+          "epoch": 20,
+          "updates": 360,
+          "training_standardized_mse": 0.8129484265128637,
+          "validation_horizon_r2": [
+            0.1599742940665353,
+            0.02736839548567974,
+            0.03185854227244045
+          ],
+          "validation_criterion": 0.07306707727488516,
+          "elapsed_seconds": 1.125373166
+        },
+        {
+          "epoch": 21,
+          "updates": 360,
+          "training_standardized_mse": 0.8109846392175134,
+          "validation_horizon_r2": [
+            0.15848321267283869,
+            0.04348093503058546,
+            0.038646641569988156
+          ],
+          "validation_criterion": 0.08020359642447077,
+          "elapsed_seconds": 1.127059459
+        },
+        {
+          "epoch": 22,
+          "updates": 360,
+          "training_standardized_mse": 0.8115083441242261,
+          "validation_horizon_r2": [
+            0.13781596011408245,
+            0.017372708993165335,
+            0.011669493419769366
+          ],
+          "validation_criterion": 0.05561938750900572,
+          "elapsed_seconds": 1.1280765
+        },
+        {
+          "epoch": 23,
+          "updates": 360,
+          "training_standardized_mse": 0.811629691759179,
+          "validation_horizon_r2": [
+            0.1442442539069972,
+            0.019786403845711873,
+            0.017083083236281663
+          ],
+          "validation_criterion": 0.06037124699633024,
+          "elapsed_seconds": 1.127063125
+        },
+        {
+          "epoch": 24,
+          "updates": 360,
+          "training_standardized_mse": 0.8062574375174475,
+          "validation_horizon_r2": [
+            0.15592461038090566,
+            0.03463562197035681,
+            0.03580660643471133
+          ],
+          "validation_criterion": 0.07545561292865793,
+          "elapsed_seconds": 1.133655084
+        },
+        {
+          "epoch": 25,
+          "updates": 360,
+          "training_standardized_mse": 0.8057881105230856,
+          "validation_horizon_r2": [
+            0.14599807052765376,
+            0.008907286044435208,
+            0.024964649509192333
+          ],
+          "validation_criterion": 0.059956668693760436,
+          "elapsed_seconds": 1.107064
+        },
+        {
+          "epoch": 26,
+          "updates": 360,
+          "training_standardized_mse": 0.8070391378575762,
+          "validation_horizon_r2": [
+            0.13589420497711993,
+            0.010860657450464014,
+            0.015899898174696128
+          ],
+          "validation_criterion": 0.054218253534093354,
+          "elapsed_seconds": 1.112643208
+        },
+        {
+          "epoch": 27,
+          "updates": 360,
+          "training_standardized_mse": 0.8153765170774347,
+          "validation_horizon_r2": [
+            0.13095713748856339,
+            0.019200148861196368,
+            0.020011744113031454
+          ],
+          "validation_criterion": 0.05672301015426373,
+          "elapsed_seconds": 1.114464375
+        },
+        {
+          "epoch": 28,
+          "updates": 360,
+          "training_standardized_mse": 0.8108764132647314,
+          "validation_horizon_r2": [
+            0.14702838682412847,
+            0.031698619251222804,
+            0.03435699918423885
+          ],
+          "validation_criterion": 0.0710280017531967,
+          "elapsed_seconds": 1.114860625
+        },
+        {
+          "epoch": 29,
+          "updates": 360,
+          "training_standardized_mse": 0.8087022613646039,
+          "validation_horizon_r2": [
+            0.15144167080291723,
+            0.013874910213366315,
+            0.00809986660359347
+          ],
+          "validation_criterion": 0.057805482539959006,
+          "elapsed_seconds": 1.1209988339999999
+        },
+        {
+          "epoch": 30,
+          "updates": 360,
+          "training_standardized_mse": 0.8070198797884942,
+          "validation_horizon_r2": [
+            0.15264659140279155,
+            0.03714409708654148,
+            0.04791585025886514
+          ],
+          "validation_criterion": 0.07923551291606605,
+          "elapsed_seconds": 1.116912917
+        }
+      ],
+      "selected_epoch": 11,
+      "trainable_parameters": 6677,
+      "calibration_statistics": 298,
+      "behavior_forecast_parameters": 16,
+      "free_parameters": 6991
+    }
+  },
+  "preprocessing_evidence": [
+    {
+      "dataset_hash": "966a77af4cd82d0085f45cdb013617546588136815a24aa818769fecc57873b5",
+      "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+      "status": "retrospective",
+      "evidence_path": "docs/wormwideweb-preprocessing-audit.json",
+      "evidence_sha256": "56aab7c5ccde23df045d21d29ede3df5d25dc7daf862ba801294fea7919dcab6",
+      "description": "Whole-recording neural z-scoring is numerically confirmed for all 21 source animals. Reference neural and behavior processing includes noncausal operations; exact per-file settings are not fully attested. This benchmark supports retrospective processed-signal prediction, not end-to-end prospective forecasting."
+    }
+  ],
+  "limitations": [
+    "Retrospective processed-signal benchmark, not a prospectively processed forecast.",
+    "Validation scores used to select candidates are optimistic estimates, not held-out test results.",
+    "Actual future behavior is excluded; future behavior uncertainty is not marginalized.",
+    "Added input-matrix weights and common behavior scalars must be counted in model comparisons."
+  ],
+  "legacy_lds_regression": {
+    "all_trial_arrays_exactly_equal": true,
+    "trial_count": 72,
+    "prediction_source_commit": "ad1b06d41911e50547b420804bf9d213a4536746",
+    "archived_prediction_source_commit": "6dceb3f4f144fb64a1ff08c3097e8d555398ee83"
+  }
+}

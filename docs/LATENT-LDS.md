@@ -173,3 +173,8 @@ A rank-32 driven candidate therefore contains 7,567 total scalars. The report
 states these extra counts separately; the unconditioned receipts above remain
 unchanged. The behavior-assisted comparison will be scored after Level 0 consumes
 the same protocol.
+
+The first controlled LDS run selects rank 32, update 2 on validation. Its
+validation-only results and exact shared-input comparison with GRU are recorded
+in [BEHAVIOR-INPUTS.md](BEHAVIOR-INPUTS.md#baseline-fits-validation-only). No new
+behavior-assisted test claim is made before the Level 0 integration.

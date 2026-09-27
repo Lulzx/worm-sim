@@ -93,3 +93,38 @@ The same committed executable loaded the archived no-behavior GRU artifact and
 reproduced all 72 saved test trial prediction arrays exactly. Source/model metadata
 changes as expected; neural numerical outputs are unchanged. Level 0
 behavior integration and the equal-input model comparison remain pending.
+
+## Baseline fits: validation only
+
+The [selection receipt](behavior-baseline-selection.json) binds both baseline fits
+to committed source `ad1b06d41911e50547b420804bf9d213a4536746`, records all candidates,
+and verifies that the embedded common behavior artifacts are **exactly equal**.
+No behavior-assisted test predictions were generated for this experiment.
+
+| Model selected on validation | 1 s R² | 10 s R² | 30 s R² | Total scalars |
+| --- | ---: | ---: | ---: | ---: |
+| LDS rank 32, EM update 2 | 0.49642 | 0.09819 | 0.04878 | 7,567 |
+| GRU six hidden units, epoch 11 | 0.16135 | 0.04424 | 0.05657 | 6,991 |
+
+These scores select the artifacts; they are not independent test estimates or
+proof of a benefit from behavior. The GRU's extra covariate weights also change
+initialization and capacity. A descriptive comparison against its no-behavior run
+cannot isolate those effects. LDS adds 256 learned input weights and the same 16
+behavior scalars. Both fitted models still lack uncertainty propagation through
+the estimated future behavior trajectory.
+
+The summed LDS preparation/candidate timers are 80.77 seconds; GRU candidate
+timers sum to 34.54 seconds on the M4 Pro CPU. Both exclude file loading, candidate
+writes and separate final scoring; GRU excludes preparation, while LDS includes
+preparation but excludes per-rank PCA initialization. These differing boundaries
+must not be treated as an apples-to-apples performance comparison.
+
+The receipt also verifies exact numerical compatibility on all 72 archived
+no-behavior LDS test predictions. Level 0 input weights/inference/gradients and
+the three-model test comparison remain outstanding.
+
+```sh
+target/release/wormsim lds-fit data/c302-herm.wsc   runs/wormwideweb-benchmark.json data/wormwideweb-animal-split.json   configs/lds-behavior-fit.json runs/lds-behavior-fit.json
+target/release/wormsim gru-fit data/c302-herm.wsc   runs/wormwideweb-benchmark.json data/wormwideweb-animal-split.json   configs/gru-behavior-fit.json runs/gru-behavior-fit.json
+python3 scripts/record_behavior_baseline_fits.py
+```
