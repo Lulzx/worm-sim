@@ -59,3 +59,10 @@ This is a workload check, not a fitted biological result.
 WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release --example benchmark_level0_atlas
 target/release/examples/benchmark_level0_atlas data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json runs/level0-atlas-workload.json
 ```
+
+The [measured workload receipt](level0-atlas-workload.json), source
+`40aed58`, contains 2,842 training trials aggregated into 161 stimulated-target
+groups. On the local Apple M4 Pro, one full 302-neuron response gradient took
+0.11185 seconds. Halving dt from 0.01 to 0.005 s changed predictions by at most
+4.22e−5 on this initial model. This single target does not establish population
+throughput or numerical convergence after fitting.
