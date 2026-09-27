@@ -121,6 +121,20 @@ fn benchmark(path: Option<&str>) -> Result<()> {
 fn run() -> Result<()> {
     let args: Vec<_> = std::env::args().collect();
     match args.get(1).map(String::as_str) {
+        Some("baseline-pack") if args.len()==4 => {
+            let bundle:wormsim::baseline::Bundle=serde_json::from_slice(&fs::read(&args[2]).map_err(|e|e.to_string())?).map_err(|e|e.to_string())?;
+            let bytes=wormsim::baseline::pack(&bundle)?;
+            fs::write(&args[3],&bytes).map_err(|e|e.to_string())?;
+            println!("packed {} models in {} bytes",bundle.models.len(),bytes.len());
+        }
+        Some("baseline-eval") if args.len()==4 => {
+            let bundle=wormsim::baseline::unpack(&fs::read(&args[2]).map_err(|e|e.to_string())?)?;
+            let report=wormsim::baseline::evaluate(&bundle)?;
+            write_json(&args[3],&report)?;
+            for model in &report.models {println!("{}: STAM r={:.6}, correlation r={:.6}, {:.3}s, parity={}",model.name,model.stams_test.correlation,model.correlation_test.correlation,model.prediction_seconds,model.parity_passed);}
+            if !report.all_parity_passed {return Err("baseline differs from exported reference; see report".into());}
+        }
+
         Some("import-c302") if args.len()==7 => {
             if args[6]!="--strict"&&args[6]!="--mean-mirrors" {return Err("choose --strict or --mean-mirrors".into());}
             let bytes=fs::read(&args[2]).map_err(|e|e.to_string())?;
@@ -153,7 +167,7 @@ fn run() -> Result<()> {
             println!("saved {} samples to {}",result.times.len(),args[4]);
         }
         Some("bench") if args.len()<=3 => {benchmark(args.get(2).map(String::as_str))?;}
-        _ => return Err("usage: wormsim import-c302 CSV IDS.json VERSION OUTPUT.wsc --strict|--mean-mirrors | pack GRAPH.json GRAPH.wsc | unpack GRAPH.wsc GRAPH.json | simulate GRAPH CONFIG.json OUTPUT.json|OUTPUT.wst | bench [GRAPH]".into()),
+        _ => return Err("usage: wormsim baseline-pack BUNDLE.json BUNDLE.wsb | baseline-eval BUNDLE.wsb REPORT.json | import-c302 CSV IDS.json VERSION OUTPUT.wsc --strict|--mean-mirrors | pack GRAPH.json GRAPH.wsc | unpack GRAPH.wsc GRAPH.json | simulate GRAPH CONFIG.json OUTPUT.json|OUTPUT.wst | bench [GRAPH]".into()),
     }
     Ok(())
 }

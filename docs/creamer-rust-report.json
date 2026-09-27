@@ -1,0 +1,157 @@
+{
+  "source": {
+    "repository": "Nondairy-Creamer/Creamer_LDS_2026",
+    "commit": "bba43302d50a4947804d98b01779856e648237cc",
+    "artifacts": [
+      {
+        "path": "models/connectome_constrained.pkl",
+        "sha256": "1d2dbb1966794b2e3108de2dfaaad099d1e1989fcc432d65c7f669f3610f302d"
+      },
+      {
+        "path": "models/fully_connected.pkl",
+        "sha256": "34c85c16317fc9105abe89575ed1a2660faae4e29ebfebbd6fbd9cd99012be3f"
+      },
+      {
+        "path": "models/shuffled_constrained.pkl",
+        "sha256": "d59cdacc120b79c59ceffa8d14bbba4038c641cd50b2dea4867a3bb7003ee1c0"
+      },
+      {
+        "path": "data/measured_stams.pkl",
+        "sha256": "e6562954067ad5b84a2a33a434f92c5d21eece5ae56270bfd5d6fe5f8b17669a"
+      },
+      {
+        "path": "data/measured_corr.pkl",
+        "sha256": "b1f64846cd8136b43db5c96c33ea650619ad218c7e83551f4a3222268bd1f570"
+      },
+      {
+        "path": "ssm_classes.py",
+        "sha256": "8b1fff75bc76c1de9ad8d896f813f14f6c00e8a2b6de564032e95ff7487ced91"
+      },
+      {
+        "path": "lgssm_utilities.py",
+        "sha256": "e86720b1d05e5912094ca904c40cd9a5f0b944688e9993fbed05d2a782b4122b"
+      },
+      {
+        "path": "metrics.py",
+        "sha256": "af2b3d82d2ff8a9cf0df459890b775406bef0e04373e12b8e127ce589bbe4448"
+      },
+      {
+        "path": "quick_start_examples/predict_stams.py",
+        "sha256": "d687727efcb66e6b4072aa4a57d388545308df26f9b7600ad4bc67c420b6e6b9"
+      },
+      {
+        "path": "LICENSE",
+        "sha256": "db390c59fd3f435502d7131afa501469204042e47db432ab6676d6127f4bf88d"
+      }
+    ],
+    "split": "Upstream train/test recording split; not a stimulated-neuron-held-out split."
+  },
+  "bundle_sha256": "ee911070a8912db2e7d11bb6edee9a680244bbc5e5c3919d87fc06fceb117ca3",
+  "protocol": "Upstream 15s pre/30s post, 2Hz; off-diagonal STAM and latent correlation; P0=W W^T+Q then 100 updates; no refitting",
+  "stams_train_test": {
+    "correlation": 0.17343013773093077,
+    "pairs": 10693,
+    "fisher_95": [
+      0.15498533524264493,
+      0.1917540724504464
+    ]
+  },
+  "correlation_train_test": {
+    "correlation": 0.35754168037167017,
+    "pairs": 17920,
+    "fisher_95": [
+      0.34470472558212756,
+      0.3702449338951427
+    ]
+  },
+  "models": [
+    {
+      "name": "connectome_constrained",
+      "neurons": 154,
+      "learned_parameters": 9403,
+      "stored_parameter_scalars": 9403,
+      "dense_parameter_scalars": 1185800,
+      "prediction_seconds": 0.011956167,
+      "stams_test": {
+        "correlation": 0.1402836651474248,
+        "pairs": 11010,
+        "fisher_95": [
+          0.1219237488878059,
+          0.15854761166203749
+        ]
+      },
+      "correlation_test": {
+        "correlation": 0.2819569477065313,
+        "pairs": 17936,
+        "fisher_95": [
+          0.2684296726207549,
+          0.2953730431347847
+        ]
+      },
+      "max_stams_error": 1.0658141036401503e-14,
+      "max_correlation_error": 7.771561172376096e-16,
+      "max_probe_error": 1.1102230246251565e-16,
+      "max_score_error": 2.7033930649622562e-14,
+      "parity_passed": true
+    },
+    {
+      "name": "fully_connected",
+      "neurons": 154,
+      "learned_parameters": 30954,
+      "stored_parameter_scalars": 30954,
+      "dense_parameter_scalars": 1185800,
+      "prediction_seconds": 0.11983075,
+      "stams_test": {
+        "correlation": 0.11964259524511733,
+        "pairs": 11010,
+        "fisher_95": [
+          0.10118933133521399,
+          0.13801356242087875
+        ]
+      },
+      "correlation_test": {
+        "correlation": 0.3247233894642241,
+        "pairs": 17936,
+        "fisher_95": [
+          0.31156913197665537,
+          0.3377532122523126
+        ]
+      },
+      "max_stams_error": 2.4868995751603507e-14,
+      "max_correlation_error": 1.3877787807814457e-15,
+      "max_probe_error": 4.440892098500626e-16,
+      "max_score_error": 2.275957200481571e-15,
+      "parity_passed": true
+    },
+    {
+      "name": "shuffled_constrained",
+      "neurons": 154,
+      "learned_parameters": 9403,
+      "stored_parameter_scalars": 9403,
+      "dense_parameter_scalars": 1185800,
+      "prediction_seconds": 0.012874875,
+      "stams_test": {
+        "correlation": 0.04033166521162898,
+        "pairs": 11010,
+        "fisher_95": [
+          0.021668582540843553,
+          0.058966648578870164
+        ]
+      },
+      "correlation_test": {
+        "correlation": 0.11543261589993399,
+        "pairs": 17936,
+        "fisher_95": [
+          0.10096825783231192,
+          0.12984818571648896
+        ]
+      },
+      "max_stams_error": 1.2434497875801753e-14,
+      "max_correlation_error": 5.551115123125783e-16,
+      "max_probe_error": 2.220446049250313e-16,
+      "max_score_error": 9.769962616701378e-15,
+      "parity_passed": true
+    }
+  ],
+  "all_parity_passed": true
+}

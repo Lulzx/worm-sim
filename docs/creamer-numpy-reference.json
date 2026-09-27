@@ -1,0 +1,82 @@
+{
+  "numpy_version": "2.2.6",
+  "reference_seconds": 0.6522840419784188,
+  "json_bytes": 5007824,
+  "models": [
+    {
+      "name": "connectome_constrained",
+      "representations": {
+        "dynamics_weights": "csr",
+        "dynamics_input_weights": "lagged_diagonal",
+        "dynamics_cov": "lagged_diagonal",
+        "emissions_weights": "identity",
+        "emissions_input_weights": "zero",
+        "emissions_cov": "lagged_diagonal"
+      },
+      "learned_parameters": {
+        "dynamics_weights": 2165,
+        "dynamics_input_weights": 6930,
+        "dynamics_cov": 154,
+        "emissions_cov": 154
+      },
+      "stams_test_score": {
+        "correlation": 0.14028366514742083,
+        "pairs": 11010
+      },
+      "corr_test_score": {
+        "correlation": 0.28195694770650426,
+        "pairs": 17936
+      }
+    },
+    {
+      "name": "fully_connected",
+      "representations": {
+        "dynamics_weights": "dense",
+        "dynamics_input_weights": "lagged_diagonal",
+        "dynamics_cov": "lagged_diagonal",
+        "emissions_weights": "identity",
+        "emissions_input_weights": "zero",
+        "emissions_cov": "lagged_diagonal"
+      },
+      "learned_parameters": {
+        "dynamics_weights": 23716,
+        "dynamics_input_weights": 6930,
+        "dynamics_cov": 154,
+        "emissions_cov": 154
+      },
+      "stams_test_score": {
+        "correlation": 0.11964259524511697,
+        "pairs": 11010
+      },
+      "corr_test_score": {
+        "correlation": 0.32472338946422635,
+        "pairs": 17936
+      }
+    },
+    {
+      "name": "shuffled_constrained",
+      "representations": {
+        "dynamics_weights": "csr",
+        "dynamics_input_weights": "lagged_diagonal",
+        "dynamics_cov": "lagged_diagonal",
+        "emissions_weights": "identity",
+        "emissions_input_weights": "zero",
+        "emissions_cov": "lagged_diagonal"
+      },
+      "learned_parameters": {
+        "dynamics_weights": 2165,
+        "dynamics_input_weights": 6930,
+        "dynamics_cov": 154,
+        "emissions_cov": 154
+      },
+      "stams_test_score": {
+        "correlation": 0.04033166521162904,
+        "pairs": 11010
+      },
+      "corr_test_score": {
+        "correlation": 0.11543261589992422,
+        "pairs": 17936
+      }
+    }
+  ]
+}
