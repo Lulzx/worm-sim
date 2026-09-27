@@ -33,6 +33,12 @@ pub enum Event {
         conductances: Vec<f64>,
         reversal: f64,
     },
+    /// Prescribed piecewise-linear voltage; other state variables still evolve.
+    VoltageClamp {
+        neuron: String,
+        times: Vec<f64>,
+        voltages: Vec<f64>,
+    },
     Silence {
         neuron: String,
         start: f64,
@@ -85,6 +91,50 @@ impl Config {
         Ok(())
     }
 }
+struct Clamp<'a> {
+    neuron: usize,
+    times: &'a [f64],
+    voltages: &'a [f64],
+}
+impl Clamp<'_> {
+    fn active(&self, t: f64) -> bool {
+        t >= self.times[0] && t < self.times[self.times.len() - 1]
+    }
+    fn value(&self, t: f64) -> f64 {
+        let k = self
+            .times
+            .partition_point(|v| *v <= t)
+            .saturating_sub(1)
+            .min(self.times.len() - 2);
+        let f = ((t - self.times[k]) / (self.times[k + 1] - self.times[k])).clamp(0., 1.);
+        (1. - f) * self.voltages[k] + f * self.voltages[k + 1]
+    }
+}
+fn project_clamps<S: Scalar>(clamps: &[Clamp<'_>], anchor: f64, time: f64, state: &mut [S]) {
+    for c in clamps.iter().filter(|c| c.active(anchor)) {
+        state[c.neuron] = S::constant(c.value(time));
+    }
+}
+fn clamp_derivatives<S: Scalar>(clamps: &[Clamp<'_>], anchor: f64, derivative: &mut [S]) {
+    for c in clamps.iter().filter(|c| c.active(anchor)) {
+        derivative[c.neuron] = S::constant(0.);
+    }
+}
+fn validate_waveform(times: &[f64], values: &[f64], duration: f64) -> Result<()> {
+    if times.len() < 2
+        || times.len() != values.len()
+        || times.iter().chain(values).any(|v| !v.is_finite())
+        || times[0] < 0.
+        || times[times.len() - 1] > duration
+        || times.windows(2).any(|w| w[1] <= w[0])
+    {
+        return Err(
+            "waveform needs matching finite values and strictly increasing times within the run"
+                .into(),
+        );
+    }
+    Ok(())
+}
 /// Output is allocated only on the save grid. RK stages reuse one workspace.
 pub fn simulate<S: Scalar>(
     model: &Model,
@@ -107,7 +157,23 @@ pub fn simulate_from_state<S: Scalar>(
     let mut boundaries = vec![0.0, cfg.duration];
     let mut events = Vec::new();
     let mut waveforms = Vec::new();
+    let mut clamps = Vec::new();
     for event in &cfg.events {
+        if let Event::VoltageClamp {
+            neuron,
+            times,
+            voltages,
+        } = event
+        {
+            validate_waveform(times, voltages, cfg.duration)?;
+            clamps.push(Clamp {
+                neuron: model.graph.neuron(neuron)?,
+                times,
+                voltages,
+            });
+            boundaries.extend(times);
+            continue;
+        }
         let waveform = match event {
             Event::CurrentWaveform {
                 neuron,
@@ -134,15 +200,7 @@ pub fn simulate_from_state<S: Scalar>(
             _ => None,
         };
         if let Some((neuron, times, amplitudes, reversal)) = waveform {
-            if times.len() < 2
-                || times.len() != amplitudes.len()
-                || times.iter().chain(amplitudes).any(|v| !v.is_finite())
-                || times[0] < 0.
-                || times[times.len() - 1] > cfg.duration
-                || times.windows(2).any(|w| w[1] <= w[0])
-            {
-                return Err("waveform needs matching finite values and strictly increasing times within the run".into());
-            }
+            validate_waveform(times, amplitudes, cfg.duration)?;
             waveforms.push((model.graph.neuron(neuron)?, times, amplitudes, reversal));
             boundaries.extend(times);
             continue;
@@ -156,7 +214,9 @@ pub fn simulate_from_state<S: Scalar>(
             } => (neuron, *start, *end, *amplitude, 0),
             Event::Silence { neuron, start, end } => (neuron, *start, *end, 0.0, 1),
             Event::Ablate { neuron } => (neuron, 0.0, cfg.duration, 0.0, 2),
-            Event::CurrentWaveform { .. } | Event::ConductanceWaveform { .. } => unreachable!(),
+            Event::CurrentWaveform { .. }
+            | Event::ConductanceWaveform { .. }
+            | Event::VoltageClamp { .. } => unreachable!(),
         };
         if !start.is_finite()
             || !end.is_finite()
@@ -169,6 +229,18 @@ pub fn simulate_from_state<S: Scalar>(
         }
         events.push((model.graph.neuron(name)?, start, end, amplitude, kind));
         boundaries.extend([start, end]);
+    }
+    for (i, c) in clamps.iter().enumerate() {
+        if events.iter().any(|e| e.0 == c.neuron && e.4 == 2) {
+            return Err("cannot clamp an ablated neuron".into());
+        }
+        if clamps[..i].iter().any(|b| {
+            b.neuron == c.neuron
+                && b.times[0] < c.times[c.times.len() - 1]
+                && c.times[0] < b.times[b.times.len() - 1]
+        }) {
+            return Err("overlapping voltage clamps on one neuron".into());
+        }
     }
     boundaries.sort_by(f64::total_cmp);
     boundaries.dedup();
@@ -201,6 +273,7 @@ pub fn simulate_from_state<S: Scalar>(
         out.fluorescence
             .push((0..n).map(|i| y[n + i] * p.calcium_scale[i]).collect());
     };
+    project_clamps(&clamps, 0., 0., &mut y);
     save(0.0, &y, &mut result);
     let mut t = 0.0;
     let mut sample = 1usize;
@@ -256,6 +329,7 @@ pub fn simulate_from_state<S: Scalar>(
         };
         set_current(t, &mut input);
         model.rhs(&p, &y, &input, &mut release, &mut k1);
+        clamp_derivatives(&clamps, t, &mut k1);
         match cfg.method {
             Method::Euler => {
                 for i in 0..len {
@@ -267,16 +341,22 @@ pub fn simulate_from_state<S: Scalar>(
                     temp[i] = y[i] + S::constant(h * 0.5) * k1[i];
                 }
                 set_current(t + h * 0.5, &mut input);
+                project_clamps(&clamps, t, t + h * 0.5, &mut temp);
                 model.rhs(&p, &temp, &input, &mut release, &mut k2);
+                clamp_derivatives(&clamps, t, &mut k2);
                 for i in 0..len {
                     temp[i] = y[i] + S::constant(h * 0.5) * k2[i];
                 }
+                project_clamps(&clamps, t, t + h * 0.5, &mut temp);
                 model.rhs(&p, &temp, &input, &mut release, &mut k3);
+                clamp_derivatives(&clamps, t, &mut k3);
                 for i in 0..len {
                     temp[i] = y[i] + S::constant(h) * k3[i];
                 }
                 set_current(target, &mut input);
+                project_clamps(&clamps, t, target, &mut temp);
                 model.rhs(&p, &temp, &input, &mut release, &mut k4);
+                clamp_derivatives(&clamps, t, &mut k4);
                 for i in 0..len {
                     y[i] = y[i]
                         + S::constant(h / 6.0)
@@ -284,6 +364,10 @@ pub fn simulate_from_state<S: Scalar>(
                 }
             }
         }
+        // Complete the outgoing clamp at its endpoint, then apply any newly
+        // starting clamp. Samples are right-continuous at clamp onsets.
+        project_clamps(&clamps, t, target, &mut y);
+        project_clamps(&clamps, target, target, &mut y);
         if y.iter().any(|v| !v.value().is_finite()) {
             return Err(format!("nonfinite state at t={target}; reduce dt"));
         }
