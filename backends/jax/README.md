@@ -142,3 +142,10 @@ for the Level 0 engine. It supports named parameter tying, independent
 species/compartment channels, and gain/leak/chemical-weight effects with automatic
 gradients. Maps require explicit provenance; the included example is synthetic.
 See [equations, API and acceptance limits](../../docs/NEUROMODULATION.md).
+
+## Rectifying gaps
+
+`GapRectification` adds a conservative, nonnegative voltage-dependent conductance
+on explicitly selected anatomical pairs. Zero asymmetry preserves the baseline;
+source provenance and canonical pair orientation are required. See the
+[law, API and limitations](../../docs/GAP-RECTIFICATION.md).

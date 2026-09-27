@@ -12,6 +12,7 @@ import numpy as np
 from solvers import Adaptive, integrate
 from typing import NamedTuple
 from modulation import Modulation
+from rectification import GapRectification
 
 
 class AdaptiveSolution(NamedTuple):
@@ -36,12 +37,14 @@ class Level0(eqx.Module):
     adaptive: Adaptive | None = eqx.field(static=True)
     preparation: float = eqx.field(static=True)
     modulation: Modulation | None
+    rectification: GapRectification | None
 
-    def __init__(self, model, graph, times, adaptive=None, modulation=None):
+    def __init__(self, model, graph, times, adaptive=None, modulation=None, rectification=None):
         if adaptive is not None and not isinstance(adaptive,Adaptive):
             raise TypeError('adaptive settings must be an Adaptive instance')
         self.adaptive=adaptive
         self.modulation=modulation
+        self.rectification=rectification
         names = sorted(n['id'] for n in graph['neurons'])
         index = {name:i for i,name in enumerate(names)}
         self.n = len(names)
@@ -49,6 +52,8 @@ class Level0(eqx.Module):
             raise ValueError('modulation neuron order differs from the model')
         chemical = sorted(graph['chemical'], key=lambda e:(e['pre'],e['post']))
         gaps = sorted(graph['gaps'], key=lambda e:(e['a'],e['b']))
+        if rectification is not None and (not isinstance(rectification,GapRectification) or rectification.pairs!=tuple((e['a'],e['b']) for e in gaps)):
+            raise ValueError('rectification topology differs from model')
         self.m = len(chemical)
         self.mapping = jnp.asarray(model['parameters']['raw_to_group'], dtype=jnp.int32)
         if len(self.mapping) != 6*self.n+2*self.m+len(gaps)+1:
@@ -115,7 +120,10 @@ class Level0(eqx.Module):
             weight=weight*synapse[self.post]
         reversal = 2*jax.nn.sigmoid(raw[6*n+m:6*n+2*m])-1
         dv = dv.at[self.post].add(weight*s[self.pre]*(reversal-v[self.post]))
-        gap = positive[6*n+2*m:-1]*self.sizes*(v[self.gb]-v[self.ga])
+        delta=v[self.gb]-v[self.ga]
+        gap = positive[6*n+2*m:-1]*self.sizes*delta
+        if self.rectification is not None:
+            gap=gap*self.rectification.multiplier(delta,theta['rectification'])
         dv = dv.at[self.ga].add(gap).at[self.gb].add(-gap)
         fast=jnp.concatenate((dv/positive[:n], (release-c)/positive[4*n:5*n],
                                 (release*(1-s)-s)/positive[-1]))
@@ -165,12 +173,14 @@ class Level0(eqx.Module):
         return jnp.exp(theta['log_gain'])*scale*(calcium-calcium[0])
 
 
-def parameters(model, modulation=None):
+def parameters(model, modulation=None, rectification=None):
     out = {'groups':jnp.asarray([g['value'] for g in model['parameters']['groups']]),
             'kernel':jnp.asarray(model['kernel_raw']),
             'log_gain':jnp.asarray(model.get('observation_log_gain') or 0.)}
     if modulation is not None:
         out['modulation']=modulation.parameters()
+    if rectification is not None:
+        out['rectification']=rectification.parameters()
     return out
 
 
