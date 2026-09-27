@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "fit_source_commit": "a3768d1988bfcd39ef0b3d0c7a14b2aa8330068a",
+  "data": "runs/randi-data.json",
+  "data_file_sha256": "2063f69753f9ab0dce9ee489214fc3eb641c451651a09cc4b2ee81f261df4b2b",
+  "split": "data/randi-neuron-split.json",
+  "split_file_sha256": "c3002a03460f7685f71bcddf2be58c78e8ec35a410abe4a5eb3c2b9f11375438",
+  "dataset_hash": "3f3a537ff8424d89da72699e9b342185959afbd9380f7ecc6aa0fed06fafe843",
+  "split_hash": "2d291f63668345396d9b08e984581841db7b8912897405993ba258bf9f013f47",
+  "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+  "runs": [
+    {
+      "seed": 1,
+      "config": "configs/level0-atlas-sign-seed1-fit.json",
+      "config_sha256": "fb4601e1cdd5c5660b6e9c657fea090851652e336dbfa23af1c6a514ebd77f21",
+      "directory": "runs/level0-atlas-sign-seed1-fit"
+    },
+    {
+      "seed": 2,
+      "config": "configs/level0-atlas-sign-seed2-fit.json",
+      "config_sha256": "97550cc3d3f140cfcb1385302800473486200e816b24ced4b315e1a49da995f3",
+      "directory": "runs/level0-atlas-sign-seed2-fit"
+    },
+    {
+      "seed": 3,
+      "config": "configs/level0-atlas-sign-seed3-fit.json",
+      "config_sha256": "866bc26e9f80e3f992ab636bb2ea5b7000b7f37aada5588e0509453ccd9f9c11",
+      "directory": "runs/level0-atlas-sign-seed3-fit"
+    }
+  ]
+}

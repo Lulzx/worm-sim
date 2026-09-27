@@ -85,3 +85,29 @@ independent coupling audits verify the local coefficients and preparation:
 This verifies the intended initialization intervention, not equilibrium
 uniqueness, optimization convergence or predictive improvement. Fits and final
 comparisons remain pending.
+
+## Validation-only cohort selector
+
+The [cohort manifest](../configs/level0-atlas-sign-restarts.json) fixes all three
+seeds, configuration file hashes, fit source, data/split identities and input file
+hashes. It records the selection rule above in executable form; it does not
+change the already running fits. Once every run completes:
+
+```sh
+python3 scripts/select_atlas_restart.py --manifest configs/level0-atlas-sign-restarts.json --output runs/sign-restart-selection.json
+```
+
+The selector requires the complete epoch sequence for each declared run, verifies
+saved checkpoint selection and shared lineage, permits configurations to differ
+only by sign seed, and independently rescores the selected validation predictions
+against the original validation observations. It hashes every epoch model and
+the selected model/validation artifacts in its output. It never opens test
+predictions or test reports, and refuses to overwrite a previous selection
+receipt. Missing/incomplete runs are errors; they are not silently dropped from
+the cohort. Unit tests exercise selection without any test files, seed tie breaks,
+missing epochs, duplicate seeds, changed configs and altered validation outputs.
+
+The selector verifies saved selection records and prediction scores, not every
+epoch's nonlinear dynamics or optimizer updates. Independent dynamics audits and
+the common test scorer remain separate required steps. Selection from only three
+seeds remains exploratory and is not ensemble uncertainty quantification.
