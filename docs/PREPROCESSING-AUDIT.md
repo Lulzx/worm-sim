@@ -108,3 +108,9 @@ cargo test --locked --lib --test bench
 Source cache entries are hash checked on every audit. Numerical tests reject
 invalid arrays and distinguish whole-recording normalization from a prefix-only
 transform. No raw recordings or third-party source code are redistributed.
+
+The [scorer regression receipt](preprocessing-scoring-receipt.json) rescored the
+archived selected GRU predictions from committed source. Every existing report
+field except scorer revision matches exactly, including all bootstrap intervals;
+the new field identifies the dataset as retrospective. This audit changes the
+interpretation and recorded evidence, not the reported numerical outcomes.
