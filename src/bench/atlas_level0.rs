@@ -17,6 +17,8 @@ use std::collections::BTreeMap;
 pub struct FitConfig {
     pub epochs: usize,
     pub dt: f64,
+    #[serde(default)]
+    pub preparation_seconds: f64,
     pub learning_rate: f64,
     pub kernel_lags: usize,
     pub prior_strength: f64,
@@ -26,7 +28,10 @@ pub struct FitConfig {
 }
 impl FitConfig {
     fn validate(&self) -> Result<()> {
-        if self.epochs == 0
+        if !self.preparation_seconds.is_finite()
+            || self.preparation_seconds < 0.0
+            || self.preparation_seconds > 300.0
+            || self.epochs == 0
             || self.epochs > 1000
             || self.kernel_lags == 0
             || self.kernel_lags > 512
@@ -59,7 +64,8 @@ pub struct AtlasModel {
     pub epoch: usize,
     pub sample_dt: f64,
     pub parameters: TiedParameters,
-    /// Shared across targets; fixed at declared initialization during this first fit.
+    /// Shared fixed preparation seed. With zero preparation it is the response initial state;
+    /// otherwise the response starts from its parameter-dependent unforced evolution.
     pub initial: Vec<f64>,
     /// Softplus coordinates; effective current is nonnegative and shared across targets.
     pub kernel_raw: Vec<f64>,
@@ -161,7 +167,7 @@ impl AtlasModel {
             let frames = times.len();
             if let std::collections::btree_map::Entry::Vacant(e) = cache.entry((target, frames)) {
                 let currents = self.currents(target, frames, model.n())?;
-                e.insert(initial_state::response_with_currents(
+                e.insert(initial_state::prepared_response_with_currents(
                     &model,
                     &params,
                     &self.initial,
@@ -169,6 +175,7 @@ impl AtlasModel {
                     &readout,
                     dt,
                     &currents,
+                    self.config.preparation_seconds,
                 )?);
             }
             let response = &cache[&(target, frames)];
@@ -201,7 +208,14 @@ impl AtlasModel {
             schema_version: 1,
             dataset_hash: self.dataset_hash.clone(),
             split_hash: self.split_hash.clone(),
-            model: "level0-atlas-shared-positive-current-fixed-initial-state".into(),
+            model: if self.config.preparation_seconds == 0.0 {
+                "level0-atlas-shared-positive-current-fixed-initial-state".into()
+            } else {
+                format!(
+                    "level0-atlas-shared-positive-current-preparation-{}s",
+                    self.config.preparation_seconds
+                )
+            },
             free_parameters: self.free_parameters(),
             training_trials: self.training_trials.clone(),
             selection_trials: self.selection_trials.clone(),
@@ -291,7 +305,7 @@ pub fn fit_select(
             for group in &groups {
                 let target = graph.neuron(&group.stimulated_neuron)?;
                 let currents = current.currents(target, group.recording.times.len(), model.n())?;
-                let g = initial_state::response_gradient_with_currents(
+                let g = initial_state::prepared_response_gradient_with_currents(
                     &model,
                     &raw,
                     &group.recording,
@@ -299,6 +313,7 @@ pub fn fit_select(
                     &current.initial,
                     config.dt,
                     &currents,
+                    config.preparation_seconds,
                 )?;
                 let w = group.sample_weight / total_weight;
                 mse += w * (g.value + group.irreducible_mse);

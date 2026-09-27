@@ -413,36 +413,57 @@ fn driven_forecast_matches_independent_event_solver_and_inference_ignores_future
 
 #[test]
 fn relative_response_adjoint_matches_parameter_state_gain_and_current_differences() {
+    check_response_gradient(0.0);
+}
+#[test]
+fn prepared_response_adjoint_differentiates_seed_prefix_and_calcium_baseline() {
+    check_response_gradient(0.4);
+}
+
+fn check_response_gradient(preparation: f64) {
     let (model, params, recording, initial, mut readout, config) = fixture();
     readout.offset.fill(0.0);
     let n = model.n();
     let mut currents = vec![vec![0.; n]; recording.times.len()];
     currents[0][1] = 0.7;
     currents[2][2] = -0.3;
-    let gradient = initial_state::response_gradient_with_currents(
-        &model, &params, &recording, &readout, &initial, config.dt, &currents,
+    let gradient = initial_state::prepared_response_gradient_with_currents(
+        &model,
+        &params,
+        &recording,
+        &readout,
+        &initial,
+        config.dt,
+        &currents,
+        preparation,
     )
     .unwrap();
-    let objective = |p: &wormsim::model::Parameters<f64>,
-                     y: &[f64],
-                     r: &Readout,
-                     u: &[Vec<f64>]| {
-        let prediction =
-            initial_state::response_with_currents(&model, p, y, &recording.times, r, config.dt, u)
-                .unwrap();
-        let mut error = 0.;
-        let mut weight = 0.;
-        for trace in &recording.traces {
-            let i = model.graph.neuron(&trace.neuron).unwrap();
-            for (t, value) in trace.values.iter().enumerate() {
-                if let Some(v) = value {
-                    error += trace.provenance.id_confidence * (prediction[t][i] - v).powi(2);
-                    weight += trace.provenance.id_confidence;
+    let objective =
+        |p: &wormsim::model::Parameters<f64>, y: &[f64], r: &Readout, u: &[Vec<f64>]| {
+            let prediction = initial_state::prepared_response_with_currents(
+                &model,
+                p,
+                y,
+                &recording.times,
+                r,
+                config.dt,
+                u,
+                preparation,
+            )
+            .unwrap();
+            let mut error = 0.;
+            let mut weight = 0.;
+            for trace in &recording.traces {
+                let i = model.graph.neuron(&trace.neuron).unwrap();
+                for (t, value) in trace.values.iter().enumerate() {
+                    if let Some(v) = value {
+                        error += trace.provenance.id_confidence * (prediction[t][i] - v).powi(2);
+                        weight += trace.provenance.id_confidence;
+                    }
                 }
             }
-        }
-        error / weight
-    };
+            error / weight
+        };
     assert!((objective(&params, &initial, &readout, &currents) - gradient.value).abs() < 1e-12);
     let eps = 1e-5;
     let compare = |a: f64, b: f64| assert!((a - b).abs() < 2e-7, "{a} != {b}");
@@ -504,7 +525,42 @@ fn relative_response_adjoint_matches_parameter_state_gain_and_current_difference
             gradient.currents[t][1],
         );
     }
-    let response = initial_state::response_with_currents(
+    let response = initial_state::prepared_response_with_currents(
+        &model,
+        &params,
+        &initial,
+        &recording.times,
+        &readout,
+        config.dt,
+        &currents,
+        preparation,
+    )
+    .unwrap();
+    assert!(response[0].iter().all(|v| v.abs() < 1e-12));
+}
+
+#[test]
+fn prepared_state_matches_event_solver_and_zero_duration_preserves_old_responses() {
+    let (model, params, recording, initial, readout, config) = fixture();
+    let expected = solve::simulate_from_state(
+        &model,
+        &params,
+        &Config {
+            duration: 0.4,
+            save_dt: 0.4,
+            ..config.clone()
+        },
+        Some(&initial),
+    )
+    .unwrap();
+    let (state, derivative) =
+        initial_state::prepared_state(&model, &params, &initial, config.dt, 0.4).unwrap();
+    for (a, b) in state.iter().zip(expected.final_state) {
+        assert!((a - b).abs() < 1e-12);
+    }
+    assert!(derivative.iter().all(|v| v.is_finite()));
+    let currents = vec![vec![0.1; model.n()]; recording.times.len()];
+    let old = initial_state::response_with_currents(
         &model,
         &params,
         &initial,
@@ -514,5 +570,54 @@ fn relative_response_adjoint_matches_parameter_state_gain_and_current_difference
         &currents,
     )
     .unwrap();
-    assert!(response[0].iter().all(|v| v.abs() < 1e-12));
+    let compatible = initial_state::prepared_response_with_currents(
+        &model,
+        &params,
+        &initial,
+        &recording.times,
+        &readout,
+        config.dt,
+        &currents,
+        0.,
+    )
+    .unwrap();
+    assert_eq!(old, compatible);
+    let prepared = initial_state::prepared_response_with_currents(
+        &model,
+        &params,
+        &initial,
+        &recording.times,
+        &readout,
+        config.dt,
+        &currents,
+        0.4,
+    )
+    .unwrap();
+    let staged = initial_state::response_with_currents(
+        &model,
+        &params,
+        &state,
+        &recording.times,
+        &readout,
+        config.dt,
+        &currents,
+    )
+    .unwrap();
+    for (a, b) in prepared.iter().flatten().zip(staged.iter().flatten()) {
+        assert!((a - b).abs() < 1e-12);
+    }
+    assert!(initial_state::prepared_state(&model, &params, &initial, 0., 0.).is_err());
+    assert!(
+        initial_state::prepared_response_with_currents(
+            &model,
+            &params,
+            &initial,
+            &recording.times,
+            &readout,
+            config.dt,
+            &currents,
+            -1.
+        )
+        .is_err()
+    );
 }

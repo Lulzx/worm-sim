@@ -66,6 +66,47 @@ fn main() -> Result<()> {
         write(output.join(format!("{name}-predictions.json")), &prediction)?;
         write(output.join(format!("{name}-report.json")), &report)?;
         if name == "validation" {
+            if model.config.preparation_seconds > 0.0 {
+                let network = wormsim::model::Model::new(graph.clone())?;
+                let params = model.parameters.expand(&network)?;
+                let (state, derivative) = wormsim::initial_state::prepared_state(
+                    &network,
+                    &params,
+                    &model.initial,
+                    model.config.dt,
+                    model.config.preparation_seconds,
+                )?;
+                let (long_state, long_derivative) = wormsim::initial_state::prepared_state(
+                    &network,
+                    &params,
+                    &model.initial,
+                    model.config.dt,
+                    2.0 * model.config.preparation_seconds,
+                )?;
+                let mut longer = model.clone();
+                longer.config.preparation_seconds *= 2.0;
+                let longer_prediction = longer.predict(&data, &graph, &split, partition)?;
+                let longer_report =
+                    bench::evaluate(&data, &graph, &split, &longer_prediction, partition)?;
+                let max_change = prediction
+                    .trials
+                    .iter()
+                    .zip(&longer_prediction.trials)
+                    .flat_map(|(a, b)| {
+                        a.fluorescence.iter().flat_map(move |(name, values)| {
+                            values
+                                .iter()
+                                .zip(&b.fluorescence[name])
+                                .map(|(x, y)| (x - y).abs())
+                        })
+                    })
+                    .fold(0.0, f64::max);
+                write(
+                    output.join("validation-preparation-check.json"),
+                    &serde_json::json!({"source_commit":model.source_commit,"epoch":model.epoch,"preparation_seconds":model.config.preparation_seconds,"longer_seconds":longer.config.preparation_seconds,"derivative_l2":derivative.iter().map(|v|v*v).sum::<f64>().sqrt(),"longer_derivative_l2":long_derivative.iter().map(|v|v*v).sum::<f64>().sqrt(),"max_state_change":state.iter().zip(&long_state).map(|(a,b)|(a-b).abs()).fold(0.0,f64::max),"max_prediction_change":max_change,"selected_duration_mse":report.pooled_trace_scores.mse,"longer_duration_mse":longer_report.pooled_trace_scores.mse,"scope":"Validation-only preparation duration sensitivity and residual unforced derivative; not a proof of equilibrium uniqueness or a biological resting state."}),
+                )?;
+            }
+
             let fine = model.predict_dt(&data, &graph, &split, partition, model.config.dt / 2.0)?;
             let fine_report = bench::evaluate(&data, &graph, &split, &fine, partition)?;
             let max_change = prediction

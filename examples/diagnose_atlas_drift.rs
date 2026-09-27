@@ -6,7 +6,7 @@ use wormsim::{
     bench::{self, Dataset, Partition, Split, atlas, atlas_level0::AtlasModel},
     codec,
     initial_state::{self, Readout},
-    model::{Inputs, Model},
+    model::Model,
 };
 fn read<T: serde::de::DeserializeOwned>(p: &str) -> Result<T> {
     serde_json::from_slice(&fs::read(p).map_err(|e| e.to_string())?).map_err(|e| e.to_string())
@@ -28,16 +28,13 @@ fn main() -> Result<()> {
     let driven = fitted.predict(&data, &graph, &split, Partition::Validation)?;
     let model = Model::new(graph.clone())?;
     let params = fitted.parameters.expand(&model)?;
-    let prepared = model.prepare(&params)?;
-    let mut derivative = vec![0.; model.state_len()];
-    let mut scratch = vec![0.; model.n()];
-    model.rhs(
-        &prepared,
+    let (_, derivative) = initial_state::prepared_state(
+        &model,
+        &params,
         &fitted.initial,
-        &Inputs::new(model.n()),
-        &mut scratch,
-        &mut derivative,
-    );
+        fitted.config.dt,
+        fitted.config.preparation_seconds,
+    )?;
     let mut zero = driven.clone();
     let mut difference = driven.clone();
     zero.model.push_str("; diagnostic zero current");
@@ -62,7 +59,7 @@ fn main() -> Result<()> {
     {
         let frames = p.times.len();
         if let std::collections::btree_map::Entry::Vacant(e) = cache.entry(frames) {
-            e.insert(initial_state::response_with_currents(
+            e.insert(initial_state::prepared_response_with_currents(
                 &model,
                 &params,
                 &fitted.initial,
@@ -70,6 +67,7 @@ fn main() -> Result<()> {
                 &Readout::identity(model.n()),
                 fitted.config.dt,
                 &vec![vec![0.; model.n()]; frames],
+                fitted.config.preparation_seconds,
             )?);
         }
         let baseline = &cache[&frames];
@@ -124,7 +122,7 @@ fn main() -> Result<()> {
         write(out.join(format!("{name}-predictions.json")), p)?;
         scores.insert(name,serde_json::json!({"mse":traces.pooled_trace_scores.mse,"correlation":traces.macro_trace_correlation,"defined_correlations":traces.defined_trace_correlations,"pair_auroc":classification.auroc.value}));
     }
-    let report = serde_json::json!({"schema_version":1,"source_commit":option_env!("WORMSIM_COMMIT").unwrap_or("unversioned"),"model_source_commit":fitted.source_commit,"model_sha256":format!("{:x}",Sha256::digest(fs::read(&a[5]).map_err(|e|e.to_string())?)),"epoch":fitted.epoch,"dataset_hash":split.dataset_hash,"split_hash":split.content_hash()?,"partition":"validation","scores":scores,"observed_weighted_mean_square":{"driven":energies[0]/sample_weight,"zero_current":energies[1]/sample_weight,"stimulus_difference":energies[2]/sample_weight,"cross_term":energy_cross/sample_weight},"energy_identity_residual":(energies[0]-energies[1]-energies[2]-energy_cross)/sample_weight,"initial_unforced_derivative_l2":derivative.iter().map(|v|v*v).sum::<f64>().sqrt(),"scope":"Frozen model diagnostic on validation only. No refitting or test scoring. Driven = zero-current drift + stimulus difference exactly, up to floating-point error. Subtracted predictions are diagnostic and are not a newly trained model. Mean squares include only observed positive-weight validation samples; cross term means these are not orthogonal variance fractions."});
+    let report = serde_json::json!({"schema_version":1,"source_commit":option_env!("WORMSIM_COMMIT").unwrap_or("unversioned"),"model_source_commit":fitted.source_commit,"model_sha256":format!("{:x}",Sha256::digest(fs::read(&a[5]).map_err(|e|e.to_string())?)),"epoch":fitted.epoch,"preparation_seconds":fitted.config.preparation_seconds,"dataset_hash":split.dataset_hash,"split_hash":split.content_hash()?,"partition":"validation","scores":scores,"observed_weighted_mean_square":{"driven":energies[0]/sample_weight,"zero_current":energies[1]/sample_weight,"stimulus_difference":energies[2]/sample_weight,"cross_term":energy_cross/sample_weight},"energy_identity_residual":(energies[0]-energies[1]-energies[2]-energy_cross)/sample_weight,"initial_unforced_derivative_l2":derivative.iter().map(|v|v*v).sum::<f64>().sqrt(),"scope":"Frozen model diagnostic on validation only. No refitting or test scoring. Driven = zero-current drift + stimulus difference exactly, up to floating-point error. Subtracted predictions are diagnostic and are not a newly trained model. Mean squares include only observed positive-weight validation samples; cross term means these are not orthogonal variance fractions."});
     write(out.join("report.json"), &report)?;
     println!(
         "{}",

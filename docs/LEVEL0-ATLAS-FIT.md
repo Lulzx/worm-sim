@@ -217,3 +217,44 @@ selecting a metric after viewing test outcomes.
 python3 scripts/audit_atlas_drift.py --diagnostic runs/level0-atlas-selected-drift --output runs/level0-atlas-selected-drift-audit.json
 python3 scripts/audit_atlas_drift.py --diagnostic runs/level0-atlas-initial-drift --output runs/level0-atlas-initial-drift-audit.json
 ```
+
+## Differentiable pre-stimulation preparation
+
+The atlas configuration now supports `preparation_seconds` (default zero for
+legacy artifacts). A positive duration prepends an unforced rollout from the
+stored shared seed. Fluorescence is then measured relative to calcium at the
+end of that preparation, rather than the old fixed seed. No observed fluorescence
+or behavior enters this prefix.
+
+The exact discrete adjoint runs backward through both response and preparation.
+Every response residual injects the negative baseline-calcium derivative at the
+preparation boundary as well as the usual derivative at its observation time.
+Calcium-scale derivatives use the same difference. Returned initial gradients
+refer to the preparation seed; returned current gradients retain the original
+response grid and omit the fixed zero-current prefix. The seed itself is held
+fixed in the population fit. Thus prepared state depends on fitted parameters
+without treating that dependence as a detached constant.
+
+Tests check all raw parameters, seed coordinates, gains/offsets and response
+current derivatives against finite differences with a nonzero preparation period.
+Prepared state also agrees with the separate event solver, and zero-duration
+responses preserve the old path exactly. The held-out-data mutation test now runs
+with nonzero preparation. Existing artifacts without the new field load as zero.
+
+`configs/level0-atlas-prepared-fit.json` changes only preparation duration to 30 s
+relative to the five-update first-fit settings. This duration is an explicit
+numerical assumption, not a biological measurement or a proof of equilibrium.
+After validation-only selection, the runner measures the residual unforced state
+derivative and repeats validation predictions with 60 s preparation, alongside
+the existing half-dt check. Material residual drift or duration sensitivity must
+remain visible and prevent an equilibrium claim.
+
+```sh
+WORMSIM_COMMIT="$(git rev-parse HEAD)" cargo build --locked --release --example fit_level0_atlas
+target/release/examples/fit_level0_atlas data/c302-herm.wsc runs/randi-data.json data/randi-neuron-split.json configs/level0-atlas-prepared-fit.json runs/level0-atlas-prepared-fit
+```
+
+The frozen first-fit results and their failure remain recorded above. Preparation
+addresses the identified state inconsistency; it does not by itself establish a
+better model, identify the worm's actual pre-stimulation state, or implement the
+still-missing training-pair classification objective.

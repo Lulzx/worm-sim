@@ -52,6 +52,7 @@ fn fit_and_impulses_exclude_held_out_fluorescence() {
     let config = FitConfig {
         epochs: 2,
         dt: 0.02,
+        preparation_seconds: 0.4,
         learning_rate: 0.01,
         prior_strength: 0.01,
         sign_prior_strength: 0.01,
@@ -62,6 +63,14 @@ fn fit_and_impulses_exclude_held_out_fluorescence() {
     let (model, candidates) =
         atlas_level0::fit_select(&data, &graph, &split, config.clone(), |_, _| Ok(())).unwrap();
     assert_eq!(candidates.len(), 3);
+    let mut legacy = serde_json::to_value(&model).unwrap();
+    legacy["config"]
+        .as_object_mut()
+        .unwrap()
+        .remove("preparation_seconds");
+    let legacy: atlas_level0::AtlasModel = serde_json::from_value(legacy).unwrap();
+    assert_eq!(legacy.config.preparation_seconds, 0.0);
+
     let best = candidates
         .iter()
         .min_by(|a, b| a.validation_mse.total_cmp(&b.validation_mse))

@@ -285,7 +285,7 @@ pub fn objective_gradient(
     cfg: &InferenceConfig,
 ) -> Result<(f64, Vec<f64>, Vec<f64>)> {
     let g = objective_impl(
-        model, params, recording, readout, initial, prior, cfg, false, None, false,
+        model, params, recording, readout, initial, prior, cfg, false, None, None,
     )?;
     Ok((g.value, g.initial, g.terminal))
 }
@@ -303,7 +303,7 @@ pub fn parameter_gradient(
         ..Default::default()
     };
     objective_impl(
-        model, params, recording, readout, initial, initial, &cfg, true, None, false,
+        model, params, recording, readout, initial, initial, &cfg, true, None, None,
     )
 }
 pub fn parameter_gradient_with_currents(
@@ -330,7 +330,7 @@ pub fn parameter_gradient_with_currents(
         &cfg,
         true,
         Some(currents),
-        false,
+        None,
     )
 }
 /// Affine readout at sample boundaries; each current row drives its following interval.
@@ -386,7 +386,7 @@ pub fn response_gradient_with_currents(
         &cfg,
         true,
         Some(currents),
-        true,
+        Some(0),
     )
 }
 /// Relative fluorescence response, not a calibrated conversion of optical power
@@ -421,7 +421,7 @@ fn objective_impl(
     cfg: &InferenceConfig,
     parameter_derivatives: bool,
     currents: Option<&[Vec<f64>]>,
-    relative_to_initial: bool,
+    baseline_sample: Option<usize>,
 ) -> Result<ObjectiveGradient> {
     recording.validate(&model.graph)?;
     readout.validate(model.n())?;
@@ -434,6 +434,9 @@ fn objective_impl(
     }
     let p = model.prepare(params)?;
     let tape = rollout(model, &p, initial, &recording.times, cfg.dt, currents)?;
+    if baseline_sample.is_some_and(|i| i >= tape.samples.len()) {
+        return Err("invalid response baseline sample".into());
+    }
     let n = model.n();
     let weight: f64 = recording
         .traces
@@ -462,16 +465,12 @@ fn objective_impl(
         for (t, value) in trace.values.iter().enumerate() {
             if let Some(value) = value {
                 let calcium = tape.states[tape.samples[t]][n + i]
-                    - if relative_to_initial {
-                        initial[n + i]
-                    } else {
-                        0.0
-                    };
+                    - baseline_sample.map_or(0.0, |b| tape.states[tape.samples[b]][n + i]);
                 let error = readout.offset[i] + gain * calcium - value;
                 loss += w * error * error;
                 injections[t][i] += 2.0 * w * gain * error;
-                if relative_to_initial {
-                    injections[0][i] -= 2.0 * w * gain * error;
+                if let Some(b) = baseline_sample {
+                    injections[b][i] -= 2.0 * w * gain * error;
                 }
                 if parameter_derivatives {
                     param_gradient[5 * n + i] += 2.0
@@ -658,7 +657,7 @@ fn infer_impl(
             cfg,
             false,
             history_currents,
-            false,
+            None,
         )?;
         Ok((g.value, g.initial, g.terminal))
     };
@@ -736,4 +735,145 @@ fn infer_impl(
         history_predictions,
         filter_diagnostics: None,
     })
+}
+
+fn preparation_grid(
+    times: &[f64],
+    currents: &[Vec<f64>],
+    n: usize,
+    seconds: f64,
+) -> Result<(Vec<f64>, Vec<Vec<f64>>)> {
+    if !seconds.is_finite() || seconds <= 0. || times.len() < 2 || times[0] != 0. {
+        return Err("invalid response preparation period/grid".into());
+    }
+    validate_currents(Some(currents), times.len(), n)?;
+    let mut extended = vec![0.];
+    extended.extend(times.iter().map(|t| t + seconds));
+    let mut drive = vec![vec![0.; n]];
+    drive.extend_from_slice(currents);
+    Ok((extended, drive))
+}
+/// Unforced preparation followed by a response relative to the prepared calcium.
+/// A finite preparation period approximates equilibration; callers must check it.
+#[allow(clippy::too_many_arguments)]
+pub fn prepared_response_with_currents(
+    model: &Model,
+    params: &Parameters<f64>,
+    seed: &[f64],
+    times: &[f64],
+    readout: &Readout,
+    dt: f64,
+    currents: &[Vec<f64>],
+    preparation_seconds: f64,
+) -> Result<Vec<Vec<f64>>> {
+    if preparation_seconds == 0. {
+        return response_with_currents(model, params, seed, times, readout, dt, currents);
+    }
+    let (extended, drive) = preparation_grid(times, currents, model.n(), preparation_seconds)?;
+    readout.validate(model.n())?;
+    let p = model.prepare(params)?;
+    let tape = rollout(model, &p, seed, &extended, dt, Some(&drive))?;
+    let baseline = &tape.states[tape.samples[1]];
+    Ok(tape.samples[1..]
+        .iter()
+        .map(|&s| {
+            (0..model.n())
+                .map(|i| {
+                    readout.offset[i]
+                        + readout.gain[i]
+                            * p.calcium_scale[i]
+                            * (tape.states[s][model.n() + i] - baseline[model.n() + i])
+                })
+                .collect()
+        })
+        .collect())
+}
+/// Exact discrete gradients include the entire unforced prefix and its calcium
+/// baseline. `initial` is the derivative with respect to the preparation seed;
+/// returned current rows correspond only to the original response grid.
+#[allow(clippy::too_many_arguments)]
+pub fn prepared_response_gradient_with_currents(
+    model: &Model,
+    params: &Parameters<f64>,
+    recording: &Recording,
+    readout: &Readout,
+    seed: &[f64],
+    dt: f64,
+    currents: &[Vec<f64>],
+    preparation_seconds: f64,
+) -> Result<ObjectiveGradient> {
+    if preparation_seconds == 0. {
+        return response_gradient_with_currents(
+            model, params, recording, readout, seed, dt, currents,
+        );
+    }
+    recording.validate(&model.graph)?;
+    let (times, drive) =
+        preparation_grid(&recording.times, currents, model.n(), preparation_seconds)?;
+    let mut extended = recording.clone();
+    extended.times = times;
+    // No measured data or behavior are supplied during preparation.
+    extended.behavior.clear();
+    for trace in &mut extended.traces {
+        trace.values.insert(0, None);
+    }
+    let cfg = InferenceConfig {
+        dt,
+        prior_weight: 0.,
+        ..Default::default()
+    };
+    let mut result = objective_impl(
+        model,
+        params,
+        &extended,
+        readout,
+        seed,
+        seed,
+        &cfg,
+        true,
+        Some(&drive),
+        Some(1),
+    )?;
+    result.currents.remove(0);
+    Ok(result)
+}
+/// Prepared state and its residual unforced derivative for stationarity checks.
+pub fn prepared_state(
+    model: &Model,
+    params: &Parameters<f64>,
+    seed: &[f64],
+    dt: f64,
+    seconds: f64,
+) -> Result<(Vec<f64>, Vec<f64>)> {
+    if !dt.is_finite() || dt <= 0.0 {
+        return Err("invalid preparation step size".into());
+    }
+    let p = model.prepare(params)?;
+    let state = if seconds == 0. {
+        if seed.len() != model.state_len() || seed.iter().any(|v| !v.is_finite()) {
+            return Err("invalid preparation seed".into());
+        }
+        seed.to_vec()
+    } else {
+        if !seconds.is_finite() || seconds < 0. {
+            return Err("invalid preparation duration".into());
+        }
+        rollout(model, &p, seed, &[0., seconds], dt, None)?
+            .states
+            .pop()
+            .ok_or("empty preparation")?
+    };
+    let mut derivative = vec![0.; model.state_len()];
+    let mut scratch = vec![0.; model.n()];
+    model.rhs(
+        &p,
+        &state,
+        &Inputs::new(model.n()),
+        &mut scratch,
+        &mut derivative,
+    );
+    if derivative.iter().any(|v| !v.is_finite()) {
+        return Err("nonfinite preparation derivative".into());
+    }
+    Ok((state, derivative))
 }
