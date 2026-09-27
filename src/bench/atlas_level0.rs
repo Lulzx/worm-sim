@@ -23,6 +23,8 @@ pub struct FitConfig {
     #[serde(default)]
     pub preparation_seconds: f64,
     pub learning_rate: f64,
+    #[serde(default)]
+    pub learning_rate_schedule: super::optimization::LearningRateSchedule,
     pub kernel_lags: usize,
     pub prior_strength: f64,
     pub sign_prior_strength: f64,
@@ -62,6 +64,7 @@ pub struct ClassificationConfig {
 }
 impl FitConfig {
     fn validate(&self) -> Result<()> {
+        self.learning_rate_schedule.validate()?;
         if let Some(c) = &self.correlation
             && (!c.weight.is_finite()
                 || c.weight <= 0.
@@ -147,6 +150,7 @@ pub struct AtlasModel {
 #[derive(Debug, Serialize)]
 pub struct EpochReport {
     pub epoch: usize,
+    pub applied_learning_rate: Option<f64>,
     pub preceding_training_mse: Option<f64>,
     pub preceding_penalty: Option<f64>,
     pub preceding_training_classification_bce: Option<f64>,
@@ -489,6 +493,15 @@ pub fn fit_select_with_evidence(
     let mut reports = vec![];
     for epoch in 0..=config.epochs {
         let start = std::time::Instant::now();
+        let rate = if epoch > 0 {
+            Some(
+                config
+                    .learning_rate_schedule
+                    .rate(config.learning_rate, epoch, config.epochs)?,
+            )
+        } else {
+            None
+        };
         let mut training = None;
         let mut penalty = None;
         let mut classification_bce = None;
@@ -659,7 +672,11 @@ pub fn fit_select_with_evidence(
                 gradient[gain_index] += 2. * g.prior_strength * delta;
                 values.push(log_gain);
             }
-            optimizer.update(&mut values, &gradient, config.learning_rate)?;
+            optimizer.update(
+                &mut values,
+                &gradient,
+                rate.ok_or("missing update learning rate")?,
+            )?;
             if current.observation_log_gain.is_some() {
                 current.observation_log_gain = Some(values[gain_index]);
             }
@@ -687,6 +704,7 @@ pub fn fit_select_with_evidence(
             .ok_or("no validation observations")?;
         let report = EpochReport {
             epoch,
+            applied_learning_rate: rate,
             preceding_training_mse: training,
             preceding_penalty: penalty,
             preceding_training_classification_bce: classification_bce,

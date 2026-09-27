@@ -104,6 +104,22 @@ def main():
     assert all(not targets[i] & targets[j] for i in range(3) for j in range(i))
     hashes = {}
     for c in selection:
+        if 'learning_rate_schedule' in config:
+            schedule=config['learning_rate_schedule']
+            assert schedule['kind'] in ('constant','cosine')
+            expected=None
+            if c['epoch'] > 0:
+                expected=config['learning_rate']
+                if schedule['kind']=='cosine':
+                    minimum=schedule['minimum_fraction']
+                    assert np.isfinite(minimum) and 0 <= minimum <= 1
+                    if config['epochs'] > 1:
+                        progress=(c['epoch']-1)/(config['epochs']-1)
+                        expected*=minimum+(1-minimum)*0.5*(1+np.cos(np.pi*progress))
+            if expected is None:
+                assert c['applied_learning_rate'] is None
+            else:
+                assert np.isclose(c['applied_learning_rate'],expected,rtol=1e-14,atol=1e-16)
         name = f"epoch-{c['epoch']}"
         assert c == load(run/f'{name}.report.json')
         checkpoint = load(run/f'{name}.json')

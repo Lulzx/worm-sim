@@ -50,6 +50,7 @@ fn fixture() -> (wormsim::data::IndexedGraph, Dataset, Split) {
 fn fit_and_impulses_exclude_held_out_fluorescence() {
     let (graph, mut data, split) = fixture();
     let config = FitConfig {
+        learning_rate_schedule: Default::default(),
         correlation: None,
         observation_gain: None,
         classification: None,
@@ -154,6 +155,7 @@ fn joint_fit_uses_training_labels_and_preserves_mse_selection() {
             .collect(),
     };
     let config = FitConfig {
+        learning_rate_schedule: Default::default(),
         correlation: Some(atlas_level0::CorrelationConfig {
             weight: 0.02,
             epsilon: 0.01,
@@ -331,6 +333,7 @@ fn molecular_prior_fit_preserves_graph_and_excludes_test_fluorescence() {
         inhibitory_edges: vec![1],
     };
     let config = FitConfig {
+        learning_rate_schedule: Default::default(),
         correlation: Some(atlas_level0::CorrelationConfig {
             weight: 0.02,
             epsilon: 0.01,
@@ -478,4 +481,48 @@ fn global_gain_first_update_matches_finite_difference_and_legacy_is_identity() {
     let mut bad = legacy;
     bad.observation_log_gain = Some(0.);
     assert!(bad.predict(&data, &graph, &split, Partition::Test).is_err());
+}
+
+#[test]
+fn cosine_schedule_is_applied_and_zero_final_rate_preserves_parameters() {
+    let (graph, data, split) = fixture();
+    let mut config: FitConfig = serde_json::from_value(serde_json::json!({
+        "epochs":2,"dt":0.02,"preparation_seconds":0.4,"learning_rate":0.01,
+        "learning_rate_schedule":{"kind":"cosine","minimum_fraction":0.},
+        "kernel_lags":1,"prior_strength":0.01,"sign_prior_strength":0.01,
+        "kernel_prior_strength":0.01,"sharing":wormsim::parameters::Sharing::default(),
+        "observation_gain":{"initial_gain":3.,"prior_strength":0.1}
+    }))
+    .unwrap();
+    let mut checkpoints = vec![];
+    let (_, reports) = atlas_level0::fit_select(&data, &graph, &split, config.clone(), |m, _| {
+        checkpoints.push(m.clone());
+        Ok(())
+    })
+    .unwrap();
+    assert_eq!(
+        reports
+            .iter()
+            .map(|r| r.applied_learning_rate)
+            .collect::<Vec<_>>(),
+        vec![None, Some(0.01), Some(0.)]
+    );
+    assert_eq!(
+        serde_json::to_value(&checkpoints[1].parameters).unwrap(),
+        serde_json::to_value(&checkpoints[2].parameters).unwrap()
+    );
+    assert_eq!(checkpoints[1].kernel_raw, checkpoints[2].kernel_raw);
+    assert_eq!(
+        checkpoints[1].observation_log_gain,
+        checkpoints[2].observation_log_gain
+    );
+    config.learning_rate_schedule = Default::default();
+    let mut constant = vec![];
+    atlas_level0::fit_select(&data, &graph, &split, config, |m, _| {
+        constant.push(m.clone());
+        Ok(())
+    })
+    .unwrap();
+    assert_eq!(checkpoints[1].kernel_raw, constant[1].kernel_raw);
+    assert_ne!(checkpoints[2].kernel_raw, constant[2].kernel_raw);
 }
