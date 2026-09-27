@@ -109,8 +109,11 @@ The [WormWideWeb importer](WORMWIDEWEB.md) now supplies a fixed animal split and
 persistence control. Further source-specific importers still need to map stimuli, confidence, observed labels,
 recording units and preprocessing into this contract. The current Creamer export
 uses its upstream split and cannot substitute for a held-out-stimulated-neuron
-training/evaluation run. The prescribed LDS/GRU comparisons, nonlinear training,
-and a fixed atlas neuron-split manifest remain outstanding.
+training/evaluation run. The Task 2 LDS/GRU and nonlinear fits are recorded in the
+[shared-input comparison](BEHAVIOR-INPUTS.md), including negative results.
+[Randi ingestion](RANDI-ATLAS.md) now supplies individual traces and a fixed
+neuron split. Published response labels, pulse calibration and the Task 1 fitted
+comparison remain outstanding.
 
 Primary source discovery for the next import stage:
 [WormWideWeb datasets](https://wormwideweb.org/activity/dataset/),

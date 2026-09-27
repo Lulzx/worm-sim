@@ -4,10 +4,10 @@
 These results concern retrospective processed-signal prediction, not an end-to-end
 causal forecast. See the [content-bound audit](PREPROCESSING-AUDIT.md).
 
-The immediate priority is initial-state inference and a first Level 0 fit on the
-15 training animals. Backend optimization is deferred until that fit reveals a
-measured bottleneck. Task 1 remains untested: the raw signal-propagation atlas and
-held-out stimulated-neuron split are not yet available in the pipeline.
+Controls below established the bar for the subsequent Level 0 fits and
+[shared-input comparison](BEHAVIOR-INPUTS.md). Backend optimization remains
+deferred. Task 1 now has [processed individual trials and a held-out-neuron
+split](RANDI-ATLAS.md), but its fitted model comparison remains untested.
 
 ## Controls and metric conventions
 

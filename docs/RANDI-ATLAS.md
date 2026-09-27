@@ -86,3 +86,42 @@ alignment, NaN preservation, duplicate/unknown identities, nonpositive baselines
 neighbor-event overlap, malformed timestamps/events, source hash corruption and
 the stimulated-neuron split. Real-data receipt and independent sample checks are
 recorded after running the committed importer.
+
+## Corpus result
+
+Committed importer `fe6c2be` produced **3,166 trials** from 110 represented
+recordings out of the 113 source recordings. Of 5,808 source event entries,
+2,638 have unknown/ambiguous targets, two have incomplete windows, and two share
+a duplicated stimulation frame. No retained source ranges overlap. A further
+2,395 trace windows have nonpositive baselines and two have insufficient baseline
+observations; these traces are excluded without deleting other usable traces.
+
+The [fixed split](../data/randi-neuron-split.json) holds out target identities:
+
+| Partition | Stimulated neurons | Trials | Represented recordings |
+| --- | ---: | ---: | ---: |
+| Train | 161 | 2,842 | 110 |
+| Validation | 15 | 158 | 68 |
+| Test | 15 | 166 | 67 |
+
+The split is target-disjoint, not recording-disjoint, and is not balanced by trial
+count. Its 191 represented targets include neurons outside the head. It does not
+establish independent animals across partitions. The content hash is
+`3f3a537ff8424d89da72699e9b342185959afbd9380f7ecc6aa0fed06fafe843`.
+
+The [independent audit](randi-import-audit.json) checked **all 214,062 trace windows
+and 8,562,480 finite response samples** against NumPy calculations on the pinned
+source arrays. Maximum absolute ΔF/F disagreement was 8.53e−14. No missing samples
+remain in the accepted response windows of this processed export. The audit also
+checks source event indices, times, exact neuron names, baseline boundaries,
+nonoverlap and disjoint target sets. Full transformed data and per-event import
+metadata remain in ignored `runs/`; their file hashes are recorded in the receipt.
+
+```sh
+python3 scripts/audit_randi_import.py
+```
+
+This closes the individual-trace ingestion and held-out-target split gap. It does
+**not** close Task 1: published response labels, physical stimulus calibration,
+a retrained connectome-constrained linear baseline, an atlas-trained biological
+model, and held-out trace-correlation/AUROC results remain outstanding.
