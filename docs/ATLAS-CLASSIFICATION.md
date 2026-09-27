@@ -75,3 +75,27 @@ or missing predictions, and disallowed training-partition declarations. This
 prepares classification evidence and scoring; a retrained held-out-neuron linear
 baseline, a biological fit, uncertainty estimates and actual comparative Task 1
 results remain outstanding.
+
+## Full-corpus label audit
+
+Committed importer `2329ba0` produced **23,316 ordered non-self pair labels**.
+The [independent audit](randi-pair-label-audit.json) checks every detection q,
+equivalence q, observation count, matrix direction and partition assignment
+against the pinned HDF5 source. The original trace dataset hash and bytes are
+unchanged. Pair labels are a separately hashed evidence artifact.
+
+| Partition | Pairs | Detected (q < 0.05) | Not detected | Detected and equivalent |
+| --- | ---: | ---: | ---: | ---: |
+| Train | 19,833 | 984 | 18,849 | 292 |
+| Validation | 1,725 | 48 | 1,677 | 13 |
+| Test | 1,758 | 82 | 1,676 | 19 |
+
+The last column is a diagnostic overlap between two different tests, not an
+additional class. The original detection label is retained. No model or threshold
+was selected using these class counts. Future comparisons must retain this class
+imbalance and the shared source preprocessing; they must not silently change the
+negative class to equivalence-only pairs or duplicate labels by trial count.
+
+```sh
+python3 scripts/audit_atlas_pairs.py
+```

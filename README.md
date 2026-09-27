@@ -60,7 +60,8 @@ It demonstrates plumbing, not biological validation or parameter identifiability
   identifies this benchmark as retrospective whole-recording-normalized signals.
 - Native [Randi atlas trial ingestion](docs/RANDI-ATLAS.md): 3,166 individual
   stimulation trials, a fixed held-out-neuron split, and independent sample checks.
-  Response labels and Task 1 model comparison remain outstanding.
+  [Published pair-level labels](docs/ATLAS-CLASSIFICATION.md) are independently
+  checked; Task 1 model fitting and comparison remain outstanding.
 - Full-network [history state inference](docs/INITIAL-STATE.md), tied-parameter
   [Level 0 population fitting](docs/LEVEL0-FIT.md), and an approximate
   [history filter](docs/LEVEL0-FILTER.md). Scientific acceptance remains open.

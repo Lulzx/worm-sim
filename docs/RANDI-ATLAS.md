@@ -122,6 +122,9 @@ python3 scripts/audit_randi_import.py
 ```
 
 This closes the individual-trace ingestion and held-out-target split gap. It does
-**not** close Task 1: published response labels, physical stimulus calibration,
-a retrained connectome-constrained linear baseline, an atlas-trained biological
-model, and held-out trace-correlation/AUROC results remain outstanding.
+**not** close Task 1: physical stimulus calibration, a retrained
+connectome-constrained linear baseline, an atlas-trained biological model, and
+held-out trace-correlation/AUROC results remain outstanding. Published pair-level
+response statistics and recovered detector metadata are now handled separately
+in [atlas classification](ATLAS-CLASSIFICATION.md); they do not populate per-trial
+`response_labels` with duplicated aggregate labels.

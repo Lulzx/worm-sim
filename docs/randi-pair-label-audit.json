@@ -1,0 +1,43 @@
+{
+  "dataset_hash": "3f3a537ff8424d89da72699e9b342185959afbd9380f7ecc6aa0fed06fafe843",
+  "detection_q_threshold": 0.05,
+  "equivalence_threshold_in_source": 1.2,
+  "evidence_hash": "28633bafc09afac3c53eb24d76e038774f9d1470182233a4f8d4b50e07d47152",
+  "graph_hash": "0db7c2fd8b83bc15cc17dd4b952b1bac4d1fed52ec524ba5cab403ecf3ea720e",
+  "partitions": {
+    "test": {
+      "detected": 82,
+      "detected_and_equivalent": 19,
+      "not_detected": 1676,
+      "pairs": 1758
+    },
+    "train": {
+      "detected": 984,
+      "detected_and_equivalent": 292,
+      "not_detected": 18849,
+      "pairs": 19833
+    },
+    "validation": {
+      "detected": 48,
+      "detected_and_equivalent": 13,
+      "not_detected": 1677,
+      "pairs": 1725
+    }
+  },
+  "schema_version": 1,
+  "scope": "Classification evidence preparation only; no model fitted or scored. One ordered non-self pair per observation; finite published detection q defines detected versus not detected. Nonsignificance does not establish physiological absence. Published q is aggregated over source trials, not recomputed from the filtered trace windows. No class merging or left/right guesses.",
+  "source_commit": "2329ba0ba130cacd18ac704a54c0cb4308d44ea8",
+  "source_sha256": "53a99055667b853e1d3d6be573ec2613d38c9f6989f302ec38ecd38dd50c7975",
+  "source_version": "2023-06-28_19-52-14",
+  "split_hash": "2d291f63668345396d9b08e984581841db7b8912897405993ba258bf9f013f47",
+  "independent_audit": {
+    "script_sha256": "09111d3970b1e1ea17ab780ddbea47906ac83dd7e48727e5d9b392f016463056",
+    "evidence_file_sha256": "28633bafc09afac3c53eb24d76e038774f9d1470182233a4f8d4b50e07d47152",
+    "split_file_sha256": "c3002a03460f7685f71bcddf2be58c78e8ec35a410abe4a5eb3c2b9f11375438",
+    "pairs_checked_against_source_exactly": 23316,
+    "observed_pairs_excluded_for_missing_q": 5541,
+    "observed_pairs_excluded_for_source_identity_absence": 0,
+    "pair_partitions_disjoint_and_complete": true,
+    "source_trace_dataset_unchanged": true
+  }
+}

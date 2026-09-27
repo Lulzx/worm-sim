@@ -112,8 +112,9 @@ uses its upstream split and cannot substitute for a held-out-stimulated-neuron
 training/evaluation run. The Task 2 LDS/GRU and nonlinear fits are recorded in the
 [shared-input comparison](BEHAVIOR-INPUTS.md), including negative results.
 [Randi ingestion](RANDI-ATLAS.md) now supplies individual traces and a fixed
-neuron split. Published response labels, pulse calibration and the Task 1 fitted
-comparison remain outstanding.
+neuron split. [Published pair statistics](ATLAS-CLASSIFICATION.md) supply a
+separate one-per-pair classification target and scorer. Pulse calibration and
+the Task 1 fitted comparison remain outstanding.
 
 Primary source discovery for the next import stage:
 [WormWideWeb datasets](https://wormwideweb.org/activity/dataset/),
