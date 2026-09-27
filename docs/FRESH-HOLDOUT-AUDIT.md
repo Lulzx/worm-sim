@@ -296,3 +296,33 @@ three candidates that cannot supply Task 1 perturbation trials through the
 inspected metadata. The remaining 92 recordings are not classified by this
 result. No neural response arrays were constructed or response values reported;
 no fresh confirmatory cohort is secured.
+
+### Records 4–7: localized events found, eligibility still open
+
+The next fixed-name-order batch selected records 4–7 before reading their
+metadata. All four processed files matched their published sizes and MD5s.
+The [combined receipt](dunn-records-4-7-metadata.json) retains the selection and
+complete hashed download/structure reports.
+
+| Recording | Delivered events | Event type | Algorithm event count |
+| --- | ---: | --- | ---: |
+| 20220426-11-32-18 | 0 | — | 0 |
+| 20221106-21-00-09 | 20 | circle-button | 20 |
+| 20221106-21-23-19 | 30 | circle-button | 30 |
+| 20221106-21-47-31 | 24 | circle-button | 25 |
+
+The pinned upstream `get_stim_event_params` classifies `circle-button` as
+localized stimulation. The **74 delivered events** have fields for onset,
+offset, intensity, diameter and XY location, but no explicit neuron-name field
+in the inspected event dictionaries. Localization alone does not prove
+single-neuron targeting. Target association requires registered neuron positions,
+identity labels and the upstream spatial rules; stimulus calibration also
+remains open. The algorithm/delivered count mismatch in the last recording
+shows why the planned-event list must not replace delivered-event metadata.
+
+The three stimulated recordings are on the same date and must **not** be counted
+as three independent animals without identity evidence. At this point seven
+recordings have been inspected: four have empty stimulus lists and three have
+localized events. The other 88 remain unclassified. Further candidate downloads
+are unnecessary until these positive candidates' target and animal metadata
+are assessed. No neural response arrays were constructed or outcomes scored.
