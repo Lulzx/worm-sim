@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "parent_checkpoint": "runs/capacity-scaling-curvature-v1-eval201/last-accepted.json",
+  "parent_sha256": "0e81cd699dae8353e81c5940de6c35f8f88577894dc9d987ad4af298b30278be",
+  "output": "runs/capacity-prep240-eval1001",
+  "targets": [
+    "ADAL",
+    "ADAR"
+  ],
+  "training_trials": 50,
+  "preparation_seconds": 240,
+  "parent_preparation_seconds": 120,
+  "dt": 0.005,
+  "coordinate_scaling": "curvature-v1",
+  "family_scales": {
+    "native/threshold": 0.13,
+    "native/rest": 0.16
+  },
+  "max_evaluations": 1001,
+  "max_iterations": 1000,
+  "maxcor": 100,
+  "initial_mse_expected": 0.04365803876375997,
+  "initial_mse_tolerance": 1e-10,
+  "gate": "Unchanged 90% zero-start mean-response energy; last accepted iterate and eligible termination.",
+  "purpose": "Longer optimization of the preparation-stable configuration after the completed 201-evaluation run remained nonstationary and underfit.",
+  "history": "Repeat from identical original warm parent to rebuild curvature history; verify full 201-evaluation/190-record accepted prefix before interpreting extension. Not an optimizer-state resume or independent initialization.",
+  "endpoint_checks": [
+    "independent NumPy replay",
+    "half-step and longer-preparation predictions",
+    "raw and optimizer-coordinate stationarity",
+    "240/480/960-second gradient comparison",
+    "frozen-gain residual calibration",
+    "complete finite evaluation/accepted histories"
+  ],
+  "failure_policy": "No silent retry, budget extension, or dynamical changes. Retain failed evaluations.",
+  "scope": "Training only; no new held-out claims.",
+  "maxls": 20,
+  "ftol": 1e-12,
+  "gtol": 1e-09,
+  "prefix_reference": "runs/capacity-prep240-eval201",
+  "prefix_reference_sha256": {
+    "manifest": "d1f7222fe6cb72fe1f7518b2bd8f1e770dc8bdb392dc465ec6b9a18c99748ef0",
+    "evaluations": "2e16df6e4c996a89e7706c0cdd1b1a1559b99a86ead9f7c091e564f8d9f4a2f5",
+    "accepted": "88be74a70e261cab2576bbce2828a29a13cc433275b67855d08de759094f9fe1"
+  }
+}
