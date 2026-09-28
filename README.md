@@ -85,7 +85,9 @@ Euler failure during preparation. A refined-step run completed, but captured
 only 76.69% of the available training-response energy. A subsequent
 [1,001-evaluation L-BFGS diagnostic](docs/CAPACITY-LBFGS.md) reached 78.02%,
 with independent endpoint checks, but exhausted its budget without convergence
-and still missed the 90% gate.
+and still missed the 90% gate. A bounded
+[curvature-history comparison](docs/CAPACITY-CURVATURE-HISTORY.md) raised capture
+to 78.26%; both arms remained underfit and exhausted their evaluation budgets.
 New dynamical features are paused. Existing validation/test results are
 exploratory; a fresh confirmatory cohort remains outstanding.
 

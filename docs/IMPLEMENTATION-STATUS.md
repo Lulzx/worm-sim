@@ -52,7 +52,10 @@ This verifies the fitting implementation, not biological adequacy.
    [L-BFGS comparison](CAPACITY-LBFGS.md) raises capture to 77.13% but exhausts
    its budget without convergence. The longer 1,001-evaluation diagnostic completed
    at 78.02% capture, with independent replay, numerical controls and a nonstationary
-   endpoint gradient; it also exhausted its budget and failed the 90% gate. Continue
+   endpoint gradient; it also exhausted its budget and failed the 90% gate. A bounded
+   [curvature-history comparison](CAPACITY-CURVATURE-HISTORY.md) reaches 78.26%
+   versus 78.12% for its control; both exhaust their budgets, remain nonstationary
+   and fail the same gate. Continue
    optimization/capacity diagnosis until the small-target gate passes; then
    replicate across unrelated training targets and fit the training population.
    A failed small-target gate alone does not identify model capacity as the cause.
