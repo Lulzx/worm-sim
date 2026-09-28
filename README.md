@@ -87,7 +87,9 @@ only 76.69% of the available training-response energy. A subsequent
 with independent endpoint checks, but exhausted its budget without convergence
 and still missed the 90% gate. A bounded
 [curvature-history comparison](docs/CAPACITY-CURVATURE-HISTORY.md) raised capture
-to 78.26%; both arms remained underfit and exhausted their evaluation budgets.
+to 78.26%. A subsequent
+[coordinate-scaling comparison](docs/CAPACITY-COORDINATE-SCALING.md) reached 78.63%
+versus 78.42% for its control; both exhausted their budgets and missed the gate.
 New dynamical features are paused. Existing validation/test results are
 exploratory; a fresh confirmatory cohort remains outstanding.
 

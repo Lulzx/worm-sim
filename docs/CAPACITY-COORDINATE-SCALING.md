@@ -51,3 +51,45 @@ exactly reproduced the parent; final MSE was 0.04369316702558147. Independent
 NumPy replay agreed within floating-point precision. The smoke ran in the dirty
 pre-commit worktree and is excluded from the declared comparison. Endpoint
 stationarity output includes both raw and optimizer-coordinate gradients.
+
+## Completed result
+
+Both runs launched from clean commit `708f653`, reproduced the same parent loss,
+and completed exactly 201 finite objective/gradient evaluations. Both terminated
+with `evaluation_budget_exhausted`, not convergence. Their final checkpoints are
+also their best accepted checkpoints. The
+[full receipt](capacity-scaling-results.json) retains manifests, complete accepted
+and trial histories, checkpoint hashes, and independent endpoint audits.
+
+| Coordinates | Accepted updates | Final training MSE | Captured response energy | 90% gate |
+| --- | ---: | ---: | ---: | --- |
+| Identity | 185 | 0.043677208568 | 78.4191% | Fail |
+| Threshold/rest scaled | 190 | 0.043656337684 | 78.6295% | Fail |
+
+Scaling lowers MSE by 2.08709e-5 and adds 0.21043 percentage points of capture.
+This is a small finite-budget improvement on a single paired continuation;
+it does not establish generalization, convergence, or an adequate training fit.
+The comparison does not independently replicate initialization or estimate
+uncertainty across targets. CI for the implementation passed.
+
+Independent NumPy replay reproduces both final losses. Halving the step changes
+MSE by +6.94e-9 and +4.21e-8 for identity and scaled coordinates respectively,
+with maximum prediction differences 0.00280 and 0.00291. Doubling preparation
+changes MSE by +1.63e-6 and +1.70e-6, with maximum prediction differences 0.01321
+and 0.01231. Quadrupling preparation leaves those longer-preparation losses
+essentially unchanged. The ranking survives these controls, but the endpoints
+are more sensitive to finite preparation than earlier fits; do not describe them
+as exactly equilibrated. No-stimulus energy is 1.32e-6 and 1.11e-6 versus stimulated
+energy 0.00777 and 0.00780. All 3,638 prepared chemical coefficients remain nonzero.
+
+Raw gradient infinity norms are 0.000268 and 0.002215. In optimizer coordinates
+they are 0.000268 and 0.000288, both above the 1e-9 tolerance. Lower loss did not
+establish stationarity. Frozen positive-gain recalibration closes only 2.55% and
+2.41% of the remaining zero-start-bound gap. Gains remain broad and reach about
+1,042 and 1,040.
+
+Retain scaling as an available optimizer option, without declaring it sufficient
+to solve the underfit. New dynamical features remain frozen. Before another long
+fit, account for finite-preparation sensitivity and choose a bounded optimization
+or initialization diagnostic. This comparison is complete; the 90% capacity gate,
+broader training replication, fresh holdout and scientific acceptance remain open.

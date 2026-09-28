@@ -55,7 +55,10 @@ This verifies the fitting implementation, not biological adequacy.
    endpoint gradient; it also exhausted its budget and failed the 90% gate. A bounded
    [curvature-history comparison](CAPACITY-CURVATURE-HISTORY.md) reaches 78.26%
    versus 78.12% for its control; both exhaust their budgets, remain nonstationary
-   and fail the same gate. Continue
+   and fail the same gate. A subsequent
+   [coordinate-scaling comparison](CAPACITY-COORDINATE-SCALING.md) reaches 78.63%
+   versus 78.42% for its control, again without convergence or a gate pass;
+   endpoint audits also show increased finite-preparation sensitivity. Continue
    optimization/capacity diagnosis until the small-target gate passes; then
    replicate across unrelated training targets and fit the training population.
    A failed small-target gate alone does not identify model capacity as the cause.
