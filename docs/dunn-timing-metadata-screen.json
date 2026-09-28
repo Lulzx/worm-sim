@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "records": [
+    {
+      "recording": "20221106-21-00-09",
+      "pickle_sha256": "c2d2d3a96978e097429c8becd8a11091573a09d2bcc14122ec148f6accf735ad",
+      "download_receipt_sha256": "24a0be89c96157c639e7c6007b8f421dc7353d6bf84f5d21f9ac98534f0e6b73",
+      "volume_count_from_timevec_shape": 1000,
+      "raw_frame_timestamp_count": 12000,
+      "zsize": 12,
+      "first_frame_timestamp": 0.04089069366455078,
+      "last_frame_timestamp": 959.9634234905243,
+      "source_defined_volume_rate_hz": 1.0417063562316766,
+      "exposure_metadata": 30
+    },
+    {
+      "recording": "20221106-21-23-19",
+      "pickle_sha256": "2e6993ac4b3212b6eb7126fcf95480e3b9a62835cdffd24576b90317b318ff04",
+      "download_receipt_sha256": "d7cda96826b8876d22d8715bcf8001253e95419acff12949e10d3e56b9783ecc",
+      "volume_count_from_timevec_shape": 1000,
+      "raw_frame_timestamp_count": 12000,
+      "zsize": 12,
+      "first_frame_timestamp": 0.04089045524597168,
+      "last_frame_timestamp": 959.968671798706,
+      "source_defined_volume_rate_hz": 1.0417006610499973,
+      "exposure_metadata": 30
+    },
+    {
+      "recording": "20221106-21-47-31",
+      "pickle_sha256": "8edd3db8305faef25c468f26e8877f764e84bfd3f132cdefecd9c37812890d72",
+      "download_receipt_sha256": "07ee96d6ebb5323b6a03f9b779e86e6e3537de464cbc375e43e8880f06280269",
+      "volume_count_from_timevec_shape": 1000,
+      "raw_frame_timestamp_count": 12000,
+      "zsize": 12,
+      "first_frame_timestamp": 0.03989219665527344,
+      "last_frame_timestamp": 959.9620847702026,
+      "source_defined_volume_rate_hz": 1.0417078089489147,
+      "exposure_metadata": 30
+    }
+  ],
+  "source_sha256": {
+    "scripts/inspect_dunn_pickle_structure.py": "571992491e6db9c9304c0106bf54d765adb2a3b69de9f49067d017c53530f5ab",
+    "runs/dunn-holdout-metadata/upstream-data-schema.py": "f83c58efa624da8f815e46df5a5d1e882dab296913231c51a2d4236a38aa22d1"
+  },
+  "method": "Verified existing download receipts, inert-loaded pickles, inspected timevec shape and frame_time_list endpoint/count metadata only. No timevec or response numeric payload decoded. Rate computed using pinned upstream get_fps convention.",
+  "scope": "Timing metadata screen only. Does not verify timestamp monotonicity, stimulus-window coverage, label confidence, effective illumination or animal independence; does not accept a fresh test cohort."
+}

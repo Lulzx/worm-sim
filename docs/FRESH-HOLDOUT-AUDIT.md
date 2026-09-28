@@ -396,3 +396,19 @@ Three focused tests cover coordinate endian/layout handling, refusal to decode
 response fields, circle boundaries, and an end-to-end registered synthetic event
 that preserves unlabeled-neuron ambiguity and rejects a mismatched correction.
 No candidate response values or model scores were inspected.
+
+### Sampling constraint from timing metadata
+
+The [timing screen](dunn-timing-metadata-screen.json) verifies the existing
+download hashes and inspects only inert `timevec` shape plus frame-timestamp
+counts/endpoints. All three positive candidates have 1,000 volumes, 12,000 raw
+frame timestamps and zsize 12. Their last frame timestamps are approximately
+959.96 seconds, giving about 1.0417 volumes/s under the pinned upstream
+`get_fps` convention. The upstream loader constructs a uniform `timevec` from
+that rate; this screen did not decode its payload or neural response arrays.
+
+This differs from the current 2-Hz atlas benchmark grid and must be accounted
+for explicitly in any later import. Timestamp monotonicity, per-event coverage
+and gaps have not yet been checked. The screen does not establish independent
+animals or remove the existing target/illumination ambiguities, and the fresh
+holdout remains unsecured.
