@@ -86,9 +86,9 @@ coupling coefficients remain nonzero. Frozen positive per-neuron recalibration
 would give 0.04373860, closing only 2.91% of the remaining gap. Learned gains
 span 0.0286–1,050.76 and have no physiological interpretation.
 
-The model remains underfit and this optimizer is not converged. The next bounded
-diagnostic increases the evaluation budget while holding all other settings
-fixed. It must preserve the distinction between reproducing the old trajectory,
+At the 201-evaluation endpoint the model remained underfit and the optimizer
+had not converged. The longer diagnostic below increased the evaluation budget
+while holding all other settings fixed. Its design preserves the distinction between reproducing the old trajectory,
 continuing optimization with reconstructed curvature history, and an independent
 restart. No new dynamics or held-out model selection is justified by this result.
 
@@ -128,8 +128,8 @@ backend-source and optimizer checks pass; scalar comparisons exclude only elapse
 time and use absolute tolerance 1e-10. At the receipt snapshot, the candidate had
 203 evaluations and 184 accepted records. This establishes reproduction of the
 recorded scalar trajectory before the extension, not bitwise optimizer-state
-equality. The longer run was still live; its terminal capacity outcome remains
-pending.
+equality. The run was live at that snapshot; its completed outcome is reported
+below.
 
 ## Prepared-activation screen
 
@@ -175,8 +175,8 @@ The auditor checks training-subset and input hashes, all backend source hashes
 recorded by the original manifest, JAX version, and checkpoint MSE. Two focused
 tests verify grouping/masking against known norms and reject malformed masks,
 misaligned names and nonfinite gradients. The real-data frozen evaluation also
-passes. Apply the same diagnostic to the longer run's terminal accepted
-checkpoint, after it finishes:
+passes. The same diagnostic was applied to the longer run's terminal accepted
+checkpoint with:
 
 ```sh
 .venv-jax/bin/python backends/jax/audit_capacity_stationarity.py \
@@ -187,5 +187,48 @@ checkpoint, after it finishes:
 ```
 
 Even meeting a local gradient tolerance would not establish global optimality,
-biological adequacy, or the unchanged 90% capacity gate. The longer run remains
-pending until its terminal receipt and independent endpoint checks exist.
+biological adequacy, or the unchanged 90% capacity gate. The completed
+longer-run checks are reported below.
+
+## Longer-run outcome: 78.02% capture, still unconverged
+
+The declared longer run completed at clean launch source `1b984d3` with exactly
+**1,001 evaluations and 877 accepted updates**. All trial evaluations were finite.
+The process exited 0 at the hard evaluation budget; `optimizer_success` is false.
+The final accepted checkpoint is also the best, with SHA-256
+`fbaf5fda690b94ec1d5e171ae92f9affdd3d1490f2a5132d0508c6d0cccfaa1c`.
+The [complete receipt](capacity-lbfgs-1001-results.json) retains both histories,
+terminal status, original configuration, input/checkpoint hashes and endpoint
+audits. The previously verified prefix establishes reproduction of the earlier
+201 evaluations before the extension.
+
+| Total evaluations | Accepted updates | Final training MSE | Captured response energy | Largest active gradient |
+| --- | ---: | ---: | ---: | ---: |
+| 201 | 181 | 0.0438046960 | 77.1337% | 0.000766651 |
+| 1,001 | 877 | 0.0437171006 | 78.0169% | 0.000313300 |
+
+The additional 800 evaluations improve MSE by 8.76e-5 and capture by **0.8832
+percentage points**. The unchanged 90% capacity gate fails. The final accepted
+record reports 5,806.10 seconds including compilation; this is not a controlled
+performance benchmark. Learned observation gains span 0.02855–1,045.40, without
+a physiological calibration claim.
+
+Independent NumPy replay matches MSE exactly. Halving the step changes MSE by
+2.49e-8 and predictions by at most 0.002412. Doubling preparation changes MSE by
+3.50e-8 and predictions by at most 0.001901; quadrupling adds less than 8e-10
+maximum prediction change relative to doubled preparation. Unstimulated
+prediction energy is 6.41e-9 versus 0.007776 with stimulation. These are checks
+at the saved endpoint, not a numerical guarantee for future optimization paths.
+
+The active gradient L2 norm is 0.000509796, and its maximum absolute coordinate
+remains above `gtol=1e-9`. Thus this endpoint still does not satisfy the declared
+gradient criterion. Frozen positive per-neuron recalibration would reduce MSE
+to 0.0436549468, closing only 2.85% of the remaining zero-start bound gap. Output
+scale alone does not explain most of the remaining error at these dynamics.
+
+The result justifies further optimization diagnosis, not a conclusion that Level
+0 cannot fit the data. It also does not justify new dynamics or a held-out claim.
+The next fitting work should address the slow progress of the existing objective
+and verify any optimizer change against this frozen endpoint before launching
+another long run. The full specification and the independent-cohort requirement
+remain open.

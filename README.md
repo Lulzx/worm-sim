@@ -82,7 +82,10 @@ A [1,000-update capacity test](docs/LEVEL0-LONG-RUN.md) improved training fit bu
 missed its 90% gate and showed late instability. Subsequent
 [warm-start diagnostics](docs/CAPACITY-WARM-START.md) reproduced a coarse-step
 Euler failure during preparation. A refined-step run completed, but captured
-only 76.69% of the available training-response energy and still missed the gate.
+only 76.69% of the available training-response energy. A subsequent
+[1,001-evaluation L-BFGS diagnostic](docs/CAPACITY-LBFGS.md) reached 78.02%,
+with independent endpoint checks, but exhausted its budget without convergence
+and still missed the 90% gate.
 New dynamical features are paused. Existing validation/test results are
 exploratory; a fresh confirmatory cohort remains outstanding.
 
