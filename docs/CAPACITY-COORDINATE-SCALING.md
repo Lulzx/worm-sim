@@ -93,3 +93,8 @@ to solve the underfit. New dynamical features remain frozen. Before another long
 fit, account for finite-preparation sensitivity and choose a bounded optimization
 or initialization diagnostic. This comparison is complete; the 90% capacity gate,
 broader training replication, fresh holdout and scientific acceptance remain open.
+
+A subsequent [preparation-gradient audit](CAPACITY-PREPARATION-GRADIENTS.md)
+finds that doubling preparation reverses much of the raw gradient direction,
+despite the small loss shift. Gradients stabilize from 240 to 480 seconds at
+this endpoint. Address this before another continuation of the fit.
