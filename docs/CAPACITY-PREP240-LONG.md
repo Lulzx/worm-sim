@@ -42,3 +42,20 @@ At termination repeat independent NumPy replay, step/preparation controls,
 calibration. The longer budget is not a convergence guarantee. No budget increase,
 new dynamics or held-out model selection is authorized by interim results.
 The full specification and scientific acceptance remain incomplete.
+
+
+## Repeated-prefix verification
+
+The [complete prefix receipt](capacity-prep240-long-prefix.json) verifies all
+201 reference objective/gradient trial records and all 190 accepted-state
+records, including initialization, within the declared 1e-10 scalar tolerance.
+The audit checked the declared input, parameter-lineage, fitting-source and
+configuration agreement, allowing only the declared budget changes. Elapsed
+time was excluded. The candidate snapshot contained 203 evaluation records and
+191 accepted-state records; its file hashes identify that snapshot, not the
+still-growing final history.
+
+This passes the prerequisite for interpreting the additional optimization.
+It does not establish bitwise parameter/optimizer-state equality, convergence,
+the 90% capacity gate or held-out performance. The run remains in progress;
+endpoint replay, numerical controls and stationarity checks are still required.
