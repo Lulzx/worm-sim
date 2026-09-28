@@ -105,3 +105,47 @@ This result does not justify declaring a model-capacity limit, adding dynamics,
 or selecting models on the previously inspected held-out targets. No further
 fit or budget extension is included in this report. A fresh confirmatory
 cohort remains unsecured; see the [cohort audit](FRESH-HOLDOUT-AUDIT.md).
+
+
+## Local descent and loss-profile audit
+
+The [19-evaluation receipt](capacity-prep240-long-directions.json) tests the
+three families with largest active-gradient L2 at the frozen endpoint. Each
+direction is that family's normalized negative gradient in raw coordinates;
+all other parameters stay fixed. Symmetric steps are 1e-5, 1e-6 and 1e-7.
+The diagnostic checks fitting-source and input hashes and reproduces the
+checkpoint MSE. It ran from `5527364` without backend changes.
+
+```sh
+.venv-jax/bin/python backends/jax/diagnose_capacity_curvature.py \
+  --checkpoint runs/capacity-prep240-eval1001/last-accepted.json \
+  --manifest runs/capacity-prep240-eval1001/manifest.json \
+  --training runs/overfit-seed1-training.json --graph runs/c302-audit.json \
+  --steps 0.00001 0.000001 0.0000001 \
+  --output runs/capacity-prep240-long-directions.json
+```
+
+| Family | Relative slope disagreement at h=1e-7 | Gradient secant curvature |
+| --- | ---: | ---: |
+| threshold | 2.45e-07 | 612.836333 |
+| rest | 1.74e-07 | 382.563942 |
+| chemical_strength | 6.95e-07 | 12.458264 |
+
+All three negative-gradient steps reduce loss at h=1e-6 and h=1e-7. The central
+loss derivatives agree with autodiff to relative error below 1e-6 at the finest
+step. These directional checks demonstrate remaining local descent; they do
+not verify every coordinate or prove that the 90% capacity gate is attainable.
+
+The threshold direction has a sharp excursion: at the **negative** 1e-5 probe,
+MSE is 2.016545618, while its positive probe is 0.043588511. At 1e-6 both sides
+remain near the endpoint and yield curvature about 612.84. This resembles the
+large rejected losses in the training history, but the original line-search
+parameter vectors were not saved, so the probes do not reproduce those exact
+trials or establish their cause.
+
+**Next decision:** check the high-loss threshold probe itself with independent
+replay, a halved integration step and longer preparation. Endpoint stability
+does not establish stability of nearby trial parameters. Distinguish a numerical
+failure from sensitivity to preparation or a different dynamical response before
+changing optimizer safeguards or launching another fit. No probe is promoted
+to a fitted checkpoint, and no held-out scoring or new dynamics are introduced.

@@ -64,7 +64,9 @@ This verifies the fitting implementation, not biological adequacy.
    The [longer run](CAPACITY-PREP240-LONG.md) reaches 79.31% after 864 evaluations
    and 663 accepted updates. Endpoint replay and numerical audits pass, but
    loss-change termination occurs with scaled gradient infinity norm 1.54e-4
-   versus the declared 1e-9 tolerance; the 90% gate still fails. Continue
+   versus the declared 1e-9 tolerance; the 90% gate still fails. Local directional
+   finite differences confirm remaining descent, but a nearby threshold probe
+   raises loss sharply and needs its own numerical/preparation audit. Continue
    optimization/capacity diagnosis until the small-target gate passes; then
    replicate across unrelated training targets and fit the training population.
    A failed small-target gate alone does not identify model capacity as the cause.
