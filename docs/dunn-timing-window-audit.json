@@ -1,0 +1,931 @@
+{
+  "schema_version": 1,
+  "records": {
+    "20221106-21-00-09": {
+      "frame_count": 12000,
+      "volume_count": 1000,
+      "history_seconds": 10.0,
+      "forecast_seconds": 20.0,
+      "frame_spacing_min": 0.038895606994628906,
+      "frame_spacing_median": 0.07480001449584961,
+      "frame_spacing_max": 3.8357417583465576,
+      "volume_start_spacing_min": 0.47373270988464355,
+      "volume_start_spacing_median": 0.9574394226074219,
+      "volume_start_spacing_max": 4.727356910705566,
+      "frame_gaps_over_twice_median": 1,
+      "events": [
+        {
+          "event_index": 0,
+          "onset_frame": 1452,
+          "offset_frame": 1500,
+          "onset_seconds_frame_clock": 116.20019459724426,
+          "duration_seconds_frame_clock": 3.844717264175415,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 1,
+          "onset_frame": 1812,
+          "offset_frame": 1860,
+          "onset_seconds_frame_clock": 145.01313519477844,
+          "duration_seconds_frame_clock": 3.8297574520111084,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 2,
+          "onset_frame": 2496,
+          "offset_frame": 2544,
+          "onset_seconds_frame_clock": 199.7266914844513,
+          "duration_seconds_frame_clock": 3.844717502593994,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 3,
+          "onset_frame": 3168,
+          "offset_frame": 3216,
+          "onset_seconds_frame_clock": 253.49289536476135,
+          "duration_seconds_frame_clock": 3.8297574520111084,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 4,
+          "onset_frame": 3888,
+          "offset_frame": 3936,
+          "onset_seconds_frame_clock": 311.09144043922424,
+          "duration_seconds_frame_clock": 3.8297574520111084,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 5,
+          "onset_frame": 4440,
+          "offset_frame": 4488,
+          "onset_seconds_frame_clock": 355.2539484500885,
+          "duration_seconds_frame_clock": 3.8297574520111084,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 6,
+          "onset_frame": 4776,
+          "offset_frame": 4824,
+          "onset_seconds_frame_clock": 382.12270855903625,
+          "duration_seconds_frame_clock": 3.844717264175415,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 7,
+          "onset_frame": 5580,
+          "offset_frame": 5628,
+          "onset_seconds_frame_clock": 446.4407477378845,
+          "duration_seconds_frame_clock": 3.8447177410125732,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 8,
+          "onset_frame": 6240,
+          "offset_frame": 6288,
+          "onset_seconds_frame_clock": 499.2504405975342,
+          "duration_seconds_frame_clock": 3.829756736755371,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 9,
+          "onset_frame": 7080,
+          "offset_frame": 7128,
+          "onset_seconds_frame_clock": 566.4412968158722,
+          "duration_seconds_frame_clock": 3.8447177410125732,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 10,
+          "onset_frame": 7596,
+          "offset_frame": 7644,
+          "onset_seconds_frame_clock": 607.7313737869263,
+          "duration_seconds_frame_clock": 3.8297574520111084,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 11,
+          "onset_frame": 8628,
+          "offset_frame": 8676,
+          "onset_seconds_frame_clock": 690.2815353870392,
+          "duration_seconds_frame_clock": 3.8616721630096436,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            12
+          ]
+        },
+        {
+          "event_index": 12,
+          "onset_frame": 8724,
+          "offset_frame": 8772,
+          "onset_seconds_frame_clock": 697.9715535640717,
+          "duration_seconds_frame_clock": 3.8297574520111084,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            11,
+            13
+          ]
+        },
+        {
+          "event_index": 13,
+          "onset_frame": 8940,
+          "offset_frame": 8988,
+          "onset_seconds_frame_clock": 715.2524166107178,
+          "duration_seconds_frame_clock": 3.8297576904296875,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 14,
+          "onset_frame": 9768,
+          "offset_frame": 9816,
+          "onset_seconds_frame_clock": 781.4813358783722,
+          "duration_seconds_frame_clock": 3.8616721630096436,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            15
+          ]
+        },
+        {
+          "event_index": 15,
+          "onset_frame": 9924,
+          "offset_frame": 9972,
+          "onset_seconds_frame_clock": 793.9735071659088,
+          "duration_seconds_frame_clock": 3.8297574520111084,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            14
+          ]
+        },
+        {
+          "event_index": 16,
+          "onset_frame": 10296,
+          "offset_frame": 10344,
+          "onset_seconds_frame_clock": 823.7300539016724,
+          "duration_seconds_frame_clock": 3.831268310546875,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 17,
+          "onset_frame": 10992,
+          "offset_frame": 11040,
+          "onset_seconds_frame_clock": 879.402726650238,
+          "duration_seconds_frame_clock": 3.8616721630096436,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            18
+          ]
+        },
+        {
+          "event_index": 18,
+          "onset_frame": 11148,
+          "offset_frame": 11196,
+          "onset_seconds_frame_clock": 891.8799374103546,
+          "duration_seconds_frame_clock": 3.844717264175415,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            17
+          ]
+        },
+        {
+          "event_index": 19,
+          "onset_frame": 11724,
+          "offset_frame": 11772,
+          "onset_seconds_frame_clock": 937.9716665744781,
+          "duration_seconds_frame_clock": 3.830328941345215,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        }
+      ],
+      "events_with_full_frame_clock_window": 20,
+      "events_without_other_stimuli_in_window": 14,
+      "schema_version": 1,
+      "pickle_sha256": "c2d2d3a96978e097429c8becd8a11091573a09d2bcc14122ec148f6accf735ad",
+      "download_receipt_sha256": "24a0be89c96157c639e7c6007b8f421dc7353d6bf84f5d21f9ac98534f0e6b73",
+      "source_sha256": {
+        "audit_dunn_timing_metadata.py": "2ec86b5ac291b0555fc3a82f05f4d7c8811592fc4b3f6372734f6a0246bc763d",
+        "inspect_dunn_pickle_structure.py": "571992491e6db9c9304c0106bf54d765adb2a3b69de9f49067d017c53530f5ab"
+      },
+      "convention": "Delivered stim_on/stim_off interpreted as zero-based raw-frame indices, with offset as exclusive boundary; 10 s before onset and 20 s after onset, half-open stimulus overlap intervals.",
+      "scope": "Metadata-only frame-clock screen. No response/timevec payload decoded. Does not validate synchronization to processed fluorescence, optical timing, missing neurons, independent animals or cohort eligibility."
+    },
+    "20221106-21-23-19": {
+      "frame_count": 12000,
+      "volume_count": 1000,
+      "history_seconds": 10.0,
+      "forecast_seconds": 20.0,
+      "frame_spacing_min": 0.038895368576049805,
+      "frame_spacing_median": 0.07480001449584961,
+      "frame_spacing_max": 3.8088133335113525,
+      "volume_start_spacing_min": 0.47572755813598633,
+      "volume_start_spacing_median": 0.9574394226074219,
+      "volume_start_spacing_max": 4.701426029205322,
+      "frame_gaps_over_twice_median": 1,
+      "events": [
+        {
+          "event_index": 0,
+          "onset_frame": 1728,
+          "offset_frame": 1776,
+          "onset_seconds_frame_clock": 138.2832796573639,
+          "duration_seconds_frame_clock": 3.8617000579833984,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            1
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_frame": 1884,
+          "offset_frame": 1932,
+          "onset_seconds_frame_clock": 150.7634563446045,
+          "duration_seconds_frame_clock": 3.844717264175415,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            0,
+            2
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_frame": 2112,
+          "offset_frame": 2160,
+          "onset_seconds_frame_clock": 169.00371718406677,
+          "duration_seconds_frame_clock": 3.8626692295074463,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            3
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_frame": 2268,
+          "offset_frame": 2316,
+          "onset_seconds_frame_clock": 181.48081588745117,
+          "duration_seconds_frame_clock": 3.844717502593994,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            2
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_frame": 3408,
+          "offset_frame": 3456,
+          "onset_seconds_frame_clock": 272.69351148605347,
+          "duration_seconds_frame_clock": 3.848052740097046,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            5
+          ]
+        },
+        {
+          "event_index": 5,
+          "onset_frame": 3564,
+          "offset_frame": 3612,
+          "onset_seconds_frame_clock": 285.1740024089813,
+          "duration_seconds_frame_clock": 3.8297574520111084,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            4
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_frame": 3816,
+          "offset_frame": 3864,
+          "onset_seconds_frame_clock": 305.32859778404236,
+          "duration_seconds_frame_clock": 3.8467118740081787,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            7
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_frame": 3972,
+          "offset_frame": 4020,
+          "onset_seconds_frame_clock": 317.80570125579834,
+          "duration_seconds_frame_clock": 3.844717025756836,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            6
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_frame": 5124,
+          "offset_frame": 5172,
+          "onset_seconds_frame_clock": 409.9632713794708,
+          "duration_seconds_frame_clock": 3.8616719245910645,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            9
+          ]
+        },
+        {
+          "event_index": 9,
+          "onset_frame": 5280,
+          "offset_frame": 5328,
+          "onset_seconds_frame_clock": 422.4403088092804,
+          "duration_seconds_frame_clock": 3.844717264175415,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            8
+          ]
+        },
+        {
+          "event_index": 10,
+          "onset_frame": 5832,
+          "offset_frame": 5880,
+          "onset_seconds_frame_clock": 466.60623049736023,
+          "duration_seconds_frame_clock": 3.846712350845337,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            11
+          ]
+        },
+        {
+          "event_index": 11,
+          "onset_frame": 5988,
+          "offset_frame": 6036,
+          "onset_seconds_frame_clock": 479.0834872722626,
+          "duration_seconds_frame_clock": 3.846712350845337,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            10
+          ]
+        },
+        {
+          "event_index": 12,
+          "onset_frame": 6348,
+          "offset_frame": 6396,
+          "onset_seconds_frame_clock": 507.88164734840393,
+          "duration_seconds_frame_clock": 3.8616716861724854,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            13
+          ]
+        },
+        {
+          "event_index": 13,
+          "onset_frame": 6504,
+          "offset_frame": 6552,
+          "onset_seconds_frame_clock": 520.3736047744751,
+          "duration_seconds_frame_clock": 3.8297574520111084,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            12
+          ]
+        },
+        {
+          "event_index": 14,
+          "onset_frame": 6780,
+          "offset_frame": 6828,
+          "onset_seconds_frame_clock": 542.4395899772644,
+          "duration_seconds_frame_clock": 3.8626694679260254,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            15
+          ]
+        },
+        {
+          "event_index": 15,
+          "onset_frame": 6936,
+          "offset_frame": 6984,
+          "onset_seconds_frame_clock": 554.9316051006317,
+          "duration_seconds_frame_clock": 3.8297579288482666,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            14
+          ]
+        },
+        {
+          "event_index": 16,
+          "onset_frame": 7668,
+          "offset_frame": 7716,
+          "onset_seconds_frame_clock": 613.4890406131744,
+          "duration_seconds_frame_clock": 3.845714807510376,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            17
+          ]
+        },
+        {
+          "event_index": 17,
+          "onset_frame": 7824,
+          "offset_frame": 7872,
+          "onset_seconds_frame_clock": 625.9662871360779,
+          "duration_seconds_frame_clock": 3.844717502593994,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            16
+          ]
+        },
+        {
+          "event_index": 18,
+          "onset_frame": 8364,
+          "offset_frame": 8412,
+          "onset_seconds_frame_clock": 669.1738035678864,
+          "duration_seconds_frame_clock": 3.845714569091797,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            19
+          ]
+        },
+        {
+          "event_index": 19,
+          "onset_frame": 8520,
+          "offset_frame": 8568,
+          "onset_seconds_frame_clock": 681.6504352092743,
+          "duration_seconds_frame_clock": 3.8297572135925293,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            18,
+            20
+          ]
+        },
+        {
+          "event_index": 20,
+          "onset_frame": 8724,
+          "offset_frame": 8772,
+          "onset_seconds_frame_clock": 697.9718627929688,
+          "duration_seconds_frame_clock": 3.84678316116333,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            21
+          ]
+        },
+        {
+          "event_index": 21,
+          "onset_frame": 8880,
+          "offset_frame": 8928,
+          "onset_seconds_frame_clock": 710.4515783786774,
+          "duration_seconds_frame_clock": 3.8297574520111084,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            20
+          ]
+        },
+        {
+          "event_index": 22,
+          "onset_frame": 9624,
+          "offset_frame": 9672,
+          "onset_seconds_frame_clock": 769.9625091552734,
+          "duration_seconds_frame_clock": 3.861211061477661,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            23
+          ]
+        },
+        {
+          "event_index": 23,
+          "onset_frame": 9780,
+          "offset_frame": 9828,
+          "onset_seconds_frame_clock": 782.4416921138763,
+          "duration_seconds_frame_clock": 3.8447177410125732,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            22
+          ]
+        },
+        {
+          "event_index": 24,
+          "onset_frame": 10128,
+          "offset_frame": 10176,
+          "onset_seconds_frame_clock": 810.2853240966797,
+          "duration_seconds_frame_clock": 3.845714569091797,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            25
+          ]
+        },
+        {
+          "event_index": 25,
+          "onset_frame": 10284,
+          "offset_frame": 10332,
+          "onset_seconds_frame_clock": 822.7619559764862,
+          "duration_seconds_frame_clock": 3.844717264175415,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            24
+          ]
+        },
+        {
+          "event_index": 26,
+          "onset_frame": 10560,
+          "offset_frame": 10608,
+          "onset_seconds_frame_clock": 844.8460075855255,
+          "duration_seconds_frame_clock": 3.846712589263916,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            27
+          ]
+        },
+        {
+          "event_index": 27,
+          "onset_frame": 10716,
+          "offset_frame": 10764,
+          "onset_seconds_frame_clock": 857.3226392269135,
+          "duration_seconds_frame_clock": 3.844717502593994,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            26
+          ]
+        },
+        {
+          "event_index": 28,
+          "onset_frame": 11064,
+          "offset_frame": 11112,
+          "onset_seconds_frame_clock": 885.1687216758728,
+          "duration_seconds_frame_clock": 3.844717502593994,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 29,
+          "onset_frame": 11448,
+          "offset_frame": 11496,
+          "onset_seconds_frame_clock": 915.8815813064575,
+          "duration_seconds_frame_clock": 3.844717264175415,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        }
+      ],
+      "events_with_full_frame_clock_window": 30,
+      "events_without_other_stimuli_in_window": 2,
+      "schema_version": 1,
+      "pickle_sha256": "2e6993ac4b3212b6eb7126fcf95480e3b9a62835cdffd24576b90317b318ff04",
+      "download_receipt_sha256": "d7cda96826b8876d22d8715bcf8001253e95419acff12949e10d3e56b9783ecc",
+      "source_sha256": {
+        "audit_dunn_timing_metadata.py": "2ec86b5ac291b0555fc3a82f05f4d7c8811592fc4b3f6372734f6a0246bc763d",
+        "inspect_dunn_pickle_structure.py": "571992491e6db9c9304c0106bf54d765adb2a3b69de9f49067d017c53530f5ab"
+      },
+      "convention": "Delivered stim_on/stim_off interpreted as zero-based raw-frame indices, with offset as exclusive boundary; 10 s before onset and 20 s after onset, half-open stimulus overlap intervals.",
+      "scope": "Metadata-only frame-clock screen. No response/timevec payload decoded. Does not validate synchronization to processed fluorescence, optical timing, missing neurons, independent animals or cohort eligibility."
+    },
+    "20221106-21-47-31": {
+      "frame_count": 12000,
+      "volume_count": 1000,
+      "history_seconds": 10.0,
+      "forecast_seconds": 20.0,
+      "frame_spacing_min": 0.03889584541320801,
+      "frame_spacing_median": 0.07480001449584961,
+      "frame_spacing_max": 3.845715045928955,
+      "volume_start_spacing_min": 0.47772216796875,
+      "volume_start_spacing_median": 0.9574394226074219,
+      "volume_start_spacing_max": 4.7333409786224365,
+      "frame_gaps_over_twice_median": 1,
+      "events": [
+        {
+          "event_index": 0,
+          "onset_frame": 1164,
+          "offset_frame": 1212,
+          "onset_seconds_frame_clock": 93.1608943939209,
+          "duration_seconds_frame_clock": 3.8626694679260254,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            1
+          ]
+        },
+        {
+          "event_index": 1,
+          "onset_frame": 1320,
+          "offset_frame": 1368,
+          "onset_seconds_frame_clock": 105.65248608589172,
+          "duration_seconds_frame_clock": 3.8297576904296875,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            0
+          ]
+        },
+        {
+          "event_index": 2,
+          "onset_frame": 1740,
+          "offset_frame": 1788,
+          "onset_seconds_frame_clock": 139.25262355804443,
+          "duration_seconds_frame_clock": 3.8477094173431396,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            3
+          ]
+        },
+        {
+          "event_index": 3,
+          "onset_frame": 1896,
+          "offset_frame": 1944,
+          "onset_seconds_frame_clock": 151.72925567626953,
+          "duration_seconds_frame_clock": 3.844716787338257,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            2
+          ]
+        },
+        {
+          "event_index": 4,
+          "onset_frame": 2496,
+          "offset_frame": 2544,
+          "onset_seconds_frame_clock": 199.72479486465454,
+          "duration_seconds_frame_clock": 3.844717502593994,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 5,
+          "onset_frame": 3984,
+          "offset_frame": 4032,
+          "onset_seconds_frame_clock": 318.76256489753723,
+          "duration_seconds_frame_clock": 3.8626697063446045,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            6
+          ]
+        },
+        {
+          "event_index": 6,
+          "onset_frame": 4140,
+          "offset_frame": 4188,
+          "onset_seconds_frame_clock": 331.2541563510895,
+          "duration_seconds_frame_clock": 3.8297576904296875,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            5
+          ]
+        },
+        {
+          "event_index": 7,
+          "onset_frame": 4656,
+          "offset_frame": 4704,
+          "onset_seconds_frame_clock": 372.53090357780457,
+          "duration_seconds_frame_clock": 3.8497345447540283,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            8
+          ]
+        },
+        {
+          "event_index": 8,
+          "onset_frame": 4812,
+          "offset_frame": 4860,
+          "onset_seconds_frame_clock": 385.01307821273804,
+          "duration_seconds_frame_clock": 3.8297574520111084,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            7
+          ]
+        },
+        {
+          "event_index": 9,
+          "onset_frame": 5376,
+          "offset_frame": 5424,
+          "onset_seconds_frame_clock": 430.1240222454071,
+          "duration_seconds_frame_clock": 3.861793041229248,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            10
+          ]
+        },
+        {
+          "event_index": 10,
+          "onset_frame": 5532,
+          "offset_frame": 5580,
+          "onset_seconds_frame_clock": 442.60176134109497,
+          "duration_seconds_frame_clock": 3.844717502593994,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            9
+          ]
+        },
+        {
+          "event_index": 11,
+          "onset_frame": 6072,
+          "offset_frame": 6120,
+          "onset_seconds_frame_clock": 485.81006503105164,
+          "duration_seconds_frame_clock": 3.8297572135925293,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 12,
+          "onset_frame": 7428,
+          "offset_frame": 7476,
+          "onset_seconds_frame_clock": 594.2864634990692,
+          "duration_seconds_frame_clock": 3.847235918045044,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 13,
+          "onset_frame": 8028,
+          "offset_frame": 8076,
+          "onset_seconds_frame_clock": 642.2817220687866,
+          "duration_seconds_frame_clock": 3.850241184234619,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            14
+          ]
+        },
+        {
+          "event_index": 14,
+          "onset_frame": 8160,
+          "offset_frame": 8208,
+          "onset_seconds_frame_clock": 652.8495221138,
+          "duration_seconds_frame_clock": 3.8297574520111084,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            13
+          ]
+        },
+        {
+          "event_index": 15,
+          "onset_frame": 8568,
+          "offset_frame": 8616,
+          "onset_seconds_frame_clock": 685.4922201633453,
+          "duration_seconds_frame_clock": 3.8299407958984375,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 16,
+          "onset_frame": 9192,
+          "offset_frame": 9240,
+          "onset_seconds_frame_clock": 735.3995611667633,
+          "duration_seconds_frame_clock": 3.8628110885620117,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            17
+          ]
+        },
+        {
+          "event_index": 17,
+          "onset_frame": 9324,
+          "offset_frame": 9372,
+          "onset_seconds_frame_clock": 745.9624478816986,
+          "duration_seconds_frame_clock": 3.844717264175415,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            16
+          ]
+        },
+        {
+          "event_index": 18,
+          "onset_frame": 9720,
+          "offset_frame": 9768,
+          "onset_seconds_frame_clock": 777.647706747055,
+          "duration_seconds_frame_clock": 3.8502416610717773,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            19
+          ]
+        },
+        {
+          "event_index": 19,
+          "onset_frame": 9852,
+          "offset_frame": 9900,
+          "onset_seconds_frame_clock": 788.2005481719971,
+          "duration_seconds_frame_clock": 3.844717502593994,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            18
+          ]
+        },
+        {
+          "event_index": 20,
+          "onset_frame": 10284,
+          "offset_frame": 10332,
+          "onset_seconds_frame_clock": 822.7619969844818,
+          "duration_seconds_frame_clock": 3.8447177410125732,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 21,
+          "onset_frame": 10716,
+          "offset_frame": 10764,
+          "onset_seconds_frame_clock": 857.3195741176605,
+          "duration_seconds_frame_clock": 3.844891309738159,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": []
+        },
+        {
+          "event_index": 22,
+          "onset_frame": 11376,
+          "offset_frame": 11424,
+          "onset_seconds_frame_clock": 910.1291029453278,
+          "duration_seconds_frame_clock": 3.8470964431762695,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            23
+          ]
+        },
+        {
+          "event_index": 23,
+          "onset_frame": 11472,
+          "offset_frame": 11520,
+          "onset_seconds_frame_clock": 917.8052325248718,
+          "duration_seconds_frame_clock": 3.844717264175415,
+          "history_available": true,
+          "forecast_available": true,
+          "other_stimuli_overlapping_window": [
+            22
+          ]
+        }
+      ],
+      "events_with_full_frame_clock_window": 24,
+      "events_without_other_stimuli_in_window": 6,
+      "schema_version": 1,
+      "pickle_sha256": "8edd3db8305faef25c468f26e8877f764e84bfd3f132cdefecd9c37812890d72",
+      "download_receipt_sha256": "07ee96d6ebb5323b6a03f9b779e86e6e3537de464cbc375e43e8880f06280269",
+      "source_sha256": {
+        "audit_dunn_timing_metadata.py": "2ec86b5ac291b0555fc3a82f05f4d7c8811592fc4b3f6372734f6a0246bc763d",
+        "inspect_dunn_pickle_structure.py": "571992491e6db9c9304c0106bf54d765adb2a3b69de9f49067d017c53530f5ab"
+      },
+      "convention": "Delivered stim_on/stim_off interpreted as zero-based raw-frame indices, with offset as exclusive boundary; 10 s before onset and 20 s after onset, half-open stimulus overlap intervals.",
+      "scope": "Metadata-only frame-clock screen. No response/timevec payload decoded. Does not validate synchronization to processed fluorescence, optical timing, missing neurons, independent animals or cohort eligibility."
+    }
+  },
+  "scope": "Metadata screen only, not an accepted holdout; complete wall-clock windows do not imply gap-free sampling or independent events."
+}

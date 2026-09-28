@@ -412,3 +412,34 @@ for explicitly in any later import. Timestamp monotonicity, per-event coverage
 and gaps have not yet been checked. The screen does not establish independent
 animals or remove the existing target/illumination ambiguities, and the fresh
 holdout remains unsecured.
+
+### Timestamp ordering and stimulus-window coverage
+
+The [window audit](dunn-timing-window-audit.json) uses the new tested
+`scripts/audit_dunn_timing_metadata.py` on the same three hashed files. Raw frame
+timestamps are finite and strictly increasing, and all delivered onset indices
+are on volume boundaries. The explicit screen interprets delivered onset/offset
+as zero-based raw-frame indices, offsets as exclusive, and evaluates a half-open
+window from 10 seconds before onset to 20 seconds after onset. Synchronization
+to processed fluorescence and actual optical timing are not established by this
+index convention. Neural responses and saved numerical `timevec` remain opaque.
+
+| Recording | Events with full frame-clock window | Windows without another delivered stimulus | Maximum raw-frame gap |
+| --- | ---: | ---: | ---: |
+| 20221106-21-00-09 | 20 / 20 | 14 | 3.836 s |
+| 20221106-21-23-19 | 30 / 30 | 2 | 3.809 s |
+| 20221106-21-47-31 | 24 / 24 | 6 | 3.846 s |
+
+Each recording has one raw-frame gap greater than twice its median frame spacing.
+Median volume-start spacing is 0.9574 seconds, with maximum intervals of
+4.70–4.73 seconds. This confirms that a uniform average-rate grid hides acquisition
+irregularity. Full endpoint coverage does not mean a window is gap-free; the
+present receipt does not localize those gaps relative to individual events.
+Only 22 of 74 windows avoid another delivered stimulus under this screen.
+Do not treat the events as independent single-stimulus trials, interpolate gaps
+silently, or regard this as validation of a single-neuron holdout. Animal identity,
+illumination, response synchronization and label confidence remain unresolved.
+
+Two tests verify coverage/overlap calculations and reject unordered/nonfinite
+clocks, incomplete volumes, invalid bounds and non-boundary onsets. Existing
+`test_dunn_*.py` CI discovery includes these tests automatically.
