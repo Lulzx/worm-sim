@@ -198,3 +198,48 @@ not retained. The next diagnostic is a frozen-parameter cross-initialization
 of the two resting states to test whether both persist at the same parameters.
 Do that before choosing a remedy for initialization or line-search behavior;
 no new fit, model feature or held-out selection has been performed.
+
+
+## Cross-initialization result
+
+The [eight-case receipt](capacity-prep240-long-resting-states.json) fixes each
+parameter set in turn, initializes from each previously prepared state, and
+relaxes without input for 480 seconds at dt 0.005 and 0.0025. It records all
+prepared states, training-response losses, input hashes and replay-source hash.
+
+```sh
+.venv-jax/bin/python scripts/audit_capacity_resting_states.py \
+  --checkpoint runs/capacity-prep240-eval1001/last-accepted.json \
+  --probe runs/capacity-prep240-long-excursion.probe.json \
+  --excursion runs/capacity-prep240-long-excursion.json \
+  --graph runs/c302-audit.json --training runs/overfit-seed1-training.json \
+  --output runs/capacity-prep240-long-resting-states.json
+```
+
+| Parameters | Initial prepared state | MSE, dt 0.005 | MSE, dt 0.0025 |
+| --- | --- | ---: | ---: |
+| Endpoint | Endpoint | 0.043588493 | 0.043588532 |
+| Endpoint | High-loss probe | 2.018213887 | 2.017939861 |
+| High-loss probe | Endpoint | 0.043588536 | 0.043588589 |
+| High-loss probe | High-loss probe | 2.016545618 | 2.016271150 |
+
+All eight final derivative infinity norms are below 2e-13. For each fixed
+parameter set and step size, the final states from the two seeds remain more
+than 1.33 units apart in infinity norm. This is numerical evidence for two
+coexisting stationary states under the same parameters. It is not a formal
+stability or bifurcation proof; no eigenvalue or neighborhood-stability test
+was performed. It also does not establish which state is biologically correct.
+
+**Decision:** investigate a deterministic prepared-state initialization for the
+next bounded fitting experiment. Freeze the endpoint's low-loss resting state
+as the common initial vector for every objective evaluation, keep unforced
+preparation, and record the vector and its provenance. Before fitting, check
+baseline loss, gradients and the previously troublesome threshold perturbation
+under that exact objective. The baseline result above suggests this will retain
+the endpoint response, but JAX gradients under the new seed remain unverified.
+
+This is an explicit change to the initialization contract, not a transparent
+optimizer restart. Never reseed from the previous accepted/trial state inside
+an objective call: that would make results depend on evaluation order. Preserve
+the original-seed result and failed capacity gate. This diagnostic does not
+select among held-out responses, change dynamics, or launch another fit.

@@ -68,8 +68,10 @@ This verifies the fitting implementation, not biological adequacy.
    finite differences confirm remaining descent, but a nearby threshold probe
    raises loss sharply. Its independent replay, half-step and longer-preparation
    controls retain the high loss; the prepared voltage state changes by up to
-   1.336 normalized units. Test for coexisting resting states before changing
-   initialization or optimizer behavior. Continue
+   1.336 normalized units. Cross-initialization confirms two numerically
+   stationary states under each fixed parameter set, with distinct training
+   responses. A fixed, recorded prepared-state seed needs objective/gradient
+   checks before another bounded fitting experiment. Continue
    optimization/capacity diagnosis until the small-target gate passes; then
    replicate across unrelated training targets and fit the training population.
    A failed small-target gate alone does not identify model capacity as the cause.
