@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "input_sha256": {
+    "checkpoint": "2426b19e9d1458633a1de61fbd06590a386cf39ea04399d93d7683617f23dff0",
+    "manifest": "67f077014114aafd9a637309b1413e6310d37f69daaff0f52ce9b5eb3e1329fb",
+    "training": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629"
+  },
+  "script_sha256": "8c42ca7ba15e055c62b24efdab43cc8d780b92da3d43c96d9a3f89bdc63890d5",
+  "jax": "0.11.2",
+  "metrics": {
+    "mse": 0.04369316900814718,
+    "bce": 0.0,
+    "correlation": 0.0,
+    "prior": 0.0
+  },
+  "objective_evaluations": 13,
+  "probes": [
+    {
+      "family": "native/threshold",
+      "active_gradient_l2": 0.001119911309448858,
+      "probes": [
+        {
+          "step": 0.001,
+          "gradient_slope": -0.0011199113094488582,
+          "central_value_slope": -0.051237774533544056,
+          "gradient_secant_curvature": 362.04718689348476,
+          "central_value_curvature": 341.10221983110756,
+          "positive_probe_loss": 0.04381248234352919,
+          "negative_probe_loss": 0.04391495789259628
+        },
+        {
+          "step": 0.0005,
+          "gradient_slope": -0.0011199113094488582,
+          "central_value_slope": -0.013322449809116677,
+          "gradient_secant_curvature": 330.7294304711191,
+          "central_value_curvature": 325.6876995295643,
+          "positive_probe_loss": 0.04372721874568382,
+          "negative_probe_loss": 0.043740541195492935
+        }
+      ]
+    },
+    {
+      "family": "native/rest",
+      "active_gradient_l2": 0.000886764069936015,
+      "probes": [
+        {
+          "step": 0.001,
+          "gradient_slope": -0.0008867640699360152,
+          "central_value_slope": -0.02503550593065465,
+          "gradient_secant_curvature": 216.50786796384912,
+          "central_value_curvature": 208.69946840123416,
+          "positive_probe_loss": 0.043772483236417144,
+          "negative_probe_loss": 0.04382255424827845
+        },
+        {
+          "step": 0.0005,
+          "gradient_slope": -0.0008867640699360152,
+          "central_value_slope": -0.006828604412631445,
+          "gradient_secant_curvature": 204.81665444377492,
+          "central_value_curvature": 202.90707227671456,
+          "positive_probe_loss": 0.043715118089975455,
+          "negative_probe_loss": 0.043721946694388086
+        }
+      ]
+    },
+    {
+      "family": "native/chemical_strength",
+      "active_gradient_l2": 0.00014484024187928128,
+      "probes": [
+        {
+          "step": 0.001,
+          "gradient_slope": -0.0001448402418792813,
+          "central_value_slope": -0.00026054622620508283,
+          "gradient_secant_curvature": 5.407268255979631,
+          "central_value_curvature": 5.399960506025092,
+          "positive_probe_loss": 0.04369560844217399,
+          "negative_probe_loss": 0.0436961295346264
+        },
+        {
+          "step": 0.0005,
+          "gradient_slope": -0.0001448402418792813,
+          "central_value_slope": -0.00017374553525073555,
+          "gradient_secant_curvature": 5.396308277022255,
+          "central_value_curvature": 5.394484617393669,
+          "positive_probe_loss": 0.04369375644595673,
+          "negative_probe_loss": 0.04369393019149198
+        }
+      ]
+    }
+  ],
+  "scope": "Frozen training checkpoint. Top three active-gradient L2 families, normalized negative-gradient direction, fixed central steps 0.001 and 0.0005. Local directional curvature only; not Hessian eigenvalues, a condition number, a fitted model, or evidence of generalization."
+}

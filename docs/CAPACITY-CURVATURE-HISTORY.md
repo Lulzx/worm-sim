@@ -109,3 +109,8 @@ underfit. The next diagnostic should investigate optimization conditioning or
 initialization on training data, with a declared bounded budget, rather than
 silently extending this comparison or interpreting it as a capacity limit.
 No fresh holdout has been secured and no held-out scoring was performed here.
+
+A [frozen directional-curvature diagnostic](CAPACITY-DIRECTIONAL-CURVATURE.md)
+finds strong local sensitivity in threshold and rest coordinates. Its initial
+step sizes are too large for derivative agreement, so a finer sweep is needed
+before selecting coordinate scaling. No parameters were updated.
