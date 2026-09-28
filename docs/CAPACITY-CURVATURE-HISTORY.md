@@ -50,3 +50,21 @@ optimizer result. Initial MSE exactly reproduces the parent; the final checkpoin
 replays exactly in NumPy. Its MSE change is only 4.17e-10 and is not evidence of
 optimizer improvement. The smoke ran in the pre-commit worktree; the declared
 arms must launch from the clean committed implementation.
+
+## Early comparison prefix verified
+
+Both declared arms launched from clean source `dfc28ca`. The
+[prefix receipt](capacity-curvature-prefix.json) verifies initialization plus the
+first **20 accepted updates** and all **25 associated objective evaluations**.
+All recorded scalar fields agree within absolute tolerance 1e-10, excluding only
+elapsed time. Initial MSE reproduces the hashed parent. Manifests agree except
+for process ID and the declared `maxcor` value; inputs, source hashes, training
+subset, objective, solver and all other optimizer settings match.
+
+The check reuses the tested `complete_rows` and recursive `compare_value`
+helpers from `scripts/audit_lbfgs_prefix.py`, then limits the comparison to the
+declared early interval. The receipt records snapshot byte lengths and hashes,
+so those append-only journal prefixes can be recovered after the runs finish.
+This establishes a common scalar trajectory before interpreting later history-
+length differences. It does not establish bitwise optimizer-state equality or
+optimizer superiority. Both endpoint results were still pending at the snapshot.

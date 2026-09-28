@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "declared_early_prefix_verified": true,
+  "accepted_updates_compared": 20,
+  "accepted_records_including_initialization": 21,
+  "trial_evaluations_compared": 25,
+  "float_absolute_tolerance": 1e-10,
+  "excluded_scalar_fields": [
+    "elapsed_seconds"
+  ],
+  "manifest_differences_allowed": [
+    "process_id",
+    "fitting_optimizer.maxcor"
+  ],
+  "declaration_sha256": "7433586977dbb2a93553452c04de3d7fce5b919e42fd0cbe0d1fa5f260083b75",
+  "comparison_helper_sha256": "cb158b93a533d50ba0cbf6d83853fa2d834944bd4b435572c785077a7314c925",
+  "source_commit": "dfc28ca2c700de4be0d44b4ef8a8c091fe81f954",
+  "parent_sha256": "fbaf5fda690b94ec1d5e171ae92f9affdd3d1490f2a5132d0508c6d0cccfaa1c",
+  "arms": [
+    {
+      "maxcor": 20,
+      "snapshot_bytes": {
+        "manifest": 7908,
+        "accepted": 8329,
+        "evaluations": 5939
+      },
+      "snapshot_sha256": {
+        "manifest": "de93e7b40a2d60fdc7b265245fdfad100c0f99b8dfc8ef80fbffa9f23d77fda0",
+        "accepted": "ed8c9bb434afc52fc4c946933936719bd100d4a81308ab60d33d482e42970a12",
+        "evaluations": "ac15e068b1445d4afd57c307135fa9e62210838fed666f37bb29c7557234be69"
+      },
+      "complete_accepted_records": 32,
+      "complete_trial_records": 37
+    },
+    {
+      "maxcor": 100,
+      "snapshot_bytes": {
+        "manifest": 7909,
+        "accepted": 8589,
+        "evaluations": 5944
+      },
+      "snapshot_sha256": {
+        "manifest": "67f077014114aafd9a637309b1413e6310d37f69daaff0f52ce9b5eb3e1329fb",
+        "accepted": "150b8fa92f1d65a3e1ad9fe346de3a5e99e3c5d89c2420bc1be4a0e8b9a3b901",
+        "evaluations": "36ca46364bf297b566442532402b1fba89157e056ec6b8ad74df0ce6fb7526c0"
+      },
+      "complete_accepted_records": 33,
+      "complete_trial_records": 37
+    }
+  ],
+  "scope": "Common early scalar trajectory, parent/input/source/configuration agreement before interpreting curvature-memory differences. No claim of bitwise parameter or optimizer-state equality, convergence, capacity acceptance or held-out performance. Both fits remain live."
+}
