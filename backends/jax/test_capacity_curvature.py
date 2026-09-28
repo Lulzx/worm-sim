@@ -1,6 +1,7 @@
+import argparse
 import unittest
 import numpy as np
-from diagnose_capacity_curvature import directional_summary
+from diagnose_capacity_curvature import directional_summary, positive_step
 
 
 class CurvatureTests(unittest.TestCase):
@@ -15,6 +16,12 @@ class CurvatureTests(unittest.TestCase):
             self.assertAlmostEqual(result['central_value_slope'], gradient @ d, places=9)
             self.assertAlmostEqual(result['gradient_secant_curvature'], d @ matrix @ d, places=9)
             self.assertAlmostEqual(result['central_value_curvature'], d @ matrix @ d, places=6)
+
+    def test_step_argument(self):
+        self.assertEqual(positive_step("1e-6"), 1e-6)
+        for value in ["nan", "inf", "0", "-1"]:
+            with self.assertRaises(argparse.ArgumentTypeError):
+                positive_step(value)
 
     def test_invalid_probes(self):
         for step, direction in [(0., np.array([1.])), (0.1, np.array([2.]))]:

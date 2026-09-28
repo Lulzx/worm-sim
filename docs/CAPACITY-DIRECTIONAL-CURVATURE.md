@@ -48,3 +48,33 @@ establish the local derivative limit before choosing any coordinate scaling.
 Do not infer a Hessian condition number, global capacity limit, or biological
 importance from three gradient-aligned directions. This result does not meet
 the training-capacity gate or justify new dynamical features.
+
+## Finer sweep
+
+A second fixed 13-evaluation probe uses `--steps 0.00001 0.000001` at the same
+checkpoint, with unchanged family selection. The
+[fine-sweep receipt](capacity-curvature-fine-directions.json) records its exact
+script and input hashes. It ran in the working tree based on `2e76a68`; no fitting
+backend files changed. The CLI now accepts explicit finite positive step sizes,
+and three unit tests pass, including invalid argument rejection.
+
+| Family | Relative slope disagreement at h=1e-6 | Gradient secant curvature at h=1e-6 |
+| --- | ---: | ---: |
+| Threshold | 0.00432% | 320.6776 |
+| Rest | 0.00266% | 201.0045 |
+| Chemical strength | 0.000083% | 5.39266 |
+
+All three negative-gradient probes lower loss at h=1e-6. Curvatures change by
+less than 0.0013% from h=1e-5 to h=1e-6. This supports derivative agreement and
+stable local directional curvature for these three directions. It is not a
+full-gradient finite-difference audit or a spectrum/condition-number estimate.
+
+The roughly 59-fold threshold-to-chemical and 37-fold rest-to-chemical curvature
+ratios motivate a bounded coordinate-scaling experiment. A candidate is to scale
+threshold coordinates by 0.13 and rest coordinates by 0.16, leaving other
+coordinates unchanged; these approximate square roots of the chemical-to-family
+curvature ratios. These are family-wide heuristic scales inferred from only one
+direction per family, not a measured diagonal Hessian. They need an equal-budget
+unscaled control from the identical checkpoint with reset optimizer histories.
+The experiment must retain the same objective, frozen coordinates, trace scorer,
+90% capacity gate and endpoint numerical checks. No scaling fit has run yet.

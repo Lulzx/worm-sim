@@ -31,10 +31,18 @@ def directional_summary(value, gradient, direction, plus, minus, step):
             'positive_probe_loss': float(vp), 'negative_probe_loss': float(vm)}
 
 
+def positive_step(text):
+    value = float(text)
+    if not np.isfinite(value) or value <= 0:
+        raise argparse.ArgumentTypeError("step must be finite and positive")
+    return value
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     for key in ['checkpoint', 'manifest', 'training', 'graph', 'output']:
         parser.add_argument('--' + key, required=True)
+    parser.add_argument("--steps", type=positive_step, nargs="+", default=[0.001, 0.0005])
     args = parser.parse_args()
     output = Path(args.output)
     if output.exists():
@@ -96,7 +104,7 @@ def main():
     probes = []
     for norm, family, direction in families[:3]:
         rows = []
-        for step in [0.001, 0.0005]:
+        for step in args.steps:
             vp, gp, _ = objective(flat + step * direction)
             vm, gm, _ = objective(flat - step * direction)
             rows.append(directional_summary(value, gradient, direction, (vp, gp), (vm, gm), step))
@@ -104,8 +112,8 @@ def main():
         print(json.dumps(probes[-1]), flush=True)
     result = {'schema_version': 1, 'input_sha256': {k: digest(getattr(args, k)) for k in ['checkpoint', 'manifest', 'training', 'graph']},
               'script_sha256': digest(__file__), 'jax': jax.__version__, 'metrics': metrics,
-              'objective_evaluations': 1 + 4 * len(probes), 'probes': probes,
-              'scope': 'Frozen training checkpoint. Top three active-gradient L2 families, normalized negative-gradient direction, fixed central steps 0.001 and 0.0005. Local directional curvature only; not Hessian eigenvalues, a condition number, a fitted model, or evidence of generalization.'}
+              'steps': args.steps, 'objective_evaluations': 1 + 2 * len(args.steps) * len(probes), 'probes': probes,
+              'scope': 'Frozen training checkpoint. Top three active-gradient L2 families, normalized negative-gradient direction, explicit recorded central steps. Local directional curvature only; not Hessian eigenvalues, a condition number, a fitted model, or evidence of generalization.'}
     with output.open('x') as handle:
         json.dump(result, handle, indent=2, allow_nan=False)
 
