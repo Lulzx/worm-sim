@@ -42,3 +42,18 @@ Both runs may execute concurrently; timings are not controlled benchmarks.
 Neither arm receives additional evaluations after its declared termination.
 Nonfinite failures are retained. This declaration contains no results; endpoint
 receipts are required before interpreting either fit.
+
+## Stopped at user request
+
+The fixed-seed run was terminated when the user requested commit, push and stop.
+The [saved partial receipt](capacity-fixed-seed-stopped.json) includes the full
+last accepted checkpoint, manifest, completed evaluation history and hashes.
+It records 112 completed evaluations and 108 accepted updates,
+with MSE 0.043583600449 and capture
+79.3629%. An in-flight evaluation may not
+be recorded. The run did not finish its declared comparison; endpoint audits
+for this interrupted checkpoint have not run. The original-seed control's
+local audit artifacts remain under `runs/capacity-seed-original-*`.
+
+No fit remains running. Work is paused; resuming from saved parameters would
+require fresh optimizer history and an explicitly recorded continuation.
