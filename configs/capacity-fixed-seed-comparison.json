@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "parent_checkpoint": "runs/capacity-prep240-eval1001/last-accepted.json",
+  "parent_sha256": "df12786dce9b508e3b9a456bf4c04adeebd5dd53e5aeafc257499e681f08fa0b",
+  "fixed_seed_audit": "docs/capacity-fixed-seed-audit.json",
+  "fixed_seed_audit_sha256": "3475feb6ced8834c58dc6db55dd46b58eded165d636e4f97a57f92264a20f037",
+  "targets": [
+    "ADAL",
+    "ADAR"
+  ],
+  "training_trials": 50,
+  "dt": 0.005,
+  "preparation_seconds": 240,
+  "coordinate_scaling": "curvature-v1",
+  "family_scales": {
+    "native/threshold": 0.13,
+    "native/rest": 0.16
+  },
+  "arms": [
+    {
+      "name": "original",
+      "initial_state": "inherited parent seed",
+      "output": "runs/capacity-seed-original-eval201"
+    },
+    {
+      "name": "fixed",
+      "initial_state": "fixed vector from audited parent prepared state",
+      "output": "runs/capacity-seed-fixed-eval201"
+    }
+  ],
+  "max_evaluations": 201,
+  "max_iterations": 200,
+  "maxcor": 100,
+  "maxls": 20,
+  "ftol": 1e-12,
+  "gtol": 1e-09,
+  "primary_comparison": "Last accepted training MSE and termination status, retaining all evaluations and accepted states. Report best accepted separately.",
+  "capacity_gate": "Unchanged 90% zero-start mean-response energy, eligible termination required.",
+  "history": "Same fitted parameters; reset optimizer histories. Not independent initializations.",
+  "interpretation": "Seed is an explicit objective change. Do not infer biological correctness or generalization from lower training loss.",
+  "endpoint_checks": [
+    "independent NumPy replay",
+    "half-step and longer-preparation controls",
+    "raw and scaled stationarity",
+    "preparation gradient sensitivity",
+    "finite and contiguous histories",
+    "input and backend source equality across arms except seed receipt"
+  ],
+  "failure_policy": "No retries, silent budget extensions, new dynamics or held-out scoring. Retain failures.",
+  "timing": "Concurrent CPU runs allowed; no controlled speed comparison."
+}
