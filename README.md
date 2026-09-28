@@ -92,7 +92,9 @@ to 78.26%. A subsequent
 versus 78.42% for its control; both exhausted their budgets and missed the gate.
 A [240-second preparation continuation](docs/CAPACITY-PREP240.md) reached 78.82%
 with stable endpoint preparation gradients, but also exhausted its budget and
-failed the gate.
+failed the gate. The [longer run](docs/CAPACITY-PREP240-LONG.md) reached **79.31%**
+after 663 accepted updates, with stable endpoint audits. It stopped on tiny
+loss changes while still missing the gradient tolerance and 90% capacity gate.
 New dynamical features are paused. Existing validation/test results are
 exploratory; a fresh confirmatory cohort remains outstanding.
 

@@ -57,5 +57,51 @@ still-growing final history.
 
 This passes the prerequisite for interpreting the additional optimization.
 It does not establish bitwise parameter/optimizer-state equality, convergence,
-the 90% capacity gate or held-out performance. The run remains in progress;
-endpoint replay, numerical controls and stationarity checks are still required.
+the 90% capacity gate or held-out performance. The endpoint checks below
+are now complete.
+
+
+## Completed result
+
+The [full receipt](capacity-prep240-long-results.json) preserves the manifest,
+all 864 finite evaluations, all 664 accepted-state records including initialization,
+endpoint audits and artifact hashes. The run used fitting source `df84327`.
+It stopped after **663 accepted updates**, before its 1,001-evaluation budget,
+on SciPy's relative-loss-change criterion (`ftol=1e-12`).
+
+| Measure | Endpoint |
+| --- | --- |
+| Training MSE | 0.04358849292541925 |
+| Training-response capture | 79.3136% |
+| Unchanged capacity gate | 90%; failed |
+| Best accepted checkpoint | Same as final accepted checkpoint |
+| Raw gradient infinity norm | 9.53962e-4 |
+| Optimizer-coordinate gradient infinity norm | 1.54095e-4 |
+| Declared gradient tolerance | 1e-9; not met |
+| Learned positive gains | 0.02826–931.47 |
+
+This improves capture by 0.495 percentage points over the matched 201-evaluation
+run. SciPy reports optimizer success, but its loss-change stopping condition
+must not be confused with gradient convergence or the capacity gate.
+
+Independent NumPy replay differs from JAX in MSE by 6.94e-18. Halving the time
+step changes MSE by +3.91e-8 (maximum prediction difference 0.00437). Extending
+preparation from 240 to 480 or 960 seconds changes MSE by about 3.47e-14 and
+predictions by at most 3.40e-9. The 240-to-480-second gradient relative L2
+change is 9.12e-7, with cosine essentially one; the 480-to-960 change is 3.42e-14.
+These checks support endpoint numerical stability, not biological validity.
+
+All 3,638 chemical coefficients are nonzero. With stimulation removed,
+prediction energy is 2.83e-20 versus 0.00786 with stimulation. Frozen positive
+per-neuron gain recalibration closes only 2.79% of the remaining mean-response
+bound gap. Neither a dead chemical start nor output scaling alone explains the
+remaining error at this endpoint.
+
+**Decision:** the small-target test remains underfit and nonstationary by the
+declared gradient criterion. The next bounded diagnostic should investigate
+why the line search stalls while gradients remain nonzero, including local
+directional finite differences and loss profiles at this exact checkpoint.
+This result does not justify declaring a model-capacity limit, adding dynamics,
+or selecting models on the previously inspected held-out targets. No further
+fit or budget extension is included in this report. A fresh confirmatory
+cohort remains unsecured; see the [cohort audit](FRESH-HOLDOUT-AUDIT.md).
