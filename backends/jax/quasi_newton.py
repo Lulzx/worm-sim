@@ -13,9 +13,11 @@ class NonfiniteEvaluation(Exception):
     pass
 
 
-def optimize_active(theta, active, objective, accepted, evaluated, *, max_evaluations=201, max_iterations=200):
+def optimize_active(theta, active, objective, accepted, evaluated, *, max_evaluations=201, max_iterations=200, max_corrections=20):
     if type(max_evaluations) is not int or max_evaluations < 1 or type(max_iterations) is not int or max_iterations < 1:
         raise ValueError('positive integer budgets required')
+    if type(max_corrections) is not int or max_corrections < 1:
+        raise ValueError('positive integer curvature history required')
     flat, unravel = ravel_pytree(theta)
     mask, _ = ravel_pytree(active)
     if jax.tree.structure(theta) != jax.tree.structure(active) or mask.shape != flat.shape:
@@ -51,7 +53,7 @@ def optimize_active(theta, active, objective, accepted, evaluated, *, max_evalua
     def callback(x):
         nonlocal iterations
         record(x,iterations+1);iterations+=1
-    options=dict(maxiter=max_iterations,maxfun=max_evaluations,maxls=20,maxcor=20,ftol=1e-12,gtol=1e-9)
+    options=dict(maxiter=max_iterations,maxfun=max_evaluations,maxls=20,maxcor=max_corrections,ftol=1e-12,gtol=1e-9)
     x0=np.asarray(flat)[indices].copy()
     try:
         record(x0,0)

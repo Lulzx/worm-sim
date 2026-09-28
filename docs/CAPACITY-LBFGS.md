@@ -232,3 +232,8 @@ The next fitting work should address the slow progress of the existing objective
 and verify any optimizer change against this frozen endpoint before launching
 another long run. The full specification and the independent-cohort requirement
 remain open.
+
+The next declared test is the [curvature-history comparison](CAPACITY-CURVATURE-HISTORY.md):
+20 versus 100 retained correction pairs, equal 201-evaluation budgets, both
+starting from this endpoint with fresh optimizer history. It tests an optimizer
+setting while preserving the model, objective and capacity gate.

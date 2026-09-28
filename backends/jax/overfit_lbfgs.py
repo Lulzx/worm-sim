@@ -26,9 +26,10 @@ def main():
         parser.add_argument('--'+key,required=True)
     parser.add_argument('--max-evaluations',type=int,default=201)
     parser.add_argument('--max-iterations',type=int,default=200)
+    parser.add_argument('--maxcor',type=int,default=20,help='L-BFGS curvature correction pairs retained')
     parser.add_argument('--dt',type=float,default=.005)
     a=parser.parse_args()
-    if a.max_evaluations<1 or a.max_iterations<1 or not np.isfinite(a.dt) or a.dt<=0:
+    if a.max_evaluations<1 or a.max_iterations<1 or a.maxcor<1 or not np.isfinite(a.dt) or a.dt<=0:
         raise ValueError('invalid budgets or step')
     paths={k:Path(getattr(a,k)) for k in ['model','graph','training','warm_start']}
     original,graph,training,parent=[json.loads(paths[k].read_text()) for k in paths]
@@ -54,7 +55,7 @@ def main():
         'bounds':reference,'backend_source_sha256':{p.name:digest(p) for p in sorted(Path(__file__).parent.glob('*.py'))},
         'jax':jax.__version__,'scipy':scipy.__version__,'devices':[str(d) for d in jax.devices()],
         'fitting_optimizer':{'method':'SciPy L-BFGS-B','bounds':None,'max_evaluations':a.max_evaluations,
-            'max_iterations':a.max_iterations,'maxls':20,'maxcor':20,'ftol':1e-12,'gtol':1e-9},
+            'max_iterations':a.max_iterations,'maxls':20,'maxcor':a.maxcor,'ftol':1e-12,'gtol':1e-9},
         'selection':'minimum training MSE among accepted iterates, earliest tie; line-search trials are not selectable',
         'scope':'Training subset only. Native fit_config retained for parameter/checkpoint compatibility; fitting_optimizer controls this diagnostic. No priors or dynamical changes.'}
     write('manifest.json',manifest)
@@ -84,7 +85,7 @@ def main():
             atomic_best(out/'last-accepted.json',artifact)
             print(json.dumps(final,allow_nan=False),flush=True)
         outcome=optimize_active(theta,active,lambda p:evaluate(p,groups,data,prior),on_accepted,on_evaluation,
-            max_evaluations=a.max_evaluations,max_iterations=a.max_iterations)
+            max_evaluations=a.max_evaluations,max_iterations=a.max_iterations,max_corrections=a.maxcor)
     outcome.pop('final_theta');outcome.pop('final_metrics')
     eligible_termination=outcome['status']=='evaluation_budget_exhausted' or outcome.get('optimizer_status') in (0,1)
     write('result.json',dict(**outcome,final=final,bounds=reference,best_epoch=best_epoch,

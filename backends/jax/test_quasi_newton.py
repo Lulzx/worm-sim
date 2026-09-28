@@ -18,6 +18,7 @@ class QuasiNewtonTests(unittest.TestCase):
         np.testing.assert_allclose(result['final_theta']['x'],[2.,7.],atol=1e-10)
         self.assertTrue(all(row[1]==7. for row in evaluations))
         self.assertEqual(result['active_coordinates'],1)
+        self.assertEqual(result['options']['maxcor'],20)
         self.assertEqual([r[0] for r in accepted],list(range(len(accepted))))
 
     def test_hard_budget_and_nonfinite_trial_keep_last_accepted(self):
@@ -53,6 +54,21 @@ class QuasiNewtonTests(unittest.TestCase):
     def test_mask_validation(self):
         with self.assertRaises(ValueError):
             optimize_active({'x':jnp.ones(2)},{'x':jnp.ones(2)},None,None,None)
+
+    def test_curvature_history_option_and_validation(self):
+        def objective(p):
+            loss=jnp.sum((p['x']-2.)**2)
+            return loss,{'x':2*(p['x']-2.)},{'mse':float(loss)}
+        theta={'x':jnp.array([5.,7.])};active={'x':jnp.array([True,True])}
+        result=optimize_active(theta,active,objective,lambda *args:None,lambda *args:None,
+            max_evaluations=10,max_corrections=100)
+        self.assertTrue(result['optimizer_success'])
+        self.assertEqual(result['options']['maxcor'],100)
+        np.testing.assert_allclose(result['final_theta']['x'],[2.,2.],atol=1e-10)
+        for invalid in [0,-1,True,1.5]:
+            with self.assertRaisesRegex(ValueError,'curvature history'):
+                optimize_active(theta,active,objective,lambda *args:None,lambda *args:None,
+                    max_corrections=invalid)
 
 
 if __name__=='__main__':unittest.main()

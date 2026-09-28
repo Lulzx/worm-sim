@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "hypothesis": "Retaining more L-BFGS curvature pairs may improve finite-budget progress on the unchanged training objective. No superiority is assumed.",
+  "parent_checkpoint": "runs/capacity-lbfgs-eval1001/last-accepted.json",
+  "parent_sha256": "fbaf5fda690b94ec1d5e171ae92f9affdd3d1490f2a5132d0508c6d0cccfaa1c",
+  "parent_accepted_iteration": 877,
+  "targets": [
+    "ADAL",
+    "ADAR"
+  ],
+  "training_trials": 50,
+  "dt": 0.005,
+  "preparation_seconds": 120.0,
+  "arms": [
+    {
+      "maxcor": 20,
+      "role": "unchanged-memory fresh-history control",
+      "output": "runs/capacity-curvature20-eval201"
+    },
+    {
+      "maxcor": 100,
+      "role": "larger-memory comparison",
+      "output": "runs/capacity-curvature100-eval201"
+    }
+  ],
+  "max_evaluations_per_arm": 201,
+  "max_iterations_per_arm": 200,
+  "maxls": 20,
+  "ftol": 1e-12,
+  "gtol": 1e-09,
+  "capacity_gate": "unchanged: last accepted iterate captures at least 90% of zero-start mean-response energy; nonfinite/abnormal termination cannot pass.",
+  "primary_comparison": "Last accepted training MSE after termination within each 201-evaluation budget; report both failures and budget/convergence status.",
+  "secondary_comparison": "Best accepted MSE, full trial and accepted histories, active-gradient norms and independent replay/numerical controls. No held-out observations.",
+  "prefix_check": "Both initial checkpoints must reproduce parent MSE; compare the first 20 accepted updates and associated trial metrics within absolute 1e-10, since the history limit has not yet discarded old correction pairs. Report a mismatch before attributing differences to memory length.",
+  "history_policy": "Both reset curvature history from the same endpoint; neither resumes the 1001-evaluation optimizer state or represents an independent initialization.",
+  "timing_policy": "Runs may execute concurrently. Equal objective-evaluation budgets are compared; elapsed times are not controlled performance measurements.",
+  "failure_policy": "Keep existing hard evaluation limits and nonfinite failure retention. No silent retry, budget extension or dynamical changes."
+}
