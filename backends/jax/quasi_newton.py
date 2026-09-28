@@ -13,7 +13,7 @@ class NonfiniteEvaluation(Exception):
     pass
 
 
-def optimize_active(theta, active, objective, accepted, evaluated, *, max_evaluations=201, max_iterations=200, max_corrections=20):
+def optimize_active(theta, active, objective, accepted, evaluated, *, max_evaluations=201, max_iterations=200, max_corrections=20, coordinate_scale=None):
     if type(max_evaluations) is not int or max_evaluations < 1 or type(max_iterations) is not int or max_iterations < 1:
         raise ValueError('positive integer budgets required')
     if type(max_corrections) is not int or max_corrections < 1:
@@ -28,8 +28,22 @@ def optimize_active(theta, active, objective, accepted, evaluated, *, max_evalua
     indices = np.flatnonzero(np.asarray(mask))
     if not len(indices) or not np.isfinite(np.asarray(flat)).all():
         raise ValueError('requires finite parameters and active coordinates')
+    scale = np.ones(len(indices))
+    centered = coordinate_scale is not None
+    if centered:
+        if jax.tree.structure(coordinate_scale) != jax.tree.structure(theta):
+            raise ValueError('coordinate scale layout differs')
+        for parameter, factor in zip(jax.tree.leaves(theta), jax.tree.leaves(coordinate_scale), strict=True):
+            if parameter.shape != factor.shape:
+                raise ValueError('coordinate scale shape differs')
+        factors, _ = ravel_pytree(coordinate_scale)
+        factors = np.asarray(factors)
+        if not np.isfinite(factors).all() or np.any(factors <= 0):
+            raise ValueError('coordinate scales must be finite and positive')
+        scale = factors[indices]
+    origin = np.asarray(flat)[indices].copy() if centered else np.zeros(len(indices))
     def unpack(x):
-        return unravel(flat.at[indices].set(x))
+        return unravel(flat.at[indices].set(origin + scale * x))
     calls=0;iterations=0;cache=None;last=None
     def fun(x):
         nonlocal calls,cache
@@ -43,7 +57,7 @@ def optimize_active(theta, active, objective, accepted, evaluated, *, max_evalua
         finite=bool(np.isfinite(float(value)) and np.isfinite(np.asarray(g)).all())
         evaluated(calls,candidate,value,gradient,metrics,finite)
         if not finite:raise NonfiniteEvaluation('nonfinite line-search evaluation')
-        cache=(np.array(x,copy=True),float(value),np.asarray(g)[indices].copy(),candidate,metrics)
+        cache=(np.array(x,copy=True),float(value),(np.asarray(g)[indices] * scale).copy(),candidate,metrics)
         return cache[1],cache[2]
     def record(x,iteration):
         nonlocal last
@@ -54,7 +68,7 @@ def optimize_active(theta, active, objective, accepted, evaluated, *, max_evalua
         nonlocal iterations
         record(x,iterations+1);iterations+=1
     options=dict(maxiter=max_iterations,maxfun=max_evaluations,maxls=20,maxcor=max_corrections,ftol=1e-12,gtol=1e-9)
-    x0=np.asarray(flat)[indices].copy()
+    x0=np.zeros(len(indices)) if centered else np.asarray(flat)[indices].copy()
     try:
         record(x0,0)
         result=minimize(fun,x0,jac=True,method='L-BFGS-B',callback=callback,options=options)
@@ -67,5 +81,7 @@ def optimize_active(theta, active, objective, accepted, evaluated, *, max_evalua
     except NonfiniteEvaluation:
         status={'status':'nonfinite_evaluation','optimizer_success':False}
     return dict(**status,evaluations=calls,accepted_iterations=iterations,options=options,
+        coordinate_transform="theta = initial + scale * z" if centered else "identity",
+        scale_min=float(scale.min()),scale_max=float(scale.max()),
         active_coordinates=len(indices),final_theta=None if last is None else last[2],
         final_metrics=None if last is None else last[3])

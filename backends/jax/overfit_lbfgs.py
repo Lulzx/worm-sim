@@ -27,6 +27,7 @@ def main():
     parser.add_argument('--max-evaluations',type=int,default=201)
     parser.add_argument('--max-iterations',type=int,default=200)
     parser.add_argument('--maxcor',type=int,default=20,help='L-BFGS curvature correction pairs retained')
+    parser.add_argument("--coordinate-scaling", choices=["identity", "curvature-v1"], default="identity")
     parser.add_argument('--dt',type=float,default=.005)
     a=parser.parse_args()
     if a.max_evaluations<1 or a.max_iterations<1 or a.maxcor<1 or not np.isfinite(a.dt) or a.dt<=0:
@@ -41,6 +42,10 @@ def main():
     model['config']['dt']=a.dt
     theta=warm_parameters(parent,model,graph,training,config,targets,allow_step_change=True)
     _,active,groups,data,prior=build(model,graph,training,config)
+    scaling = {'native/threshold': 0.13, 'native/rest': 0.16} if a.coordinate_scaling == 'curvature-v1' else {}
+    coordinate_scale = jax.tree.map(lambda v: np.ones(v.shape), theta)
+    coordinate_scale['groups'] = np.array([scaling.get('native/' + g['name'].split('/')[0], 1.)
+                                         for g in model['parameters']['groups']])
     reference=bounds(groups);out=Path(a.output);out.mkdir(exist_ok=False)
     source=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
     warm={'checkpoint_sha256':digest(paths['warm_start']),'source_epoch':base['epoch'],
@@ -55,6 +60,9 @@ def main():
         'bounds':reference,'backend_source_sha256':{p.name:digest(p) for p in sorted(Path(__file__).parent.glob('*.py'))},
         'jax':jax.__version__,'scipy':scipy.__version__,'devices':[str(d) for d in jax.devices()],
         'fitting_optimizer':{'method':'SciPy L-BFGS-B','bounds':None,'max_evaluations':a.max_evaluations,
+            'coordinate_scaling':a.coordinate_scaling,'family_scales':scaling,
+            'coordinate_transform':'theta = initial + scale * z; frozen coordinates unchanged',
+            'gtol_coordinates':'scaled optimizer coordinates z',
             'max_iterations':a.max_iterations,'maxls':20,'maxcor':a.maxcor,'ftol':1e-12,'gtol':1e-9},
         'selection':'minimum training MSE among accepted iterates, earliest tie; line-search trials are not selectable',
         'scope':'Training subset only. Native fit_config retained for parameter/checkpoint compatibility; fitting_optimizer controls this diagnostic. No priors or dynamical changes.'}
@@ -85,7 +93,7 @@ def main():
             atomic_best(out/'last-accepted.json',artifact)
             print(json.dumps(final,allow_nan=False),flush=True)
         outcome=optimize_active(theta,active,lambda p:evaluate(p,groups,data,prior),on_accepted,on_evaluation,
-            max_evaluations=a.max_evaluations,max_iterations=a.max_iterations,max_corrections=a.maxcor)
+            max_evaluations=a.max_evaluations,max_iterations=a.max_iterations,max_corrections=a.maxcor,coordinate_scale=coordinate_scale)
     outcome.pop('final_theta');outcome.pop('final_metrics')
     eligible_termination=outcome['status']=='evaluation_budget_exhausted' or outcome.get('optimizer_status') in (0,1)
     write('result.json',dict(**outcome,final=final,bounds=reference,best_epoch=best_epoch,

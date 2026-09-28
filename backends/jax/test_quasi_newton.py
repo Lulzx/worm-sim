@@ -51,6 +51,41 @@ class QuasiNewtonTests(unittest.TestCase):
         for before,after,mask in zip(jax.tree.leaves(theta),jax.tree.leaves(result['final_theta']),jax.tree.leaves(active),strict=True):
             np.testing.assert_array_equal(np.asarray(before)[~np.asarray(mask)],np.asarray(after)[~np.asarray(mask)])
 
+    def test_scaled_chain_rule(self):
+        from unittest.mock import patch
+        from types import SimpleNamespace
+        def objective(p):
+            x=p['x']; loss=jnp.sum(x*x)
+            return loss, {'x':2*x}, {'mse':float(loss)}
+        def inspect(fun,x0,**kwargs):
+            x=np.array([.3,-.2]); value,gradient=fun(x)
+            h=1e-5
+            fd=np.array([(fun(x+h*np.eye(2)[i])[0]-fun(x-h*np.eye(2)[i])[0])/(2*h) for i in range(2)])
+            np.testing.assert_allclose(gradient,fd,rtol=1e-7,atol=1e-8)
+            return SimpleNamespace(x=x0,success=True,status=0,message='test')
+        with patch('quasi_newton.minimize',side_effect=inspect):
+            optimize_active({'x':jnp.array([5.,7.])},{'x':jnp.array([True,True])},objective,
+                lambda *args:None,lambda *args:None,coordinate_scale={'x':jnp.array([.13,.16])})
+
+    def test_scaled_quadratic_and_invalid_scales(self):
+        theta={'x':jnp.array([5.,7.,9.])}; active={'x':jnp.array([True,True,False])}
+        seen=[]
+        def objective(p):
+            x=p['x']; weights=jnp.array([100.,1.,3.])
+            loss=jnp.sum(weights*(x-2.)**2)
+            return loss, {'x':2*weights*(x-2.)}, {'mse':float(loss)}
+        result=optimize_active(theta,active,objective,lambda *args:None,
+            lambda n,p,*args:seen.append(np.asarray(p['x'])),
+            coordinate_scale={'x':jnp.array([.1,1.,4.])},max_evaluations=30)
+        self.assertTrue(result['optimizer_success'])
+        np.testing.assert_array_equal(seen[0],[5.,7.,9.])
+        np.testing.assert_allclose(result['final_theta']['x'],[2.,2.,9.],atol=1e-8)
+        self.assertTrue(all(x[2]==9. for x in seen))
+        for scale in [jnp.array([0.,1.,1.]),jnp.array([float('nan'),1.,1.]),jnp.ones(2)]:
+            with self.assertRaisesRegex(ValueError,'scale'):
+                optimize_active(theta,active,objective,lambda *args:None,lambda *args:None,
+                                coordinate_scale={'x':scale})
+
     def test_mask_validation(self):
         with self.assertRaises(ValueError):
             optimize_active({'x':jnp.ones(2)},{'x':jnp.ones(2)},None,None,None)

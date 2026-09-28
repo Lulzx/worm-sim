@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "parent_checkpoint": "runs/capacity-curvature100-eval201/last-accepted.json",
+  "parent_sha256": "2426b19e9d1458633a1de61fbd06590a386cf39ea04399d93d7683617f23dff0",
+  "targets": [
+    "ADAL",
+    "ADAR"
+  ],
+  "training_trials": 50,
+  "dt": 0.005,
+  "preparation_seconds": 120,
+  "arms": [
+    {
+      "coordinate_scaling": "identity",
+      "family_scales": {},
+      "output": "runs/capacity-scaling-identity-eval201"
+    },
+    {
+      "coordinate_scaling": "curvature-v1",
+      "family_scales": {
+        "native/threshold": 0.13,
+        "native/rest": 0.16
+      },
+      "output": "runs/capacity-scaling-curvature-v1-eval201"
+    }
+  ],
+  "max_evaluations": 201,
+  "max_iterations": 200,
+  "maxcor": 100,
+  "maxls": 20,
+  "ftol": 1e-12,
+  "gtol": 1e-09,
+  "gtol_coordinates": "optimizer z coordinates; report raw and scaled endpoint gradients",
+  "transformation": "theta = initial + scale * z, initialized z=0, frozen coordinates unchanged",
+  "primary_comparison": "Last accepted training MSE at termination, with both statuses and full histories. No held-out data.",
+  "capacity_gate": "Unchanged 90% captured zero-start mean-response energy; eligible termination required.",
+  "rationale": "Rounded square roots of local chemical-strength-to-threshold/rest curvature ratios from fixed endpoint probes; heuristic family-wide scaling, not a measured Hessian diagonal.",
+  "history": "Both fresh histories from identical checkpoint; not independent restarts or prior optimizer-state continuation.",
+  "failure_policy": "Hard budgets and nonfinite retention unchanged; no adaptive budget increases or new dynamics.",
+  "timing": "Concurrent runs permitted; not controlled wall-time comparison."
+}

@@ -1,0 +1,430 @@
+{
+  "manifest": {
+    "format": "wormsim-training-capacity-diagnostic",
+    "source_commit": "c1a63e3a6231bf76abac36cde1b9de80f9ed77ed",
+    "source_worktree_dirty": true,
+    "input_sha256": {
+      "model": "0b4d213bdbbff3853cfe61c49d3bdee16e1ca834ead72d5bc0f3956b745284ba",
+      "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+      "training": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+      "warm_start": "2426b19e9d1458633a1de61fbd06590a386cf39ea04399d93d7683617f23dff0"
+    },
+    "targets": [
+      "ADAL",
+      "ADAR"
+    ],
+    "training_trials": [
+      "randi-004-event-027",
+      "randi-014-event-013",
+      "randi-014-event-042",
+      "randi-014-event-043",
+      "randi-014-event-066",
+      "randi-031-event-059",
+      "randi-031-event-067",
+      "randi-037-event-007",
+      "randi-040-event-064",
+      "randi-043-event-020",
+      "randi-043-event-045",
+      "randi-044-event-016",
+      "randi-046-event-040",
+      "randi-048-event-047",
+      "randi-049-event-035",
+      "randi-061-event-001",
+      "randi-063-event-002",
+      "randi-066-event-021",
+      "randi-070-event-014",
+      "randi-070-event-025",
+      "randi-070-event-029",
+      "randi-071-event-029",
+      "randi-072-event-002",
+      "randi-072-event-030",
+      "randi-072-event-038",
+      "randi-072-event-040",
+      "randi-073-event-001",
+      "randi-073-event-027",
+      "randi-075-event-008",
+      "randi-076-event-032",
+      "randi-079-event-025",
+      "randi-081-event-010",
+      "randi-082-event-020",
+      "randi-083-event-008",
+      "randi-084-event-038",
+      "randi-085-event-034",
+      "randi-085-event-046",
+      "randi-086-event-027",
+      "randi-087-event-037",
+      "randi-091-event-024",
+      "randi-095-event-006",
+      "randi-096-event-009",
+      "randi-096-event-035",
+      "randi-098-event-044",
+      "randi-101-event-032",
+      "randi-101-event-033",
+      "randi-102-event-034",
+      "randi-105-event-036",
+      "randi-106-event-003",
+      "randi-106-event-023"
+    ],
+    "warm_start": {
+      "checkpoint_sha256": "2426b19e9d1458633a1de61fbd06590a386cf39ea04399d93d7683617f23dff0",
+      "source_epoch": 191,
+      "parent_dt": 0.005,
+      "run_dt": 0.005,
+      "optimizer_state": "fresh L-BFGS history; no Adam moments",
+      "epoch_convention": "accepted L-BFGS iterations; trial evaluations separately logged"
+    },
+    "process_id": 86573,
+    "configuration": {
+      "schema_version": 1,
+      "solver": null,
+      "extensions": {
+        "observation": {
+          "initial_gain": 10.0,
+          "prior_strength": 0.0
+        }
+      }
+    },
+    "fit_config": {
+      "epochs": 1000,
+      "dt": 0.005,
+      "preparation_seconds": 120.0,
+      "learning_rate": 0.01,
+      "learning_rate_schedule": {
+        "kind": "constant"
+      },
+      "optimizer": {
+        "kind": "adam"
+      },
+      "kernel_lags": 39,
+      "prior_strength": 0.0,
+      "sign_prior_strength": 0.0,
+      "kernel_prior_strength": 0.0,
+      "sharing": {
+        "classes": {},
+        "allow_suffix_pairs": true,
+        "provenance": "Graph annotations when available; matching terminal L/R names otherwise. Suffix pairing is an explicit modeling assumption, not a biological annotation."
+      },
+      "classification": null,
+      "molecular_sign_priors": null,
+      "sign_initialization": {
+        "seed": 1,
+        "reversal_magnitude": 0.5
+      },
+      "observation_gain": {
+        "initial_gain": 10.0,
+        "prior_strength": 0.0
+      },
+      "correlation": null
+    },
+    "bounds": {
+      "zero_response_mse": 0.05145505909970581,
+      "mean_response_bound": 0.04148524142533844,
+      "start_zero_mean_response_bound": 0.041536749763839996
+    },
+    "backend_source_sha256": {
+      "audit_capacity_gradients.py": "67ab4bc0db3898bc232ea39fef431b03fa3ca41299a9c1bb8b45c99d7a24cd2f",
+      "audit_capacity_stationarity.py": "464c60683684846246e971dc0a47042b9db7cd652c66bb0f1106fce01b781207",
+      "audit_fit.py": "666c26f4bbff8b8a3f49e936a0ecfe83f998a7d1f96760c1df432a6efea411cb",
+      "check_training.py": "3bdf12fe5da687262d188500b6760810c26bfe4659515000d8be38a3d80488b6",
+      "compare_solvers.py": "f36c4813d4c208d1661affe5b0d2ec97e644772901f85766e612bf3c6b508aa9",
+      "dark_edges.py": "51e520b5dc7ad7be736be97bb63be43e7439bc87a9cf969835a19e3ba168a2d0",
+      "diagnose_capacity_curvature.py": "59aa2d79305d71e61b9264b10ac7ec08bfcc44bf1cdf93c905ad8147484a0e72",
+      "extensions.py": "a3d8d61bd5f05d76c0c01b5d0419d313db2d794a9311811aafc59542b30eb2db",
+      "fit.py": "82767fd354ea2e9dc368bd9f1cd85bfe3f517faa4e5c201347d2baa75f2dedbb",
+      "fit_extensions.py": "c2572a3235ec21bd2c32edfbf656911f49d749276da2c326b17751a3ff1c0a40",
+      "level0.py": "5594af39c7acbcad1e6d554a32a93ddd60f8ef6d36c4e1863a3c59cb2414232d",
+      "modulation.py": "883fc33701a1f9bd4edd3ad3b2021efde6e7c54020c89c6a5dffac071df1ec47",
+      "multirate.py": "3c9abb8052bb36462a497bf00988a9aebc0478ce60ff3cdce5a77b0fe87256b7",
+      "objective.py": "28ae005464e2391695b7a9b8391a8c1f0000dacbc2e1bcfb43ed00d897cad5c6",
+      "observation.py": "b577b780ceb852c784a9aeeebeec65ec8583625a39f52756abf8ce161e6667d6",
+      "optimization.py": "f78d1f46ab30befc342171aee9c21caef918f8429d80f25222d7c9425b8521f1",
+      "overfit.py": "90cd7705600a5f8d9ac9c140ebd4dcfc8f05b38c8971b7176558a40a91ef8055",
+      "overfit_lbfgs.py": "d48e09f15fc5afdf5048aa9c772bd0080e4f952d7b0ef65f4fd2e414f62e611a",
+      "plasticity.py": "e7193355906d53d53703e3f2294f3da3326d72d76e2a7846f306223f4c1eac7d",
+      "predict_extensions.py": "4d796f6edf8b17e78941a7effe5d1b94f2d18d5a91f2ff9ad4991803864b9e0f",
+      "quasi_newton.py": "906847326b7370778a421b3c5b5e3848812b9fe8a05de54c417619f380612d06",
+      "rectification.py": "2c68b8a09832f1e6adb59b1353b06ddccc0e024f1b82b78bfe869694ddd8a1ad",
+      "replay.py": "8bbd2b5b1537decfc58df7cedc9ce86d45631241248c2e0258c71feef736cf28",
+      "replay_capacity_failure.py": "ecef1134575afceeba904e322d404a2defe800af635d864658fb9005e0c0b3de",
+      "solvers.py": "d6278c352e37d7887ccb2b239472a4babbacc1fe5b05c878336b06b261ab474a",
+      "test_adjoints.py": "52ff185c8af2dc56387b8edbae78454fdb248c6ad5296e635b8773a9e86ab085",
+      "test_audit_fit.py": "957c8aa89add4a211d089f69e13fa2303edfc50316182db94ee62096070ff2e1",
+      "test_capacity_curvature.py": "303a5e88d683b3ccd232af89908c53d5c1992e81f389999893b41a4c1e83ecf3",
+      "test_capacity_stationarity.py": "523f8ee4aead9fe03562dfd8596d1cdbc93974c802c07157e5ad0d9b7ab554d7",
+      "test_dark_edges.py": "257ecfc4024de51be66603da0ecd2550444f09b8b76d2e420eadf0dd837ad3c3",
+      "test_extensions.py": "89e3331c40b2e59460795b634c5f8dae2d2caec120befbb14a8fd83fe12b69c0",
+      "test_external_smoke.py": "1506e15451b7ef662dd60ad5b75427b2d4a7fd8f1994df4b7f903f6dd5c36172",
+      "test_fit.py": "dc1dfef8697868d5db43886b479937bc845d5d4436c318ab185a01e6450936f5",
+      "test_level0.py": "bdbab2d43b594352da82b01a5946bc349f393be187005437e0e958020299614c",
+      "test_modulation.py": "cb59f00c09c0530c5e52b835d943ade77929238ed9cd613853a5b236d0ff4c6a",
+      "test_multirate.py": "da5527c66db4ba8808acb76d9b6f562a80f387e4488404e15b6f6eb5c303ec7a",
+      "test_objective.py": "ad7aa7e97f702aef6e9acd7242124fc795f29247fef380872ce5aa34280776bc",
+      "test_optimization.py": "7161c6b9c6a256d9ed555d665d9e8cc0df6af7ae92bb13ccbd11e25efc149d57",
+      "test_overfit.py": "b4324b70c15aad8be593ac3efec47804c805a7e8712ef9265b3b0bfc3f914d83",
+      "test_plasticity.py": "b99adf1872b5ccc3bc04e5972baea03f5c856a60fee00f3aa2e3048157d3ed6c",
+      "test_quasi_newton.py": "43c6a99e3e737d3670101e94cc5f347b7e7c1abfb3aaf07312fff073d0495228",
+      "test_rectification.py": "4808c0ceb528e7c3ac8f049471c063f2d7f32f7ca36c2f30cd34bd3fd5363fd8",
+      "test_solvers.py": "e28e8b11882637698567b2fc4a31b90707cb8612800e85d3e04767f12fd6a512"
+    },
+    "jax": "0.11.2",
+    "scipy": "1.18.1",
+    "devices": [
+      "cpu:0"
+    ],
+    "fitting_optimizer": {
+      "method": "SciPy L-BFGS-B",
+      "bounds": null,
+      "max_evaluations": 5,
+      "coordinate_scaling": "curvature-v1",
+      "family_scales": {
+        "native/threshold": 0.13,
+        "native/rest": 0.16
+      },
+      "coordinate_transform": "theta = initial + scale * z; frozen coordinates unchanged",
+      "gtol_coordinates": "scaled optimizer coordinates z",
+      "max_iterations": 1,
+      "maxls": 20,
+      "maxcor": 100,
+      "ftol": 1e-12,
+      "gtol": 1e-09
+    },
+    "selection": "minimum training MSE among accepted iterates, earliest tie; line-search trials are not selectable",
+    "scope": "Training subset only. Native fit_config retained for parameter/checkpoint compatibility; fitting_optimizer controls this diagnostic. No priors or dynamical changes."
+  },
+  "result": {
+    "status": "optimizer_terminated",
+    "optimizer_success": false,
+    "optimizer_status": 1,
+    "message": "STOP: TOTAL NO. OF ITERATIONS REACHED LIMIT",
+    "evaluations": 4,
+    "accepted_iterations": 1,
+    "options": {
+      "maxiter": 1,
+      "maxfun": 5,
+      "maxls": 20,
+      "maxcor": 100,
+      "ftol": 1e-12,
+      "gtol": 1e-09
+    },
+    "coordinate_transform": "theta = initial + scale * z",
+    "scale_min": 0.13,
+    "scale_max": 1.0,
+    "active_coordinates": 7083,
+    "final": {
+      "epoch": 1,
+      "evaluations": 4,
+      "mse": 0.04369316702558147,
+      "bce": 0.0,
+      "correlation": 0.0,
+      "prior": 0.0,
+      "captured_start_zero_energy": 0.7825821731589265,
+      "gain_min": 0.028537688192036517,
+      "gain_max": 1036.7447399606306,
+      "elapsed_seconds": 24.042600792017765
+    },
+    "bounds": {
+      "zero_response_mse": 0.05145505909970581,
+      "mean_response_bound": 0.04148524142533844,
+      "start_zero_mean_response_bound": 0.041536749763839996
+    },
+    "best_epoch": 1,
+    "best_training_mse": 0.04369316702558147,
+    "best_checkpoint_sha256": "58f220add91dcfd4f974155bf4f4f5eaddceb408b55e8db4162d13d9aa99b09b",
+    "capacity_gate": false,
+    "capacity_gate_definition": "last accepted iterate captures at least 90%; nonfinite termination cannot pass; optimizer convergence is reported separately"
+  },
+  "replay": {
+    "checkpoint_sha256": "58f220add91dcfd4f974155bf4f4f5eaddceb408b55e8db4162d13d9aa99b09b",
+    "manifest_sha256": "2a480076e93c5ff5b73f853b5e36b88e79000c98fd23d6061e9ef2b72a76b9d1",
+    "training_sha256": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "audit_script_sha256": "74b89999635eeff5dd6f5f8558e59a0af659a335e9bfc5fc08a3f11bbe7e47f2",
+    "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+    "epoch": 1,
+    "targets": [
+      "ADAL",
+      "ADAR"
+    ],
+    "training_trials": 50,
+    "numpy_mse": 0.04369316702558147,
+    "jax_mse": 0.04369316702558147,
+    "mse_absolute_difference": 0.0,
+    "bounds": {
+      "zero_response_mse": 0.05145505909970581,
+      "mean_response_bound": 0.04148524142533844,
+      "start_zero_mean_response_bound": 0.041536749763839996
+    },
+    "captured_start_zero_energy": 0.7825821731589271,
+    "nonzero_prepared_chemical_coefficients": 3638,
+    "chemical_edges": 3638,
+    "unforced_prepared_derivative_max": 0.00010394962652517333,
+    "scope": "Independent NumPy dynamics and weighted scoring of Rust-exported training sufficient statistics; no held-out observations or generalization estimate."
+  },
+  "stationarity": {
+    "active_coordinates": 7083,
+    "active_gradient_l2": 0.00018519120393341543,
+    "active_gradient_linf": 0.00012703626697680315,
+    "families": [
+      {
+        "family": "kernel",
+        "active_coordinates": 39,
+        "gradient_l2": 1.0058421678219363e-05,
+        "gradient_linf": 5.730024884477421e-06
+      },
+      {
+        "family": "native/calcium_tau",
+        "active_coordinates": 203,
+        "gradient_l2": 5.214047978126635e-06,
+        "gradient_linf": 3.5090658057278583e-06
+      },
+      {
+        "family": "native/chemical_sign",
+        "active_coordinates": 2457,
+        "gradient_l2": 4.1848621582398565e-06,
+        "gradient_linf": 1.5361614766231173e-06
+      },
+      {
+        "family": "native/chemical_strength",
+        "active_coordinates": 2457,
+        "gradient_l2": 3.0783530706945905e-05,
+        "gradient_linf": 2.2465314041799837e-05
+      },
+      {
+        "family": "native/gap_strength",
+        "active_coordinates": 812,
+        "gradient_l2": 1.4382031588447724e-05,
+        "gradient_linf": 7.95837743571472e-06
+      },
+      {
+        "family": "native/rest",
+        "active_coordinates": 203,
+        "gradient_l2": 0.00010900998439617254,
+        "gradient_linf": 0.00010124113138737124
+      },
+      {
+        "family": "native/slope",
+        "active_coordinates": 203,
+        "gradient_l2": 6.182960235940828e-06,
+        "gradient_linf": 2.5169080147384773e-06
+      },
+      {
+        "family": "native/synapse_tau",
+        "active_coordinates": 1,
+        "gradient_l2": 7.516020336869045e-07,
+        "gradient_linf": 7.516020336869045e-07
+      },
+      {
+        "family": "native/tau",
+        "active_coordinates": 203,
+        "gradient_l2": 5.390541167143654e-06,
+        "gradient_linf": 2.498829045369256e-06
+      },
+      {
+        "family": "native/threshold",
+        "active_coordinates": 203,
+        "gradient_l2": 0.00014401515988992692,
+        "gradient_linf": 0.00012703626697680315
+      },
+      {
+        "family": "observation/log_gain",
+        "active_coordinates": 302,
+        "gradient_l2": 1.7436954765864152e-05,
+        "gradient_linf": 5.391691315249181e-06
+      }
+    ],
+    "schema_version": 1,
+    "metrics": {
+      "mse": 0.04369316702558147,
+      "bce": 0.0,
+      "correlation": 0.0,
+      "prior": 0.0
+    },
+    "epoch": 1,
+    "declared_gtol": 1e-09,
+    "active_gradient_linf_meets_declared_gtol": false,
+    "optimizer_coordinate_gradient": {
+      "active_coordinates": 7083,
+      "active_gradient_l2": 4.823857949508146e-05,
+      "active_gradient_linf": 2.2465314041799837e-05,
+      "families": [
+        {
+          "family": "kernel",
+          "active_coordinates": 39,
+          "gradient_l2": 1.0058421678219363e-05,
+          "gradient_linf": 5.730024884477421e-06
+        },
+        {
+          "family": "native/calcium_tau",
+          "active_coordinates": 203,
+          "gradient_l2": 5.214047978126635e-06,
+          "gradient_linf": 3.5090658057278583e-06
+        },
+        {
+          "family": "native/chemical_sign",
+          "active_coordinates": 2457,
+          "gradient_l2": 4.1848621582398565e-06,
+          "gradient_linf": 1.5361614766231173e-06
+        },
+        {
+          "family": "native/chemical_strength",
+          "active_coordinates": 2457,
+          "gradient_l2": 3.0783530706945905e-05,
+          "gradient_linf": 2.2465314041799837e-05
+        },
+        {
+          "family": "native/gap_strength",
+          "active_coordinates": 812,
+          "gradient_l2": 1.4382031588447724e-05,
+          "gradient_linf": 7.95837743571472e-06
+        },
+        {
+          "family": "native/rest",
+          "active_coordinates": 203,
+          "gradient_l2": 1.744159750338761e-05,
+          "gradient_linf": 1.61985810219794e-05
+        },
+        {
+          "family": "native/slope",
+          "active_coordinates": 203,
+          "gradient_l2": 6.182960235940828e-06,
+          "gradient_linf": 2.5169080147384773e-06
+        },
+        {
+          "family": "native/synapse_tau",
+          "active_coordinates": 1,
+          "gradient_l2": 7.516020336869045e-07,
+          "gradient_linf": 7.516020336869045e-07
+        },
+        {
+          "family": "native/tau",
+          "active_coordinates": 203,
+          "gradient_l2": 5.390541167143654e-06,
+          "gradient_linf": 2.498829045369256e-06
+        },
+        {
+          "family": "native/threshold",
+          "active_coordinates": 203,
+          "gradient_l2": 1.87219707856905e-05,
+          "gradient_linf": 1.651471470698441e-05
+        },
+        {
+          "family": "observation/log_gain",
+          "active_coordinates": 302,
+          "gradient_l2": 1.7436954765864152e-05,
+          "gradient_linf": 5.391691315249181e-06
+        }
+      ]
+    },
+    "optimizer_coordinate_gradient_meets_gtol": false,
+    "input_sha256": {
+      "checkpoint": "58f220add91dcfd4f974155bf4f4f5eaddceb408b55e8db4162d13d9aa99b09b",
+      "manifest": "2a480076e93c5ff5b73f853b5e36b88e79000c98fd23d6061e9ef2b72a76b9d1",
+      "training": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+      "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629"
+    },
+    "script_sha256": "464c60683684846246e971dc0a47042b9db7cd652c66bb0f1106fce01b781207",
+    "jax": "0.11.2",
+    "scope": "One frozen training checkpoint, existing objective and raw active parameter coordinates. No parameter updates, finite-difference claim or held-out selection. A small gradient does not prove global optimality or sufficient model capacity; this is not an optimizer termination report."
+  },
+  "scope": "Precommit dirty-worktree implementation smoke; one accepted update, excluded from declared comparison."
+}

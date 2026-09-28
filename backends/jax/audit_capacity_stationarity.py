@@ -82,10 +82,18 @@ def main():
     if not np.isfinite(float(value)) or abs(metrics['mse'] - saved['metrics']['mse']) > 1e-10:
         raise ValueError('checkpoint score does not reproduce')
     result = summarize(gradient, active, [g['name'] for g in base['parameters']['groups']])
+    family_scales = manifest['fitting_optimizer'].get('family_scales', {})
+    scaled_gradient = jax.tree.map(lambda v: v, gradient)
+    scaled_gradient['groups'] = gradient['groups'] * np.asarray([
+        family_scales.get('native/' + g['name'].split('/')[0], 1.)
+        for g in base['parameters']['groups']])
+    scaled = summarize(scaled_gradient, active, [g['name'] for g in base['parameters']['groups']])
     gtol = manifest['fitting_optimizer']['gtol']
     result.update({'schema_version': 1, 'metrics': metrics, 'epoch': base['epoch'],
                    'declared_gtol': gtol,
                    'active_gradient_linf_meets_declared_gtol': result['active_gradient_linf'] <= gtol,
+                   'optimizer_coordinate_gradient': scaled,
+                   'optimizer_coordinate_gradient_meets_gtol': scaled['active_gradient_linf'] <= gtol,
                    'input_sha256': {k: digest(getattr(a, k)) for k in ['checkpoint', 'manifest', 'training', 'graph']},
                    'script_sha256': digest(__file__), 'jax': jax.__version__,
                    'scope': 'One frozen training checkpoint, existing objective and raw active parameter coordinates. No parameter updates, finite-difference claim or held-out selection. A small gradient does not prove global optimality or sufficient model capacity; this is not an optimizer termination report.'})
