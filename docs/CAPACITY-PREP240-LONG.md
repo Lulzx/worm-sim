@@ -149,3 +149,52 @@ does not establish stability of nearby trial parameters. Distinguish a numerical
 failure from sensitivity to preparation or a different dynamical response before
 changing optimizer safeguards or launching another fit. No probe is promoted
 to a fitted checkpoint, and no held-out scoring or new dynamics are introduced.
+
+
+## High-loss perturbation audit
+
+The [excursion receipt](capacity-prep240-long-excursion.json) reconstructs the
+negative 1e-5 threshold probe from the frozen endpoint gradient. Its JAX MSE
+exactly matches the earlier directional receipt. The generated artifact is
+explicitly an **unaccepted diagnostic perturbation**, not a fitted checkpoint.
+
+```sh
+.venv-jax/bin/python scripts/audit_capacity_excursion.py \
+  --checkpoint runs/capacity-prep240-eval1001/last-accepted.json \
+  --manifest runs/capacity-prep240-eval1001/manifest.json \
+  --training runs/overfit-seed1-training.json --graph runs/c302-audit.json \
+  --directions runs/capacity-prep240-long-directions.json \
+  --output runs/capacity-prep240-long-excursion.json
+```
+
+| Probe replay | Training MSE |
+| --- | ---: |
+| JAX, dt 0.005, preparation 240 s | 2.016545618060591 |
+| Independent NumPy, same settings | 2.016545618060596 |
+| NumPy, dt 0.0025 | 2.016271150501991 |
+| NumPy, preparation 480 s | 2.016545617649954 |
+| NumPy, preparation 960 s | 2.016545617649954 |
+| NumPy, no stimulation | 0.051455059101597 |
+
+Halving the step changes predictions by at most 0.00396. Longer preparation
+changes them by at most 7.05e-9, and the maximum prepared-state derivative falls
+from 5.17e-12 to 6.76e-14. The no-stimulation prediction energy is 2.74e-21.
+The high loss therefore survives these numerical/preparation controls.
+
+A separate [prepared-state comparison](capacity-prep240-long-excursion-state.json)
+finds a maximum voltage difference of **1.336 normalized units** between the
+endpoint and probe, despite their threshold displacement having length only
+1e-5. RMHL changes from -1.03416 to 0.301913. Calcium and synaptic-release
+components change by up to 0.9681 and 0.4841. This comparison constructs the
+independent `Replay` for each saved base model with the same graph and compares
+its `.state` after preparation; input and replay-source hashes are recorded.
+
+**Interpretation:** the large response change is accompanied by a large change
+in the prepared resting state. The evidence is consistent with switching between
+attraction basins during preparation, rather than merely a large local curvature
+within the endpoint's resting state. This is not a formal bifurcation analysis:
+step refinement is limited, and the original rejected optimizer vectors were
+not retained. The next diagnostic is a frozen-parameter cross-initialization
+of the two resting states to test whether both persist at the same parameters.
+Do that before choosing a remedy for initialization or line-search behavior;
+no new fit, model feature or held-out selection has been performed.

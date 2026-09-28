@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "input_sha256": {
+    "checkpoint": "df12786dce9b508e3b9a456bf4c04adeebd5dd53e5aeafc257499e681f08fa0b",
+    "manifest": "01ee46fc1c1ef3afaf8ea3d50722c4b36dea1a18e204f7b20d7df721c20121c7",
+    "training": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "directions": "c74d57286162e9b0d6112abed1e5a537d0b302e04ac7bb716f139417bfa25160"
+  },
+  "script_sha256": "b3424038693a9be265120a3360f8f67db5eb6957624cf85e99a8802c1ff897c7",
+  "jax": "0.11.2",
+  "probe_sha256": "18cc803d0aa35829a507f2ecc5148bd43f4247f5e1c21e35fb21987b89b4896e",
+  "numerics_sha256": "261730b8727f7ebbb71be9fb8e18e68c62a4a16af70ce2c6079699e0ddd6d6b3",
+  "probe_provenance": {
+    "parent_sha256": "df12786dce9b508e3b9a456bf4c04adeebd5dd53e5aeafc257499e681f08fa0b",
+    "family": "native/threshold",
+    "signed_negative_gradient_step": -1e-05,
+    "scope": "Unaccepted diagnostic perturbation; not a fitted checkpoint."
+  },
+  "probe_metrics": {
+    "mse": 2.0165456180605905,
+    "bce": 0.0,
+    "correlation": 0.0,
+    "prior": 0.0
+  },
+  "numerics": {
+    "checkpoint_sha256": "18cc803d0aa35829a507f2ecc5148bd43f4247f5e1c21e35fb21987b89b4896e",
+    "manifest_sha256": "01ee46fc1c1ef3afaf8ea3d50722c4b36dea1a18e204f7b20d7df721c20121c7",
+    "training_sha256": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "graph_sha256": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "script_sha256": "0e7e69c00e2727c709c043cdda52ce624c1b58a2b7b16b2c9a86da0d0a947551",
+    "replay_script_sha256": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9",
+    "variants": [
+      {
+        "variant": "reference",
+        "dt": 0.005,
+        "preparation_seconds": 240.0,
+        "training_mse": 2.0165456180605963,
+        "weighted_prediction_energy": 2.0172342472009794,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 0.0,
+        "max_absolute_difference_from_previous_variant": 0.0,
+        "unforced_prepared_derivative_max": 5.17353673651416e-12
+      },
+      {
+        "variant": "half_step",
+        "dt": 0.0025,
+        "preparation_seconds": 240.0,
+        "training_mse": 2.016271150501991,
+        "weighted_prediction_energy": 2.016956039814881,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 0.003956612302133067,
+        "max_absolute_difference_from_previous_variant": 0.003956612302133067,
+        "unforced_prepared_derivative_max": 5.334333182862789e-12
+      },
+      {
+        "variant": "double_preparation",
+        "dt": 0.005,
+        "preparation_seconds": 480.0,
+        "training_mse": 2.016545617649954,
+        "weighted_prediction_energy": 2.017234246788791,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 7.044933525435226e-09,
+        "max_absolute_difference_from_previous_variant": 0.003956616611138664,
+        "unforced_prepared_derivative_max": 6.760377270405884e-14
+      },
+      {
+        "variant": "quadruple_preparation",
+        "dt": 0.005,
+        "preparation_seconds": 960.0,
+        "training_mse": 2.016545617649954,
+        "weighted_prediction_energy": 2.017234246788791,
+        "stimulus_enabled": true,
+        "max_absolute_prediction_difference": 7.044933525435226e-09,
+        "max_absolute_difference_from_previous_variant": 0.0,
+        "unforced_prepared_derivative_max": 6.760377270405884e-14
+      },
+      {
+        "variant": "no_stimulus",
+        "dt": 0.005,
+        "preparation_seconds": 240.0,
+        "training_mse": 0.051455059101597395,
+        "weighted_prediction_energy": 2.7400254120438887e-21,
+        "stimulus_enabled": false,
+        "max_absolute_prediction_difference": 35.395644574731215,
+        "max_absolute_difference_from_previous_variant": 35.39564457248425,
+        "unforced_prepared_derivative_max": 5.17353673651416e-12
+      }
+    ],
+    "scope": "Frozen parameters, independent NumPy replay on training targets only. Step/preparation variants and a zero-current control are diagnostics, not refits or held-out scores. Prediction energy is measured on observed target-neuron traces using the same confidence weights."
+  },
+  "scope": "Reconstructed training-only unaccepted threshold perturbation. Independent NumPy step/preparation controls; no optimization or held-out selection."
+}

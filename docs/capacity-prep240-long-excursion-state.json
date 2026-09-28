@@ -1,0 +1,48 @@
+{
+  "input_sha256": {
+    "runs/capacity-prep240-eval1001/last-accepted.json": "df12786dce9b508e3b9a456bf4c04adeebd5dd53e5aeafc257499e681f08fa0b",
+    "runs/capacity-prep240-long-excursion.probe.json": "18cc803d0aa35829a507f2ecc5148bd43f4247f5e1c21e35fb21987b89b4896e",
+    "runs/c302-audit.json": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "scripts/replay_level0_atlas.py": "fdff39f5bc9d68ddd354f7472b72417ab760ab4e1f10ba8307243262ebc885e9"
+  },
+  "state_difference_linf": 1.3360724916039555,
+  "state_difference_l2": 3.895698759247944,
+  "components": {
+    "voltage": 1.3360724916039555,
+    "calcium": 0.9681079306016789,
+    "synaptic_release": 0.48410650078266393
+  },
+  "largest_voltage_changes": [
+    {
+      "neuron": "RMHL",
+      "parent": -1.034159444630943,
+      "probe": 0.30191304697301236,
+      "delta": 1.3360724916039555
+    },
+    {
+      "neuron": "AVKL",
+      "parent": -2.1855127592254813,
+      "probe": -1.118730767073054,
+      "delta": 1.0667819921524273
+    },
+    {
+      "neuron": "RICL",
+      "parent": -2.3300185243842213,
+      "probe": -1.3502241132976112,
+      "delta": 0.9797944110866101
+    },
+    {
+      "neuron": "RMHR",
+      "parent": -1.4577333166426538,
+      "probe": -0.48938421404773047,
+      "delta": 0.9683491025949233
+    },
+    {
+      "neuron": "RMDDR",
+      "parent": -1.229198775588161,
+      "probe": -0.3302238612819525,
+      "delta": 0.8989749143062085
+    }
+  ],
+  "scope": "Frozen NumPy prepared-state comparison at dt .005 and preparation 240s; not a bifurcation analysis."
+}

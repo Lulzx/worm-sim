@@ -66,7 +66,10 @@ This verifies the fitting implementation, not biological adequacy.
    loss-change termination occurs with scaled gradient infinity norm 1.54e-4
    versus the declared 1e-9 tolerance; the 90% gate still fails. Local directional
    finite differences confirm remaining descent, but a nearby threshold probe
-   raises loss sharply and needs its own numerical/preparation audit. Continue
+   raises loss sharply. Its independent replay, half-step and longer-preparation
+   controls retain the high loss; the prepared voltage state changes by up to
+   1.336 normalized units. Test for coexisting resting states before changing
+   initialization or optimizer behavior. Continue
    optimization/capacity diagnosis until the small-target gate passes; then
    replicate across unrelated training targets and fit the training population.
    A failed small-target gate alone does not identify model capacity as the cause.
