@@ -408,8 +408,8 @@ frame timestamps and zsize 12. Their last frame timestamps are approximately
 that rate; this screen did not decode its payload or neural response arrays.
 
 This differs from the current 2-Hz atlas benchmark grid and must be accounted
-for explicitly in any later import. Timestamp monotonicity, per-event coverage
-and gaps have not yet been checked. The screen does not establish independent
+for explicitly in any later import. The subsequent window and joint audits below check timestamp monotonicity,
+per-event coverage and gap locations. The screen does not establish independent
 animals or remove the existing target/illumination ambiguities, and the fresh
 holdout remains unsecured.
 
@@ -433,8 +433,9 @@ index convention. Neural responses and saved numerical `timevec` remain opaque.
 Each recording has one raw-frame gap greater than twice its median frame spacing.
 Median volume-start spacing is 0.9574 seconds, with maximum intervals of
 4.70–4.73 seconds. This confirms that a uniform average-rate grid hides acquisition
-irregularity. Full endpoint coverage does not mean a window is gap-free; the
-present receipt does not localize those gaps relative to individual events.
+irregularity. Full endpoint coverage does not mean a window is gap-free; that
+receipt did not localize those gaps relative to individual events; the joint audit
+below does.
 Only 22 of 74 windows avoid another delivered stimulus under this screen.
 Do not treat the events as independent single-stimulus trials, interpolate gaps
 silently, or regard this as validation of a single-neuron holdout. Animal identity,
@@ -443,3 +444,33 @@ illumination, response synchronization and label confidence remain unresolved.
 Two tests verify coverage/overlap calculations and reject unordered/nonfinite
 clocks, incomplete volumes, invalid bounds and non-boundary onsets. Existing
 `test_dunn_*.py` CI discovery includes these tests automatically.
+
+
+### Joint spatial and timing screen
+
+The [joint receipt](dunn-joint-metadata-screen.json) localizes every raw-frame
+interval exceeding twice the recording's median frame spacing. Each recording's
+only detected gap lies between frames 11 and 12, approximately 0.93–4.77 seconds
+into acquisition. None overlaps any of the 74 stimulus windows. This threshold
+screen does not establish uniform sampling or fluorescence synchronization.
+
+The intersection joins spatial and timing receipts only when pickle hashes,
+ordered event indices and onset frame/volume indices agree. An event passes this
+metadata screen only with one named expressing soma, no unlabeled segmented soma
+in the projected disk, full 10-second history and 20-second forecast coverage,
+no other delivered stimulus and no detected frame gap in that window.
+
+| Recording | Spatial screen | No other stimulus | Joint screen |
+| --- | ---: | ---: | ---: |
+| 20221106-21-00-09 | 7 | 14 | 3 |
+| 20221106-21-23-19 | 8 | 2 | 0 |
+| 20221106-21-47-31 | 13 | 6 | 3 |
+
+Only **6 of 74 events** pass the combined metadata screen. The earlier counts of
+28 spatially screened events and 22 isolated windows cannot be used as a cohort
+size. These six events still do not constitute an accepted holdout: independent
+animal identity, illumination, label confidence and response synchronization
+remain unresolved. No candidate neural responses or model scores were decoded.
+
+All 13 Dunn metadata tests pass, including new gap/window boundary tests and
+intersection tests that reject mismatched source hashes and event alignment.
