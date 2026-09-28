@@ -90,6 +90,9 @@ and still missed the 90% gate. A bounded
 to 78.26%. A subsequent
 [coordinate-scaling comparison](docs/CAPACITY-COORDINATE-SCALING.md) reached 78.63%
 versus 78.42% for its control; both exhausted their budgets and missed the gate.
+A [240-second preparation continuation](docs/CAPACITY-PREP240.md) reached 78.82%
+with stable endpoint preparation gradients, but also exhausted its budget and
+failed the gate.
 New dynamical features are paused. Existing validation/test results are
 exploratory; a fresh confirmatory cohort remains outstanding.
 

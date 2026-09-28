@@ -58,7 +58,9 @@ This verifies the fitting implementation, not biological adequacy.
    and fail the same gate. A subsequent
    [coordinate-scaling comparison](CAPACITY-COORDINATE-SCALING.md) reaches 78.63%
    versus 78.42% for its control, again without convergence or a gate pass;
-   endpoint audits also show increased finite-preparation sensitivity. Continue
+   endpoint audits also show increased finite-preparation sensitivity. A
+   [240-second continuation](CAPACITY-PREP240.md) reaches 78.82% with stable
+   endpoint preparation gradients; it remains nonstationary and fails the gate. Continue
    optimization/capacity diagnosis until the small-target gate passes; then
    replicate across unrelated training targets and fit the training population.
    A failed small-target gate alone does not identify model capacity as the cause.
