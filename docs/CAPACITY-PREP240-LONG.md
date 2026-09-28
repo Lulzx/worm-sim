@@ -243,3 +243,48 @@ optimizer restart. Never reseed from the previous accepted/trial state inside
 an objective call: that would make results depend on evaluation order. Preserve
 the original-seed result and failed capacity gate. This diagnostic does not
 select among held-out responses, change dynamics, or launch another fit.
+
+
+## Fixed-seed objective preflight
+
+The [ten-evaluation audit](capacity-fixed-seed-audit.json) freezes the endpoint's
+NumPy-prepared state as a constant initial vector and keeps 240 seconds of
+fully differentiated unforced preparation. Parameters and data are unchanged.
+
+- Baseline MSE: 0.04358849292545398 (change 3.47e-14).
+- Active-gradient relative L2 change: 9.12e-7; cosine essentially one.
+- Central finite differences at h=1e-6 agree with negative-gradient slopes in
+  threshold, rest and chemical-strength families (relative errors below 2.3e-5).
+- The old high-loss threshold perturbation now gives MSE 0.043588535892291544.
+- Repeating the baseline after all perturbations changes neither loss nor gradient.
+
+The runner now accepts `--fixed-seed-audit` explicitly. It checks the receipt's
+parent checkpoint, graph and training hashes and audit-script hash, requires a
+finite state of unchanged dimensions, and records the receipt hash in the run
+manifest. The seed is fixed for every evaluation and saved in every checkpoint.
+Subsequent continuations inherit that seed and retain the original rest-parameter
+initialization used to reconstruct frozen coordinates. Other warm-start lineage
+and parameter checks remain enforced. This changes the initialization contract;
+it does not establish convergence, global smoothness or scientific validity.
+
+```sh
+.venv-jax/bin/python scripts/audit_capacity_fixed_seed.py \
+  --checkpoint runs/capacity-prep240-eval1001/last-accepted.json \
+  --manifest runs/capacity-prep240-eval1001/manifest.json \
+  --training runs/overfit-seed1-training.json --graph runs/c302-audit.json \
+  --output runs/capacity-prep240-fixed-seed.json
+```
+
+The audit ran against the historical fitting-source hashes before the runner
+change. Reproducing it later requires that historical backend snapshot. The
+receipt preserves exact hashes; it must not be regenerated with mismatched
+sources. The new runner uses the recorded fixed vector, without rerunning or
+mutating the historical audit.
+
+Five overfit tests and seven quasi-Newton tests pass, including explicit seed
+permission, dimension/finiteness rejection and parameter preservation. Two
+[one-evaluation smoke receipts](capacity-fixed-seed-smoke.json) verify the explicit
+seed and its inheritance by a continuation. Both reproduce MSE
+0.04358849292545398 with zero accepted updates. These ran from the implementation
+worktree and record its dirty state and exact backend hashes. No capacity
+improvement is claimed from these smoke tests.

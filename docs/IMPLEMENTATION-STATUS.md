@@ -70,8 +70,9 @@ This verifies the fitting implementation, not biological adequacy.
    controls retain the high loss; the prepared voltage state changes by up to
    1.336 normalized units. Cross-initialization confirms two numerically
    stationary states under each fixed parameter set, with distinct training
-   responses. A fixed, recorded prepared-state seed needs objective/gradient
-   checks before another bounded fitting experiment. Continue
+   responses. A fixed, recorded prepared-state seed passes objective/gradient checks and
+   removes the audited loss excursion. The runner supports an explicit audited
+   seed and tested inheritance; an equal-budget fitting comparison is pending. Continue
    optimization/capacity diagnosis until the small-target gate passes; then
    replicate across unrelated training targets and fit the training population.
    A failed small-target gate alone does not identify model capacity as the cause.

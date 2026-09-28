@@ -67,6 +67,14 @@ class OverfitTests(unittest.TestCase):
             with self.assertRaises(ValueError):warm_parameters(saved,invalid,g,t,c,['A'],allow_preparation_change=True)
         invalid=copy.deepcopy(longer);invalid['initial'][0]=99.
         with self.assertRaises(ValueError):warm_parameters(saved,invalid,g,t,c,['A'],allow_preparation_change=True)
+        seeded=copy.deepcopy(new);seeded['initial'][0]+=.01
+        with self.assertRaises(ValueError):warm_parameters(saved,seeded,g,t,c,['A'])
+        q=warm_parameters(saved,seeded,g,t,c,['A'],initial_override=seeded['initial'])
+        for left,right in zip(jax.tree.leaves(theta),jax.tree.leaves(q),strict=True):
+            np.testing.assert_array_equal(left,right)
+        for bad_seed in [[0.], [float('nan')]*len(new['initial']), new['initial']]:
+            with self.assertRaises(ValueError):
+                warm_parameters(saved,seeded,g,t,c,['A'],initial_override=bad_seed)
         for invalid_step in [0.,float('nan'),new['config']['dt']*2]:
             invalid=copy.deepcopy(refined);invalid['config']['dt']=invalid_step
             with self.assertRaises(ValueError):warm_parameters(saved,invalid,g,t,c,['A'],allow_step_change=True)

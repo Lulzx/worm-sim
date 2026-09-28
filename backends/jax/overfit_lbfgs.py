@@ -30,6 +30,7 @@ def main():
     parser.add_argument("--coordinate-scaling", choices=["identity", "curvature-v1"], default="identity")
     parser.add_argument('--dt',type=float,default=.005)
     parser.add_argument('--preparation-seconds',type=float,default=None)
+    parser.add_argument('--fixed-seed-audit', help='Explicit frozen-seed audit receipt for this warm parent')
     a=parser.parse_args()
     if a.max_evaluations<1 or a.max_iterations<1 or a.maxcor<1 or not np.isfinite(a.dt) or a.dt<=0:
         raise ValueError('invalid budgets or step')
@@ -38,13 +39,26 @@ def main():
     if digest(paths['model'])!=training['model_sha256']:
         raise ValueError('training export belongs to another checkpoint')
     base=parent['model']['base_model'];targets=parent['targets']
-    rest=base['initial'][0]
+    rest=parent.get('warm_start',{}).get('initial_rest_parameter',base['initial'][0])
     model,training,config=prepare(original,training,targets,base['config']['epochs'],base['config']['learning_rate'],rest,base['config']['preparation_seconds'])
+    model['initial']=list(base['initial'])
+    seed_override=None
+    if a.fixed_seed_audit:
+        paths['fixed_seed_audit']=Path(a.fixed_seed_audit)
+        seed_audit=json.loads(paths['fixed_seed_audit'].read_text())
+        for key,path in [('checkpoint',paths['warm_start']),('training',paths['training']),('graph',paths['graph'])]:
+            if seed_audit['input_sha256'][key]!=digest(path):
+                raise ValueError('fixed-seed audit lineage differs: '+key)
+        audit_script=Path(__file__).resolve().parents[2]/'scripts'/'audit_capacity_fixed_seed.py'
+        if seed_audit['script_sha256']!=digest(audit_script):
+            raise ValueError('fixed-seed audit source differs')
+        seed_override=seed_audit['fixed_initial_state']
+        model['initial']=seed_override
     model['config']['dt']=a.dt
     if a.preparation_seconds is not None:
         model['config']['preparation_seconds']=a.preparation_seconds
     theta=warm_parameters(parent,model,graph,training,config,targets,allow_step_change=True,
-        allow_preparation_change=a.preparation_seconds is not None)
+        allow_preparation_change=a.preparation_seconds is not None, initial_override=seed_override)
     _,active,groups,data,prior=build(model,graph,training,config)
     scaling = {'native/threshold': 0.13, 'native/rest': 0.16} if a.coordinate_scaling == 'curvature-v1' else {}
     coordinate_scale = jax.tree.map(lambda v: np.ones(v.shape), theta)
@@ -52,8 +66,10 @@ def main():
                                          for g in model['parameters']['groups']])
     reference=bounds(groups);out=Path(a.output);out.mkdir(exist_ok=False)
     source=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
-    warm={'checkpoint_sha256':digest(paths['warm_start']),'source_epoch':base['epoch'],
+    warm={'initial_rest_parameter':rest,'checkpoint_sha256':digest(paths['warm_start']),'source_epoch':base['epoch'],
         'parent_dt':base['config']['dt'],'run_dt':a.dt,
+        'initial_state_policy':'audited fixed prepared seed' if a.fixed_seed_audit else 'inherited parent seed',
+        'fixed_seed_audit_sha256':digest(paths['fixed_seed_audit']) if a.fixed_seed_audit else None,
         'parent_preparation_seconds':base['config']['preparation_seconds'],
         'run_preparation_seconds':model['config']['preparation_seconds'],
         'parent_training_mse':parent['metrics']['mse'],'optimizer_state':'fresh L-BFGS history; no Adam moments',
@@ -86,7 +102,7 @@ def main():
                 write('failure.json',failed)
         def on_accepted(epoch,n,p,metrics):
             nonlocal best,best_epoch,final
-            if epoch==0 and a.dt==base['config']['dt'] and model['config']['preparation_seconds']==base['config']['preparation_seconds'] and abs(metrics['mse']-parent['metrics']['mse'])>1e-10:
+            if epoch==0 and not a.fixed_seed_audit and a.dt==base['config']['dt'] and model['config']['preparation_seconds']==base['config']['preparation_seconds'] and abs(metrics['mse']-parent['metrics']['mse'])>1e-10:
                 raise ValueError('initial score differs from parent')
             if epoch==0:
                 write('initial-objective.json', {'parent_mse':parent['metrics']['mse'],
