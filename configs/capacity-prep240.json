@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "parent_checkpoint": "runs/capacity-scaling-curvature-v1-eval201/last-accepted.json",
+  "parent_sha256": "0e81cd699dae8353e81c5940de6c35f8f88577894dc9d987ad4af298b30278be",
+  "output": "runs/capacity-prep240-eval201",
+  "targets": [
+    "ADAL",
+    "ADAR"
+  ],
+  "training_trials": 50,
+  "preparation_seconds": 240,
+  "parent_preparation_seconds": 120,
+  "dt": 0.005,
+  "coordinate_scaling": "curvature-v1",
+  "family_scales": {
+    "native/threshold": 0.13,
+    "native/rest": 0.16
+  },
+  "max_evaluations": 201,
+  "max_iterations": 200,
+  "maxcor": 100,
+  "initial_mse_expected": 0.04365803876375997,
+  "initial_mse_tolerance": 1e-10,
+  "gate": "Unchanged 90% zero-start mean-response energy; last accepted iterate and eligible termination.",
+  "purpose": "Continue fitting with explicitly longer preparation after gradient sensitivity audit. This changes the finite-preparation objective, not model dynamics.",
+  "history": "Exact saved parameters; reset curvature history. Not an independent initialization.",
+  "endpoint_checks": [
+    "independent NumPy replay",
+    "half-step and longer-preparation predictions",
+    "raw and optimizer-coordinate stationarity",
+    "240/480/960-second gradient comparison",
+    "frozen-gain residual calibration",
+    "complete finite evaluation/accepted histories"
+  ],
+  "failure_policy": "No silent retry, budget extension, or dynamical changes. Retain failed evaluations.",
+  "scope": "Training only; no new held-out claims."
+}

@@ -76,7 +76,7 @@ def bounds(groups):
 
 
 
-def warm_parameters(saved, model, graph, training, configuration, targets, allow_step_change=False):
+def warm_parameters(saved, model, graph, training, configuration, targets, allow_step_change=False, allow_preparation_change=False):
     """Reuse only fitted parameters; keep the new run's initialization and objective."""
     if saved.get('format') != 'wormsim-training-capacity-diagnostic' or saved.get('targets') != targets:
         raise ValueError('warm start requires the same diagnostic target subset')
@@ -97,6 +97,11 @@ def warm_parameters(saved, model, graph, training, configuration, targets, allow
         if not np.isfinite(dt) or dt <= 0 or dt > base['config']['dt']:
             raise ValueError('warm-start step override must be positive and no larger than parent')
         expected['config']['dt'] = dt
+    if allow_preparation_change:
+        duration = model['config']['preparation_seconds']
+        if not np.isfinite(duration) or duration <= 0 or duration < base['config']['preparation_seconds']:
+            raise ValueError('warm-start preparation override must be positive and no shorter than parent')
+        expected['config']['preparation_seconds'] = duration
     if reconstructed != expected:
         raise ValueError('warm-start lineage, objective, initialization, or parameter layout differs')
     return theta

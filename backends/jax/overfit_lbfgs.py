@@ -29,6 +29,7 @@ def main():
     parser.add_argument('--maxcor',type=int,default=20,help='L-BFGS curvature correction pairs retained')
     parser.add_argument("--coordinate-scaling", choices=["identity", "curvature-v1"], default="identity")
     parser.add_argument('--dt',type=float,default=.005)
+    parser.add_argument('--preparation-seconds',type=float,default=None)
     a=parser.parse_args()
     if a.max_evaluations<1 or a.max_iterations<1 or a.maxcor<1 or not np.isfinite(a.dt) or a.dt<=0:
         raise ValueError('invalid budgets or step')
@@ -40,7 +41,10 @@ def main():
     rest=base['initial'][0]
     model,training,config=prepare(original,training,targets,base['config']['epochs'],base['config']['learning_rate'],rest,base['config']['preparation_seconds'])
     model['config']['dt']=a.dt
-    theta=warm_parameters(parent,model,graph,training,config,targets,allow_step_change=True)
+    if a.preparation_seconds is not None:
+        model['config']['preparation_seconds']=a.preparation_seconds
+    theta=warm_parameters(parent,model,graph,training,config,targets,allow_step_change=True,
+        allow_preparation_change=a.preparation_seconds is not None)
     _,active,groups,data,prior=build(model,graph,training,config)
     scaling = {'native/threshold': 0.13, 'native/rest': 0.16} if a.coordinate_scaling == 'curvature-v1' else {}
     coordinate_scale = jax.tree.map(lambda v: np.ones(v.shape), theta)
@@ -49,7 +53,10 @@ def main():
     reference=bounds(groups);out=Path(a.output);out.mkdir(exist_ok=False)
     source=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
     warm={'checkpoint_sha256':digest(paths['warm_start']),'source_epoch':base['epoch'],
-        'parent_dt':base['config']['dt'],'run_dt':a.dt,'optimizer_state':'fresh L-BFGS history; no Adam moments',
+        'parent_dt':base['config']['dt'],'run_dt':a.dt,
+        'parent_preparation_seconds':base['config']['preparation_seconds'],
+        'run_preparation_seconds':model['config']['preparation_seconds'],
+        'parent_training_mse':parent['metrics']['mse'],'optimizer_state':'fresh L-BFGS history; no Adam moments',
         'epoch_convention':'accepted L-BFGS iterations; trial evaluations separately logged'}
     def write(name,value):
         with (out/name).open('x') as f:json.dump(value,f,indent=2,allow_nan=False)
@@ -79,8 +86,14 @@ def main():
                 write('failure.json',failed)
         def on_accepted(epoch,n,p,metrics):
             nonlocal best,best_epoch,final
-            if epoch==0 and a.dt==base['config']['dt'] and abs(metrics['mse']-parent['metrics']['mse'])>1e-10:
+            if epoch==0 and a.dt==base['config']['dt'] and model['config']['preparation_seconds']==base['config']['preparation_seconds'] and abs(metrics['mse']-parent['metrics']['mse'])>1e-10:
                 raise ValueError('initial score differs from parent')
+            if epoch==0:
+                write('initial-objective.json', {'parent_mse':parent['metrics']['mse'],
+                    'run_initial_mse':metrics['mse'], 'difference':metrics['mse']-parent['metrics']['mse'],
+                    'parent_dt':base['config']['dt'], 'run_dt':a.dt,
+                    'parent_preparation_seconds':base['config']['preparation_seconds'],
+                    'run_preparation_seconds':model['config']['preparation_seconds']})
             gains=np.exp(np.asarray(p['observation']['log_gain']))
             final=dict(epoch=epoch,evaluations=n,**metrics,
                 captured_start_zero_energy=(reference['zero_response_mse']-metrics['mse'])/(reference['zero_response_mse']-reference['start_zero_mean_response_bound']),

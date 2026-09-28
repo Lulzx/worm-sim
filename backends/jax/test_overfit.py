@@ -57,6 +57,16 @@ class OverfitTests(unittest.TestCase):
         q=warm_parameters(saved,refined,g,t,c,['A'],allow_step_change=True)
         for left,right in zip(jax.tree.leaves(theta),jax.tree.leaves(q),strict=True):
             np.testing.assert_array_equal(left,right)
+        longer=copy.deepcopy(new);longer['config']['preparation_seconds']+=1.
+        with self.assertRaises(ValueError):warm_parameters(saved,longer,g,t,c,['A'])
+        q=warm_parameters(saved,longer,g,t,c,['A'],allow_preparation_change=True)
+        for left,right in zip(jax.tree.leaves(theta),jax.tree.leaves(q),strict=True):
+            np.testing.assert_array_equal(left,right)
+        for duration in [0.,-1.,float('nan'),new['config']['preparation_seconds']/2]:
+            invalid=copy.deepcopy(new);invalid['config']['preparation_seconds']=duration
+            with self.assertRaises(ValueError):warm_parameters(saved,invalid,g,t,c,['A'],allow_preparation_change=True)
+        invalid=copy.deepcopy(longer);invalid['initial'][0]=99.
+        with self.assertRaises(ValueError):warm_parameters(saved,invalid,g,t,c,['A'],allow_preparation_change=True)
         for invalid_step in [0.,float('nan'),new['config']['dt']*2]:
             invalid=copy.deepcopy(refined);invalid['config']['dt']=invalid_step
             with self.assertRaises(ValueError):warm_parameters(saved,invalid,g,t,c,['A'],allow_step_change=True)
