@@ -3,6 +3,7 @@ import unittest
 import numpy as np
 from mirror_reliability import Model, mirror_map, mirror_pairs, rewire
 from probe_molecular_sign_agreement import group_table, permutation_test
+from compile_molecular_init import compile_labels, wiring_status
 
 
 class MirrorTests(unittest.TestCase):
@@ -70,6 +71,35 @@ class ProbeTests(unittest.TestCase):
         planted = np.where(labels != 0, labels, rng.choice([-1., 1.], n))*rng.uniform(.01, .2, n)
         p_planted = permutation_test(labels, planted, strata, 2000, rng)[3]
         self.assertLess(p_planted, .001)
+
+
+class CompilerTests(unittest.TestCase):
+    def table(self):
+        rows = [(-1, 'confirmed'), (-1, 'unconfirmed'), (1, 'untestable'), (None, 'confirmed'),
+                (0, 'confirmed'), (0, 'confirmed'), (0, 'untestable'), (-1, 'confirmed')]
+        return [{'label': label, 'status': status, 'stratum': f'GABA|{status}'} for label, status in rows]
+
+    def test_wiring_status_prefers_confirmation(self):
+        rel = {'a': {'mirror_present': False, 'mirror_defined': True},
+               'b': {'mirror_present': True, 'mirror_defined': True},
+               'c': {'mirror_present': False, 'mirror_defined': False}}
+        self.assertEqual(wiring_status(['a', 'b'], rel), 'confirmed')
+        self.assertEqual(wiring_status(['a', 'c'], rel), 'untestable')
+        self.assertEqual(wiring_status(['a'], rel), 'unconfirmed')
+
+    def test_molecular_arm_drops_unconfirmed_and_mixed_labels(self):
+        labels = compile_labels(self.table(), 'molecular', None)
+        np.testing.assert_array_equal(labels, [-1, 0, 1, 0, 0, 0, 0, -1])
+
+    def test_shuffled_arm_preserves_stratum_label_counts(self):
+        table = self.table()
+        molecular = compile_labels(table, 'molecular', None)
+        for seed in range(20):
+            shuffled = compile_labels(table, 'shuffled', seed)
+            for stratum in {t['stratum'] for t in table}:
+                idx = [i for i, t in enumerate(table) if t['stratum'] == stratum]
+                self.assertEqual(sorted(shuffled[idx]), sorted(molecular[idx]))
+        self.assertTrue(any(not np.array_equal(compile_labels(table, 'shuffled', s), molecular) for s in range(20)))
 
 
 if __name__ == '__main__':

@@ -39,7 +39,8 @@ def main():
     if digest(paths['model'])!=training['model_sha256']:
         raise ValueError('training export belongs to another checkpoint')
     base=parent['model']['base_model'];targets=parent['targets']
-    rest=parent.get('warm_start',{}).get('initial_rest_parameter',base['initial'][0])
+    # Fresh overfit.py parents record warm_start as null; their rest is the saved initial state.
+    rest=(parent.get('warm_start') or {}).get('initial_rest_parameter',base['initial'][0])
     model,training,config=prepare(original,training,targets,base['config']['epochs'],base['config']['learning_rate'],rest,base['config']['preparation_seconds'])
     model['initial']=list(base['initial'])
     seed_override=None

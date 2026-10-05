@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "compiler": {
+    "script": "scripts/compile_molecular_init.py",
+    "rule": "compiler-v0: unanimous directional label on reproducible wiring sets sign group to label at seed magnitude",
+    "evidence": "runs/molecular-th2/evidence.json",
+    "evidence_sha256": "71c987699a4f6388c9f66edda8a2ab8a5c30b1dc682afe37b8fda7e2713b8822",
+    "reliability_sha256": "8cca064e748b257869c5c75b6c14ad98f05cbd99a886efb2b6682a3105cacd71",
+    "script_sha256": "c950b99a6a61b8eb70b30151f47af2d957ef505613e26236a1bb815043602895",
+    "reliability": "data/c302-edge-reliability.json",
+    "receipts": "docs/molecular-init/"
+  },
+  "targets": ["ADAL", "ADAR"],
+  "training_trials": 50,
+  "seeds": [1, 2, 3],
+  "arms": [
+    {
+      "name": "random",
+      "start": "runs/level0-atlas-sign-seed{seed}-fit/epoch-0.json, unchanged",
+      "model_sha256": {
+        "1": "0b4d213bdbbff3853cfe61c49d3bdee16e1ca834ead72d5bc0f3956b745284ba",
+        "2": "c2f4dcf754b97aa3369c6d19862c068d34750a6dd9a95137c9ed741823cdfdab",
+        "3": "b25e9c2ebcad3abfccbd27e9f69e811650daf615ecb77d7ae9ed203b7231d3f6"
+      }
+    },
+    {
+      "name": "molecular",
+      "start": "compiler-v0 molecular arm applied to the random start of the same seed",
+      "model_sha256": {
+        "1": "e8093e699373121088737d92d79250ffc0d46c1103dcc6632ad9bc62a9fc244a",
+        "2": "e5f17da79ecb9474688987738a8d6cfb236bda4a1d91fafb89d3c56e32391316",
+        "3": "966704edcf8e3adb26b870b63409bb83bed5f42cb22eb6ead5270124f359038f"
+      }
+    },
+    {
+      "name": "shuffled",
+      "start": "compiler-v0 shuffled arm, permutation seed 100+seed, within transmitter-signature x wiring-status strata",
+      "model_sha256": {
+        "1": "8deb92ff48a0c747670e6841fc42384e2fefd9240be198a9f1c1110770419cac",
+        "2": "842cdf201ffea64067d180f7adaefd16b97d2a7d695db082eef98400433b414c",
+        "3": "8e18398830e0ed7cbcafa57b9bfd7a1d2801a3ad057a410875c5fa08a9b7732d"
+      }
+    }
+  ],
+  "output_root": "runs/molecular-init/{arm}-seed{seed}",
+  "start_stage": {
+    "script": "backends/jax/overfit.py",
+    "steps": 1,
+    "rest": -0.2,
+    "purpose": "Writes the epoch-zero capacity checkpoint; L-BFGS warm-starts from epoch-0.json, never epoch-1.json."
+  },
+  "dt": 0.005,
+  "preparation_seconds": 240,
+  "coordinate_scaling": "curvature-v1",
+  "family_scales": {
+    "native/threshold": 0.13,
+    "native/rest": 0.16
+  },
+  "max_evaluations": 401,
+  "max_iterations": 400,
+  "maxcor": 100,
+  "priors": "all disabled by the capacity objective; molecular evidence enters only through initialization",
+  "primary_comparison": "Last accepted captured zero-start energy, molecular minus shuffled, paired by seed. Supported only if molecular exceeds shuffled in all three seeds and the mean paired difference exceeds the largest absolute pairwise difference among the three random-arm seeds.",
+  "secondary_comparisons": [
+    "Shuffled minus random, paired by seed: effect of overwriting the same number of groups with any stratified labels.",
+    "Molecular-sign agreement of each endpoint with scripts/probe_molecular_sign_agreement.py, restricted to groups above the median absolute movement of that run.",
+    "Cross-seed agreement of endpoint signs, within arm, for groups that move above median in every seed of the arm."
+  ],
+  "capacity_gate": "Unchanged 90% zero-start mean-response energy; reported, not a decision criterion for this comparison.",
+  "endpoint_checks": [
+    "independent NumPy replay (scripts/audit_capacity_fit.py)",
+    "half-step and longer-preparation controls",
+    "finite and contiguous histories",
+    "input, backend source and configuration equality across arms except model and training export hashes"
+  ],
+  "failure_policy": "No retries, silent budget extensions, new dynamics, threshold changes or held-out scoring. Nonfinite failures are retained and count as failed arms.",
+  "interpretation": "Three paired seeds give no significance claim; a sign test on three pairs cannot fall below p = 0.125. Training capture on two related targets is not biological validation or generalization.",
+  "timing": "Concurrent CPU runs allowed; no controlled speed comparison."
+}

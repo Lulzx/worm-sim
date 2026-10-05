@@ -1,0 +1,231 @@
+{
+ "format": "wormsim-molecular-init-receipt",
+ "rule": "compiler-v0: unanimous directional label on reproducible wiring sets sign group to label at seed magnitude",
+ "arm": "shuffled",
+ "permutation_seed": 103,
+ "script_sha256": "c950b99a6a61b8eb70b30151f47af2d957ef505613e26236a1bb815043602895",
+ "input_sha256": {
+  "model": "b25e9c2ebcad3abfccbd27e9f69e811650daf615ecb77d7ae9ed203b7231d3f6",
+  "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+  "evidence": "71c987699a4f6388c9f66edda8a2ab8a5c30b1dc682afe37b8fda7e2713b8822",
+  "reliability": "8cca064e748b257869c5c75b6c14ad98f05cbd99a886efb2b6682a3105cacd71"
+ },
+ "output_sha256": "8e18398830e0ed7cbcafa57b9bfd7a1d2801a3ad057a410875c5fa08a9b7732d",
+ "seed": 3,
+ "seed_magnitude": 1.0986122886681098,
+ "sign_groups": 2457,
+ "labeled_groups": 198,
+ "mixed_label_groups": 0,
+ "labels_dropped_unconfirmed_wiring": 121,
+ "assigned_groups": 77,
+ "assigned_excitatory": 4,
+ "assigned_inhibitory": 73,
+ "assigned_by_status": {
+  "confirmed": 47,
+  "untestable": 30
+ },
+ "changed_groups": 40,
+ "changes": [
+  {
+   "name": "chemical_sign/neuron:AQR->suffix-pair:AVA",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:AQR->suffix-pair:PVP",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:AVL->neuron:SABD",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:AVL->neuron:VC1",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:AVM->neuron:VA2",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:AVM->neuron:VB3",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:DD2->neuron:DA3",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:DVB->neuron:PDA",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:PVR->neuron:PVR",
+   "seed_value": -1.0986122886681098,
+   "compiled_value": 1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:RIS->neuron:RMEV",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:RIS->suffix-pair:AVK",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:RIS->suffix-pair:SMDD",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:RIS->suffix-pair:URYV",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:RMED->suffix-pair:RIB",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:VD1->neuron:VA1",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:VD11->neuron:DD6",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:VD2->neuron:AS1",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:VD2->neuron:VA2",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:VD3->neuron:DD1",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:VD4->neuron:VA4",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:VD6->neuron:VA6",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/neuron:VD7->neuron:VB6",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:ADL->suffix-pair:AVD",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:ASH->suffix-pair:AVH",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:AUA->suffix-pair:BAG",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:AVF->neuron:AVG",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:AVF->suffix-pair:AVH",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:AVJ->suffix-pair:AVA",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:AVJ->suffix-pair:AVD",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:AVJ->suffix-pair:PVC",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:AWC->suffix-pair:ASE",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:IL1D->suffix-pair:RMDV",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:OLL->suffix-pair:AVE",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:OLQD->suffix-pair:SIBD",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:PHA->neuron:DVA",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:RIG->suffix-pair:RMH",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:RIM->suffix-pair:RIB",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:RIM->suffix-pair:SAAV",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:URYV->suffix-pair:RIA",
+   "seed_value": 1.0986122886681098,
+   "compiled_value": -1.0986122886681098
+  },
+  {
+   "name": "chemical_sign/suffix-pair:URYV->suffix-pair:SMDV",
+   "seed_value": -1.0986122886681098,
+   "compiled_value": 1.0986122886681098
+  }
+ ],
+ "scope": "Initialization only; capacity fits disable priors. The model keeps its seed in config because unassigned groups retain the seed draw; this receipt identifies the compiled values."
+}
