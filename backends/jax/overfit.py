@@ -184,6 +184,7 @@ def main():
         'input_sha256':hashes, 'targets':a.targets, 'training_trials':training['training_trials'],
         'warm_start':warm_info,
         'planted_truth':training.get('synthetic'),
+        'trial_split':training.get('trial_split'),
         'process_id':os.getpid(),
         'backend_source_sha256':{path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted(Path(__file__).parent.glob('*.py'))},
         'configuration':config, 'fit_config':model['config'], 'rest_initialization':a.rest,

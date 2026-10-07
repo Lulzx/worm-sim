@@ -178,3 +178,33 @@ untouched for the confirmatory comparison.
 
 **Not tested here:** truths far from the standard start, other targets, and
 more than one noise seed. Each needs a new declared arm.
+
+## Trial-split check on real data (declared before the fits)
+
+Tool: [`backends/jax/trial_split.py`](../backends/jax/trial_split.py). Its
+aggregation mirrors the Rust training exporter and is checked against it on the
+full trial set before any split is written. Splits are fixed by rule: each
+target's training trials, sorted by ID, go to the fit half at positions with
+index % 2 == parity. ADAL has 12 trials per half and ADAR 13. Both parities are
+run as two independent fits, so every trial is held out once.
+
+**Fits.** `overfit.py` on each fit-half export, with the reference settings:
+seed-1 epoch-zero start, rest −0.2, gains initialized at 10, Adam 0.01, 1,000
+updates, dt 0.01, 120 s preparation. A fit that stops on nonfinite values is
+scored on the checkpoints it saved.
+
+**Scores** (`trial_split.py score`, on the saved checkpoints every 50 updates
+plus `best.json`):
+- capture on the fit half and on the held half, with the gate's formula;
+- held-half expectation: the noise-ceiling capture a perfect shared-response
+  predictor would reach on the held means, with a 95% trial-bootstrap interval
+  (200 resamples within each target).
+
+**Rules.**
+1. The checkpoint is selected by held-half capture only.
+2. *Adequate:* the selected checkpoint's held-half capture reaches the lower
+   bound of the expectation interval.
+3. *Noise fitting:* held-half capture peaks at an update before the last saved
+   one while fit-half capture keeps rising. The fit-half gain after that peak is
+   reported as capture spent on noise.
+4. Both parities are reported. Neither is chosen after the fact.
