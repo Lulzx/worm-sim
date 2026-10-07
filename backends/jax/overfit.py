@@ -183,6 +183,7 @@ def main():
         'source_commit':source, 'source_worktree_dirty':bool(subprocess.check_output(['git','status','--porcelain'],text=True).strip()),
         'input_sha256':hashes, 'targets':a.targets, 'training_trials':training['training_trials'],
         'warm_start':warm_info,
+        'planted_truth':training.get('synthetic'),
         'process_id':os.getpid(),
         'backend_source_sha256':{path.name:hashlib.sha256(path.read_bytes()).hexdigest() for path in sorted(Path(__file__).parent.glob('*.py'))},
         'configuration':config, 'fit_config':model['config'], 'rest_initialization':a.rest,
@@ -229,6 +230,7 @@ def main():
     write('result.json',{'completed_steps':a.steps,'best_training_mse':best,'best_epoch':best_epoch,
         'best_checkpoint_sha256':hashlib.sha256((out/'best.json').read_bytes()).hexdigest(),
         'warm_start':warm_info,
+        'planted_truth':training.get('synthetic') is not None,
         'final':report,'bounds':reference,'capacity_gate':captured>=.9,
         'capacity_gate_definition':'final iterate captures at least 90% of the zero-start mean-response energy; no generalization claim'})
 

@@ -1,0 +1,40 @@
+{
+  "format": "wormsim-planted-truth-noise-ceiling",
+  "source_commit": "b0276453ca05c694cdaeec10a9d72a8e2e62f580",
+  "source_worktree_dirty": true,
+  "input_sha256": {
+    "training": "6ed9b3ca48f597fb476a633b8a12b39a0e9effd02f675db39dc7369e90383ebc",
+    "data": "2063f69753f9ab0dce9ee489214fc3eb641c451651a09cc4b2ee81f261df4b2b"
+  },
+  "jax": "0.11.2",
+  "devices": [
+    "cpu:0"
+  ],
+  "targets": [
+    "ADAL",
+    "ADAR"
+  ],
+  "zero_response_mse": 0.05145505909970581,
+  "start_zero_mean_response_bound": 0.04153674976384,
+  "explainable_energy": 0.009918309335865808,
+  "noise_energy": 0.004466129305908046,
+  "noise_share": 0.45029139086819786,
+  "expected_truth_capture": 0.5497086091318022,
+  "groups": [
+    {
+      "target": "ADAL",
+      "trials": 24,
+      "observed_neurons": 178,
+      "single_trial_neurons": 8,
+      "noise_energy": 0.002366485758033787
+    },
+    {
+      "target": "ADAR",
+      "trials": 26,
+      "observed_neurons": 196,
+      "single_trial_neurons": 20,
+      "noise_energy": 0.0020996435478742594
+    }
+  ],
+  "assumptions": "Noise energy is the expected squared sampling error of each confidence-weighted trial mean (unbiased weighted variance x sum(w^2)/W^2), summed with objective weights. Single-trial neurons use the target's pooled per-sample variance. Trial-to-trial and animal-to-animal variation both count as noise for a shared deterministic response."
+}

@@ -74,6 +74,8 @@ def checkpoint(template, theta, epoch, source):
 
 
 def fit(model,graph,training,source,score_and_save,progress=None,configuration=None):
+    if training.get('synthetic') is not None:
+        raise ValueError('planted-truth exports are diagnostics, never benchmark fitting inputs')
     if model['epoch']!=0:
         raise ValueError('fit requires epoch zero; optimizer resume is not implemented')
     theta,active,groups,data,prior=build(model,graph,training,configuration)
