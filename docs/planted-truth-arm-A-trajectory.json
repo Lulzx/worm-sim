@@ -1,0 +1,114 @@
+{
+  "format": "wormsim-planted-truth-trajectory",
+  "arm": "A",
+  "rows": [
+    {
+      "checkpoint": 0,
+      "capture": 0.03128824411687493,
+      "signal_recovery": 0.05591873248417334,
+      "noise_absorbed": 0.2591364687763541
+    },
+    {
+      "checkpoint": 50,
+      "capture": 0.09619593101664996,
+      "signal_recovery": 0.15682015281560724,
+      "noise_absorbed": 0.24707625136732408
+    },
+    {
+      "checkpoint": 100,
+      "capture": 0.22409310544900785,
+      "signal_recovery": 0.3493332073874039,
+      "noise_absorbed": 0.22800617245424054
+    },
+    {
+      "checkpoint": 150,
+      "capture": 0.40928064257810925,
+      "signal_recovery": 0.5750025833685135,
+      "noise_absorbed": 0.23989140785521335
+    },
+    {
+      "checkpoint": 200,
+      "capture": 0.5736559037435932,
+      "signal_recovery": 0.6144618289724821,
+      "noise_absorbed": 0.3701346460306727
+    },
+    {
+      "checkpoint": 250,
+      "capture": 0.6064980667544606,
+      "signal_recovery": 0.6135987549442381,
+      "noise_absorbed": 0.4026662505585538
+    },
+    {
+      "checkpoint": 300,
+      "capture": 0.6293269764542819,
+      "signal_recovery": 0.6024043808825305,
+      "noise_absorbed": 0.43316304085518076
+    },
+    {
+      "checkpoint": 350,
+      "capture": 0.6585978678148339,
+      "signal_recovery": 0.6035450104091187,
+      "noise_absorbed": 0.4607359456185698
+    },
+    {
+      "checkpoint": 400,
+      "capture": 0.6672933925228817,
+      "signal_recovery": 0.6066800652616708,
+      "noise_absorbed": 0.46684627749262503
+    },
+    {
+      "checkpoint": 450,
+      "capture": 0.6739116399935206,
+      "signal_recovery": 0.6033068042569467,
+      "noise_absorbed": 0.47578269816988517
+    },
+    {
+      "checkpoint": 500,
+      "capture": 0.679797163708912,
+      "signal_recovery": 0.5959696334217519,
+      "noise_absorbed": 0.48695735806267587
+    },
+    {
+      "checkpoint": 550,
+      "capture": 0.6890606426434789,
+      "signal_recovery": 0.5957794583601541,
+      "noise_absorbed": 0.49609360474138947
+    },
+    {
+      "checkpoint": 600,
+      "capture": 0.6932134067980802,
+      "signal_recovery": 0.5958511196632064,
+      "noise_absorbed": 0.5000725641098994
+    },
+    {
+      "checkpoint": 650,
+      "capture": 0.6962763491469398,
+      "signal_recovery": 0.5891793103369769,
+      "noise_absorbed": 0.5080114081243046
+    },
+    {
+      "checkpoint": 700,
+      "capture": 0.6984727347039698,
+      "signal_recovery": 0.5929348004289133,
+      "noise_absorbed": 0.5073494609506021
+    },
+    {
+      "checkpoint": 750,
+      "capture": 0.7029227762350826,
+      "signal_recovery": 0.5887802837153879,
+      "noise_absorbed": 0.5147619429412604
+    },
+    {
+      "checkpoint": 800,
+      "capture": 0.704120665839584,
+      "signal_recovery": 0.6084086390245461,
+      "noise_absorbed": 0.5013188277293594
+    },
+    {
+      "checkpoint": "best",
+      "capture": 0.7095688622149324,
+      "signal_recovery": 0.6065740435042315,
+      "noise_absorbed": 0.5079741593371669
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "format": "wormsim-planted-truth-score",
+  "source_commit": "91e5445636f08d62fb8d5ad673eef89fd82ca2ba",
+  "source_worktree_dirty": true,
+  "input_sha256": {
+    "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "export": "417e62d96fb2c37726dea6bc111242a595453aceb0afe751d2c4e41f67ec54e5",
+    "checkpoint": "1b1579187123f641896165e83d8ca6e9c5f385f786ff9dc429dd535b04c135df",
+    "truth": "009d9496075b2675978052118e7347a00ece38be8d4cc1ecf44ddd1489994e08"
+  },
+  "jax": "0.11.2",
+  "devices": [
+    "cpu:0"
+  ],
+  "mse": 0.04198085988052908,
+  "captured_start_zero_energy": 0.9341618004763189,
+  "signal_recovery": 0.9341618004763191,
+  "noise_absorbed": null,
+  "signal_energy": 0.007527825164969443,
+  "noise_energy": 0.0,
+  "oracle": {
+    "mse": 0.04148524142533844,
+    "captured_start_zero_energy": 1.0,
+    "signal_recovery": 1.0,
+    "noise_absorbed": null,
+    "signal_energy": 0.007527825164969443,
+    "noise_energy": 0.0
+  },
+  "chemical_sign_agreement": 0.960927960927961
+}

@@ -97,4 +97,84 @@ cannot mean. They do not validate Level 0 biologically.
 
 ## Results
 
-Pending.
+All three fits ran concurrently from commit `91e5445` plus the uncommitted tool,
+whose backend source hashes are recorded in each manifest. B completed all 1,000
+updates. **A and C stopped early** with nonfinite gradients, at updates 837
+and 347. That is the coarse-step Euler preparation failure already documented in
+[warm-start diagnostics](CAPACITY-WARM-START.md). Each kept a finite
+`failure.json` and a valid `best.json`. Truncated arms are compared at matched
+update counts. Scores: [B](planted-truth-score-B.json),
+[A](planted-truth-score-A.json), [C](planted-truth-score-C.json),
+[A trajectory](planted-truth-arm-A-trajectory.json).
+
+| Arm | Updates | Fit capture | Oracle capture | Signal recovery | Noise absorbed |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| B: clean, in class | 1,000 | **99.45%** | 100% | 0.995 | — |
+| A: real residuals, in class | 836 | **70.96%** | 48.79% | **0.607** | **0.508** |
+| C: clean, depression outside Level 0 | 346 | **93.42%** | 100% | 0.934 | — |
+| Real reference run, same settings | 836 / 1,000 | 75.51% / 74.76% | ≈55% (step 1) | unknown | unknown |
+
+Matched-update capture: at 346 updates B reaches 90.50% and C 93.42%. At 836,
+B reaches 99.11%, A 70.96% and the real run 75.51%.
+
+Arm A over its saved checkpoints:
+
+| Update | 100 | 200 | 300 | 500 | 700 | 836 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Capture | 22.4% | 57.4% | 62.9% | 68.0% | 69.9% | 71.0% |
+| Signal recovery | 0.349 | **0.615** | 0.602 | 0.596 | 0.593 | 0.607 |
+| Noise absorbed | 0.228 | 0.370 | 0.433 | 0.487 | 0.507 | 0.508 |
+
+Chemical-sign agreement with the truth (0.94–0.97) is not informative. The
+shared epoch-zero start already agrees on 96.1% of signs, because the truth was
+fitted from it.
+
+### Decisions under the declared rules
+
+1. **Arm B passes (99.45% ≥ 90%).** At this budget the optimizer reaches an
+   in-class optimum from the standard start, so the real shortfall is not an
+   optimization failure on the deterministic part. Caveat: the truth was itself
+   reached from this start on real data, which makes it a favourable in-class
+   target. A truth from an unrelated region of parameter space could be harder.
+2. **Arm A absorbs noise and does not recover the signal.**
+   - Capture is 22.2 points above oracle capture (rule: more than 5).
+   - Signal recovery is 0.607, below the 0.9 rule.
+   - The trajectory locates the cause. Recovery peaks at 0.615 by update 200
+     and then stays flat. Every later point of capture, from 57% to 71%, is
+     noise: absorption rises from 0.37 to 0.51.
+   - Arm A sits 4.55 points below the real run at the same update count
+     (within 5). The real result is therefore consistent with a correct
+     in-class model plus noise fitting.
+3. **Arm C: the gate cannot detect this missing mechanism.** At matched updates
+   C is 2.9 points *above* B, not 5 below. Level 0 absorbs short-term depression
+   on every chemical edge with 93% capture, so a high capture is not evidence
+   that a mechanism is absent.
+4. **The 90% gate is retired for trial-mean targets** (rule 4).
+
+**What this means for the earlier capacity work.** The nine optimizer and
+numerics variants that moved real capture from 74.8% to 79.31% were most likely
+improving the fit to sampling noise. In arm A every point above about 57% was noise.
+Training capture on two targets cannot measure Level 0's capacity, and further
+optimizer work aimed at the 90% gate should stop.
+
+### Replacement gate (fixed here before any further real-data fit)
+
+- **Optimization check:** a planted in-class arm, with the B design at the run's
+  own settings, must reach signal recovery ≥ 0.9. This passes for the
+  reference settings.
+- **Fit-quality check on real data: trial-split.** For each target, split
+  training trials into two halves by sorted trial ID (even and odd positions).
+  Build training means from one half, fit, and score the prediction against the
+  other half's means. For a correct model, the expected held-half capture is
+  the noise-ceiling expectation computed for that split. A fit is adequate when
+  its held-half capture is within the bootstrap interval of that expectation.
+  It is noise-fitting when its training-half capture rises while held-half
+  capture stops improving. Checkpoints are selected on held-half capture only.
+- **Mechanism checks** use planted out-of-class arms, as in C. A capture
+  number alone is never read as evidence about mechanism.
+
+Both checks use training trials only. Validation and test targets stay
+untouched for the confirmatory comparison.
+
+**Not tested here:** truths far from the standard start, other targets, and
+more than one noise seed. Each needs a new declared arm.

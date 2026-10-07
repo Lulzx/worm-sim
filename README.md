@@ -95,7 +95,11 @@ with stable endpoint preparation gradients, but also exhausted its budget and
 failed the gate. The [longer run](docs/CAPACITY-PREP240-LONG.md) reached **79.31%**
 after 663 accepted updates, with stable endpoint audits. It stopped on tiny
 loss changes while still missing the gradient tolerance and 90% capacity gate.
-New dynamical features are paused. Existing validation/test results are
+[Planted-truth controls](docs/PLANTED-TRUTH.md) then showed why: trial
+sampling noise is 45% of these targets' explainable energy, so a correct model
+captures about 55%. On a known in-class truth with real trial noise, signal
+recovery stops at 0.61 after about 200 updates, and further capture is noise. The
+90% gate is retired and replaced by a trial-split check. New dynamical features are paused. Existing validation/test results are
 exploratory; a fresh confirmatory cohort remains outstanding.
 
 The JAX backend reproduced the original five-update Level 0 fit through the

@@ -1,0 +1,30 @@
+{
+  "format": "wormsim-planted-truth-score",
+  "source_commit": "91e5445636f08d62fb8d5ad673eef89fd82ca2ba",
+  "source_worktree_dirty": true,
+  "input_sha256": {
+    "graph": "67f19cd3452dd0ce99814c4f20b8e0271b26bfe305262fb70b804e623d483629",
+    "export": "5e3723eda03abc912814efa20b466d3f1d9756914e55fdba5dfb75f241c9cb91",
+    "checkpoint": "cdd44304dc89959be71301e491d4cb8da3d24312799edf32ed614f329296a1a7",
+    "truth": "009d9496075b2675978052118e7347a00ece38be8d4cc1ecf44ddd1489994e08"
+  },
+  "jax": "0.11.2",
+  "devices": [
+    "cpu:0"
+  ],
+  "mse": 0.044366215563456574,
+  "captured_start_zero_energy": 0.7095688622149324,
+  "signal_recovery": 0.6065740435042315,
+  "noise_absorbed": 0.5079741593371669,
+  "signal_energy": 0.00752782516496944,
+  "noise_energy": 0.005058067837125958,
+  "oracle": {
+    "mse": 0.0465433092624644,
+    "captured_start_zero_energy": 0.48792869189263677,
+    "signal_recovery": 1.0,
+    "noise_absorbed": 0.0,
+    "signal_energy": 0.00752782516496944,
+    "noise_energy": 0.005058067837125958
+  },
+  "chemical_sign_agreement": 0.9426129426129426
+}
